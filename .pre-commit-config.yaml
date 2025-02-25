@@ -20,5 +20,3 @@ repos:
     hooks:
     -   id: flake8
         additional_dependencies: [flake8-docstrings]
-        args: ["--ignore=D400, D205"]  # Ignore "First line should end with a period"
-        # The hooks included here are valuable for maintaining code quality and consistency.

@@ -6,18 +6,20 @@
 
 """Kinematic Arbiter package component."""
 
-import rclpy
 from geometry_msgs.msg import PoseWithCovarianceStamped
+
 from rcl_interfaces.msg import FloatingPointRange, ParameterDescriptor
+
+import rclpy
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 
-from ..core.generate_signals import SignalParams, generate_signals
-from ..core.mediated_kalman_filter import MediatedKalmanFilter
 from .domain_models import FilterParameters, MediationMode, State
 from .message_converters import (
     state_to_pose_with_covariance_stamped,
 )
+from ..core.generate_signals import SignalParams, generate_signals
+from ..core.mediated_kalman_filter import MediatedKalmanFilter
 
 
 class SimplifiedDemoNode(Node):
