@@ -20,7 +20,7 @@ jobs:
         uses: ros-tooling/action-ros-ci@v0.2
         with:
           target-ros2-distro: humble
-          package-name: ros2_template_pkg
+          package-name: kinematic_arbiter
       - name: Upload Logs
         uses: actions/upload-artifact@v1
         with:

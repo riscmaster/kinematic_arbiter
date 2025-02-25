@@ -2,6 +2,6 @@
 [submodule "acfr_ros2_interfaces"]
 	path = acfr_ros2_interfaces
 	url = https://github.com/acfr/acfr_ros2_interfaces.git
-[submodule "ros2_template_pkg/extern/googletest"]
-	path = ros2_template_pkg/extern/googletest
+[submodule "kinematic_arbiter/extern/googletest"]
+	path = kinematic_arbiter/extern/googletest
 	url = https://github.com/google/googletest

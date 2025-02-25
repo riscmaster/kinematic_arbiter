@@ -1,0 +1,12 @@
+/**:
+  ros__parameters:
+    process_measurement_ratio: 0.25
+    window_time: 0.01
+    mediation_mode: 0  # ADJUST_STATE
+
+filter_node:
+  ros__parameters:
+    use_sim_time: false
+    process_measurement_ratio: 0.25
+    window_time: 0.01
+    mediation_mode: 0  # ADJUST_STATE

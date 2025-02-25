@@ -1,0 +1,14 @@
+uint8 ADJUST_STATE=0
+uint8 ADJUST_MEASUREMENT=1
+uint8 REJECT_MEASUREMENT=2
+uint8 NO_ACTION=3
+
+uint8 requested_mode
+float64 transition_duration
+---
+bool success
+uint8 current_mode
+string message
+---
+float32 progress
+string status
