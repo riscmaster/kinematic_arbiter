@@ -8,7 +8,10 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from core.generate_signals import SignalParams, generate_signals
+from src.single_dof_demo.core.signal_generator import (
+    SignalParams,
+    generate_signals,
+)
 from core.kalman_filter import KalmanFilter
 from core.mediated_kalman_filter import MediatedKalmanFilter, Mediation
 from matplotlib.lines import Line2D

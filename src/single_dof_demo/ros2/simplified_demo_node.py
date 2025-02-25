@@ -18,7 +18,7 @@ from .domain_models import FilterParameters, MediationMode, State
 from .message_converters import (
     state_to_pose_with_covariance_stamped,
 )
-from ..core.generate_signals import SignalParams, generate_signals
+from ..core.signal_generator import SignalParams, generate_signals
 from ..core.mediated_kalman_filter import MediatedKalmanFilter
 
 

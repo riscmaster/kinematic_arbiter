@@ -9,18 +9,14 @@
 """Signal generator node for the simplified demo."""
 
 import rclpy
-from geometry_msgs.msg import PoseWithCovarianceStamped
+from geometry_msgs.msg import PointStamped, Point
+from std_msgs.msg import Header
 from rcl_interfaces.msg import FloatingPointRange, ParameterDescriptor
 from rclpy.node import Node
 
-# Update imports to match installed package structure
-from kinematic_arbiter.single_dof_demo.core.generate_signals import (
+from kinematic_arbiter.single_dof_demo.core.signal_generator import (
     SignalParams,
-    generate_signals,
-)
-from kinematic_arbiter.single_dof_demo.ros2.domain_models import State
-from kinematic_arbiter.single_dof_demo.ros2.message_converters import (
-    state_to_pose_with_covariance_stamped,
+    SingleDofSignalGenerator,
 )
 
 
@@ -36,51 +32,65 @@ class SignalGeneratorNode(Node):
             namespace="",
             parameters=[
                 (
-                    "frequency",
-                    10.0,
+                    "publishing_rate",
+                    20.0,
                     self._create_float_descriptor(
-                        0.1, 100.0, "Signal generation frequency in Hz"
+                        0.1, 100.0, "Rate at which signals are published (Hz)"
                     ),
                 ),
                 (
-                    "amplitude",
+                    "max_frequency",
                     1.0,
                     self._create_float_descriptor(
-                        0.0, 10.0, "Signal amplitude"
+                        0.1, 100.0, "Maximum frequency for signal components"
                     ),
                 ),
                 (
-                    "noise_level",
-                    0.1,
-                    self._create_float_descriptor(0.0, 1.0, "Noise level"),
+                    "max_amplitude",
+                    1.0,
+                    self._create_float_descriptor(
+                        0.0, 10.0, "Maximum amplitude for signal components"
+                    ),
+                ),
+                (
+                    "number_of_signals",
+                    10,
+                    ParameterDescriptor(
+                        description="Number of sinusoidal components"
+                    ),
                 ),
             ],
         )
 
-        # Publisher for noisy measurements
-        self.measurement_publisher = self.create_publisher(
-            PoseWithCovarianceStamped, "raw_measurement", 10
+        # Publishers
+        self.noisy_publisher = self.create_publisher(
+            PointStamped, "raw_measurements", 10
+        )
+        self.clean_publisher = self.create_publisher(
+            PointStamped, "true_signal", 10
         )
 
-        # Initialize signal generator
+        # Initialize signal generator parameters
         self.signal_params = SignalParams()
-        self.signal_params.sample_frequency = self.get_parameter(
-            "frequency"
+        self.signal_params.max_frequency = self.get_parameter(
+            "max_frequency"
         ).value
         self.signal_params.max_amplitude = self.get_parameter(
-            "amplitude"
+            "max_amplitude"
         ).value
-        self.signal_params.noise_amplitude = self.get_parameter(
-            "noise_level"
+        self.signal_params.number_of_signals = self.get_parameter(
+            "number_of_signals"
         ).value
 
-        self.signal, self.noisy_signal, self.time = generate_signals(
-            self.signal_params
-        )
-        self.current_index = 0
+        # Create signal generator
+        self.signal_generator = SingleDofSignalGenerator(self.signal_params)
+
+        # Initialize time
+        self.initial_time = self.get_clock().now()
 
         # Create timer for signal publishing
-        timer_period = 1.0 / self.signal_params.sample_frequency
+        publishing_rate = self.get_parameter("publishing_rate").value
+        timer_period = 1.0 / publishing_rate
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
         self.get_logger().info("Signal generator node initialized")
@@ -95,28 +105,30 @@ class SignalGeneratorNode(Node):
         )
 
     def timer_callback(self):
-        """Publish noisy measurements."""
-        if self.current_index >= len(self.time):
-            self.current_index = 0
+        """Publish clean and noisy measurements."""
+        # Update current time
+        current_time = self.get_clock().now() - self.initial_time
 
-        # Get current signal values
-        noisy_value = self.noisy_signal[self.current_index]
-
-        # Create measurement state
-        measurement = State(
-            value=noisy_value, variance=self.signal_params.max_amplitude
+        # Generate signals
+        clean_signal, noisy_signal = self.signal_generator.generate_signal(
+            current_time.nanoseconds * 1e-9
         )
 
         # Get current ROS time for message timestamp
         current_stamp = self.get_clock().now().to_msg()
 
-        # Convert to ROS message and publish
-        measurement_msg = state_to_pose_with_covariance_stamped(
-            measurement, current_stamp
+        # Create and publish signal messages
+        clean_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id="world"),
+            point=Point(x=clean_signal, y=0.0, z=0.0),
         )
-        self.measurement_publisher.publish(measurement_msg)
+        self.clean_publisher.publish(clean_msg)
 
-        self.current_index += 1
+        noisy_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id="world"),
+            point=Point(x=noisy_signal, y=0.0, z=0.0),
+        )
+        self.noisy_publisher.publish(noisy_msg)
 
 
 def main(args=None):
