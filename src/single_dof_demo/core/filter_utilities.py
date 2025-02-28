@@ -14,14 +14,14 @@ Provides functions to:
 
 import math
 
-SIGMA_BOUND = 3.0
+THREE_SIGMA_BOUND = 3.0
 
 
 def variance_to_bound(variance: float) -> float:
     """Convert variance to 3-sigma confidence bounds."""
-    return math.sqrt(variance) * SIGMA_BOUND
+    return math.sqrt(variance) * THREE_SIGMA_BOUND
 
 
 def bound_to_variance(bound: float) -> float:
     """Convert 3-sigma confidence bounds back to variance."""
-    return (bound / SIGMA_BOUND) ** 2
+    return (bound / THREE_SIGMA_BOUND) ** 2

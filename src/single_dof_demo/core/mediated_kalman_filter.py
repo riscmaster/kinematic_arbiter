@@ -60,6 +60,7 @@ class MediatedKalmanFilter(object):
         self, measurement: float, t: float
     ) -> filter_output.FilterOutput:
         """Update filter state with new measurement.
+
         Args:
             measurement: New measurement value
             t: Timestamp of measurement
@@ -126,13 +127,14 @@ class MediatedKalmanFilter(object):
 
         # Update
         output.final = output.mediated
+        kalman_gain = predicted_variance / innovation_variance
         self.measurement_variance += (
             innovation_2 - self.measurement_variance
         ) / sample_window
         self.process_variance += (
-            self.scale * self.measurement_variance - self.process_variance
+            self.scale * (kalman_gain * innovation) ** 2
+            - self.process_variance
         ) / sample_window
-        kalman_gain = predicted_variance / innovation_variance
         self.state_estimate += kalman_gain * innovation
         self.state_variance = (1.0 - kalman_gain) * predicted_variance
         output.final.state.value = self.state_estimate

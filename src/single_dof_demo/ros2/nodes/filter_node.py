@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Copyright (c) 2024 Spencer Maughan
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -8,20 +10,14 @@
 
 import rclpy
 from diagnostic_msgs.msg import DiagnosticStatus, KeyValue
-from geometry_msgs.msg import PoseWithCovarianceStamped
+from geometry_msgs.msg import PointStamped, Point
+from std_msgs.msg import Header
 from rcl_interfaces.msg import FloatingPointRange, ParameterDescriptor
-from rclpy.action import ActionServer
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 from std_srvs.srv import Trigger
 
-from action import FilterMediation
-from kinematic_arbiter.single_dof_demo.core.mediated_kalman_filter import (
-    MedianFilter,
-)
-from kinematic_arbiter.single_dof_demo.ros2.domain_models import (
-    State,
-)
+from kinematic_arbiter.single_dof_demo.core.kalman_filter import KalmanFilter
 
 
 class FilterNode(Node):
@@ -39,20 +35,19 @@ class FilterNode(Node):
             namespace="",
             parameters=[
                 (
-                    "process_measurement_ratio",
-                    0.25,
+                    "process_noise",
+                    0.01,
                     self._create_float_descriptor(
-                        0.0, 100.0, "Process to measurement ratio"
+                        0.0, 1.0, "Process noise variance"
                     ),
                 ),
                 (
-                    "window_time",
-                    0.01,
+                    "measurement_noise",
+                    0.1,
                     self._create_float_descriptor(
-                        0.0, 1.0, "Window time for adaptation"
+                        0.0, 1.0, "Measurement noise variance"
                     ),
                 ),
-                ("mediation_mode", 0),
             ],
         )
 
@@ -61,7 +56,7 @@ class FilterNode(Node):
 
         # Subscribers
         self.measurement_sub = self.create_subscription(
-            PoseWithCovarianceStamped,
+            PointStamped,
             "raw_measurements",
             self.measurement_callback,
             10,
@@ -69,11 +64,20 @@ class FilterNode(Node):
         )
 
         # Publishers
-        self.filtered_pub = self.create_publisher(
-            PoseWithCovarianceStamped, "filtered_state", 10
+        self.state_pub = self.create_publisher(
+            PointStamped, "kalman_state_estimate", 10
         )
-        self.processed_measurement_pub = self.create_publisher(
-            PoseWithCovarianceStamped, "processed_measurement", 10
+        self.state_upper_bound_pub = self.create_publisher(
+            PointStamped, "kalman_state_upper_bound", 10
+        )
+        self.state_lower_bound_pub = self.create_publisher(
+            PointStamped, "kalman_state_lower_bound", 10
+        )
+        self.measurement_upper_bound_pub = self.create_publisher(
+            PointStamped, "kalman_measurement_upper_bound", 10
+        )
+        self.measurement_lower_bound_pub = self.create_publisher(
+            PointStamped, "kalman_measurement_lower_bound", 10
         )
         self.diagnostics_pub = self.create_publisher(
             DiagnosticStatus, "filter_status", 10
@@ -84,15 +88,6 @@ class FilterNode(Node):
             Trigger,
             "reset_filter",
             self.handle_reset,
-            callback_group=self.callback_group,
-        )
-
-        # Action server
-        self._mediation_action_server = ActionServer(
-            self,
-            FilterMediation,
-            "set_mediation_mode",
-            self.handle_mediation_request,
             callback_group=self.callback_group,
         )
 
@@ -109,40 +104,60 @@ class FilterNode(Node):
 
     def _init_filter(self):
         """Initialize the Kalman filter."""
-        self.filter = MedianFilter(
-            process_to_measurement_ratio=self.get_parameter(
-                "process_measurement_ratio"
-            ).value,
-            window_time=self.get_parameter("window_time").value,
-            mediation=self.get_parameter("mediation_mode").value,
+        self.filter = KalmanFilter(
+            process_noise=self.get_parameter("process_noise").value,
+            measurement_noise=self.get_parameter("measurement_noise").value,
         )
 
     def measurement_callback(self, msg):
         """Process incoming measurement messages and update the filter."""
-        # Convert message to state
-        measurement = State(
-            value=msg.pose.pose.position.x, variance=msg.pose.covariance[0]
-        )
+        # Extract measurement from message
+        measurement = msg.point.x
 
         # Update filter
-        output = self.filter.update(
-            measurement=measurement.value,
-            t=self.get_clock().now().nanoseconds * 1e-9,
+        output = self.filter.update(measurement=measurement)
+
+        # Get state and bounds
+        state_value = output.final.state.value
+        state_bound = output.final.state.bound
+        measurement_bound = output.final.measurement.bound
+
+        # Get current timestamp and frame_id from input message
+        current_stamp = msg.header.stamp
+        frame_id = msg.header.frame_id
+
+        # Publish state
+        state_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id=frame_id),
+            point=Point(x=state_value, y=0.0, z=0.0),
         )
+        self.state_pub.publish(state_msg)
 
-        # Publish filtered state
-        filtered_msg = PoseWithCovarianceStamped()
-        filtered_msg.header = msg.header
-        filtered_msg.pose.pose.position.x = output.final.state.value
-        filtered_msg.pose.covariance[0] = self.filter.state_variance
-        self.filtered_pub.publish(filtered_msg)
+        # Publish state bounds
+        state_upper_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id=frame_id),
+            point=Point(x=state_value + state_bound, y=0.0, z=0.0),
+        )
+        self.state_upper_bound_pub.publish(state_upper_msg)
 
-        # Publish processed measurement
-        processed_msg = PoseWithCovarianceStamped()
-        processed_msg.header = msg.header
-        processed_msg.pose.pose.position.x = output.final.measurement.value
-        processed_msg.pose.covariance[0] = self.filter.measurement_variance
-        self.processed_measurement_pub.publish(processed_msg)
+        state_lower_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id=frame_id),
+            point=Point(x=state_value - state_bound, y=0.0, z=0.0),
+        )
+        self.state_lower_bound_pub.publish(state_lower_msg)
+
+        # Publish measurement bounds
+        measurement_upper_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id=frame_id),
+            point=Point(x=measurement + measurement_bound, y=0.0, z=0.0),
+        )
+        self.measurement_upper_bound_pub.publish(measurement_upper_msg)
+
+        measurement_lower_msg = PointStamped(
+            header=Header(stamp=current_stamp, frame_id=frame_id),
+            point=Point(x=measurement - measurement_bound, y=0.0, z=0.0),
+        )
+        self.measurement_lower_bound_pub.publish(measurement_lower_msg)
 
         # Publish diagnostics
         self._publish_diagnostics()
@@ -154,41 +169,12 @@ class FilterNode(Node):
         response.message = "Filter reset successful"
         return response
 
-    async def handle_mediation_request(self, goal_handle):
-        """Handle mediation mode change requests."""
-        feedback_msg = FilterMediation.Feedback()
-
-        try:
-            # Update mediation mode
-            self.filter.mediation = goal_handle.request.requested_mode
-
-            # Simulate transition
-            feedback_msg.progress = 1.0
-            feedback_msg.status = "Mediation mode updated"
-            goal_handle.publish_feedback(feedback_msg)
-
-            goal_handle.succeed()
-
-            result = FilterMediation.Result()
-            result.success = True
-            result.current_mode = self.filter.mediation
-            result.message = "Mediation mode changed successfully"
-            return result
-
-        except Exception as e:
-            goal_handle.abort()
-            result = FilterMediation.Result()
-            result.success = False
-            result.current_mode = self.filter.mediation
-            result.message = f"Failed to change mediation mode: {str(e)}"
-            return result
-
     def _publish_diagnostics(self):
         """Publish diagnostics for the filter."""
         msg = DiagnosticStatus()
         msg.level = DiagnosticStatus.OK
-        msg.name = "Mediated Kalman Filter"
-        msg.message = f"Mediation Mode: {self.filter.mediation}"
+        msg.name = "Kalman Filter"
+        msg.message = "Filter running normally"
         msg.values = [
             KeyValue(
                 key="state_variance", value=str(self.filter.state_variance)
