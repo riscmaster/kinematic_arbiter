@@ -11,6 +11,8 @@ Provides functions to generate clean and noisy layered sinusoidal test signals
 with configurable parameters like frequency, amplitude and noise level.
 """
 
+import random
+import math
 import numpy as np
 
 
@@ -41,21 +43,66 @@ class SingleDofSignalGenerator:
     def __init__(self, params=SignalParams()):
         """Initialize the signal generator."""
         self.params = params
-        np.random.seed(params.seed)
-        self.frequencies = np.random.uniform(
-            0, params.max_frequency, params.number_of_signals
-        )
-        self.amplitudes = np.random.uniform(
-            0, params.max_amplitude, params.number_of_signals
-        )
+        self.frequencies = []
+        self.amplitudes = []
+        self.phases = []
+        self.seed = None
+        self.reset()
 
-    def generate_signal(self, t_secs: float) -> float:
-        """Generate clean and noisy test signals."""
-        clean_signal = sum(
-            amplitude * np.sin(2 * np.pi * frequency * t_secs)
-            for frequency, amplitude in zip(self.frequencies, self.amplitudes)
-        )
-        noisy_signal = clean_signal + np.random.normal(
-            0.0, self.params.max_amplitude
-        )
+    def reset(self):
+        """Reset the signal components with a new random seed.
+
+        Returns:
+            int: The new random seed used
+        """
+        # Generate a new random seed
+        self.seed = random.randint(0, 10000)
+        random.seed(self.seed)
+        np.random.seed(self.seed)
+
+        # Generate random frequencies, amplitudes, and phases
+        self.frequencies = []
+        self.amplitudes = []
+        self.phases = []
+
+        for _ in range(self.params.number_of_signals):
+            self.frequencies.append(
+                random.uniform(0.1, self.params.max_frequency)
+            )
+            self.amplitudes.append(
+                random.uniform(0.1, self.params.max_amplitude)
+            )
+            self.phases.append(random.uniform(0, 2 * math.pi))
+
+        return self.seed
+
+    def get_value(self, t):
+        """Get the clean signal value at time t.
+
+        Args:
+            t: Time in seconds
+
+        Returns:
+            float: Signal value
+        """
+        value = 0.0
+        for i in range(len(self.frequencies)):
+            value += self.amplitudes[i] * math.sin(
+                2 * math.pi * self.frequencies[i] * t + self.phases[i]
+            )
+        return value
+
+    def generate_signal(self, t, noise_level=0.2):
+        """Generate both clean and noisy signals at time t.
+
+        Args:
+            t: Time in seconds
+            noise_level: Standard deviation of Gaussian noise
+
+        Returns:
+            tuple: (clean_signal, noisy_signal)
+        """
+        clean_signal = self.get_value(t)
+        noise = np.random.normal(0, noise_level)
+        noisy_signal = clean_signal + noise
         return clean_signal, noisy_signal

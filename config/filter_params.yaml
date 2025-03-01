@@ -1,12 +1,27 @@
 /**:
   ros__parameters:
-    process_measurement_ratio: 0.25
-    window_time: 0.01
-    mediation_mode: 0  # ADJUST_STATE
-    process_noise: 0.01
-    measurement_noise: 0.1
-    model_frequency: 0.0
-    model_amplitude: 0.0
+    # Signal Generator Parameters
+    signal_generator:
+      publishing_rate: 20.0
+      max_frequency: 1.0
+      max_amplitude: 1.0
+      noise_level: 0.2
+      number_of_signals: 10
+
+    # Kalman Filter Parameters
+    kalman_filter_node:
+      process_noise: 0.01
+      measurement_noise: 0.1
+      model_frequency: 0.0
+      model_amplitude: 0.0
+
+    # Mediated Filter Parameters
+    mediated_filter_node:
+      process_measurement_ratio: 1.0
+      sample_window: 40
+      mediation_mode: 0  # ADJUST_STATE
+      model_frequency: 0.0
+      model_amplitude: 0.0
 
 filter_node:
   ros__parameters:

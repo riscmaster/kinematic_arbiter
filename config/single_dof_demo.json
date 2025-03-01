@@ -1,0 +1,218 @@
+{
+  "configById": {
+    "CallService!2q1tndp": {
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "timeoutSeconds": 10,
+      "serviceName": "/mediated_filter_node/reset_parameters",
+      "foxglovePanelTitle": "Reset Signal To Default",
+      "buttonText": "Reset Mediated Filter Params",
+      "buttonColor": "#dd4646"
+    },
+    "CallService!36t9gla": {
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "timeoutSeconds": 10,
+      "serviceName": "/mediated_filter_node/reset_filter",
+      "foxglovePanelTitle": "Reset Signal To Default",
+      "buttonText": "Reset Mediated Filter",
+      "buttonColor": "#dd4646"
+    },
+    "CallService!31bw0j2": {
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "timeoutSeconds": 10,
+      "serviceName": "/signal_generator/reset_parameters",
+      "foxglovePanelTitle": "Reset Signal To Default",
+      "buttonText": "Reset Signal To Default",
+      "buttonColor": "#dd4646"
+    },
+    "CallService!3rl3ftr": {
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "timeoutSeconds": 10,
+      "serviceName": "/kalman_filter_node/reset_parameters",
+      "foxglovePanelTitle": "Reset KF Params",
+      "buttonText": "Reset KF Params",
+      "buttonColor": "#dd4646"
+    },
+    "CallService!3yggk5s": {
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "timeoutSeconds": 10,
+      "serviceName": "/kalman_filter_node/reset_filter",
+      "foxglovePanelTitle": "Reset KF Params",
+      "buttonText": "Reset KF",
+      "buttonColor": "#dd4646"
+    },
+    "Parameters!4fycjlh": {
+      "title": "Parameters"
+    },
+    "Plot!2j70wip": {
+      "paths": [
+        {
+          "value": "/kalman_measurement_lower_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#bbefbb",
+          "label": "Meas Upper Bound"
+        },
+        {
+          "value": "/kalman_measurement_upper_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#bbefbb",
+          "label": "Meas Lower Bound"
+        },
+        {
+          "value": "/kalman_state_estimate.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#f77272",
+          "label": "KF Mean"
+        },
+        {
+          "value": "/kalman_state_lower_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#f2a9a9",
+          "label": "KF Lower Bound"
+        },
+        {
+          "value": "/kalman_state_upper_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#f2a9a9",
+          "label": "KF Upper Bound"
+        },
+        {
+          "value": "/raw_measurements.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#6ff06f",
+          "label": "Meas"
+        },
+        {
+          "value": "/true_signal.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#6160d6"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    },
+    "Plot!1g8bsj0": {
+      "paths": [
+        {
+          "value": "/true_signal.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#6560d6",
+          "label": "True State"
+        },
+        {
+          "value": "/mediated_measurement_upper_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#8def79"
+        },
+        {
+          "value": "/mediated_measurement_lower_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#8def79"
+        },
+        {
+          "value": "/mediated_state_estimate.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#dd4b4b"
+        },
+        {
+          "value": "/mediated_state_lower_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#fcadad"
+        },
+        {
+          "value": "/mediated_state_upper_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#fcadad"
+        },
+        {
+          "value": "/raw_measurements.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#42e845"
+        },
+        {
+          "value": "/mediated_mediation_point.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#000000",
+          "lineSize": 6,
+          "showLine": false,
+          "label": "Mediation"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    }
+  },
+  "globalVariables": {
+    "globalVariable": 5,
+    "/filter_node.measurement_noise: 1": 19.4
+  },
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": {
+      "first": {
+        "first": {
+          "first": {
+            "first": "CallService!2q1tndp",
+            "second": "CallService!36t9gla",
+            "direction": "column"
+          },
+          "second": "CallService!31bw0j2",
+          "direction": "column",
+          "splitPercentage": 67.26871820393721
+        },
+        "second": "CallService!3rl3ftr",
+        "direction": "column",
+        "splitPercentage": 74.02733964248158
+      },
+      "second": "CallService!3yggk5s",
+      "direction": "column",
+      "splitPercentage": 80.5355976485957
+    },
+    "second": {
+      "direction": "row",
+      "first": "Parameters!4fycjlh",
+      "second": {
+        "first": "Plot!2j70wip",
+        "second": "Plot!1g8bsj0",
+        "direction": "column"
+      },
+      "splitPercentage": 31.955291333418874
+    },
+    "splitPercentage": 7.48502994011976
+  }
+}

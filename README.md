@@ -64,6 +64,9 @@ sudo apt install python3-pip
 
 # Install development tools
 pip install pre-commit
+
+# Install Foxglove Bridge (for visualization)
+sudo apt install ros-humble-foxglove-bridge
 ```
 
 ## Installation
@@ -87,12 +90,11 @@ colcon build --packages-select kinematic_arbiter
 
 ## Demonstrations
 
-### Simplified 1D Demo
-The package includes a simplified one-dimensional implementation that demonstrates:
-- Basic filter operation
-- Measurement validation
-- Parameter tuning effects
-- Real-time visualization
+### Single DOF Demo
+The package includes a comprehensive single degree of freedom (DOF) demonstration that showcases:
+- Signal generation with configurable parameters
+- Kalman filtering with dynamic parameter adjustment
+- Foxglove integration for visualization
 
 Run the demo with:
 ```bash
@@ -100,7 +102,48 @@ Run the demo with:
 source ~/ros2_ws/install/setup.bash
 
 # Launch the demo
-ros2 launch kinematic_arbiter simplified_demo_launch.py
+ros2 launch kinematic_arbiter single_dof_demo.launch.py
+```
+
+To also launch Foxglove Studio (if installed):
+```bash
+ros2 launch kinematic_arbiter single_dof_demo.launch.py use_foxglove_studio:=true
+```
+
+#### Demo Components
+
+The Single DOF Demo consists of two main nodes:
+
+1. **Signal Generator Node**: Generates synthetic signals with configurable frequency, amplitude, and noise
+   - Adjustable parameters: publishing rate, max frequency, max amplitude, number of signals
+   - Services: reset generator, reset parameters
+
+2. **Kalman Filter Node**: Processes measurements and provides filtered state estimates
+   - Adjustable parameters: process noise, measurement noise, model frequency, model amplitude
+   - Services: reset filter, reset parameters
+   - Publishes: state estimate, state bounds, measurement bounds, diagnostics
+
+#### Visualization with Foxglove
+
+The demo includes Foxglove Bridge integration for advanced visualization:
+1. Connect to Foxglove Studio at `ws://localhost:8765`
+2. Import the provided layout from `config/kalman_filter_layout.json`
+3. Observe real-time signal generation, filtering, and parameter effects
+
+### Simplified 1D Demo
+The package also includes a simplified one-dimensional implementation that demonstrates:
+- Basic filter operation
+- Measurement validation
+- Parameter tuning effects
+- Real-time visualization
+
+Run the simplified demo with:
+```bash
+# Source the workspace
+source ~/ros2_ws/install/setup.bash
+
+# Launch the demo
+ros2 launch kinematic_arbiter simplified_demo.launch.py
 ```
 
 ## Usage
@@ -111,16 +154,17 @@ ros2 launch kinematic_arbiter simplified_demo_launch.py
 source ~/ros2_ws/install/setup.bash
 ```
 
-2. Launch the demo:
+2. Launch the single DOF demo:
 ```bash
-ros2 launch kinematic_arbiter simplified_demo_launch.py
+ros2 launch kinematic_arbiter single_dof_demo.launch.py
 ```
 
 ### Configuration
 The filter can be configured through:
 - ROS 2 parameters
 - Launch file arguments
-- Real-time parameter updates
+- Real-time parameter updates via ROS 2 parameter services
+- ROS 2 services for resetting the filter and parameters
 
 ### Future Development
 - 2D implementation for planar motion
@@ -136,3 +180,5 @@ Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) 
 
 ## References
 - [Mediated Kalman Filter](doc/mediated_kalman_filter.pdf)
+
+These additions would make the README more practical and user-friendly, providing concrete guidance for users at different levels of expertise.

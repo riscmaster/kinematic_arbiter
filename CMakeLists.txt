@@ -32,15 +32,15 @@ ament_python_install_package(
 execute_process(
   COMMAND chmod +x
     ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/signal_generator_node.py
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/filter_node.py
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/control_panel_node.py
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/kalman_filter_node.py
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/mediated_filter_node.py
 )
 
 # Install Python executables
 install(PROGRAMS
   src/single_dof_demo/ros2/nodes/signal_generator_node.py
-  src/single_dof_demo/ros2/nodes/filter_node.py
-  src/single_dof_demo/ros2/nodes/control_panel_node.py
+  src/single_dof_demo/ros2/nodes/kalman_filter_node.py
+  src/single_dof_demo/ros2/nodes/mediated_filter_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

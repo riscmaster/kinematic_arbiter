@@ -38,12 +38,12 @@ class StateMeasurementPair:
 
 
 class FilterOutput:
-    """Represents the output of the filter containing predicted, mediated, and
-    final estimates.
-    """
+    """Contains filter output stages: predicted, mediated, and final estimates."""
 
     def __init__(self):
         """Initialize filter output with default state-measurement pairs."""
         self.predicted = StateMeasurementPair()
         self.mediated = StateMeasurementPair()
         self.final = StateMeasurementPair()
+        self.mediation_detected = False
+        self.mediation_point = 0.0

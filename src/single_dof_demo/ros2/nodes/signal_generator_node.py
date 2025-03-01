@@ -11,8 +11,15 @@
 import rclpy
 from geometry_msgs.msg import PointStamped, Point
 from std_msgs.msg import Header
-from rcl_interfaces.msg import FloatingPointRange, ParameterDescriptor
+from rcl_interfaces.msg import (
+    FloatingPointRange,
+    ParameterDescriptor,
+    SetParametersResult,
+)
+from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
+from std_srvs.srv import Trigger
+from rclpy.parameter import Parameter
 
 from kinematic_arbiter.single_dof_demo.core.signal_generator import (
     SignalParams,
@@ -27,40 +34,62 @@ class SignalGeneratorNode(Node):
         """Initialize the signal generator node."""
         super().__init__("signal_generator")
 
+        # Use ReentrantCallbackGroup to allow concurrent callbacks
+        self.callback_group = ReentrantCallbackGroup()
+
+        # Default parameter values
+        self.default_params = {
+            "publishing_rate": 20.0,
+            "max_frequency": 1.0,
+            "max_amplitude": 1.0,
+            "noise_level": 0.2,
+            "number_of_signals": 10,
+        }
+
         # Parameters
         self.declare_parameters(
             namespace="",
             parameters=[
                 (
                     "publishing_rate",
-                    20.0,
+                    self.default_params["publishing_rate"],
                     self._create_float_descriptor(
                         0.1, 100.0, "Rate at which signals are published (Hz)"
                     ),
                 ),
                 (
                     "max_frequency",
-                    1.0,
+                    self.default_params["max_frequency"],
                     self._create_float_descriptor(
                         0.1, 100.0, "Maximum frequency for signal components"
                     ),
                 ),
                 (
                     "max_amplitude",
-                    1.0,
+                    self.default_params["max_amplitude"],
                     self._create_float_descriptor(
                         0.0, 10.0, "Maximum amplitude for signal components"
                     ),
                 ),
                 (
+                    "noise_level",
+                    self.default_params["noise_level"],
+                    self._create_float_descriptor(
+                        0.0, 5.0, "Standard deviation of Gaussian noise"
+                    ),
+                ),
+                (
                     "number_of_signals",
-                    10,
+                    self.default_params["number_of_signals"],
                     ParameterDescriptor(
                         description="Number of sinusoidal components"
                     ),
                 ),
             ],
         )
+
+        # Add parameter callback
+        self.add_on_set_parameters_callback(self.parameters_callback)
 
         # Publishers
         self.noisy_publisher = self.create_publisher(
@@ -70,28 +99,30 @@ class SignalGeneratorNode(Node):
             PointStamped, "true_signal", 10
         )
 
-        # Initialize signal generator parameters
-        self.signal_params = SignalParams()
-        self.signal_params.max_frequency = self.get_parameter(
-            "max_frequency"
-        ).value
-        self.signal_params.max_amplitude = self.get_parameter(
-            "max_amplitude"
-        ).value
-        self.signal_params.number_of_signals = self.get_parameter(
-            "number_of_signals"
-        ).value
-
-        # Create signal generator
-        self.signal_generator = SingleDofSignalGenerator(self.signal_params)
+        # Initialize signal generator
+        self._init_signal_generator()
 
         # Initialize time
         self.initial_time = self.get_clock().now()
 
         # Create timer for signal publishing
-        publishing_rate = self.get_parameter("publishing_rate").value
-        timer_period = 1.0 / publishing_rate
-        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.timer = None
+        self._create_timer()
+
+        # Services
+        self.reset_service = self.create_service(
+            Trigger,
+            "~/reset_generator",
+            self.handle_reset,
+            callback_group=self.callback_group,
+        )
+
+        self.reset_params_service = self.create_service(
+            Trigger,
+            "~/reset_parameters",
+            self.handle_reset_parameters,
+            callback_group=self.callback_group,
+        )
 
         self.get_logger().info("Signal generator node initialized")
 
@@ -104,6 +135,104 @@ class SignalGeneratorNode(Node):
             description=description,
         )
 
+    def parameters_callback(self, params):
+        """Handle parameter changes."""
+        result = SetParametersResult(successful=True)
+        timer_update_needed = False
+
+        for param in params:
+            try:
+                if param.name == "publishing_rate":
+                    if param.value <= 0.0:
+                        raise ValueError("Publishing rate must be positive")
+                    timer_update_needed = True
+                    self.get_logger().info(
+                        f"Updated publishing rate to {param.value}"
+                    )
+                elif param.name == "max_frequency":
+                    if param.value <= 0.0:
+                        raise ValueError("Max frequency must be positive")
+                    self.signal_params.max_frequency = param.value
+                    self.get_logger().info(
+                        f"Updated max frequency to {param.value}"
+                    )
+                elif param.name == "max_amplitude":
+                    if param.value < 0.0:
+                        raise ValueError("Max amplitude must be non-negative")
+                    self.signal_params.max_amplitude = param.value
+                    self.get_logger().info(
+                        f"Updated max amplitude to {param.value}"
+                    )
+                elif param.name == "noise_level":
+                    if param.value < 0.0:
+                        raise ValueError("Noise level must be non-negative")
+                    self.noise_level = param.value
+                    self.get_logger().info(
+                        f"Updated noise level to {param.value}"
+                    )
+                elif param.name == "number_of_signals":
+                    if param.value <= 0:
+                        raise ValueError("Number of signals must be positive")
+                    self.signal_params.number_of_signals = param.value
+                    self.get_logger().info(
+                        f"Updated number of signals to {param.value}"
+                    )
+            except Exception as e:
+                self.get_logger().error(
+                    f"Error setting parameter {param.name}: {str(e)}"
+                )
+                result.successful = False
+                result.reason = str(e)
+                return result
+
+        # If any parameters changed that require reinitializing the generator
+        if any(
+            param.name
+            in ["max_frequency", "max_amplitude", "number_of_signals"]
+            for param in params
+        ):
+            self._init_signal_generator()
+
+        # If publishing rate changed, update the timer
+        if timer_update_needed:
+            self._create_timer()
+
+        return result
+
+    def _init_signal_generator(self):
+        """Initialize the signal generator with current parameters."""
+        self.signal_params = SignalParams()
+        self.signal_params.max_frequency = self.get_parameter(
+            "max_frequency"
+        ).value
+        self.signal_params.max_amplitude = self.get_parameter(
+            "max_amplitude"
+        ).value
+        self.signal_params.number_of_signals = self.get_parameter(
+            "number_of_signals"
+        ).value
+
+        # Store noise level separately
+        self.noise_level = self.get_parameter("noise_level").value
+
+        # Create signal generator
+        self.signal_generator = SingleDofSignalGenerator(self.signal_params)
+        self.get_logger().info("Signal generator reinitialized")
+
+    def _create_timer(self):
+        """Create or update the timer for signal publishing."""
+        # Cancel existing timer if it exists
+        if self.timer:
+            self.timer.cancel()
+
+        # Create new timer with current publishing rate
+        publishing_rate = self.get_parameter("publishing_rate").value
+        timer_period = 1.0 / publishing_rate
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.get_logger().info(
+            f"Timer updated with period {timer_period:.4f}s"
+        )
+
     def timer_callback(self):
         """Publish clean and noisy measurements."""
         # Update current time
@@ -111,7 +240,7 @@ class SignalGeneratorNode(Node):
 
         # Generate signals
         clean_signal, noisy_signal = self.signal_generator.generate_signal(
-            current_time.nanoseconds * 1e-9
+            current_time.nanoseconds * 1e-9, noise_level=self.noise_level
         )
 
         # Get current ROS time for message timestamp
@@ -129,6 +258,59 @@ class SignalGeneratorNode(Node):
             point=Point(x=noisy_signal, y=0.0, z=0.0),
         )
         self.noisy_publisher.publish(noisy_msg)
+
+    def handle_reset(self, request, response):
+        """Handle signal generator reset requests."""
+        # Reinitialize the signal generator with a new random seed
+        self._init_signal_generator()
+
+        # Reset the signal components with a new random seed
+        new_seed = self.signal_generator.reset()
+        self.get_logger().info(
+            f"Signal generator reset with new seed: {new_seed}"
+        )
+
+        # Reset the time reference
+        self.initial_time = self.get_clock().now()
+
+        response.success = True
+        response.message = (
+            f"Signal generator reset successful with seed {new_seed}"
+        )
+        return response
+
+    def handle_reset_parameters(self, request, response):
+        """Reset all parameters to their default values."""
+        try:
+            # Set parameters directly
+            parameters = []
+            for name, value in self.default_params.items():
+                param_type = Parameter.Type.DOUBLE
+                if name == "number_of_signals":
+                    param_type = Parameter.Type.INTEGER
+
+                parameters.append(Parameter(name, param_type, value))
+
+            self.set_parameters(parameters)
+
+            for name, value in self.default_params.items():
+                self.get_logger().info(f"Reset {name} to {value}")
+
+            # Reinitialize signal generator with default values
+            self._init_signal_generator()
+
+            # Update timer with default publishing rate
+            self._create_timer()
+
+            self.get_logger().info("All parameters reset to default values")
+            response.success = True
+            response.message = "Parameters reset successful"
+        except Exception as e:
+            self.get_logger().error(f"Error resetting parameters: {str(e)}")
+            response.success = False
+            response.message = f"Error: {str(e)}"
+
+        return response
 
 
 def main(args=None):
