@@ -3,6 +3,10 @@
     process_measurement_ratio: 0.25
     window_time: 0.01
     mediation_mode: 0  # ADJUST_STATE
+    process_noise: 0.01
+    measurement_noise: 0.1
+    model_frequency: 0.0
+    model_amplitude: 0.0
 
 filter_node:
   ros__parameters:
@@ -10,3 +14,7 @@ filter_node:
     process_measurement_ratio: 0.25
     window_time: 0.01
     mediation_mode: 0  # ADJUST_STATE
+    process_noise: 0.01
+    measurement_noise: 0.1
+    model_frequency: 0.0
+    model_amplitude: 0.0

@@ -20,4 +20,6 @@ repos:
     hooks:
     -   id: flake8
         additional_dependencies: [flake8-docstrings]
-        args: ["--ignore=W503"]
+        # W503: Line break before binary operator (conflicts with black)
+        # E501: Line too long (handled by black's line-length setting)
+        args: ["--ignore=W503,E501"]

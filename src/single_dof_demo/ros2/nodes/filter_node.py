@@ -6,13 +6,19 @@
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction.
 
-"""Filter node for the simplified demo."""
+"""Filter node for the simplified demo with dynamic parameter adjustment."""
 
+import math
 import rclpy
+from rclpy.parameter import Parameter
 from diagnostic_msgs.msg import DiagnosticStatus, KeyValue
 from geometry_msgs.msg import PointStamped, Point
 from std_msgs.msg import Header
-from rcl_interfaces.msg import FloatingPointRange, ParameterDescriptor
+from rcl_interfaces.msg import (
+    FloatingPointRange,
+    ParameterDescriptor,
+    SetParametersResult,
+)
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 from std_srvs.srv import Trigger
@@ -21,7 +27,7 @@ from kinematic_arbiter.single_dof_demo.core.kalman_filter import KalmanFilter
 
 
 class FilterNode(Node):
-    """Filter node for the simplified demo."""
+    """Filter node for the simplified demo with dynamic parameter adjustment."""
 
     def __init__(self):
         """Initialize the filter node."""
@@ -30,26 +36,51 @@ class FilterNode(Node):
         # Use ReentrantCallbackGroup to allow concurrent callbacks
         self.callback_group = ReentrantCallbackGroup()
 
+        # Default parameter values
+        self.default_params = {
+            "process_noise": 0.01,
+            "measurement_noise": 0.1,
+            "model_frequency": 0.0,
+            "model_amplitude": 0.0,
+        }
+
         # Parameters
         self.declare_parameters(
             namespace="",
             parameters=[
                 (
                     "process_noise",
-                    0.01,
+                    self.default_params["process_noise"],
                     self._create_float_descriptor(
-                        0.0, 1.0, "Process noise variance"
+                        0.0, 100.0, "Process noise variance"
                     ),
                 ),
                 (
                     "measurement_noise",
-                    0.1,
+                    self.default_params["measurement_noise"],
                     self._create_float_descriptor(
-                        0.0, 1.0, "Measurement noise variance"
+                        0.0, 100.0, "Measurement noise variance"
+                    ),
+                ),
+                (
+                    "model_frequency",
+                    self.default_params["model_frequency"],
+                    self._create_float_descriptor(
+                        0.0, 20.0, "Frequency of the model in Hz"
+                    ),
+                ),
+                (
+                    "model_amplitude",
+                    self.default_params["model_amplitude"],
+                    self._create_float_descriptor(
+                        0.0, 10.0, "Amplitude of the model"
                     ),
                 ),
             ],
         )
+
+        # Add parameter callback
+        self.add_on_set_parameters_callback(self.parameters_callback)
 
         # Initialize filter
         self._init_filter()
@@ -86,10 +117,20 @@ class FilterNode(Node):
         # Services
         self.reset_service = self.create_service(
             Trigger,
-            "reset_filter",
+            "~/reset_filter",
             self.handle_reset,
             callback_group=self.callback_group,
         )
+
+        self.reset_params_service = self.create_service(
+            Trigger,
+            "~/reset_parameters",
+            self.handle_reset_parameters,
+            callback_group=self.callback_group,
+        )
+
+        # Initialize time tracking
+        self.initial_time = self.get_clock().now()
 
         self.get_logger().info("Filter node initialized")
 
@@ -102,11 +143,55 @@ class FilterNode(Node):
             description=description,
         )
 
+    def parameters_callback(self, params):
+        """Handle parameter changes."""
+        result = SetParametersResult(successful=True)
+
+        for param in params:
+            try:
+                if param.name == "process_noise":
+                    if param.value < 0.0:
+                        raise ValueError("Process noise must be non-negative")
+                    self.filter.set_process_noise(param.value)
+                    self.get_logger().info(
+                        f"Updated process noise to {param.value}"
+                    )
+                elif param.name == "measurement_noise":
+                    if param.value < 0.0:
+                        raise ValueError(
+                            "Measurement noise must be non-negative"
+                        )
+                    self.filter.set_measurement_noise(param.value)
+                    self.get_logger().info(
+                        f"Updated measurement noise to {param.value}"
+                    )
+                elif param.name == "model_frequency":
+                    self.filter.set_frequency(param.value)
+                    self.get_logger().info(
+                        f"Updated model frequency to {param.value}"
+                    )
+                elif param.name == "model_amplitude":
+                    self.filter.set_amplitude(param.value)
+                    self.get_logger().info(
+                        f"Updated model amplitude to {param.value}"
+                    )
+            except Exception as e:
+                self.get_logger().error(
+                    f"Error setting parameter {param.name}: {str(e)}"
+                )
+                result.successful = False
+                result.reason = str(e)
+                return result
+
+        return result
+
     def _init_filter(self):
         """Initialize the Kalman filter."""
         self.filter = KalmanFilter(
             process_noise=self.get_parameter("process_noise").value,
             measurement_noise=self.get_parameter("measurement_noise").value,
+            frequency=self.get_parameter("model_frequency").value,
+            amplitude=self.get_parameter("model_amplitude").value,
         )
 
     def measurement_callback(self, msg):
@@ -114,8 +199,19 @@ class FilterNode(Node):
         # Extract measurement from message
         measurement = msg.point.x
 
+        # Skip invalid measurements
+        if math.isnan(measurement):
+            self.get_logger().warn("Received NaN measurement, skipping update")
+            return
+
+        # Calculate current time in seconds
+        current_time = self.get_clock().now() - self.initial_time
+        time_secs = current_time.nanoseconds * 1e-9
+
         # Update filter
-        output = self.filter.update(measurement=measurement)
+        output = self.filter.update(
+            measurement=measurement, time_secs=time_secs
+        )
 
         # Get state and bounds
         state_value = output.final.state.value
@@ -165,8 +261,42 @@ class FilterNode(Node):
     def handle_reset(self, request, response):
         """Handle filter reset requests."""
         self._init_filter()
+        self.initial_time = self.get_clock().now()
         response.success = True
         response.message = "Filter reset successful"
+        return response
+
+    def handle_reset_parameters(self, request, response):
+        """Reset all parameters to their default values."""
+        try:
+            # Set parameters directly
+            parameters = []
+            for name, value in self.default_params.items():
+                parameters.append(
+                    Parameter(name, Parameter.Type.DOUBLE, value)
+                )
+
+            self.set_parameters(parameters)
+
+            for name, value in self.default_params.items():
+                self.get_logger().info(f"Reset {name} to {value}")
+
+            # Update filter with default values
+            self.filter.set_process_noise(self.default_params["process_noise"])
+            self.filter.set_measurement_noise(
+                self.default_params["measurement_noise"]
+            )
+            self.filter.set_frequency(self.default_params["model_frequency"])
+            self.filter.set_amplitude(self.default_params["model_amplitude"])
+
+            self.get_logger().info("All parameters reset to default values")
+            response.success = True
+            response.message = "Parameters reset successful"
+        except Exception as e:
+            self.get_logger().error(f"Error resetting parameters: {str(e)}")
+            response.success = False
+            response.message = f"Error: {str(e)}"
+
         return response
 
     def _publish_diagnostics(self):
@@ -182,6 +312,18 @@ class FilterNode(Node):
             KeyValue(
                 key="measurement_variance",
                 value=str(self.filter.measurement_variance),
+            ),
+            KeyValue(
+                key="process_variance",
+                value=str(self.filter.process_variance),
+            ),
+            KeyValue(
+                key="model_frequency",
+                value=str(self.filter.frequency),
+            ),
+            KeyValue(
+                key="model_amplitude",
+                value=str(self.filter.amplitude),
             ),
         ]
         self.diagnostics_pub.publish(msg)
