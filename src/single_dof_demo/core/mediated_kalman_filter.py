@@ -73,6 +73,13 @@ class MediatedKalmanFilter(object):
             ratio: The new process to measurement ratio (ζ).
         """
         self.scale = ratio
+        # Adjust process_variance to maintain the proper ratio with measurement_variance
+        self.process_variance = max(
+            self.process_variance, self.measurement_variance
+        )
+        # Note: In high dimensional cases where measurements don't directly map to every state,
+        # a collective maximum bound on state covariance would be tracked and used
+        # across various measurements for the observable states.
 
     def set_sample_window(self, window: int):
         """Update the sample window parameter.

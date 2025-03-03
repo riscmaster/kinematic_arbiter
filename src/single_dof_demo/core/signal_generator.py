@@ -31,10 +31,25 @@ class SignalParams:
         number_of_signals: Number of sinusoidal components to combine
     """
 
-    seed = 543
-    max_frequency = 20.0
-    max_amplitude = 0.3
-    number_of_signals = 10
+    def __init__(
+        self,
+        seed=543,
+        max_frequency=20.0,
+        max_amplitude=0.3,
+        number_of_signals=10,
+    ):
+        """Initialize signal parameters.
+
+        Args:
+            seed: Random seed for reproducible signal generation
+            max_frequency: Maximum frequency for signal components (Hz)
+            max_amplitude: Maximum amplitude for signal components
+            number_of_signals: Number of sinusoidal components to combine
+        """
+        self.seed = seed
+        self.max_frequency = max_frequency
+        self.max_amplitude = max_amplitude
+        self.number_of_signals = number_of_signals
 
 
 class SingleDofSignalGenerator:
@@ -106,3 +121,34 @@ class SingleDofSignalGenerator:
         noise = np.random.normal(0, noise_level)
         noisy_signal = clean_signal + noise
         return clean_signal, noisy_signal
+
+    def generate_complete_signal(self, duration=1.0, sample_frequency=2000):
+        """Generate both clean and noisy signals over a specified duration.
+
+        Args:
+            duration: Total duration of the signal (seconds)
+            sample_frequency: Number of samples per second
+
+        Returns:
+            tuple: (clean_signal, noisy_signal, signal_time)
+        """
+        np.random.seed(self.params.seed)
+        number_of_samples = int(duration * sample_frequency)
+        signal_time = np.linspace(
+            start=0.0, stop=duration, num=number_of_samples
+        )
+        frequencies = np.random.uniform(
+            0, self.params.max_frequency, self.params.number_of_signals
+        )
+        amplitudes = np.random.uniform(
+            0, self.params.max_amplitude, self.params.number_of_signals
+        )
+        signal = np.zeros(len(signal_time))
+        for i, t in enumerate(signal_time):
+            for frequency, amplitude in zip(frequencies, amplitudes):
+                signal[i] += amplitude * np.sin(2 * np.pi * frequency * t)
+
+        noisy_signal = signal + np.random.normal(
+            0.0, self.params.max_amplitude, len(signal)
+        )
+        return signal, noisy_signal, signal_time

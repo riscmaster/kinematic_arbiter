@@ -8,10 +8,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from src.single_dof_demo.core.signal_generator import (
-    SignalParams,
-    generate_signals,
-)
+from core.signal_generator import SingleDofSignalGenerator, SignalParams
 from core.kalman_filter import KalmanFilter
 from core.mediated_kalman_filter import MediatedKalmanFilter, Mediation
 from matplotlib.lines import Line2D
@@ -48,9 +45,10 @@ class DisplayGui(object):
         self.kf_ax.margins(y=0)
 
         plt.subplots_adjust(left=0.25, bottom=0.25)
-        params = SignalParams()
-        self.signal, self.noisy_signal, self.signal_time = generate_signals(
-            params=params
+        signal_params = SignalParams()
+        signal_generator = SingleDofSignalGenerator(signal_params)
+        self.signal, self.noisy_signal, self.signal_time = (
+            signal_generator.generate_complete_signal()
         )
 
         self.mkf_signal_estimate = np.zeros(len(self.signal_time))
@@ -60,38 +58,20 @@ class DisplayGui(object):
         self.kf_signal_bound = np.zeros(len(self.signal_time))
         self.kf_measurement_bound = np.zeros(len(self.signal_time))
         self.mediation = np.zeros(len(self.signal_time))
-        initial_mkf_tuning = 0.25
-        initial_process_noise = 0.025
-        initial_measurement_noise = 0.05
-        self.mkf_mediation = Mediation.ADJUST_STATE
-        mkf = MediatedKalmanFilter(
-            process_to_measurement_ratio=initial_mkf_tuning,
-            window_time=0.01,
-            mediation=self.mkf_mediation,
-        )
-        kf = KalmanFilter(
-            process_noise=initial_process_noise,
-            measurement_noise=initial_measurement_noise,
-        )
-        for i, (t, s) in enumerate(zip(self.signal_time, self.noisy_signal)):
-            self.mkf_signal_estimate[i] = mkf.update(
-                measurement=s, t=t
-            ).final.state.value
-            self.mkf_signal_bound[i] = 3.0 * np.sqrt(mkf.state_variance)
-            self.mkf_measurement_bound[i] = 3.0 * np.sqrt(
-                mkf.measurement_variance
-            )
-            self.kf_signal_estimate[i] = kf.update(
-                measurement=s
-            ).final.state.value
-            self.kf_signal_bound[i] = 3.0 * np.sqrt(kf.state_variance)
-            self.kf_measurement_bound[i] = 3.0 * np.sqrt(
-                kf.measurement_variance
-            )
-            self.mediation[i] = (
-                self.mkf_signal_estimate[i] if mkf.mediation else float("NaN")
-            )
 
+        # Initialize tuning parameters
+        self.initial_mkf_tuning = 1.5
+        self.initial_process_noise = 0.025
+        self.initial_measurement_noise = 0.05
+        self.mkf_mediation = Mediation.ADJUST_STATE
+
+        # Create the filters
+        self.initialize_filters()
+
+        # Generate initial data
+        self.update_data()
+
+        # Plot setup for Mediated Kalman Filter
         (self.mkf_noisy_plot_val,) = self.mkf_ax.plot(
             self.signal_time, self.noisy_signal, "g", alpha=0.5
         )
@@ -133,6 +113,7 @@ class DisplayGui(object):
             self.signal_time, self.signal, "b"
         )
 
+        # Plot setup for Standard Kalman Filter
         (self.kf_noisy_plot_val,) = self.kf_ax.plot(
             self.signal_time, self.noisy_signal, "g", alpha=0.5
         )
@@ -179,12 +160,12 @@ class DisplayGui(object):
             "MKF PM Ratio",
             0.0,
             1.0,
-            valinit=np.log10((initial_mkf_tuning + 1.0)),
-            valstep=1e-4,
+            valinit=np.log10((self.initial_mkf_tuning + 1.0)),
+            valstep=0.01,
         )
         self.mkf_tuner.on_changed(self.update_mkf_plot)
 
-        # KF Tuners
+        # KF Tuner
         self.kf_process_tuner = Slider(
             plt.axes(
                 [0.25, 0.1, 0.65, 0.03], facecolor="lightgoldenrodyellow"
@@ -192,8 +173,8 @@ class DisplayGui(object):
             "KF Process",
             0.0,
             0.1,
-            valinit=np.log10(initial_process_noise + 1.0),
-            valstep=1e-4,
+            valinit=np.log10(self.initial_process_noise + 1.0),
+            valstep=0.001,
         )
         self.kf_process_tuner.on_changed(self.update_kf_plot)
 
@@ -204,24 +185,75 @@ class DisplayGui(object):
             "KF Measurement",
             0.0,
             1.0,
-            valinit=np.log10(initial_measurement_noise + 1.0),
-            valstep=1e-4,
+            valinit=np.log10(self.initial_measurement_noise + 1.0),
+            valstep=0.01,
         )
         self.kf_measurement_tuner.on_changed(self.update_kf_plot)
 
-        # Reset Button
+        # Reset button
         resetax = plt.axes([0.8, 0.025, 0.1, 0.04])
         self.button = Button(
             resetax, "Reset", color=axcolor, hovercolor="0.975"
         )
         self.button.on_clicked(self.reset)
 
+        # Radio buttons for mediation method
         rax = plt.axes([0.015, 0.65, 0.185, 0.15], facecolor=axcolor)
         self.radio = RadioButtons(
             rax, ("State", "Meas", "Reject Meas", "Nothing"), active=0
         )
-
         self.radio.on_clicked(self.update_mkf_method)
+
+    def initialize_filters(self):
+        """Initialize both filters with current parameters."""
+        # Create MKF filter
+        self.mkf = MediatedKalmanFilter(
+            process_to_measurement_ratio=self.initial_mkf_tuning,
+            sample_window=40,
+            mediation=self.mkf_mediation,
+        )
+        self.mkf.process_variance = self.initial_process_noise
+        self.mkf.measurement_variance = self.initial_measurement_noise
+        self.mkf.state_variance = 0.1
+
+        # Create standard KF filter
+        self.kf = KalmanFilter(
+            process_noise=self.initial_process_noise,
+            measurement_noise=self.initial_measurement_noise,
+        )
+        self.kf.process_variance = self.initial_process_noise
+        self.kf.measurement_variance = self.initial_measurement_noise
+        self.kf.state_variance = 0.1
+
+    def update_data(self):
+        """Update all data using current filter settings."""
+        # Reinitialize the filters instead of trying to reset them
+        self.initialize_filters()
+
+        # Process all data points
+        for i, (t, s) in enumerate(zip(self.signal_time, self.noisy_signal)):
+            # Process through MKF
+            mkf_output = self.mkf.update(measurement=s, t=t)
+            self.mkf_signal_estimate[i] = mkf_output.final.state.value
+            self.mkf_signal_bound[i] = 3.0 * np.sqrt(self.mkf.state_variance)
+            self.mkf_measurement_bound[i] = 3.0 * np.sqrt(
+                self.mkf.measurement_variance
+            )
+
+            # Process through standard KF
+            kf_output = self.kf.update(measurement=s)
+            self.kf_signal_estimate[i] = kf_output.final.state.value
+            self.kf_signal_bound[i] = 3.0 * np.sqrt(self.kf.state_variance)
+            self.kf_measurement_bound[i] = 3.0 * np.sqrt(
+                self.kf.measurement_variance
+            )
+
+            # Store mediation points
+            self.mediation[i] = (
+                self.mkf_signal_estimate[i]
+                if self.mkf.mediation
+                else float("NaN")
+            )
 
     def update_mkf_method(self, label):
         """Update the mediation method based on radio button selection."""
@@ -237,26 +269,34 @@ class DisplayGui(object):
 
     def update_mkf_plot(self, _):
         """Update the mediated Kalman filter plot based on slider values."""
-        bar_value = -(self.mkf_tuner.val - 1)
-        pm_ratio = 100.0 if (bar_value == 0) else -np.log10(bar_value)
-        self.mkf_tuner.valtext.set_text(pm_ratio)
-        mkf = MediatedKalmanFilter(
-            process_to_measurement_ratio=pm_ratio,
-            window_time=0.01,
+        # Convert slider value to actual ratio
+        ratio_value = -1.0 + 10**self.mkf_tuner.val
+        self.mkf_tuner.valtext.set_text(ratio_value)
+
+        # Re-initialize MKF with new parameters
+        self.mkf = MediatedKalmanFilter(
+            process_to_measurement_ratio=ratio_value,
+            sample_window=40,
             mediation=self.mkf_mediation,
         )
+        self.mkf.process_variance = self.initial_process_noise
+        self.mkf.measurement_variance = self.initial_measurement_noise
+
+        # Process all data through the filter
         for i, (t, s) in enumerate(zip(self.signal_time, self.noisy_signal)):
-            self.mkf_signal_estimate[i] = mkf.update(
-                measurement=s, t=t
-            ).final.state.value
-            self.mkf_signal_bound[i] = 3.0 * np.sqrt(mkf.state_variance)
+            mkf_output = self.mkf.update(measurement=s, t=t)
+            self.mkf_signal_estimate[i] = mkf_output.final.state.value
+            self.mkf_signal_bound[i] = 3.0 * np.sqrt(self.mkf.state_variance)
             self.mkf_measurement_bound[i] = 3.0 * np.sqrt(
-                mkf.measurement_variance
+                self.mkf.measurement_variance
             )
             self.mediation[i] = (
-                self.mkf_signal_estimate[i] if mkf.mediation else float("NaN")
+                self.mkf_signal_estimate[i]
+                if self.mkf.mediation
+                else float("NaN")
             )
 
+        # Update plot data
         self.mkf_noisy_plot_val.set_ydata(self.noisy_signal)
         self.mkf_noisy_plot_up.set_ydata(
             self.noisy_signal + self.mkf_measurement_bound
@@ -277,22 +317,27 @@ class DisplayGui(object):
 
     def update_kf_plot(self, _):
         """Update the standard Kalman filter plot based on slider values."""
+        # Convert slider values to actual noise values
         process_noise = -1.0 + 10**self.kf_process_tuner.val
         self.kf_process_tuner.valtext.set_text(process_noise)
         measurement_noise = -1.0 + 10**self.kf_measurement_tuner.val
         self.kf_measurement_tuner.valtext.set_text(measurement_noise)
-        kf = KalmanFilter(
+
+        # Re-initialize KF with new parameters
+        self.kf = KalmanFilter(
             process_noise=process_noise, measurement_noise=measurement_noise
         )
+
+        # Process all data through the filter
         for i, s in enumerate(self.noisy_signal):
-            self.kf_signal_estimate[i] = kf.update(
-                measurement=s
-            ).final.state.value
-            self.kf_signal_bound[i] = 3.0 * np.sqrt(kf.state_variance)
+            kf_output = self.kf.update(measurement=s)
+            self.kf_signal_estimate[i] = kf_output.final.state.value
+            self.kf_signal_bound[i] = 3.0 * np.sqrt(self.kf.state_variance)
             self.kf_measurement_bound[i] = 3.0 * np.sqrt(
-                kf.measurement_variance
+                self.kf.measurement_variance
             )
 
+        # Update plot data
         self.kf_noisy_plot_val.set_ydata(self.noisy_signal)
         self.kf_noisy_plot_up.set_ydata(
             self.noisy_signal + self.kf_measurement_bound
@@ -315,6 +360,12 @@ class DisplayGui(object):
         self.mkf_tuner.reset()
         self.kf_measurement_tuner.reset()
         self.kf_process_tuner.reset()
+        # Reset filters to default states
+        self.initialize_filters()
+        self.update_data()
+        # Update plots
+        self.update_mkf_plot(None)
+        self.update_kf_plot(None)
 
     @staticmethod
     def run():
