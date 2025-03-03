@@ -64,7 +64,7 @@ This interactive demo provides:
 - Visualization of measurement validation and mediation effects
 - Different mediation strategies (state adjustment, measurement adjustment, rejection)
 
-![Standalone Demo](docs/StandaloneDemo.gif)
+![Standalone Demo](https://github.com/riscmaster/kinematic_arbiter/blob/master/doc/StandaloneDemo.gif)
 
 The standalone demo is an excellent way to understand the core concepts of the Mediated Kalman Filter before integrating it into a ROS 2 system.
 
@@ -114,7 +114,7 @@ The demo includes Foxglove Bridge integration for advanced visualization:
 2. Import the provided layout from `config/single_dof_demo.json`
 3. Observe real-time signal generation, filtering, and parameter effects
 
-![Foxglove Studio Visualization](docs/SingleDofDemo.gif)
+![Foxglove Studio Visualization](https://github.com/riscmaster/kinematic_arbiter/blob/master/doc/SingleDofDemo.gif)
 
 ## Prerequisites
 
