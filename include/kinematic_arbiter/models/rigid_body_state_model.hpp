@@ -148,7 +148,7 @@ public:
     orientation.normalize();
 
     // Get rotation matrix
-    Eigen::Matrix3d rotation_matrix_w_to_b = orientation.toRotationMatrix().transpose();
+    Eigen::Matrix3d rotation_matrix_b_to_w = orientation.toRotationMatrix();
 
     // Extract velocity and acceleration components
     const Eigen::Vector3d linear_velocity = current_state.segment<3>(static_cast<int>(StateIndex::kLinearXDot));
@@ -158,7 +158,7 @@ public:
 
     // Linear XYZ Position Prediction Model
     new_states.segment<3>(static_cast<int>(StateIndex::kLinearX)) +=
-      rotation_matrix_w_to_b * ((linear_velocity + time_step * 0.5 * linear_acceleration) * time_step);
+      rotation_matrix_b_to_w * ((linear_velocity + time_step * 0.5 * linear_acceleration) * time_step);
 
     // Angular Position (Quaternion) Prediction Model
     // Use quaternion kinematics: q(t+dt) = exp(0.5*ω*dt) * q(t)
