@@ -15,7 +15,7 @@ jobs:
       image: ros:humble
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
@@ -34,7 +34,7 @@ jobs:
           colcon test-result --verbose
 
       - name: Upload logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-only-logs
           path: ~/ros2_ws/log
@@ -47,7 +47,7 @@ jobs:
       image: ros:humble
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Drake
         run: |
@@ -76,7 +76,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: full-build-logs
           path: ~/ros2_ws/log
