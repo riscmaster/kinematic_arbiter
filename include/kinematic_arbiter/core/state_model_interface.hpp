@@ -5,53 +5,78 @@
 namespace kinematic_arbiter {
 namespace core {
 
-// Fixed state size for position, orientation, velocity, angular velocity, acceleration, angular acceleration
-constexpr int kStateSize = 18;
-
 /**
- * @brief Interface for state transition models
+ * @brief Interface for state transition models used in Kalman filtering
  *
- * Defines the process model for state transition and its Jacobian.
- * The state vector is fixed at 18 dimensions:
- * - Position (3D)
- * - Orientation (3D)
- * - Linear velocity (3D)
- * - Angular velocity (3D)
- * - Linear acceleration (3D)
- * - Angular acceleration (3D)
+ * @tparam StateType Type of state vector
  */
+template<typename StateType>
 class StateModelInterface {
 public:
-  using StateVector = Eigen::Matrix<double, kStateSize, 1>;
-  using StateMatrix = Eigen::Matrix<double, kStateSize, kStateSize>;
+  // Type definitions
+  using StateVector = StateType;
+  using StateMatrix = Eigen::Matrix<double, StateType::RowsAtCompileTime, StateType::RowsAtCompileTime>;
 
   /**
-   * @brief Predict next state based on current state and time step
-   *
-   * Implements the process model: x_k = A_{k-1} * x_{k-1} + v_k
-   *
-   * @param current_state Current state vector (x_{k-1})
-   * @param time_step Time step in seconds
-   * @return Predicted next state (x_k)
+   * @brief Parameters for state model
    */
-  virtual StateVector PredictState(
-      const StateVector& current_state,
-      double time_step) const = 0;
+  struct Params {
+    // Initial state covariance uncertainty
+    double initial_state_uncertainty = 1.0;
+
+    // Base process noise magnitude (Q matrix scaling)
+    double process_noise_magnitude = 0.01;
+  };
 
   /**
-   * @brief Compute state transition matrix (Jacobian of state transition)
+   * @brief Constructor with parameters
    *
-   * Returns the matrix A_{k-1} in the process model
-   *
-   * @param current_state Current state vector (x_{k-1})
-   * @param time_step Time step in seconds
-   * @return State transition matrix (A_{k-1})
+   * @param params Parameters for this state model
    */
-  virtual StateMatrix GetStateTransitionMatrix(
-      const StateVector& current_state,
-      double time_step) const = 0;
+  explicit StateModelInterface(const Params& params = Params())
+    : params_(params) {}
 
+  /**
+   * @brief Virtual destructor
+   */
   virtual ~StateModelInterface() = default;
+
+  /**
+   * @brief Predict state forward in time
+   *
+   * @param state Current state estimate
+   * @param dt Time step in seconds
+   * @return Predicted next state
+   */
+  virtual StateVector PredictState(const StateVector& state, double dt) const = 0;
+
+  /**
+   * @brief Get the state transition matrix
+   *
+   * @param state Current state estimate
+   * @param dt Time step in seconds
+   * @return State transition matrix (F)
+   */
+  virtual StateMatrix GetTransitionMatrix(const StateVector& state, double dt) const = 0;
+
+  /**
+   * @brief Get the process noise covariance
+   *
+   * @param state Current state estimate
+   * @param dt Time step in seconds
+   * @return Process noise covariance matrix (Q)
+   */
+  virtual StateMatrix GetProcessNoiseCovariance(const StateVector& state, double dt) const = 0;
+
+  /**
+   * @brief Get the state model parameters
+   *
+   * @return Const reference to parameters
+   */
+  const Params& GetParams() const { return params_; }
+
+protected:
+  Params params_;
 };
 
 } // namespace core

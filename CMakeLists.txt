@@ -1,5 +1,27 @@
+# Basic minimum CMake version
 cmake_minimum_required(VERSION 3.8)
 project(kinematic_arbiter)
+
+# First, let's check what's being processed
+message(STATUS "CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}")
+message(STATUS "CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Get build directory information
+message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
+message(STATUS "PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
+
+# Check what CMake is actually running
+execute_process(
+  COMMAND find ${CMAKE_BINARY_DIR} -name "CMakeLists.txt"
+  OUTPUT_VARIABLE found_cmakelists
+)
+message(STATUS "Found CMakeLists.txt files in build dir: ${found_cmakelists}")
+
+# Get original CMakeLists content
+file(READ ${CMAKE_CURRENT_LIST_FILE} original_content)
+string(LENGTH "${original_content}" content_length)
+message(STATUS "Original CMakeLists.txt length: ${content_length}")
 
 # Option to build only Python components
 option(BUILD_PYTHON_ONLY "Build only Python components without Drake dependency" OFF)
@@ -78,59 +100,62 @@ if(NOT BUILD_PYTHON_ONLY)
   find_package(drake REQUIRED)
   find_package(rclcpp REQUIRED)
 
-  # C++ libraries for core implementation
-  add_library(mkf_core
-    src/core/mediated_kalman_filter.cpp
-  )
+  # Use global include directories instead of target-specific ones
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-  # Include directories
-  target_include_directories(mkf_core PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
-
-  # Link against Drake
-  target_link_libraries(mkf_core PUBLIC
-    drake::drake
-  )
-
-  # Install C++ target
-  install(TARGETS mkf_core
-    EXPORT export_${PROJECT_NAME}
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION bin
-  )
-
-  # Install C++ headers
-  install(DIRECTORY include/
-    DESTINATION include
-  )
-
-  # Tests
+  # Tests - Both Drake integration and state model testing
   if(BUILD_TESTING)
-    # C++ tests with Drake
-    find_package(ament_cmake_gtest REQUIRED)
+    message(STATUS "Build testing is enabled")
 
-    # Add Drake test
-    ament_add_gtest(test_drake_integration
-      test/test_drake_integration.cpp
-    )
+    # Add the test directory to the include path
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+    # Find GTest
+    find_package(GTest REQUIRED)
+
+    # Add the Drake test
+    add_executable(test_drake_integration
+      test/test_drake_integration.cpp)
+
+    # Link against libraries
     target_link_libraries(test_drake_integration
-      mkf_core
       drake::drake
-    )
+      GTest::gtest
+      GTest::gtest_main)
+
+    # Register as a test with CTest
+    add_test(NAME test_drake_integration
+             COMMAND test_drake_integration)
+
+    # Add the state model test
+    add_executable(rigid_body_state_model_test
+      test/models/rigid_body_state_model_test.cpp)
+
+    # Link against Drake and GTest
+    target_link_libraries(rigid_body_state_model_test
+      drake::drake
+      GTest::gtest
+      GTest::gtest_main)
+
+    # Register as a test
+    add_test(NAME rigid_body_state_model_test
+             COMMAND rigid_body_state_model_test)
   endif()
-
-  ament_export_include_directories(include)
-  ament_export_libraries(mkf_core)
-  ament_export_targets(export_${PROJECT_NAME})
 endif()
 
-# Python tests can run regardless of BUILD_PYTHON_ONLY
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  ament_lint_auto_find_test_dependencies()
-endif()
+# Ensure these headers are installed
+install(DIRECTORY include/
+  DESTINATION include
+)
 
 ament_package()
+
+# Print line 150 (if it exists)
+string(REPLACE "\n" ";" content_lines "${original_content}")
+list(LENGTH content_lines num_lines)
+message(STATUS "Total lines in original CMakeLists.txt: ${num_lines}")
+
+if(num_lines GREATER_EQUAL 150)
+  list(GET content_lines 149 line_150) # 0-based index so 149 is line 150
+  message(STATUS "Line 150 content: '${line_150}'")
+endif()

@@ -1,67 +1,102 @@
 #pragma once
 
 #include <Eigen/Dense>
-#include "kinematic_arbiter/core/state_model_interface.hpp"
 
 namespace kinematic_arbiter {
 namespace core {
 
 /**
- * @brief Base class for all measurement types
- */
-struct MeasurementBase {
-  double timestamp;  // Time in seconds
-
-  explicit MeasurementBase(double ts) : timestamp(ts) {}
-  virtual ~MeasurementBase() = default;
-};
-
-/**
- * @brief Interface for measurement models
+ * @brief Interface for measurement models used in Kalman filtering
  *
- * Defines the measurement model and its Jacobian.
- *
- * @tparam MeasurementType Type of measurement (must derive from MeasurementBase)
- * @tparam MeasurementSize Dimension of the measurement vector
+ * @tparam StateType Type of state vector
+ * @tparam MeasurementType Type of measurement vector
  */
-template<typename MeasurementType, int MeasurementSize>
+template<typename StateType, typename MeasurementType>
 class MeasurementModelInterface {
 public:
-  using StateVector = Eigen::Matrix<double, kStateSize, 1>;
-  using MeasurementVector = Eigen::Matrix<double, MeasurementSize, 1>;
-  using MeasurementMatrix = Eigen::Matrix<double, MeasurementSize, MeasurementSize>;
-  using ObservationMatrix = Eigen::Matrix<double, MeasurementSize, kStateSize>;
+  // Type definitions
+  using StateVector = StateType;
+  using MeasurementVector = MeasurementType;
+  using MeasurementMatrix = Eigen::Matrix<double, MeasurementType::RowsAtCompileTime, MeasurementType::RowsAtCompileTime>;
+  using MeasurementJacobian = Eigen::Matrix<double, MeasurementType::RowsAtCompileTime, StateType::RowsAtCompileTime>;
 
   /**
-   * @brief Predict measurement based on current state
-   *
-   * Implements the measurement model: y_k = C_k * x_k
-   *
-   * @param state Current state vector (x_k)
-   * @return Predicted measurement (C_k * x_k)
+   * @brief Parameters for measurement model mediation
    */
-  virtual MeasurementVector PredictMeasurement(
-      const StateVector& state) const = 0;
+  struct Params {
+    // Sample window size for adaptive measurement noise estimation
+    size_t noise_sample_window = 100;
+
+    // Process noise modifier (ζ). Lower values increase confidence in the process model
+    // Range: [0, inf)
+    double process_to_measurement_noise_ratio = 1.0;
+
+    // Confidence level for measurement validation (used for chi-squared test)
+    // Range: (0, 1)
+    double confidence_value = 0.95;
+
+    // Initial measurement noise covariance
+    double initial_noise_uncertainty = 1.0;
+  };
 
   /**
-   * @brief Compute observation matrix (Jacobian of measurement function)
+   * @brief Constructor with parameters
    *
-   * Returns the matrix C_k in the measurement model
-   *
-   * @param state Current state vector (x_k)
-   * @return Observation matrix (C_k)
+   * @param params Parameters for this measurement model
    */
-  virtual ObservationMatrix GetObservationMatrix(
-      const StateVector& state) const = 0;
+  explicit MeasurementModelInterface(const Params& params = Params())
+    : params_(params),
+      noise_covariance_(MeasurementMatrix::Identity() * params.initial_noise_uncertainty) {}
 
   /**
-   * @brief Get the initial measurement noise covariance matrix
-   *
-   * @return Initial measurement noise covariance matrix (R_k)
+   * @brief Virtual destructor
    */
-  virtual MeasurementMatrix GetInitialNoiseCovarianceMatrix() const = 0;
-
   virtual ~MeasurementModelInterface() = default;
+
+  /**
+   * @brief Predict expected measurement from state
+   *
+   * @param state Current state estimate
+   * @return Expected measurement
+   */
+  virtual MeasurementVector PredictMeasurement(const StateVector& state) const = 0;
+
+  /**
+   * @brief Compute the Jacobian of the measurement model
+   *
+   * @param state Current state estimate
+   * @return Jacobian matrix (∂h/∂x)
+   */
+  virtual MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const = 0;
+
+  /**
+   * @brief Get the current measurement noise covariance
+   *
+   * @return Measurement noise covariance matrix
+   */
+  const MeasurementMatrix& GetNoiseCovariance() const { return noise_covariance_; }
+
+  /**
+   * @brief Get the measurement model parameters
+   *
+   * @return Const reference to parameters
+   */
+  const Params& GetParams() const { return params_; }
+
+  /**
+   * @brief Update the measurement noise covariance based on innovation
+   *
+   * @param innovation The measurement innovation
+   */
+  void UpdateNoiseCovariance(const MeasurementVector& innovation) {
+    // R_k = R_{k-1} + (innovation * innovation^T - R_{k-1}) / noise_sample_window
+    noise_covariance_ = noise_covariance_ +
+        (innovation * innovation.transpose() - noise_covariance_) / params_.noise_sample_window;
+  }
+
+protected:
+  Params params_;
+  MeasurementMatrix noise_covariance_;
 };
 
 } // namespace core
