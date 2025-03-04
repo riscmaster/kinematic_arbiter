@@ -20,7 +20,7 @@ The algorithm extends the traditional Kalman filter by adding a mediation layer 
 - Dynamically adjusts measurement noise estimates based on observed data
 - Maintains a conservative estimate of process noise linked to measurement updates
 
-> **Note**: Our implementation is inspired by the "consider" Kalman filter approach, which accounts for uncertainties in the system model that are not explicitly estimated. For more details on this approach, see [Numerical Consider Kalman Filter Implementations](https://sites.utexas.edu/renato/files/2017/04/Numerical_Consider_rz_5_16_13.pdf).
+> **Note**: Our C++ implementation uses optimal filtering techniques to handle out-of-sequence measurements and other practical challenges common in robotics applications. This approach enables robust state estimation even when measurements arrive late or sensor data is temporarily unreliable. For more details on this approach, see [Optimal Update with Out-of-Sequence Measurements](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=546f758d8981b8c8420a0b630f90cd2cce3606b4), which presents algorithms based on BLUE (best linear unbiased estimation) fusion that are optimal for the information available at the time of update.
 
 ### Key Features
 
