@@ -2,10 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>kinematic_arbiter</name>
-  <version>0.0.0</version>
-  <description>Sensor fusion package with mediated Kalman filter</description>
-  <maintainer email="your.email@example.com">Your Name</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  <description>Mediated Kalman filter implementation for robust state estimation</description>
+  <maintainer email="spencer.maughan@gmail.com">Spencer Maughan</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
@@ -20,10 +20,17 @@
   <depend>action_msgs</depend>
   <depend>launch</depend>
   <depend>launch_ros</depend>
+  <depend>drake</depend>
+  <depend>rclcpp</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_eigen</depend>
+  <depend>eigen</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-  <test_depend>ament_cmake_pytest</test_depend>
+   <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
 
   <member_of_group>rosidl_interface_packages</member_of_group>
 

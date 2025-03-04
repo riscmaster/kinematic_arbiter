@@ -20,6 +20,8 @@ The algorithm extends the traditional Kalman filter by adding a mediation layer 
 - Dynamically adjusts measurement noise estimates based on observed data
 - Maintains a conservative estimate of process noise linked to measurement updates
 
+> **Note**: Our implementation is inspired by the "consider" Kalman filter approach, which accounts for uncertainties in the system model that are not explicitly estimated. For more details on this approach, see [Numerical Consider Kalman Filter Implementations](https://sites.utexas.edu/renato/files/2017/04/Numerical_Consider_rz_5_16_13.pdf).
+
 ### Key Features
 
 #### Measurement Validation
@@ -254,3 +256,90 @@ This package is released under the MIT License. See the [LICENSE](LICENSE) file 
 - [Mediated Kalman Filter](doc/mediated_kalman_filter.pdf)
 
 These additions would make the README more practical and user-friendly, providing concrete guidance for users at different levels of expertise.
+
+## Drake Integration
+
+The C++ implementation of the mediated Kalman filter uses [Drake](https://drake.mit.edu/) for mathematical operations and geometric transformations. This section explains how to set up and verify Drake integration.
+
+### Installing Drake
+
+#### Using the Drake Binary Release (Recommended)
+
+For the most up-to-date installation instructions, please refer to the official Drake APT repository documentation:
+
+[Drake APT Installation Instructions](https://drake.mit.edu/apt.html#stable-releases)
+
+The official documentation provides detailed steps for installing Drake on Ubuntu systems, including prerequisites and environment setup. This ensures you'll always have the most current instructions even if repository details change.
+
+### Configuring Your Environment
+
+After installing Drake through APT, most content installs to `/opt/drake`. You may want to set up the following environment variables as recommended in the Drake documentation:
+
+```bash
+export PATH="/opt/drake/bin${PATH:+:${PATH}}"
+export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
+```
+
+For CMake to find Drake, no additional configuration should be necessary when using the APT package installation.
+
+### Verifying Drake Integration
+
+To verify that Drake is properly integrated, build and run the included test:
+
+```bash
+# Build the package
+cd ~/ros2_ws
+colcon build --packages-select kinematic_arbiter
+
+# Run the Drake integration test
+colcon test --packages-select kinematic_arbiter --ctest-args -R test_drake_integration
+```
+
+If the test passes, Drake is properly integrated with the package.
+
+### Using Drake Components
+
+The mediated Kalman filter implementation uses several Drake components:
+
+- `drake::math::RigidTransform` for representing poses
+- `drake::math::RotationMatrix` for rotation operations
+- Eigen types from Drake's endorsed version of Eigen
+
+When developing new functionality, refer to the [Drake Documentation](https://drake.mit.edu/doxygen_cxx/index.html) for detailed API information.
+
+### Troubleshooting
+
+#### Common Issues
+
+1. **CMake can't find Drake**
+
+   ```
+   CMake Error at CMakeLists.txt:XX (find_package):
+     By not providing "Drakeconfig.cmake" or "drake-config.cmake"...
+   ```
+
+   **Solution**: Ensure Drake is installed and add its installation path to `CMAKE_PREFIX_PATH`.
+
+2. **Linking errors with Drake**
+
+   ```
+   undefined reference to `drake::math::RotationMatrix<double>::...`
+   ```
+
+   **Solution**: Check that you're linking against Drake properly in CMakeLists.txt with `target_link_libraries(... drake::drake)`.
+
+3. **Version mismatch with Eigen**
+
+   **Solution**: Use Drake's version of Eigen to avoid compatibility issues.
+
+4. **Runtime errors about missing Drake libraries**
+
+   **Solution**: Make sure to set `LD_LIBRARY_PATH` to include Drake's library path when running executables outside the build environment.
+
+#### Drake Compatibility
+
+Drake undergoes regular development and may change APIs. If you encounter compatibility issues:
+
+1. Check the [Drake Release Notes](https://drake.mit.edu/release_notes/) for API changes
+2. Consider pinning to a specific version of Drake
+3. Look for workarounds in the [Drake GitHub Issues](https://github.com/RobotLocomotion/drake/issues)
