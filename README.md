@@ -145,22 +145,43 @@ sudo apt install ros-humble-foxglove-bridge
 
 ## Installation
 
-### Build from Source
-```bash
-# Create a workspace
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
+### Full Installation (Python + C++)
 
+To build the complete package with both Python and C++ components:
+
+```bash
 # Clone the repository
 git clone https://github.com/riscmaster/kinematic_arbiter.git
-cd ..
 
-# Install dependencies
-rosdep install -y --from-paths src --ignore-src --rosdistro humble
+# Navigate to your ROS 2 workspace
+cd ~/ros2_ws
 
 # Build the package
 colcon build --packages-select kinematic_arbiter
+
+# Source the workspace
+source install/setup.bash
 ```
+
+### Python-Only Installation
+
+If you're only interested in the Python demonstrations and don't need the C++ implementation (which requires Drake), you can build with the Python-only option:
+
+```bash
+# Navigate to your ROS 2 workspace
+cd ~/ros2_ws
+
+# Build only the Python components
+colcon build --packages-select kinematic_arbiter --cmake-args -DBUILD_PYTHON_ONLY=ON
+
+# Source the workspace
+source install/setup.bash
+```
+
+This option is useful if:
+- You want to quickly try out the demos without installing Drake
+- You're primarily interested in the educational aspects of the package
+- You're developing or testing only the Python components
 
 ## Usage
 
@@ -259,7 +280,7 @@ These additions would make the README more practical and user-friendly, providin
 
 ## Drake Integration
 
-The C++ implementation of the mediated Kalman filter uses [Drake](https://drake.mit.edu/) for mathematical operations and geometric transformations. This section explains how to set up and verify Drake integration.
+The C++ implementation of the mediated Kalman filter uses [Drake](https://drake.mit.edu/) for mathematical operations and geometric transformations. This section is only relevant if you're building the full package (not using the `BUILD_PYTHON_ONLY` option).
 
 ### Installing Drake
 
