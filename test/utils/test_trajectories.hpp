@@ -65,7 +65,7 @@ models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
   states[static_cast<int>(StateIndex::kQuaternionZ)] = orientation.z();
 
   // Get rotation matrix for body frame calculations
-  Eigen::Matrix3d rotate_inertial_to_body = orientation.toRotationMatrix();
+  Eigen::Matrix3d rotate_inertial_to_body = orientation.toRotationMatrix().transpose();
 
   // Velocity in inertial frame
   Eigen::Vector3d inertial_velocity(

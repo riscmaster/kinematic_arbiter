@@ -279,6 +279,66 @@ TEST_P(BasicMotionTestP, PredictionAccuracy) {
       << angular_error_deg << " deg)";
 }
 
+// Define test parameters
+INSTANTIATE_TEST_SUITE_P(
+    Figure8Trajectories,
+    Figure8TestP,
+    ::testing::Values(
+        Figure8Params{5.0, 0.01, 0.03},
+        Figure8Params{10.0, 0.01, 0.05}
+    )
+);
+
+/**
+ * @brief Test the prediction accuracy with parameterized figure-8 trajectory
+ */
+TEST_P(Figure8TestP, PredictionAccuracy) {
+  Figure8Params params = GetParam();
+
+  double time = 0.0;
+  double max_position_error = 0.0;
+
+  // Initial state from the Figure8Trajectory utility
+  StateVector true_state = testing::Figure8Trajectory(time);
+  StateVector state_estimate = true_state;
+
+  // Run simulation for specified duration
+  while (time < params.duration) {
+    // Advance time
+    time += params.time_step;
+
+    // Get true state at new time
+    StateVector next_true_state = testing::Figure8Trajectory(time);
+
+    // Predict next state using model
+    StateVector predicted_state = model_->PredictState(state_estimate, params.time_step);
+
+    // Update velocities and accelerations from true state (simulating perfect sensors)
+    // This isolates the test to just evaluate the prediction model's accuracy
+    for (int i = static_cast<int>(StateIndex::kLinearXDot);
+         i <= static_cast<int>(StateIndex::kAngularZDDot); ++i) {
+      predicted_state[i] = next_true_state[i];
+    }
+
+    // Calculate position error
+    Eigen::Vector3d true_position = next_true_state.segment<3>(static_cast<int>(StateIndex::kLinearX));
+    Eigen::Vector3d predicted_position = predicted_state.segment<3>(static_cast<int>(StateIndex::kLinearX));
+
+    double position_error = (true_position - predicted_position).norm();
+    max_position_error = std::max(max_position_error, position_error);
+
+    // Update state estimate for next iteration
+    state_estimate = predicted_state;
+
+    // Check that error is within bounds
+    double allowable_position_error = params.error_per_second * time;
+    EXPECT_LE(position_error, allowable_position_error)
+        << "Position error exceeds tolerance at time " << time << "s";
+  }
+
+  std::cout << "Figure-8 test completed with max position error: " << max_position_error << std::endl;
+}
+
 } // namespace test
 } // namespace models
 } // namespace kinematic_arbiter
