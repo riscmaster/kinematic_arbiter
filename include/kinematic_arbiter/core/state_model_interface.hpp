@@ -25,7 +25,7 @@ public:
     size_t process_noise_window;
 
     // Default constructor with initialization
-    Params() : process_noise_window(40) {}
+    Params() : process_noise_window(100) {}
   };
 
   /**
@@ -99,14 +99,22 @@ public:
       const StateVector& a_posteriori_state,
       double process_to_measurement_ratio,
       double dt) {
-    if (fabs(dt) < 1e-12) { return; }
+    if (fabs(dt) < kEpsilon) { return; }
+
     // Compute state correction
     StateVector state_diff = a_priori_state - a_posteriori_state;
 
-    // Update process noise using the recursive covariance formula
-    // Q̂_k = Q̂_{k-1} + (ζ·dt·(x̂_k^- - x̂_k^+)(x̂_k^- - x̂_k^+)^T - Q̂_{k-1})/n
-    process_noise_ = process_noise_ +
-                     (process_to_measurement_ratio * dt * state_diff * state_diff.transpose() - process_noise_) /
+    // Create binary mask vector (1.0 where states changed, 0.0 otherwise)
+    StateVector mask = (state_diff.array().abs() > kEpsilon).cast<double>();
+
+    // Create masked outer product (only non-zero where both states changed)
+    StateMatrix mask_matrix = mask * mask.transpose();
+    StateMatrix masked_update = (mask.asDiagonal() * state_diff) *
+                               (mask.asDiagonal() * state_diff).transpose();
+
+    // Apply selective update using element-wise product with mask
+    process_noise_ += process_to_measurement_ratio * dt *
+                     (masked_update - process_noise_.cwiseProduct(mask_matrix)) /
                      params_.process_noise_window;
   }
 
@@ -127,8 +135,14 @@ public:
   const Params& GetParams() const { return params_; }
 
 protected:
+  // Threshold for numerical comparisons
+  static constexpr double kEpsilon = 1e-10;
+
+  // State model parameters
   Params params_;
-  StateMatrix process_noise_;  // Process noise covariance matrix Q̂
+
+  // Process noise covariance
+  StateMatrix process_noise_ = StateMatrix::Identity();
 };
 
 } // namespace core

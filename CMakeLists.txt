@@ -26,10 +26,9 @@ message(STATUS "Original CMakeLists.txt length: ${content_length}")
 # Option to build only Python components
 option(BUILD_PYTHON_ONLY "Build only Python components without Drake dependency" OFF)
 
-# Default to C++17
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
-endif()
+# Set C++20 as the standard to handle designated initializers
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies for both Python and C++
 find_package(ament_cmake REQUIRED)
@@ -46,6 +45,9 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_eigen REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(drake QUIET)
 
 # Generate interfaces for Python demo
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -96,10 +98,6 @@ if(NOT BUILD_PYTHON_ONLY)
     add_compile_options(-Wall -Wextra -Wpedantic)
   endif()
 
-  # Find Drake
-  find_package(drake REQUIRED)
-  find_package(rclcpp REQUIRED)
-
   # Use global include directories instead of target-specific ones
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -148,6 +146,49 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
+# Export includes and dependencies - MUST come before ament_package
+ament_export_include_directories(include)
+ament_export_libraries(kinematic_arbiter_core)
+ament_export_targets(export_${PROJECT_NAME})
+
+# Build the core library before anything else
+add_library(kinematic_arbiter_core
+  src/kinematic_arbiter/core/statistical_utils.cpp
+  # Add other source files as needed
+)
+
+# Set properties and dependencies for the core library
+target_include_directories(kinematic_arbiter_core PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${EIGEN3_INCLUDE_DIR}
+)
+
+target_compile_features(kinematic_arbiter_core PUBLIC cxx_std_20)
+
+# Build tests
+if(BUILD_TESTING)
+  # Let the existing test structure handle the tests
+  include(test/CMakeLists.txt)
+  # Don't use add_subdirectory to avoid binary directory conflicts
+  # add_subdirectory(test)
+endif()
+
+# Install targets
+install(TARGETS kinematic_arbiter_core
+  EXPORT export_${PROJECT_NAME}
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+  INCLUDES DESTINATION include
+)
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+# MUST be the last command
 ament_package()
 
 # Print line 150 (if it exists)
@@ -159,3 +200,12 @@ if(num_lines GREATER_EQUAL 150)
   list(GET content_lines 149 line_150) # 0-based index so 149 is line 150
   message(STATUS "Line 150 content: '${line_150}'")
 endif()
+
+# Find Eigen3
+find_package(Eigen3 REQUIRED)
+
+# Add include directories for the project
+include_directories(
+  include
+  ${EIGEN3_INCLUDE_DIR}
+)

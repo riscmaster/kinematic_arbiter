@@ -4,6 +4,7 @@
 #include <Eigen/Geometry>
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/mediation_types.hpp"
+#include "kinematic_arbiter/core/statistical_utils.hpp"
 
 namespace kinematic_arbiter {
 namespace core {
@@ -38,8 +39,8 @@ public:
    * updating, retrodiction, and other filter operations.
    */
   struct MeasurementAuxData {
-    MeasurementVector innovation;                // y_k - h(x_k)
-    MeasurementJacobian jacobian;                // C_k or H
+    MeasurementVector innovation;                // y_k - C_k x_k
+    MeasurementJacobian jacobian;                // C_k
     InnovationCovariance innovation_covariance;  // S = C_k P_k C_k^T + R
     Eigen::MatrixXd innovation_covariance_inv;   // S^-1 (cached for efficiency)
 
@@ -59,7 +60,7 @@ public:
    */
   struct ValidationResult {
     bool assumptions_valid = false;    // Whether filter assumptions hold
-    double chi_squared = 0.0;          // Computed chi-squared value
+    double chi_squared_term = 0.0;          // Computed chi-squared value
     double threshold = 0.0;            // Threshold used for the test
   };
 
@@ -68,13 +69,9 @@ public:
    */
   struct ValidationParams {
     // Sample window size for adaptive estimation of R
-    size_t noise_sample_window = 30;
+    size_t noise_sample_window = 40;
 
-    // Chi-squared threshold for measurement validation
-    // If set to 0.0, will be auto-computed based on confidence level
-    double chi_squared_threshold = 0.0;
-
-    // Confidence level for auto-computing chi-squared threshold (0-1)
+    // Confidence level assumption validation (0-1)
     double confidence_level = 0.95;
   };
 
@@ -177,20 +174,16 @@ public:
     ValidationResult result;
 
     // Mahalanobis distance: d = ν^T S^-1 ν
-    result.chi_squared = aux_data.innovation.transpose() *
+    result.chi_squared_term = aux_data.innovation.transpose() *
                          aux_data.innovation_covariance_inv *
                          aux_data.innovation;
 
     // Determine threshold for chi-squared test
-    result.threshold = validation_params_.chi_squared_threshold;
-    if (result.threshold <= 0.0) {
-      result.threshold = GetChiSquaredThreshold(
-          validation_params_.confidence_level,
-          aux_data.innovation.rows());
-    }
+    result.threshold = CalculateChiSquareCriticalValueNDof(
+          aux_data.innovation.rows(), validation_params_.confidence_level);
 
     // Check if filter assumptions hold
-    result.assumptions_valid = (result.chi_squared < result.threshold);
+    result.assumptions_valid = (result.chi_squared_term < result.threshold);
 
     return result;
   }
@@ -208,11 +201,7 @@ public:
    */
   bool ApplyMediation(
       const ValidationResult& validation_result,
-      MediationAction action,
-      MeasurementCovariance& adjusted_covariance) const {
-
-    // Initialize output to current covariance
-    adjusted_covariance = measurement_covariance_;
+      MediationAction action) const {
 
     // If assumptions hold, no mediation needed
     if (validation_result.assumptions_valid) {
@@ -222,8 +211,8 @@ public:
     // Apply mediation according to selected action
     if (action == MediationAction::AdjustCovariance) {
       // Scale covariance to make chi-squared test pass
-      double scale_factor = validation_result.chi_squared / validation_result.threshold;
-      adjusted_covariance = measurement_covariance_ * scale_factor;
+      double scale_factor = validation_result.chi_squared_term / validation_result.threshold;
+      measurement_covariance_ *= scale_factor;
     }
 
     // Mediation was applied
@@ -236,11 +225,11 @@ public:
    * Implements the formula:
    * R̂_k = R̂_{k-1} + ((y_k - h(x_k))(y_k - h(x_k))^T - R̂_{k-1})/n
    *
-   * @param aux_data Auxiliary measurement data
+   * @param innovation Measurement innovation
    */
-  void UpdateCovariance(const MeasurementAuxData& aux_data) {
+  void UpdateCovariance(const MeasurementVector& innovation) {
     measurement_covariance_ = measurement_covariance_ +
-        (aux_data.innovation * aux_data.innovation.transpose() - measurement_covariance_) /
+        (innovation * innovation.transpose() - measurement_covariance_) /
         validation_params_.noise_sample_window;
   }
 
@@ -277,11 +266,9 @@ public:
     bool mediation_applied = ApplyMediation(result, action, adjusted_covariance);
 
     // Update covariance if requested and appropriate
-    if (update_covariance && (result.assumptions_valid ||
-                             action == MediationAction::ForceAccept)) {
-      UpdateCovariance(aux_data);
+    if (result.assumptions_valid && update_covariance) {
+      UpdateCovariance(aux_data.innovation);
     }
-
     return result.assumptions_valid;
   }
 
@@ -311,26 +298,6 @@ public:
   }
 
 protected:
-  /**
-   * @brief Get chi-squared threshold for a given confidence level and DOF
-   *
-   * @param confidence Confidence level (0-1)
-   * @param dof Degrees of freedom (measurement dimension)
-   * @return Chi-squared threshold value
-   */
-  double GetChiSquaredThreshold(double confidence, int dof) const {
-    // Common values for 95% confidence:
-    switch (dof) {
-      case 1: return 3.84;
-      case 2: return 5.99;
-      case 3: return 7.81;
-      case 4: return 9.49;
-      case 5: return 11.07;
-      case 6: return 12.59;
-      default: return dof + 1.8 * std::sqrt(dof); // Approximation
-    }
-  }
-
   Eigen::Isometry3d sensor_pose_in_body_frame_;      // Sensor-to-body transform
   Eigen::Isometry3d body_to_sensor_transform_;       // Body-to-sensor transform
   MeasurementCovariance measurement_covariance_;     // Measurement noise covariance R
