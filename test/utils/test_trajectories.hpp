@@ -1,6 +1,7 @@
 #pragma once
 
-#include "kinematic_arbiter/models/rigid_body_state_model.hpp"
+#include "kinematic_arbiter/core/state_index.hpp"
+#include <Eigen/Dense>
 #include <cmath>
 
 namespace kinematic_arbiter {
@@ -15,9 +16,9 @@ namespace testing {
  * @param time Current time in seconds
  * @return State vector containing position, orientation, velocity and acceleration
  */
-models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
-  using StateIndex = models::StateIndex;
-  using StateVector = models::RigidBodyStateModel::StateVector;
+Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(double time) {
+  using SIdx = core::StateIndex;
+  using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
 
   // Dimensions of the figure-8
   constexpr double kMaxVelocity = 1.0;
@@ -41,15 +42,15 @@ models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
   StateVector states = StateVector::Zero();
 
   // Linear Position
-  states[static_cast<int>(StateIndex::kLinearX)] =
+  states[SIdx::Position::X] =
       kXAmplitude * std::cos(kXFrequency * time);
-  states[static_cast<int>(StateIndex::kLinearY)] =
+  states[SIdx::Position::Y] =
       kYAmplitude * std::sin(kXZFrequency * time);
-  states[static_cast<int>(StateIndex::kLinearZ)] =
+  states[SIdx::Position::Z] =
       kZAmplitude * std::sin(kXZFrequency * time);
 
   // Angular Position (create quaternion from position-derived euler angles)
-  Eigen::Vector3d position_vector = states.segment<3>(static_cast<int>(StateIndex::kLinearX));
+  Eigen::Vector3d position_vector = states.segment<3>(SIdx::Position::Begin());
   Eigen::Vector3d roll_pitch_yaw = position_vector * kAnglularScale;
 
   // Convert RPY to quaternion
@@ -59,10 +60,10 @@ models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
   Eigen::Quaterniond orientation = yawAngle * pitchAngle * rollAngle;
 
   // Set quaternion components
-  states[static_cast<int>(StateIndex::kQuaternionW)] = orientation.w();
-  states[static_cast<int>(StateIndex::kQuaternionX)] = orientation.x();
-  states[static_cast<int>(StateIndex::kQuaternionY)] = orientation.y();
-  states[static_cast<int>(StateIndex::kQuaternionZ)] = orientation.z();
+  states[SIdx::Quaternion::W] = orientation.w();
+  states[SIdx::Quaternion::X] = orientation.x();
+  states[SIdx::Quaternion::Y] = orientation.y();
+  states[SIdx::Quaternion::Z] = orientation.z();
 
   // Get rotation matrix for body frame calculations
   Eigen::Matrix3d rotate_inertial_to_body = orientation.toRotationMatrix().transpose();
@@ -74,11 +75,11 @@ models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
       kZAmplitude * kXZFrequency * std::cos(kXZFrequency * time));
 
   // Convert to body frame and set in state vector
-  states.segment<3>(static_cast<int>(StateIndex::kLinearXDot)) =
+  states.segment<3>(SIdx::LinearVelocity::Begin()) =
       rotate_inertial_to_body * inertial_velocity;
 
   // Angular velocity derived from position
-  states.segment<3>(static_cast<int>(StateIndex::kAngularXDot)) =
+  states.segment<3>(SIdx::AngularVelocity::Begin()) =
       inertial_velocity * kAnglularScale;
 
   // Acceleration in inertial frame
@@ -88,11 +89,11 @@ models::RigidBodyStateModel::StateVector Figure8Trajectory(double time) {
       -kZAmplitude * kXZFrequency * kXZFrequency * std::sin(kXZFrequency * time));
 
   // Convert to body frame and set in state vector
-  states.segment<3>(static_cast<int>(StateIndex::kLinearXDDot)) =
+  states.segment<3>(SIdx::LinearAcceleration::Begin()) =
       rotate_inertial_to_body * inertial_acceleration;
 
   // Angular acceleration derived from linear acceleration
-  states.segment<3>(static_cast<int>(StateIndex::kAngularXDDot)) =
+  states.segment<3>(SIdx::AngularAcceleration::Begin()) =
       inertial_acceleration * kAnglularScale;
 
   return states;

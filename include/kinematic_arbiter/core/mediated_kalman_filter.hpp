@@ -64,6 +64,7 @@ public:
     // Maximum history length for OOSM handling in seconds
     // This is also the maximum allowed measurement delay
     double max_history_window = 1.0;
+    int max_history_size = 100; // Maximum number of history nodes to store
   };
 
   /**

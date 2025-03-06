@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kinematic_arbiter/core/state_model_interface.hpp"
+#include "kinematic_arbiter/core/state_index.hpp"
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
 #include <cmath>
@@ -9,54 +10,6 @@
 namespace kinematic_arbiter {
 namespace models {
 
-/**
- * @brief State indices for 3D rigid body with quaternion orientation
- */
-enum class StateIndex {
-  // Position (3D) in World Frame
-  kLinearX = 0,
-  kLinearY = 1,
-  kLinearZ = 2,
-
-  // Orientation (quaternion) in World Frame
-  kQuaternionW = 3,
-  kQuaternionX = 4,
-  kQuaternionY = 5,
-  kQuaternionZ = 6,
-
-  // Linear velocity (3D) in Body Frame
-  kLinearXDot = 7,
-  kLinearYDot = 8,
-  kLinearZDot = 9,
-
-  // Angular velocity (3D) in Body Frame
-  kAngularXDot = 10,
-  kAngularYDot = 11,
-  kAngularZDot = 12,
-
-  // Linear acceleration (3D) in Body Frame
-  kLinearXDDot = 13,
-  kLinearYDDot = 14,
-  kLinearZDDot = 15,
-
-  // Angular acceleration (3D) in Body Frame
-  kAngularXDDot = 16,
-  kAngularYDDot = 17,
-  kAngularZDDot = 18,
-
-  // Total size
-  kStateSize = 19
-};
-
-/**
- * @brief Helper enums for quaternion components
- */
-enum class QuaternionVectorComponent {
-  kQuaternionW = 0,
-  kQuaternionX = 1,
-  kQuaternionY = 2,
-  kQuaternionZ = 3
-};
 
 /**
  * @brief State model for 3D rigid body with quaternion orientation
@@ -71,93 +24,61 @@ enum class QuaternionVectorComponent {
  *
  * The model uses quaternion kinematics for rotation representation to avoid gimbal lock.
  */
-class RigidBodyStateModel : public core::StateModelInterface<Eigen::Matrix<double, static_cast<int>(StateIndex::kStateSize), 1>> {
+class RigidBodyStateModel : public core::StateModelInterface {
 public:
-  using StateVector = Eigen::Matrix<double, static_cast<int>(StateIndex::kStateSize), 1>;
-  using StateMatrix = Eigen::Matrix<double, static_cast<int>(StateIndex::kStateSize), static_cast<int>(StateIndex::kStateSize)>;
+  // Use convenient matrix/vector aliases for 3D/4D operations
+  using Matrix3d = Eigen::Matrix<double, 3, 3>;
+  using Vector3d = Eigen::Vector3d;
+  using Vector4d = Eigen::Vector4d;
+  using Matrix4d = Eigen::Matrix<double, 4, 4>;
+
+  // Type alias for cleaner access to state indices
+  using SIdx = core::StateIndex;
 
   /**
    * @brief Construct a new RigidBodyStateModel
-   * @param process_noise_magnitude Scale factor for process noise
-   * @param initial_variance Initial uncertainty for state variables
+   * @param params State model parameters
    */
-  explicit RigidBodyStateModel(double process_noise_magnitude = 0.01,
-                             double initial_variance = 10.0)
-    : process_noise_magnitude_(process_noise_magnitude),
-      initial_variance_(initial_variance) {
-    InitializeCovariance();
-  }
+  explicit RigidBodyStateModel(const Params& params = Params())
+    : core::StateModelInterface(params) {}
 
   /**
-   * @brief Set the state covariance matrix
-   * @param covariance New covariance matrix
-   */
-  void SetCovariance(StateMatrix covariance) {
-    covariance_ = covariance;
-  }
-
-  /**
-   * @brief Get the current state covariance matrix
-   * @return Current covariance matrix
-   */
-  StateMatrix GetCovariance() const {
-    return covariance_;
-  }
-
-  /**
-   * @brief Set the state vector
-   * @param state New state
-   */
-  void SetState(StateVector state) {
-    state_ = state;
-  }
-
-private:
-
-  /**
-   * @brief Initialize noise scales based on the default process noise scale
-   */
-  void InitializeCovariance() {
-    covariance_ = StateMatrix::Identity() * initial_variance_;
-    covariance_.block<3,3>(static_cast<int>(StateIndex::kLinearX), static_cast<int>(StateIndex::kLinearX)) *= 0.01;
-    covariance_.block<4,4>(static_cast<int>(StateIndex::kQuaternionW), static_cast<int>(StateIndex::kQuaternionW)) *= 0.01;
-    covariance_.block<3,3>(static_cast<int>(StateIndex::kLinearXDot), static_cast<int>(StateIndex::kLinearXDot)) *= 0.1;
-    covariance_.block<3,3>(static_cast<int>(StateIndex::kAngularXDot), static_cast<int>(StateIndex::kAngularXDot)) *= 0.1;
-    covariance_.block<3,3>(static_cast<int>(StateIndex::kLinearXDDot), static_cast<int>(StateIndex::kLinearXDDot)) *= 1.0;
-    covariance_.block<3,3>(static_cast<int>(StateIndex::kAngularXDDot), static_cast<int>(StateIndex::kAngularXDDot)) *= 1.0;
-  }
-
-public:
-  /**
-   * @brief Predict state forward in time
+   * @brief Predict state forward in time: x̂_k^- = f(x̂_{k-1}^+, u_k)
    *
-   * @param current_state Current state estimate
+   * @param current_state Current state estimate x̂_{k-1}^+
    * @param time_step Time step in seconds
-   * @return Predicted next state
+   * @return Predicted next state x̂_k^-
    */
   StateVector PredictState(const StateVector& current_state, double time_step) const override {
     StateVector new_states = current_state;
 
     // Extract quaternion and normalize
     Eigen::Quaterniond orientation(
-      current_state[static_cast<int>(StateIndex::kQuaternionW)],
-      current_state[static_cast<int>(StateIndex::kQuaternionX)],
-      current_state[static_cast<int>(StateIndex::kQuaternionY)],
-      current_state[static_cast<int>(StateIndex::kQuaternionZ)]
+      current_state[SIdx::Quaternion::W],
+      current_state[SIdx::Quaternion::X],
+      current_state[SIdx::Quaternion::Y],
+      current_state[SIdx::Quaternion::Z]
     );
     orientation.normalize();
 
     // Get rotation matrix
-    Eigen::Matrix3d rotation_matrix_b_to_w = orientation.toRotationMatrix();
+    Matrix3d rotation_matrix_b_to_w = orientation.toRotationMatrix();
 
     // Extract velocity and acceleration components
-    const Eigen::Vector3d linear_velocity = current_state.segment<3>(static_cast<int>(StateIndex::kLinearXDot));
-    const Eigen::Vector3d angular_velocity = current_state.segment<3>(static_cast<int>(StateIndex::kAngularXDot));
-    const Eigen::Vector3d linear_acceleration = current_state.segment<3>(static_cast<int>(StateIndex::kLinearXDDot));
-    const Eigen::Vector3d angular_acceleration = current_state.segment<3>(static_cast<int>(StateIndex::kAngularXDDot));
+    const Vector3d linear_velocity =
+      current_state.segment<3>(SIdx::LinearVelocity::Begin());
+
+    const Vector3d angular_velocity =
+      current_state.segment<3>(SIdx::AngularVelocity::Begin());
+
+    const Vector3d linear_acceleration =
+      current_state.segment<3>(SIdx::LinearAcceleration::Begin());
+
+    const Vector3d angular_acceleration =
+      current_state.segment<3>(SIdx::AngularAcceleration::Begin());
 
     // Linear XYZ Position Prediction Model
-    new_states.segment<3>(static_cast<int>(StateIndex::kLinearX)) +=
+    new_states.segment<3>(SIdx::Position::Begin()) +=
       rotation_matrix_b_to_w * ((linear_velocity + time_step * 0.5 * linear_acceleration) * time_step);
 
     // Angular Position (Quaternion) Prediction Model
@@ -166,7 +87,7 @@ public:
     double angular_velocity_norm = angular_velocity.norm();
 
     if (angular_velocity_norm > std::numeric_limits<double>::min()) {
-      Eigen::Vector3d axis = angular_velocity / angular_velocity_norm;
+      Vector3d axis = angular_velocity / angular_velocity_norm;
       double angle = angular_velocity_norm * time_step;
       delta_q = Eigen::Quaterniond(Eigen::AngleAxisd(angle, axis));
     } else {
@@ -176,158 +97,139 @@ public:
     Eigen::Quaterniond new_quaternion = delta_q * orientation;
     new_quaternion.normalize();
 
-    new_states[static_cast<int>(StateIndex::kQuaternionW)] = new_quaternion.w();
-    new_states[static_cast<int>(StateIndex::kQuaternionX)] = new_quaternion.x();
-    new_states[static_cast<int>(StateIndex::kQuaternionY)] = new_quaternion.y();
-    new_states[static_cast<int>(StateIndex::kQuaternionZ)] = new_quaternion.z();
+    new_states[SIdx::Quaternion::W] = new_quaternion.w();
+    new_states[SIdx::Quaternion::X] = new_quaternion.x();
+    new_states[SIdx::Quaternion::Y] = new_quaternion.y();
+    new_states[SIdx::Quaternion::Z] = new_quaternion.z();
 
     // Velocity prediction (integrate acceleration)
-    new_states.segment<3>(static_cast<int>(StateIndex::kLinearXDot)) += time_step * linear_acceleration;
-    new_states.segment<3>(static_cast<int>(StateIndex::kAngularXDot)) += time_step * angular_acceleration;
+    new_states.segment<3>(SIdx::LinearVelocity::Begin()) += time_step * linear_acceleration;
+    new_states.segment<3>(SIdx::AngularVelocity::Begin()) += time_step * angular_acceleration;
 
-    // Acceleration modelled as zero (system dynamics)
-    new_states.segment<3>(static_cast<int>(StateIndex::kLinearXDDot)) = Eigen::Vector3d::Zero();
-    new_states.segment<3>(static_cast<int>(StateIndex::kAngularXDDot)) = Eigen::Vector3d::Zero();
+    // Acceleration is modelled as constant zero (system dynamics)
+    // This assumes no external forces are applied between updates
+    new_states.segment<3>(SIdx::LinearAcceleration::Begin()) = Vector3d::Zero();
+    new_states.segment<3>(SIdx::AngularAcceleration::Begin()) = Vector3d::Zero();
 
     return new_states;
   }
 
   /**
-   * @brief Get the state transition matrix
+   * @brief Get the state transition matrix: A_k
    *
-   * @param current_state Current state estimate
+   * The matrix A_k linearizes the state transition function:
+   * A_k = ∂f/∂x evaluated at x̂_{k-1}^+ and u_k
+   *
+   * @param current_state Current state estimate x̂_{k-1}^+
    * @param time_step Time step in seconds
-   * @return State transition matrix (A)
+   * @return State transition matrix A_k
    */
   StateMatrix GetTransitionMatrix(const StateVector& current_state, double time_step) const override {
     StateMatrix jacobian = StateMatrix::Zero();
 
     // Extract quaternion and normalize
     Eigen::Quaterniond orientation(
-      current_state[static_cast<int>(StateIndex::kQuaternionW)],
-      current_state[static_cast<int>(StateIndex::kQuaternionX)],
-      current_state[static_cast<int>(StateIndex::kQuaternionY)],
-      current_state[static_cast<int>(StateIndex::kQuaternionZ)]
+      current_state[SIdx::Quaternion::W],
+      current_state[SIdx::Quaternion::X],
+      current_state[SIdx::Quaternion::Y],
+      current_state[SIdx::Quaternion::Z]
     );
     orientation.normalize();
 
-    // Get rotation matrix
-    Eigen::Matrix3d rotation_matrix_w_to_b = orientation.toRotationMatrix().transpose();
+    // Get rotation matrix (world to body frame)
+    Matrix3d rotation_matrix_w_to_b = orientation.toRotationMatrix().transpose();
 
-    const Eigen::Vector3d angular_velocity =
-      current_state.segment<3>(static_cast<int>(StateIndex::kAngularXDot));
-
-    // Position block
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kLinearX), static_cast<int>(StateIndex::kLinearX)) =
-      Eigen::Matrix3d::Identity();
+    // Position block - identity for position elements
+    jacobian.block<3,3>(SIdx::Position::Begin(), SIdx::Position::Begin()) =
+      Matrix3d::Identity();
 
     // Position wrt linear velocity
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kLinearX), static_cast<int>(StateIndex::kLinearXDot)) =
-      rotation_matrix_w_to_b * (time_step * Eigen::Matrix3d::Identity());
+    jacobian.block<3,3>(SIdx::Position::Begin(), SIdx::LinearVelocity::Begin()) =
+      rotation_matrix_w_to_b * (time_step * Matrix3d::Identity());
 
     // Position wrt linear acceleration
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kLinearX), static_cast<int>(StateIndex::kLinearXDDot)) =
-      rotation_matrix_w_to_b * (time_step * time_step * 0.5 * Eigen::Matrix3d::Identity());
+    jacobian.block<3,3>(SIdx::Position::Begin(), SIdx::LinearAcceleration::Begin()) =
+      rotation_matrix_w_to_b * (time_step * time_step * 0.5 * Matrix3d::Identity());
 
-    // Quaternion block - identity for quaternion components
-    jacobian.block<4,4>(static_cast<int>(StateIndex::kQuaternionW), static_cast<int>(StateIndex::kQuaternionW)) =
-      Eigen::Matrix4d::Identity();
+    // Remove coupling between linear and angular position in the jacobian by
+    // setting to zero. Derivation of partial of position with respect to the
+    // rotation in quaternion form can be found here:
+    // http://www.iri.upc.edu/people/jsola/JoanSola/objectes/notes/kinematics.pdf
+    jacobian.block<3,4>(SIdx::Position::Begin(), SIdx::Quaternion::Begin()) =
+        Eigen::Matrix<double, 3, 4>::Zero();
 
-    // Quaternion derivatives with respect to angular velocity components
-    double norm_omega = angular_velocity.norm();
-    if (norm_omega > std::numeric_limits<double>::min()) {
-      // These calculations are complex derivatives of the quaternion kinematics
-      // with respect to angular velocity components
+    // Quaternion self-propagation
+    jacobian.block<4,4>(SIdx::Quaternion::Begin(), SIdx::Quaternion::Begin()) =
+        Matrix4d::Identity();
 
-      // For the full implementation, we'd compute partial derivatives of the quaternion
-      // with respect to each component of angular velocity
-      // This is a simplified approximation for the demonstration
+    // Extract angular velocity components
+    const Vector3d angular_velocity =
+      current_state.segment<3>(SIdx::AngularVelocity::Begin());
 
-      // In practice, you'd implement the detailed calculations from your original code here
-      double alpha = time_step * norm_omega;
-      double half_alpha = alpha / 2.0;
-      double nu = time_step * (time_step / norm_omega) *
-                  (alpha * std::cos(half_alpha) - 2.0 * std::sin(half_alpha)) /
-                  (2.0 * alpha * alpha);
-      double gamma = -0.5 * (time_step / norm_omega) * std::sin(half_alpha);
+    // Calculate angular velocity magnitude
+    double angular_velocity_norm = angular_velocity.norm();
 
-      // Mark as intentionally unused or comment out if truly not needed
-      (void)nu;
-      (void)gamma;
+    // Compute the derivative matrices using the derived formula
+    // d/dw[(w/||w||) * sin(||w|| * t/2)] ≈ (t*I)/2 - (t^3*||w||^2)/16 * (w*w^T/||w||^2)
 
-      // Apply the quaternion derivative calculations here
-      // These would be specific implementations based on quaternion kinematics
+    // First term: (t*I)/2
+    double t = time_step;
+    Matrix3d identity_term = (t/2.0) * Matrix3d::Identity();
+
+    // Second term: (t^3*||w||^2)/16 * (w*w^T/||w||^2)
+    Matrix3d outer_product_term;
+    if (angular_velocity_norm > std::numeric_limits<double>::min()) {
+      // Use full formula when angular velocity is non-zero
+      outer_product_term = (t*t*t * angular_velocity_norm*angular_velocity_norm / 16.0) *
+                          (angular_velocity * angular_velocity.transpose()) /
+                          (angular_velocity_norm * angular_velocity_norm);
+    } else {
+      outer_product_term = Matrix3d::Zero();
     }
 
-    // Velocity blocks
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kLinearXDot), static_cast<int>(StateIndex::kLinearXDot)) =
-      Eigen::Matrix3d::Identity();
+    // Combined derivative matrix for the vector part of quaternion
+    Matrix3d vector_derivative = identity_term - outer_product_term;
 
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kLinearXDot), static_cast<int>(StateIndex::kLinearXDDot)) =
-      time_step * Eigen::Matrix3d::Identity();
+    // Create quaternion derivatives for angular velocity components
+    Vector4d dq_dx = Vector4d(
+        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[0],
+        vector_derivative(0,0), vector_derivative(0,1), vector_derivative(0,2)
+    );
+    Vector4d dq_dy = Vector4d(
+        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[1],
+        vector_derivative(1,0), vector_derivative(1,1), vector_derivative(1,2)
+    );
+    Vector4d dq_dz = Vector4d(
+        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[2],
+        vector_derivative(2,0), vector_derivative(2,1), vector_derivative(2,2)
+    );
 
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kAngularXDot), static_cast<int>(StateIndex::kAngularXDot)) =
-      Eigen::Matrix3d::Identity();
+    // Set the Jacobian block for quaternion wrt angular velocity
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::X) = dq_dx;
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::Y) = dq_dy;
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::Z) = dq_dz;
 
-    jacobian.block<3,3>(static_cast<int>(StateIndex::kAngularXDot), static_cast<int>(StateIndex::kAngularXDDot)) =
-      time_step * Eigen::Matrix3d::Identity();
+    // Velocity blocks - identity for velocity elements
+    jacobian.block<3,3>(SIdx::LinearVelocity::Begin(), SIdx::LinearVelocity::Begin()) =
+      Matrix3d::Identity();
 
-    // Acceleration is modelled as zero, so no additional jacobian terms
+    // Linear velocity wrt linear acceleration
+    jacobian.block<3,3>(SIdx::LinearVelocity::Begin(), SIdx::LinearAcceleration::Begin()) =
+      time_step * Matrix3d::Identity();
+
+    // Angular velocity blocks - identity for angular velocity elements
+    jacobian.block<3,3>(SIdx::AngularVelocity::Begin(), SIdx::AngularVelocity::Begin()) =
+      Matrix3d::Identity();
+
+    // Angular velocity wrt angular acceleration
+    jacobian.block<3,3>(SIdx::AngularVelocity::Begin(), SIdx::AngularAcceleration::Begin()) =
+      time_step * Matrix3d::Identity();
+
+    // Acceleration blocks are modelled as zero (no change)
+    // Corresponding jacobian elements remain zero
 
     return jacobian;
   }
-
-  /**
-   * @brief Get the process noise covariance
-   *
-   * @param state Current state estimate
-   * @param dt Time step in seconds
-   * @return Process noise covariance matrix (Q)
-   */
-  StateMatrix GetProcessNoiseCovariance(const StateVector& state, double dt) const override {
-    // Mark state as intentionally unused
-    (void)state;
-
-    StateMatrix process_noise = StateMatrix::Zero();
-
-    // Scale base uncertainty by time step squared for position, time step for velocity
-    double dt2 = dt * dt;
-    double dt3 = dt2 * dt;
-    double dt4 = dt3 * dt;
-
-    // Position noise (grows with dt²)
-    process_noise.block<3,3>(static_cast<int>(StateIndex::kLinearX), static_cast<int>(StateIndex::kLinearX)) =
-      Eigen::Matrix3d::Identity() * 0.001 * dt4;  // position_noise_scale
-
-    // Orientation noise
-    process_noise.block<4,4>(static_cast<int>(StateIndex::kQuaternionW), static_cast<int>(StateIndex::kQuaternionW)) =
-      Eigen::Matrix4d::Identity() * 0.001 * dt2;  // orientation_noise_scale
-
-    // Linear velocity noise (grows with dt)
-    process_noise.block<3,3>(static_cast<int>(StateIndex::kLinearXDot), static_cast<int>(StateIndex::kLinearXDot)) =
-      Eigen::Matrix3d::Identity() * 0.01 * dt2;  // velocity_noise_scale
-
-    // Angular velocity noise
-    process_noise.block<3,3>(static_cast<int>(StateIndex::kAngularXDot), static_cast<int>(StateIndex::kAngularXDot)) =
-      Eigen::Matrix3d::Identity() * 0.01 * dt2;  // velocity_noise_scale
-
-    // Linear acceleration noise
-    process_noise.block<3,3>(static_cast<int>(StateIndex::kLinearXDDot), static_cast<int>(StateIndex::kLinearXDDot)) =
-      Eigen::Matrix3d::Identity() * 0.1 * dt;  // acceleration_noise_scale
-
-    // Angular acceleration noise
-    process_noise.block<3,3>(static_cast<int>(StateIndex::kAngularXDDot), static_cast<int>(StateIndex::kAngularXDDot)) =
-      Eigen::Matrix3d::Identity() * 0.1 * dt;  // acceleration_noise_scale
-
-    return process_noise * process_noise_magnitude_;
-  }
-
-private:
-  // Private member variables
-  double process_noise_magnitude_;
-  double initial_variance_;
-  StateVector state_ = StateVector::Zero();
-  StateMatrix covariance_ = StateMatrix::Zero();
 };
 
 } // namespace models
