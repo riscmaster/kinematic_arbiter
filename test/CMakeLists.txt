@@ -80,3 +80,18 @@ set_tests_properties(dynamic_covariance_test PROPERTIES
 )
 
 message(STATUS "Added statistical_utils_test and dynamic_covariance_test to test framework")
+
+# Add sensor model tests
+add_executable(pose_sensor_model_test
+  ${CMAKE_SOURCE_DIR}/test/kinematic_arbiter/sensors/pose_sensor_model_test.cpp
+)
+target_link_libraries(pose_sensor_model_test
+  PRIVATE
+    kinematic_arbiter_core
+    GTest::gtest
+    GTest::gtest_main
+)
+add_test(
+  NAME pose_sensor_model_test
+  COMMAND pose_sensor_model_test
+)
