@@ -1,11 +1,7 @@
 #include <gtest/gtest.h>
 #include <Eigen/Geometry>
-#include <iostream>
 #include <memory>
-#include <random>
-#include <functional>
-
-#include <drake/math/compute_numerical_gradient.h>
+#include <iostream>
 
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
@@ -16,8 +12,7 @@ namespace test {
 
 using Eigen::Quaterniond;
 using Eigen::Vector3d;
-using Eigen::VectorXd;
-using Eigen::MatrixXd;
+using Eigen::Matrix3d;
 using core::StateIndex;
 
 class ImuSensorModelJacobianTest : public ::testing::Test {
@@ -29,10 +24,13 @@ protected:
     imu_model_ = std::make_unique<ImuSensorModel>(Eigen::Isometry3d::Identity(), config);
 
     // Initialize state vector
-    state_ = VectorXd::Zero(StateIndex::kFullStateSize);
+    state_ = Eigen::VectorXd::Zero(StateIndex::kFullStateSize);
+
+    // Set default gravity
+    gravity_ = Vector3d(0, 0, imu_model_->GetGravity());
   }
 
-  // Helper to set quaternion in state
+  // Set quaternion in state vector
   void SetQuaternion(const Quaterniond& q) {
     state_(StateIndex::Quaternion::W) = q.w();
     state_(StateIndex::Quaternion::X) = q.x();
@@ -40,208 +38,363 @@ protected:
     state_(StateIndex::Quaternion::Z) = q.z();
   }
 
-  // Helper to extract the quaternion-acceleration Jacobian
-  Eigen::Matrix<double, 3, 4> ExtractQuatAccelJacobian(
-      const Eigen::MatrixXd& full_jacobian) const {
-    return full_jacobian.block<3, 4>(
-        ImuSensorModel::MeasurementIndex::AX,
-        StateIndex::Quaternion::Begin());
+  // Set angular velocity in state vector
+  void SetAngularVelocity(const Vector3d& omega) {
+    state_.segment<3>(StateIndex::AngularVelocity::Begin()) = omega;
   }
 
-  // Compute numerical Jacobian using Drake's ComputeNumericalGradient
-  Eigen::Matrix<double, 3, 4> ComputeNumericalJacobian(const Eigen::Quaterniond& q) {
-    // Set the base quaternion in the state
-    SetQuaternion(q);
+  // Set angular acceleration in state vector
+  void SetAngularAcceleration(const Vector3d& alpha) {
+    state_.segment<3>(StateIndex::AngularAcceleration::Begin()) = alpha;
+  }
 
-    // Create a vector with just the quaternion part for differentiation
-    VectorXd q_vec(4);
-    q_vec << q.w(), q.x(), q.y(), q.z();
+  // Set linear acceleration in state vector
+  void SetLinearAcceleration(const Vector3d& accel) {
+    state_.segment<3>(StateIndex::LinearAcceleration::Begin()) = accel;
+  }
 
-    // Create a function that computes accelerometer measurements for a given quaternion
-    std::function<void(const Eigen::VectorXd&, Eigen::VectorXd*)> imu_accel_func =
-        [this](const Eigen::VectorXd& x, Eigen::VectorXd* y) {
-      // Create temporary state with the provided quaternion
-      Eigen::VectorXd temp_state = state_;
-      temp_state(StateIndex::Quaternion::W) = x(0);
-      temp_state(StateIndex::Quaternion::X) = x(1);
-      temp_state(StateIndex::Quaternion::Y) = x(2);
-      temp_state(StateIndex::Quaternion::Z) = x(3);
+  // Set sensor-to-body transform
+  void SetSensorToBodyTransform(const Eigen::Isometry3d& T_BS) {
+    // Recreate the model with the new transform
+    ImuSensorConfig config;
+    config.calibration_enabled = false;
+    imu_model_ = std::make_unique<ImuSensorModel>(T_BS, config);
+  }
 
-      // Get measurement using the model
-      Eigen::VectorXd measurement = imu_model_->PredictMeasurement(temp_state);
+  // Test if the Jacobian correctly predicts measurement changes for each state component
+  void TestJacobianLinearization(const std::string& description) {
+    // Get the baseline measurement and Jacobian
+    Eigen::VectorXd y0 = imu_model_->PredictMeasurement(state_);
+    Eigen::MatrixXd C = imu_model_->GetMeasurementJacobian(state_);
 
-      // Return just the accelerometer part
-      *y = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
+    // Test quaternion perturbations
+    bool quat_success = TestQuaternionPerturbations(y0, C, description);
+
+    // Test angular velocity perturbations
+    bool ang_vel_success = TestAngularVelocityPerturbations(y0, C, description);
+
+    // Test angular acceleration perturbations
+    bool ang_acc_success = TestAngularAccelerationPerturbations(y0, C, description);
+
+    // Test linear acceleration perturbations
+    bool lin_acc_success = TestLinearAccelerationPerturbations(y0, C, description);
+
+    // Only print detailed diagnostics if any test failed
+    if (!quat_success || !ang_vel_success || !ang_acc_success || !lin_acc_success) {
+      std::cout << "\n==== Jacobian linearization failed for " << description << " ====\n";
+
+      // Print the current state
+      std::cout << "Current state:\n";
+      std::cout << "  Quaternion: w=" << state_(StateIndex::Quaternion::W)
+                << ", x=" << state_(StateIndex::Quaternion::X)
+                << ", y=" << state_(StateIndex::Quaternion::Y)
+                << ", z=" << state_(StateIndex::Quaternion::Z) << "\n";
+
+      std::cout << "  Angular velocity: "
+                << state_.segment<3>(StateIndex::AngularVelocity::Begin()).transpose() << "\n";
+
+      std::cout << "  Angular acceleration: "
+                << state_.segment<3>(StateIndex::AngularAcceleration::Begin()).transpose() << "\n";
+
+      std::cout << "  Linear acceleration: "
+                << state_.segment<3>(StateIndex::LinearAcceleration::Begin()).transpose() << "\n";
+
+      // Print the Jacobian
+      std::cout << "Jacobian:\n" << C << "\n";
+
+      // Print the baseline measurement
+      std::cout << "Baseline measurement: " << y0.transpose() << "\n";
+    }
+  }
+
+  // Test quaternion perturbations using proper rotation perturbations
+  bool TestQuaternionPerturbations(const Eigen::VectorXd& y0, const Eigen::MatrixXd& C,
+                                  const std::string& description) {
+    bool all_passed = true;
+
+    // Get current quaternion
+    Quaterniond q_current(
+        state_(StateIndex::Quaternion::W),
+        state_(StateIndex::Quaternion::X),
+        state_(StateIndex::Quaternion::Y),
+        state_(StateIndex::Quaternion::Z));
+
+    // Test small rotations around each axis
+    Vector3d axes[3] = {
+        Vector3d(1, 0, 0),  // X-axis
+        Vector3d(0, 1, 0),  // Y-axis
+        Vector3d(0, 0, 1)   // Z-axis
     };
 
-    // Configure numerical gradient options
-    drake::math::NumericalGradientOption options(
-        drake::math::NumericalGradientMethod::kCentral, 1e-6);
+    // Use a larger angle for better numerical stability
+    const double angle = 0.01;  // 0.01 rad ≈ 0.57°
 
-    // Compute numerical Jacobian
-    return drake::math::ComputeNumericalGradient(imu_accel_func, q_vec, options);
-  }
+    for (int i = 0; i < 3; i++) {
+      // Create a small rotation perturbation
+      Quaterniond q_delta(Eigen::AngleAxisd(angle, axes[i]));
 
-  // Validate Jacobian for a given quaternion orientation
-  void ValidateJacobian(const Eigen::Quaterniond& q, const std::string& description) {
-    std::cout << "==== Testing " << description << " ====\n";
-    std::cout << "Quaternion: w=" << q.w() << ", x=" << q.x()
-              << ", y=" << q.y() << ", z=" << q.z() << "\n";
+      // Apply the perturbation (right multiplication for local frame rotation)
+      Quaterniond q_perturbed = q_current * q_delta;
+      q_perturbed.normalize();  // Ensure unit quaternion
 
-    // Set quaternion in state vector
-    SetQuaternion(q);
+      // Create perturbed state
+      Eigen::VectorXd perturbed_state = state_;
+      perturbed_state(StateIndex::Quaternion::W) = q_perturbed.w();
+      perturbed_state(StateIndex::Quaternion::X) = q_perturbed.x();
+      perturbed_state(StateIndex::Quaternion::Y) = q_perturbed.y();
+      perturbed_state(StateIndex::Quaternion::Z) = q_perturbed.z();
 
-    // Get analytical Jacobian from the model
-    auto full_jacobian = imu_model_->GetMeasurementJacobian(state_);
-    Eigen::Matrix<double, 3, 4> analytical_jacobian = ExtractQuatAccelJacobian(full_jacobian);
+      // Get the actual measurement at the perturbed state
+      Eigen::VectorXd y1 = imu_model_->PredictMeasurement(perturbed_state);
 
-    std::cout << "Analytical Jacobian:\n" << analytical_jacobian << "\n\n";
+      // Calculate the actual change in measurement
+      Eigen::VectorXd actual_delta_y = y1 - y0;
 
-    // Compute numerical Jacobian using Drake's tools
-    Eigen::Matrix<double, 3, 4> numerical_jacobian = ComputeNumericalJacobian(q);
+      // Calculate the predicted change using the Jacobian
+      Eigen::VectorXd predicted_delta_y = C * (perturbed_state - state_);
 
-    std::cout << "Numerical Jacobian:\n" << numerical_jacobian << "\n\n";
+      // Calculate the absolute error instead of relative error
+      double abs_error = (predicted_delta_y - actual_delta_y).norm();
 
-    // Element-wise analysis for better debugging
-    std::cout << "Element-wise analysis:\n";
-    double max_element_error = 0.0;
+      // Only print on failure
+      bool passed = abs_error < 0.01;  // Use absolute error threshold
+      if (!passed) {
+        all_passed = false;
+        std::cout << "  Quaternion rotation around "
+                  << (i == 0 ? "X" : i == 1 ? "Y" : "Z") << "-axis: "
+                  << abs_error << " absolute error\n";
 
-    for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < 4; ++j) {
-        double analytical = analytical_jacobian(i, j);
-        double numerical = numerical_jacobian(i, j);
-        double abs_diff = std::abs(analytical - numerical);
-        double rel_error = 0.0;
-
-        // Avoid division by zero
-        if (std::abs(numerical) > 1e-10) {
-          rel_error = abs_diff / std::abs(numerical);
-        } else if (std::abs(analytical) > 1e-10) {
-          rel_error = 1.0;  // If numerical is ~0 but analytical isn't, 100% error
-        } else {
-          rel_error = 0.0;  // Both are ~0, no error
-        }
-
-        std::cout << "(" << i << "," << j << "): Analytical=" << analytical
-                  << ", Numerical=" << numerical << ", Error=" << rel_error << "\n";
-
-        max_element_error = std::max(max_element_error, rel_error);
+        std::cout << "    Actual change: " << actual_delta_y.transpose() << "\n";
+        std::cout << "    Predicted change: " << predicted_delta_y.transpose() << "\n";
+        std::cout << "    State delta: " << (perturbed_state - state_).transpose() << "\n";
+        std::cout << "    Perturbed measurement: " << y1.transpose() << "\n";
       }
+
+      EXPECT_LT(abs_error, 0.01) << "Quaternion Jacobian linearization error too large for "
+                                << (i == 0 ? "X" : i == 1 ? "Y" : "Z") << "-axis rotation in "
+                                << description;
     }
 
-    // Compute matrix-level error metrics
-    double abs_error = (numerical_jacobian - analytical_jacobian).norm();
-    double rel_error = abs_error / std::max(numerical_jacobian.norm(), 1e-8);
+    return all_passed;
+  }
 
-    std::cout << "Maximum element-wise error: " << max_element_error * 100 << "%\n";
-    std::cout << "Matrix-level relative error: " << rel_error * 100 << "%\n\n";
+  // Test angular velocity perturbations
+  bool TestAngularVelocityPerturbations(const Eigen::VectorXd& y0, const Eigen::MatrixXd& C,
+                                       const std::string& description) {
+    bool all_passed = true;
 
-    // For debugging purposes, print whether we accept or reject
-    if (rel_error < 0.05) {
-      std::cout << "ACCEPT: Error < 5%\n";
-    } else {
-      std::cout << "REJECT: Error > 5%\n";
+    // Test perturbation in each component
+    for (int i = 0; i < 3; i++) {
+      // Create a small perturbation
+      Eigen::VectorXd perturbed_state = state_;
+      double delta = 0.1;  // 0.1 rad/s
+      perturbed_state(StateIndex::AngularVelocity::Begin() + i) += delta;
+
+      // Get the actual measurement at the perturbed state
+      Eigen::VectorXd y1 = imu_model_->PredictMeasurement(perturbed_state);
+
+      // Calculate the actual change in measurement
+      Eigen::VectorXd actual_delta_y = y1 - y0;
+
+      // Calculate the predicted change using the Jacobian
+      Eigen::VectorXd predicted_delta_y = C * (perturbed_state - state_);
+
+      // Calculate the absolute error
+      double abs_error = (predicted_delta_y - actual_delta_y).norm();
+
+      // Only print on failure
+      bool passed = abs_error < 0.01;
+      if (!passed) {
+        all_passed = false;
+        std::cout << "  Angular velocity " << (i == 0 ? "ω_x" : i == 1 ? "ω_y" : "ω_z")
+                  << ": " << abs_error << " absolute error\n";
+
+        std::cout << "    Actual change: " << actual_delta_y.transpose() << "\n";
+        std::cout << "    Predicted change: " << predicted_delta_y.transpose() << "\n";
+        std::cout << "    State delta: " << (perturbed_state - state_).transpose() << "\n";
+      }
+
+      EXPECT_LT(abs_error, 0.01) << "Angular velocity Jacobian linearization error too large for "
+                                << (i == 0 ? "ω_x" : i == 1 ? "ω_y" : "ω_z") << " in "
+                                << description;
     }
 
-    // For now, we'll just verify that the model is consistent with itself
-    // This is a temporary fix until we understand the discrepancy
-    EXPECT_TRUE(true) << "This test is currently informational only";
+    return all_passed;
   }
 
-  // Validate that certain blocks of the Jacobian are zero as expected
-  void ValidateNullJacobianBlocks() {
-    // Set a random quaternion
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(-1.0, 1.0);
+  // Test angular acceleration perturbations
+  bool TestAngularAccelerationPerturbations(const Eigen::VectorXd& y0, const Eigen::MatrixXd& C,
+                                           const std::string& description) {
+    bool all_passed = true;
 
-    Eigen::Quaterniond q_random(dis(gen), dis(gen), dis(gen), dis(gen));
-    q_random.normalize();
+    // Test perturbation in each component
+    for (int i = 0; i < 3; i++) {
+      // Create a small perturbation
+      Eigen::VectorXd perturbed_state = state_;
+      double delta = 0.1;  // 0.1 rad/s²
+      perturbed_state(StateIndex::AngularAcceleration::Begin() + i) += delta;
 
-    SetQuaternion(q_random);
+      // Get the actual measurement at the perturbed state
+      Eigen::VectorXd y1 = imu_model_->PredictMeasurement(perturbed_state);
 
-    // Get full Jacobian
-    auto full_jacobian = imu_model_->GetMeasurementJacobian(state_);
+      // Calculate the actual change in measurement
+      Eigen::VectorXd actual_delta_y = y1 - y0;
 
-    // Check position block (should be zero for accelerometer)
-    Eigen::MatrixXd position_block = full_jacobian.block(
-        ImuSensorModel::MeasurementIndex::AX,
-        StateIndex::Position::Begin(),
-        3,
-        StateIndex::Position::Size());
+      // Calculate the predicted change using the Jacobian
+      Eigen::VectorXd predicted_delta_y = C * (perturbed_state - state_);
 
-    std::cout << "Position block:\n" << position_block << "\n";
-    double position_norm = position_block.norm();
-    EXPECT_LT(position_norm, 1e-6) << "Position block should be zero";
+      // Calculate the absolute error
+      double abs_error = (predicted_delta_y - actual_delta_y).norm();
 
-    // Check linear velocity block (should be zero for accelerometer)
-    Eigen::MatrixXd velocity_block = full_jacobian.block(
-        ImuSensorModel::MeasurementIndex::AX,
-        StateIndex::LinearVelocity::Begin(),
-        3,
-        StateIndex::LinearVelocity::Size());
+      // Only print on failure
+      bool passed = abs_error < 0.01;
+      if (!passed) {
+        all_passed = false;
+        std::cout << "  Angular acceleration " << (i == 0 ? "α_x" : i == 1 ? "α_y" : "α_z")
+                  << ": " << abs_error << " absolute error\n";
 
-    std::cout << "Linear velocity block:\n" << velocity_block << "\n";
-    double velocity_norm = velocity_block.norm();
-    EXPECT_LT(velocity_norm, 1e-6) << "Linear velocity block should be zero";
+        std::cout << "    Actual change: " << actual_delta_y.transpose() << "\n";
+        std::cout << "    Predicted change: " << predicted_delta_y.transpose() << "\n";
+        std::cout << "    State delta: " << (perturbed_state - state_).transpose() << "\n";
+      }
+
+      EXPECT_LT(abs_error, 0.01) << "Angular acceleration Jacobian linearization error too large for "
+                                << (i == 0 ? "α_x" : i == 1 ? "α_y" : "α_z") << " in "
+                                << description;
+    }
+
+    return all_passed;
   }
 
-  // Validate the linear acceleration term in the Jacobian
-  void ValidateLinearAccelerationTerm() {
-    // Set a random quaternion
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(-1.0, 1.0);
+  // Test linear acceleration perturbations
+  bool TestLinearAccelerationPerturbations(const Eigen::VectorXd& y0, const Eigen::MatrixXd& C,
+                                          const std::string& description) {
+    bool all_passed = true;
 
-    Eigen::Quaterniond q_random(dis(gen), dis(gen), dis(gen), dis(gen));
-    q_random.normalize();
+    // Test perturbation in each component
+    for (int i = 0; i < 3; i++) {
+      // Create a small perturbation
+      Eigen::VectorXd perturbed_state = state_;
+      double delta = 0.1;  // 0.1 m/s²
+      perturbed_state(StateIndex::LinearAcceleration::Begin() + i) += delta;
 
-    SetQuaternion(q_random);
+      // Get the actual measurement at the perturbed state
+      Eigen::VectorXd y1 = imu_model_->PredictMeasurement(perturbed_state);
 
-    // Get full Jacobian
-    auto full_jacobian = imu_model_->GetMeasurementJacobian(state_);
+      // Calculate the actual change in measurement
+      Eigen::VectorXd actual_delta_y = y1 - y0;
 
-    // Check linear acceleration block (should be identity or transformed by sensor-to-body rotation)
-    Eigen::MatrixXd accel_block = full_jacobian.block(
-        ImuSensorModel::MeasurementIndex::AX,
-        StateIndex::LinearAcceleration::Begin(),
-        3,
-        StateIndex::LinearAcceleration::Size());
+      // Calculate the predicted change using the Jacobian
+      Eigen::VectorXd predicted_delta_y = C * (perturbed_state - state_);
 
-    std::cout << "Linear acceleration block:\n" << accel_block << "\n";
+      // Calculate the absolute error
+      double abs_error = (predicted_delta_y - actual_delta_y).norm();
 
-    // Should be identity or transformed by sensor-to-body rotation
-    Eigen::Matrix3d expected_block = imu_model_->GetSensorPoseInBodyFrame().linear();
+      // Only print on failure
+      bool passed = abs_error < 0.01;
+      if (!passed) {
+        all_passed = false;
+        std::cout << "  Linear acceleration " << (i == 0 ? "a_x" : i == 1 ? "a_y" : "a_z")
+                  << ": " << abs_error << " absolute error\n";
 
-    double accel_error = (accel_block - expected_block).norm();
-    std::cout << "Linear acceleration block error: " << accel_error << "\n";
-    EXPECT_LT(accel_error, 1e-6) << "Linear acceleration block should match sensor-to-body rotation";
+        std::cout << "    Actual change: " << actual_delta_y.transpose() << "\n";
+        std::cout << "    Predicted change: " << predicted_delta_y.transpose() << "\n";
+        std::cout << "    State delta: " << (perturbed_state - state_).transpose() << "\n";
+      }
+
+      EXPECT_LT(abs_error, 0.01) << "Linear acceleration Jacobian linearization error too large for "
+                                << (i == 0 ? "a_x" : i == 1 ? "a_y" : "a_z") << " in "
+                                << description;
+    }
+
+    return all_passed;
   }
 
   std::unique_ptr<ImuSensorModel> imu_model_;
   Eigen::VectorXd state_;
+  Vector3d gravity_;
 };
 
-// Test with identity quaternion
+// Test with different orientations
 TEST_F(ImuSensorModelJacobianTest, IdentityQuaternion) {
-  Eigen::Quaterniond q_identity = Eigen::Quaterniond::Identity();
-  ValidateJacobian(q_identity, "Identity Quaternion");
+  SetQuaternion(Quaterniond::Identity());
+  TestJacobianLinearization("Identity Quaternion");
 }
 
-// Test with 90-degree Z rotation
+TEST_F(ImuSensorModelJacobianTest, XRotation90Deg) {
+  SetQuaternion(Quaterniond(std::sqrt(2.0)/2.0, std::sqrt(2.0)/2.0, 0.0, 0.0));
+  TestJacobianLinearization("90° X-Rotation");
+}
+
+TEST_F(ImuSensorModelJacobianTest, YRotation90Deg) {
+  SetQuaternion(Quaterniond(std::sqrt(2.0)/2.0, 0.0, std::sqrt(2.0)/2.0, 0.0));
+  TestJacobianLinearization("90° Y-Rotation");
+}
+
 TEST_F(ImuSensorModelJacobianTest, ZRotation90Deg) {
-  Eigen::Quaterniond q_z_90(std::sqrt(2.0)/2.0, 0.0, 0.0, std::sqrt(2.0)/2.0);
-  ValidateJacobian(q_z_90, "90° Z-Rotation");
+  SetQuaternion(Quaterniond(std::sqrt(2.0)/2.0, 0.0, 0.0, std::sqrt(2.0)/2.0));
+  TestJacobianLinearization("90° Z-Rotation");
 }
 
-// Test null Jacobian blocks
-TEST_F(ImuSensorModelJacobianTest, NullJacobianBlocks) {
-  ValidateNullJacobianBlocks();
+TEST_F(ImuSensorModelJacobianTest, ArbitraryOrientation) {
+  SetQuaternion(Quaterniond(0.5, 0.5, 0.5, 0.5).normalized());
+  TestJacobianLinearization("Arbitrary Orientation");
 }
 
-// Test linear acceleration term
-TEST_F(ImuSensorModelJacobianTest, LinearAccelerationTerm) {
-  ValidateLinearAccelerationTerm();
+// Test with non-zero dynamics
+TEST_F(ImuSensorModelJacobianTest, WithAngularVelocity) {
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetAngularVelocity(Vector3d(0.5, -0.3, 0.2));
+  TestJacobianLinearization("With Angular Velocity");
+}
+
+TEST_F(ImuSensorModelJacobianTest, WithAngularAcceleration) {
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetAngularAcceleration(Vector3d(1.0, -0.7, 0.4));
+  TestJacobianLinearization("With Angular Acceleration");
+}
+
+TEST_F(ImuSensorModelJacobianTest, WithLinearAcceleration) {
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetLinearAcceleration(Vector3d(0.8, 0.6, -0.9));
+  TestJacobianLinearization("With Linear Acceleration");
+}
+
+// Test with non-identity sensor transform
+TEST_F(ImuSensorModelJacobianTest, WithSensorOffset) {
+  Eigen::Isometry3d T_BS = Eigen::Isometry3d::Identity();
+  T_BS.translation() = Vector3d(0.1, 0.2, 0.3);
+  SetSensorToBodyTransform(T_BS);
+
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetAngularVelocity(Vector3d(0.5, -0.3, 0.2));
+  SetAngularAcceleration(Vector3d(1.0, -0.7, 0.4));
+
+  TestJacobianLinearization("With Sensor Offset");
+}
+
+// Test with high angular velocity
+TEST_F(ImuSensorModelJacobianTest, HighAngularVelocity) {
+  Eigen::Isometry3d T_BS = Eigen::Isometry3d::Identity();
+  T_BS.translation() = Vector3d(0.1, 0.2, 0.3);
+  SetSensorToBodyTransform(T_BS);
+
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetAngularVelocity(Vector3d(3.0, -2.0, 2.5));  // ~150°/s
+
+  TestJacobianLinearization("High Angular Velocity");
+}
+
+// Test with large angular acceleration
+TEST_F(ImuSensorModelJacobianTest, LargeAngularAcceleration) {
+  Eigen::Isometry3d T_BS = Eigen::Isometry3d::Identity();
+  T_BS.translation() = Vector3d(0.1, 0.2, 0.3);
+  SetSensorToBodyTransform(T_BS);
+
+  SetQuaternion(Quaterniond::UnitRandom());
+  SetAngularAcceleration(Vector3d(10.0, -8.0, 6.0));  // ~500°/s²
+
+  TestJacobianLinearization("Large Angular Acceleration");
 }
 
 }  // namespace test

@@ -119,6 +119,15 @@ public:
     config_ = config;
   }
 
+  /**
+   * @brief Get the gravity constant
+   *
+   * @return Gravity constant
+   */
+  double GetGravity() const {
+    return kGravity;
+  }
+
   friend class kinematic_arbiter::sensors::test::ImuStationaryTest;
 
 private:
