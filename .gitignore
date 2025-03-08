@@ -35,3 +35,10 @@ build/
 .DS_Store
 .directory
 .Trash-*
+
+# Documentation build files
+doc/*.aux
+doc/*.log
+doc/*.synctex.gz
+doc/*.out
+doc/*.toc

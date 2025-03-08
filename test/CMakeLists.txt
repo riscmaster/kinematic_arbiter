@@ -95,3 +95,48 @@ add_test(
   NAME pose_sensor_model_test
   COMMAND pose_sensor_model_test
 )
+
+add_executable(body_velocity_sensor_model_test
+  ${CMAKE_SOURCE_DIR}/test/kinematic_arbiter/sensors/body_velocity_sensor_model_test.cpp
+)
+target_link_libraries(body_velocity_sensor_model_test
+  PRIVATE
+    kinematic_arbiter_core
+    GTest::gtest
+    GTest::gtest_main
+)
+add_test(
+  NAME body_velocity_sensor_model_test
+  COMMAND body_velocity_sensor_model_test
+)
+
+add_executable(imu_bias_estimator_test
+  ${CMAKE_SOURCE_DIR}/test/sensors/imu_bias_estimator_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_bias_estimator.cpp
+)
+target_link_libraries(imu_bias_estimator_test
+  PRIVATE
+    kinematic_arbiter_core
+    GTest::gtest
+    GTest::gtest_main
+)
+add_test(
+  NAME imu_bias_estimator_test
+  COMMAND imu_bias_estimator_test
+)
+
+add_executable(imu_sensor_model_test
+  ${CMAKE_SOURCE_DIR}/test/sensors/imu_sensor_model_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
+)
+target_link_libraries(imu_sensor_model_test
+  PRIVATE
+    kinematic_arbiter_core
+    GTest::gtest
+    GTest::gtest_main
+    drake::drake
+)
+add_test(
+  NAME imu_sensor_model_test
+  COMMAND imu_sensor_model_test
+)

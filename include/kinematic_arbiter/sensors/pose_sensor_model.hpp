@@ -7,7 +7,7 @@ namespace kinematic_arbiter {
 namespace sensors {
 
 /**
- * @brief 6DOF pose measurement model (position + orientation)
+ * @brief 7DOF pose measurement model (position + orientation)
  *
  * Models a sensor that measures position and orientation in 3D space.
  * Measurement vector is [x, y, z, qw, qx, qy, qz]' where

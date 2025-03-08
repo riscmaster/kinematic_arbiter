@@ -154,6 +154,7 @@ ament_export_targets(export_${PROJECT_NAME})
 # Build the core library before anything else
 add_library(kinematic_arbiter_core
   src/kinematic_arbiter/core/statistical_utils.cpp
+  src/sensors/imu_bias_estimator.cpp
   # Add other source files as needed
 )
 
