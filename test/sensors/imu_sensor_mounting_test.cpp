@@ -4,15 +4,17 @@
 #include <memory>
 #include <vector>
 #include <utility>
+#include <Eigen/Geometry>
 
-#include "kinematic_arbiter/sensors/imu_sensor_model.h"
-#include "kinematic_arbiter/core/state_index.h"
+#include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
+#include "kinematic_arbiter/core/state_index.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
 namespace test {
 
 using core::StateIndex;
+using Eigen::Vector3d;
 
 // Add this constant to avoid direct access to the private kGravity in the class
 constexpr double kTestGravity = 9.80665;
@@ -126,17 +128,17 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
 
   SetStateValues(orientation, angular_velocity, linear_acceleration);
 
-  std::cout << "\n==== Perfect Mounting Test ====\n";
-  std::cout << "Identity body orientation, identity mounting\n";
+  SCOPED_TRACE("==== Perfect Mounting Test ====");
+  SCOPED_TRACE("Identity body orientation, identity mounting");
 
   // Predict measurement
   auto measurement = perfect_sensor->PredictMeasurement(state_);
   Eigen::Vector3d gyro = measurement.segment<3>(ImuSensorModel::MeasurementIndex::GX);
   Eigen::Vector3d accel = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
 
-  std::cout << "Gyro: " << gyro.transpose() << std::endl;
-  std::cout << "Accel: " << accel.transpose() << std::endl;
-  std::cout << "Accel Magnitude: " << accel.norm() << std::endl;
+  SCOPED_TRACE("Gyro: " + ::testing::PrintToString(gyro.transpose()));
+  SCOPED_TRACE("Accel: " + ::testing::PrintToString(accel.transpose()));
+  SCOPED_TRACE("Accel Magnitude: " + ::testing::PrintToString(accel.norm()));
 
   // Gyro should be zero
   EXPECT_NEAR(gyro.norm(), 0.0, 1e-6);
@@ -146,7 +148,7 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
   EXPECT_NEAR(accel[2], kTestGravity, 1e-6);
 
   // Test with 90° rotation around X axis
-  std::cout << "\nRotation around X by 90°, identity mounting\n";
+  SCOPED_TRACE("Rotation around X by 90°, identity mounting");
   Eigen::Quaterniond rotation_x = QuaternionFromAxisAngle(Eigen::Vector3d::UnitX(), M_PI/2);
   SetStateValues(rotation_x, angular_velocity, linear_acceleration);
 
@@ -154,9 +156,9 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
   gyro = measurement.segment<3>(ImuSensorModel::MeasurementIndex::GX);
   accel = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
 
-  std::cout << "Gyro: " << gyro.transpose() << std::endl;
-  std::cout << "Accel: " << accel.transpose() << std::endl;
-  std::cout << "Accel Magnitude: " << accel.norm() << std::endl;
+  SCOPED_TRACE("Gyro: " + ::testing::PrintToString(gyro.transpose()));
+  SCOPED_TRACE("Accel: " + ::testing::PrintToString(accel.transpose()));
+  SCOPED_TRACE("Accel Magnitude: " + ::testing::PrintToString(accel.norm()));
 
   // With 90° X rotation, gravity should be along Y axis
   EXPECT_NEAR(accel[0], 0.0, 1e-6);
@@ -164,7 +166,7 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
   EXPECT_NEAR(accel[2], 0.0, 1e-6);
 
   // Test with 90° rotation around Y axis
-  std::cout << "\nRotation around Y by 90°, identity mounting\n";
+  SCOPED_TRACE("Rotation around Y by 90°, identity mounting");
   Eigen::Quaterniond rotation_y = QuaternionFromAxisAngle(Eigen::Vector3d::UnitY(), M_PI/2);
   SetStateValues(rotation_y, angular_velocity, linear_acceleration);
 
@@ -172,9 +174,9 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
   gyro = measurement.segment<3>(ImuSensorModel::MeasurementIndex::GX);
   accel = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
 
-  std::cout << "Gyro: " << gyro.transpose() << std::endl;
-  std::cout << "Accel: " << accel.transpose() << std::endl;
-  std::cout << "Accel Magnitude: " << accel.norm() << std::endl;
+  SCOPED_TRACE("Gyro: " + ::testing::PrintToString(gyro.transpose()));
+  SCOPED_TRACE("Accel: " + ::testing::PrintToString(accel.transpose()));
+  SCOPED_TRACE("Accel Magnitude: " + ::testing::PrintToString(accel.norm()));
 
   // With 90° Y rotation, gravity should be along negative X axis
   EXPECT_NEAR(accel[0], -kTestGravity, 1e-6);
@@ -184,7 +186,7 @@ TEST_F(ImuSensorMountingTest, PerfectMounting) {
 
 // Test with different sensor mounting orientations
 TEST_F(ImuSensorMountingTest, MountingOrientations) {
-  std::cout << "\n==== Different Mounting Orientations ====\n";
+  SCOPED_TRACE("==== Different Mounting Orientations ====");
 
   // Create an array of different mounting orientations to test
   std::vector<std::pair<Eigen::Isometry3d, std::string>> mounting_poses;
@@ -207,7 +209,7 @@ TEST_F(ImuSensorMountingTest, MountingOrientations) {
 
   // Test each mounting orientation
   for (const auto& [mounting_pose, description] : mounting_poses) {
-    std::cout << "\n--- Testing: " << description << " ---\n";
+    SCOPED_TRACE("--- Testing: " + description + " ---");
 
     // Create sensor with this mounting
     auto test_sensor = std::make_unique<TestableImuSensorModel>(mounting_pose);
@@ -220,11 +222,14 @@ TEST_F(ImuSensorMountingTest, MountingOrientations) {
 
     // Print the sensor pose for reference
     Eigen::Isometry3d sensor_pose = test_sensor->GetSensorPoseInBodyFrame();
-    std::cout << "Sensor Position: " << sensor_pose.translation().transpose() << std::endl;
+    SCOPED_TRACE("Sensor Position: " + ::testing::PrintToString(sensor_pose.translation().transpose()));
+
     Eigen::Quaterniond sensor_quat(sensor_pose.rotation());
-    std::cout << "Sensor Orientation (quat): " << sensor_quat.w() << ", "
-              << sensor_quat.x() << ", " << sensor_quat.y() << ", "
-              << sensor_quat.z() << std::endl;
+    std::ostringstream quat_str;
+    quat_str << "Sensor Orientation (quat): " << sensor_quat.w() << ", "
+             << sensor_quat.x() << ", " << sensor_quat.y() << ", "
+             << sensor_quat.z();
+    SCOPED_TRACE(quat_str.str());
 
     // Test with identity body orientation
     Eigen::Quaterniond orientation = Eigen::Quaterniond::Identity();
@@ -233,27 +238,27 @@ TEST_F(ImuSensorMountingTest, MountingOrientations) {
 
     SetStateValues(orientation, angular_velocity, linear_acceleration);
 
-    std::cout << "Identity body orientation:\n";
+    SCOPED_TRACE("Identity body orientation:");
     auto measurement = test_sensor->PredictMeasurement(state_);
     Eigen::Vector3d gyro = measurement.segment<3>(ImuSensorModel::MeasurementIndex::GX);
     Eigen::Vector3d accel = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
 
-    std::cout << "Gyro: " << gyro.transpose() << std::endl;
-    std::cout << "Accel: " << accel.transpose() << std::endl;
-    std::cout << "Accel Magnitude: " << accel.norm() << std::endl;
+    SCOPED_TRACE("Gyro: " + ::testing::PrintToString(gyro.transpose()));
+    SCOPED_TRACE("Accel: " + ::testing::PrintToString(accel.transpose()));
+    SCOPED_TRACE("Accel Magnitude: " + ::testing::PrintToString(accel.norm()));
 
     // Test with 90° rotation around X
     Eigen::Quaterniond rotation_x = QuaternionFromAxisAngle(Eigen::Vector3d::UnitX(), M_PI/2);
     SetStateValues(rotation_x, angular_velocity, linear_acceleration);
 
-    std::cout << "\nBody rotated 90° around X:\n";
+    SCOPED_TRACE("Body rotated 90° around X:");
     measurement = test_sensor->PredictMeasurement(state_);
     gyro = measurement.segment<3>(ImuSensorModel::MeasurementIndex::GX);
     accel = measurement.segment<3>(ImuSensorModel::MeasurementIndex::AX);
 
-    std::cout << "Gyro: " << gyro.transpose() << std::endl;
-    std::cout << "Accel: " << accel.transpose() << std::endl;
-    std::cout << "Accel Magnitude: " << accel.norm() << std::endl;
+    SCOPED_TRACE("Gyro: " + ::testing::PrintToString(gyro.transpose()));
+    SCOPED_TRACE("Accel: " + ::testing::PrintToString(accel.transpose()));
+    SCOPED_TRACE("Accel Magnitude: " + ::testing::PrintToString(accel.norm()));
 
     // Verify that acceleration magnitude is preserved
     EXPECT_NEAR(accel.norm(), kTestGravity, 1e-6);
@@ -285,11 +290,11 @@ TEST_F(ImuSensorMountingTest, BasicMeasurementPrediction) {
   double gyro_error = (gyro - expected_gyro).norm() / expected_gyro.norm();
   double accel_error = (accel - expected_accel).norm() / expected_accel.norm();
 
-  EXPECT_LT(gyro_error, kRelativeErrorTolerance) << "Gyro prediction error too large";
-  EXPECT_LT(accel_error, kRelativeErrorTolerance) << "Accel prediction error too large";
+  EXPECT_LT(gyro_error, 1e-6) << "Gyro prediction error too large";
+  EXPECT_LT(accel_error, 1e-6) << "Accel prediction error too large";
 
-  std::cout << "Identity test: gyro_error=" << gyro_error
-            << ", accel_error=" << accel_error << std::endl;
+  SCOPED_TRACE("Identity test: gyro_error=" + std::to_string(gyro_error) +
+               ", accel_error=" + std::to_string(accel_error));
 }
 
 }  // namespace test

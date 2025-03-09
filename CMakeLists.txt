@@ -101,43 +101,13 @@ if(NOT BUILD_PYTHON_ONLY)
   # Use global include directories instead of target-specific ones
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-  # Tests - Both Drake integration and state model testing
+  # Tests - delegate to test/CMakeLists.txt
   if(BUILD_TESTING)
     message(STATUS "Build testing is enabled")
-
     # Add the test directory to the include path
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
-    # Find GTest
-    find_package(GTest REQUIRED)
-
-    # Add the Drake test
-    add_executable(test_drake_integration
-      test/test_drake_integration.cpp)
-
-    # Link against libraries
-    target_link_libraries(test_drake_integration
-      drake::drake
-      GTest::gtest
-      GTest::gtest_main)
-
-    # Register as a test with CTest
-    add_test(NAME test_drake_integration
-             COMMAND test_drake_integration)
-
-    # Add the state model test
-    add_executable(rigid_body_state_model_test
-      test/models/rigid_body_state_model_test.cpp)
-
-    # Link against Drake and GTest
-    target_link_libraries(rigid_body_state_model_test
-      drake::drake
-      GTest::gtest
-      GTest::gtest_main)
-
-    # Register as a test
-    add_test(NAME rigid_body_state_model_test
-             COMMAND rigid_body_state_model_test)
+    # Let the test CMakeLists handle all test targets
+    add_subdirectory(test)
   endif()
 endif()
 
@@ -167,14 +137,6 @@ target_include_directories(kinematic_arbiter_core PUBLIC
 
 target_compile_features(kinematic_arbiter_core PUBLIC cxx_std_20)
 
-# Build tests
-if(BUILD_TESTING)
-  # Let the existing test structure handle the tests
-  include(test/CMakeLists.txt)
-  # Don't use add_subdirectory to avoid binary directory conflicts
-  # add_subdirectory(test)
-endif()
-
 # Install targets
 install(TARGETS kinematic_arbiter_core
   EXPORT export_${PROJECT_NAME}
@@ -189,6 +151,15 @@ install(
   DESTINATION include
 )
 
+# Find Eigen3
+find_package(Eigen3 REQUIRED)
+
+# Add include directories for the project
+include_directories(
+  include
+  ${EIGEN3_INCLUDE_DIR}
+)
+
 # MUST be the last command
 ament_package()
 
@@ -201,12 +172,3 @@ if(num_lines GREATER_EQUAL 150)
   list(GET content_lines 149 line_150) # 0-based index so 149 is line 150
   message(STATUS "Line 150 content: '${line_150}'")
 endif()
-
-# Find Eigen3
-find_package(Eigen3 REQUIRED)
-
-# Add include directories for the project
-include_directories(
-  include
-  ${EIGEN3_INCLUDE_DIR}
-)

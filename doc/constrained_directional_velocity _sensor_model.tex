@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,braket}
+
+\begin{document}
+
+	\title{Directional Velocity Constraint in Sensor-Model Kalman Filter}
+	\maketitle
+
+	\section{Problem Definition}
+	Estimate a 19D state vector containing position, orientation (quaternion), velocities, and accelerations using:
+	\begin{itemize}
+		\item Asynchronous position measurements $\mathbf{z}_p \in \mathbb{R}^3$
+		\item Scalar velocity magnitude $z_v \in \mathbb{R}$ aligned with heading
+	\end{itemize}
+
+	\section{State Representation}
+	Define the state vector:
+	\[
+	\mathbf{x} = \begin{bmatrix}
+		\mathbf{p} \\ \mathbf{q} \\ \mathbf{v} \\ \boldsymbol{\omega} \\ \mathbf{a} \\ \boldsymbol{\alpha}
+	\end{bmatrix} = \begin{bmatrix}
+		x & y & z & q_w & q_x & q_y & q_z & v_x & v_y & v_z & \cdots\\
+	\end{bmatrix}^T
+	\]
+	where $\mathbf{q} = (q_w, q_x, q_y, q_z)$ is a unit quaternion.
+
+	\section{Measurement Model}
+	\subsection{Position Measurement}
+	\[
+	\mathbf{z}_p = \mathbf{p} + \boldsymbol{\nu}_p,\quad \boldsymbol{\nu}_p \sim \mathcal{N}(0,\mathbf{R}_p)
+	\]
+	Jacobian: $\mathbf{H}_p = \begin{bmatrix}\mathbf{I}_3 & \mathbf{0}_{3\times16}\end{bmatrix}$
+
+	\subsection{Velocity-Direction Constraint}
+	Define heading vector from quaternion:
+	\[
+	\mathbf{h}(\mathbf{q}) = \mathbf{R}(\mathbf{q})\begin{bmatrix}1\\0\\0\end{bmatrix} = \begin{bmatrix}
+		1-2(q_y^2 + q_z^2) \\
+		2(q_xq_y + q_wq_z) \\
+		2(q_xq_z - q_wq_y)
+	\end{bmatrix}
+	\]
+	Velocity measurement model:
+	\[
+	z_v = \mathbf{v}^T\mathbf{h}(\mathbf{q}) + \nu_v,\quad \nu_v \sim \mathcal{N}(0,R_v)
+	\]
+
+	\section{Constraint Jacobian}
+	Compute $\mathbf{H}_v = \frac{\partial}{\partial\mathbf{x}}(\mathbf{v}^T\mathbf{h}(\mathbf{q}))$:
+
+	\subsection{Velocity Components}
+	\[
+	\frac{\partial z_v}{\partial\mathbf{v}} = \mathbf{h}(\mathbf{q})^T = \begin{bmatrix}
+		1-2(q_y^2+q_z^2) & 2(q_xq_y+q_wq_z) & 2(q_xq_z-q_wq_y)
+	\end{bmatrix}
+	\]
+
+	\subsection{Quaternion Components}
+	\[
+	\frac{\partial z_v}{\partial\mathbf{q}} = \mathbf{v}^T\frac{\partial\mathbf{h}}{\partial\mathbf{q}} = \begin{bmatrix}
+		2(v_yq_z - v_zq_y) \\
+		2(v_yq_y + v_zq_z) \\
+		-4v_xq_y + 2v_yq_x - 2v_zq_w \\
+		-4v_xq_z + 2v_yq_w + 2v_zq_x
+	\end{bmatrix}^T
+	\]
+
+	Full Jacobian structure:
+	\[
+	\mathbf{H}_v = \begin{bmatrix}
+		\mathbf{0}_{1\times3} & \frac{\partial z_v}{\partial\mathbf{q}} & \frac{\partial z_v}{\partial\mathbf{v}} & \mathbf{0}_{1\times9}
+	\end{bmatrix}
+	\]
+
+	\section{Filter Implementation}
+	\subsection{Prediction Step}
+	Propagate state using high-order dynamics:
+	\[
+	\dot{\mathbf{x}} = f(\mathbf{x},\mathbf{u}) \quad \text{(Physics model)}
+	\]
+	with quaternion propagation:
+	\[
+	\dot{\mathbf{q}} = \frac{1}{2}\mathbf{q} \otimes \begin{bmatrix}0 \\ \boldsymbol{\omega}\end{bmatrix}
+	\]
+
+	\subsection{Update Steps}
+	Handle measurements asynchronously:
+	\begin{align*}
+		\text{Position Update:} & \quad \text{Apply } \mathbf{H}_p \text{ with Kalman gain} \\
+		\text{Velocity Update:} & \quad \text{Apply } \mathbf{H}_v \text{ using current state estimate}
+	\end{align*}
+
+	\section{Implementation Notes}
+	\begin{itemize}
+		\item \textbf{Quaternion Normalization:} Renormalize $\mathbf{q}$ after each update
+		\[
+		\mathbf{q} \leftarrow \mathbf{q}/\|\mathbf{q}\|
+		\]
+		\item \textbf{Adaptive Noise:} Scale $R_v$ inversely with $\|\mathbf{v}\|$
+		\[
+		R_v \leftarrow R_0(1 + \|\mathbf{v}\|^{-1})
+		\]
+	\end{itemize}
+
+	\section{Conclusion}
+	This sensor-model constraint approach:
+	\begin{itemize}
+		\item Maintains high-order state dynamics integrity
+		\item Enforces velocity-heading alignment through measurement residuals
+		\item Handles asynchronous sensors naturally
+		\item Requires only 19D matrix operations (sparse Jacobians)
+	\end{itemize}
+
+\end{document}

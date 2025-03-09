@@ -8,8 +8,12 @@
 #include <optional>
 #include <type_traits>
 #include <Eigen/Dense>
+#include <boost/math/distributions/chi_squared.hpp>
+
+#include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/state_model_interface.hpp"
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
+#include "kinematic_arbiter/core/mediation_types.hpp"
 
 namespace kinematic_arbiter {
 namespace core {
@@ -20,6 +24,27 @@ namespace core {
 class FilterException : public std::runtime_error {
 public:
   explicit FilterException(const std::string& message) : std::runtime_error(message) {}
+};
+
+/**
+ * @brief Generic measurement container with timestamp
+ *
+ * @tparam SensorType The sensor model type
+ */
+template<typename SensorType>
+struct Measurement {
+  using ValueType = typename SensorType::MeasurementVector;
+
+  double timestamp;                                      // Measurement timestamp
+  ValueType value;                                       // Measurement value
+  std::optional<typename SensorType::MeasurementCovariance> noise_override; // Optional override for noise
+
+  Measurement(double t, const ValueType& v)
+    : timestamp(t), value(v), noise_override(std::nullopt) {}
+
+  Measurement(double t, const ValueType& v,
+              const typename SensorType::MeasurementCovariance& cov)
+    : timestamp(t), value(v), noise_override(cov) {}
 };
 
 /**
@@ -53,18 +78,17 @@ public:
   using StateVector = Eigen::Matrix<double, StateSize, 1>;
   using StateMatrix = Eigen::Matrix<double, StateSize, StateSize>;
 
-  // Forward declaration of the Measurement struct
-  template<typename SensorType>
-  struct Measurement;
-
   /**
    * @brief Parameters for OOSM handling in the filter
    */
   struct Params {
     // Maximum history length for OOSM handling in seconds
     // This is also the maximum allowed measurement delay
-    double max_history_window = 1.0;
+    double max_history_window = 5.0;
     int max_history_size = 100; // Maximum number of history nodes to store
+    MediationAction mediation_action = MediationAction::AdjustCovariance;  // Default mediation action
+    double process_to_measurement_ratio = 1.0;           // Process noise modifier (ζ)
+    bool enable_adaptive_noise = true;                   // Whether to adaptively update noise
   };
 
   /**
@@ -91,22 +115,6 @@ public:
                                          // Enables efficient retrodiction for OOSM processing
     };
     AuxiliaryVariables aux;
-  };
-
-  /**
-   * @brief Measurement data with timestamp for a specific sensor type
-   *
-   * @tparam SensorType The measurement model type
-   */
-  template<typename SensorType>
-  struct Measurement {
-    double timestamp;               // When the measurement was taken
-
-    // The actual measurement vector
-    typename SensorType::MeasurementVector value;
-
-    // Optional override for the measurement noise covariance
-    std::optional<typename SensorType::MeasurementMatrix> noise_covariance;
   };
 
   /**
@@ -199,6 +207,13 @@ public:
    */
   template<typename SensorType>
   const typename SensorType::MeasurementMatrix& GetMeasurementNoiseCovariance() const;
+
+  /**
+   * @brief Get filter parameters
+   *
+   * @return Filter parameters
+   */
+  const Params& GetParams() const;
 
 private:
   // Filter state
@@ -317,30 +332,6 @@ private:
   double ComputeMahalanobisDistance(
       const typename SensorType::MeasurementVector& innovation,
       const typename SensorType::MeasurementMatrix& innovation_covariance);
-
-  /**
-   * @brief Update measurement noise covariance based on innovations
-   *
-   * Adaptive estimation of measurement noise to improve filter robustness.
-   *
-   * @tparam SensorType Type of sensor
-   * @param innovation Innovation vector (z - h(x))
-   */
-  template<typename SensorType>
-  void UpdateMeasurementNoiseCovariance(
-      const typename SensorType::MeasurementVector& innovation);
-
-  /**
-   * @brief Update process noise covariance based on state updates
-   *
-   * Adaptive estimation of process noise to improve filter robustness.
-   *
-   * @param prior_state State estimate before update
-   * @param posterior_state State estimate after update
-   */
-  void UpdateProcessNoiseCovariance(
-      const StateVector& prior_state,
-      const StateVector& posterior_state);
 
   /**
    * @brief Re-apply all measurements after an OOSM update
