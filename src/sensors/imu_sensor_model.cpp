@@ -263,9 +263,9 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
 
   StateFlags initialized_states = StateFlags::Zero();
 
-  // Extract IMU measurements
-  Eigen::Vector3d gyro = measurement.segment<3>(MeasurementIndex::GX);
-  Eigen::Vector3d accel = measurement.segment<3>(MeasurementIndex::AX);
+  // Extract gyro and accelerometer measurements
+  Eigen::Vector3d gyro = measurement.segment<3>(0);
+  Eigen::Vector3d accel = measurement.segment<3>(3);
 
   // Transform to body frame
   const Eigen::Matrix3d R_SB = sensor_pose_in_body_frame_.rotation();
@@ -294,27 +294,18 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
   initialized_states[StateIndex::AngularVelocity::Y] = true;
   initialized_states[StateIndex::AngularVelocity::Z] = true;
 
-  // Check if stationary
+  // Use the existing IsStationary function instead of duplicating logic
   bool is_stationary = IsStationary(state, covariance, measurement);
 
-  // If stationary, we can initialize orientation (roll/pitch) from gravity
+  // Only initialize orientation if stationary
   if (is_stationary) {
-    // Extract sensor-to-body transform components
-    const Eigen::Vector3d& r = sensor_pose_in_body_frame_.translation();
+    // Estimate gravity direction in body frame (normalized)
+    Eigen::Vector3d g_body = -accel_body.normalized();
 
-    // Correct for centripetal acceleration if angular velocity is significant
-    if (omega_body.norm() > 0.1) {  // rad/s threshold
-      accel_body -= omega_body.cross(omega_body.cross(r));
-    }
-
-    // Estimate gravity in body frame (negative of measured acceleration when stationary)
-    Eigen::Vector3d g_body = -accel_body;
-    g_body.normalize();
-
-    // Create orientation from gravity direction
-    // This only defines roll and pitch, not yaw
+    // Create quaternion from gravity direction
     Eigen::Vector3d z_world(0, 0, 1);  // Up direction in world frame
     Eigen::Quaterniond q_gravity = Eigen::Quaterniond::FromTwoVectors(g_body, z_world);
+    q_gravity.normalize();  // Explicitly normalize
 
     // If we already have valid yaw, preserve it
     bool yaw_valid = valid_states[StateIndex::Quaternion::Z];
@@ -326,20 +317,20 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
           state(StateIndex::Quaternion::Y),
           state(StateIndex::Quaternion::Z)
       );
+      current_q.normalize();  // Explicitly normalize
 
-      // Convert to rotation matrix and extract Euler angles
+      // Convert to rotation matrix and extract yaw
       Eigen::Matrix3d rot_matrix = current_q.toRotationMatrix();
-
-      // Get yaw from current quaternion (rotation around Z)
       double yaw = std::atan2(rot_matrix(1, 0), rot_matrix(0, 0));
 
-      // Create rotation matrix with gravity-derived roll/pitch and preserved yaw
+      // Create rotation with gravity-derived roll/pitch and preserved yaw
       Eigen::Matrix3d gravity_rot = q_gravity.toRotationMatrix();
       Eigen::Matrix3d yaw_rot = Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ()).toRotationMatrix();
 
       // Apply yaw rotation to gravity-derived orientation
       Eigen::Matrix3d combined_rot = gravity_rot * yaw_rot;
       Eigen::Quaterniond combined_q(combined_rot);
+      combined_q.normalize();  // Explicitly normalize
 
       // Update state with combined quaternion
       state(StateIndex::Quaternion::W) = combined_q.w();
@@ -356,20 +347,16 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
 
     // Set appropriate covariance for quaternion
     // Lower uncertainty for roll/pitch, high for yaw
-    Eigen::Matrix3d accel_cov = measurement_covariance_.block<3, 3>(3, 3);
-
-    // Simple mapping of accelerometer noise to orientation uncertainty
-    // More rigorous approach would use proper uncertainty propagation
     double roll_pitch_variance = 0.01;  // rad^2
-    double yaw_variance = M_PI * M_PI / 3.0;  // Very high uncertainty for yaw
+    double yaw_variance = M_PI * M_PI;  // Very high uncertainty for yaw
 
     // Simplified diagonal covariance for quaternion
     for (int i = 0; i < 3; i++) {
       covariance(StateIndex::Quaternion::Begin() + i,
-                 StateIndex::Quaternion::Begin() + i) = roll_pitch_variance;
+                StateIndex::Quaternion::Begin() + i) = roll_pitch_variance;
     }
     covariance(StateIndex::Quaternion::Begin() + 3,
-               StateIndex::Quaternion::Begin() + 3) = yaw_variance;
+              StateIndex::Quaternion::Begin() + 3) = yaw_variance;
 
     // Mark quaternion components as initialized
     initialized_states[StateIndex::Quaternion::W] = true;
@@ -381,6 +368,22 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
       initialized_states[StateIndex::Quaternion::Z] = true;
     }
 
+    // When stationary, linear acceleration should be zero in inertial frame
+    state.segment<3>(StateIndex::LinearAcceleration::Begin()).setZero();
+
+    // Set covariance for linear acceleration
+    Eigen::Matrix3d accel_cov = measurement_covariance_.block<3, 3>(3, 3);
+    Eigen::Matrix3d lin_accel_cov = R_SB * accel_cov * R_SB.transpose();
+
+    covariance.block<3, 3>(
+        StateIndex::LinearAcceleration::Begin(),
+        StateIndex::LinearAcceleration::Begin()) = lin_accel_cov;
+
+    // Mark linear acceleration as initialized
+    initialized_states[StateIndex::LinearAcceleration::X] = true;
+    initialized_states[StateIndex::LinearAcceleration::Y] = true;
+    initialized_states[StateIndex::LinearAcceleration::Z] = true;
+
     // When stationary, set angular acceleration to zero
     state.segment<3>(StateIndex::AngularAcceleration::Begin()).setZero();
 
@@ -388,81 +391,17 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
     double ang_accel_variance = 0.01;  // (rad/s^2)^2
     for (int i = 0; i < 3; i++) {
       covariance(StateIndex::AngularAcceleration::Begin() + i,
-                 StateIndex::AngularAcceleration::Begin() + i) = ang_accel_variance;
+                StateIndex::AngularAcceleration::Begin() + i) = ang_accel_variance;
     }
 
     // Mark angular acceleration as initialized
     initialized_states[StateIndex::AngularAcceleration::X] = true;
     initialized_states[StateIndex::AngularAcceleration::Y] = true;
     initialized_states[StateIndex::AngularAcceleration::Z] = true;
-  }
-
-  // Initialize linear acceleration
-  // First, we need to compensate for gravity if orientation is valid
-  bool orientation_valid =
-      valid_states[StateIndex::Quaternion::W] &&
-      valid_states[StateIndex::Quaternion::X] &&
-      valid_states[StateIndex::Quaternion::Y] &&
-      valid_states[StateIndex::Quaternion::Z];
-
-  if (orientation_valid) {
-    // Extract quaternion
-    Eigen::Quaterniond q(
-        state(StateIndex::Quaternion::W),
-        state(StateIndex::Quaternion::X),
-        state(StateIndex::Quaternion::Y),
-        state(StateIndex::Quaternion::Z)
-    );
-
-    // Gravity vector in world frame
-    const Eigen::Vector3d g_W(0.0, 0.0, kGravity);
-
-    // Compute linear acceleration by removing gravity and centripetal effects
-    Eigen::Vector3d a_linear = accel_body - q.inverse() * g_W;
-
-    // If we have angular velocity and lever arm, remove centripetal effects
-    if (initialized_states[StateIndex::AngularVelocity::X]) {
-      const Eigen::Vector3d& r = sensor_pose_in_body_frame_.translation();
-      a_linear -= omega_body.cross(omega_body.cross(r));
-
-      // If we also have angular acceleration, remove that effect too
-      if (valid_states[StateIndex::AngularAcceleration::X]) {
-        Eigen::Vector3d alpha = state.segment<3>(StateIndex::AngularAcceleration::Begin());
-        a_linear -= alpha.cross(r);
-      }
-    }
-
-    // Update state with linear acceleration
-    state.segment<3>(StateIndex::LinearAcceleration::Begin()) = a_linear;
   } else {
-    // Without valid orientation, we can't properly remove gravity
-    // Just use the raw acceleration with a warning flag
-    if (is_stationary) {
-      // If stationary, we know acceleration should be zero in body frame
-      state.segment<3>(StateIndex::LinearAcceleration::Begin()).setZero();
-    } else {
-      // Otherwise, use measured value but with high uncertainty
-      state.segment<3>(StateIndex::LinearAcceleration::Begin()) = accel_body;
-    }
+    // For non-stationary case, only initialize angular velocity
+    // Don't attempt to initialize quaternion or linear acceleration yet
   }
-
-  // Set linear acceleration covariance
-  Eigen::Matrix3d accel_cov = measurement_covariance_.block<3, 3>(3, 3);
-  Eigen::Matrix3d lin_accel_cov = R_SB * accel_cov * R_SB.transpose();
-
-  // If orientation isn't valid, increase uncertainty to account for gravity
-  if (!orientation_valid && !is_stationary) {
-    lin_accel_cov.diagonal().array() += kGravity * kGravity;
-  }
-
-  covariance.block<3, 3>(
-      StateIndex::LinearAcceleration::Begin(),
-      StateIndex::LinearAcceleration::Begin()) = lin_accel_cov;
-
-  // Mark linear acceleration as initialized
-  initialized_states[StateIndex::LinearAcceleration::X] = true;
-  initialized_states[StateIndex::LinearAcceleration::Y] = true;
-  initialized_states[StateIndex::LinearAcceleration::Z] = true;
 
   return initialized_states;
 }

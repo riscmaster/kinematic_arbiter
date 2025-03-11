@@ -159,7 +159,21 @@ public:
     return A * reference_covariance_ * A.transpose() + Q;
   }
 
+  /**
+   * @brief Set state covariance
+   */
+  void SetStateCovariance(const StateMatrix& covariance) {
+    reference_covariance_ = covariance;
+  }
+
+  /**
+   * @brief Get current time
+   */
   double GetCurrentTime() const { return reference_time_; }
+
+  /**
+   * @brief Set max delay window
+   */
   void SetMaxDelayWindow(double window) { max_delay_window_ = window; }
 
   /**
@@ -170,7 +184,7 @@ public:
   }
 
   // Update IsInitialized to check if any states are initialized
-  bool IsInitialized() const { return reference_time_ > 0.0; }
+  bool IsInitialized() const { return initialized_states_.any(); }
 
 private:
   /**
