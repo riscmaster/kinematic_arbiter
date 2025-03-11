@@ -40,6 +40,7 @@ public:
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
   using MeasurementCovariance = typename Base::MeasurementCovariance;
+  using StateFlags = typename Base::StateFlags;
 
   /**
    * @brief Indices for accessing IMU measurement components
@@ -127,6 +128,36 @@ public:
   double GetGravity() const {
     return kGravity;
   }
+
+  /**
+   * @brief Get states that this sensor can directly initialize
+   *
+   * IMU provides measurements of angular velocity and linear acceleration.
+   * When stationary, it can also help initialize roll and pitch components
+   * of orientation from gravity direction.
+   *
+   * @return Flags indicating initializable states
+   */
+  StateFlags GetInitializableStates() const override;
+
+  /**
+   * @brief Initialize state from IMU measurement
+   *
+   * Initializes angular velocity and linear acceleration directly.
+   * When stationary, initializes orientation (roll/pitch) from gravity
+   * and sets angular acceleration to zero.
+   *
+   * @param measurement IMU measurement [gx, gy, gz, ax, ay, az]
+   * @param valid_states Flags indicating which states are valid
+   * @param state State vector to update
+   * @param covariance State covariance to update
+   * @return Flags indicating which states were initialized
+   */
+  StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const override;
 
   friend class kinematic_arbiter::sensors::test::ImuStationaryTest;
 

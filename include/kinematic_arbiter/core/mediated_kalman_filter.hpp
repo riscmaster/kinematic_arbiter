@@ -48,304 +48,201 @@ struct Measurement {
 };
 
 /**
- * @brief Template class for a Mediated Kalman Filter with OOSM support
+ * @brief MediatedKalmanFilter implements a Kalman filter with chi-squared validation
  *
- * Implements a unified algorithm that combines:
- * 1. Mediated Kalman filtering - For robust handling of potentially invalid assumptions
- * 2. OOSM processing - For optimal updates with out-of-sequence measurements
+ * Leverages StateModelInterface for prediction and ProcessNoise management
+ * and MeasurementModelInterface for measurement processing, validation and mediation.
  *
- * This filter continuously validates the fundamental Kalman filter assumptions through
- * mediation and handles measurements arriving in arbitrary order through retrodiction.
- *
- * Practical applications include:
- * - Multi-sensor fusion where sensors have different reliabilities
- * - Systems with communication delays (networked robots, distributed sensing)
- * - Applications requiring fault detection and recovery
- * - Edge computing with asynchronous sensor data
- *
- * @tparam StateSize Dimension of the state vector
- * @tparam ProcessModel Model that defines state transition and jacobian
- * @tparam MeasurementModels... Variable number of measurement model types
+ * @tparam StateSize Dimension of state vector
+ * @tparam ProcessModel Type implementing StateModelInterface
+ * @tparam SensorModels Types implementing MeasurementModelInterface
  */
-template<
-  int StateSize,
-  typename ProcessModel,
-  typename... MeasurementModels
->
+template<int StateSize, typename ProcessModel, typename... SensorModels>
 class MediatedKalmanFilter {
 public:
-  // Type definitions for matrices
+  // Type aliases
   using StateVector = Eigen::Matrix<double, StateSize, 1>;
   using StateMatrix = Eigen::Matrix<double, StateSize, StateSize>;
+  using StateFlags = Eigen::Array<bool, StateSize, 1>;
 
   /**
-   * @brief Parameters for OOSM handling in the filter
+   * @brief Constructor with process and measurement models
    */
-  struct Params {
-    // Maximum history length for OOSM handling in seconds
-    // This is also the maximum allowed measurement delay
-    double max_history_window = 5.0;
-    int max_history_size = 100; // Maximum number of history nodes to store
-    MediationAction mediation_action = MediationAction::AdjustCovariance;  // Default mediation action
-    double process_to_measurement_ratio = 1.0;           // Process noise modifier (ζ)
-    bool enable_adaptive_noise = true;                   // Whether to adaptively update noise
-  };
+  MediatedKalmanFilter(std::shared_ptr<ProcessModel> process_model,
+                      std::shared_ptr<SensorModels>... sensor_models)
+    : process_model_(process_model),
+      sensor_models_(std::make_tuple(sensor_models...)),
+      reference_time_(0.0),
+      max_delay_window_(10.0) {}
 
   /**
-   * @brief History node for OOSM processing and mediation
-   *
-   * Stores all necessary information to perform retrodiction and mediation
+   * @brief Process measurement from specified sensor
    */
-  struct HistoryNode {
-    double timestamp;               // When this state was recorded
-    StateVector state;              // State estimate at this time
-    StateMatrix covariance;         // State covariance at this time
+  template<size_t SensorIndex, typename MeasurementType>
+  bool ProcessMeasurement(double timestamp, const MeasurementType& measurement) {
+    auto sensor_model = std::get<SensorIndex>(sensor_models_);
 
-    // Unified auxiliary variables for both OOSM and mediation
-    struct AuxiliaryVariables {
-      // For OOSM retrodiction and efficient Kalman updates
-      StateVector information_state;     // Related to state innovation contribution (y in OOSM paper)
-                                         // Computed as: C^T(CPC^T+R)^-1(y-Cx)
+    // Try to initialize any states this sensor can provide
+    StateFlags initializable = sensor_model->GetInitializableStates();
 
-      StateMatrix information_matrix;    // Information contribution from measurement (B in OOSM paper)
-                                         // Computed as: C^T(CPC^T+R)^-1C
+    // Create "not initialized" mask using select (avoids bitwise NOT)
+    StateFlags not_initialized = initialized_states_.select(StateFlags::Zero(), StateFlags::Ones());
 
-      StateMatrix projection_matrix;     // State projection through measurement update (U in OOSM paper)
-                                         // Computed as: I - P*information_matrix
-                                         // Enables efficient retrodiction for OOSM processing
-    };
-    AuxiliaryVariables aux;
-  };
+    // Use cwiseProduct for element-wise AND (states that can be initialized and aren't yet)
+    StateFlags uninit_states = initializable.cwiseProduct(not_initialized);
+
+    // Only attempt initialization for states we haven't initialized yet
+    if (uninit_states.any()) {
+      StateFlags new_states = sensor_model->InitializeState(
+          measurement, initialized_states_, reference_state_, reference_covariance_);
+
+      // Use cwiseMax for element-wise OR (states that were initialized before OR are newly initialized)
+      initialized_states_ = initialized_states_.cwiseMax(new_states);
+    }
+
+    // Reject too-old measurements
+    if (timestamp < reference_time_ - max_delay_window_) {
+      return false;
+    }
+
+    double dt = timestamp - reference_time_;
+
+    StateMatrix A = process_model_->GetTransitionMatrix(reference_state_, dt);
+    StateVector state_at_sensor_time = process_model_->PredictState(reference_state_, dt);
+    StateMatrix Q_at_sensor_time = process_model_->GetProcessNoiseCovariance(dt);
+    StateMatrix covariance_at_sensor_time = A * reference_covariance_ * A.transpose() + Q_at_sensor_time;
+
+    // Apply measurement at sensor time
+    if (!applyMeasurement<SensorIndex>(state_at_sensor_time, covariance_at_sensor_time, measurement, dt)) {
+      return false;  // Measurement rejected
+    }
+
+    if (dt > 0.0) {
+      // Update reference state and time
+      reference_state_ = state_at_sensor_time;
+      reference_covariance_ = covariance_at_sensor_time;
+      reference_time_ = timestamp;  // Time advances for newer measurements
+      return true;
+    }
+
+    // Reset reference state to reference time
+    reference_state_ = process_model_->PredictState(reference_state_, -dt);
+    reference_covariance_ = process_model_->GetProcessNoiseCovariance(-dt);
+    return true;
+  }
 
   /**
-   * @brief Create a new Mediated Kalman Filter
-   *
-   * @param process_model Model that implements state transition
-   * @param measurement_models... Models that implement measurement predictions
+   * @brief Get state estimate at given time
    */
-  MediatedKalmanFilter(
-      const ProcessModel& process_model,
-      const MeasurementModels&... measurement_models);
+  StateVector GetStateEstimate(double timestamp = -1.0) const {
+    if (timestamp < 0.0 || timestamp == reference_time_) {
+      return reference_state_;
+    }
+
+    // Predict state to requested time without changing reference
+    double dt = timestamp - reference_time_;
+    return process_model_->PredictState(reference_state_, dt);
+  }
 
   /**
-   * @brief Initialize the filter with OOSM parameters
-   *
-   * @param params Filter parameters
-   * @throws FilterException if parameters are invalid
+   * @brief Get state covariance at given time
    */
-  void Initialize(const Params& params);
+  StateMatrix GetStateCovariance(double timestamp = -1.0) const {
+    if (timestamp < 0.0 || timestamp == reference_time_) {
+      return reference_covariance_;
+    }
+
+    // Predict covariance to requested time without changing reference
+    double dt = timestamp - reference_time_;
+    StateMatrix A = process_model_->GetTransitionMatrix(reference_state_, dt);
+    StateMatrix Q = process_model_->GetProcessNoiseCovariance(dt);
+    return A * reference_covariance_ * A.transpose() + Q;
+  }
+
+  double GetCurrentTime() const { return reference_time_; }
+  void SetMaxDelayWindow(double window) { max_delay_window_ = window; }
 
   /**
-   * @brief Initialize the filter with a starting state
-   *
-   * @param initial_state Initial state vector
-   * @param timestamp Initial timestamp
+   * @brief Get process model
    */
-  void Initialize(const StateVector& initial_state, double timestamp = 0.0);
+  std::shared_ptr<ProcessModel> GetProcessModel() const {
+    return process_model_;
+  }
 
-  /**
-   * @brief Predict state forward to the specified time
-   *
-   * Implements the prediction step of the Kalman filter:
-   * x̌_k = A_{k-1} * x̂_{k-1} + v_k
-   * P̌_k = A_{k-1} * P̂_{k-1} * A_{k-1}^T + Q_k
-   *
-   * @param timestamp Time to predict to
-   * @return Updated state estimate
-   * @throws FilterException if filter is not initialized
-   */
-  StateVector Predict(double timestamp);
-
-  /**
-   * @brief Process a measurement from any registered sensor
-   *
-   * This method handles both in-sequence and out-of-sequence measurements:
-   * 1. For in-sequence: Standard mediated Kalman update
-   * 2. For out-of-sequence: Uses retrodiction algorithm for optimal updates
-   *
-   * @tparam SensorType Type of sensor providing the measurement
-   * @param measurement Measurement data with timestamp
-   * @return true if measurement was used, false if rejected by validation
-   * @throws FilterException if measurement delay exceeds max_measurement_delay
-   */
-  template<typename SensorType>
-  bool ProcessMeasurement(const Measurement<SensorType>& measurement);
-
-  /**
-   * @brief Get the current state estimate
-   *
-   * @return Current state estimate
-   */
-  const StateVector& GetStateEstimate() const;
-
-  /**
-   * @brief Get the current state covariance
-   *
-   * @return Current state covariance
-   */
-  const StateMatrix& GetStateCovariance() const;
-
-  /**
-   * @brief Get the timestamp of the current state estimate
-   *
-   * @return Current timestamp
-   */
-  double GetCurrentTime() const;
-
-  /**
-   * @brief Get the process noise covariance matrix
-   *
-   * @return Process noise covariance
-   */
-  const StateMatrix& GetProcessNoiseCovariance() const;
-
-  /**
-   * @brief Get the measurement noise covariance for a specific sensor
-   *
-   * @tparam SensorType Type of sensor
-   * @return Measurement noise covariance for the sensor
-   */
-  template<typename SensorType>
-  const typename SensorType::MeasurementMatrix& GetMeasurementNoiseCovariance() const;
-
-  /**
-   * @brief Get filter parameters
-   *
-   * @return Filter parameters
-   */
-  const Params& GetParams() const;
+  // Update IsInitialized to check if any states are initialized
+  bool IsInitialized() const { return reference_time_ > 0.0; }
 
 private:
-  // Filter state
-  double current_time_ = 0.0;
-  bool is_initialized_ = false;
-  StateVector state_estimate_;
-  StateMatrix state_covariance_;
-  StateMatrix process_noise_covariance_;
-
-  // Filter parameters
-  Params params_;
-
-  // Models
-  ProcessModel process_model_;
-  std::tuple<MeasurementModels...> measurement_models_;
-
-  // History for OOSM processing
-  std::deque<HistoryNode> history_;
-
   /**
-   * @brief Get the measurement model for a specific sensor type
-   *
-   * Helper method to extract the right measurement model from the tuple
-   *
-   * @tparam SensorType The sensor type to get the model for
-   * @return Reference to the measurement model
+   * @brief Apply measurement update at a given state
    */
-  template<typename SensorType>
-  const SensorType& GetMeasurementModel() const;
+  template<size_t SensorIndex, typename MeasurementType>
+  bool applyMeasurement(StateVector& state, StateMatrix& covariance, const MeasurementType& measurement, double dt = 0.0) {
+    auto sensor_model = std::get<SensorIndex>(sensor_models_);
 
-  /**
-   * @brief Add current state to history for OOSM processing
-   *
-   * Updates the auxiliary variables needed for retrodiction algorithm
-   * and maintains history window based on configuration.
-   */
-  void UpdateHistory();
+    // Store a copy of the prior state for process noise update
+    StateVector prior_state = state;
 
-  /**
-   * @brief Prune history nodes older than max_history_window
-   */
-  void PruneHistory();
+    // Compute auxiliary data (innovation, Jacobian, innovation covariance)
+    auto aux_data = sensor_model->ComputeAuxiliaryData(state, covariance, measurement);
 
-  /**
-   * @brief Process an in-sequence measurement (latest in time)
-   *
-   * Standard mediated Kalman filter update:
-   * 1. Validate measurement using chi-squared test
-   * 2. If valid, update state and covariance
-   * 3. Update noise estimates
-   *
-   * @tparam SensorType Type of sensor providing the measurement
-   * @param measurement Measurement data
-   * @return true if measurement was used, false if rejected
-   */
-  template<typename SensorType>
-  bool ProcessInSequenceMeasurement(const Measurement<SensorType>& measurement);
+    // Validate measurement using the simplified ValidateAndMediate interface
+    // Note: This now handles covariance updates internally based on validation result
+    bool assumptions_valid = sensor_model->ValidateAndMediate(
+        state,                      // Current state
+        covariance,                 // Current covariance
+        measurement                // Measurement to validate
+    );
 
-  /**
-   * @brief Process an out-of-sequence measurement
-   *
-   * Implements Algorithm I, Case II from the retrodiction paper:
-   * 1. Find appropriate history node
-   * 2. Retrodict state to measurement time
-   * 3. Compute optimal update
-   * 4. Re-process all subsequent measurements
-   *
-   * @tparam SensorType Type of sensor providing the measurement
-   * @param measurement Out-of-sequence measurement
-   * @return true if measurement was used, false if rejected
-   */
-  template<typename SensorType>
-  bool ProcessOutOfSequenceMeasurement(const Measurement<SensorType>& measurement);
+    if (!assumptions_valid && sensor_model->GetValidationParams().mediation_action == MediationAction::Reject) {
+      return false;  // Measurement rejected
+    }
 
-  /**
-   * @brief Retrodict state to the time of a measurement
-   *
-   * Computes the optimal state estimate at a past time point using
-   * stored auxiliary variables (y, B, U) as defined in the retrodiction paper.
-   *
-   * @param measurement_time Time to retrodict to
-   * @param history_index Index of nearest history node
-   * @return Pair of retrodicted state and covariance
-   */
-  std::pair<StateVector, StateMatrix> RetrodictState(double measurement_time, size_t history_index);
+    // Compute Kalman gain using Cholesky decomposition for efficiency
+    // K = P*H'*S^-1 can be computed as the solution to: S*K' = H*P'
+    auto PHt = covariance * aux_data.jacobian.transpose();
 
-  /**
-   * @brief Validate a measurement using chi-squared test
-   *
-   * Tests if innovation is within expected bounds based on confidence_value.
-   * This is a key part of the mediation algorithm to detect invalid measurements.
-   *
-   * @tparam SensorType Type of sensor
-   * @param measurement The measurement to validate
-   * @param predicted_state State prediction at measurement time
-   * @param predicted_covariance Covariance prediction at measurement time
-   * @return true if measurement passes validation, false otherwise
-   */
-  template<typename SensorType>
-  bool ValidateMeasurement(
-      const typename SensorType::MeasurementVector& measurement,
-      const StateVector& predicted_state,
-      const StateMatrix& predicted_covariance);
+    // Use Cholesky decomposition to solve for Kalman gain
+    Eigen::LLT<typename std::decay_t<decltype(aux_data.innovation_covariance)>> llt_of_S(aux_data.innovation_covariance);
 
-  /**
-   * @brief Compute Mahalanobis distance for innovation validation
-   *
-   * Used to quantify how "surprising" a measurement is relative to the prediction.
-   *
-   * @tparam SensorType Type of sensor
-   * @param innovation Innovation vector (z - h(x))
-   * @param innovation_covariance Covariance of the innovation
-   * @return Mahalanobis distance
-   */
-  template<typename SensorType>
-  double ComputeMahalanobisDistance(
-      const typename SensorType::MeasurementVector& innovation,
-      const typename SensorType::MeasurementMatrix& innovation_covariance);
+    // Check if decomposition succeeded (matrix is SPD)
+    if (llt_of_S.info() != Eigen::Success) {
+      // Add small regularization if needed
+      auto regularized_S = aux_data.innovation_covariance;
+      regularized_S.diagonal().array() += 1e-8;
+      llt_of_S.compute(regularized_S);
+    }
 
-  /**
-   * @brief Re-apply all measurements after an OOSM update
-   *
-   * After processing an OOSM, we need to re-process all subsequent
-   * measurements to maintain consistency.
-   *
-   * @param start_index Index in history to start reprocessing from
-   */
-  void ReapplyMeasurements(size_t start_index);
+    // Solve for Kalman gain efficiently
+    auto kalman_gain = llt_of_S.solve(PHt.transpose()).transpose();
+
+    // Update state estimate (x = x + K*innovation)
+    state += kalman_gain * aux_data.innovation;
+
+    covariance = (StateMatrix::Identity() - kalman_gain * aux_data.jacobian) * covariance;
+
+    // Update process noise using the proper UpdateProcessNoise interface
+    process_model_->UpdateProcessNoise(
+        prior_state,   // a priori state (before update)
+        state,         // a posteriori state (after update)
+        sensor_model->GetValidationParams().process_to_measurement_noise_ratio,  // process to measurement noise ratio (tunable)
+        dt           // dt - small representative time step for this update
+    );
+
+    return true;
+  }
+
+  // Core data
+  std::shared_ptr<ProcessModel> process_model_;
+  std::tuple<std::shared_ptr<SensorModels>...> sensor_models_;
+
+  // Reference state (at most recent measurement time)
+  StateVector reference_state_;
+  StateMatrix reference_covariance_;
+  double reference_time_;
+  double max_delay_window_;
+  StateFlags initialized_states_;
 };
 
 } // namespace core
 } // namespace kinematic_arbiter
-
-// Include the implementation
-#include "kinematic_arbiter/core/mediated_kalman_filter.tpp"

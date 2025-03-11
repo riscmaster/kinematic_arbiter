@@ -19,6 +19,7 @@ public:
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using StateFlags = typename Base::StateFlags;
 
   /**
    * @brief Indices for accessing position measurement components
@@ -47,8 +48,6 @@ public:
    * @return Expected measurement [x, y, z]'
    */
   MeasurementVector PredictMeasurement(const StateVector& state) const override {
-    MeasurementVector predicted_measurement = MeasurementVector::Zero();
-
     // Extract position from state
     Eigen::Vector3d position = state.segment<3>(core::StateIndex::Position::X);
 
@@ -65,12 +64,8 @@ public:
 
     // Compute predicted position in global frame
     // p_sensor_global = p_body + R_body_to_global * p_sensor_in_body
-    Eigen::Vector3d predicted_position = position + orientation * trans_b_s;
 
-    // Fill measurement vector
-    predicted_measurement = predicted_position;
-
-    return predicted_measurement;
+    return position + orientation * trans_b_s;
   }
 
   /**
@@ -124,6 +119,105 @@ public:
     }
 
     return jacobian;
+  }
+
+  /**
+   * @brief Get states that this sensor can directly initialize
+   *
+   * Position sensor provides position measurements in global frame,
+   * so it can initialize position state components.
+   *
+   * @return Flags for initializable states
+   */
+  StateFlags GetInitializableStates() const override {
+    StateFlags flags = StateFlags::Zero();
+
+    // Position sensor can initialize position
+    flags[core::StateIndex::Position::X] = true;
+    flags[core::StateIndex::Position::Y] = true;
+    flags[core::StateIndex::Position::Z] = true;
+
+    return flags;
+  }
+
+  /**
+   * @brief Initialize state from position measurement
+   *
+   * Initializes position states from sensor measurement,
+   * accounting for sensor-to-body frame offset if quaternion is valid.
+   *
+   * @param measurement Position measurement [x, y, z]
+   * @param valid_states Flags indicating which states are valid
+   * @param state State vector to update
+   * @param covariance State covariance to update
+   * @return Flags indicating which states were initialized
+   */
+  StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const override {
+
+    StateFlags initialized_states = StateFlags::Zero();
+
+    // Extract position from measurement
+    Eigen::Vector3d sensor_position = measurement;
+
+    // Extract the sensor-to-body translation
+    Eigen::Vector3d trans_b_s = sensor_pose_in_body_frame_.translation();
+
+    // Check if quaternion is valid for lever arm compensation
+    bool quaternion_valid =
+        valid_states[core::StateIndex::Quaternion::W] &&
+        valid_states[core::StateIndex::Quaternion::X] &&
+        valid_states[core::StateIndex::Quaternion::Y] &&
+        valid_states[core::StateIndex::Quaternion::Z];
+
+    Eigen::Vector3d body_position;
+
+    if (quaternion_valid && trans_b_s.norm() > 1e-6) {
+      // With valid quaternion, we can properly account for the lever arm
+      Eigen::Quaterniond orientation(
+          state(core::StateIndex::Quaternion::W),
+          state(core::StateIndex::Quaternion::X),
+          state(core::StateIndex::Quaternion::Y),
+          state(core::StateIndex::Quaternion::Z)
+      );
+
+      // Compensate for lever arm: p_body = p_sensor - R_body_to_global * p_sensor_in_body
+      body_position = sensor_position - orientation * trans_b_s;
+    } else {
+      // Without valid quaternion, we ignore the lever arm
+      // This will introduce error if the lever arm is significant
+      body_position = sensor_position;
+    }
+
+    // Update state with initialized position
+    state.segment<3>(core::StateIndex::Position::Begin()) = body_position;
+
+    // Update covariance in state
+    covariance.block<3, 3>(
+        core::StateIndex::Position::Begin(),
+        core::StateIndex::Position::Begin()) = measurement_covariance_;
+
+    // If we ignored the lever arm, increase position uncertainty
+    if (!quaternion_valid && trans_b_s.norm() > 1e-6) {
+      // Add additional uncertainty based on lever arm length
+      double lever_arm_length = trans_b_s.norm();
+      double additional_variance = lever_arm_length * lever_arm_length;
+
+      for (int i = 0; i < 3; i++) {
+        covariance(core::StateIndex::Position::Begin() + i,
+                   core::StateIndex::Position::Begin() + i) += additional_variance;
+      }
+    }
+
+    // Mark position states as initialized
+    initialized_states[core::StateIndex::Position::X] = true;
+    initialized_states[core::StateIndex::Position::Y] = true;
+    initialized_states[core::StateIndex::Position::Z] = true;
+
+    return initialized_states;
   }
 };
 

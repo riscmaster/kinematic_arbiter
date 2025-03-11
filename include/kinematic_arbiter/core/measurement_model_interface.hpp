@@ -32,6 +32,9 @@ public:
     MeasurementVectorType::RowsAtCompileTime, StateSize>;                    // Measurement Jacobian C_k
   using InnovationCovariance = MeasurementCovariance;                          // Innovation covariance S
 
+  // More general name for boolean state flags
+  using StateFlags = Eigen::Array<bool, StateSize, 1>;
+
   /**
    * @brief Core measurement auxiliary data that can be reused across algorithms
    *
@@ -42,7 +45,6 @@ public:
     MeasurementVector innovation;                // y_k - C_k x_k
     MeasurementJacobian jacobian;                // C_k
     InnovationCovariance innovation_covariance;  // S = C_k P_k C_k^T + R
-    Eigen::MatrixXd innovation_covariance_inv;   // S^-1 (cached for efficiency)
 
     // Constructors
     MeasurementAuxData() = default;
@@ -50,19 +52,9 @@ public:
         const MeasurementVector& inn,
         const MeasurementJacobian& jac,
         const InnovationCovariance& inn_cov)
-      : innovation(inn), jacobian(jac), innovation_covariance(inn_cov) {
-      innovation_covariance_inv = innovation_covariance.inverse();
-    }
+      : innovation(inn), jacobian(jac), innovation_covariance(inn_cov) {}
   };
 
-  /**
-   * @brief Validation result with chi-squared test details
-   */
-  struct ValidationResult {
-    bool assumptions_valid = false;    // Whether filter assumptions hold
-    double chi_squared_term = 0.0;          // Computed chi-squared value
-    double threshold = 0.0;            // Threshold used for the test
-  };
 
   /**
    * @brief Parameters for assumption validation
@@ -73,6 +65,12 @@ public:
 
     // Confidence level assumption validation (0-1)
     double confidence_level = 0.95;
+
+    // Process to measurement noise ratio
+    double process_to_measurement_noise_ratio = 2.0;
+
+    // Mediation action to take if validation fails
+    MediationAction mediation_action = MediationAction::AdjustCovariance;
   };
 
   /**
@@ -92,6 +90,7 @@ public:
    * @brief Virtual destructor
    */
   virtual ~MeasurementModelInterface() = default;
+
 
   /**
    * @brief Predict expected measurement h(x) from state
@@ -163,113 +162,46 @@ public:
   }
 
   /**
-   * @brief Validate filter assumptions using chi-squared test
-   *
-   * Tests if measurement is consistent with model expectations.
-   *
-   * @param aux_data Auxiliary measurement data
-   * @return Result of chi-squared validation
-   */
-  ValidationResult ValidateAssumptions(const MeasurementAuxData& aux_data) const {
-    ValidationResult result;
-
-    // Mahalanobis distance: d = ν^T S^-1 ν
-    result.chi_squared_term = aux_data.innovation.transpose() *
-                         aux_data.innovation_covariance_inv *
-                         aux_data.innovation;
-
-    // Determine threshold for chi-squared test
-    result.threshold = CalculateChiSquareCriticalValueNDof(
-          aux_data.innovation.rows(), validation_params_.confidence_level);
-
-    // Check if filter assumptions hold
-    result.assumptions_valid = (result.chi_squared_term < result.threshold);
-
-    return result;
-  }
-
-  /**
-   * @brief Apply mediation action if validation fails
-   *
-   * If assumptions are violated and action is AdjustCovariance,
-   * updates the covariance matrix to make test pass.
-   *
-   * @param validation_result Result from ValidateAssumptions
-   * @param action Action to take if validation fails
-   * @param[out] adjusted_covariance Output for potentially adjusted covariance
-   * @return Whether mediation was applied
-   */
-  bool ApplyMediation(
-      const ValidationResult& validation_result,
-      MediationAction action) const {
-
-    // If assumptions hold, no mediation needed
-    if (validation_result.assumptions_valid) {
-      return false;
-    }
-
-    // Apply mediation according to selected action
-    if (action == MediationAction::AdjustCovariance) {
-      // Scale covariance to make chi-squared test pass
-      double scale_factor = validation_result.chi_squared_term / validation_result.threshold;
-      measurement_covariance_ *= scale_factor;
-    }
-
-    // Mediation was applied
-    return true;
-  }
-
-  /**
-   * @brief Update measurement covariance based on innovation
-   *
-   * Implements the formula:
-   * R̂_k = R̂_{k-1} + ((y_k - h(x_k))(y_k - h(x_k))^T - R̂_{k-1})/n
-   *
-   * @param innovation Measurement innovation
-   */
-  void UpdateCovariance(const MeasurementVector& innovation) {
-    measurement_covariance_ = measurement_covariance_ +
-        (innovation * innovation.transpose() - measurement_covariance_) /
-        validation_params_.noise_sample_window;
-  }
-
-  /**
-   * @brief Perform the entire validation and mediation process
-   *
-   * Convenience method that combines ComputeAuxiliaryData, ValidateAssumptions,
-   * ApplyMediation, and optionally UpdateCovariance in one call.
+   * @brief Perform the validation and mediation process
    *
    * @param state Current state estimate x_k
    * @param state_covariance Current state covariance P_k
    * @param measurement Actual measurement y_k
-   * @param action Action to take if validation fails
-   * @param[out] adjusted_covariance Output for potentially adjusted covariance
-   * @param update_covariance Whether to update internal covariance with this measurement
    * @return Whether filter assumptions hold for this measurement
    */
   bool ValidateAndMediate(
       const StateVector& state,
       const StateCovariance& state_covariance,
-      const MeasurementVector& measurement,
-      MediationAction action,
-      MeasurementCovariance& adjusted_covariance,
-      bool update_covariance = false) {
+      const MeasurementVector& measurement) {
 
     // Compute auxiliary data once for all operations
     MeasurementAuxData aux_data = ComputeAuxiliaryData(
         state, state_covariance, measurement);
 
-    // Validate assumptions
-    ValidationResult result = ValidateAssumptions(aux_data);
+    // Mahalanobis distance: d = ν^T S^-1 ν
+    double chi_squared_term = aux_data.innovation.transpose() *
+                         aux_data.innovation_covariance.llt().solve(
+                         aux_data.innovation);
 
-    // Apply mediation if needed
-    bool mediation_applied = ApplyMediation(result, action, adjusted_covariance);
+    // Determine threshold for chi-squared test
+    double threshold = CalculateChiSquareCriticalValueNDof(
+          aux_data.innovation.rows(), validation_params_.confidence_level);
 
-    // Update covariance if requested and appropriate
-    if (result.assumptions_valid && update_covariance) {
+    // Check if measurement passes validation
+    if (chi_squared_term < threshold) {
       UpdateCovariance(aux_data.innovation);
+      return true;
     }
-    return result.assumptions_valid;
+
+    // Measurement Apply Mediation Action
+    if (validation_params_.mediation_action == MediationAction::AdjustCovariance) {
+      // Scale covariance to make chi-squared test pass
+      double scale_factor = chi_squared_term / threshold;
+      measurement_covariance_ *= scale_factor;
+    }
+
+    // Always return false if validation fails
+    return false;
   }
 
   /**
@@ -295,6 +227,59 @@ public:
   void SetSensorPoseInBodyFrame(const Eigen::Isometry3d& pose) {
     sensor_pose_in_body_frame_ = pose;
     body_to_sensor_transform_ = pose.inverse();
+  }
+
+  /**
+   * @brief Get the states that this sensor can directly initialize
+   *
+   * Returns an array of boolean flags where each element corresponds to a state component.
+   * A true value indicates that the sensor can directly initialize that state.
+   *
+   * @return Flags indicating initializable states
+   */
+  virtual StateFlags GetInitializableStates() const = 0;
+
+  /**
+   * @brief Initialize state components from a measurement
+   *
+   * This method initializes state components that this sensor can directly observe.
+   * Updates both the state vector and covariance matrix for initialized components.
+   *
+   * @param measurement The measurement to use for initialization
+   * @param valid_states Flags indicating which states are valid for use in initialization
+   * @param state [in/out] The state vector to be initialized
+   * @param covariance [in/out] The state covariance to be initialized
+   * @return Flags indicating which states were initialized
+   */
+  virtual StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const = 0;
+
+private:
+
+  /**
+   * @brief Update measurement covariance with bounded innovation
+   *
+   * @param innovation Measurement innovation
+   */
+  void UpdateCovariance(const MeasurementVector& innovation) {
+    // Define bounds as named constants for clarity
+    static const double kMinInnovation = 1e-6;
+    static const double kMaxInnovation = 1e6;
+
+    // 1. Clip large values (positive and negative)
+    auto clipped = innovation.array().cwiseMax(-kMaxInnovation).cwiseMin(kMaxInnovation);
+
+    // 2. Apply minimum magnitude while preserving sign
+    // Formula: sign(x) * max(|x|, kMinInnovation)
+    MeasurementVector bounded_innovation =
+        clipped.sign() * clipped.abs().cwiseMax(kMinInnovation);
+
+    // Update covariance with the adaptive formula
+    measurement_covariance_ += (bounded_innovation * bounded_innovation.transpose() -
+                               measurement_covariance_) / validation_params_.noise_sample_window;
   }
 
 protected:

@@ -72,7 +72,7 @@ public:
    * @return Process noise covariance matrix Q_k
    */
   virtual StateMatrix GetProcessNoiseCovariance(double dt) const {
-    return process_noise_ * dt;
+    return process_noise_ * fabs(dt);
   }
 
   /**
@@ -107,10 +107,15 @@ public:
     // Create binary mask vector (1.0 where states changed, 0.0 otherwise)
     StateVector mask = (state_diff.array().abs() > kEpsilon).cast<double>();
 
+    // Apply maximum bound to state differences
+    static const double kMaxStateDiff = 1e6;
+    StateVector bounded_diff =
+        state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
+
     // Create masked outer product (only non-zero where both states changed)
     StateMatrix mask_matrix = mask * mask.transpose();
-    StateMatrix masked_update = (mask.asDiagonal() * state_diff) *
-                               (mask.asDiagonal() * state_diff).transpose();
+    StateMatrix masked_update = (mask.asDiagonal() * bounded_diff) *
+                               (mask.asDiagonal() * bounded_diff).transpose();
 
     // Apply selective update using element-wise product with mask
     process_noise_ += process_to_measurement_ratio * dt *

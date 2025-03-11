@@ -41,6 +41,14 @@ add_test_executable(rigid_body_state_model_test
 )
 set_tests_properties(rigid_body_state_model_test PROPERTIES LABELS "models")
 
+# Core filter tests
+set(EXTRA_LIBS "")
+add_test_executable(mediated_kalman_filter_test
+  ${CMAKE_SOURCE_DIR}/test/mediated_kalman_filter_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
+)
+set_tests_properties(mediated_kalman_filter_test PROPERTIES LABELS "filters")
+
 # Sensor tests
 set(EXTRA_LIBS "")
 

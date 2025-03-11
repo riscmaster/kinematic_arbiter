@@ -97,6 +97,22 @@ public:
    */
   std::shared_ptr<StateModelInterface> GetProcessModel();
 
+  /**
+   * @brief Get sensor measurement covariance by ID
+   *
+   * @param sensor_id Sensor identifier
+   * @return Measurement covariance matrix for the sensor
+   */
+  template<typename SensorType>
+  typename SensorType::MeasurementCovariance GetSensorCovariance(const std::string& sensor_id) const;
+
+  /**
+   * @brief Get current filter time
+   *
+   * @return Current filter time
+   */
+  double GetCurrentTime() const;
+
 private:
   // Implementation details hidden
   class Impl;

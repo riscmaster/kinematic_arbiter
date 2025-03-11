@@ -20,6 +20,7 @@ public:
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using StateFlags = typename Base::StateFlags;
 
   /**
    * @brief Indices for accessing body velocity measurement components
@@ -145,6 +146,141 @@ public:
 
     return jacobian;
   }
+
+    /**
+   * @brief Get states that this sensor can directly initialize
+   *
+   * Body velocity sensors can initialize linear and angular velocity states.
+   *
+   * @return Flags for initializable states
+   */
+  StateFlags GetInitializableStates() const override {
+    StateFlags flags = StateFlags::Zero();
+
+    // Body velocity sensor can initialize all velocity states
+    flags[core::StateIndex::LinearVelocity::X] = true;
+    flags[core::StateIndex::LinearVelocity::Y] = true;
+    flags[core::StateIndex::LinearVelocity::Z] = true;
+    flags[core::StateIndex::AngularVelocity::X] = true;
+    flags[core::StateIndex::AngularVelocity::Y] = true;
+    flags[core::StateIndex::AngularVelocity::Z] = true;
+
+    return flags;
+  }
+
+  /**
+   * @brief Initialize state from body velocity measurement
+   *
+   * Initializes linear and angular velocity states based on the measurement,
+   * properly accounting for lever arm effects between sensor and body frame.
+   *
+   * @param measurement Velocity measurement [vx, vy, vz, wx, wy, wz]
+   * @param valid_states Flags indicating which states are valid for initialization
+   * @param state State vector to update
+   * @param covariance State covariance to update
+   * @return Flags indicating which states were initialized
+   */
+  StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const override {
+
+    StateFlags initialized_states = StateFlags::Zero();
+
+    // Extract measurement components in sensor frame
+    const Eigen::Vector3d sensor_lin_vel = measurement.segment<3>(0);
+    const Eigen::Vector3d sensor_ang_vel = measurement.segment<3>(3);
+
+    // Check if sensor is aligned with body frame (identity transform and zero offset)
+    bool sensor_aligned = sensor_pose_in_body_frame_.isApprox(Eigen::Isometry3d::Identity());
+
+    // Check if quaternion is valid - only needed for non-aligned sensor
+    bool quaternion_valid =
+        valid_states[core::StateIndex::Quaternion::W] &&
+        valid_states[core::StateIndex::Quaternion::X] &&
+        valid_states[core::StateIndex::Quaternion::Y] &&
+        valid_states[core::StateIndex::Quaternion::Z];
+
+    // Either the sensor is aligned with the body frame OR we have a valid quaternion
+    bool can_fully_initialize = sensor_aligned || quaternion_valid;
+
+    if (can_fully_initialize) {
+      // We can properly initialize velocities in body frame
+
+      // Extract the sensor-to-body transform components
+      const Eigen::Vector3d trans_b_s = sensor_pose_in_body_frame_.translation();
+      const Eigen::Matrix3d rot_b_s = sensor_pose_in_body_frame_.rotation();
+
+      // Calculate the skew-symmetric matrix for the cross product: ω × r
+      auto skew_matrix = [](const Eigen::Vector3d& v) -> Eigen::Matrix3d {
+        Eigen::Matrix3d skew;
+        skew << 0, -v(2), v(1),
+                v(2), 0, -v(0),
+                -v(1), v(0), 0;
+        return skew;
+      };
+
+      // First, compute body angular velocity
+      const Eigen::Vector3d body_ang_vel = rot_b_s * sensor_ang_vel;
+
+      // Convert sensor linear velocity to body frame
+      const Eigen::Vector3d sensor_lin_vel_in_body = rot_b_s * sensor_lin_vel;
+
+      // Account for the lever arm effect
+      const Eigen::Vector3d lever_arm_effect = skew_matrix(body_ang_vel) * trans_b_s;
+
+      // Compute body linear velocity
+      const Eigen::Vector3d body_lin_vel = sensor_lin_vel_in_body - lever_arm_effect;
+
+      // Initialize state vector
+      state.segment<3>(core::StateIndex::LinearVelocity::Begin()) = body_lin_vel;
+      state.segment<3>(core::StateIndex::AngularVelocity::Begin()) = body_ang_vel;
+
+      // Set all velocity states as initialized
+      initialized_states[core::StateIndex::LinearVelocity::X] = true;
+      initialized_states[core::StateIndex::LinearVelocity::Y] = true;
+      initialized_states[core::StateIndex::LinearVelocity::Z] = true;
+      initialized_states[core::StateIndex::AngularVelocity::X] = true;
+      initialized_states[core::StateIndex::AngularVelocity::Y] = true;
+      initialized_states[core::StateIndex::AngularVelocity::Z] = true;
+
+      // Transform covariance from sensor to body frame
+      // For angular velocity (straightforward rotation)
+      Eigen::Matrix3d ang_vel_cov = rot_b_s *
+          measurement_covariance_.block<3, 3>(3, 3) *
+          rot_b_s.transpose();
+
+      // For linear velocity (approximate - ignoring cross-terms with angular velocity)
+      Eigen::Matrix3d lin_vel_cov = rot_b_s *
+          measurement_covariance_.block<3, 3>(0, 0) *
+          rot_b_s.transpose();
+
+      // Set covariance blocks in state covariance
+      covariance.block<3, 3>(
+          core::StateIndex::LinearVelocity::Begin(),
+          core::StateIndex::LinearVelocity::Begin()) = lin_vel_cov;
+
+      covariance.block<3, 3>(
+          core::StateIndex::AngularVelocity::Begin(),
+          core::StateIndex::AngularVelocity::Begin()) = ang_vel_cov;
+    } else {
+      // We can only partially initialize - sensor isn't aligned and quaternion is invalid
+      // Just initialize angular velocity which is less affected by frame transformations
+      state.segment<3>(core::StateIndex::AngularVelocity::Begin()) = sensor_ang_vel;
+      covariance.block<3, 3>(
+          core::StateIndex::AngularVelocity::Begin(),
+          core::StateIndex::AngularVelocity::Begin()) = measurement_covariance_.block<3, 3>(3, 3);
+
+      initialized_states[core::StateIndex::AngularVelocity::X] = true;
+      initialized_states[core::StateIndex::AngularVelocity::Y] = true;
+      initialized_states[core::StateIndex::AngularVelocity::Z] = true;
+    }
+
+    return initialized_states;
+  }
+
+
 };
 
 } // namespace sensors

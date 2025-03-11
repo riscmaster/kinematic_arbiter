@@ -21,7 +21,7 @@ public:
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
-
+  using StateFlags = typename Base::StateFlags;
   /**
    * @brief Constructor
    *
@@ -98,6 +98,104 @@ public:
     jacobian(0, core::StateIndex::Quaternion::Z) = 2.0 * (-2.0 * vx * qz + vy * qw + vz * qx);
 
     return jacobian;
+  }
+
+  /**
+   * @brief Get states that this sensor can directly initialize
+   *
+   * Heading velocity sensor can partially initialize:
+   * - Linear velocity components along heading direction
+   * - Only yaw component of quaternion (affecting W and Z components)
+   *
+   * @return Flags for initializable states
+   */
+  StateFlags GetInitializableStates() const override {
+    StateFlags flags = StateFlags::Zero();
+
+    // Heading velocity sensor can partially initialize linear velocity
+    flags[core::StateIndex::LinearVelocity::X] = true;
+    flags[core::StateIndex::LinearVelocity::Y] = true;
+    flags[core::StateIndex::LinearVelocity::Z] = true;
+
+    return flags;
+  }
+
+  /**
+   * @brief Initialize state from heading velocity measurement
+   *
+   * Assumes heading velocity represents velocity magnitude along the vehicle's heading.
+   * Requires a valid quaternion to determine the heading direction.
+   *
+   * @param measurement Heading velocity measurement
+   * @param valid_states Flags indicating which states are valid
+   * @param state State vector to update
+   * @param covariance State covariance to update
+   * @return Flags indicating which states were initialized
+   */
+  StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const override {
+
+    StateFlags initialized_states = StateFlags::Zero();
+
+    // Extract heading velocity measurement
+    double velocity_magnitude = measurement(0);
+
+    // Check if magnitude is sufficient for meaningful initialization
+    const double MIN_VELOCITY = 0.5;  // m/s
+    if (std::abs(velocity_magnitude) < MIN_VELOCITY) {
+      return initialized_states;  // Too small to provide reliable information
+    }
+
+    // Check quaternion validity - we need full orientation to determine heading
+    bool quaternion_valid =
+        valid_states[core::StateIndex::Quaternion::W] &&
+        valid_states[core::StateIndex::Quaternion::X] &&
+        valid_states[core::StateIndex::Quaternion::Y] &&
+        valid_states[core::StateIndex::Quaternion::Z];
+
+    // We can only initialize if we have a valid quaternion
+    if (quaternion_valid) {
+      // Extract orientation quaternion
+      Eigen::Quaterniond q(
+          state(core::StateIndex::Quaternion::W),
+          state(core::StateIndex::Quaternion::X),
+          state(core::StateIndex::Quaternion::Y),
+          state(core::StateIndex::Quaternion::Z)
+      );
+
+      // Compute heading vector
+      Eigen::Vector3d heading_vector = ComputeHeadingVector(q);
+
+      // Initialize velocity along heading
+      state.segment<3>(core::StateIndex::LinearVelocity::Begin()) =
+          velocity_magnitude * heading_vector;
+
+      // Set appropriate covariance
+      double velocity_variance = measurement_covariance_(0, 0);
+
+      // Heading projection matrix (outer product)
+      Eigen::Matrix3d heading_proj = heading_vector * heading_vector.transpose();
+
+      // Perpendicular projection matrix
+      Eigen::Matrix3d perp_proj = Eigen::Matrix3d::Identity() - heading_proj;
+
+      // Set low uncertainty along heading, high perpendicular
+      double perp_variance = 10.0 * velocity_variance;
+      Eigen::Matrix3d vel_cov = velocity_variance * heading_proj + perp_variance * perp_proj;
+
+      covariance.block<3, 3>(
+          core::StateIndex::LinearVelocity::Begin(),
+          core::StateIndex::LinearVelocity::Begin()) = vel_cov;
+
+      // Mark linear velocity as initialized
+      initialized_states[core::StateIndex::LinearVelocity::X] = true;
+      initialized_states[core::StateIndex::LinearVelocity::Y] = true;
+      initialized_states[core::StateIndex::LinearVelocity::Z] = true;
+    }
+    return initialized_states;
   }
 
 private:

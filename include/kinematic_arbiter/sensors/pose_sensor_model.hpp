@@ -20,6 +20,7 @@ public:
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using StateFlags = typename Base::StateFlags;
 
   /**
    * @brief Indices for accessing pose measurement components
@@ -130,6 +131,110 @@ public:
         quaternion_product_jacobian;
 
     return jacobian;
+  }
+
+  /**
+   * @brief Get states that this sensor can directly initialize
+   *
+   * Pose sensor provides both position and orientation measurements,
+   * so it can directly initialize these state components.
+   *
+   * @return Flags for initializable states
+   */
+  StateFlags GetInitializableStates() const override {
+    StateFlags flags = StateFlags::Zero();
+
+    // Pose sensor can initialize position
+    flags[core::StateIndex::Position::X] = true;
+    flags[core::StateIndex::Position::Y] = true;
+    flags[core::StateIndex::Position::Z] = true;
+
+    // Pose sensor can initialize quaternion
+    flags[core::StateIndex::Quaternion::W] = true;
+    flags[core::StateIndex::Quaternion::X] = true;
+    flags[core::StateIndex::Quaternion::Y] = true;
+    flags[core::StateIndex::Quaternion::Z] = true;
+
+    return flags;
+  }
+
+  /**
+   * @brief Initialize state from pose measurement
+   *
+   * Initializes position and orientation states from sensor measurement,
+   * accounting for sensor-to-body frame transformation.
+   *
+   * @param measurement Pose measurement [x, y, z, qw, qx, qy, qz]
+   * @param valid_states Flags indicating which states are valid
+   * @param state State vector to update
+   * @param covariance State covariance to update
+   * @return Flags indicating which states were initialized
+   */
+  StateFlags InitializeState(
+      const MeasurementVector& measurement,
+      const StateFlags& valid_states,
+      StateVector& state,
+      StateCovariance& covariance) const override {
+
+    StateFlags initialized_states = StateFlags::Zero();
+
+    // Extract position and orientation from measurement
+    Eigen::Vector3d sensor_position = measurement.segment<3>(MeasurementIndex::X);
+    Eigen::Quaterniond sensor_orientation(
+        measurement(MeasurementIndex::QW),
+        measurement(MeasurementIndex::QX),
+        measurement(MeasurementIndex::QY),
+        measurement(MeasurementIndex::QZ)
+    );
+
+    // Extract the sensor-to-body transform components
+    Eigen::Vector3d trans_b_s = sensor_pose_in_body_frame_.translation();
+    Eigen::Quaterniond rot_b_s(sensor_pose_in_body_frame_.rotation());
+
+    // Transform from sensor to body frame
+    // For orientation: q_body = q_sensor * (q_sensor_in_body)^-1
+    Eigen::Quaterniond body_orientation = sensor_orientation * rot_b_s.inverse();
+    body_orientation.normalize();  // Ensure unit quaternion
+
+    // For position: p_body = p_sensor - R_body_to_global * p_sensor_in_body
+    Eigen::Vector3d body_position = sensor_position - body_orientation * trans_b_s;
+
+    // Update state with initialized values
+    state.segment<3>(core::StateIndex::Position::Begin()) = body_position;
+    state(core::StateIndex::Quaternion::W) = body_orientation.w();
+    state(core::StateIndex::Quaternion::X) = body_orientation.x();
+    state(core::StateIndex::Quaternion::Y) = body_orientation.y();
+    state(core::StateIndex::Quaternion::Z) = body_orientation.z();
+
+    // Transform measurement covariance to state covariance
+    // Note: This is a simplified approach; a more rigorous implementation would
+    // apply the proper uncertainty transformation through the Jacobian
+
+    // For position covariance (direct mapping with lever arm effects)
+    Eigen::Matrix3d pos_cov = measurement_covariance_.block<3, 3>(0, 0);
+
+    // For quaternion covariance (simplified transfer from measurement)
+    Eigen::Matrix4d quat_cov = measurement_covariance_.block<4, 4>(3, 3);
+
+    // Update covariance blocks
+    covariance.block<3, 3>(
+        core::StateIndex::Position::Begin(),
+        core::StateIndex::Position::Begin()) = pos_cov;
+
+    covariance.block<4, 4>(
+        core::StateIndex::Quaternion::Begin(),
+        core::StateIndex::Quaternion::Begin()) = quat_cov;
+
+    // Mark states as initialized
+    initialized_states[core::StateIndex::Position::X] = true;
+    initialized_states[core::StateIndex::Position::Y] = true;
+    initialized_states[core::StateIndex::Position::Z] = true;
+    initialized_states[core::StateIndex::Quaternion::W] = true;
+    initialized_states[core::StateIndex::Quaternion::X] = true;
+    initialized_states[core::StateIndex::Quaternion::Y] = true;
+    initialized_states[core::StateIndex::Quaternion::Z] = true;
+
+    return initialized_states;
   }
 };
 
