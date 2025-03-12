@@ -182,7 +182,7 @@ public:
    */
   StateFlags InitializeState(
       const MeasurementVector& measurement,
-      const StateFlags& valid_states,
+      const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override {
 
@@ -191,22 +191,6 @@ public:
     // Extract measurement components in sensor frame
     const Eigen::Vector3d sensor_lin_vel = measurement.segment<3>(0);
     const Eigen::Vector3d sensor_ang_vel = measurement.segment<3>(3);
-
-    // Check if sensor is aligned with body frame (identity transform and zero offset)
-    bool sensor_aligned = sensor_pose_in_body_frame_.isApprox(Eigen::Isometry3d::Identity());
-
-    // Check if quaternion is valid - only needed for non-aligned sensor
-    bool quaternion_valid =
-        valid_states[core::StateIndex::Quaternion::W] &&
-        valid_states[core::StateIndex::Quaternion::X] &&
-        valid_states[core::StateIndex::Quaternion::Y] &&
-        valid_states[core::StateIndex::Quaternion::Z];
-
-    // Either the sensor is aligned with the body frame OR we have a valid quaternion
-    bool can_fully_initialize = sensor_aligned || quaternion_valid;
-
-    if (can_fully_initialize) {
-      // We can properly initialize velocities in body frame
 
       // Extract the sensor-to-body transform components
       const Eigen::Vector3d trans_b_s = sensor_pose_in_body_frame_.translation();
@@ -264,18 +248,7 @@ public:
       covariance.block<3, 3>(
           core::StateIndex::AngularVelocity::Begin(),
           core::StateIndex::AngularVelocity::Begin()) = ang_vel_cov;
-    } else {
-      // We can only partially initialize - sensor isn't aligned and quaternion is invalid
-      // Just initialize angular velocity which is less affected by frame transformations
-      state.segment<3>(core::StateIndex::AngularVelocity::Begin()) = sensor_ang_vel;
-      covariance.block<3, 3>(
-          core::StateIndex::AngularVelocity::Begin(),
-          core::StateIndex::AngularVelocity::Begin()) = measurement_covariance_.block<3, 3>(3, 3);
 
-      initialized_states[core::StateIndex::AngularVelocity::X] = true;
-      initialized_states[core::StateIndex::AngularVelocity::Y] = true;
-      initialized_states[core::StateIndex::AngularVelocity::Z] = true;
-    }
 
     return initialized_states;
   }

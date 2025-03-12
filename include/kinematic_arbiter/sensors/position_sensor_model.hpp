@@ -206,10 +206,11 @@ public:
       double lever_arm_length = trans_b_s.norm();
       double additional_variance = lever_arm_length * lever_arm_length;
 
-      for (int i = 0; i < 3; i++) {
-        covariance(core::StateIndex::Position::Begin() + i,
-                   core::StateIndex::Position::Begin() + i) += additional_variance;
-      }
+      // Use Eigen diagonal matrix addition instead of loops
+      covariance.block<3, 3>(
+          core::StateIndex::Position::Begin(),
+          core::StateIndex::Position::Begin()) +=
+          additional_variance * Eigen::Matrix3d::Identity();
     }
 
     // Mark position states as initialized

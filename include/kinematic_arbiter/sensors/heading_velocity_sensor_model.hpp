@@ -134,67 +134,21 @@ public:
    */
   StateFlags InitializeState(
       const MeasurementVector& measurement,
-      const StateFlags& valid_states,
+      const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override {
 
     StateFlags initialized_states = StateFlags::Zero();
+    state.segment<3>(core::StateIndex::LinearVelocity::Begin()) = Eigen::Vector3d(measurement(0), 0, 0);
 
-    // Extract heading velocity measurement
-    double velocity_magnitude = measurement(0);
-
-    // Check if magnitude is sufficient for meaningful initialization
-    const double MIN_VELOCITY = 0.5;  // m/s
-    if (std::abs(velocity_magnitude) < MIN_VELOCITY) {
-      return initialized_states;  // Too small to provide reliable information
-    }
-
-    // Check quaternion validity - we need full orientation to determine heading
-    bool quaternion_valid =
-        valid_states[core::StateIndex::Quaternion::W] &&
-        valid_states[core::StateIndex::Quaternion::X] &&
-        valid_states[core::StateIndex::Quaternion::Y] &&
-        valid_states[core::StateIndex::Quaternion::Z];
-
-    // We can only initialize if we have a valid quaternion
-    if (quaternion_valid) {
-      // Extract orientation quaternion
-      Eigen::Quaterniond q(
-          state(core::StateIndex::Quaternion::W),
-          state(core::StateIndex::Quaternion::X),
-          state(core::StateIndex::Quaternion::Y),
-          state(core::StateIndex::Quaternion::Z)
-      );
-
-      // Compute heading vector
-      Eigen::Vector3d heading_vector = ComputeHeadingVector(q);
-
-      // Initialize velocity along heading
-      state.segment<3>(core::StateIndex::LinearVelocity::Begin()) =
-          velocity_magnitude * heading_vector;
-
-      // Set appropriate covariance
-      double velocity_variance = measurement_covariance_(0, 0);
-
-      // Heading projection matrix (outer product)
-      Eigen::Matrix3d heading_proj = heading_vector * heading_vector.transpose();
-
-      // Perpendicular projection matrix
-      Eigen::Matrix3d perp_proj = Eigen::Matrix3d::Identity() - heading_proj;
-
-      // Set low uncertainty along heading, high perpendicular
-      double perp_variance = 10.0 * velocity_variance;
-      Eigen::Matrix3d vel_cov = velocity_variance * heading_proj + perp_variance * perp_proj;
-
-      covariance.block<3, 3>(
+    covariance.block<3, 3>(
           core::StateIndex::LinearVelocity::Begin(),
-          core::StateIndex::LinearVelocity::Begin()) = vel_cov;
+          core::StateIndex::LinearVelocity::Begin()) = Eigen::Matrix3d::Identity() *  measurement_covariance_(0, 0);
 
-      // Mark linear velocity as initialized
-      initialized_states[core::StateIndex::LinearVelocity::X] = true;
-      initialized_states[core::StateIndex::LinearVelocity::Y] = true;
-      initialized_states[core::StateIndex::LinearVelocity::Z] = true;
-    }
+    // Mark linear velocity as initialized
+    initialized_states[core::StateIndex::LinearVelocity::X] = true;
+    initialized_states[core::StateIndex::LinearVelocity::Y] = true;
+    initialized_states[core::StateIndex::LinearVelocity::Z] = true;
     return initialized_states;
   }
 

@@ -159,6 +159,15 @@ public:
     return A * reference_covariance_ * A.transpose() + Q;
   }
 
+/**
+   * @brief Set state estimate
+   */
+  void SetStateEstimate(const StateVector& state) {
+    reference_state_ = state;
+    initialized_states_ = StateFlags::Ones();
+  }
+
+
   /**
    * @brief Set state covariance
    */

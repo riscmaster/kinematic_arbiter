@@ -71,10 +71,10 @@ protected:
     MeasurementJacobian C = sensor_model_->GetMeasurementJacobian(default_state_);
 
     // Test position perturbations
-    bool pos_success = TestPositionPerturbations(y0, C, description);
+    bool pos_success = TestPositionPerturbations(y0, C);
 
     // Test quaternion perturbations (only relevant if sensor has offset)
-    bool quat_success = TestQuaternionPerturbations(y0, C, description);
+    bool quat_success = TestQuaternionPerturbations(y0, C);
 
     // Only print detailed diagnostics if any test failed
     if (!pos_success || !quat_success) {
@@ -103,9 +103,9 @@ protected:
   }
 
   // Test position perturbations
-  bool TestPositionPerturbations(const MeasurementVector& y0,
-                               const MeasurementJacobian& C,
-                               const std::string& description) {
+  bool TestPositionPerturbations(const MeasurementVector& expected,
+                                const MeasurementJacobian& jacobian,
+                                const std::string& /* description */ = "") {
     bool all_passed = true;
 
     // Test perturbation in each component
@@ -119,7 +119,7 @@ protected:
       MeasurementVector y1 = sensor_model_->PredictMeasurement(perturbed_state);
 
       // Calculate the actual change in measurement
-      MeasurementVector actual_delta_y = y1 - y0;
+      MeasurementVector actual_delta_y = y1 - expected;
 
       // Calculate the predicted change using the Jacobian
       // Extract only the relevant columns from the Jacobian for the position components
@@ -127,7 +127,7 @@ protected:
       state_delta(i) = delta;
 
       // Use only the position part of the Jacobian
-      Eigen::Matrix3d position_jacobian = C.block<3, 3>(0, StateIndex::Position::X);
+      Eigen::Matrix3d position_jacobian = jacobian.block<3, 3>(0, StateIndex::Position::X);
       Eigen::Vector3d predicted_delta_y = position_jacobian * state_delta;
 
       // Calculate the absolute error
@@ -152,9 +152,9 @@ protected:
   }
 
   // Test quaternion perturbations using proper rotation perturbations
-  bool TestQuaternionPerturbations(const MeasurementVector& y0,
-                                 const MeasurementJacobian& C,
-                                 const std::string& description) {
+  bool TestQuaternionPerturbations(const MeasurementVector& expected,
+                                   const MeasurementJacobian& jacobian,
+                                   const std::string& /* description */ = "") {
     bool all_passed = true;
 
     // Get current quaternion
@@ -193,7 +193,7 @@ protected:
       MeasurementVector y1 = sensor_model_->PredictMeasurement(perturbed_state);
 
       // Calculate the actual change in measurement
-      MeasurementVector actual_delta_y = y1 - y0;
+      MeasurementVector actual_delta_y = y1 - expected;
 
       // Calculate the quaternion delta for Jacobian multiplication
       Eigen::Vector4d quat_delta;
@@ -203,7 +203,7 @@ protected:
                   q_perturbed.z() - q_current.z();
 
       // Use only the quaternion part of the Jacobian
-      Eigen::Matrix<double, 3, 4> quat_jacobian = C.block<3, 4>(0, StateIndex::Quaternion::W);
+      Eigen::Matrix<double, 3, 4> quat_jacobian = jacobian.block<3, 4>(0, StateIndex::Quaternion::W);
       Eigen::Vector3d predicted_delta_y = quat_jacobian * quat_delta;
 
       // Calculate the absolute error
@@ -360,6 +360,176 @@ TEST_F(PositionSensorModelTest, JacobianLinearizationWithBodyRotation) {
 
   SCOPED_TRACE("Testing with rotated body");
   TestJacobianLinearization("rotated body");
+}
+
+// Test initializable states
+TEST_F(PositionSensorModelTest, InitializableStates) {
+  PositionSensorModel model;
+
+  // Get initializable states
+  PositionSensorModel::StateFlags init_flags = model.GetInitializableStates();
+
+  // Verify position states are initializable
+  EXPECT_TRUE(init_flags[StateIndex::Position::X]);
+  EXPECT_TRUE(init_flags[StateIndex::Position::Y]);
+  EXPECT_TRUE(init_flags[StateIndex::Position::Z]);
+
+  // Verify other states are not initializable
+  EXPECT_FALSE(init_flags[StateIndex::Quaternion::W]);
+  EXPECT_FALSE(init_flags[StateIndex::LinearVelocity::X]);
+  EXPECT_FALSE(init_flags[StateIndex::AngularVelocity::X]);
+}
+
+// Test initialization with identity transform (no lever arm)
+TEST_F(PositionSensorModelTest, InitializeWithIdentityTransform) {
+  // Create model with identity transform
+  PositionSensorModel model;
+
+  // Create state, covariance and valid_states
+  StateVector state = StateVector::Zero();
+  PositionSensorModel::StateCovariance covariance = PositionSensorModel::StateCovariance::Zero();
+  PositionSensorModel::StateFlags valid_states = PositionSensorModel::StateFlags::Zero();
+
+  // Create position measurement [5, 6, 7]
+  MeasurementVector measurement;
+  measurement << 5.0, 6.0, 7.0;
+
+  // Initialize state from measurement
+  PositionSensorModel::StateFlags initialized_states = model.InitializeState(
+      measurement, valid_states, state, covariance);
+
+  // Verify position states were initialized
+  EXPECT_TRUE(initialized_states[StateIndex::Position::X]);
+  EXPECT_TRUE(initialized_states[StateIndex::Position::Y]);
+  EXPECT_TRUE(initialized_states[StateIndex::Position::Z]);
+
+  // Verify position values (should directly match measurement)
+  EXPECT_NEAR(state(StateIndex::Position::X), 5.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Y), 6.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Z), 7.0, 1e-6);
+
+  // Verify covariance was set (should be non-zero)
+  EXPECT_GT(covariance(StateIndex::Position::X, StateIndex::Position::X), 0.0);
+  EXPECT_GT(covariance(StateIndex::Position::Y, StateIndex::Position::Y), 0.0);
+  EXPECT_GT(covariance(StateIndex::Position::Z, StateIndex::Position::Z), 0.0);
+}
+
+// Test initialization with lever arm and valid quaternion
+TEST_F(PositionSensorModelTest, InitializeWithLeverArmAndValidQuaternion) {
+  // Create transform with 2m offset in X direction
+  Eigen::Isometry3d sensor_pose = Eigen::Isometry3d::Identity();
+  sensor_pose.translation() = Eigen::Vector3d(2.0, 0.0, 0.0);
+
+  // Create model with offset transform
+  PositionSensorModel model(sensor_pose);
+
+  // Create state, covariance and valid_states
+  StateVector state = StateVector::Zero();
+  PositionSensorModel::StateCovariance covariance = PositionSensorModel::StateCovariance::Zero();
+  PositionSensorModel::StateFlags valid_states = PositionSensorModel::StateFlags::Zero();
+
+  // Set a 90-degree rotation around Z-axis in the state
+  Quaterniond rotation(0.7071, 0.0, 0.0, 0.7071);  // 90° rotation around Z
+  state(StateIndex::Quaternion::W) = rotation.w();
+  state(StateIndex::Quaternion::X) = rotation.x();
+  state(StateIndex::Quaternion::Y) = rotation.y();
+  state(StateIndex::Quaternion::Z) = rotation.z();
+
+  // Mark quaternion as valid in valid_states
+  valid_states[StateIndex::Quaternion::W] = true;
+  valid_states[StateIndex::Quaternion::X] = true;
+  valid_states[StateIndex::Quaternion::Y] = true;
+  valid_states[StateIndex::Quaternion::Z] = true;
+
+  // Create position measurement [10, 5, 3]
+  MeasurementVector measurement;
+  measurement << 10.0, 5.0, 3.0;
+
+  // Initialize state from measurement
+  model.InitializeState(measurement, valid_states, state, covariance);
+
+  // Expected result: With 90° rotation around Z, the 2m X-offset becomes a 2m Y-offset
+  // So body position = [10, 5, 3] - R * [2, 0, 0] = [10, 5, 3] - [0, 2, 0] = [10, 3, 3]
+  // Use a more relaxed tolerance to account for numerical precision
+  EXPECT_NEAR(state(StateIndex::Position::X), 10.0, 1e-4);
+  EXPECT_NEAR(state(StateIndex::Position::Y), 3.0, 1e-4);  // 5.0 - 2.0
+  EXPECT_NEAR(state(StateIndex::Position::Z), 3.0, 1e-4);
+}
+
+// Test initialization with lever arm but invalid quaternion
+TEST_F(PositionSensorModelTest, InitializeWithLeverArmButInvalidQuaternion) {
+  // Create transform with 2m offset in X direction
+  Eigen::Isometry3d sensor_pose = Eigen::Isometry3d::Identity();
+  sensor_pose.translation() = Eigen::Vector3d(2.0, 0.0, 0.0);
+
+  // Create model with offset transform
+  PositionSensorModel model(sensor_pose);
+
+  // Create state, covariance and valid_states
+  StateVector state = StateVector::Zero();
+  PositionSensorModel::StateCovariance covariance = PositionSensorModel::StateCovariance::Identity();
+  PositionSensorModel::StateFlags valid_states = PositionSensorModel::StateFlags::Zero();
+
+  // Set quaternion in state, but don't mark it as valid in valid_states
+  Quaterniond rotation(0.7071, 0.0, 0.0, 0.7071);
+  state(StateIndex::Quaternion::W) = rotation.w();
+  state(StateIndex::Quaternion::X) = rotation.x();
+  state(StateIndex::Quaternion::Y) = rotation.y();
+  state(StateIndex::Quaternion::Z) = rotation.z();
+
+  // Store initial covariance values for comparison
+  double initial_variance = covariance(StateIndex::Position::X, StateIndex::Position::X);
+
+  // Create position measurement [10, 5, 3]
+  MeasurementVector measurement;
+  measurement << 10.0, 5.0, 3.0;
+
+  // Initialize state from measurement
+  model.InitializeState(measurement, valid_states, state, covariance);
+
+  // Without valid quaternion, position should be raw sensor position without lever arm compensation
+  EXPECT_NEAR(state(StateIndex::Position::X), 10.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Y), 5.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Z), 3.0, 1e-6);
+
+  // Covariance should be increased due to lever arm uncertainty
+  // Additional variance is lever_arm_length² = 2.0² = 4.0
+  double expected_variance = initial_variance + 4.0;
+  EXPECT_NEAR(covariance(StateIndex::Position::X, StateIndex::Position::X), expected_variance, 1e-6);
+  EXPECT_NEAR(covariance(StateIndex::Position::Y, StateIndex::Position::Y), expected_variance, 1e-6);
+  EXPECT_NEAR(covariance(StateIndex::Position::Z, StateIndex::Position::Z), expected_variance, 1e-6);
+}
+
+// Test initialization with small lever arm (should be ignored)
+TEST_F(PositionSensorModelTest, InitializeWithSmallLeverArm) {
+  // Create transform with very small offset (should be ignored)
+  Eigen::Isometry3d sensor_pose = Eigen::Isometry3d::Identity();
+  sensor_pose.translation() = Eigen::Vector3d(1e-7, 1e-7, 1e-7);  // Below 1e-6 threshold
+
+  // Create model with tiny offset transform
+  PositionSensorModel model(sensor_pose);
+
+  // Create state, covariance and valid_states
+  StateVector state = StateVector::Zero();
+  PositionSensorModel::StateCovariance covariance = PositionSensorModel::StateCovariance::Identity();
+  PositionSensorModel::StateFlags valid_states = PositionSensorModel::StateFlags::Zero();
+
+  // Create position measurement
+  MeasurementVector measurement;
+  measurement << 10.0, 5.0, 3.0;
+
+  // Initialize state from measurement
+  model.InitializeState(measurement, valid_states, state, covariance);
+
+  // Position should match measurement exactly since lever arm is negligible
+  EXPECT_NEAR(state(StateIndex::Position::X), 10.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Y), 5.0, 1e-6);
+  EXPECT_NEAR(state(StateIndex::Position::Z), 3.0, 1e-6);
+
+  // No additional uncertainty should be added to covariance
+  EXPECT_NEAR(covariance(StateIndex::Position::X, StateIndex::Position::X), 1.0, 1e-6);
+  EXPECT_NEAR(covariance(StateIndex::Position::Y, StateIndex::Position::Y), 1.0, 1e-6);
+  EXPECT_NEAR(covariance(StateIndex::Position::Z, StateIndex::Position::Z), 1.0, 1e-6);
 }
 
 }  // namespace test

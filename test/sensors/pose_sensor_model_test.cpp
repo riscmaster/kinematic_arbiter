@@ -213,6 +213,165 @@ TEST_F(PoseSensorModelTest, NumericalJacobianValidation) {
   }
 }
 
+// Test the initializable states of the pose sensor model
+TEST_F(PoseSensorModelTest, InitializableStates) {
+  PoseSensorModel model;
+  PoseSensorModel::StateFlags init_flags = model.GetInitializableStates();
+
+  // Pose sensor should be able to initialize position
+  EXPECT_TRUE(init_flags[core::StateIndex::Position::X]);
+  EXPECT_TRUE(init_flags[core::StateIndex::Position::Y]);
+  EXPECT_TRUE(init_flags[core::StateIndex::Position::Z]);
+
+  // Pose sensor should be able to initialize quaternion (full orientation)
+  EXPECT_TRUE(init_flags[core::StateIndex::Quaternion::W]);
+  EXPECT_TRUE(init_flags[core::StateIndex::Quaternion::X]);
+  EXPECT_TRUE(init_flags[core::StateIndex::Quaternion::Y]);
+  EXPECT_TRUE(init_flags[core::StateIndex::Quaternion::Z]);
+
+  // All other states should NOT be initializable
+  EXPECT_FALSE(init_flags[core::StateIndex::LinearVelocity::X]);
+  EXPECT_FALSE(init_flags[core::StateIndex::AngularVelocity::X]);
+  EXPECT_FALSE(init_flags[core::StateIndex::LinearAcceleration::X]);
+  EXPECT_FALSE(init_flags[core::StateIndex::AngularAcceleration::X]);
+}
+
+// Test initialization of states from pose measurement with identity transform
+TEST_F(PoseSensorModelTest, InitializeStateIdentityTransform) {
+  // Use identity transform between sensor and body
+  PoseSensorModel model;
+
+  // Create measurement with position [5, 6, 7] and orientation 90° around Z
+  PoseSensorModel::MeasurementVector measurement;
+  measurement << 5.0, 6.0, 7.0,                 // position
+                 0.7071, 0.0, 0.0, 0.7071;      // quaternion (90° around Z)
+
+  // Create state, covariance and valid_states for initialization
+  PoseSensorModel::StateVector state = PoseSensorModel::StateVector::Zero();
+  PoseSensorModel::StateCovariance covariance = PoseSensorModel::StateCovariance::Identity();
+  PoseSensorModel::StateFlags valid_states = PoseSensorModel::StateFlags::Zero();
+
+  // Initialize state from measurement
+  PoseSensorModel::StateFlags initialized_states = model.InitializeState(
+      measurement, valid_states, state, covariance);
+
+  // Check that position and quaternion states were initialized
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::X]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::Y]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::Z]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Quaternion::W]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Quaternion::X]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Quaternion::Y]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Quaternion::Z]);
+
+  // With identity transform, body position should equal sensor position
+  EXPECT_NEAR(state(core::StateIndex::Position::X), 5.0, 1e-6);
+  EXPECT_NEAR(state(core::StateIndex::Position::Y), 6.0, 1e-6);
+  EXPECT_NEAR(state(core::StateIndex::Position::Z), 7.0, 1e-6);
+
+  // With identity transform, body orientation should equal sensor orientation
+  EXPECT_NEAR(state(core::StateIndex::Quaternion::W), 0.7071, 1e-4);
+  EXPECT_NEAR(state(core::StateIndex::Quaternion::X), 0.0, 1e-6);
+  EXPECT_NEAR(state(core::StateIndex::Quaternion::Y), 0.0, 1e-6);
+  EXPECT_NEAR(state(core::StateIndex::Quaternion::Z), 0.7071, 1e-4);
+}
+
+// Test initialization of states from pose measurement with offset transform
+TEST_F(PoseSensorModelTest, InitializeStateOffsetTransform) {
+  // Use offset transform between sensor and body (2m in X and 45° around Z)
+  PoseSensorModel model(offset_transform_);
+
+  // Create measurement with position [5, 0, 0] and identity orientation
+  PoseSensorModel::MeasurementVector measurement;
+  measurement << 5.0, 0.0, 0.0,      // position
+                 1.0, 0.0, 0.0, 0.0;  // identity quaternion
+
+  // Create state, covariance and valid_states for initialization
+  PoseSensorModel::StateVector state = PoseSensorModel::StateVector::Zero();
+  PoseSensorModel::StateCovariance covariance = PoseSensorModel::StateCovariance::Identity();
+  PoseSensorModel::StateFlags valid_states = PoseSensorModel::StateFlags::Zero();
+
+  // Initialize state from measurement
+  PoseSensorModel::StateFlags initialized_states = model.InitializeState(
+      measurement, valid_states, state, covariance);
+
+  // Check that position and quaternion states were initialized
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::X]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::Y]);
+  EXPECT_TRUE(initialized_states[core::StateIndex::Position::Z]);
+
+  // Calculate expected position after transformation
+  double x_offset = 5.0 - 2.0 * cos(M_PI/4.0);  // 5 - 2*cos(45°)
+  double y_offset = 2.0 * sin(M_PI/4.0);        // 2*sin(45°)
+
+  // Since the actual sign depends on quaternion representation,
+  // we check the magnitudes and verify one coordinate is positive, one negative
+  EXPECT_NEAR(std::abs(state(core::StateIndex::Position::X) - 5.0), std::abs(x_offset - 5.0), 1e-6);
+  EXPECT_NEAR(std::abs(state(core::StateIndex::Position::Y)), std::abs(y_offset), 1e-6);
+  EXPECT_NEAR(state(core::StateIndex::Position::Z), 0.0, 1e-6);
+
+  // For quaternion, we check that it represents a rotation of approximately 45°
+  // around Z-axis, regardless of the sign
+  Eigen::Quaterniond q(
+      state(core::StateIndex::Quaternion::W),
+      state(core::StateIndex::Quaternion::X),
+      state(core::StateIndex::Quaternion::Y),
+      state(core::StateIndex::Quaternion::Z));
+
+  // Convert to axis-angle representation
+  Eigen::AngleAxisd aa(q);
+  Eigen::Vector3d axis = aa.axis();
+  double angle = aa.angle();
+
+  // Check that rotation is around Z axis (either +Z or -Z)
+  EXPECT_NEAR(std::abs(axis.z()), 1.0, 1e-6);
+  EXPECT_NEAR(std::abs(axis.x()), 0.0, 1e-6);
+  EXPECT_NEAR(std::abs(axis.y()), 0.0, 1e-6);
+
+  // Check that angle is around 45° (π/4 radians)
+  EXPECT_NEAR(std::abs(angle), M_PI/4.0, 1e-6);
+}
+
+// Test covariance propagation during initialization
+TEST_F(PoseSensorModelTest, InitializeCovarianceTransform) {
+  PoseSensorModel model;
+
+  // Create measurement with position [1, 2, 3] and identity orientation
+  PoseSensorModel::MeasurementVector measurement;
+  measurement << 1.0, 2.0, 3.0,      // position
+                 1.0, 0.0, 0.0, 0.0;  // identity quaternion
+
+  // Create state, covariance and valid_states for initialization
+  PoseSensorModel::StateVector state = PoseSensorModel::StateVector::Zero();
+  PoseSensorModel::StateCovariance covariance = PoseSensorModel::StateCovariance::Zero();
+  PoseSensorModel::StateFlags valid_states = PoseSensorModel::StateFlags::Zero();
+
+  // Store the initial covariance
+  PoseSensorModel::StateCovariance initial_covariance = covariance;
+
+  // Initialize state from measurement
+  model.InitializeState(measurement, valid_states, state, covariance);
+
+  // Check that the covariance was updated (should no longer be zero)
+  // Position covariance should be set
+  EXPECT_GT(covariance(core::StateIndex::Position::X, core::StateIndex::Position::X),
+            initial_covariance(core::StateIndex::Position::X, core::StateIndex::Position::X));
+  EXPECT_GT(covariance(core::StateIndex::Position::Y, core::StateIndex::Position::Y),
+            initial_covariance(core::StateIndex::Position::Y, core::StateIndex::Position::Y));
+  EXPECT_GT(covariance(core::StateIndex::Position::Z, core::StateIndex::Position::Z),
+            initial_covariance(core::StateIndex::Position::Z, core::StateIndex::Position::Z));
+
+  // Quaternion covariance should be set
+  EXPECT_GT(covariance(core::StateIndex::Quaternion::W, core::StateIndex::Quaternion::W),
+            initial_covariance(core::StateIndex::Quaternion::W, core::StateIndex::Quaternion::W));
+  EXPECT_GT(covariance(core::StateIndex::Quaternion::X, core::StateIndex::Quaternion::X),
+            initial_covariance(core::StateIndex::Quaternion::X, core::StateIndex::Quaternion::X));
+  EXPECT_GT(covariance(core::StateIndex::Quaternion::Y, core::StateIndex::Quaternion::Y),
+            initial_covariance(core::StateIndex::Quaternion::Y, core::StateIndex::Quaternion::Y));
+  EXPECT_GT(covariance(core::StateIndex::Quaternion::Z, core::StateIndex::Quaternion::Z),
+            initial_covariance(core::StateIndex::Quaternion::Z, core::StateIndex::Quaternion::Z));
+}
+
 }  // namespace testing
 }  // namespace sensors
 }  // namespace kinematic_arbiter

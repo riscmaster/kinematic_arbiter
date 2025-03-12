@@ -29,7 +29,7 @@ double CalculateChiSquareCriticalValueNDof(size_t dof_index,
     throw std::invalid_argument("Unsupported degrees of freedom: " +
                                std::to_string(dof_index) +
                                ". Maximum supported DoF is " +
-                               std::to_string(kMaxChiSquareDof - 1));
+                               std::to_string(kMaxChiSquareDof));
   }
   if (confidence_level <
       kChiSquareCriticalValues[dof_index].front().confidence) {

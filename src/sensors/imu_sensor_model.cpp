@@ -257,7 +257,7 @@ typename ImuSensorModel::StateFlags ImuSensorModel::GetInitializableStates() con
  */
 typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
     const MeasurementVector& measurement,
-    const StateFlags& valid_states,
+    const StateFlags& ,
     StateVector& state,
     StateCovariance& covariance) const {
 
@@ -285,122 +285,120 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
 
   // Set angular velocity covariance
   Eigen::Matrix3d gyro_cov = measurement_covariance_.block<3, 3>(0, 0);
+  Eigen::Matrix3d omega_body_cov = R_SB * gyro_cov * R_SB.transpose();
   covariance.block<3, 3>(
       StateIndex::AngularVelocity::Begin(),
-      StateIndex::AngularVelocity::Begin()) = R_SB * gyro_cov * R_SB.transpose();
+      StateIndex::AngularVelocity::Begin()) = omega_body_cov;
 
   // Mark angular velocity as initialized
   initialized_states[StateIndex::AngularVelocity::X] = true;
   initialized_states[StateIndex::AngularVelocity::Y] = true;
   initialized_states[StateIndex::AngularVelocity::Z] = true;
 
-  // Use the existing IsStationary function instead of duplicating logic
+  // Calculate accelerometer covariance in body frame
+  Eigen::Matrix3d accel_cov = measurement_covariance_.block<3, 3>(3, 3);
+  Eigen::Matrix3d accel_body_cov = R_SB * accel_cov * R_SB.transpose();
+
+  // Check if IMU is stationary for orientation initialization
   bool is_stationary = IsStationary(state, covariance, measurement);
 
-  // Only initialize orientation if stationary
+  // Always extract current yaw regardless of validity
+  // Extract current quaternion
+  Eigen::Quaterniond current_q(
+      state(StateIndex::Quaternion::W),
+      state(StateIndex::Quaternion::X),
+      state(StateIndex::Quaternion::Y),
+      state(StateIndex::Quaternion::Z)
+  );
+  current_q.normalize();
+
+  // Convert to rotation matrix and extract yaw
+  Eigen::Matrix3d rot_matrix = current_q.toRotationMatrix();
+  double current_yaw = std::atan2(rot_matrix(1, 0), rot_matrix(0, 0));
+
   if (is_stationary) {
-    // Estimate gravity direction in body frame (normalized)
-    Eigen::Vector3d g_body = -accel_body.normalized();
+    // Calculate roll from accelerometer when stationary
+    double ay = accel_body(1);
+    double az = accel_body(2);
+    double roll = std::atan2(ay, az);
 
-    // Create quaternion from gravity direction
-    Eigen::Vector3d z_world(0, 0, 1);  // Up direction in world frame
-    Eigen::Quaterniond q_gravity = Eigen::Quaterniond::FromTwoVectors(g_body, z_world);
-    q_gravity.normalize();  // Explicitly normalize
+    // Propagate uncertainty for roll
+    double d_roll_d_ay = std::abs(az / (ay*ay + az*az));
+    double d_roll_d_az = std::abs(-ay / (ay*ay + az*az));
+    Eigen::Vector2d d_roll_d_ayz;
+    d_roll_d_ayz << d_roll_d_ay, d_roll_d_az;
+    double roll_var = d_roll_d_ayz.transpose() *
+                     accel_body_cov.block<2,2>(1,1) *
+                     d_roll_d_ayz;
 
-    // If we already have valid yaw, preserve it
-    bool yaw_valid = valid_states[StateIndex::Quaternion::Z];
-    if (yaw_valid) {
-      // Extract current quaternion
-      Eigen::Quaterniond current_q(
-          state(StateIndex::Quaternion::W),
-          state(StateIndex::Quaternion::X),
-          state(StateIndex::Quaternion::Y),
-          state(StateIndex::Quaternion::Z)
-      );
-      current_q.normalize();  // Explicitly normalize
+    // Calculate pitch from accelerometer when stationary
+    double ax = accel_body(0);
+    double gravity = 9.80665; // Standard gravity in m/s^2
+    double pitch = std::asin(-ax / gravity);
 
-      // Convert to rotation matrix and extract yaw
-      Eigen::Matrix3d rot_matrix = current_q.toRotationMatrix();
-      double yaw = std::atan2(rot_matrix(1, 0), rot_matrix(0, 0));
+    // Propagate uncertainty for pitch
+    double d_pitch_d_ax = std::abs(1.0 / (gravity * std::sqrt(1.0 - (ax*ax)/(gravity*gravity))));
+    double pitch_var = d_pitch_d_ax * accel_body_cov(0,0) * d_pitch_d_ax;
 
-      // Create rotation with gravity-derived roll/pitch and preserved yaw
-      Eigen::Matrix3d gravity_rot = q_gravity.toRotationMatrix();
-      Eigen::Matrix3d yaw_rot = Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ()).toRotationMatrix();
+    // Create rotation matrix from roll, pitch, and yaw
+    Eigen::Matrix3d roll_rot = Eigen::AngleAxisd(roll, Eigen::Vector3d::UnitX()).toRotationMatrix();
+    Eigen::Matrix3d pitch_rot = Eigen::AngleAxisd(pitch, Eigen::Vector3d::UnitY()).toRotationMatrix();
+    Eigen::Matrix3d yaw_rot = Eigen::AngleAxisd(current_yaw, Eigen::Vector3d::UnitZ()).toRotationMatrix();
 
-      // Apply yaw rotation to gravity-derived orientation
-      Eigen::Matrix3d combined_rot = gravity_rot * yaw_rot;
-      Eigen::Quaterniond combined_q(combined_rot);
-      combined_q.normalize();  // Explicitly normalize
+    // Combine rotations in XYZ order (roll-pitch-yaw)
+    rot_matrix = roll_rot * pitch_rot * yaw_rot;
+    // Convert to quaternion
+    Eigen::Quaterniond q(rot_matrix);
+    q.normalize();
 
-      // Update state with combined quaternion
-      state(StateIndex::Quaternion::W) = combined_q.w();
-      state(StateIndex::Quaternion::X) = combined_q.x();
-      state(StateIndex::Quaternion::Y) = combined_q.y();
-      state(StateIndex::Quaternion::Z) = combined_q.z();
-    } else {
-      // No valid yaw, just use gravity-derived orientation
-      state(StateIndex::Quaternion::W) = q_gravity.w();
-      state(StateIndex::Quaternion::X) = q_gravity.x();
-      state(StateIndex::Quaternion::Y) = q_gravity.y();
-      state(StateIndex::Quaternion::Z) = q_gravity.z();
-    }
+    // Update state with quaternion
+    state(StateIndex::Quaternion::W) = q.w();
+    state(StateIndex::Quaternion::X) = q.x();
+    state(StateIndex::Quaternion::Y) = q.y();
+    state(StateIndex::Quaternion::Z) = q.z();
 
-    // Set appropriate covariance for quaternion
-    // Lower uncertainty for roll/pitch, high for yaw
-    double roll_pitch_variance = 0.01;  // rad^2
-    double yaw_variance = M_PI * M_PI;  // Very high uncertainty for yaw
+    // Set appropriate covariance for quaternion components
+    double roll_pitch_variance = std::max(roll_var, pitch_var);
 
-    // Simplified diagonal covariance for quaternion
-    for (int i = 0; i < 3; i++) {
-      covariance(StateIndex::Quaternion::Begin() + i,
-                StateIndex::Quaternion::Begin() + i) = roll_pitch_variance;
-    }
-    covariance(StateIndex::Quaternion::Begin() + 3,
-              StateIndex::Quaternion::Begin() + 3) = yaw_variance;
+    // Create a mask matrix for yaw-related components (W and Z)
+    Eigen::Matrix4d yaw_mask = Eigen::Matrix4d::Zero();
+    yaw_mask(0, 0) = 1.0; // W component
+    yaw_mask(3, 3) = 1.0; // Z component
 
-    // Mark quaternion components as initialized
+    // Create a mask for roll/pitch components (W, X, Y)
+    Eigen::Matrix4d roll_pitch_mask = Eigen::Matrix4d::Identity() - yaw_mask;
+
+    // Combine the covariances:
+    // - For roll/pitch components: use the newly calculated variance
+    // - For yaw components: preserve the original covariance magnitude
+    covariance.block<4, 4>(StateIndex::Quaternion::Begin(), StateIndex::Quaternion::Begin()) =
+        (roll_pitch_mask * roll_pitch_variance) +
+        (yaw_mask * covariance.block<4, 4>(StateIndex::Quaternion::Begin(), StateIndex::Quaternion::Begin()).norm());
+
+    // Mark roll and pitch as initialized (quaternion components)
     initialized_states[StateIndex::Quaternion::W] = true;
     initialized_states[StateIndex::Quaternion::X] = true;
     initialized_states[StateIndex::Quaternion::Y] = true;
 
-    // Don't mark Z (yaw) as initialized unless we preserved it from a valid state
-    if (yaw_valid) {
-      initialized_states[StateIndex::Quaternion::Z] = true;
-    }
-
     // When stationary, linear acceleration should be zero in inertial frame
+    // and angular acceleration should be zero
     state.segment<3>(StateIndex::LinearAcceleration::Begin()).setZero();
-
-    // Set covariance for linear acceleration
-    Eigen::Matrix3d accel_cov = measurement_covariance_.block<3, 3>(3, 3);
-    Eigen::Matrix3d lin_accel_cov = R_SB * accel_cov * R_SB.transpose();
-
-    covariance.block<3, 3>(
-        StateIndex::LinearAcceleration::Begin(),
-        StateIndex::LinearAcceleration::Begin()) = lin_accel_cov;
-
-    // Mark linear acceleration as initialized
-    initialized_states[StateIndex::LinearAcceleration::X] = true;
-    initialized_states[StateIndex::LinearAcceleration::Y] = true;
-    initialized_states[StateIndex::LinearAcceleration::Z] = true;
-
-    // When stationary, set angular acceleration to zero
     state.segment<3>(StateIndex::AngularAcceleration::Begin()).setZero();
 
-    // Set small covariance for angular acceleration
-    double ang_accel_variance = 0.01;  // (rad/s^2)^2
-    for (int i = 0; i < 3; i++) {
-      covariance(StateIndex::AngularAcceleration::Begin() + i,
-                StateIndex::AngularAcceleration::Begin() + i) = ang_accel_variance;
-    }
+    // Set covariance for linear and angular acceleration
+    covariance.block<3, 3>(
+        StateIndex::LinearAcceleration::Begin(),
+        StateIndex::LinearAcceleration::Begin()) = accel_body_cov;
 
-    // Mark angular acceleration as initialized
-    initialized_states[StateIndex::AngularAcceleration::X] = true;
-    initialized_states[StateIndex::AngularAcceleration::Y] = true;
-    initialized_states[StateIndex::AngularAcceleration::Z] = true;
-  } else {
-    // For non-stationary case, only initialize angular velocity
-    // Don't attempt to initialize quaternion or linear acceleration yet
+    covariance.block<3, 3>(
+        StateIndex::AngularAcceleration::Begin(),
+        StateIndex::AngularAcceleration::Begin()) = omega_body_cov;
+
+    // Mark linear and angular acceleration as initialized
+    for (int i = 0; i < 3; i++) {
+      initialized_states[StateIndex::LinearAcceleration::Begin() + i] = true;
+      initialized_states[StateIndex::AngularAcceleration::Begin() + i] = true;
+    }
   }
 
   return initialized_states;

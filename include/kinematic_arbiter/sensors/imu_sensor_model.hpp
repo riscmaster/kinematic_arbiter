@@ -155,7 +155,7 @@ public:
    */
   StateFlags InitializeState(
       const MeasurementVector& measurement,
-      const StateFlags& valid_states,
+      const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override;
 

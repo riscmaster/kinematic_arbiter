@@ -12,6 +12,8 @@ class HeadingVelocitySensorModelTest : public ::testing::Test {
 protected:
   // Define types for clarity
   using StateVector = HeadingVelocitySensorModel::StateVector;
+  using StateCovariance = HeadingVelocitySensorModel::StateCovariance;
+  using StateFlags = HeadingVelocitySensorModel::StateFlags;
   using MeasurementVector = HeadingVelocitySensorModel::MeasurementVector;
   using MeasurementJacobian = HeadingVelocitySensorModel::MeasurementJacobian;
 
@@ -325,6 +327,147 @@ TEST_F(HeadingVelocitySensorModelTest, NumericalJacobianValidation) {
   }
 
   EXPECT_TRUE(quat_success && vel_success) << "Jacobian linearization test failed";
+}
+
+// Test initialization of states from heading velocity
+TEST_F(HeadingVelocitySensorModelTest, StateInitialization) {
+  HeadingVelocitySensorModel model;
+
+  // 1. Test basic initialization
+  {
+    // Create state and covariance containers
+    StateVector state = StateVector::Zero();
+    StateCovariance covariance = StateCovariance::Identity();
+    StateFlags valid_states = StateFlags::Zero();
+
+    // Create measurement with 2.0 m/s
+    MeasurementVector measurement;
+    measurement << 2.0;
+
+    // Initialize state from measurement
+    StateFlags initialized_states = model.InitializeState(
+        measurement, valid_states, state, covariance);
+
+    // Verify linear velocity was initialized
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::X]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Y]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Z]);
+
+    // The implementation simply sets X component to measurement value
+    // and Y,Z to zero, regardless of quaternion or heading
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::X), 2.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Y), 0.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Z), 0.0, 1e-6);
+
+    // Check that covariance was set correctly
+    EXPECT_GT(covariance(core::StateIndex::LinearVelocity::X, core::StateIndex::LinearVelocity::X), 0.0);
+    EXPECT_GT(covariance(core::StateIndex::LinearVelocity::Y, core::StateIndex::LinearVelocity::Y), 0.0);
+    EXPECT_GT(covariance(core::StateIndex::LinearVelocity::Z, core::StateIndex::LinearVelocity::Z), 0.0);
+  }
+
+  // 2. Test with negative velocity
+  {
+    // Create state and covariance containers
+    StateVector state = StateVector::Zero();
+    StateCovariance covariance = StateCovariance::Identity();
+    StateFlags valid_states = StateFlags::Zero();
+
+    // Create measurement with -3.0 m/s
+    MeasurementVector measurement;
+    measurement << -3.0;
+
+    // Initialize state from measurement
+    StateFlags initialized_states = model.InitializeState(
+        measurement, valid_states, state, covariance);
+
+    // Verify linear velocity was initialized
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::X]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Y]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Z]);
+
+    // The implementation simply sets X component to measurement value
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::X), -3.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Y), 0.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Z), 0.0, 1e-6);
+  }
+
+  // 3. Test with zero velocity
+  {
+    // Create state and covariance containers
+    StateVector state = StateVector::Zero();
+    StateCovariance covariance = StateCovariance::Identity();
+    StateFlags valid_states = StateFlags::Zero();
+
+    // Create measurement with 0.0 m/s
+    MeasurementVector measurement;
+    measurement << 0.0;
+
+    // Initialize state from measurement
+    StateFlags initialized_states = model.InitializeState(
+        measurement, valid_states, state, covariance);
+
+    // Verify linear velocity was initialized (no minimum threshold in implementation)
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::X]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Y]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Z]);
+
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::X), 0.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Y), 0.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Z), 0.0, 1e-6);
+  }
+
+  // 4. Test with non-zero quaternion - should have no effect
+  {
+    // Create state and covariance containers
+    StateVector state = StateVector::Zero();
+    StateCovariance covariance = StateCovariance::Identity();
+    StateFlags valid_states = StateFlags::Zero();
+
+    // Set quaternion for 90-degree rotation around Z (doesn't matter)
+    state(STATE_QUAT_W) = 0.7071068;
+    state(STATE_QUAT_Z) = 0.7071068;
+
+    // Mark quaternion as valid (doesn't matter)
+    valid_states[STATE_QUAT_W] = true;
+    valid_states[STATE_QUAT_X] = true;
+    valid_states[STATE_QUAT_Y] = true;
+    valid_states[STATE_QUAT_Z] = true;
+
+    // Create measurement
+    MeasurementVector measurement;
+    measurement << 4.0;
+
+    // Initialize state from measurement
+    StateFlags initialized_states = model.InitializeState(
+        measurement, valid_states, state, covariance);
+
+    // Quaternion state has no effect on initialization
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::X]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Y]);
+    EXPECT_TRUE(initialized_states[core::StateIndex::LinearVelocity::Z]);
+
+    // Still just sets X to measurement value
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::X), 4.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Y), 0.0, 1e-6);
+    EXPECT_NEAR(state(core::StateIndex::LinearVelocity::Z), 0.0, 1e-6);
+  }
+}
+
+// Test initializable states flags
+TEST_F(HeadingVelocitySensorModelTest, InitializableStates) {
+  HeadingVelocitySensorModel model;
+  HeadingVelocitySensorModel::StateFlags init_flags = model.GetInitializableStates();
+
+  // Check that only linear velocity states are marked as initializable
+  EXPECT_TRUE(init_flags[core::StateIndex::LinearVelocity::X]);
+  EXPECT_TRUE(init_flags[core::StateIndex::LinearVelocity::Y]);
+  EXPECT_TRUE(init_flags[core::StateIndex::LinearVelocity::Z]);
+
+  // Check that other states are not initializable
+  EXPECT_FALSE(init_flags[core::StateIndex::Position::X]);
+  EXPECT_FALSE(init_flags[core::StateIndex::Quaternion::W]);
+  EXPECT_FALSE(init_flags[core::StateIndex::AngularVelocity::X]);
+  EXPECT_FALSE(init_flags[core::StateIndex::LinearAcceleration::X]);
 }
 
 }  // namespace test

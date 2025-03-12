@@ -77,6 +77,11 @@ add_test_executable(imu_bias_estimator_test
   ${CMAKE_SOURCE_DIR}/src/sensors/imu_bias_estimator.cpp
 )
 
+add_test_executable(imu_sensor_model_test
+  ${CMAKE_SOURCE_DIR}/test/sensors/imu_sensor_model_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
+)
+
 add_test_executable(imu_sensor_jacobian_test
   ${CMAKE_SOURCE_DIR}/test/sensors/imu_sensor_jacobian_test.cpp
   ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
@@ -101,6 +106,7 @@ set_tests_properties(
   imu_sensor_jacobian_test
   imu_sensor_mounting_test
   imu_stationary_test
+  imu_sensor_model_test
   PROPERTIES LABELS "sensors"
 )
 
