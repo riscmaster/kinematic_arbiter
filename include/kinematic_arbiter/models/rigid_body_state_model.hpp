@@ -52,6 +52,10 @@ public:
   StateVector PredictState(const StateVector& current_state, double time_step) const override {
     StateVector new_states = current_state;
 
+    if (fabs(time_step) <= std::numeric_limits<double>::epsilon()) {
+      return new_states;
+    }
+
     // Extract quaternion and normalize
     Eigen::Quaterniond orientation(
       current_state[SIdx::Quaternion::W],
@@ -125,6 +129,10 @@ public:
    * @return State transition matrix A_k
    */
   StateMatrix GetTransitionMatrix(const StateVector& current_state, double time_step) const override {
+    if (fabs(time_step) <= std::numeric_limits<double>::epsilon()) {
+      return StateMatrix::Identity();
+    }
+
     StateMatrix jacobian = StateMatrix::Zero();
 
     // Extract quaternion and normalize

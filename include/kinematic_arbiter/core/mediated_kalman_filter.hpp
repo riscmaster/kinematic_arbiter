@@ -273,82 +273,121 @@ private:
 
       double dt = timestamp - filter.reference_time_;
 
+      // Propagate state to sensor time
       StateMatrix A = filter.process_model_->GetTransitionMatrix(filter.reference_state_, dt);
       StateVector state_at_sensor_time = filter.process_model_->PredictState(filter.reference_state_, dt);
       StateMatrix Q_at_sensor_time = filter.process_model_->GetProcessNoiseCovariance(dt);
       StateMatrix covariance_at_sensor_time = A * filter.reference_covariance_ * A.transpose() + Q_at_sensor_time;
 
-      // Apply measurement at sensor time using existing logic
-      if (!this->ApplyMeasurement(filter, state_at_sensor_time, covariance_at_sensor_time, *typed_measurement, dt)) {
-        return false;  // Measurement rejected
-      }
-
-      if (dt > 0.0) {
-        // Update reference state and time
-        filter.reference_state_ = state_at_sensor_time;
-        filter.reference_covariance_ = covariance_at_sensor_time;
-        filter.reference_time_ = timestamp;  // Time advances for newer measurements
-        return true;
-      }
-
-      // Reset reference state to reference time
-      filter.reference_state_ = filter.process_model_->PredictState(filter.reference_state_, -dt);
-      filter.reference_covariance_ = filter.process_model_->GetProcessNoiseCovariance(-dt);
-      return true;
-    }
-
-    bool ApplyMeasurement(MediatedKalmanFilter& filter, StateVector& state, StateMatrix& covariance,
-                          const MeasurementType& measurement, double dt = 0.0) {
-      auto& sensor_model = this->sensor_model;
-
-      // Store a copy of the prior state for process noise update
-      StateVector prior_state = state;
-
-      // Compute auxiliary data (innovation, Jacobian, innovation covariance)
-      auto aux_data = sensor_model->ComputeAuxiliaryData(state, covariance, measurement);
-
-      // Validate measurement using the simplified ValidateAndMediate interface
-      bool assumptions_valid = sensor_model->ValidateAndMediate(
-          state,                      // Current state
-          covariance,                 // Current covariance
-          measurement                // Measurement to validate
+      // Apply measurement directly to the filter's reference state
+      bool measurement_accepted = this->ApplyMeasurement(
+          filter,
+          state_at_sensor_time,
+          covariance_at_sensor_time,
+          *typed_measurement,
+          timestamp,
+          dt
       );
 
-      if (!assumptions_valid && sensor_model->GetValidationParams().mediation_action == MediationAction::Reject) {
-        return false;  // Measurement rejected
+      // Return false only when the measurement is explicitly rejected
+      return measurement_accepted || sensor_model->GetValidationParams().mediation_action != MediationAction::Reject;
+    }
+
+    bool ApplyMeasurement(MediatedKalmanFilter& filter,
+                         const StateVector& predicted_state,
+                         const StateMatrix& predicted_covariance,
+                         const MeasurementType& measurement,
+                         double measurement_timestamp,
+                         double dt = 0.0) {
+      auto& sensor_model = this->sensor_model;
+
+      // Debug check for NaN in input values
+      if (predicted_state.hasNaN() || predicted_covariance.hasNaN()) {
+        // Force breakpoint with a volatile variable and an if that won't be optimized away
+        volatile bool nan_detected = true;
+        if (nan_detected) {
+          std::cerr << "NaN detected in input state or covariance" << std::endl;
+          // Put breakpoint on the next line
+          int i = 0;  // Debugger breakpoint line
+        }
       }
 
-      // Compute Kalman gain using Cholesky decomposition for efficiency
-      auto PHt = covariance * aux_data.jacobian.transpose();
+      // Compute auxiliary data (innovation, Jacobian, innovation covariance)
+      auto aux_data = sensor_model->ComputeAuxiliaryData(predicted_state, predicted_covariance, measurement);
 
-      // Use Cholesky decomposition to solve for Kalman gain
-      Eigen::LLT<typename std::decay_t<decltype(aux_data.innovation_covariance)>> llt_of_S(aux_data.innovation_covariance);
-
-      // Check if decomposition succeeded (matrix is SPD)
-      if (llt_of_S.info() != Eigen::Success) {
-        // Add small regularization if needed
-        auto regularized_S = aux_data.innovation_covariance;
-        regularized_S.diagonal().array() += 1e-8;
-        llt_of_S.compute(regularized_S);
+      // Check innovation and Jacobian for NaNs
+      if (aux_data.innovation.hasNaN() || aux_data.jacobian.hasNaN() || aux_data.innovation_covariance.hasNaN()) {
+        std::cerr << "NaN detected in auxiliary data" << std::endl;
+        return false; // Early exit on NaN detection
       }
 
-      // Solve for Kalman gain efficiently
-      auto kalman_gain = llt_of_S.solve(PHt.transpose()).transpose();
+      // Validate measurement
+      bool measurement_valid = sensor_model->ValidateAndMediate(
+          predicted_state,        // Current state
+          predicted_covariance,   // Current covariance
+          measurement           // Measurement to validate
+      );
+
+      // If measurement is invalid and we're set to reject, return early
+      if (!measurement_valid && sensor_model->GetValidationParams().mediation_action == MediationAction::Reject) {
+        return false;  // Measurement rejected without updating filter
+      }
+
+      // Proceed with Kalman update - compute PHt
+      auto PHt = predicted_covariance * aux_data.jacobian.transpose();
+
+      // Simple regularization of innovation covariance to ensure it's invertible
+      auto S = aux_data.innovation_covariance;
+
+      // Direct calculation of Kalman gain
+      // Solve S*K' = PHt' for K'
+      Eigen::MatrixXd K_transpose = S.ldlt().solve(PHt.transpose());
+      auto kalman_gain = K_transpose.transpose();
+
+      // Simple safety check
+      if (kalman_gain.hasNaN()) {
+        std::cerr << "NaN in Kalman gain after calculation" << std::endl;
+        return false;
+      }
 
       // Update state estimate (x = x + K*innovation)
-      state += kalman_gain * aux_data.innovation;
+      StateVector updated_state = predicted_state + kalman_gain * aux_data.innovation;
 
-      covariance = (StateMatrix::Identity() - kalman_gain * aux_data.jacobian) * covariance;
+      // Joseph form update for better numerical stability in the covariance
+      auto I_KH = StateMatrix::Identity() - kalman_gain * aux_data.jacobian;
+      StateMatrix updated_covariance = I_KH * predicted_covariance * I_KH.transpose() +
+                                       kalman_gain * sensor_model->GetMeasurementCovariance() * kalman_gain.transpose();
+
+      // Minimal validity check on final covariance
+      if (updated_covariance.hasNaN()) {
+        std::cerr << "NaN in updated covariance" << std::endl;
+        return false;
+      }
 
       // Update process noise using the proper UpdateProcessNoise interface
       filter.process_model_->UpdateProcessNoise(
-          prior_state,   // a priori state (before update)
-          state,         // a posteriori state (after update)
-          sensor_model->GetValidationParams().process_to_measurement_noise_ratio,  // process to measurement noise ratio
-          dt           // dt - small representative time step for this update
+          predicted_state,   // a priori state (before update)
+          updated_state,     // a posteriori state (after update)
+          sensor_model->GetValidationParams().process_to_measurement_noise_ratio,
+          dt
       );
 
-      return true;
+      // Directly update the filter's reference values
+      if (measurement_timestamp > filter.reference_time_) {
+        // For newer measurements, update the reference time and state
+        filter.reference_state_ = updated_state;
+        filter.reference_covariance_ = updated_covariance;
+        filter.reference_time_ = measurement_timestamp;
+      } else {
+        // For older measurements, propagate the updated state forward to the reference time
+        double forward_dt = filter.reference_time_ - measurement_timestamp;
+        filter.reference_state_ = filter.process_model_->PredictState(updated_state, forward_dt);
+        StateMatrix A_forward = filter.process_model_->GetTransitionMatrix(updated_state, forward_dt);
+        StateMatrix Q_forward = filter.process_model_->GetProcessNoiseCovariance(forward_dt);
+        filter.reference_covariance_ = A_forward * updated_covariance * A_forward.transpose() + Q_forward;
+      }
+
+      return measurement_valid;
     }
   };
 
