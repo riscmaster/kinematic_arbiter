@@ -55,9 +55,8 @@ struct Measurement {
  *
  * @tparam StateSize Dimension of state vector
  * @tparam ProcessModel Type implementing StateModelInterface
- * @tparam SensorModels Types implementing MeasurementModelInterface
  */
-template<int StateSize, typename ProcessModel, typename... SensorModels>
+template<int StateSize, typename ProcessModel>
 class MediatedKalmanFilter {
 public:
   // Type aliases
@@ -66,69 +65,74 @@ public:
   using StateFlags = Eigen::Array<bool, StateSize, 1>;
 
   /**
-   * @brief Constructor with process and measurement models
+   * @brief Constructor with just process model
    */
-  MediatedKalmanFilter(std::shared_ptr<ProcessModel> process_model,
-                      std::shared_ptr<SensorModels>... sensor_models)
+  explicit MediatedKalmanFilter(std::shared_ptr<ProcessModel> process_model)
     : process_model_(process_model),
-      sensor_models_(std::make_tuple(sensor_models...)),
       reference_time_(0.0),
-      max_delay_window_(10.0) {}
+      max_delay_window_(10.0),
+      initialized_states_(StateFlags::Zero()),
+      reference_state_(StateVector::Zero()),
+      reference_covariance_(StateMatrix::Identity()) {}
 
   /**
-   * @brief Process measurement from specified sensor
+   * @brief Add a new sensor model
+   *
+   * @tparam SensorModelType Type of sensor model implementing MeasurementModelInterface
+   * @param sensor_model Shared pointer to the sensor model
+   * @return size_t Index of the newly added sensor
    */
-  template<size_t SensorIndex, typename MeasurementType>
-  bool ProcessMeasurement(double timestamp, const MeasurementType& measurement) {
-    auto sensor_model = std::get<SensorIndex>(sensor_models_);
+  template<typename SensorModelType>
+  size_t AddSensor(std::shared_ptr<SensorModelType> sensor_model) {
+    size_t sensor_index = sensors_.size();
 
-    // Try to initialize any states this sensor can provide
-    StateFlags initializable = sensor_model->GetInitializableStates();
+    // Create a wrapper that stores both the sensor model and its type
+    auto wrapper = std::make_shared<SensorWrapper<SensorModelType>>(sensor_model);
+    sensors_.push_back(wrapper);
 
-    // Create "not initialized" mask using select (avoids bitwise NOT)
-    StateFlags not_initialized = initialized_states_.select(StateFlags::Zero(), StateFlags::Ones());
+    return sensor_index;
+  }
 
-    // Use cwiseProduct for element-wise AND (states that can be initialized and aren't yet)
-    StateFlags uninit_states = initializable.cwiseProduct(not_initialized);
-
-    // Only attempt initialization for states we haven't initialized yet
-    if (uninit_states.any()) {
-      StateFlags new_states = sensor_model->InitializeState(
-          measurement, initialized_states_, reference_state_, reference_covariance_);
-
-      // Use cwiseMax for element-wise OR (states that were initialized before OR are newly initialized)
-      initialized_states_ = initialized_states_.cwiseMax(new_states);
+  /**
+   * @brief Process measurement for a sensor by index
+   *
+   * @tparam MeasurementType Type of measurement
+   * @param sensor_index Index of the sensor to use
+   * @param timestamp Measurement timestamp
+   * @param measurement Measurement data
+   * @return true if measurement was processed successfully
+   */
+  template<typename MeasurementType>
+  bool ProcessMeasurementByIndex(size_t sensor_index, double timestamp, const MeasurementType& measurement) {
+    if (sensor_index >= sensors_.size()) {
+      return false; // Invalid sensor index
     }
 
-    // Reject too-old measurements
-    if (timestamp < reference_time_ - max_delay_window_) {
-      return false;
+    auto& sensor_wrapper = sensors_[sensor_index];
+    return sensor_wrapper->ProcessMeasurement(*this, timestamp, measurement);
+  }
+
+  /**
+   * @brief Get sensor model by index
+   *
+   * @tparam SensorModelType Expected type of the sensor model
+   * @param sensor_index Index of the sensor
+   * @return std::shared_ptr<SensorModelType> The sensor model or nullptr if types don't match
+   */
+  template<typename SensorModelType>
+  std::shared_ptr<SensorModelType> GetSensorByIndex(size_t sensor_index) const {
+    if (sensor_index >= sensors_.size()) {
+      return nullptr;
     }
 
-    double dt = timestamp - reference_time_;
+    auto& wrapper = sensors_[sensor_index];
+    auto* typed_wrapper = dynamic_cast<SensorWrapper<SensorModelType>*>(wrapper.get());
 
-    StateMatrix A = process_model_->GetTransitionMatrix(reference_state_, dt);
-    StateVector state_at_sensor_time = process_model_->PredictState(reference_state_, dt);
-    StateMatrix Q_at_sensor_time = process_model_->GetProcessNoiseCovariance(dt);
-    StateMatrix covariance_at_sensor_time = A * reference_covariance_ * A.transpose() + Q_at_sensor_time;
-
-    // Apply measurement at sensor time
-    if (!applyMeasurement<SensorIndex>(state_at_sensor_time, covariance_at_sensor_time, measurement, dt)) {
-      return false;  // Measurement rejected
+    if (!typed_wrapper) {
+      return nullptr;
     }
 
-    if (dt > 0.0) {
-      // Update reference state and time
-      reference_state_ = state_at_sensor_time;
-      reference_covariance_ = covariance_at_sensor_time;
-      reference_time_ = timestamp;  // Time advances for newer measurements
-      return true;
-    }
-
-    // Reset reference state to reference time
-    reference_state_ = process_model_->PredictState(reference_state_, -dt);
-    reference_covariance_ = process_model_->GetProcessNoiseCovariance(-dt);
-    return true;
+    return typed_wrapper->sensor_model;
   }
 
   /**
@@ -159,14 +163,13 @@ public:
     return A * reference_covariance_ * A.transpose() + Q;
   }
 
-/**
+  /**
    * @brief Set state estimate
    */
   void SetStateEstimate(const StateVector& state) {
     reference_state_ = state;
     initialized_states_ = StateFlags::Ones();
   }
-
 
   /**
    * @brief Set state covariance
@@ -195,76 +198,173 @@ public:
   // Update IsInitialized to check if any states are initialized
   bool IsInitialized() const { return initialized_states_.any(); }
 
-private:
   /**
-   * @brief Apply measurement update at a given state
+   * @brief Predict and update reference state to a new timestamp (for dead reckoning)
+   *
+   * This method explicitly advances the filter's reference state and covariance
+   * using only the process model prediction, without incorporating any measurements.
+   *
+   * @param timestamp The new reference timestamp
+   * @return true if prediction was successful
    */
-  template<size_t SensorIndex, typename MeasurementType>
-  bool applyMeasurement(StateVector& state, StateMatrix& covariance, const MeasurementType& measurement, double dt = 0.0) {
-    auto sensor_model = std::get<SensorIndex>(sensor_models_);
-
-    // Store a copy of the prior state for process noise update
-    StateVector prior_state = state;
-
-    // Compute auxiliary data (innovation, Jacobian, innovation covariance)
-    auto aux_data = sensor_model->ComputeAuxiliaryData(state, covariance, measurement);
-
-    // Validate measurement using the simplified ValidateAndMediate interface
-    // Note: This now handles covariance updates internally based on validation result
-    bool assumptions_valid = sensor_model->ValidateAndMediate(
-        state,                      // Current state
-        covariance,                 // Current covariance
-        measurement                // Measurement to validate
-    );
-
-    if (!assumptions_valid && sensor_model->GetValidationParams().mediation_action == MediationAction::Reject) {
-      return false;  // Measurement rejected
-    }
-
-    // Compute Kalman gain using Cholesky decomposition for efficiency
-    // K = P*H'*S^-1 can be computed as the solution to: S*K' = H*P'
-    auto PHt = covariance * aux_data.jacobian.transpose();
-
-    // Use Cholesky decomposition to solve for Kalman gain
-    Eigen::LLT<typename std::decay_t<decltype(aux_data.innovation_covariance)>> llt_of_S(aux_data.innovation_covariance);
-
-    // Check if decomposition succeeded (matrix is SPD)
-    if (llt_of_S.info() != Eigen::Success) {
-      // Add small regularization if needed
-      auto regularized_S = aux_data.innovation_covariance;
-      regularized_S.diagonal().array() += 1e-8;
-      llt_of_S.compute(regularized_S);
-    }
-
-    // Solve for Kalman gain efficiently
-    auto kalman_gain = llt_of_S.solve(PHt.transpose()).transpose();
-
-    // Update state estimate (x = x + K*innovation)
-    state += kalman_gain * aux_data.innovation;
-
-    covariance = (StateMatrix::Identity() - kalman_gain * aux_data.jacobian) * covariance;
-
-    // Update process noise using the proper UpdateProcessNoise interface
-    process_model_->UpdateProcessNoise(
-        prior_state,   // a priori state (before update)
-        state,         // a posteriori state (after update)
-        sensor_model->GetValidationParams().process_to_measurement_noise_ratio,  // process to measurement noise ratio (tunable)
-        dt           // dt - small representative time step for this update
-    );
-
-    return true;
+  void PredictNewReference(double timestamp) {
+    double dt = timestamp - reference_time_;
+    reference_state_ = process_model_->PredictState(reference_state_, dt);
+    StateMatrix A = process_model_->GetTransitionMatrix(reference_state_, dt);
+    StateMatrix Q = process_model_->GetProcessNoiseCovariance(dt);
+    reference_covariance_ = A * reference_covariance_ * A.transpose() + Q;
+    reference_time_ = timestamp;
   }
 
-  // Core data
-  std::shared_ptr<ProcessModel> process_model_;
-  std::tuple<std::shared_ptr<SensorModels>...> sensor_models_;
+private:
+  // Base type-erased sensor wrapper
+  class SensorWrapperBase {
+  public:
+    virtual ~SensorWrapperBase() = default;
 
-  // Reference state (at most recent measurement time)
-  StateVector reference_state_;
-  StateMatrix reference_covariance_;
+    template<typename MeasurementType>
+    bool ProcessMeasurement(MediatedKalmanFilter& filter, double timestamp, const MeasurementType& measurement) {
+      return DoProcessMeasurement(filter, timestamp, &measurement);
+    }
+
+  protected:
+    virtual bool DoProcessMeasurement(MediatedKalmanFilter& filter, double timestamp, const void* measurement) = 0;
+  };
+
+  // Type-specific sensor wrapper implementation
+  template<typename SensorModelType>
+  class SensorWrapper : public SensorWrapperBase {
+  public:
+    explicit SensorWrapper(std::shared_ptr<SensorModelType> model)
+      : sensor_model(model) {}
+
+    std::shared_ptr<SensorModelType> sensor_model;
+
+  protected:
+    using MeasurementType = typename SensorModelType::MeasurementVector;
+
+    bool DoProcessMeasurement(MediatedKalmanFilter& filter, double timestamp, const void* measurement) override {
+      const auto* typed_measurement = static_cast<const MeasurementType*>(measurement);
+
+      auto sensor_model = this->sensor_model;
+
+      // Try to initialize any states this sensor can provide
+      StateFlags initializable = sensor_model->GetInitializableStates();
+
+      // Create "not initialized" mask using select
+      StateFlags not_initialized = filter.initialized_states_.select(StateFlags::Zero(), StateFlags::Ones());
+
+      // States that can be initialized and aren't yet
+      StateFlags uninit_states = initializable.cwiseProduct(not_initialized);
+
+      // Only attempt initialization for states we haven't initialized yet
+      if (uninit_states.any()) {
+        StateFlags new_states = sensor_model->InitializeState(
+            *typed_measurement, filter.initialized_states_, filter.reference_state_, filter.reference_covariance_);
+
+        // Update initialized states
+        filter.initialized_states_ = filter.initialized_states_.cwiseMax(new_states);
+      }
+
+      // Reject too-old measurements
+      if (timestamp < filter.reference_time_ - filter.max_delay_window_) {
+        return false;
+      }
+
+      double dt = timestamp - filter.reference_time_;
+
+      StateMatrix A = filter.process_model_->GetTransitionMatrix(filter.reference_state_, dt);
+      StateVector state_at_sensor_time = filter.process_model_->PredictState(filter.reference_state_, dt);
+      StateMatrix Q_at_sensor_time = filter.process_model_->GetProcessNoiseCovariance(dt);
+      StateMatrix covariance_at_sensor_time = A * filter.reference_covariance_ * A.transpose() + Q_at_sensor_time;
+
+      // Apply measurement at sensor time using existing logic
+      if (!this->ApplyMeasurement(filter, state_at_sensor_time, covariance_at_sensor_time, *typed_measurement, dt)) {
+        return false;  // Measurement rejected
+      }
+
+      if (dt > 0.0) {
+        // Update reference state and time
+        filter.reference_state_ = state_at_sensor_time;
+        filter.reference_covariance_ = covariance_at_sensor_time;
+        filter.reference_time_ = timestamp;  // Time advances for newer measurements
+        return true;
+      }
+
+      // Reset reference state to reference time
+      filter.reference_state_ = filter.process_model_->PredictState(filter.reference_state_, -dt);
+      filter.reference_covariance_ = filter.process_model_->GetProcessNoiseCovariance(-dt);
+      return true;
+    }
+
+    bool ApplyMeasurement(MediatedKalmanFilter& filter, StateVector& state, StateMatrix& covariance,
+                          const MeasurementType& measurement, double dt = 0.0) {
+      auto& sensor_model = this->sensor_model;
+
+      // Store a copy of the prior state for process noise update
+      StateVector prior_state = state;
+
+      // Compute auxiliary data (innovation, Jacobian, innovation covariance)
+      auto aux_data = sensor_model->ComputeAuxiliaryData(state, covariance, measurement);
+
+      // Validate measurement using the simplified ValidateAndMediate interface
+      bool assumptions_valid = sensor_model->ValidateAndMediate(
+          state,                      // Current state
+          covariance,                 // Current covariance
+          measurement                // Measurement to validate
+      );
+
+      if (!assumptions_valid && sensor_model->GetValidationParams().mediation_action == MediationAction::Reject) {
+        return false;  // Measurement rejected
+      }
+
+      // Compute Kalman gain using Cholesky decomposition for efficiency
+      auto PHt = covariance * aux_data.jacobian.transpose();
+
+      // Use Cholesky decomposition to solve for Kalman gain
+      Eigen::LLT<typename std::decay_t<decltype(aux_data.innovation_covariance)>> llt_of_S(aux_data.innovation_covariance);
+
+      // Check if decomposition succeeded (matrix is SPD)
+      if (llt_of_S.info() != Eigen::Success) {
+        // Add small regularization if needed
+        auto regularized_S = aux_data.innovation_covariance;
+        regularized_S.diagonal().array() += 1e-8;
+        llt_of_S.compute(regularized_S);
+      }
+
+      // Solve for Kalman gain efficiently
+      auto kalman_gain = llt_of_S.solve(PHt.transpose()).transpose();
+
+      // Update state estimate (x = x + K*innovation)
+      state += kalman_gain * aux_data.innovation;
+
+      covariance = (StateMatrix::Identity() - kalman_gain * aux_data.jacobian) * covariance;
+
+      // Update process noise using the proper UpdateProcessNoise interface
+      filter.process_model_->UpdateProcessNoise(
+          prior_state,   // a priori state (before update)
+          state,         // a posteriori state (after update)
+          sensor_model->GetValidationParams().process_to_measurement_noise_ratio,  // process to measurement noise ratio
+          dt           // dt - small representative time step for this update
+      );
+
+      return true;
+    }
+  };
+
+  // Private data members
+  std::shared_ptr<ProcessModel> process_model_;
+  std::vector<std::shared_ptr<SensorWrapperBase>> sensors_;
+
+  // Core filter state data (made accessible to SensorWrapper)
+  friend class SensorWrapperBase;
+  template<typename SensorModelType> friend class SensorWrapper;
+
   double reference_time_;
   double max_delay_window_;
   StateFlags initialized_states_;
+  StateVector reference_state_;
+  StateMatrix reference_covariance_;
 };
 
 } // namespace core
