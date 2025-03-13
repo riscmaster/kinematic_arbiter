@@ -301,25 +301,8 @@ private:
                          double dt = 0.0) {
       auto& sensor_model = this->sensor_model;
 
-      // Debug check for NaN in input values
-      if (predicted_state.hasNaN() || predicted_covariance.hasNaN()) {
-        // Force breakpoint with a volatile variable and an if that won't be optimized away
-        volatile bool nan_detected = true;
-        if (nan_detected) {
-          std::cerr << "NaN detected in input state or covariance" << std::endl;
-          // Put breakpoint on the next line
-          int i = 0;  // Debugger breakpoint line
-        }
-      }
-
       // Compute auxiliary data (innovation, Jacobian, innovation covariance)
       auto aux_data = sensor_model->ComputeAuxiliaryData(predicted_state, predicted_covariance, measurement);
-
-      // Check innovation and Jacobian for NaNs
-      if (aux_data.innovation.hasNaN() || aux_data.jacobian.hasNaN() || aux_data.innovation_covariance.hasNaN()) {
-        std::cerr << "NaN detected in auxiliary data" << std::endl;
-        return false; // Early exit on NaN detection
-      }
 
       // Validate measurement
       bool measurement_valid = sensor_model->ValidateAndMediate(
@@ -344,12 +327,6 @@ private:
       Eigen::MatrixXd K_transpose = S.ldlt().solve(PHt.transpose());
       auto kalman_gain = K_transpose.transpose();
 
-      // Simple safety check
-      if (kalman_gain.hasNaN()) {
-        std::cerr << "NaN in Kalman gain after calculation" << std::endl;
-        return false;
-      }
-
       // Update state estimate (x = x + K*innovation)
       StateVector updated_state = predicted_state + kalman_gain * aux_data.innovation;
 
@@ -357,12 +334,6 @@ private:
       auto I_KH = StateMatrix::Identity() - kalman_gain * aux_data.jacobian;
       StateMatrix updated_covariance = I_KH * predicted_covariance * I_KH.transpose() +
                                        kalman_gain * sensor_model->GetMeasurementCovariance() * kalman_gain.transpose();
-
-      // Minimal validity check on final covariance
-      if (updated_covariance.hasNaN()) {
-        std::cerr << "NaN in updated covariance" << std::endl;
-        return false;
-      }
 
       // Update process noise using the proper UpdateProcessNoise interface
       filter.process_model_->UpdateProcessNoise(
