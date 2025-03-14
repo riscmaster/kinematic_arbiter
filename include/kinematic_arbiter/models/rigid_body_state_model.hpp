@@ -49,7 +49,7 @@ public:
    * @param time_step Time step in seconds
    * @return Predicted next state x̂_k^-
    */
-  StateVector PredictState(const StateVector& current_state, double time_step) const override {
+    StateVector PredictState(const StateVector& current_state, double time_step) const override {
     StateVector new_states = current_state;
 
     if (fabs(time_step) <= std::numeric_limits<double>::epsilon()) {
@@ -86,13 +86,18 @@ public:
       rotation_matrix_b_to_w * ((linear_velocity + time_step * 0.5 * linear_acceleration) * time_step);
 
     // Angular Position (Quaternion) Prediction Model
-    // Use quaternion kinematics: q(t+dt) = exp(0.5*ω*dt) * q(t)
+    // Use quaternion kinematics with angular acceleration: q(t+dt) = exp(0.5*ω*dt + 0.25*ω̇*dt²) * q(t)
     Eigen::Quaterniond delta_q;
-    double angular_velocity_norm = angular_velocity.norm();
 
-    if (angular_velocity_norm > std::numeric_limits<double>::min()) {
-      Vector3d axis = angular_velocity / angular_velocity_norm;
-      double angle = angular_velocity_norm * time_step;
+    // Calculate combined angular motion vector v = 0.5*ω*dt + 0.25*ω̇*dt²
+    // This is the same vector used in the quaternion update: q(t+dt) = exp(v) * q(t)
+    double t = time_step;
+    Vector3d combined_angular_motion = angular_velocity * t + 0.5 * angular_acceleration * t * t;
+    double motion_norm = combined_angular_motion.norm();
+
+    if (motion_norm > std::numeric_limits<double>::min()) {
+      Vector3d axis = combined_angular_motion / motion_norm;
+      double angle = motion_norm;
       delta_q = Eigen::Quaterniond(Eigen::AngleAxisd(angle, axis));
     } else {
       delta_q = Eigen::Quaterniond::Identity();
@@ -170,52 +175,101 @@ public:
     jacobian.block<4,4>(SIdx::Quaternion::Begin(), SIdx::Quaternion::Begin()) =
         Matrix4d::Identity();
 
-    // Extract angular velocity components
+    // Extract angular velocity and acceleration components
     const Vector3d angular_velocity =
       current_state.segment<3>(SIdx::AngularVelocity::Begin());
 
-    // Calculate angular velocity magnitude
-    double angular_velocity_norm = angular_velocity.norm();
+    const Vector3d angular_acceleration =
+      current_state.segment<3>(SIdx::AngularAcceleration::Begin());
 
-    // Compute the derivative matrices using the derived formula
-    // d/dw[(w/||w||) * sin(||w|| * t/2)] ≈ (t*I)/2 - (t^3*||w||^2)/16 * (w*w^T/||w||^2)
-
-    // First term: (t*I)/2
+    // Calculate combined angular motion vector v = 0.5*ω*dt + 0.25*ω̇*dt²
+    // This is the same vector used in the quaternion update: q(t+dt) = exp(v) * q(t)
     double t = time_step;
-    Matrix3d identity_term = (t/2.0) * Matrix3d::Identity();
+    Vector3d combined_angular_motion = angular_velocity * t + 0.5 * angular_acceleration * t * t;
+    double motion_norm = combined_angular_motion.norm();
 
-    // Second term: (t^3*||w||^2)/16 * (w*w^T/||w||^2)
-    Matrix3d outer_product_term;
-    if (angular_velocity_norm > std::numeric_limits<double>::min()) {
-      // Use full formula when angular velocity is non-zero
-      outer_product_term = (t*t*t * angular_velocity_norm*angular_velocity_norm / 16.0) *
-                          (angular_velocity * angular_velocity.transpose()) /
-                          (angular_velocity_norm * angular_velocity_norm);
-    } else {
-      outer_product_term = Matrix3d::Zero();
+    // Jacobian terms for quaternion derivatives with respect to angular velocity
+    // ∂q/∂ω ≈ (t/2)*I - higher order correction terms
+    Matrix3d velocity_term = (t/2.0) * Matrix3d::Identity();
+
+    // Jacobian terms for quaternion derivatives with respect to angular acceleration
+    // ∂q/∂ω̇ ≈ (t²/4)*I - higher order correction terms
+    Matrix3d accel_term = (t*t/4.0) * Matrix3d::Identity();
+
+    // Apply correction terms when motion is non-zero
+    if (motion_norm > std::numeric_limits<double>::min()) {
+      // Compute outer product correction based on combined motion
+      // This comes from the derivative of the exponential map
+      Matrix3d outer_product_correction = (combined_angular_motion * combined_angular_motion.transpose()) /
+                                         (motion_norm * motion_norm);
+
+      // Scale for velocity: (t³*||v||)/16 * (v*v^T/||v||²)
+      Matrix3d velocity_correction = (t*t*t * motion_norm / 16.0) * outer_product_correction;
+
+      // Scale for acceleration: (t⁴*||v||)/32 * (v*v^T/||v||²)
+      Matrix3d accel_correction = (t*t*t*t * motion_norm / 32.0) * outer_product_correction;
+
+      velocity_term -= velocity_correction;
+      accel_term -= accel_correction;
     }
 
-    // Combined derivative matrix for the vector part of quaternion
-    Matrix3d vector_derivative = identity_term - outer_product_term;
-
     // Create quaternion derivatives for angular velocity components
-    Vector4d dq_dx = Vector4d(
-        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[0],
-        vector_derivative(0,0), vector_derivative(0,1), vector_derivative(0,2)
+    // Format: [scalar_part, vector_part_x, vector_part_y, vector_part_z]
+    Vector4d dq_dx(
+        -0.25 * t * combined_angular_motion[0],  // Scalar part derivative
+        velocity_term(0,0), velocity_term(0,1), velocity_term(0,2)  // Vector part derivatives
     );
-    Vector4d dq_dy = Vector4d(
-        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[1],
-        vector_derivative(1,0), vector_derivative(1,1), vector_derivative(1,2)
+    Vector4d dq_dy(
+        -0.25 * t * combined_angular_motion[1],
+        velocity_term(1,0), velocity_term(1,1), velocity_term(1,2)
     );
-    Vector4d dq_dz = Vector4d(
-        -0.25 * time_step*time_step*angular_velocity_norm * angular_velocity[2],
-        vector_derivative(2,0), vector_derivative(2,1), vector_derivative(2,2)
+    Vector4d dq_dz(
+        -0.25 * t * combined_angular_motion[2],
+        velocity_term(2,0), velocity_term(2,1), velocity_term(2,2)
     );
 
     // Set the Jacobian block for quaternion wrt angular velocity
     jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::X) = dq_dx;
     jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::Y) = dq_dy;
     jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularVelocity::Z) = dq_dz;
+
+    // Create quaternion derivatives for angular acceleration components
+    // Format: [scalar_part, vector_part_x, vector_part_y, vector_part_z]
+    Vector4d dq_dax(
+        -0.125 * t * t * combined_angular_motion[0],  // Scalar part derivative
+        accel_term(0,0), accel_term(0,1), accel_term(0,2)  // Vector part derivatives
+    );
+    Vector4d dq_day(
+        -0.125 * t * t * combined_angular_motion[1],
+        accel_term(1,0), accel_term(1,1), accel_term(1,2)
+    );
+    Vector4d dq_daz(
+        -0.125 * t * t * combined_angular_motion[2],
+        accel_term(2,0), accel_term(2,1), accel_term(2,2)
+    );
+
+    // Set the Jacobian block for quaternion wrt angular acceleration
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularAcceleration::X) = dq_dax;
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularAcceleration::Y) = dq_day;
+    jacobian.block<4,1>(SIdx::Quaternion::Begin(), SIdx::AngularAcceleration::Z) = dq_daz;
+
+    // Velocity blocks - identity for velocity elements
+    jacobian.block<3,3>(SIdx::LinearVelocity::Begin(), SIdx::LinearVelocity::Begin()) =
+      Matrix3d::Identity();
+
+    // Linear velocity wrt linear acceleration
+    jacobian.block<3,3>(SIdx::LinearVelocity::Begin(), SIdx::LinearAcceleration::Begin()) =
+      time_step * Matrix3d::Identity();
+
+    // Angular velocity blocks - identity for angular velocity elements
+    jacobian.block<3,3>(SIdx::AngularVelocity::Begin(), SIdx::AngularVelocity::Begin()) =
+      Matrix3d::Identity();
+
+    // Angular velocity wrt angular acceleration
+    jacobian.block<3,3>(SIdx::AngularVelocity::Begin(), SIdx::AngularAcceleration::Begin()) =
+      time_step * Matrix3d::Identity();
+
+    // Acceleration blocks are modelled as zero (no change)
 
     // Velocity blocks - identity for velocity elements
     jacobian.block<3,3>(SIdx::LinearVelocity::Begin(), SIdx::LinearVelocity::Begin()) =

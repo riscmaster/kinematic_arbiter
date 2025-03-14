@@ -169,6 +169,90 @@ ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
   return jacobian;
 }
 
+Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
+    const StateVector& state_before_prediction,
+    const MeasurementVector& measurement_after_prediction,
+    double dt) const {
+  if (fabs(dt) < 1e-10) {
+    return state_before_prediction.segment<6>(StateIndex::LinearAcceleration::Begin());
+  }
+
+  // Use the proper type with namespace/scope
+  Eigen::Matrix<double, 6, 1> inputs;
+
+  // Extract current state components (before prediction)
+  const Eigen::Quaterniond current_q(
+      state_before_prediction(StateIndex::Quaternion::W),
+      state_before_prediction(StateIndex::Quaternion::X),
+      state_before_prediction(StateIndex::Quaternion::Y),
+      state_before_prediction(StateIndex::Quaternion::Z)
+  );
+  const Eigen::Vector3d current_ang_vel = state_before_prediction.segment<3>(StateIndex::AngularVelocity::Begin());
+
+  // Extract gyro and accelerometer measurements (after prediction)
+  const Eigen::Vector3d measured_gyro = measurement_after_prediction.segment<3>(MeasurementIndex::GX);
+  const Eigen::Vector3d measured_accel = measurement_after_prediction.segment<3>(MeasurementIndex::AX);
+
+  // Extract sensor configuration
+  const Eigen::Vector3d& r = sensor_pose_in_body_frame_.translation();
+  const Eigen::Matrix3d& R_SB = sensor_pose_in_body_frame_.rotation();
+
+  // Gravity vector in world frame
+  const Eigen::Vector3d g_W(0.0, 0.0, kGravity);
+
+  // Remove bias if calibration is enabled
+  Eigen::Vector3d corrected_gyro = measured_gyro;
+  Eigen::Vector3d corrected_accel = measured_accel;
+  if (config_.calibration_enabled) {
+    corrected_gyro -= bias_estimator_.GetGyroBias();
+    corrected_accel -= bias_estimator_.GetAccelBias();
+  }
+
+  // Convert gyro measurement to body frame angular velocity after prediction
+  Eigen::Vector3d omega_after = R_SB.transpose() * corrected_gyro;
+
+  // Solve for angular acceleration using the relationship between current and after-prediction angular velocity
+  // ω_after = ω_before + α*dt
+  // Rearranging: α = (ω_after - ω_before) / dt
+  Eigen::Vector3d a_angular = (omega_after - current_ang_vel) / dt;
+
+  // For more accurate quaternion prediction, we'll use the exact same algorithm as in RigidBodyStateModel
+  // to ensure consistency between prediction and recovery
+  Eigen::Vector3d axis_angle = current_ang_vel * dt + 0.5 * a_angular * dt * dt;
+  double angle = axis_angle.norm();
+
+  Eigen::Quaterniond delta_q;
+  if (angle > std::numeric_limits<double>::epsilon()) {
+    delta_q = Eigen::Quaterniond(Eigen::AngleAxisd(angle, axis_angle.normalized()));
+  } else {
+    delta_q = Eigen::Quaterniond::Identity();
+  }
+
+  Eigen::Quaterniond predicted_q = delta_q * current_q;
+  predicted_q.normalize();
+
+  // Compute centripetal and tangential accelerations at the sensor location
+  Eigen::Vector3d centripetal_accel = omega_after.cross(omega_after.cross(r));
+  Eigen::Vector3d tangential_accel = a_angular.cross(r);
+
+  // Compute gravity in body frame after prediction
+  Eigen::Vector3d gravity_body = predicted_q.inverse() * g_W;
+
+  // Solve for linear acceleration from accelerometer measurement
+  // a_meas = R_SB^T * (a_linear + gravity_body + tangential_accel + centripetal_accel)
+  // Rearranging: a_linear = R_SB * a_meas - gravity_body - tangential_accel - centripetal_accel
+  Eigen::Vector3d a_linear = R_SB.transpose() * corrected_accel -
+                             gravity_body -
+                             tangential_accel -
+                             centripetal_accel;
+
+  // Set the output accelerations
+  inputs.segment<3>(0) = a_linear;
+  inputs.segment<3>(3) = a_angular;
+
+  return inputs;
+}
+
 bool ImuSensorModel::IsStationary(
     const StateVector& state,
     const StateCovariance& state_covariance,

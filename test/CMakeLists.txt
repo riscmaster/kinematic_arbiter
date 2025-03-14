@@ -96,6 +96,11 @@ add_test_executable(imu_stationary_test
   ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
 )
 
+add_test_executable(imu_prediction_inputs_test
+  ${CMAKE_SOURCE_DIR}/test/sensors/imu_prediction_inputs_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
+)
+
 set_tests_properties(
   body_velocity_sensor_model_test
   pose_sensor_model_test
@@ -105,6 +110,7 @@ set_tests_properties(
   imu_sensor_mounting_test
   imu_stationary_test
   imu_sensor_model_test
+  imu_prediction_inputs_test
   PROPERTIES LABELS "sensors"
 )
 

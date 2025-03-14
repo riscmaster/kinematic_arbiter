@@ -16,7 +16,7 @@ public:
   static constexpr int StateSize = StateIndex::kFullStateSize;
   using StateVector = Eigen::Matrix<double, StateSize, 1>;
   using StateMatrix = Eigen::Matrix<double, StateSize, StateSize>;
-
+  using Vector3d = Eigen::Vector3d;
   /**
    * @brief Parameters for state model
    */
@@ -51,6 +51,7 @@ public:
    */
   virtual StateVector PredictState(const StateVector& state, double dt) const = 0;
 
+
   /**
    * @brief Get the state transition matrix: A_k
    *
@@ -62,6 +63,21 @@ public:
    * @return State transition matrix A_k
    */
   virtual StateMatrix GetTransitionMatrix(const StateVector& state, double dt) const = 0;
+
+/**
+   * @brief Predict state forward in time: x̂_k^- = f(x̂_{k-1}^+, u_k)
+   *
+   * @param state Current state estimate x̂_{k-1}^+
+   * @param dt Time step in seconds
+   * @return Predicted next state x̂_k^-
+   */
+  virtual StateVector PredictStateWithInputAccelerations(const StateVector& state, double dt, const Vector3d& linear_acceleration=Vector3d::Zero(), const Vector3d& angular_acceleration=Vector3d::Zero()) const
+  {
+    StateVector new_state = state;
+    new_state.segment<3>(StateIndex::LinearAcceleration::Begin()) = linear_acceleration;
+    new_state.segment<3>(StateIndex::AngularAcceleration::Begin()) = angular_acceleration;
+    return PredictState(new_state, dt);
+  };
 
   /**
    * @brief Get the process noise covariance matrix: Q_k

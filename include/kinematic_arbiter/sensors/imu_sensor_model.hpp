@@ -70,7 +70,9 @@ public:
       const ValidationParams& params = ValidationParams())
     : Base(sensor_pose_in_body_frame, params),
       bias_estimator_(config.bias_estimation_window_size),
-      config_(config) {}
+      config_(config) {
+        this->can_predict_input_accelerations_ = true;
+      }
 
   /**
    * @brief Predict measurement from state
@@ -103,6 +105,16 @@ public:
    * @return Jacobian of measurement with respect to state
    */
   MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const override;
+
+  /**
+   * @brief Get the inputs to the prediction model
+   *
+   * @param state_before_prediction Current state estimate
+   * @param measurement_after_prediction Actual measurement y_k after prediction of dt
+   * @param dt Time step in seconds
+   * @return Linear and angular acceleration as inputs to the prediction model
+   */
+  Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& state_before_prediction, const MeasurementVector& measurement_after_prediction, double dt) const override;
 
   /**
    * @brief Enable or disable bias calibration

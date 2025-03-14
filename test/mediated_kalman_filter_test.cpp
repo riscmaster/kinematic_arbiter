@@ -214,15 +214,18 @@ protected:
 
           try {
               // Predict forward
-              filter->PredictNewReference(t);
+              if (!is_imu_sensor) {
+                filter->PredictNewReference(t);
+              }
 
               // Check for NaNs after prediction
               if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
                   FAIL() << "NaN detected in state or covariance after prediction at t=" << t;
               }
-
-              StateVector predicted_state = filter->GetStateEstimate();
-              StateMatrix predicted_cov = filter->GetStateCovariance();
+              auto process_model = filter->GetProcessModel();
+              StateVector predicted_state = process_model->PredictState(filter->GetStateEstimate(), dt);
+              auto A = process_model->GetTransitionMatrix(filter->GetStateEstimate(), dt);
+              StateMatrix predicted_cov = A * filter->GetStateCovariance() * A.transpose() + process_model->GetProcessNoiseCovariance(dt);
 
               // Get measurement
               auto measurement = sensor->PredictMeasurement(true_state);

@@ -23,7 +23,7 @@ public:
   // Type definitions
   static constexpr int StateSize = StateIndex::kFullStateSize;
   using StateVector = Eigen::Matrix<double, StateSize, 1>;                     // State vector x
-  using StateCovariance = Eigen::Matrix<double, StateSize, StateSize>;         // State covariance P
+  using StateCovariance = Eigen::Matrix<double, StateSize, StateSize>;
   using MeasurementVector = MeasurementVectorType;                             // Measurement vector y_k
   using MeasurementCovariance = Eigen::Matrix<double,
     MeasurementVectorType::RowsAtCompileTime,
@@ -91,7 +91,6 @@ public:
    */
   virtual ~MeasurementModelInterface() = default;
 
-
   /**
    * @brief Predict expected measurement h(x) from state
    *
@@ -107,6 +106,22 @@ public:
    * @return Measurement Jacobian H (C_k in paper notation)
    */
   virtual MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const = 0;
+
+  /**
+   * @brief Get the inputs to the prediction model
+   *
+   * @param state_before_prediction Current state estimate x_k
+   * @param measurement_after_prediction Actual measurement y_k after prediction of dt
+   * @param dt Time step in seconds
+   * @return Linear and angular acceleration as inputs to the prediction model
+   */
+  virtual Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& , const MeasurementVector& , double) const {return Eigen::Matrix<double, 6, 1>::Zero();};
+
+  /**
+   * @brief Get whether the prediction model can predict input accelerations
+   * @return True if the prediction model can predict input accelerations
+   */
+  bool CanPredictInputAccelerations() {return can_predict_input_accelerations_;}
 
   /**
    * @brief Get current measurement covariance
@@ -287,6 +302,7 @@ protected:
   Eigen::Isometry3d body_to_sensor_transform_;       // Body-to-sensor transform
   MeasurementCovariance measurement_covariance_;     // Measurement noise covariance R
   ValidationParams validation_params_;               // Parameters for validation
+  bool can_predict_input_accelerations_ = false;
 };
 
 } // namespace core

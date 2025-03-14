@@ -244,7 +244,7 @@ private:
     using MeasurementType = typename SensorModelType::MeasurementVector;
 
     bool DoProcessMeasurement(MediatedKalmanFilter& filter, double timestamp, const void* measurement) override {
-      const auto* typed_measurement = static_cast<const MeasurementType*>(measurement);
+      const MeasurementType* typed_measurement = static_cast<const MeasurementType*>(measurement);
 
       auto sensor_model = this->sensor_model;
 
@@ -273,9 +273,29 @@ private:
 
       double dt = timestamp - filter.reference_time_;
 
-      // Propagate state to sensor time
-      StateMatrix A = filter.process_model_->GetTransitionMatrix(filter.reference_state_, dt);
-      StateVector state_at_sensor_time = filter.process_model_->PredictState(filter.reference_state_, dt);
+
+
+      // Use the inputs for the transition matrix - note we only pass the required parameters
+      StateMatrix A = filter.process_model_->GetTransitionMatrix(
+          filter.reference_state_, dt);
+      StateVector state_at_sensor_time = filter.reference_state_;
+      if (sensor_model->CanPredictInputAccelerations()) {
+        // Use the fully qualified type name to avoid scope issues
+      Eigen::Matrix<double, 6, 1> inputs = sensor_model->GetPredictionModelInputs(
+          filter.reference_state_, *typed_measurement, dt);
+
+      // Extract the linear and angular acceleration components
+      Eigen::Vector3d linear_accel = inputs.template segment<3>(0);
+      Eigen::Vector3d angular_accel = inputs.template segment<3>(3);
+      // Predict the state using the optional acceleration inputs
+      state_at_sensor_time = filter.process_model_->PredictStateWithInputAccelerations(
+          filter.reference_state_, dt, linear_accel, angular_accel);
+      } else {
+        // Use the default prediction model
+      state_at_sensor_time = filter.process_model_->PredictState(
+          filter.reference_state_, dt);
+      }
+
       StateMatrix Q_at_sensor_time = filter.process_model_->GetProcessNoiseCovariance(dt);
       StateMatrix covariance_at_sensor_time = A * filter.reference_covariance_ * A.transpose() + Q_at_sensor_time;
 
