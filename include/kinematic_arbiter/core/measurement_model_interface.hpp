@@ -111,11 +111,12 @@ public:
    * @brief Get the inputs to the prediction model
    *
    * @param state_before_prediction Current state estimate x_k
+   * @param state_covariance_before_prediction Current state covariance P_k
    * @param measurement_after_prediction Actual measurement y_k after prediction of dt
    * @param dt Time step in seconds
    * @return Linear and angular acceleration as inputs to the prediction model
    */
-  virtual Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& , const MeasurementVector& , double) const {return Eigen::Matrix<double, 6, 1>::Zero();};
+  virtual Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& , const StateCovariance& , const MeasurementVector& , double) const {return Eigen::Matrix<double, 6, 1>::Zero();};
 
   /**
    * @brief Get whether the prediction model can predict input accelerations

@@ -37,6 +37,7 @@ public:
   // Type definitions for clarity
   using Base = core::MeasurementModelInterface<Eigen::Matrix<double, kImuMeasurementDof, 1>>;
   using StateVector = typename Base::StateVector;
+  using StateCovariance = typename Base::StateCovariance;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
   using MeasurementCovariance = typename Base::MeasurementCovariance;
@@ -71,7 +72,7 @@ public:
     : Base(sensor_pose_in_body_frame, params),
       bias_estimator_(config.bias_estimation_window_size),
       config_(config) {
-        this->can_predict_input_accelerations_ = true;
+        // this->can_predict_input_accelerations_ = true;
       }
 
   /**
@@ -114,7 +115,7 @@ public:
    * @param dt Time step in seconds
    * @return Linear and angular acceleration as inputs to the prediction model
    */
-  Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& state_before_prediction, const MeasurementVector& measurement_after_prediction, double dt) const override;
+  Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& state_before_prediction, const StateCovariance& state_covariance_before_prediction, const MeasurementVector& measurement_after_prediction, double dt) const override;
 
   /**
    * @brief Enable or disable bias calibration

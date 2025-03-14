@@ -171,6 +171,7 @@ ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
 
 Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
     const StateVector& state_before_prediction,
+    const StateCovariance& state_covariance_before_prediction,
     const MeasurementVector& measurement_after_prediction,
     double dt) const {
   if (fabs(dt) < 1e-10) {
@@ -188,6 +189,10 @@ Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
       state_before_prediction(StateIndex::Quaternion::Z)
   );
   const Eigen::Vector3d current_ang_vel = state_before_prediction.segment<3>(StateIndex::AngularVelocity::Begin());
+
+  // Get current accelerations from state
+  const Eigen::Vector3d current_lin_acc = state_before_prediction.segment<3>(StateIndex::LinearAcceleration::Begin());
+  const Eigen::Vector3d current_ang_acc = state_before_prediction.segment<3>(StateIndex::AngularAcceleration::Begin());
 
   // Extract gyro and accelerometer measurements (after prediction)
   const Eigen::Vector3d measured_gyro = measurement_after_prediction.segment<3>(MeasurementIndex::GX);
@@ -214,10 +219,62 @@ Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
   // Solve for angular acceleration using the relationship between current and after-prediction angular velocity
   // ω_after = ω_before + α*dt
   // Rearranging: α = (ω_after - ω_before) / dt
-  Eigen::Vector3d a_angular = (omega_after - current_ang_vel) / dt;
+  Eigen::Vector3d a_angular_from_meas = (omega_after - current_ang_vel) / dt;
 
-  // For more accurate quaternion prediction, we'll use the exact same algorithm as in RigidBodyStateModel
-  // to ensure consistency between prediction and recovery
+  // Extract state covariance for accelerations
+  Eigen::Matrix3d lin_acc_cov = state_covariance_before_prediction.block<3, 3>(
+      StateIndex::LinearAcceleration::Begin(), StateIndex::LinearAcceleration::Begin());
+  Eigen::Matrix3d ang_acc_cov = state_covariance_before_prediction.block<3, 3>(
+      StateIndex::AngularAcceleration::Begin(), StateIndex::AngularAcceleration::Begin());
+
+  // Extract measurement covariance for accelerometer and gyroscope
+  Eigen::Matrix3d accel_meas_cov = measurement_covariance_.block<3, 3>(MeasurementIndex::AX, MeasurementIndex::AX);
+  Eigen::Matrix3d gyro_meas_cov = measurement_covariance_.block<3, 3>(MeasurementIndex::GX, MeasurementIndex::GX);
+
+  // Apply process_to_measurement_noise_ratio to scale the state covariance
+  double ratio = validation_params_.process_to_measurement_noise_ratio;
+  Eigen::Matrix3d scaled_lin_acc_cov = lin_acc_cov * ratio;
+  Eigen::Matrix3d scaled_ang_acc_cov = ang_acc_cov * ratio;
+
+  // Compute measurement-derived acceleration covariance (simplified)
+  Eigen::Matrix3d lin_acc_meas_cov = R_SB.transpose() * accel_meas_cov * R_SB;
+  Eigen::Matrix3d ang_acc_meas_cov = gyro_meas_cov / (dt * dt);  // Simplified transformation
+
+  // Ensure covariance matrices are positive definite
+  const double min_eigenvalue = 1e-6;
+  Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> es_lin(scaled_lin_acc_cov);
+  Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> es_ang(scaled_ang_acc_cov);
+  Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> es_lin_meas(lin_acc_meas_cov);
+  Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> es_ang_meas(ang_acc_meas_cov);
+
+  for (int i = 0; i < 3; ++i) {
+    if (es_lin.eigenvalues()(i) < min_eigenvalue)
+      scaled_lin_acc_cov += Eigen::Matrix3d::Identity() * (min_eigenvalue - es_lin.eigenvalues()(i));
+    if (es_ang.eigenvalues()(i) < min_eigenvalue)
+      scaled_ang_acc_cov += Eigen::Matrix3d::Identity() * (min_eigenvalue - es_ang.eigenvalues()(i));
+    if (es_lin_meas.eigenvalues()(i) < min_eigenvalue)
+      lin_acc_meas_cov += Eigen::Matrix3d::Identity() * (min_eigenvalue - es_lin_meas.eigenvalues()(i));
+    if (es_ang_meas.eigenvalues()(i) < min_eigenvalue)
+      ang_acc_meas_cov += Eigen::Matrix3d::Identity() * (min_eigenvalue - es_ang_meas.eigenvalues()(i));
+  }
+
+  // Optimal fusion of angular acceleration using LDLT decomposition
+  Eigen::LDLT<Eigen::Matrix3d> solver_ang_state(scaled_ang_acc_cov);
+  Eigen::LDLT<Eigen::Matrix3d> solver_ang_meas(ang_acc_meas_cov);
+
+  // Calculate (C1⁻¹ + C2⁻¹) implicitly
+  Eigen::Matrix3d ang_Cinv_sum = solver_ang_state.solve(Eigen::Matrix3d::Identity()) +
+                                solver_ang_meas.solve(Eigen::Matrix3d::Identity());
+
+  // Compute weighted sum: C1⁻¹x1 + C2⁻¹x2
+  Eigen::Vector3d ang_weighted_sum = solver_ang_state.solve(current_ang_acc) +
+                                   solver_ang_meas.solve(a_angular_from_meas);
+
+  // Solve (C1⁻¹ + C2⁻¹)x̄ = weighted_sum
+  Eigen::LDLT<Eigen::Matrix3d> ang_final_solver(ang_Cinv_sum);
+  Eigen::Vector3d a_angular = ang_final_solver.solve(ang_weighted_sum);
+
+  // For more accurate quaternion prediction, use the optimally fused angular acceleration
   Eigen::Vector3d axis_angle = current_ang_vel * dt + 0.5 * a_angular * dt * dt;
   double angle = axis_angle.norm();
 
@@ -241,10 +298,26 @@ Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
   // Solve for linear acceleration from accelerometer measurement
   // a_meas = R_SB^T * (a_linear + gravity_body + tangential_accel + centripetal_accel)
   // Rearranging: a_linear = R_SB * a_meas - gravity_body - tangential_accel - centripetal_accel
-  Eigen::Vector3d a_linear = R_SB.transpose() * corrected_accel -
-                             gravity_body -
-                             tangential_accel -
-                             centripetal_accel;
+  Eigen::Vector3d a_linear_from_meas = R_SB.transpose() * corrected_accel -
+                                      gravity_body -
+                                      tangential_accel -
+                                      centripetal_accel;
+
+  // Optimal fusion of linear acceleration using LDLT decomposition
+  Eigen::LDLT<Eigen::Matrix3d> solver_lin_state(scaled_lin_acc_cov);
+  Eigen::LDLT<Eigen::Matrix3d> solver_lin_meas(lin_acc_meas_cov);
+
+  // Calculate (C1⁻¹ + C2⁻¹) implicitly
+  Eigen::Matrix3d lin_Cinv_sum = solver_lin_state.solve(Eigen::Matrix3d::Identity()) +
+                                solver_lin_meas.solve(Eigen::Matrix3d::Identity());
+
+  // Compute weighted sum: C1⁻¹x1 + C2⁻¹x2
+  Eigen::Vector3d lin_weighted_sum = solver_lin_state.solve(current_lin_acc) +
+                                   solver_lin_meas.solve(a_linear_from_meas);
+
+  // Solve (C1⁻¹ + C2⁻¹)x̄ = weighted_sum
+  Eigen::LDLT<Eigen::Matrix3d> lin_final_solver(lin_Cinv_sum);
+  Eigen::Vector3d a_linear = lin_final_solver.solve(lin_weighted_sum);
 
   // Set the output accelerations
   inputs.segment<3>(0) = a_linear;

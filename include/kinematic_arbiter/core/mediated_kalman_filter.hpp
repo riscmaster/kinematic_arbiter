@@ -282,7 +282,7 @@ private:
       if (sensor_model->CanPredictInputAccelerations()) {
         // Use the fully qualified type name to avoid scope issues
       Eigen::Matrix<double, 6, 1> inputs = sensor_model->GetPredictionModelInputs(
-          filter.reference_state_, *typed_measurement, dt);
+          filter.reference_state_, filter.reference_covariance_, *typed_measurement, dt);
 
       // Extract the linear and angular acceleration components
       Eigen::Vector3d linear_accel = inputs.template segment<3>(0);
@@ -296,8 +296,8 @@ private:
           filter.reference_state_, dt);
       }
 
-      StateMatrix Q_at_sensor_time = filter.process_model_->GetProcessNoiseCovariance(dt);
-      StateMatrix covariance_at_sensor_time = A * filter.reference_covariance_ * A.transpose() + Q_at_sensor_time;
+      StateMatrix Q = filter.process_model_->GetProcessNoiseCovariance(dt);
+      StateMatrix covariance_at_sensor_time = A * filter.reference_covariance_ * A.transpose() + Q;
 
       // Apply measurement directly to the filter's reference state
       bool measurement_accepted = this->ApplyMeasurement(

@@ -4,6 +4,7 @@
 #include <memory>
 #include <cmath>
 #include <Eigen/Dense>
+#include <iomanip>
 
 #include "kinematic_arbiter/core/mediated_kalman_filter.hpp"
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
@@ -156,14 +157,18 @@ protected:
   }
 
   template<typename SensorModel>
-  void TestSensorImprovesStateEstimates(std::shared_ptr<SensorModel> sensor) {
+  void TestSensorImprovesStateEstimates(
+      std::shared_ptr<SensorModel> sensor,
+      const Eigen::MatrixXd& noise_covariance) {
       using namespace core;
+      using MeasurementType = typename SensorModel::MeasurementVector;
+
+      // Flag to determine if we should add noise
+      bool add_noise = !noise_covariance.isZero();
 
       // Create filter
       auto filter = std::make_shared<FilterType>(state_model_);
       size_t sensor_idx = filter->AddSensor(sensor);
-      bool is_imu_sensor = std::is_same<SensorModel, kinematic_arbiter::sensors::ImuSensorModel>::value;
-
 
       // Test parameters
       const double dt = 0.05;
@@ -198,7 +203,39 @@ protected:
 
       // Set ceiling based on initial covariance norm
       const double kMeasCovCeiling = initial_measurement_cov_norm * 1.5;
-      const double kMeasCovFloor = 0.1; // Floor value based on observed behavior
+
+      // Set floor based on true noise covariance
+      // For zero noise, use a small positive value to avoid division by zero
+      // const double kMeasCovFloor = noise_covariance.isZero() ? 0.1 :
+      //                              std::max(0.1, noise_covariance.norm() * 0.5);
+
+      // Random number generator for adding noise
+      std::random_device rd;
+      std::mt19937 gen(rd());
+
+      // Create multivariate normal distribution for noise
+      Eigen::MatrixXd transform;
+      if (add_noise) {
+          Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> eigenSolver(noise_covariance);
+          transform = eigenSolver.eigenvectors() *
+                      eigenSolver.eigenvalues().cwiseSqrt().asDiagonal();
+      }
+
+      // Function to add noise to measurement
+      auto addNoise = [&gen, &transform](const MeasurementType& measurement) -> MeasurementType {
+          // Generate standard normal samples
+          Eigen::VectorXd z(measurement.size());
+          std::normal_distribution<double> normal(0, 1);
+          for (int i = 0; i < z.size(); ++i) {
+              z(i) = normal(gen);
+          }
+
+          // Transform to desired covariance
+          Eigen::VectorXd noise = transform * z;
+
+          // Add noise to measurement
+          return measurement + noise;
+      };
 
       // Test for 10 seconds (200 steps at 0.05s per step)
       for (int i = 0; i < 200; i++) {
@@ -213,22 +250,21 @@ protected:
           StateVector true_state = kinematic_arbiter::testing::Figure8Trajectory(t);
 
           try {
-              // Predict forward
-              if (!is_imu_sensor) {
-                filter->PredictNewReference(t);
-              }
 
               // Check for NaNs after prediction
               if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
                   FAIL() << "NaN detected in state or covariance after prediction at t=" << t;
               }
-              auto process_model = filter->GetProcessModel();
-              StateVector predicted_state = process_model->PredictState(filter->GetStateEstimate(), dt);
-              auto A = process_model->GetTransitionMatrix(filter->GetStateEstimate(), dt);
-              StateMatrix predicted_cov = A * filter->GetStateCovariance() * A.transpose() + process_model->GetProcessNoiseCovariance(dt);
 
-              // Get measurement
+              StateVector predicted_state = filter->GetProcessModel()->PredictState(filter->GetStateEstimate(), dt);
+              StateMatrix A = filter->GetProcessModel()->GetTransitionMatrix(filter->GetStateEstimate(), dt);
+              StateMatrix predicted_cov = A * filter->GetStateCovariance() * A.transpose() + filter->GetProcessModel()->GetProcessNoiseCovariance(dt);
+
+              // Get measurement and add noise if needed
               auto measurement = sensor->PredictMeasurement(true_state);
+              if (add_noise) {
+                  measurement = addNoise(measurement);
+              }
 
               // Compute auxiliary data
               auto aux_data = sensor->ComputeAuxiliaryData(
@@ -252,11 +288,9 @@ protected:
                   FAIL() << "NaN detected in state or covariance after update at t=" << t;
               }
 
-              // Get updated state
               StateVector updated_state = filter->GetStateEstimate();
               StateMatrix updated_cov = filter->GetStateCovariance();
 
-              // Check each state triplet (X/Y/Z) that is initializable
               // Position
               if (initializable_flags[StateIndex::Position::X]) {
                   double error_before = (predicted_state.segment<3>(StateIndex::Position::X) -
@@ -266,6 +300,180 @@ protected:
 
                   if (error_after > error_before) {
                       FAIL() << "Position estimate did not improve at t=" << t;
+                  }
+              }
+
+              // Orientation (quaternion)
+              if (initializable_flags[StateIndex::Quaternion::W]) {
+                  Eigen::Quaterniond q_true(
+                      true_state(StateIndex::Quaternion::W),
+                      true_state(StateIndex::Quaternion::X),
+                      true_state(StateIndex::Quaternion::Y),
+                      true_state(StateIndex::Quaternion::Z));
+
+                  Eigen::Quaterniond q_pred(
+                      predicted_state(StateIndex::Quaternion::W),
+                      predicted_state(StateIndex::Quaternion::X),
+                      predicted_state(StateIndex::Quaternion::Y),
+                      predicted_state(StateIndex::Quaternion::Z));
+
+                  Eigen::Quaterniond q_upd(
+                      updated_state(StateIndex::Quaternion::W),
+                      updated_state(StateIndex::Quaternion::X),
+                      updated_state(StateIndex::Quaternion::Y),
+                      updated_state(StateIndex::Quaternion::Z));
+
+                  double angle_before = 2.0 * q_true.angularDistance(q_pred);
+                  double angle_after = 2.0 * q_true.angularDistance(q_upd);
+
+                  // Add tolerance: 5% relative or 0.001 radians absolute
+                  const double rel_tol = 0.05;
+                  const double abs_tol = 0.001;
+
+                  // Get prediction model inputs
+                  Eigen::Matrix<double, 6, 1> inputs = sensor->GetPredictionModelInputs(
+                      predicted_state,
+                      predicted_cov,
+                      measurement,
+                      dt);
+
+                  // Detailed diagnostic information
+                  std::stringstream diagnostic_info;
+                  diagnostic_info << "Time: " << t << "\n";
+
+                  // Quaternion information
+                  diagnostic_info << "True quaternion: [" << q_true.w() << ", " << q_true.x() << ", "
+                                  << q_true.y() << ", " << q_true.z() << "]\n";
+                  diagnostic_info << "Predicted quaternion: [" << q_pred.w() << ", " << q_pred.x() << ", "
+                                  << q_pred.y() << ", " << q_pred.z() << "]\n";
+                  diagnostic_info << "Updated quaternion: [" << q_upd.w() << ", " << q_upd.x() << ", "
+                                  << q_upd.y() << ", " << q_upd.z() << "]\n";
+                  diagnostic_info << "Angular error before update: " << angle_before << " rad\n";
+                  diagnostic_info << "Angular error after update: " << angle_after << " rad\n";
+                  diagnostic_info << "Change in error: " << (angle_after - angle_before) << " rad\n";
+
+                  // Acceleration comparison table
+                  diagnostic_info << "\n=== ACCELERATION COMPARISON ===\n";
+                  diagnostic_info << std::setw(20) << "Source"
+                                  << std::setw(15) << "Linear X"
+                                  << std::setw(15) << "Linear Y"
+                                  << std::setw(15) << "Linear Z"
+                                  << std::setw(15) << "Angular X"
+                                  << std::setw(15) << "Angular Y"
+                                  << std::setw(15) << "Angular Z" << "\n";
+
+                  // True accelerations
+                  diagnostic_info << std::setw(20) << "True"
+                                  << std::setw(15) << true_state(StateIndex::LinearAcceleration::X)
+                                  << std::setw(15) << true_state(StateIndex::LinearAcceleration::Y)
+                                  << std::setw(15) << true_state(StateIndex::LinearAcceleration::Z)
+                                  << std::setw(15) << true_state(StateIndex::AngularAcceleration::X)
+                                  << std::setw(15) << true_state(StateIndex::AngularAcceleration::Y)
+                                  << std::setw(15) << true_state(StateIndex::AngularAcceleration::Z) << "\n";
+
+                  // Predicted accelerations
+                  diagnostic_info << std::setw(20) << "Predicted"
+                                  << std::setw(15) << predicted_state(StateIndex::LinearAcceleration::X)
+                                  << std::setw(15) << predicted_state(StateIndex::LinearAcceleration::Y)
+                                  << std::setw(15) << predicted_state(StateIndex::LinearAcceleration::Z)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularAcceleration::X)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularAcceleration::Y)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularAcceleration::Z) << "\n";
+
+                  // Updated accelerations
+                  diagnostic_info << std::setw(20) << "Updated"
+                                  << std::setw(15) << updated_state(StateIndex::LinearAcceleration::X)
+                                  << std::setw(15) << updated_state(StateIndex::LinearAcceleration::Y)
+                                  << std::setw(15) << updated_state(StateIndex::LinearAcceleration::Z)
+                                  << std::setw(15) << updated_state(StateIndex::AngularAcceleration::X)
+                                  << std::setw(15) << updated_state(StateIndex::AngularAcceleration::Y)
+                                  << std::setw(15) << updated_state(StateIndex::AngularAcceleration::Z) << "\n";
+
+                  // Prediction model inputs
+                  diagnostic_info << std::setw(20) << "Inputs"
+                                  << std::setw(15) << inputs(0)
+                                  << std::setw(15) << inputs(1)
+                                  << std::setw(15) << inputs(2)
+                                  << std::setw(15) << inputs(3)
+                                  << std::setw(15) << inputs(4)
+                                  << std::setw(15) << inputs(5) << "\n";
+
+                  // Add velocity information
+                  diagnostic_info << "\n=== VELOCITY COMPARISON ===\n";
+                  diagnostic_info << std::setw(20) << "Source"
+                                  << std::setw(15) << "Linear X"
+                                  << std::setw(15) << "Linear Y"
+                                  << std::setw(15) << "Linear Z"
+                                  << std::setw(15) << "Angular X"
+                                  << std::setw(15) << "Angular Y"
+                                  << std::setw(15) << "Angular Z" << "\n";
+
+                  // True velocities
+                  diagnostic_info << std::setw(20) << "True"
+                                  << std::setw(15) << true_state(StateIndex::LinearVelocity::X)
+                                  << std::setw(15) << true_state(StateIndex::LinearVelocity::Y)
+                                  << std::setw(15) << true_state(StateIndex::LinearVelocity::Z)
+                                  << std::setw(15) << true_state(StateIndex::AngularVelocity::X)
+                                  << std::setw(15) << true_state(StateIndex::AngularVelocity::Y)
+                                  << std::setw(15) << true_state(StateIndex::AngularVelocity::Z) << "\n";
+
+                  // Predicted velocities
+                  diagnostic_info << std::setw(20) << "Predicted"
+                                  << std::setw(15) << predicted_state(StateIndex::LinearVelocity::X)
+                                  << std::setw(15) << predicted_state(StateIndex::LinearVelocity::Y)
+                                  << std::setw(15) << predicted_state(StateIndex::LinearVelocity::Z)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularVelocity::X)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularVelocity::Y)
+                                  << std::setw(15) << predicted_state(StateIndex::AngularVelocity::Z) << "\n";
+
+                  // Updated velocities
+                  diagnostic_info << std::setw(20) << "Updated"
+                                  << std::setw(15) << updated_state(StateIndex::LinearVelocity::X)
+                                  << std::setw(15) << updated_state(StateIndex::LinearVelocity::Y)
+                                  << std::setw(15) << updated_state(StateIndex::LinearVelocity::Z)
+                                  << std::setw(15) << updated_state(StateIndex::AngularVelocity::X)
+                                  << std::setw(15) << updated_state(StateIndex::AngularVelocity::Y)
+                                  << std::setw(15) << updated_state(StateIndex::AngularVelocity::Z) << "\n";
+
+                  // Additional diagnostic information
+                  diagnostic_info << "\n=== FILTER DIAGNOSTICS ===\n";
+                  diagnostic_info << "Innovation: [";
+                  for (int i = 0; i < aux_data.innovation.size(); ++i) {
+                      diagnostic_info << aux_data.innovation(i);
+                      if (i < aux_data.innovation.size() - 1) diagnostic_info << ", ";
+                  }
+                  diagnostic_info << "]\n";
+
+                  // Print covariance information
+                  if (i == 0) {  // Only print on first iteration to avoid too much output
+                      diagnostic_info << "Measurement covariance norm: " << sensor->GetMeasurementCovariance().norm() << "\n";
+                      diagnostic_info << "Innovation covariance norm: " << aux_data.innovation_covariance.norm() << "\n";
+                      diagnostic_info << "State covariance norm: " << filter->GetStateCovariance().norm() << "\n";
+
+                      // Add covariance for accelerations
+                      Eigen::Matrix3d lin_accel_cov = predicted_cov.block<3,3>(
+                          StateIndex::LinearAcceleration::Begin(),
+                          StateIndex::LinearAcceleration::Begin());
+                      Eigen::Matrix3d ang_accel_cov = predicted_cov.block<3,3>(
+                          StateIndex::AngularAcceleration::Begin(),
+                          StateIndex::AngularAcceleration::Begin());
+
+                      diagnostic_info << "Linear accel covariance norm: " << lin_accel_cov.norm() << "\n";
+                      diagnostic_info << "Angular accel covariance norm: " << ang_accel_cov.norm() << "\n";
+                  }
+
+                  // Only fail if error is significantly worse
+                  if (angle_after > angle_before * (1.0 + rel_tol) &&
+                      angle_after - angle_before > abs_tol) {
+                      FAIL() << "Orientation estimate significantly worse at t=" << t
+                             << " (before: " << angle_before << " rad, after: " << angle_after << " rad)\n"
+                             << diagnostic_info.str();
+                  }
+
+                  // Add diagnostic output for debugging
+                  if (angle_after > angle_before) {
+                      std::cout << "WARNING: Orientation estimate worse at t=" << t << "\n"
+                                << diagnostic_info.str() << std::endl;
                   }
               }
 
@@ -343,10 +551,7 @@ protected:
               measurement_cov_norm_history.push_back(current_measurement_cov_norm);
 
               // Check that measurement covariance is decreasing until it reaches the floor
-              if (i > 0 && !is_imu_sensor &&
-                  measurement_cov_norm_history[i] > kMeasCovFloor && // Only enforce decrease above floor
-                  current_measurement_cov_norm > measurement_cov_norm_history[i] * 1.06) { // Allow 5% fluctuation
-
+              if (i > 0 && current_measurement_cov_norm > measurement_cov_norm_history[i] * 1.06) { // Allow 5% fluctuation
                   FAIL() << "Measurement covariance norm increased significantly at t=" << t
                          << " (previous: " << measurement_cov_norm_history[i]
                          << ", current: " << current_measurement_cov_norm
@@ -360,12 +565,26 @@ protected:
                          << ", current: " << current_measurement_cov_norm << ")";
               }
 
+              // Check if estimated measurement covariance is approaching the true noise covariance
+              // Only check after sufficient iterations for adaptation to occur and only if noise was added
+              if (add_noise && i > 100) {
+                  // Calculate Frobenius norm of the difference between estimated and true covariance
+                  Eigen::MatrixXd cov_diff = sensor->GetMeasurementCovariance() - noise_covariance;
+                  double cov_diff_norm = cov_diff.norm();
+
+                  // Relative error should be less than 50% after sufficient iterations
+                  double rel_error = cov_diff_norm / std::max(1e-10, noise_covariance.norm());
+                  EXPECT_LT(rel_error, 0.5)
+                      << "Estimated measurement covariance not converging to true noise at t=" << t
+                      << " (relative error: " << rel_error * 100 << "%)";
+              }
+
               // Update last good state
               last_good_state = updated_state;
               last_good_cov = updated_cov;
           }
           catch (const std::exception& e) {
-              FAIL() << "Exception during filter operation at t=" << t << ": " << e.what();
+              FAIL() << "Exception caught at t=" << t << ": " << e.what();
           }
       }
 
@@ -405,31 +624,44 @@ protected:
   }
 };
 
-// Test with sensor initialized in the test itself
+// Test with BodyVelocitySensorModel
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates) {
-  // Create sensor in the test
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
 
-  // Test with automatic state detection based on sensor capabilities
-  TestSensorImprovesStateEstimates(body_vel_model);
+  // Zero noise for perfect measurements
+  Eigen::Matrix<double, 6, 6> zero_noise = Eigen::Matrix<double, 6, 6>::Zero();
+
+  TestSensorImprovesStateEstimates(body_vel_model, zero_noise);
 }
 
 // Test with PositionSensorModel
 TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
-  TestSensorImprovesStateEstimates(position_model);
+
+  // Zero noise for perfect measurements
+  Eigen::Matrix<double, 3, 3> zero_noise = Eigen::Matrix<double, 3, 3>::Zero();
+
+  TestSensorImprovesStateEstimates(position_model, zero_noise);
 }
 
 // Test with PoseSensorModel
 TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates) {
   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
-  TestSensorImprovesStateEstimates(pose_model);
+
+  // Zero noise for perfect measurements
+  Eigen::Matrix<double, 7, 7> zero_noise = Eigen::Matrix<double, 7, 7>::Zero();
+
+  TestSensorImprovesStateEstimates(pose_model, zero_noise);
 }
 
 // Test with ImuSensorModel
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
-  TestSensorImprovesStateEstimates(imu_model);
+
+  // Zero noise for perfect measurements
+  Eigen::Matrix<double, 6, 6> zero_noise = Eigen::Matrix<double, 6, 6>::Zero();
+
+  TestSensorImprovesStateEstimates(imu_model, zero_noise);
 }
 
 } // namespace kinematic_arbiter
