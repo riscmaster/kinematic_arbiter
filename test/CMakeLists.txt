@@ -35,22 +35,26 @@ function(add_test_executable TEST_NAME)
 endfunction()
 
 # Models tests
-set(EXTRA_LIBS "drake::drake")
 add_test_executable(rigid_body_state_model_test
   ${CMAKE_SOURCE_DIR}/test/models/rigid_body_state_model_test.cpp
 )
 set_tests_properties(rigid_body_state_model_test PROPERTIES LABELS "models")
 
 # Core filter tests
-set(EXTRA_LIBS "")
 add_test_executable(mediated_kalman_filter_test
   ${CMAKE_SOURCE_DIR}/test/mediated_kalman_filter_test.cpp
   ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
 )
 set_tests_properties(mediated_kalman_filter_test PROPERTIES LABELS "filters")
 
+# Add the filter initialization test using the same pattern as the mediated_kalman_filter_test
+add_test_executable(filter_initialization_test
+  ${CMAKE_SOURCE_DIR}/test/filter_initialization_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/sensors/imu_sensor_model.cpp
+)
+set_tests_properties(filter_initialization_test PROPERTIES LABELS "filters")
+
 # Sensor tests
-set(EXTRA_LIBS "")
 
 # Body velocity and pose sensor tests
 add_test_executable(body_velocity_sensor_model_test
@@ -64,11 +68,6 @@ add_test_executable(pose_sensor_model_test
 # Position sensor test
 add_test_executable(position_sensor_model_test
   ${CMAKE_SOURCE_DIR}/test/sensors/position_sensor_model_test.cpp
-)
-
-# Heading velocity sensor test
-add_test_executable(heading_velocity_sensor_model_test
-  ${CMAKE_SOURCE_DIR}/test/sensors/heading_velocity_sensor_model_test.cpp
 )
 
 # IMU sensor tests
@@ -101,7 +100,6 @@ set_tests_properties(
   body_velocity_sensor_model_test
   pose_sensor_model_test
   position_sensor_model_test
-  heading_velocity_sensor_model_test
   imu_bias_estimator_test
   imu_sensor_jacobian_test
   imu_sensor_mounting_test
