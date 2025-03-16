@@ -8,6 +8,7 @@ find_package(Eigen3 REQUIRED)
 
 # Add test_utils.hpp directory to includes
 include_directories("${CMAKE_SOURCE_DIR}/test/kinematic_arbiter/core")
+include_directories("${CMAKE_SOURCE_DIR}/test/kinematic_arbiter/models")
 
 # Define a function to add a test with common settings
 function(add_test_executable TEST_NAME)

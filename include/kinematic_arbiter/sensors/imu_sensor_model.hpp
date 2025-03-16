@@ -72,7 +72,7 @@ public:
     : Base(sensor_pose_in_body_frame, params),
       bias_estimator_(config.bias_estimation_window_size),
       config_(config) {
-        // this->can_predict_input_accelerations_ = true;
+        this->can_predict_input_accelerations_ = true;
       }
 
   /**

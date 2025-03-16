@@ -122,7 +122,7 @@ public:
    * @brief Get whether the prediction model can predict input accelerations
    * @return True if the prediction model can predict input accelerations
    */
-  bool CanPredictInputAccelerations() {return can_predict_input_accelerations_;}
+  bool CanPredictInputAccelerations() const {return can_predict_input_accelerations_;}
 
   /**
    * @brief Get current measurement covariance

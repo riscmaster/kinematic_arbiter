@@ -114,11 +114,13 @@ public:
     // Velocity prediction (integrate acceleration)
     new_states.segment<3>(SIdx::LinearVelocity::Begin()) += time_step * linear_acceleration;
     new_states.segment<3>(SIdx::AngularVelocity::Begin()) += time_step * angular_acceleration;
-
-    // Acceleration is modelled as constant zero (system dynamics)
-    // This assumes no external forces are applied between updates
-    new_states.segment<3>(SIdx::LinearAcceleration::Begin()) = Vector3d::Zero();
-    new_states.segment<3>(SIdx::AngularAcceleration::Begin()) = Vector3d::Zero();
+    // Acceleration is modelled as exponential decay: a(t+dt) = a(t) * exp(-lambda * dt)
+    // With lambda = 46.05, acceleration decays to near zero within 0.1s
+    const double lambda = 46.05;
+    new_states.segment<3>(SIdx::LinearAcceleration::Begin()) =
+        linear_acceleration * std::exp(-lambda * time_step);
+    new_states.segment<3>(SIdx::AngularAcceleration::Begin()) =
+        angular_acceleration * std::exp(-lambda * time_step);
 
     return new_states;
   }

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstddef>
+#include <vector>
+#include <string>
+#include <unordered_map>
 
 namespace kinematic_arbiter {
 namespace core {
@@ -76,6 +79,45 @@ struct StateIndex {
   // Total size of the state vector for a full rigid body state
   static constexpr std::size_t kFullStateSize = 19;
 };
+
+// Function to get the names of initializable states
+std::vector<std::string> GetInitializableStateNames(const Eigen::Array<bool, 1, StateIndex::kFullStateSize>& initializable_states) {
+    // Map of state indices to their names
+    static const std::unordered_map<int, std::string> index_to_name = {
+        {StateIndex::Position::X, "Position X"},
+        {StateIndex::Position::Y, "Position Y"},
+        {StateIndex::Position::Z, "Position Z"},
+        {StateIndex::Quaternion::W, "Quaternion W"},
+        {StateIndex::Quaternion::X, "Quaternion X"},
+        {StateIndex::Quaternion::Y, "Quaternion Y"},
+        {StateIndex::Quaternion::Z, "Quaternion Z"},
+        {StateIndex::LinearVelocity::X, "Linear Velocity X"},
+        {StateIndex::LinearVelocity::Y, "Linear Velocity Y"},
+        {StateIndex::LinearVelocity::Z, "Linear Velocity Z"},
+        {StateIndex::AngularVelocity::X, "Angular Velocity X"},
+        {StateIndex::AngularVelocity::Y, "Angular Velocity Y"},
+        {StateIndex::AngularVelocity::Z, "Angular Velocity Z"},
+        {StateIndex::LinearAcceleration::X, "Linear Acceleration X"},
+        {StateIndex::LinearAcceleration::Y, "Linear Acceleration Y"},
+        {StateIndex::LinearAcceleration::Z, "Linear Acceleration Z"},
+        {StateIndex::AngularAcceleration::X, "Angular Acceleration X"},
+        {StateIndex::AngularAcceleration::Y, "Angular Acceleration Y"},
+        {StateIndex::AngularAcceleration::Z, "Angular Acceleration Z"}
+    };
+
+    // Vector to store the names of the initializable states
+    std::vector<std::string> state_names;
+
+    // Populate the vector with names based on the indices
+    for (int index : initializable_states) {
+        auto it = index_to_name.find(index);
+        if (it != index_to_name.end()) {
+            state_names.push_back(it->second);
+        }
+    }
+
+    return state_names;
+}
 
 } // namespace core
 } // namespace kinematic_arbiter
