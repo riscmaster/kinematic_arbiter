@@ -10,24 +10,24 @@ namespace sensors {
 using core::StateIndex;
 using namespace Eigen;
 
-namespace {
+// namespace {
 
-constexpr double kGravity = 9.80665;
+// constexpr double kGravity = 9.80665;
 constexpr double kEpsilon = 1e-12;
 
-Vector3d QuaternionLog(const Quaterniond& q) {
-    const double w_clamped = std::clamp(q.w(), -1.0 + kEpsilon, 1.0 - kEpsilon);
-    const Vector3d v = q.vec();
-    const double v_norm = v.norm();
+// Vector3d QuaternionLog(const Quaterniond& q) {
+//     const double w_clamped = std::clamp(q.w(), -1.0 + kEpsilon, 1.0 - kEpsilon);
+//     const Vector3d v = q.vec();
+//     const double v_norm = v.norm();
 
-    if(v_norm < kEpsilon)
-        return Vector3d::Zero();
+//     if(v_norm < kEpsilon)
+//         return Vector3d::Zero();
 
-    const double theta = 2.0 * std::acos(w_clamped);
-    return theta * v.normalized();
-}
+//     const double theta = 2.0 * std::acos(w_clamped);
+//     return theta * v.normalized();
+// }
 
-} // namespace
+// } // namespace
 
 ImuSensorModel::MeasurementVector ImuSensorModel::PredictMeasurement(
     const StateVector& state) const {
@@ -193,7 +193,7 @@ ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
 
 Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
     const StateVector& state_before_prediction,
-    const StateCovariance& state_covariance_before_prediction,
+    const StateCovariance& ,
     const MeasurementVector& measurement_after_prediction,
     double dt) const {
 
@@ -212,7 +212,7 @@ Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
     }
 
     const Matrix3d R_SB = sensor_pose_in_body_frame_.rotation().transpose();
-    const Vector3d r = sensor_pose_in_body_frame_.translation();
+    // const Vector3d r = sensor_pose_in_body_frame_.translation();
 
     // // Orientation Update====================================
     // Quaterniond q_prev(

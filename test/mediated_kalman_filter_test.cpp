@@ -20,6 +20,12 @@ using SIdx = kinematic_arbiter::core::StateIndex;
 
 namespace kinematic_arbiter {
 
+// Helper function to check for NaN values in Eigen matrices and vectors
+template<typename Derived>
+bool hasNaN(const Eigen::MatrixBase<Derived>& matrix) {
+  return !(matrix.array() == matrix.array()).all();
+}
+
 // Test fixture
 class MediatedKalmanFilterTest : public ::testing::Test {
 protected:
@@ -41,9 +47,7 @@ protected:
   std::shared_ptr<kinematic_arbiter::models::RigidBodyStateModel> state_model_;
 
   void PrintFilterDiagnostics(
-      const std::shared_ptr<FilterType>& filter,
       const std::shared_ptr<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>& sensor,
-      double t,
       const StateVector& true_state,
       const StateVector& predicted_state,
       const StateMatrix& predicted_cov,
@@ -121,7 +125,7 @@ protected:
 
     // Print Jacobian for initializable states
     std::cerr << "Jacobian for Initializable States:\n";
-    for (size_t idx = 0; idx < initializable_states.size(); ++idx) {
+    for (Eigen::Index idx = 0; idx < initializable_states.size(); ++idx) {
         int i = initializable_states[idx];
         std::cerr << state_names[idx] << ": ";
         for (int j = 0; j < aux_data.jacobian.cols(); ++j) {
@@ -132,7 +136,7 @@ protected:
 
     // Print Kalman gain for initializable states
     std::cerr << "Kalman Gain for Initializable States:\n";
-    for (size_t idx = 0; idx < initializable_states.size(); ++idx) {
+    for (Eigen::Index idx = 0; idx < initializable_states.size(); ++idx) {
         int i = initializable_states[idx];
         std::cerr << state_names[idx] << ": ";
         for (int j = 0; j < std::min(3, static_cast<int>(K.cols())); ++j) {
@@ -178,23 +182,18 @@ protected:
 
       // Initialize with true state
       StateVector prev_state = kinematic_arbiter::testing::Figure8Trajectory(t);
-      filter->SetStateEstimate(prev_state);
-
       // Set initial covariance
       StateMatrix prev_covariance = StateMatrix::Identity() * 0.1;
-      filter->SetStateCovariance(prev_covariance);
+      filter->SetStateEstimate(prev_state, t, prev_covariance);
+      ASSERT_EQ(filter->IsInitialized(), true) << "Filter not initialized during initialization";
+      ASSERT_EQ(filter->GetStateEstimate(), prev_state) << "State not updated during initialization";
+      ASSERT_EQ(filter->GetCurrentTime(), t) << "Time not updated during initialization";
+      ASSERT_EQ(filter->GetStateCovariance(), prev_covariance) << "Covariance not updated during initialization";
 
       // Get initializable states from the sensor
-      StateFlags initializable_flags = sensor->GetInitializableStates();
-
-      // Function to check for NaNs
-      auto hasNaN = [](const auto& mat) -> bool {
-          return !(mat.array() == mat.array()).all();
-      };
-
-      // Last successful state for diagnostics in error messages
-      StateVector last_good_state = prev_state;
-      StateMatrix last_good_cov = prev_covariance;
+      [[maybe_unused]] StateFlags initializable_flags = sensor->GetInitializableStates();
+      [[maybe_unused]] StateVector last_good_state = prev_state;
+      [[maybe_unused]] StateMatrix last_good_cov = prev_covariance;
 
       // Track measurement covariance norm to test convergence
       std::vector<double> measurement_cov_norm_history;
@@ -237,6 +236,7 @@ protected:
 
       // Test for 10 seconds (200 steps at 0.05s per step)
       for (int i = 0; i < 200; i++) {
+          ASSERT_EQ(filter->GetCurrentTime(), t) << "Time mismatch at loop iteration " << i << ": t = " << t+dt;
           t += dt;
 
 
@@ -253,9 +253,9 @@ protected:
         if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
             FAIL() << "NaN detected in state or covariance after prediction at t=" << t;
         }
-        ASSERT_EQ(filter->GetCurrentTime(), t-dt) << "Time mismatch at t=" << t-dt;
+        ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed before prediction";
         StateVector predicted_state = filter->GetStateEstimate(t);
-        ASSERT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed during prediction";
+        ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed after prediction";
 
         // Get measurement and add noise if needed
         auto measurement = sensor->PredictMeasurement(true_state);
@@ -288,8 +288,14 @@ protected:
         StateVector updated_state = filter->GetStateEstimate();
         StateMatrix updated_cov = filter->GetStateCovariance();
         // Calculate prediction error and update error for each initializable state
-        for (size_t idx = 0; idx < initializable_states.size(); ++idx) {
+        for (Eigen::Index idx = 0; idx < initializable_states.size(); ++idx) {
           int state_idx = initializable_states[idx];
+
+          // Skip this check if the state isn't actually initializable by this sensor
+          StateFlags initializable_flags = sensor->GetInitializableStates();
+          if (!initializable_flags[state_idx]) {
+            continue;  // Skip checks for states this sensor can't initialize
+          }
 
           // Special handling for quaternion components
           if (state_idx == SIdx::Quaternion::X ||
@@ -349,17 +355,16 @@ protected:
                     // Call PrintFilterDiagnostics to get more detailed information
                     // Only call PrintFilterDiagnostics if measurement is 6D
                     if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                      PrintFilterDiagnostics(
-                          filter,
-                          std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
-                          t,
-                          true_state,
-                        predicted_state,
-                        filter->GetStateCovariance(),
-                        updated_state,
-                        measurement,
-                        aux_data,
-                        "State " + state_names[idx] + " estimate got worse");
+                        PrintFilterDiagnostics(
+                            std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                            true_state,
+                            predicted_state,
+                            filter->GetStateCovariance(),
+                            updated_state,
+                            measurement,
+                            aux_data,
+                            "State " + state_names[idx] + " estimate got worse");
+                    }
 
                     return ss.str();
                 }();
@@ -373,7 +378,6 @@ protected:
       SUCCEED() << "All initializable states improved";
   }
 };
-
 // Test with BodyVelocitySensorModel
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates) {
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();

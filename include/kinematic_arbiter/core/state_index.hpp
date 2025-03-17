@@ -81,7 +81,7 @@ struct StateIndex {
 };
 
 // Function to get the names of initializable states
-std::vector<std::string> GetInitializableStateNames(const Eigen::Array<bool, 1, StateIndex::kFullStateSize>& initializable_states) {
+inline std::vector<std::string> GetInitializableStateNames(const Eigen::Array<bool, 1, StateIndex::kFullStateSize>& initializable_states) {
     // Map of state indices to their names
     static const std::unordered_map<int, std::string> index_to_name = {
         {StateIndex::Position::X, "Position X"},

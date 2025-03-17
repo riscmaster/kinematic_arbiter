@@ -166,15 +166,10 @@ public:
   /**
    * @brief Set state estimate
    */
-  void SetStateEstimate(const StateVector& state) {
+  void SetStateEstimate(const StateVector& state, double timestamp, const StateMatrix& covariance=StateMatrix::Identity()) {
     reference_state_ = state;
     initialized_states_ = StateFlags::Ones();
-  }
-
-  /**
-   * @brief Set state covariance
-   */
-  void SetStateCovariance(const StateMatrix& covariance) {
+    reference_time_ = timestamp;
     reference_covariance_ = covariance;
   }
 
