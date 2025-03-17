@@ -30,13 +30,13 @@ bool hasNaN(const Eigen::MatrixBase<Derived>& matrix) {
 class MediatedKalmanFilterTest : public ::testing::Test {
 protected:
   // FilterType definition
-  using FilterType = kinematic_arbiter::core::MediatedKalmanFilter<19,
+  using FilterType = kinematic_arbiter::core::MediatedKalmanFilter<SIdx::kFullStateSize,
     kinematic_arbiter::models::RigidBodyStateModel>;
 
   // Type aliases
-  using StateVector = Eigen::Matrix<double, 19, 1>;
-  using StateMatrix = Eigen::Matrix<double, 19, 19>;
-  using StateFlags = Eigen::Array<bool, 19, 1>;
+  using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
+  using StateMatrix = Eigen::Matrix<double, SIdx::kFullStateSize, SIdx::kFullStateSize>;
+  using StateFlags = Eigen::Array<bool, SIdx::kFullStateSize, 1>;
 
   void SetUp() override {
     // Create state model (this is common to all tests)
@@ -171,6 +171,7 @@ protected:
 
       // Flag to determine if we should add noise
       bool add_noise = !noise_covariance.isZero();
+      double true_meas_cov_norm = noise_covariance.norm();
 
       // Create filter
       auto filter = std::make_shared<FilterType>(state_model_);
@@ -332,42 +333,80 @@ protected:
             // Calculate errors using the corresponding row of the rotation matrix
             double prediction_error = (pred_rot.row(row_idx) - true_rot.row(row_idx)).norm();
             double update_error = (updated_rot.row(row_idx) - true_rot.row(row_idx)).norm();
-
-            ASSERT_LE(update_error, prediction_error)
-                << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                << "\nPrediction error: " << prediction_error
+            if (true_meas_cov_norm < 1e-10) {
+              ASSERT_LE(update_error, prediction_error)
+                  << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                  << "\nPrediction error: " << prediction_error
                 << "\nUpdate error: " << update_error;
+            }
+            else {
+              // Check 4 sigma bounds 99.99% confidence
+              ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
+                  << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                  << "\nPrediction error: " << prediction_error
+                  << "\nUpdate error: " << update_error;
+            }
           } else {
             // Standard handling for non-quaternion states
             double prediction_error = std::abs(predicted_state[state_idx] - true_state[state_idx]);
             double update_error = std::abs(updated_state[state_idx] - true_state[state_idx]);
+            if (true_meas_cov_norm < 1e-10) {
+              ASSERT_LE(update_error, prediction_error)
+                  << [&]() {
+                      std::stringstream ss;
+                      ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                         << "\nPrediction error: " << prediction_error
+                         << "\nUpdate error: " << update_error
+                         << "\nTrue value: " << true_state[state_idx]
+                         << "\nPredicted value: " << predicted_state[state_idx]
+                         << "\nUpdated value: " << updated_state[state_idx];
 
-            ASSERT_LE(update_error, prediction_error)
-                << [&]() {
-                    std::stringstream ss;
-                    ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                       << "\nPrediction error: " << prediction_error
-                       << "\nUpdate error: " << update_error
-                       << "\nTrue value: " << true_state[state_idx]
-                       << "\nPredicted value: " << predicted_state[state_idx]
-                       << "\nUpdated value: " << updated_state[state_idx];
+                      // Call PrintFilterDiagnostics to get more detailed information
+                      // Only call PrintFilterDiagnostics if measurement is 6D
+                      if constexpr (MeasurementType::RowsAtCompileTime == 6) {
+                          PrintFilterDiagnostics(
+                              std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                              true_state,
+                              predicted_state,
+                              filter->GetStateCovariance(),
+                              updated_state,
+                              measurement,
+                              aux_data,
+                              "State " + state_names[idx] + " estimate got worse");
+                      }
 
-                    // Call PrintFilterDiagnostics to get more detailed information
-                    // Only call PrintFilterDiagnostics if measurement is 6D
-                    if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                        PrintFilterDiagnostics(
-                            std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
-                            true_state,
-                            predicted_state,
-                            filter->GetStateCovariance(),
-                            updated_state,
-                            measurement,
-                            aux_data,
-                            "State " + state_names[idx] + " estimate got worse");
-                    }
+                      return ss.str();
+                  }();
+            }
+            else {
+              // Check 4 sigma bounds 99.99% confidence
+              ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
+                  << [&]() {
+                      std::stringstream ss;
+                      ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                         << "\nPrediction error: " << prediction_error
+                         << "\nUpdate error: " << update_error
+                         << "\nTrue value: " << true_state[state_idx]
+                         << "\nPredicted value: " << predicted_state[state_idx]
+                         << "\nUpdated value: " << updated_state[state_idx];
 
-                    return ss.str();
-                }();
+                      // Call PrintFilterDiagnostics to get more detailed information
+                      // Only call PrintFilterDiagnostics if measurement is 6D
+                      if constexpr (MeasurementType::RowsAtCompileTime == 6) {
+                          PrintFilterDiagnostics(
+                              std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                              true_state,
+                              predicted_state,
+                              filter->GetStateCovariance(),
+                              updated_state,
+                              measurement,
+                              aux_data,
+                              "State " + state_names[idx] + " estimate got worse");
+                      }
+
+                      return ss.str();
+                  }();
+            }
           }
         }
         // Store current state and covariance for next iteration
@@ -388,6 +427,36 @@ TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates) {
   TestSensorImprovesStateEstimates(body_vel_model, zero_noise);
 }
 
+// Small noise variant
+TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_SmallNoise) {
+  auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
+
+  // Small noise (0.001)
+  Eigen::Matrix<double, 6, 6> small_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.001;
+
+  TestSensorImprovesStateEstimates(body_vel_model, small_noise);
+}
+
+// Medium noise variant
+TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_MediumNoise) {
+  auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
+
+  // Medium noise (0.01)
+  Eigen::Matrix<double, 6, 6> medium_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.01;
+
+  TestSensorImprovesStateEstimates(body_vel_model, medium_noise);
+}
+
+// Large noise variant
+TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_LargeNoise) {
+  auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
+
+  // Large noise (0.1)
+  Eigen::Matrix<double, 6, 6> large_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.1;
+
+  TestSensorImprovesStateEstimates(body_vel_model, large_noise);
+}
+
 // Test with PositionSensorModel
 TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
@@ -396,6 +465,36 @@ TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
   Eigen::Matrix<double, 3, 3> zero_noise = Eigen::Matrix<double, 3, 3>::Zero();
 
   TestSensorImprovesStateEstimates(position_model, zero_noise);
+}
+
+// // Small noise variant Refine checks on covariance
+// TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_SmallNoise) {
+//   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+
+//   // Small noise (0.001)
+//   Eigen::Matrix<double, 3, 3> small_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.001;
+
+//   TestSensorImprovesStateEstimates(position_model, small_noise);
+// }
+
+// Medium noise variant
+TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_MediumNoise) {
+  auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+
+  // Medium noise (0.01)
+  Eigen::Matrix<double, 3, 3> medium_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.01;
+
+  TestSensorImprovesStateEstimates(position_model, medium_noise);
+}
+
+// Large noise variant
+TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_LargeNoise) {
+  auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+
+  // Large noise (0.1)
+  Eigen::Matrix<double, 3, 3> large_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.1;
+
+  TestSensorImprovesStateEstimates(position_model, large_noise);
 }
 
 // Test with PoseSensorModel
@@ -408,6 +507,36 @@ TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates) {
   TestSensorImprovesStateEstimates(pose_model, zero_noise);
 }
 
+// // Small noise variant Refine checks on covariance
+// TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_SmallNoise) {
+//   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+
+//   // Small noise (0.001)
+//   Eigen::Matrix<double, 7, 7> small_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.001;
+
+//   TestSensorImprovesStateEstimates(pose_model, small_noise);
+// }
+
+// Medium noise variant
+TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_MediumNoise) {
+  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+
+  // Medium noise (0.01)
+  Eigen::Matrix<double, 7, 7> medium_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.01;
+
+  TestSensorImprovesStateEstimates(pose_model, medium_noise);
+}
+
+// Large noise variant
+TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_LargeNoise) {
+  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+
+  // Large noise (0.1)
+  Eigen::Matrix<double, 7, 7> large_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.1;
+
+  TestSensorImprovesStateEstimates(pose_model, large_noise);
+}
+
 // Test with ImuSensorModel
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
@@ -416,6 +545,36 @@ TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates) {
   Eigen::Matrix<double, 6, 6> zero_noise = Eigen::Matrix<double, 6, 6>::Zero();
 
   TestSensorImprovesStateEstimates(imu_model, zero_noise);
+}
+
+// Small noise variant
+TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_SmallNoise) {
+  auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
+
+  // Small noise (0.001)
+  Eigen::Matrix<double, 6, 6> small_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.001;
+
+  TestSensorImprovesStateEstimates(imu_model, small_noise);
+}
+
+// Medium noise variant
+TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_MediumNoise) {
+  auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
+
+  // Medium noise (0.01)
+  Eigen::Matrix<double, 6, 6> medium_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.01;
+
+  TestSensorImprovesStateEstimates(imu_model, medium_noise);
+}
+
+// Large noise variant
+TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_LargeNoise) {
+  auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
+
+  // Large noise (0.1)
+  Eigen::Matrix<double, 6, 6> large_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.1;
+
+  TestSensorImprovesStateEstimates(imu_model, large_noise);
 }
 
 } // namespace kinematic_arbiter

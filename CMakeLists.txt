@@ -80,17 +80,22 @@ install(PROGRAMS
 
 # Install launch files
 install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}/
+  launch/
+  DESTINATION share/${PROJECT_NAME}/launch
 )
 
 # Install config files if they exist
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/config")
-  install(DIRECTORY
-    config
-    DESTINATION share/${PROJECT_NAME}/
+  install(DIRECTORY config/
+    DESTINATION share/${PROJECT_NAME}/config
   )
 endif()
+
+# Install rviz configurations
+install(DIRECTORY
+  rviz/
+  DESTINATION share/${PROJECT_NAME}/rviz
+)
 
 # C++ components that depend on Drake
 if(NOT BUILD_PYTHON_ONLY)
@@ -137,6 +142,78 @@ target_include_directories(kinematic_arbiter_core PUBLIC
 
 target_compile_features(kinematic_arbiter_core PUBLIC cxx_std_20)
 
+# ROS2 components - build conditionally based on BUILD_ROS2 flag
+
+# Find required ROS2 packages
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+
+# Create ROS2 wrapper library
+add_library(kinematic_arbiter_ros2
+  src/ros2/mkf_wrapper.cpp
+)
+
+# Link against core library and ROS2 dependencies
+target_link_libraries(kinematic_arbiter_ros2 PUBLIC
+  kinematic_arbiter_core
+  ${rclcpp_LIBRARIES}
+  ${geometry_msgs_LIBRARIES}
+  ${sensor_msgs_LIBRARIES}
+  ${tf2_LIBRARIES}
+  ${tf2_ros_LIBRARIES}
+)
+
+# Include ROS2 headers
+target_include_directories(kinematic_arbiter_ros2 PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${rclcpp_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
+  ${sensor_msgs_INCLUDE_DIRS}
+  ${tf2_INCLUDE_DIRS}
+  ${tf2_ros_INCLUDE_DIRS}
+)
+
+# Set C++ standard
+target_compile_features(kinematic_arbiter_ros2 PUBLIC cxx_std_20)
+
+# Create the ROS2 node executable
+add_executable(kinematic_arbiter_node
+  src/ros2/main.cpp
+  src/ros2/kinematic_arbiter_node.cpp
+)
+
+# Link against wrapper library
+target_link_libraries(kinematic_arbiter_node
+  kinematic_arbiter_ros2
+)
+
+# Figure 8 simulator node
+add_executable(figure8_simulator_node
+  src/ros2/simulation/figure8_simulator_node.cpp
+)
+
+target_link_libraries(figure8_simulator_node
+  kinematic_arbiter_ros2
+  ${tf2_ros_LIBRARIES}
+)
+
+# Install ROS2 targets
+install(TARGETS
+  kinematic_arbiter_ros2
+  kinematic_arbiter_node
+  figure8_simulator_node
+  EXPORT export_${PROJECT_NAME}
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+# Export the ROS2 library in package.xml
+ament_export_libraries(kinematic_arbiter_ros2)
+
+
 # Install targets
 install(TARGETS kinematic_arbiter_core
   EXPORT export_${PROJECT_NAME}
@@ -144,11 +221,6 @@ install(TARGETS kinematic_arbiter_core
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include
-)
-
-install(
-  DIRECTORY include/
-  DESTINATION include
 )
 
 # Find Eigen3

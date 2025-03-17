@@ -122,4 +122,34 @@ add_test_executable(test_drake_integration
 )
 set_tests_properties(test_drake_integration PROPERTIES LABELS "integration")
 
+
+# Add ROS2 wrapper test
+add_test_executable(mkf_wrapper_test
+  ${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_test.cpp
+  ${CMAKE_SOURCE_DIR}/src/ros2/mkf_wrapper.cpp
+)
+
+# Find required ROS2 packages
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+
+# Link with the main library and ROS2 dependencies
+target_link_libraries(mkf_wrapper_test PRIVATE
+  kinematic_arbiter_core
+  ${rclcpp_LIBRARIES}
+  ${geometry_msgs_LIBRARIES}
+  ${sensor_msgs_LIBRARIES}
+)
+
+# Add ROS2-specific include directories
+target_include_directories(mkf_wrapper_test PRIVATE
+  ${rclcpp_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
+  ${sensor_msgs_INCLUDE_DIRS}
+)
+
+set_tests_properties(mkf_wrapper_test PROPERTIES LABELS "ros2;wrapper")
+
+
 message(STATUS "Added all tests to test framework")
