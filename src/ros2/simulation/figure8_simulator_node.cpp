@@ -38,14 +38,12 @@ public:
       const Eigen::Isometry3d& transform,
       double noise_sigma,
       double publish_rate,
-      const rclcpp::Time& start_time,
       const kinematic_arbiter::utils::Figure8Config& trajectory_config)
     : node_(node),
       sensor_name_(sensor_name),
       sensor_model_(std::make_shared<sensors::PositionSensorModel>(transform)),
       noise_sigma_(noise_sigma),
       publish_rate_(publish_rate),
-      start_time_(start_time),
       trajectory_config_(trajectory_config) {
 
     // Create publishers
@@ -67,11 +65,6 @@ public:
 
     // Create covariance from sigma
     updateCovariance();
-
-    // Create timer with sensor-specific publish rate
-    timer_ = node_->create_wall_timer(
-        std::chrono::milliseconds(static_cast<int>(1000.0 / publish_rate_)),
-        std::bind(&PositionSensorSimulator::generateAndPublishMeasurements, this));
   }
 
   void updateConfiguration(
@@ -80,29 +73,16 @@ public:
       double publish_rate) {
     sensor_model_ = std::make_shared<sensors::PositionSensorModel>(transform);
     noise_sigma_ = noise_sigma;
+    publish_rate_ = publish_rate;
     updateCovariance();
-
-    // Update publish rate if changed
-    if (publish_rate_ != publish_rate) {
-      publish_rate_ = publish_rate;
-      timer_ = node_->create_wall_timer(
-          std::chrono::milliseconds(static_cast<int>(1000.0 / publish_rate_)),
-          std::bind(&PositionSensorSimulator::generateAndPublishMeasurements, this));
-    }
   }
 
   void updateTrajectoryConfig(const kinematic_arbiter::utils::Figure8Config& config) {
     trajectory_config_ = config;
   }
 
-  void updateStartTime(const rclcpp::Time& start_time) {
-    start_time_ = start_time;
-  }
-
-  // Generate and publish measurements based on sensor's own timer
-  void generateAndPublishMeasurements() {
+  void generateAndPublishMeasurements(double elapsed_seconds) {
     auto current_time = node_->now();
-    double elapsed_seconds = (current_time - start_time_).seconds();
 
     // Generate trajectory state at current time
     StateVector state = kinematic_arbiter::utils::Figure8Trajectory(
@@ -145,7 +125,6 @@ private:
       const rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr& publisher,
       const MeasurementVector& point,
       const rclcpp::Time& time) {
-
     geometry_msgs::msg::PointStamped msg;
     msg.header.stamp = time;
     msg.header.frame_id = node_->get_parameter("frame_id").as_string();
@@ -163,7 +142,6 @@ private:
   double noise_sigma_;
   double publish_rate_;
   MeasurementCovariance measurement_covariance_;
-  rclcpp::Time start_time_;
   kinematic_arbiter::utils::Figure8Config trajectory_config_;
 
   // Publishers
@@ -171,9 +149,6 @@ private:
   rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr measurement_pub_;
   rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr upper_bound_pub_;
   rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr lower_bound_pub_;
-
-  // Timer for this sensor's publishing
-  rclcpp::TimerBase::SharedPtr timer_;
 
   // Random number generator
   std::mt19937 generator_;
@@ -213,88 +188,149 @@ public:
   using SIdx = core::StateIndex;
   using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
 
-  Figure8SimulatorNode() : Node("figure8_simulator"), generator_(std::random_device{}()) {
-    // Declare base parameters
-    this->declare_parameter("publish_rate", 50.0);
-    this->declare_parameter("frame_id", "odom");
-    this->declare_parameter("base_frame_id", "base_link");
+  Figure8SimulatorNode()
+    : Node("figure8_simulator") {
 
-    // Trajectory parameters
-    this->declare_parameter("trajectory.max_velocity", 1.0);
+    // Add the parent frequency parameter
+    this->declare_parameter("parent_frequency", 20.0);  // Default 20Hz
+    double requested_parent_freq = this->get_parameter("parent_frequency").as_double();
+    parent_frequency_ = std::min(requested_parent_freq, 100.0);  // Cap at 100Hz
+
+    // Other parameters
+    this->declare_parameter("trajectory.max_vel", 1.0);
     this->declare_parameter("trajectory.length", 5.0);
-    this->declare_parameter("trajectory.width", 2.5);
+    this->declare_parameter("trajectory.width", 3.0);
     this->declare_parameter("trajectory.width_slope", 0.1);
-    this->declare_parameter("trajectory.angular_scale", 0.5);
+    this->declare_parameter("trajectory.angular_scale", 0.1);
 
-    // Position sensors parameter (list of sensor names)
-    this->declare_parameter("position_sensors", std::vector<std::string>{"position1"});
+    this->declare_parameter("frame_id", "world");
+    this->declare_parameter("base_frame_id", "base_link");
+    this->declare_parameter("publish_rate", 30.0);
+    this->declare_parameter("sensors", std::vector<std::string>());
 
-    // Load parameters
-    loadParameters();
+    // Get parameters
+    auto max_vel = this->get_parameter("trajectory.max_vel").as_double();
+    auto length = this->get_parameter("trajectory.length").as_double();
+    auto width = this->get_parameter("trajectory.width").as_double();
+    auto width_slope = this->get_parameter("trajectory.width_slope").as_double();
+    auto angular_scale = this->get_parameter("trajectory.angular_scale").as_double();
 
-    // Create trajectory publishers
-    true_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
-        "ground_truth/pose", 10);
-    true_velocity_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>(
-        "ground_truth/velocity", 10);
-    true_accel_pub_ = this->create_publisher<geometry_msgs::msg::AccelStamped>(
-        "ground_truth/acceleration", 10);
-
-    // Create TF broadcaster
-    tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
-
-    // Set up parameter callback
-    params_callback_handle_ = this->add_on_set_parameters_callback(
-        std::bind(&Figure8SimulatorNode::parametersCallback, this, std::placeholders::_1));
-
-    // Create sensors based on parameter list
-    createSensorsFromParams();
-
-    // Record start time
-    start_time_ = this->now();
-
-    // Create timer for trajectory updates
-    trajectory_timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(static_cast<int>(1000.0 / publish_rate_)),
-        std::bind(&Figure8SimulatorNode::publishTrajectory, this));
-  }
-
-private:
-  void loadParameters() {
-    // Get base parameters
     publish_rate_ = this->get_parameter("publish_rate").as_double();
     frame_id_ = this->get_parameter("frame_id").as_string();
     base_frame_id_ = this->get_parameter("base_frame_id").as_string();
 
-    // Load trajectory configuration
-    trajectory_config_.max_velocity = this->get_parameter("trajectory.max_velocity").as_double();
-    trajectory_config_.length = this->get_parameter("trajectory.length").as_double();
-    trajectory_config_.width = this->get_parameter("trajectory.width").as_double();
-    trajectory_config_.width_slope = this->get_parameter("trajectory.width_slope").as_double();
-    trajectory_config_.angular_scale = this->get_parameter("trajectory.angular_scale").as_double();
+    // Configure trajectory
+    trajectory_config_.max_velocity = max_vel;
+    trajectory_config_.length = length;
+    trajectory_config_.width = width;
+    trajectory_config_.width_slope = width_slope;
+    trajectory_config_.angular_scale = angular_scale;
 
-    RCLCPP_INFO(this->get_logger(),
-                "Loaded trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
-                trajectory_config_.max_velocity,
-                trajectory_config_.length,
-                trajectory_config_.width);
+    RCLCPP_INFO(this->get_logger(), "Loaded trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
+               max_vel, length, width);
+    // Create publishers
+    true_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
+      "trajectory/pose", 10);
+
+    true_velocity_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>(
+      "trajectory/velocity", 10);
+
+    true_accel_pub_ = this->create_publisher<geometry_msgs::msg::AccelStamped>(
+      "trajectory/acceleration", 10);
+
+    // Setup transform broadcaster
+    tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+
+    // Set starting time
+    elapsed_seconds_ = 0.0;
+    start_time_ = this->now(); // Still store this for logging, but don't use for calculations
+
+    // Initialize sensors
+    setupSensors();
+
+    // Create parameter callback
+    params_callback_handle_ = this->add_on_set_parameters_callback(
+      std::bind(&Figure8SimulatorNode::parametersCallback, this, std::placeholders::_1));
+
+    // Create parent timer using the parent frequency
+    double period_ms = 1000.0 / parent_frequency_;
+    trajectory_timer_ = this->create_wall_timer(
+      std::chrono::duration<double, std::milli>(period_ms),
+      std::bind(&Figure8SimulatorNode::timerCallback, this));
+
+    RCLCPP_INFO(this->get_logger(), "Figure8 simulator running at %.1f Hz parent frequency",
+                parent_frequency_);
   }
 
-  void createSensorsFromParams() {
-    // Get list of position sensors
-    auto sensor_names = this->get_parameter("position_sensors").as_string_array();
+private:
+  // Validate if a sensor frequency is compatible with parent frequency
+  double validateFrequency(double requested_freq) {
+    if (requested_freq > parent_frequency_) {
+      RCLCPP_WARN(this->get_logger(),
+          "Requested frequency %.1f Hz exceeds parent frequency %.1f Hz. Using parent frequency.",
+          requested_freq, parent_frequency_);
+      return parent_frequency_;
+    }
 
-    for (const auto& name : sensor_names) {
-      // Declare parameters for this sensor if they don't exist
+    // Calculate ticks per publication
+    double ticks_per_pub = parent_frequency_ / requested_freq;
+    int rounded_ticks = std::round(ticks_per_pub);
+
+    // Calculate actual frequency
+    double actual_freq = parent_frequency_ / rounded_ticks;
+
+    // Warn if significant adjustment
+    if (std::abs(actual_freq - requested_freq) > 0.01) {
+      RCLCPP_WARN(this->get_logger(),
+          "Adjusted sensor frequency from %.1f Hz to %.1f Hz to match parent frequency",
+          requested_freq, actual_freq);
+    }
+
+    return actual_freq;
+  }
+
+  // New combined timer callback that handles everything
+  void timerCallback() {
+    // Update elapsed time
+    elapsed_seconds_ += 1.0 / parent_frequency_;
+
+    // Publish trajectory at requested rate
+    publishTrajectory();
+
+    // Check which sensors should publish this tick
+    for (auto& [name, sensor] : position_sensors_) {
+      double sensor_rate = sensor->getPublishRate();
+      int ticks_per_pub = std::round(parent_frequency_ / sensor_rate);
+
+      // Check if this sensor should publish based on frame count
+      if (tick_counter_ % ticks_per_pub == 0) {
+        sensor->generateAndPublishMeasurements(elapsed_seconds_);
+      }
+    }
+
+    // Increment tick counter
+    tick_counter_++;
+  }
+
+  void setupSensors() {
+    auto sensors = this->get_parameter("sensors").as_string_array();
+
+    // Setup sensors based on parameters
+    for (const auto& name : sensors) {
+      // Declare parameters for this sensor if not already declared
       declarePositionSensorParams(name);
 
-      // Create the sensor
+      // Get parameters
       auto sensor_base = "sensors." + name;
       auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
       auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
       double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-      double sensor_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
+      double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
 
+      // Validate and adjust sensor rate to be compatible with parent frequency
+      double actual_rate = validateFrequency(requested_rate);
+
+      // Create transform
       Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
       transform.translation() = Eigen::Vector3d(
           position_param[0], position_param[1], position_param[2]);
@@ -307,30 +343,33 @@ private:
       q.normalize();
       transform.linear() = q.toRotationMatrix();
 
-      // Create and store the sensor
+      // Create the sensor
       position_sensors_[name] = std::make_unique<PositionSensorSimulator>(
-          this, name, transform, noise_sigma, sensor_rate, start_time_, trajectory_config_);
+          this, name, transform, noise_sigma, actual_rate, trajectory_config_);
 
       RCLCPP_INFO(this->get_logger(),
-                  "Created position sensor: %s (%.1f Hz, sigma=%.3f)",
-                  name.c_str(), sensor_rate, noise_sigma);
+                 "Created position sensor: %s (%.1f Hz, sigma=%.3f)",
+                 name.c_str(), actual_rate, noise_sigma);
     }
   }
 
   void declarePositionSensorParams(const std::string& name) {
-    auto sensor_base = "sensors." + name;
+    auto prefix = "sensors." + name;
 
-    // Default sensor positioned at the origin
-    this->declare_parameter(sensor_base + ".position", std::vector<double>{0.0, 0.0, 0.0});
+    // Skip if already declared
+    if (this->has_parameter(prefix + ".position")) {
+      return;
+    }
 
-    // Default identity quaternion (w, x, y, z)
-    this->declare_parameter(sensor_base + ".quaternion", std::vector<double>{1.0, 0.0, 0.0, 0.0});
+    // Position (x, y, z)
+    this->declare_parameter(prefix + ".position", std::vector<double>{0.0, 0.0, 0.0});
 
-    // Default noise sigma
-    this->declare_parameter(sensor_base + ".noise_sigma", 0.05);
+    // Orientation (w, x, y, z)
+    this->declare_parameter(prefix + ".quaternion", std::vector<double>{1.0, 0.0, 0.0, 0.0});
 
-    // Default publish rate (10 Hz)
-    this->declare_parameter(sensor_base + ".publish_rate", 10.0);
+    // Noise and rate
+    this->declare_parameter(prefix + ".noise_sigma", 0.1);
+    this->declare_parameter(prefix + ".publish_rate", 10.0);
   }
 
   rcl_interfaces::msg::SetParametersResult parametersCallback(
@@ -338,106 +377,131 @@ private:
 
     rcl_interfaces::msg::SetParametersResult result;
     result.successful = true;
-    result.reason = "Success";
 
-    bool update_trajectory_config = false;
-    bool update_trajectory_rate = false;
-    std::set<std::string> sensors_to_update;
+    bool update_trajectory = false;
+    bool update_sensors = false;
+    std::set<std::string> updated_sensors;
 
     for (const auto& param : parameters) {
-      const std::string& name = param.get_name();
+      const auto& name = param.get_name();
 
-      // Handle trajectory parameters
-      if (name == "trajectory.max_velocity") {
-        trajectory_config_.max_velocity = param.as_double();
-        update_trajectory_config = true;
-      } else if (name == "trajectory.length") {
-        trajectory_config_.length = param.as_double();
-        update_trajectory_config = true;
-      } else if (name == "trajectory.width") {
-        trajectory_config_.width = param.as_double();
-        update_trajectory_config = true;
-      } else if (name == "trajectory.width_slope") {
-        trajectory_config_.width_slope = param.as_double();
-        update_trajectory_config = true;
-      } else if (name == "trajectory.angular_scale") {
-        trajectory_config_.angular_scale = param.as_double();
-        update_trajectory_config = true;
-      } else if (name == "publish_rate") {
-        publish_rate_ = param.as_double();
-        update_trajectory_rate = true;
-      } else if (name == "frame_id") {
-        frame_id_ = param.as_string();
-      } else if (name == "base_frame_id") {
-        base_frame_id_ = param.as_string();
-      } else if (name == "position_sensors") {
-        // Handle changes to the sensor list
-        auto new_sensor_names = param.as_string_array();
-        updateSensorList(new_sensor_names);
-      } else if (name.find("sensors.") == 0) {
-        // Extract sensor name from parameter
-        size_t first_dot = name.find('.');
-        size_t second_dot = name.find('.', first_dot + 1);
-        if (second_dot != std::string::npos) {
-          std::string sensor_name = name.substr(first_dot + 1, second_dot - first_dot - 1);
-          sensors_to_update.insert(sensor_name);
+      // Check for trajectory parameter updates
+      if (name.find("trajectory.") == 0) {
+        update_trajectory = true;
+      }
+
+      // Check for sensor parameter updates
+      else if (name.find("sensors.") == 0) {
+        // Format: sensors.<name>.<param>
+        auto parts = splitString(name, '.');
+        if (parts.size() >= 2) {
+          updated_sensors.insert(parts[1]);
+          update_sensors = true;
+        }
+      }
+
+      // Check for sensor list update
+      else if (name == "sensors") {
+        update_sensors = true;
+      }
+
+      // Parent frequency update
+      else if (name == "parent_frequency") {
+        double requested_freq = param.as_double();
+        double new_freq = std::min(requested_freq, 100.0); // Cap at 100Hz
+
+        if (parent_frequency_ != new_freq) {
+          parent_frequency_ = new_freq;
+
+          // Recreate the timer with new frequency
+          double period_ms = 1000.0 / parent_frequency_;
+          trajectory_timer_ = this->create_wall_timer(
+            std::chrono::duration<double, std::milli>(period_ms),
+            std::bind(&Figure8SimulatorNode::timerCallback, this));
+
+          RCLCPP_INFO(this->get_logger(), "Updated parent frequency to %.1f Hz", parent_frequency_);
+
+          // Need to update all sensors to validate their frequencies
+          update_sensors = true;
+          auto sensors = this->get_parameter("sensors").as_string_array();
+          for (const auto& name : sensors) {
+            updated_sensors.insert(name);
+          }
         }
       }
     }
 
-    // Update trajectory configuration for all sensors if changed
-    if (update_trajectory_config) {
+    // Update trajectory if needed
+    if (update_trajectory) {
+      auto max_vel = this->get_parameter("trajectory.max_vel").as_double();
+      auto length = this->get_parameter("trajectory.length").as_double();
+      auto width = this->get_parameter("trajectory.width").as_double();
+      auto width_slope = this->get_parameter("trajectory.width_slope").as_double();
+      auto angular_scale = this->get_parameter("trajectory.angular_scale").as_double();
+
+      trajectory_config_.max_velocity = max_vel;
+      trajectory_config_.length = length;
+      trajectory_config_.width = width;
+      trajectory_config_.width_slope = width_slope;
+      trajectory_config_.angular_scale = angular_scale;
+
+      RCLCPP_INFO(this->get_logger(), "Updated trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
+                 max_vel, length, width);
+
+      // Update trajectory config in all sensors
       for (auto& [name, sensor] : position_sensors_) {
         sensor->updateTrajectoryConfig(trajectory_config_);
       }
-
-      RCLCPP_INFO(this->get_logger(),
-                "Updated trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
-                trajectory_config_.max_velocity,
-                trajectory_config_.length,
-                trajectory_config_.width);
     }
 
-    // Update trajectory timer if rate changed
-    if (update_trajectory_rate) {
-      trajectory_timer_ = this->create_wall_timer(
-          std::chrono::milliseconds(static_cast<int>(1000.0 / publish_rate_)),
-          std::bind(&Figure8SimulatorNode::publishTrajectory, this));
-
-      RCLCPP_INFO(this->get_logger(), "Updated publish rate: %.2f Hz", publish_rate_);
-    }
-
-    // Update any sensors whose parameters have changed
-    for (const auto& sensor_name : sensors_to_update) {
-      auto it = position_sensors_.find(sensor_name);
-      if (it != position_sensors_.end()) {
-        updateSensorFromParams(sensor_name, it->second.get());
-      }
+    // Update sensors if needed
+    if (update_sensors) {
+      updateSensors(updated_sensors);
     }
 
     return result;
   }
 
-  void updateSensorList(const std::vector<std::string>& new_sensor_names) {
-    // Find sensors to add and remove
-    std::set<std::string> current_sensors;
+  void updateSensors(const std::set<std::string>& specific_sensors = {}) {
+    // Get current sensor list
+    auto current_sensors = this->get_parameter("sensors").as_string_array();
+    std::set<std::string> current_set(current_sensors.begin(), current_sensors.end());
+
+    // Find sensors to remove (in position_sensors_ but not in current_sensors)
+    std::vector<std::string> to_remove;
     for (const auto& [name, _] : position_sensors_) {
-      current_sensors.insert(name);
+      if (current_set.find(name) == current_set.end()) {
+        to_remove.push_back(name);
+      }
     }
 
-    std::set<std::string> new_sensors(new_sensor_names.begin(), new_sensor_names.end());
+    // Remove sensors
+    for (const auto& name : to_remove) {
+      position_sensors_.erase(name);
+      RCLCPP_INFO(this->get_logger(), "Removed sensor: %s", name.c_str());
+    }
 
-    // Remove sensors that are no longer in the list
+    // Find new sensors to add
+    std::vector<std::string> new_sensors;
     for (const auto& name : current_sensors) {
-      if (new_sensors.find(name) == new_sensors.end()) {
-        position_sensors_.erase(name);
-        RCLCPP_INFO(this->get_logger(), "Removed sensor: %s", name.c_str());
+      if (position_sensors_.find(name) == position_sensors_.end()) {
+        new_sensors.push_back(name);
+      }
+    }
+
+    // Update existing sensors if specifically requested
+    if (!specific_sensors.empty()) {
+      for (const auto& name : specific_sensors) {
+        auto it = position_sensors_.find(name);
+        if (it != position_sensors_.end()) {
+          updateSensorFromParams(name, it->second.get());
+        }
       }
     }
 
     // Add new sensors
     for (const auto& name : new_sensors) {
-      if (current_sensors.find(name) == current_sensors.end()) {
+      if (current_set.find(name) != current_set.end()) {
         // Declare parameters for this sensor
         declarePositionSensorParams(name);
 
@@ -446,7 +510,10 @@ private:
         auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
         auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
         double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-        double sensor_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
+        double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
+
+        // Validate and adjust sensor rate
+        double actual_rate = validateFrequency(requested_rate);
 
         Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
         transform.translation() = Eigen::Vector3d(
@@ -462,11 +529,11 @@ private:
 
         // Create and store the sensor
         position_sensors_[name] = std::make_unique<PositionSensorSimulator>(
-            this, name, transform, noise_sigma, sensor_rate, start_time_, trajectory_config_);
+            this, name, transform, noise_sigma, actual_rate, trajectory_config_);
 
         RCLCPP_INFO(this->get_logger(),
                    "Created position sensor: %s (%.1f Hz, sigma=%.3f)",
-                   name.c_str(), sensor_rate, noise_sigma);
+                   name.c_str(), actual_rate, noise_sigma);
       }
     }
   }
@@ -478,7 +545,10 @@ private:
     auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
     auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
     double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-    double sensor_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
+    double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
+
+    // Validate and adjust sensor rate
+    double actual_rate = validateFrequency(requested_rate);
 
     // Create transform
     Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
@@ -494,20 +564,19 @@ private:
     transform.linear() = q.toRotationMatrix();
 
     // Update sensor configuration
-    sensor->updateConfiguration(transform, noise_sigma, sensor_rate);
+    sensor->updateConfiguration(transform, noise_sigma, actual_rate);
 
     RCLCPP_INFO(this->get_logger(), "Updated sensor: %s (%.1f Hz, sigma=%.3f)",
-               name.c_str(), sensor_rate, noise_sigma);
+               name.c_str(), actual_rate, noise_sigma);
   }
 
   void publishTrajectory() {
-    // Get current time
+    // Get current time (for message headers)
     auto current_time = this->now();
-    double elapsed_seconds = (current_time - start_time_).seconds();
 
-    // Generate trajectory state at current time
+    // Generate trajectory state at current elapsed time
     StateVector state = kinematic_arbiter::utils::Figure8Trajectory(
-        elapsed_seconds, trajectory_config_);
+        elapsed_seconds_, trajectory_config_);
 
     // Extract components for convenience
     Eigen::Vector3d position = state.segment<3>(SIdx::Position::Begin());
@@ -557,6 +626,16 @@ private:
     tf_broadcaster_->sendTransform(transform);
   }
 
+  std::vector<std::string> splitString(const std::string& s, char delimiter) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(s);
+    while (std::getline(tokenStream, token, delimiter)) {
+      tokens.push_back(token);
+    }
+    return tokens;
+  }
+
   // Publishers
   rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr true_pose_pub_;
   rclcpp::Publisher<geometry_msgs::msg::TwistStamped>::SharedPtr true_velocity_pub_;
@@ -582,8 +661,13 @@ private:
   std::string frame_id_;
   std::string base_frame_id_;
 
-  // Timing
+  // Parent frequency
+  double parent_frequency_ = 20.0;
+  int tick_counter_ = 0;
+
+  // Timing - keep start_time_ for logging but don't use for calculations
   rclcpp::Time start_time_;
+  double elapsed_seconds_ = 0.0;
 
   // Random generator
   std::mt19937 generator_;
