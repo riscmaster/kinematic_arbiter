@@ -5,7 +5,18 @@
 #include <cmath>
 
 namespace kinematic_arbiter {
-namespace testing {
+namespace utils {
+
+/**
+ * @brief Configuration for Figure-8 trajectory generation
+ */
+struct Figure8Config {
+  double max_velocity = 1.0;    // Maximum velocity along the trajectory
+  double length = 0.5;          // Length of the figure-8 in X dimension
+  double width = 0.25;          // Width of the figure-8 in Y dimension
+  double width_slope = 0.1;     // Z inclination in radians
+  double angular_scale = 0.1;   // Scale factor for angular motion
+};
 
 /**
  * @brief Generates a figure-8 trajectory for testing
@@ -14,27 +25,24 @@ namespace testing {
  * This is useful for testing state prediction and measurement models.
  *
  * @param time Current time in seconds
+ * @param config Configuration parameters for the trajectory (optional)
  * @return State vector containing position, orientation, velocity and acceleration
  */
-Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(double time) {
+Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(
+    double time,
+    const Figure8Config& config = Figure8Config()) {
+
   using SIdx = core::StateIndex;
   using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
 
-  // Dimensions of the figure-8
-  constexpr double kMaxVelocity = 1.0;
-  constexpr double kLength = 0.5;
-  constexpr double kWidth = 0.25;
-  constexpr double kWidthSlope = 0.1;  // radians
-  constexpr double kAnglularScale = 1.0 / 10.0;
-
-  // Corresponding variables to achieve the above dimensions
-  const double kXAmplitude = kLength * 0.5;
-  const double kYAmplitude = kWidth * 0.5;
-  const double kZAmplitude = kWidth * std::tan(kWidthSlope);
+  // Corresponding variables to achieve the dimensions
+  const double kXAmplitude = config.length * 0.5;
+  const double kYAmplitude = config.width * 0.5;
+  const double kZAmplitude = config.width * std::tan(config.width_slope);
   const double kPeriod =
       M_PI * std::sqrt(kXAmplitude * kXAmplitude +
                   4 * (kYAmplitude * kYAmplitude + kZAmplitude * kZAmplitude)) /
-      kMaxVelocity;
+      config.max_velocity;
   const double kXZFrequency = 2 * M_PI / kPeriod;
   const double kXFrequency = kXZFrequency * 0.5;
 
@@ -51,7 +59,7 @@ Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(dou
 
   // Angular Position (create quaternion from position-derived euler angles)
   Eigen::Vector3d position_vector = states.segment<3>(SIdx::Position::Begin());
-  Eigen::Vector3d roll_pitch_yaw = position_vector * kAnglularScale;
+  Eigen::Vector3d roll_pitch_yaw = position_vector * config.angular_scale;
 
   // Convert RPY to quaternion
   Eigen::AngleAxisd yawAngle(roll_pitch_yaw[2], Eigen::Vector3d::UnitZ());
@@ -80,7 +88,7 @@ Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(dou
 
   // Angular velocity derived from position
   states.segment<3>(SIdx::AngularVelocity::Begin()) =
-      inertial_velocity * kAnglularScale;
+      inertial_velocity * config.angular_scale;
 
   // Acceleration in inertial frame
   Eigen::Vector3d inertial_acceleration(
@@ -94,14 +102,10 @@ Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(dou
 
   // Angular acceleration derived from linear acceleration
   states.segment<3>(SIdx::AngularAcceleration::Begin()) =
-      inertial_acceleration * kAnglularScale;
+      inertial_acceleration * config.angular_scale;
 
   return states;
 }
 
-// Common test constants
-constexpr double kTestTimeStep = 0.01;  // 100 Hz update rate
-constexpr double kFuzzyMoreThanZero = 1e-10;
-
-} // namespace testing
+} // namespace utils
 } // namespace kinematic_arbiter

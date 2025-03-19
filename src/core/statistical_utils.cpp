@@ -3,7 +3,7 @@
 #include <string>
 
 namespace kinematic_arbiter {
-namespace core {
+namespace utils {
 
 double InterpolatedCriticalValue(double confidence_level,
                                  ChiSquareCriticalValue lower,
@@ -49,5 +49,5 @@ double CalculateChiSquareCriticalValueNDof(size_t dof_index,
   return kChiSquareCriticalValues[dof_index].back().critical_value;
 }
 
-} // namespace core
+} // namespace utils
 } // namespace kinematic_arbiter

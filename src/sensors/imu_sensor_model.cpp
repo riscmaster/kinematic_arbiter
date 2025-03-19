@@ -294,8 +294,8 @@ bool ImuSensorModel::IsStationary(
   double accel_norm = measured_accel.norm();
 
   // Pre-compute critical values for different degrees of freedom
-  double critical_value6dof = core::CalculateChiSquareCriticalValueNDof(5, config_.stationary_confidence_threshold);
-  double critical_value1dof = core::CalculateChiSquareCriticalValueNDof(0, config_.stationary_confidence_threshold);
+  double critical_value6dof = utils::CalculateChiSquareCriticalValueNDof(5, config_.stationary_confidence_threshold);
+  double critical_value1dof = utils::CalculateChiSquareCriticalValueNDof(0, config_.stationary_confidence_threshold);
 
   // 1. Test state velocities (6-DOF)
   int state_vel_idx = StateIndex::LinearVelocity::X;

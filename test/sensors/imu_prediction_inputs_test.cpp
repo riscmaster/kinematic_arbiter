@@ -3,14 +3,14 @@
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
-#include "test/utils/test_trajectories.hpp"
+#include "kinematic_arbiter/core/trajectory_utils.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
 namespace test {
 
 using core::StateIndex;
-using testing::Figure8Trajectory;
+using utils::Figure8Trajectory;
 
 // Define StateVector and StateMatrix with correct template parameters
 using StateVector = Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1>;

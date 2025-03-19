@@ -1,6 +1,6 @@
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
-#include "test/utils/test_trajectories.hpp"
+#include "kinematic_arbiter/core/trajectory_utils.hpp"
 #include <gtest/gtest.h>
 #include <memory>
 #include <cmath>
@@ -294,7 +294,7 @@ TEST_P(Figure8TestP, LongTermPrediction) {
   const Figure8Params& params = GetParam();
 
   // Initial state from Figure-8 trajectory at t=0
-  StateVector state = testing::Figure8Trajectory(0.0);
+  StateVector state = utils::Figure8Trajectory(0.0);
 
   // Initialize model state - copy only position and orientation
   // (leave velocity/acceleration at zero for initial prediction)
@@ -307,7 +307,7 @@ TEST_P(Figure8TestP, LongTermPrediction) {
 
   while (time < params.duration) {
     // Get ground truth state at current time
-    StateVector ground_truth = testing::Figure8Trajectory(time);
+    StateVector ground_truth = utils::Figure8Trajectory(time);
 
     // Predict the next state using our model
     StateVector predicted_state = model_->PredictState(prediction_state, params.time_step);
@@ -325,7 +325,7 @@ TEST_P(Figure8TestP, LongTermPrediction) {
         ground_truth.segment<3>(SIdx::AngularAcceleration::Begin());
 
     // Get ground truth for next timestep to compare with our prediction
-    StateVector next_ground_truth = testing::Figure8Trajectory(time + params.time_step);
+    StateVector next_ground_truth = utils::Figure8Trajectory(time + params.time_step);
 
     // Calculate position error between prediction and next ground truth
     Eigen::Vector3d predicted_position = predicted_state.segment<3>(SIdx::Position::Begin());

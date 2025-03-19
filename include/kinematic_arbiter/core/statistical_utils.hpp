@@ -7,10 +7,7 @@
 #include <Eigen/Dense>
 
 namespace kinematic_arbiter {
-namespace core {
-
-// Forward declarations
-struct GaussianDistribution;
+namespace utils {
 
 /**
  * @brief Maximum degrees of freedom for chi-square distribution
@@ -184,5 +181,5 @@ double CalculateChiSquareCriticalValue1Dof(double confidence_level);
 double CalculateChiSquareCriticalValueNDof(size_t dof_index,
                                            double confidence_level);
 
-} // namespace core
+} // namespace utils
 } // namespace kinematic_arbiter

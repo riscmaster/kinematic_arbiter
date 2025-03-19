@@ -9,119 +9,80 @@ It configures parameters for the simulation and provides event handlers for grac
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import (
-    DeclareLaunchArgument,
-    LogInfo,
-    RegisterEventHandler,
-    GroupAction,
-    EmitEvent,
-    ExecuteProcess,
-    TimerAction,
-)
-from launch.events import Shutdown
-from launch.event_handlers import OnProcessExit, OnShutdown
+from launch.actions import DeclareLaunchArgument, LogInfo
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition
 
 
 def generate_launch_description():
-    """Generate launch description with specified arguments and nodes."""
-    # Launch arguments
+    """Generate the launch description for the Figure 8 test simulation."""
+    # Debug mode
     debug_arg = DeclareLaunchArgument(
         "debug", default_value="false", description="Enable debug output"
     )
 
+    # Launch arguments
     publish_rate_arg = DeclareLaunchArgument(
         "publish_rate",
         default_value="50.0",
-        description="Rate at which to publish simulator data",
+        description="Rate at which to publish the trajectory (Hz)",
     )
 
     filter_rate_arg = DeclareLaunchArgument(
         "filter_rate",
-        default_value="20.0",
-        description="Rate at which to publish filter estimates",
+        default_value="50.0",
+        description="Rate at which to run the Kalman filter (Hz)",
     )
 
+    # Trajectory arguments
+    max_velocity_arg = DeclareLaunchArgument(
+        "max_velocity",
+        default_value="1.0",
+        description="Maximum velocity for Figure 8 trajectory (m/s)",
+    )
+
+    length_arg = DeclareLaunchArgument(
+        "length",
+        default_value="5.0",
+        description="Length of Figure 8 trajectory (m)",
+    )
+
+    width_arg = DeclareLaunchArgument(
+        "width",
+        default_value="3.0",
+        description="Width of Figure 8 trajectory (m)",
+    )
+
+    width_slope_arg = DeclareLaunchArgument(
+        "width_slope",
+        default_value="0.0",
+        description="Width slope for Figure 8 trajectory",
+    )
+
+    angular_scale_arg = DeclareLaunchArgument(
+        "angular_scale",
+        default_value="1.0",
+        description="Angular scale for Figure 8 trajectory",
+    )
+
+    # RViz config
     rviz_config_arg = DeclareLaunchArgument(
         "rviz_config",
-        default_value="$(find kinematic_arbiter)/rviz/figure8_visualization.rviz",
-        description="Path to RViz config file",
+        default_value="src/kinematic_arbiter/config/test.rviz",
+        description="Path to RViz configuration file",
     )
 
+    # Namespace
     namespace_arg = DeclareLaunchArgument(
-        "namespace", default_value="test", description="Namespace for nodes"
+        "namespace",
+        default_value="test",
+        description="Namespace for the nodes",
     )
 
-    # Debug flag for cleanup
-    cleanup_debug = DeclareLaunchArgument(
-        "cleanup_debug",
-        default_value="false",
-        description="Show debug output from cleanup",
-    )
-
-    # Cleanup shell commands for simulator node with debugging output
-    cleanup_simulator_cmd_debug = ExecuteProcess(
-        cmd=[
-            "bash",
-            "-c",
-            'echo "Checking for existing figure8_simulator nodes..."; '
-            "for pid in $(ps aux | grep figure8_simulator_node | grep -v grep | awk '{print $2}'); do "
-            '  echo "Killing existing figure8_simulator_node with PID: $pid"; '
-            "  kill -9 $pid; "
-            "done",
-        ],
-        output="screen",
-        condition=IfCondition(LaunchConfiguration("cleanup_debug")),
-    )
-
-    # Cleanup shell commands for arbiter node with debugging output
-    cleanup_arbiter_cmd_debug = ExecuteProcess(
-        cmd=[
-            "bash",
-            "-c",
-            'echo "Checking for existing kinematic_arbiter nodes..."; '
-            "for pid in $(ps aux | grep kinematic_arbiter_node | grep -v grep | awk '{print $2}'); do "
-            '  echo "Killing existing kinematic_arbiter_node with PID: $pid"; '
-            "  kill -9 $pid; "
-            "done",
-        ],
-        output="screen",
-        condition=IfCondition(LaunchConfiguration("cleanup_debug")),
-    )
-
-    # Silent cleanup commands using output redirection to /dev/null
-    cleanup_simulator = ExecuteProcess(
-        cmd=[
-            "bash",
-            "-c",
-            "for pid in $(ps aux | grep figure8_simulator_node | grep -v grep | awk '{print $2}'); do "
-            "  kill -9 $pid >/dev/null 2>&1; "
-            "done >/dev/null 2>&1",
-        ],
-        output="log",  # Use log instead of silent
-    )
-
-    cleanup_arbiter = ExecuteProcess(
-        cmd=[
-            "bash",
-            "-c",
-            "for pid in $(ps aux | grep kinematic_arbiter_node | grep -v grep | awk '{print $2}'); do "
-            "  kill -9 $pid >/dev/null 2>&1; "
-            "done >/dev/null 2>&1",
-        ],
-        output="log",  # Use log instead of silent
-    )
-
-    # Add a small delay after cleanup to ensure processes have terminated
-    delay_after_cleanup = TimerAction(
-        period=1.0, actions=[LogInfo(msg="Starting nodes after cleanup...")]
-    )
-
-    # Debug outputs
+    # Debug output
     debug_output = LogInfo(
+        msg=["Debug mode enabled"],
         condition=IfCondition(LaunchConfiguration("debug")),
-        msg=["Launching with namespace: ", LaunchConfiguration("namespace")],
     )
 
     # Figure 8 simulator node
@@ -131,18 +92,41 @@ def generate_launch_description():
         name="figure8_simulator",
         namespace=LaunchConfiguration("namespace"),
         output="screen",
-        emulate_tty=True,
         parameters=[
             {
                 "publish_rate": LaunchConfiguration("publish_rate"),
-                "figure8_scale_x": 5.0,
-                "figure8_scale_y": 2.5,
-                "period": 20.0,
-                "sensor_noise_stddev": 0.05,
-                "frame_id": "odom",
+                "frame_id": "map",
                 "base_frame_id": "base_link",
-                "sensor1_position": [1.0, 0.5, 0.2],  # front-right
-                "sensor2_position": [1.0, -0.5, 0.2],  # front-left
+                # Trajectory parameters
+                "trajectory.max_velocity": LaunchConfiguration("max_velocity"),
+                "trajectory.length": LaunchConfiguration("length"),
+                "trajectory.width": LaunchConfiguration("width"),
+                "trajectory.width_slope": LaunchConfiguration("width_slope"),
+                "trajectory.angular_scale": LaunchConfiguration(
+                    "angular_scale"
+                ),
+                # Sensors configuration
+                "position_sensors": ["position1", "position2"],
+                # Position sensor 1 parameters (center of robot)
+                "sensors.position1.position": [0.0, 0.0, 0.0],
+                "sensors.position1.quaternion": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                ],  # w, x, y, z
+                "sensors.position1.noise_sigma": 0.05,
+                "sensors.position1.publish_rate": 20.0,
+                # Position sensor 2 parameters (front of robot, noisier)
+                "sensors.position2.position": [1.0, 0.0, 0.0],
+                "sensors.position2.quaternion": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                ],  # w, x, y, z
+                "sensors.position2.noise_sigma": 0.1,
+                "sensors.position2.publish_rate": 10.0,
             }
         ],
     )
@@ -154,22 +138,18 @@ def generate_launch_description():
         name="kinematic_arbiter",
         namespace=LaunchConfiguration("namespace"),
         output="screen",
-        emulate_tty=True,
         parameters=[
             {
                 "publish_rate": LaunchConfiguration("filter_rate"),
-                "max_delay_window": 0.5,
-                "frame_id": "odom",
-                "position_sensors": ["position1", "position2"],
-                "sensors.position1.topic": "/sensors/position1",
-                "sensors.position1.frame_id": "sensor1_frame",
-                "sensors.position2.topic": "/sensors/position2",
-                "sensors.position2.frame_id": "sensor2_frame",
+                "frame_id": "map",
+                "base_frame_id": "base_link_estimated",
+                # Configure sensors to use
+                "position_sensors": ["position1"],
             }
         ],
     )
 
-    # Add RViz visualization
+    # RViz
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
@@ -178,68 +158,24 @@ def generate_launch_description():
         arguments=["-d", LaunchConfiguration("rviz_config")],
     )
 
-    # Group all nodes together to ensure they're managed as a unit
-    nodes_group = GroupAction([simulator_node, arbiter_node, rviz_node])
-
-    # Event handler for when RViz exits
-    rviz_exit_handler = RegisterEventHandler(
-        OnProcessExit(
-            target_action=rviz_node,
-            on_exit=[
-                LogInfo(msg="RViz exited - shutting down all nodes"),
-                EmitEvent(event=Shutdown(reason="RViz exited")),
-            ],
-        )
-    )
-
-    # Event handler for when simulator exits
-    simulator_exit_handler = RegisterEventHandler(
-        OnProcessExit(
-            target_action=simulator_node,
-            on_exit=[
-                LogInfo(msg="Simulator exited - shutting down all nodes"),
-                EmitEvent(event=Shutdown(reason="Simulator exited")),
-            ],
-        )
-    )
-
-    # Event handler for when arbiter exits
-    arbiter_exit_handler = RegisterEventHandler(
-        OnProcessExit(
-            target_action=arbiter_node,
-            on_exit=[
-                LogInfo(msg="Arbiter exited - shutting down all nodes"),
-                EmitEvent(event=Shutdown(reason="Arbiter exited")),
-            ],
-        )
-    )
-
-    # Event handler for shutdown
-    shutdown_handler = RegisterEventHandler(
-        OnShutdown(on_shutdown=[LogInfo(msg=["Shutting down launch file"])])
-    )
-
     return LaunchDescription(
         [
+            # Arguments
             debug_arg,
             publish_rate_arg,
             filter_rate_arg,
+            max_velocity_arg,
+            length_arg,
+            width_arg,
+            width_slope_arg,
+            angular_scale_arg,
             rviz_config_arg,
             namespace_arg,
-            cleanup_debug,
-            # First run cleanup commands
-            cleanup_simulator_cmd_debug,
-            cleanup_arbiter_cmd_debug,
-            cleanup_simulator,
-            cleanup_arbiter,
-            # Small delay to ensure cleanup completes
-            delay_after_cleanup,
-            # Then proceed with normal launch
+            # Debug output
             debug_output,
-            nodes_group,
-            rviz_exit_handler,
-            simulator_exit_handler,
-            arbiter_exit_handler,
-            shutdown_handler,
+            # Main nodes
+            rviz_node,
+            simulator_node,
+            arbiter_node,
         ]
     )

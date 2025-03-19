@@ -13,7 +13,7 @@
 #include "kinematic_arbiter/sensors/pose_sensor_model.hpp"
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
-#include "test/utils/test_trajectories.hpp"
+#include "kinematic_arbiter/core/trajectory_utils.hpp"
 
 // Use the correct state index type
 using SIdx = kinematic_arbiter::core::StateIndex;
@@ -182,7 +182,7 @@ protected:
       double t = 0.0;
 
       // Initialize with true state
-      StateVector prev_state = kinematic_arbiter::testing::Figure8Trajectory(t);
+      StateVector prev_state = kinematic_arbiter::utils::Figure8Trajectory(t);
       // Set initial covariance
       StateMatrix prev_covariance = StateMatrix::Identity() * 0.1;
       filter->SetStateEstimate(prev_state, t, prev_covariance);
@@ -247,7 +247,7 @@ protected:
           }
 
           // Get true state
-          StateVector true_state = kinematic_arbiter::testing::Figure8Trajectory(t);
+          StateVector true_state = kinematic_arbiter::utils::Figure8Trajectory(t);
 
 
         // Check for NaNs after prediction

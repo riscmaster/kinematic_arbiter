@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KINEMATIC_ARBITER_ROS2_MKF_WRAPPER_HPP_
+#define KINEMATIC_ARBITER_ROS2_MKF_WRAPPER_HPP_
 
 #include <map>
 #include <memory>
@@ -83,6 +84,22 @@ public:
    */
   void predictTo(const rclcpp::Time& time);
 
+  /**
+   * @brief Convert ROS Time to seconds
+   */
+  double rosTimeToSeconds(const rclcpp::Time& time);
+
+  /**
+   * @brief Convert between ROS and Eigen types
+   */
+  Eigen::Vector3d pointMsgToVector(const geometry_msgs::msg::Point& point);
+  Eigen::Quaterniond quaternionMsgToEigen(const geometry_msgs::msg::Quaternion& quat);
+  Eigen::Vector3d vectorMsgToEigen(const geometry_msgs::msg::Vector3& vec);
+
+  geometry_msgs::msg::Point vectorToPointMsg(const Eigen::Vector3d& vec);
+  geometry_msgs::msg::Quaternion quaternionToQuaternionMsg(const Eigen::Quaterniond& quat);
+  geometry_msgs::msg::Vector3 eigenToVectorMsg(const Eigen::Vector3d& vec);
+
 private:
   // The core filter
   std::shared_ptr<kinematic_arbiter::core::MediatedKalmanFilter<StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface>> filter_;
@@ -97,18 +114,10 @@ private:
 
   // Store message headers for reuse in expected measurements
   std::map<std::string, std_msgs::msg::Header> last_headers_;
-
-  // Conversion utilities
-  double rosTimeToSeconds(const rclcpp::Time& time);
-  Eigen::Vector3d pointMsgToVector(const geometry_msgs::msg::Point& point);
-  Eigen::Quaterniond quaternionMsgToEigen(const geometry_msgs::msg::Quaternion& quat);
-  Eigen::Vector3d vectorMsgToEigen(const geometry_msgs::msg::Vector3& vec);
-
-  geometry_msgs::msg::Point vectorToPointMsg(const Eigen::Vector3d& vec);
-  geometry_msgs::msg::Quaternion quaternionToQuaternionMsg(const Eigen::Quaterniond& quat);
-  geometry_msgs::msg::Vector3 eigenToVectorMsg(const Eigen::Vector3d& vec);
 };
 
 } // namespace wrapper
 } // namespace ros2
 } // namespace kinematic_arbiter
+
+#endif // KINEMATIC_ARBITER_ROS2_MKF_WRAPPER_HPP_

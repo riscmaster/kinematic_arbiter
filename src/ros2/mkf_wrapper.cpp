@@ -1,20 +1,46 @@
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
+#include "tf2_eigen/tf2_eigen.hpp"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
 namespace wrapper {
 
 // Constructor
-FilterWrapper::FilterWrapper(const kinematic_arbiter::models::RigidBodyStateModel::Params& model_params)
-  : filter_(std::make_shared<kinematic_arbiter::core::MediatedKalmanFilter<StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface>>(
-      std::make_shared<kinematic_arbiter::models::RigidBodyStateModel>(model_params))) {
+FilterWrapper::FilterWrapper(const kinematic_arbiter::models::RigidBodyStateModel::Params& model_params) {
+  // Create state model
+  auto state_model = std::make_shared<kinematic_arbiter::models::RigidBodyStateModel>(model_params);
+
+  // Create the filter
+  filter_ = std::make_shared<kinematic_arbiter::core::MediatedKalmanFilter<StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface>>(state_model);
 }
 
 std::string FilterWrapper::registerPositionSensor(const std::string& name) {
   auto sensor = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
   size_t idx = filter_->AddSensor(sensor);
   sensors_[name] = {idx, "position"};
+  return name;
+}
+
+std::string FilterWrapper::registerPoseSensor(const std::string& name) {
+  auto sensor = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+  size_t idx = filter_->AddSensor(sensor);
+  sensors_[name] = {idx, "pose"};
+  return name;
+}
+
+std::string FilterWrapper::registerBodyVelocitySensor(const std::string& name) {
+  auto sensor = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
+  size_t idx = filter_->AddSensor(sensor);
+  sensors_[name] = {idx, "body_velocity"};
+  return name;
+}
+
+std::string FilterWrapper::registerImuSensor(const std::string& name) {
+  auto sensor = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
+  size_t idx = filter_->AddSensor(sensor);
+  sensors_[name] = {idx, "imu"};
   return name;
 }
 
@@ -30,7 +56,8 @@ bool FilterWrapper::processPosition(const std::string& sensor_id, const geometry
 
   // Convert to measurement type
   double timestamp = rosTimeToSeconds(msg.header.stamp);
-  Eigen::Vector3d position = pointMsgToVector(msg.point);
+  Eigen::Vector3d position;
+  tf2::fromMsg(msg.point, position);
 
   // Store the header for this sensor (for expected measurement generation)
   last_headers_[sensor_id] = msg.header;
@@ -99,9 +126,7 @@ geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getPoseEstimate(con
   msg.header.frame_id = "map"; // Should be configurable
 
   // Extract position
-  msg.pose.pose.position.x = state(StateIndex::Position::X);
-  msg.pose.pose.position.y = state(StateIndex::Position::Y);
-  msg.pose.pose.position.z = state(StateIndex::Position::Z);
+  Eigen::Vector3d position = state.segment<3>(StateIndex::Position::Begin());
 
   // Extract orientation
   Eigen::Quaterniond orientation(
@@ -110,7 +135,10 @@ geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getPoseEstimate(con
       state(StateIndex::Quaternion::Y),
       state(StateIndex::Quaternion::Z)
   );
-  msg.pose.pose.orientation = quaternionToQuaternionMsg(orientation);
+
+  // Convert to message types using tf2_eigen
+  msg.pose.pose.position = tf2::toMsg(position);
+  msg.pose.pose.orientation = tf2::toMsg(orientation);
 
   // Extract position and orientation covariance
   for (int i = 0; i < 3; i++) {
@@ -120,11 +148,13 @@ geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getPoseEstimate(con
       int pj = StateIndex::Position::X + j;
       msg.pose.covariance[i*6 + j] = covariance(pi, pj);
 
-      // Orientation covariance (bottom-right 3x3 block)
-      // Note: this converts quaternion covariance to RPY covariance (simplified)
-      int oi = StateIndex::Quaternion::X + i;
-      int oj = StateIndex::Quaternion::X + j;
-      msg.pose.covariance[(i+3)*6 + (j+3)] = covariance(oi, oj);
+      // Orientation covariance is more complex due to quaternion representation
+      // This is a simplified approach; a proper conversion would involve
+      // transforming from quaternion space to rotation vector space
+      // For now, just copy the quaternion elements' covariance
+      int qi = StateIndex::Quaternion::X + i;
+      int qj = StateIndex::Quaternion::X + j;
+      msg.pose.covariance[(i+3)*6 + (j+3)] = covariance(qi, qj);
     }
   }
 
@@ -140,15 +170,13 @@ geometry_msgs::msg::TwistWithCovarianceStamped FilterWrapper::getVelocityEstimat
   msg.header.stamp = time;
   msg.header.frame_id = "base_link"; // Should be configurable
 
-  // Extract linear velocity
-  msg.twist.twist.linear.x = state(StateIndex::LinearVelocity::X);
-  msg.twist.twist.linear.y = state(StateIndex::LinearVelocity::Y);
-  msg.twist.twist.linear.z = state(StateIndex::LinearVelocity::Z);
+  // Extract linear and angular velocity
+  Eigen::Vector3d lin_velocity = state.segment<3>(StateIndex::LinearVelocity::Begin());
+  Eigen::Vector3d ang_velocity = state.segment<3>(StateIndex::AngularVelocity::Begin());
 
-  // Extract angular velocity
-  msg.twist.twist.angular.x = state(StateIndex::AngularVelocity::X);
-  msg.twist.twist.angular.y = state(StateIndex::AngularVelocity::Y);
-  msg.twist.twist.angular.z = state(StateIndex::AngularVelocity::Z);
+  // Convert to message types using tf2_eigen
+  tf2::toMsg(lin_velocity, msg.twist.twist.linear);
+  tf2::toMsg(ang_velocity, msg.twist.twist.angular);
 
   // Extract velocity covariance
   for (int i = 0; i < 3; i++) {
@@ -177,15 +205,13 @@ geometry_msgs::msg::AccelWithCovarianceStamped FilterWrapper::getAccelerationEst
   msg.header.stamp = time;
   msg.header.frame_id = "base_link"; // Should be configurable
 
-  // Extract linear acceleration
-  msg.accel.accel.linear.x = state(StateIndex::LinearAcceleration::X);
-  msg.accel.accel.linear.y = state(StateIndex::LinearAcceleration::Y);
-  msg.accel.accel.linear.z = state(StateIndex::LinearAcceleration::Z);
+  // Extract linear and angular acceleration
+  Eigen::Vector3d lin_accel = state.segment<3>(StateIndex::LinearAcceleration::Begin());
+  Eigen::Vector3d ang_accel = state.segment<3>(StateIndex::AngularAcceleration::Begin());
 
-  // Extract angular acceleration
-  msg.accel.accel.angular.x = state(StateIndex::AngularAcceleration::X);
-  msg.accel.accel.angular.y = state(StateIndex::AngularAcceleration::Y);
-  msg.accel.accel.angular.z = state(StateIndex::AngularAcceleration::Z);
+  // Convert to message types using tf2_eigen
+  tf2::toMsg(lin_accel, msg.accel.accel.linear);
+  tf2::toMsg(ang_accel, msg.accel.accel.angular);
 
   // Extract acceleration covariance
   for (int i = 0; i < 3; i++) {
@@ -216,18 +242,35 @@ double FilterWrapper::rosTimeToSeconds(const rclcpp::Time& time) {
 }
 
 Eigen::Vector3d FilterWrapper::pointMsgToVector(const geometry_msgs::msg::Point& point) {
-  return Eigen::Vector3d(point.x, point.y, point.z);
+  // Manual conversion for Point to Vector3d
+  Eigen::Vector3d vec;
+  vec(0) = point.x;
+  vec(1) = point.y;
+  vec(2) = point.z;
+  return vec;
 }
 
 Eigen::Quaterniond FilterWrapper::quaternionMsgToEigen(const geometry_msgs::msg::Quaternion& quat) {
-  return Eigen::Quaterniond(quat.w, quat.x, quat.y, quat.z);
+  // Manual conversion for Quaternion to Eigen::Quaterniond
+  Eigen::Quaterniond q;
+  q.x() = quat.x;
+  q.y() = quat.y;
+  q.z() = quat.z;
+  q.w() = quat.w;
+  return q;
 }
 
 Eigen::Vector3d FilterWrapper::vectorMsgToEigen(const geometry_msgs::msg::Vector3& vec) {
-  return Eigen::Vector3d(vec.x, vec.y, vec.z);
+  // Manual conversion for Vector3 to Vector3d
+  Eigen::Vector3d v;
+  v(0) = vec.x;
+  v(1) = vec.y;
+  v(2) = vec.z;
+  return v;
 }
 
 geometry_msgs::msg::Point FilterWrapper::vectorToPointMsg(const Eigen::Vector3d& vec) {
+  // Manual conversion for Vector3d to Point (Point is not the same as Vector3)
   geometry_msgs::msg::Point point;
   point.x = vec(0);
   point.y = vec(1);
@@ -236,15 +279,17 @@ geometry_msgs::msg::Point FilterWrapper::vectorToPointMsg(const Eigen::Vector3d&
 }
 
 geometry_msgs::msg::Quaternion FilterWrapper::quaternionToQuaternionMsg(const Eigen::Quaterniond& quat) {
+  // Manual conversion for Eigen::Quaterniond to Quaternion
   geometry_msgs::msg::Quaternion quaternion;
-  quaternion.w = quat.w();
   quaternion.x = quat.x();
   quaternion.y = quat.y();
   quaternion.z = quat.z();
+  quaternion.w = quat.w();
   return quaternion;
 }
 
 geometry_msgs::msg::Vector3 FilterWrapper::eigenToVectorMsg(const Eigen::Vector3d& vec) {
+  // Manual conversion for Vector3d to Vector3 (Vector3 is not the same as Point)
   geometry_msgs::msg::Vector3 vector;
   vector.x = vec(0);
   vector.y = vec(1);
