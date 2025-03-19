@@ -14,6 +14,7 @@
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/trajectory_utils.hpp"
+#include "kinematic_arbiter/core/statistical_utils.hpp"
 
 // Use the correct state index type
 using SIdx = kinematic_arbiter::core::StateIndex;
@@ -191,10 +192,9 @@ protected:
       ASSERT_EQ(filter->GetCurrentTime(), t) << "Time not updated during initialization";
       ASSERT_EQ(filter->GetStateCovariance(), prev_covariance) << "Covariance not updated during initialization";
 
-      // Get initializable states from the sensor
-      [[maybe_unused]] StateFlags initializable_flags = sensor->GetInitializableStates();
-      [[maybe_unused]] StateVector last_good_state = prev_state;
-      [[maybe_unused]] StateMatrix last_good_cov = prev_covariance;
+      // Get initializable states and names - moved these declarations so they're in scope
+      auto initializable_states = sensor->GetInitializableStates();
+      std::vector<std::string> state_names = kinematic_arbiter::core::GetInitializableStateNames(initializable_states);
 
       // Track measurement covariance norm to test convergence
       std::vector<double> measurement_cov_norm_history;
@@ -211,35 +211,13 @@ protected:
     //   const double kMeasCovFloor = noise_covariance.isZero() ? 0.1 :
     //                                std::max(0.1, noise_covariance.norm() * 0.5);
 
-      // Random number generator and normal distribution setup
+      // Random number generator setup
       std::mt19937 gen(std::random_device{}());
-      std::normal_distribution<double> normal_dist(0.0, 1.0);
-
-      // Precompute the transformation matrix for noise if needed
-      Eigen::MatrixXd transform;
-      if (add_noise) {
-          Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> eigenSolver(noise_covariance);
-          transform = eigenSolver.operatorSqrt();
-      }
-
-      // Lambda function to add noise to a measurement
-      auto addNoise = [&gen, &normal_dist, &transform](const MeasurementType& measurement) -> MeasurementType {
-          // Generate standard normal samples
-          Eigen::VectorXd z = Eigen::VectorXd::NullaryExpr(measurement.size(), [&]() { return normal_dist(gen); });
-
-          // Transform to desired covariance and add to measurement
-          return measurement + transform * z;
-      };
-
-
-    auto initializable_states = sensor->GetInitializableStates();
-    std::vector<std::string> state_names = kinematic_arbiter::core::GetInitializableStateNames(initializable_states);
 
       // Test for 10 seconds (200 steps at 0.05s per step)
       for (int i = 0; i < 200; i++) {
           ASSERT_EQ(filter->GetCurrentTime(), t) << "Time mismatch at loop iteration " << i << ": t = " << t+dt;
           t += dt;
-
 
           // Check for NaNs before prediction
           if (hasNaN(prev_state) || hasNaN(prev_covariance)) {
@@ -249,169 +227,172 @@ protected:
           // Get true state
           StateVector true_state = kinematic_arbiter::utils::Figure8Trajectory(t);
 
+          // Check for NaNs after prediction
+          if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
+              FAIL() << "NaN detected in state or covariance after prediction at t=" << t;
+          }
+          ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed before prediction";
+          StateVector predicted_state = filter->GetStateEstimate(t);
+          ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed after prediction";
 
-        // Check for NaNs after prediction
-        if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
-            FAIL() << "NaN detected in state or covariance after prediction at t=" << t;
-        }
-        ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed before prediction";
-        StateVector predicted_state = filter->GetStateEstimate(t);
-        ASSERT_FLOAT_EQ(filter->GetCurrentTime(), t-dt) << "Time changed after prediction";
+          // Get measurement
+          auto measurement = sensor->PredictMeasurement(true_state);
 
-        // Get measurement and add noise if needed
-        auto measurement = sensor->PredictMeasurement(true_state);
-        if (add_noise) {
-            measurement = addNoise(measurement);
-        }
-
-        // Compute auxiliary data
-        auto aux_data = sensor->ComputeAuxiliaryData(
-            predicted_state,
-            filter->GetStateCovariance(),
-            measurement);
-
-        // Check for NaNs in auxiliary data
-        if (hasNaN(aux_data.innovation) || hasNaN(aux_data.jacobian) || hasNaN(aux_data.innovation_covariance)) {
-            FAIL() << "NaN detected in auxiliary data at t=" << t;
-        }
-
-        // Process measurement
-        bool assumptions_held = filter->ProcessMeasurementByIndex(sensor_idx, t, measurement);
-        if (!assumptions_held) {
-            FAIL() << "Measurement assumptions not held at t=" << t;
-        }
-        ASSERT_EQ(filter->GetCurrentTime(), t) << "Time not updated during update";
-
-        // Check for NaNs after update
-        if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
-            FAIL() << "NaN detected in state or covariance after update at t=" << t;
-        }
-        StateVector updated_state = filter->GetStateEstimate();
-        StateMatrix updated_cov = filter->GetStateCovariance();
-        // Calculate prediction error and update error for each initializable state
-        for (Eigen::Index idx = 0; idx < initializable_states.size(); ++idx) {
-          int state_idx = initializable_states[idx];
-
-          // Skip this check if the state isn't actually initializable by this sensor
-          StateFlags initializable_flags = sensor->GetInitializableStates();
-          if (!initializable_flags[state_idx]) {
-            continue;  // Skip checks for states this sensor can't initialize
+          // Add noise if needed
+          if (add_noise) {
+              Eigen::VectorXd noise = kinematic_arbiter::utils::generateMultivariateNoise(
+                  noise_covariance, gen);
+              measurement += noise;
           }
 
-          // Special handling for quaternion components
-          if (state_idx == SIdx::Quaternion::X ||
-              state_idx == SIdx::Quaternion::Y ||
-              state_idx == SIdx::Quaternion::Z) {
+          // Compute auxiliary data
+          auto aux_data = sensor->ComputeAuxiliaryData(
+              predicted_state,
+              filter->GetStateCovariance(),
+              measurement);
 
-            // Extract quaternion components
-            Eigen::Quaterniond true_quat(
-                true_state[SIdx::Quaternion::W],
-                true_state[SIdx::Quaternion::X],
-                true_state[SIdx::Quaternion::Y],
-                true_state[SIdx::Quaternion::Z]);
+          // Check for NaNs in auxiliary data
+          if (hasNaN(aux_data.innovation) || hasNaN(aux_data.jacobian) || hasNaN(aux_data.innovation_covariance)) {
+              FAIL() << "NaN detected in auxiliary data at t=" << t;
+          }
 
-            Eigen::Quaterniond pred_quat(
-                predicted_state[SIdx::Quaternion::W],
-                predicted_state[SIdx::Quaternion::X],
-                predicted_state[SIdx::Quaternion::Y],
-                predicted_state[SIdx::Quaternion::Z]);
+          // Process measurement
+          bool assumptions_held = filter->ProcessMeasurementByIndex(sensor_idx, t, measurement);
+          if (!assumptions_held) {
+              FAIL() << "Measurement assumptions not held at t=" << t;
+          }
+          ASSERT_EQ(filter->GetCurrentTime(), t) << "Time not updated during update";
 
-            Eigen::Quaterniond updated_quat(
-                updated_state[SIdx::Quaternion::W],
-                updated_state[SIdx::Quaternion::X],
-                updated_state[SIdx::Quaternion::Y],
-                updated_state[SIdx::Quaternion::Z]);
+          // Check for NaNs after update
+          if (hasNaN(filter->GetStateEstimate()) || hasNaN(filter->GetStateCovariance())) {
+              FAIL() << "NaN detected in state or covariance after update at t=" << t;
+          }
+          StateVector updated_state = filter->GetStateEstimate();
+          StateMatrix updated_cov = filter->GetStateCovariance();
+          // Calculate prediction error and update error for each initializable state
+          for (Eigen::Index idx = 0; idx < initializable_states.size(); ++idx) {
+            int state_idx = initializable_states[idx];
 
-            // Convert to rotation matrices
-            Eigen::Matrix3d true_rot = true_quat.toRotationMatrix();
-            Eigen::Matrix3d pred_rot = pred_quat.toRotationMatrix();
-            Eigen::Matrix3d updated_rot = updated_quat.toRotationMatrix();
-
-            // Get the row index corresponding to the quaternion component (X=0, Y=1, Z=2)
-            int row_idx = state_idx - SIdx::Quaternion::X;
-
-            // Calculate errors using the corresponding row of the rotation matrix
-            double prediction_error = (pred_rot.row(row_idx) - true_rot.row(row_idx)).norm();
-            double update_error = (updated_rot.row(row_idx) - true_rot.row(row_idx)).norm();
-            if (true_meas_cov_norm < 1e-10) {
-              ASSERT_LE(update_error, prediction_error)
-                  << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                  << "\nPrediction error: " << prediction_error
-                << "\nUpdate error: " << update_error;
+            // Skip this check if the state isn't actually initializable by this sensor
+            StateFlags initializable_flags = sensor->GetInitializableStates();
+            if (!initializable_flags[state_idx]) {
+              continue;  // Skip checks for states this sensor can't initialize
             }
-            else {
-              // Check 4 sigma bounds 99.99% confidence
-              ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
-                  << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                  << "\nPrediction error: " << prediction_error
+
+            // Special handling for quaternion components
+            if (state_idx == SIdx::Quaternion::X ||
+                state_idx == SIdx::Quaternion::Y ||
+                state_idx == SIdx::Quaternion::Z) {
+
+              // Extract quaternion components
+              Eigen::Quaterniond true_quat(
+                  true_state[SIdx::Quaternion::W],
+                  true_state[SIdx::Quaternion::X],
+                  true_state[SIdx::Quaternion::Y],
+                  true_state[SIdx::Quaternion::Z]);
+
+              Eigen::Quaterniond pred_quat(
+                  predicted_state[SIdx::Quaternion::W],
+                  predicted_state[SIdx::Quaternion::X],
+                  predicted_state[SIdx::Quaternion::Y],
+                  predicted_state[SIdx::Quaternion::Z]);
+
+              Eigen::Quaterniond updated_quat(
+                  updated_state[SIdx::Quaternion::W],
+                  updated_state[SIdx::Quaternion::X],
+                  updated_state[SIdx::Quaternion::Y],
+                  updated_state[SIdx::Quaternion::Z]);
+
+              // Convert to rotation matrices
+              Eigen::Matrix3d true_rot = true_quat.toRotationMatrix();
+              Eigen::Matrix3d pred_rot = pred_quat.toRotationMatrix();
+              Eigen::Matrix3d updated_rot = updated_quat.toRotationMatrix();
+
+              // Get the row index corresponding to the quaternion component (X=0, Y=1, Z=2)
+              int row_idx = state_idx - SIdx::Quaternion::X;
+
+              // Calculate errors using the corresponding row of the rotation matrix
+              double prediction_error = (pred_rot.row(row_idx) - true_rot.row(row_idx)).norm();
+              double update_error = (updated_rot.row(row_idx) - true_rot.row(row_idx)).norm();
+              if (true_meas_cov_norm < 1e-10) {
+                ASSERT_LE(update_error, prediction_error)
+                    << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                    << "\nPrediction error: " << prediction_error
                   << "\nUpdate error: " << update_error;
-            }
-          } else {
-            // Standard handling for non-quaternion states
-            double prediction_error = std::abs(predicted_state[state_idx] - true_state[state_idx]);
-            double update_error = std::abs(updated_state[state_idx] - true_state[state_idx]);
-            if (true_meas_cov_norm < 1e-10) {
-              ASSERT_LE(update_error, prediction_error)
-                  << [&]() {
-                      std::stringstream ss;
-                      ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                         << "\nPrediction error: " << prediction_error
-                         << "\nUpdate error: " << update_error
-                         << "\nTrue value: " << true_state[state_idx]
-                         << "\nPredicted value: " << predicted_state[state_idx]
-                         << "\nUpdated value: " << updated_state[state_idx];
+              }
+              else {
+                // Check 4 sigma bounds 99.99% confidence
+                ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
+                    << "Quaternion component " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                    << "\nPrediction error: " << prediction_error
+                    << "\nUpdate error: " << update_error;
+              }
+            } else {
+              // Standard handling for non-quaternion states
+              double prediction_error = std::abs(predicted_state[state_idx] - true_state[state_idx]);
+              double update_error = std::abs(updated_state[state_idx] - true_state[state_idx]);
+              if (true_meas_cov_norm < 1e-10) {
+                ASSERT_LE(update_error, prediction_error)
+                    << [&]() {
+                        std::stringstream ss;
+                        ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                           << "\nPrediction error: " << prediction_error
+                           << "\nUpdate error: " << update_error
+                           << "\nTrue value: " << true_state[state_idx]
+                           << "\nPredicted value: " << predicted_state[state_idx]
+                           << "\nUpdated value: " << updated_state[state_idx];
 
-                      // Call PrintFilterDiagnostics to get more detailed information
-                      // Only call PrintFilterDiagnostics if measurement is 6D
-                      if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                          PrintFilterDiagnostics(
-                              std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
-                              true_state,
-                              predicted_state,
-                              filter->GetStateCovariance(),
-                              updated_state,
-                              measurement,
-                              aux_data,
-                              "State " + state_names[idx] + " estimate got worse");
-                      }
+                        // Call PrintFilterDiagnostics to get more detailed information
+                        // Only call PrintFilterDiagnostics if measurement is 6D
+                        if constexpr (MeasurementType::RowsAtCompileTime == 6) {
+                            PrintFilterDiagnostics(
+                                std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                                true_state,
+                                predicted_state,
+                                filter->GetStateCovariance(),
+                                updated_state,
+                                measurement,
+                                aux_data,
+                                "State " + state_names[idx] + " estimate got worse");
+                        }
 
-                      return ss.str();
-                  }();
-            }
-            else {
-              // Check 4 sigma bounds 99.99% confidence
-              ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
-                  << [&]() {
-                      std::stringstream ss;
-                      ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
-                         << "\nPrediction error: " << prediction_error
-                         << "\nUpdate error: " << update_error
-                         << "\nTrue value: " << true_state[state_idx]
-                         << "\nPredicted value: " << predicted_state[state_idx]
-                         << "\nUpdated value: " << updated_state[state_idx];
+                        return ss.str();
+                    }();
+              }
+              else {
+                // Check 4 sigma bounds 99.99% confidence
+                ASSERT_LE(update_error, 4 * std::sqrt(true_meas_cov_norm))
+                    << [&]() {
+                        std::stringstream ss;
+                        ss << "State " << state_names[idx] << " (index " << state_idx << ") estimate got worse after update at t=" << t
+                           << "\nPrediction error: " << prediction_error
+                           << "\nUpdate error: " << update_error
+                           << "\nTrue value: " << true_state[state_idx]
+                           << "\nPredicted value: " << predicted_state[state_idx]
+                           << "\nUpdated value: " << updated_state[state_idx];
 
-                      // Call PrintFilterDiagnostics to get more detailed information
-                      // Only call PrintFilterDiagnostics if measurement is 6D
-                      if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                          PrintFilterDiagnostics(
-                              std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
-                              true_state,
-                              predicted_state,
-                              filter->GetStateCovariance(),
-                              updated_state,
-                              measurement,
-                              aux_data,
-                              "State " + state_names[idx] + " estimate got worse");
-                      }
+                        // Call PrintFilterDiagnostics to get more detailed information
+                        // Only call PrintFilterDiagnostics if measurement is 6D
+                        if constexpr (MeasurementType::RowsAtCompileTime == 6) {
+                            PrintFilterDiagnostics(
+                                std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                                true_state,
+                                predicted_state,
+                                filter->GetStateCovariance(),
+                                updated_state,
+                                measurement,
+                                aux_data,
+                                "State " + state_names[idx] + " estimate got worse");
+                        }
 
-                      return ss.str();
-                  }();
+                        return ss.str();
+                    }();
+              }
             }
           }
-        }
-        // Store current state and covariance for next iteration
-        prev_state = updated_state;
-        prev_covariance = updated_cov;
+          // Store current state and covariance for next iteration
+          prev_state = updated_state;
+          prev_covariance = updated_cov;
       }
 
       SUCCEED() << "All initializable states improved";

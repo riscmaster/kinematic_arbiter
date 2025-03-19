@@ -111,9 +111,9 @@ public:
     // Get perfect measurement from the sensor model
     MeasurementVector true_measurement = sensor_model_->PredictMeasurement(state);
 
-    // Sample noisy measurement using the covariance
-    auto mvn = core::MultivariateNormal<3>(MeasurementVector::Zero(), measurement_covariance_);
-    MeasurementVector noise = mvn.sample(generator_);
+    // Sample noisy measurement using the new utility function
+    Eigen::Vector3d noise = kinematic_arbiter::utils::generateMultivariateNoise(
+        measurement_covariance_, generator_);
     MeasurementVector noisy_measurement = true_measurement + noise;
 
     // Calculate 3-sigma bounds
@@ -213,7 +213,7 @@ public:
   using SIdx = core::StateIndex;
   using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
 
-  Figure8SimulatorNode() : Node("figure8_simulator") {
+  Figure8SimulatorNode() : Node("figure8_simulator"), generator_(std::random_device{}()) {
     // Declare base parameters
     this->declare_parameter("publish_rate", 50.0);
     this->declare_parameter("frame_id", "odom");
@@ -584,6 +584,9 @@ private:
 
   // Timing
   rclcpp::Time start_time_;
+
+  // Random generator
+  std::mt19937 generator_;
 };
 
 }  // namespace simulation

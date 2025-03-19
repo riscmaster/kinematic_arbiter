@@ -2,7 +2,7 @@
 #include <memory>
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "tf2_eigen/tf2_eigen.h"
+#include "tf2_eigen/tf2_eigen.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
@@ -196,7 +196,8 @@ TEST_F(FilterWrapperTest, TransformConversions) {
   isometry.linear() = quat.toRotationMatrix();
 
   // Convert to transform using tf2_eigen
-  geometry_msgs::msg::Transform transform_msg = tf2::toMsg(isometry);
+  geometry_msgs::msg::TransformStamped transform_stamped = tf2::eigenToTransform(isometry);
+  geometry_msgs::msg::Transform transform_msg = transform_stamped.transform;
 
   // Test the individual components with our wrapper
   Eigen::Vector3d extracted_translation = wrapper_->vectorMsgToEigen(transform_msg.translation);

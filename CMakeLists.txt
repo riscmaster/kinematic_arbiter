@@ -175,6 +175,7 @@ if(NOT BUILD_PYTHON_ONLY)
   set(CPP_TARGETS "")
   if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/ros2/kinematic_arbiter_node.cpp")
     add_executable(kinematic_arbiter_node
+      src/ros2/main.cpp
       src/ros2/kinematic_arbiter_node.cpp
     )
     target_link_libraries(kinematic_arbiter_node PUBLIC

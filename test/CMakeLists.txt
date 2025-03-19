@@ -75,12 +75,16 @@ add_test_executable(rigid_body_state_model_test
 set_tests_properties(rigid_body_state_model_test PROPERTIES LABELS "models")
 
 add_test_executable(mediated_kalman_filter_test
-  "${CMAKE_SOURCE_DIR}/test/mediated_kalman_filter_test.cpp")
+  "${CMAKE_SOURCE_DIR}/test/core/mediated_kalman_filter_test.cpp")
 set_tests_properties(mediated_kalman_filter_test PROPERTIES LABELS "filters")
 
 add_test_executable(filter_initialization_test
-  "${CMAKE_SOURCE_DIR}/test/filter_initialization_test.cpp")
+  "${CMAKE_SOURCE_DIR}/test/core/filter_initialization_test.cpp")
 set_tests_properties(filter_initialization_test PROPERTIES LABELS "filters")
+
+add_test_executable(statistical_utils_test
+  "${CMAKE_SOURCE_DIR}/test/core/statistical_utils_test.cpp")
+set_tests_properties(statistical_utils_test PROPERTIES LABELS "core")
 
 # Sensor tests
 add_test_executable(body_velocity_sensor_model_test

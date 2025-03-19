@@ -5,6 +5,9 @@
 #include <limits>
 #include <cstddef>
 #include <Eigen/Dense>
+#include <random>
+#include <stdexcept>
+#include <vector>
 
 namespace kinematic_arbiter {
 namespace utils {
@@ -180,6 +183,52 @@ double CalculateChiSquareCriticalValue1Dof(double confidence_level);
  */
 double CalculateChiSquareCriticalValueNDof(size_t dof_index,
                                            double confidence_level);
+
+/**
+ * @brief Generate multivariate normal noise with given covariance
+ *
+ * @tparam Generator Random number generator type
+ * @tparam Derived Eigen matrix type for covariance
+ * @param covariance Covariance matrix (must be positive definite)
+ * @param generator Random number generator
+ * @return Noise vector with specified covariance
+ * @throws std::invalid_argument if covariance is not positive definite
+ */
+template <typename Generator, typename Derived>
+Eigen::VectorXd generateMultivariateNoise(
+    const Eigen::MatrixBase<Derived>& covariance,
+    Generator& generator) {
+
+  const int size = covariance.rows();
+
+  // Verify the covariance matrix is square
+  if (covariance.rows() != covariance.cols()) {
+    throw std::invalid_argument("Covariance matrix must be square");
+  }
+
+  // Compute the Cholesky decomposition
+  Eigen::LLT<Eigen::MatrixXd> llt(covariance);
+
+  // Check if the covariance matrix is positive definite
+  if (llt.info() != Eigen::Success) {
+    throw std::invalid_argument("Covariance matrix must be positive definite");
+  }
+
+  // Get the lower triangular matrix L from the decomposition
+  Eigen::MatrixXd L = llt.matrixL();
+
+  // Create standard normal distribution
+  std::normal_distribution<double> normal_dist(0.0, 1.0);
+
+  // Generate standard normal samples
+  Eigen::VectorXd z(size);
+  for (int i = 0; i < size; ++i) {
+    z(i) = normal_dist(generator);
+  }
+
+  // Transform to desired covariance: x = L*z
+  return L * z;
+}
 
 } // namespace utils
 } // namespace kinematic_arbiter

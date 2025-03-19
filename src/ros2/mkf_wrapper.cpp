@@ -270,7 +270,7 @@ Eigen::Vector3d FilterWrapper::vectorMsgToEigen(const geometry_msgs::msg::Vector
 }
 
 geometry_msgs::msg::Point FilterWrapper::vectorToPointMsg(const Eigen::Vector3d& vec) {
-  // Manual conversion for Vector3d to Point (Point is not the same as Vector3)
+  // Manual conversion for Point
   geometry_msgs::msg::Point point;
   point.x = vec(0);
   point.y = vec(1);
@@ -279,17 +279,17 @@ geometry_msgs::msg::Point FilterWrapper::vectorToPointMsg(const Eigen::Vector3d&
 }
 
 geometry_msgs::msg::Quaternion FilterWrapper::quaternionToQuaternionMsg(const Eigen::Quaterniond& quat) {
-  // Manual conversion for Eigen::Quaterniond to Quaternion
-  geometry_msgs::msg::Quaternion quaternion;
-  quaternion.x = quat.x();
-  quaternion.y = quat.y();
-  quaternion.z = quat.z();
-  quaternion.w = quat.w();
-  return quaternion;
+  // Using proper tf2_eigen method for Isometry3d conversion
+  Eigen::Isometry3d isometry = Eigen::Isometry3d::Identity();
+  isometry.linear() = quat.toRotationMatrix();
+
+  // Convert to TransformStamped and extract Quaternion
+  geometry_msgs::msg::TransformStamped transform_stamped = tf2::eigenToTransform(isometry);
+  return transform_stamped.transform.rotation;
 }
 
 geometry_msgs::msg::Vector3 FilterWrapper::eigenToVectorMsg(const Eigen::Vector3d& vec) {
-  // Manual conversion for Vector3d to Vector3 (Vector3 is not the same as Point)
+  // Manual conversion for Vector3
   geometry_msgs::msg::Vector3 vector;
   vector.x = vec(0);
   vector.y = vec(1);
