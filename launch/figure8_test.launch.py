@@ -28,6 +28,13 @@ def generate_launch_description():
         description="Rate at which to publish the trajectory (Hz)",
     )
 
+    # Add parent frequency argument
+    parent_frequency_arg = DeclareLaunchArgument(
+        "parent_frequency",
+        default_value="20.0",
+        description="Parent frequency for the simulator (Hz, max 100Hz)",
+    )
+
     filter_rate_arg = DeclareLaunchArgument(
         "filter_rate",
         default_value="50.0",
@@ -65,10 +72,10 @@ def generate_launch_description():
         description="Angular scale for Figure 8 trajectory",
     )
 
-    # RViz config
+    # RViz config - update path to use our visualization file
     rviz_config_arg = DeclareLaunchArgument(
         "rviz_config",
-        default_value="src/kinematic_arbiter/config/test.rviz",
+        default_value="src/kinematic_arbiter/rviz/figure8_visualization.rviz",
         description="Path to RViz configuration file",
     )
 
@@ -95,10 +102,11 @@ def generate_launch_description():
         parameters=[
             {
                 "publish_rate": LaunchConfiguration("publish_rate"),
+                "parent_frequency": LaunchConfiguration("parent_frequency"),
                 "frame_id": "map",
                 "base_frame_id": "base_link",
                 # Trajectory parameters
-                "trajectory.max_velocity": LaunchConfiguration("max_velocity"),
+                "trajectory.max_vel": LaunchConfiguration("max_velocity"),
                 "trajectory.length": LaunchConfiguration("length"),
                 "trajectory.width": LaunchConfiguration("width"),
                 "trajectory.width_slope": LaunchConfiguration("width_slope"),
@@ -106,7 +114,7 @@ def generate_launch_description():
                     "angular_scale"
                 ),
                 # Sensors configuration
-                "position_sensors": ["position1", "position2"],
+                "sensors": ["position1", "position2"],
                 # Position sensor 1 parameters (center of robot)
                 "sensors.position1.position": [0.0, 0.0, 0.0],
                 "sensors.position1.quaternion": [
@@ -131,6 +139,15 @@ def generate_launch_description():
         ],
     )
 
+    # Add RViz node using our configuration
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        arguments=["-d", LaunchConfiguration("rviz_config")],
+        output="screen",
+    )
+
     # Kinematic arbiter node
     arbiter_node = Node(
         package="kinematic_arbiter",
@@ -144,18 +161,9 @@ def generate_launch_description():
                 "frame_id": "map",
                 "base_frame_id": "base_link_estimated",
                 # Configure sensors to use
-                "position_sensors": ["position1"],
+                "sensors": ["position1"],
             }
         ],
-    )
-
-    # RViz
-    rviz_node = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="screen",
-        arguments=["-d", LaunchConfiguration("rviz_config")],
     )
 
     return LaunchDescription(
@@ -163,6 +171,7 @@ def generate_launch_description():
             # Arguments
             debug_arg,
             publish_rate_arg,
+            parent_frequency_arg,
             filter_rate_arg,
             max_velocity_arg,
             length_arg,
