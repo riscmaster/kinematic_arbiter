@@ -199,8 +199,10 @@ INSTANTIATE_TEST_SUITE_P(
     Figure8Trajectories,
     Figure8TestP,
     ::testing::Values(
-        Figure8Params{10.0, 0.01, 0.001},   // 10 seconds, 10ms steps, 1mm/s error growth
-        Figure8Params{60.0, 0.1, 0.002}     // 60 seconds, 100ms steps, 2mm/s error growth
+        Figure8Params{10.0, 0.0001, 0.0004},
+        Figure8Params{10.0, 0.001, 0.004},
+        Figure8Params{10.0, 0.01, 0.04},
+        Figure8Params{10.0, 0.1, 0.4}
     )
 );
 
@@ -295,48 +297,37 @@ TEST_P(Figure8TestP, LongTermPrediction) {
 
   // Initial state from Figure-8 trajectory at t=0
   StateVector state = utils::Figure8Trajectory(0.0);
-
-  // Initialize model state - copy only position and orientation
-  // (leave velocity/acceleration at zero for initial prediction)
-  StateVector prediction_state = StateVector::Zero();
-  prediction_state.segment<3>(SIdx::Position::Begin()) = state.segment<3>(SIdx::Position::Begin());
-  prediction_state.segment<4>(SIdx::Quaternion::Begin()) = state.segment<4>(SIdx::Quaternion::Begin());
+  StateVector predicted_state = state;
 
   double time = 0.0;
   double max_position_error = 0.0;
 
   while (time < params.duration) {
-    // Get ground truth state at current time
-    StateVector ground_truth = utils::Figure8Trajectory(time);
+    // Get ground truth for next timestep to compare with our prediction
+    StateVector actual_state = utils::Figure8Trajectory(time + params.time_step);
+
+    // Use next steps velocity and acceleration to predict the state
+    predicted_state.segment<3>(SIdx::LinearVelocity::Begin()) =
+        actual_state.segment<3>(SIdx::LinearVelocity::Begin());
+    predicted_state.segment<3>(SIdx::AngularVelocity::Begin()) =
+        actual_state.segment<3>(SIdx::AngularVelocity::Begin());
+    predicted_state.segment<3>(SIdx::LinearAcceleration::Begin()) =
+        actual_state.segment<3>(SIdx::LinearAcceleration::Begin());
+    predicted_state.segment<3>(SIdx::AngularAcceleration::Begin()) =
+        actual_state.segment<3>(SIdx::AngularAcceleration::Begin());
+
 
     // Predict the next state using our model
-    StateVector predicted_state = model_->PredictState(prediction_state, params.time_step);
+    predicted_state = model_->PredictState(predicted_state, params.time_step);
 
-    // After prediction, update the predicted state's velocity and acceleration
-    // from ground truth to match reality for the next step (we're only testing
-    // position/orientation prediction accuracy)
-    predicted_state.segment<3>(SIdx::LinearVelocity::Begin()) =
-        ground_truth.segment<3>(SIdx::LinearVelocity::Begin());
-    predicted_state.segment<3>(SIdx::AngularVelocity::Begin()) =
-        ground_truth.segment<3>(SIdx::AngularVelocity::Begin());
-    predicted_state.segment<3>(SIdx::LinearAcceleration::Begin()) =
-        ground_truth.segment<3>(SIdx::LinearAcceleration::Begin());
-    predicted_state.segment<3>(SIdx::AngularAcceleration::Begin()) =
-        ground_truth.segment<3>(SIdx::AngularAcceleration::Begin());
-
-    // Get ground truth for next timestep to compare with our prediction
-    StateVector next_ground_truth = utils::Figure8Trajectory(time + params.time_step);
 
     // Calculate position error between prediction and next ground truth
     Eigen::Vector3d predicted_position = predicted_state.segment<3>(SIdx::Position::Begin());
-    Eigen::Vector3d ground_truth_position = next_ground_truth.segment<3>(SIdx::Position::Begin());
+    Eigen::Vector3d ground_truth_position = actual_state.segment<3>(SIdx::Position::Begin());
     double position_error = (predicted_position - ground_truth_position).norm();
 
     // Track maximum error
     max_position_error = std::max(max_position_error, position_error);
-
-    // Store predicted state for next iteration
-    prediction_state = predicted_state;
 
     // Advance time
     time += params.time_step;

@@ -7,18 +7,32 @@ a kinematic arbiter node for state estimation, and visualization tools.
 It configures parameters for the simulation and provides event handlers for graceful shutdown.
 """
 
+import os
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument, LogInfo
+from launch.actions import DeclareLaunchArgument, LogInfo, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition
+from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
     """Generate the launch description for the Figure 8 test simulation."""
+    pkg_share = get_package_share_directory("kinematic_arbiter")
+
+    # Foxglove layout file
+    foxglove_layout = os.path.join(pkg_share, "config", "figure8_layout.json")
+
     # Debug mode
     debug_arg = DeclareLaunchArgument(
         "debug", default_value="false", description="Enable debug output"
+    )
+
+    # Foxglove Studio argument
+    use_foxglove_studio_arg = DeclareLaunchArgument(
+        "use_foxglove_studio",
+        default_value="false",
+        description="Start Foxglove Studio (requires installation)",
     )
 
     # Launch arguments
@@ -62,13 +76,13 @@ def generate_launch_description():
 
     width_slope_arg = DeclareLaunchArgument(
         "width_slope",
-        default_value="0.0",
+        default_value="0.1",
         description="Width slope for Figure 8 trajectory",
     )
 
     angular_scale_arg = DeclareLaunchArgument(
         "angular_scale",
-        default_value="1.0",
+        default_value="0.001",
         description="Angular scale for Figure 8 trajectory",
     )
 
@@ -166,10 +180,33 @@ def generate_launch_description():
         ],
     )
 
+    # Foxglove Bridge Node
+    foxglove_bridge_node = Node(
+        package="foxglove_bridge",
+        executable="foxglove_bridge",
+        name="foxglove_bridge",
+        parameters=[
+            {"port": 8765},
+            {"address": "0.0.0.0"},
+            {"tls": False},
+            {"topic_whitelist": [".*"]},
+        ],
+        output="screen",
+    )
+
+    # Foxglove Studio (optional)
+    foxglove_studio_process = ExecuteProcess(
+        condition=IfCondition(LaunchConfiguration("use_foxglove_studio")),
+        cmd=["foxglove-studio", "--load-layout", foxglove_layout],
+        name="foxglove_studio",
+        output="screen",
+    )
+
     return LaunchDescription(
         [
             # Arguments
             debug_arg,
+            use_foxglove_studio_arg,
             publish_rate_arg,
             parent_frequency_arg,
             filter_rate_arg,
@@ -180,11 +217,14 @@ def generate_launch_description():
             angular_scale_arg,
             rviz_config_arg,
             namespace_arg,
-            # Debug output
+            # Logging
             debug_output,
-            # Main nodes
-            rviz_node,
+            # Nodes
             simulator_node,
+            rviz_node,
             arbiter_node,
+            # Foxglove integration
+            foxglove_bridge_node,
+            foxglove_studio_process,
         ]
     )

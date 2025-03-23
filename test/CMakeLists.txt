@@ -86,6 +86,10 @@ add_test_executable(statistical_utils_test
   "${CMAKE_SOURCE_DIR}/test/core/statistical_utils_test.cpp")
 set_tests_properties(statistical_utils_test PROPERTIES LABELS "core")
 
+add_test_executable(trajectory_utils_test
+  "${CMAKE_SOURCE_DIR}/test/core/trajectory_utils_test.cpp")
+set_tests_properties(trajectory_utils_test PROPERTIES LABELS "core")
+
 # Sensor tests
 add_test_executable(body_velocity_sensor_model_test
   "${CMAKE_SOURCE_DIR}/test/sensors/body_velocity_sensor_model_test.cpp")

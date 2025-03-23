@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <Eigen/Dense>
 
 namespace kinematic_arbiter {
 namespace core {

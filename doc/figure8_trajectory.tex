@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{amsmath, bm}
+
+\begin{document}
+
+	\section{Trajectory Definition}
+	\begin{align*}
+		a &= 0.5\times\text{length}, \quad
+		b = 0.5\times\text{width}, \quad
+		c = \text{width}\tan(\text{width\_slope}) \\
+		\omega_1 &= \frac{2\pi}{T}, \quad
+		\omega_2 = \frac{\omega_1}{2}, \quad
+		T = \frac{\pi\sqrt{a^2 + 4(b^2 + c^2)}}{\text{max\_velocity}}
+	\end{align*}
+
+	\section{Core Kinematics}
+	\subsection{Position}
+	\[
+	\bm{r}(t) = \begin{bmatrix}
+		a\cos(\omega_2 t) \\
+		b\sin(\omega_1 t) \\
+		c\sin(\omega_1 t)
+	\end{bmatrix}
+	\]
+
+	\subsection{Velocity}
+	\[
+	\bm{v}(t) = \begin{bmatrix}
+		-a\omega_2\sin(\omega_2 t) \\
+		b\omega_1\cos(\omega_1 t) \\
+		c\omega_1\cos(\omega_1 t)
+	\end{bmatrix}
+	\]
+
+	\subsection{Acceleration}
+	\[
+	\bm{a}(t) = \begin{bmatrix}
+		-a\omega_2^2\cos(\omega_2 t) \\
+		-b\omega_1^2\sin(\omega_1 t) \\
+		-c\omega_1^2\sin(\omega_1 t)
+	\end{bmatrix}
+	\]
+
+	\subsection{Jerk}
+	\[
+	\bm{j}(t) = \begin{bmatrix}
+		a\omega_2^3\sin(\omega_2 t) \\
+		-b\omega_1^3\cos(\omega_1 t) \\
+		-c\omega_1^3\cos(\omega_1 t)
+	\end{bmatrix}
+	\]
+
+	\section{Angular Motion}
+	\subsection{Orientation Angles}
+	\[
+	\phi = \text{(Roll - Future Extension)}, \quad
+	\theta = -\arcsin\left(\frac{v_z}{\|\bm{v}\|}\right), \quad
+	\psi = \arctan\left(\frac{v_y}{v_x}\right)
+	\]
+
+	\subsection{Pitch and Yaw Rates}
+	\[\text{Pitch Rate: }\quad \dot{\theta} = -\frac{\|\bm{v}\| a_z - v_z \bm{v}^\top \bm{a} / \|\bm{v}\|}{\bm{v}^\top\bm{v} \sqrt{1 - v_z^2 / \bm{v}^\top\bm{v}}} \]
+
+	\[\text{Yaw Rate: }\quad \dot{\psi} = \frac{\bm{v}_{xy}^\top \bm{J} \bm{a}_{xy}}{\|\bm{v}_{xy}\|^2}\]
+
+	\subsection{Pitch and Yaw Accelerations}
+	\[\text{Pitch Acceleration: }\quad \ddot{\theta} = -\frac{- v_z^2\|\bm{v}\|^2 j_z + v_z \|\bm{v}\|^2 (a_z^2 - \|\bm{v}\| j_z + 2 a_z a_{||}) + \|\bm{v}\|^3(\|\bm{v}\| j_z - 2 a_z a_{||}) + v_z^3 (\|\bm{v}\| a_{||} - a_z^2)}{\|\bm{v}\|^3\sqrt{1 - v_z^2/\|\bm{v}\|^2}(\|\bm{v}\|^2 - v_z^2)}\]
+
+	\[\text{Yaw Acceleration: }\quad \ddot{\psi} = \frac{(\bm{v}_{xy}^\top \bm{J} \bm{j}_{xy})\|\bm{v}_{xy}\|^2 - 2(\bm{v}_{xy}^\top \bm{a}_{xy})(\bm{v}_{xy}^\top \bm{J} \bm{a}_{xy})}{\|\bm{v}_{xy}\|^4} \]
+
+	Where:
+	\begin{itemize}
+		\item \(\bm{J} = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \) (90\textdegree counterclockwise rotation matrix)
+		\item \(\bm{v}_{xy} = \begin{bmatrix} v_x \\ v_y \end{bmatrix}\)
+		\item \(\bm{a}_{xy} = \begin{bmatrix} a_x \\ a_y \end{bmatrix}\)
+		\item \(\bm{j}_{xy} = \begin{bmatrix} j_x \\ j_y \end{bmatrix}\)
+	\end{itemize}
+
+	\section{Key Properties}
+	\begin{itemize}
+		\item \textbf{Generalized Rotation}: Full 321-sequence tensor accommodates future roll extensions
+		\item \textbf{Singularity Aware}: Explicit \(\tan\theta\) terms highlight \(\theta = \pm\pi/2\) singularities
+		\item \textbf{Frame Consistency}: Proper treatment of inertial-body transformations
+		\item \textbf{Computational Preservation}: Maintains original velocity-based angular rate derivations
+	\end{itemize}
+
+\end{document}
