@@ -1,0 +1,172 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{bm}
+
+\title{Mathematical Derivation and Justification of the Rigid Body State Model with Quaternion Orientation}
+\author{Spencer Maughan}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\section{Introduction}
+	This document provides a comprehensive mathematical explanation of the rigid body state model implemented in the provided code. The model incorporates:
+
+	- 3D position
+	- Quaternion orientation
+	- 3D linear and angular velocity
+	- 3D linear and angular acceleration
+
+	Quaternion kinematics are employed for orientation representation to avoid gimbal lock and maintain robust rotation modeling.
+
+	\section{State Representation}
+	The state vector is defined as follows:
+
+	\begin{equation}
+		\mathbf{x} = \begin{bmatrix} \mathbf{p} \\ \mathbf{q} \\ \mathbf{v}_l \\ \mathbf{v}_a \\ \mathbf{a}_l \\ \mathbf{a}_a \end{bmatrix}
+	\end{equation}
+
+	Where:
+	- $\mathbf{p}$: 3D position vector
+	- $\mathbf{q}$: Quaternion orientation (4D vector)
+	- $\mathbf{v}_l$: 3D linear velocity
+	- $\mathbf{v}_a$: 3D angular velocity
+	- $\mathbf{a}_l$: 3D linear acceleration
+	- $\mathbf{a}_a$: 3D angular acceleration
+
+	\section{State Prediction Model}
+	The state evolution model is defined as follows:
+
+	\subsection{Position Model}
+	The position update is given by:
+	\begin{equation}
+		\mathbf{p}_{k+1} = \mathbf{p}_k + \mathbf{R}(\mathbf{q}_k) \left( \mathbf{v}_{l,k} + \frac{1}{2} \mathbf{a}_{l,k} \Delta t \right) \Delta t
+	\end{equation}
+
+	Where $\mathbf{R}(\mathbf{q})$ is the rotation matrix derived from the quaternion $\mathbf{q}$.
+
+	\subsection{Quaternion Update via Exponential Map}
+	Quaternion kinematics are defined by:
+
+	\begin{equation}
+		\mathbf{q}_{k+1} = \exp\left(\frac{1}{2} \mathbf{\Omega} \Delta t + \frac{1}{4} \mathbf{\alpha} \Delta t^2\right) \mathbf{q}_k
+	\end{equation}
+
+	Where:
+	- $\mathbf{\Omega}$ is the angular velocity vector
+	- $\mathbf{\alpha}$ is the angular acceleration vector
+
+	The exponential map is calculated using the Rodrigues rotation formula:
+
+	\begin{equation}
+		\exp(\bm{\theta}) = \cos\left(\frac{\|\bm{\theta}\|}{2}\right) + \frac{\sin\left(\frac{\|\bm{\theta}\|}{2}\right)}{\|\bm{\theta}\|} \bm{\theta}
+	\end{equation}
+
+	For small angular motion (when $\|\bm{\theta}\| \to 0$), the exponential map simplifies to the identity quaternion.
+
+	\subsection{Velocity Model}
+	The linear and angular velocity updates are given by:
+
+	\begin{align*}
+		\mathbf{v}_{l,k+1} &= \mathbf{v}_{l,k} + \mathbf{a}_{l,k} \Delta t \\
+		\mathbf{v}_{a,k+1} &= \mathbf{v}_{a,k} + \mathbf{a}_{a,k} \Delta t
+	\end{align*}
+
+	\subsection{Acceleration Model}
+	The exponential decay model for acceleration is:
+
+	\begin{align*}
+		\mathbf{a}_{l,k+1} &= \mathbf{a}_{l,k} e^{-\lambda \Delta t} \\
+		\mathbf{a}_{a,k+1} &= \mathbf{a}_{a,k} e^{-\lambda \Delta t}
+	\end{align*}
+
+	Where $\lambda = 46.05$ controls the exponential decay of acceleration terms.
+
+\section{Jacobian Derivation}
+The Jacobian matrix linearizes the system's state transition model:
+
+\begin{equation}
+	\mathbf{A} = \frac{\partial f}{\partial \mathbf{x}} \bigg|_{\hat{\mathbf{x}}_{k-1}^+, u_k}
+\end{equation}
+
+Key components include:
+
+\subsection{Position Jacobian Terms}
+The position Jacobian terms are derived from the position update equation:
+
+\begin{equation}
+	\mathbf{p}_{k+1} = \mathbf{p}_k + \mathbf{R}(\mathbf{q}) \left( \mathbf{v}_{l,k} + \frac{1}{2} \mathbf{a}_{l,k} \Delta t \right) \Delta t
+\end{equation}
+
+Taking the partial derivatives:
+\begin{align*}
+	\frac{\partial \mathbf{p}}{\partial \mathbf{v}_l} &= \mathbf{R}(\mathbf{q}) \Delta t \\
+	\frac{\partial \mathbf{p}}{\partial \mathbf{a}_l} &= \mathbf{R}(\mathbf{q}) \frac{\Delta t^2}{2} \\
+	\frac{\partial \mathbf{p}}{\partial \mathbf{q}} &= 0
+\end{align*}
+
+\subsection{Quaternion Jacobian Terms}
+Starting from the quaternion update equation:
+
+\begin{equation}
+	\mathbf{q}_{k+1} = \exp\left(\frac{1}{2} \mathbf{\Omega} \Delta t + \frac{1}{4} \mathbf{\alpha} \Delta t^2\right) \mathbf{q}_k
+\end{equation}
+
+\subsection{Angular Motion Vector Definition}
+We define the combined angular motion vector as:
+\begin{equation}
+	\mathbf{v} = \frac{1}{2} \mathbf{\Omega} \Delta t + \frac{1}{4} \mathbf{\alpha} \Delta t^2
+\end{equation}
+This vector represents the net angular displacement when both angular velocity and angular acceleration are considered.
+
+\subsection{Exponential Map and Its Derivative}
+The quaternion update uses the exponential map:
+\begin{equation}
+	\exp(\bm{v}) = \cos\left(\frac{\|\mathbf{v}\|}{2}\right) + \frac{\sin\left(\frac{\|\mathbf{v}\|}{2}\right)}{\|\mathbf{v}\|} \mathbf{v}
+\end{equation}
+For small motion, this reduces to approximately:
+\begin{equation}
+	\exp(\bm{v}) \approx 1 + \frac{1}{2} \bm{v}
+\end{equation}
+
+\subsection{Jacobian Terms for Angular Velocity}
+Differentiating the quaternion update with respect to angular velocity gives:
+\begin{equation}
+	\frac{\partial \mathbf{q}}{\partial \mathbf{\Omega}} \approx \frac{\Delta t}{2} \mathbf{I} - \frac{\Delta t^3}{16} \frac{\mathbf{\Omega} \mathbf{\Omega}^T}{\|\mathbf{\Omega}\|^2}
+\end{equation}
+
+\subsection{Jacobian Terms for Angular Acceleration}
+Similarly, for angular acceleration:
+\begin{equation}
+	\frac{\partial \mathbf{q}}{\partial \mathbf{\alpha}} \approx \frac{\Delta t^2}{4} \mathbf{I} - \frac{\Delta t^4}{32} \frac{\mathbf{\alpha} \mathbf{\alpha}^T}{\|\mathbf{\alpha}\|^2}
+\end{equation}
+
+\subsection{Correction Terms for Stability}
+When motion is non-zero, higher-order corrections improve accuracy. The correction terms scale the quaternion update:
+\begin{align*}
+	\mathbf{C}_{\mathbf{\Omega}} &= \frac{\Delta t^3 \|\mathbf{v}\|}{16} \frac{\mathbf{v} \mathbf{v}^T}{\|\mathbf{v}\|^2} \\
+	\mathbf{C}_{\mathbf{\alpha}} &= \frac{\Delta t^4 \|\mathbf{v}\|}{32} \frac{\mathbf{v} \mathbf{v}^T}{\|\mathbf{v}\|^2}
+\end{align*}
+
+The correction terms ensure the Jacobian better approximates the non-linear rotation behavior for larger rotations.
+\subsection{Velocity and Acceleration Jacobians}
+Velocity Jacobians are identity matrices with appropriate scaling for integration over time:
+\begin{align*}
+	\frac{\partial \mathbf{v}{l,k+1}}{\partial \mathbf{v}{l,k}} &= \mathbf{I} \
+	\frac{\partial \mathbf{v}{l,k+1}}{\partial \mathbf{a}{l,k}} &= \Delta t \mathbf{I} \
+	\frac{\partial \mathbf{v}{a,k+1}}{\partial \mathbf{v}{a,k}} &= \mathbf{I} \
+	\frac{\partial \mathbf{v}{a,k+1}}{\partial \mathbf{a}{a,k}} &= \Delta t \mathbf{I}
+\end{align*}
+
+Acceleration Jacobians reflect the exponential decay model:
+\begin{equation}
+	\frac{\partial \mathbf{a}{l,k+1}}{\partial \mathbf{a}{l,k}} = e^{-\lambda \Delta t} \mathbf{I}
+\end{equation}
+
+
+	\section{Conclusion}
+	This document provides a detailed derivation and mathematical justification for the provided rigid body state model. The combination of quaternion kinematics and exponential decay for acceleration provides a numerically stable and physically accurate prediction model for 3D rigid body dynamics in state estimation systems.
+
+\end{document}

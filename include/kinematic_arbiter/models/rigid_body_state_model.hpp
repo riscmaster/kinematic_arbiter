@@ -9,6 +9,9 @@
 
 namespace kinematic_arbiter {
 namespace models {
+namespace {
+  const double kLambda = 46.05;
+}
 
 
 /**
@@ -116,11 +119,10 @@ public:
     new_states.segment<3>(SIdx::AngularVelocity::Begin()) += time_step * angular_acceleration;
     // Acceleration is modelled as exponential decay: a(t+dt) = a(t) * exp(-lambda * dt)
     // With lambda = 46.05, acceleration decays to near zero within 0.1s
-    const double lambda = 46.05;
     new_states.segment<3>(SIdx::LinearAcceleration::Begin()) =
-        linear_acceleration * std::exp(-lambda * time_step);
+        linear_acceleration * std::exp(-kLambda * time_step);
     new_states.segment<3>(SIdx::AngularAcceleration::Begin()) =
-        angular_acceleration * std::exp(-lambda * time_step);
+        angular_acceleration * std::exp(-kLambda * time_step);
 
     return new_states;
   }
@@ -289,8 +291,11 @@ public:
     jacobian.block<3,3>(SIdx::AngularVelocity::Begin(), SIdx::AngularAcceleration::Begin()) =
       time_step * Matrix3d::Identity();
 
-    // Acceleration blocks are modelled as zero (no change)
-    // Corresponding jacobian elements remain zero
+    jacobian.block<3,3>(SIdx::AngularAcceleration::Begin(), SIdx::AngularAcceleration::Begin()) =
+      std::exp(-kLambda * time_step) * Matrix3d::Identity();
+
+    jacobian.block<3,3>(SIdx::LinearAcceleration::Begin(), SIdx::LinearAcceleration::Begin()) =
+      std::exp(-kLambda * time_step) * Matrix3d::Identity();
 
     return jacobian;
   }

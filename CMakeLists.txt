@@ -27,8 +27,6 @@ message(STATUS "Original CMakeLists.txt length: ${content_length}")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Option to build only Python components
-option(BUILD_PYTHON_ONLY "Build only Python components without Drake dependency" OFF)
 
 # Find required dependencies for both Python and C++
 find_package(ament_cmake REQUIRED)
@@ -49,7 +47,6 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(drake QUIET)
 
 # Generate interfaces for Python demo
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -121,12 +118,6 @@ if(NOT BUILD_PYTHON_ONLY)
       message(STATUS "Source file not found: ${file}")
     endif()
   endforeach()
-
-  # Core only needs Eigen and Drake (if available)
-  target_link_libraries(kinematic_arbiter_core PUBLIC Eigen3::Eigen)
-  if(drake_FOUND)
-    target_link_libraries(kinematic_arbiter_core PUBLIC drake::drake)
-  endif()
 
   # 2. Build the ROS2 wrapper library separately
   add_library(kinematic_arbiter_ros2 SHARED

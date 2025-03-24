@@ -428,12 +428,20 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
   // Convert to rotation matrix and extract yaw
   Eigen::Matrix3d rot_matrix = current_q.toRotationMatrix();
   double current_yaw = std::atan2(rot_matrix(1, 0), rot_matrix(0, 0));
-
-  if (is_stationary) {
-    // Calculate roll from accelerometer when stationary
-    double ay = accel_body(1);
-    double az = accel_body(2);
+  if (is_stationary || (accel_body.norm() > 0.5 * kGravity && accel_body.norm() < 1.5 * kGravity)) {
+    double ay = accel_body(1)/accel_body.norm();
+    double az = accel_body(2)/accel_body.norm();
     double roll = std::atan2(ay, az);
+    // Calculate pitch from accelerometer when stationary
+    double ax = accel_body(0);
+    double pitch = std::asin(-ax / accel_body.norm());
+    double roll_pitch_variance = (M_PI/6.0) * (M_PI/6.0);
+
+    if (is_stationary) {
+    // Calculate roll from accelerometer when stationary
+    ay = accel_body(1);
+    az = accel_body(2);
+    roll = std::atan2(ay, az);
 
     // Propagate uncertainty for roll
     double d_roll_d_ay = std::abs(az / (ay*ay + az*az));
@@ -445,13 +453,16 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
                      d_roll_d_ayz;
 
     // Calculate pitch from accelerometer when stationary
-    double ax = accel_body(0);
-    double gravity = 9.80665; // Standard gravity in m/s^2
-    double pitch = std::asin(-ax / gravity);
+    ax = accel_body(0);
+    pitch = std::asin(-ax / kGravity);
 
     // Propagate uncertainty for pitch
-    double d_pitch_d_ax = std::abs(1.0 / (gravity * std::sqrt(1.0 - (ax*ax)/(gravity*gravity))));
+    double d_pitch_d_ax = std::abs(1.0 / (kGravity * std::sqrt(1.0 - (ax*ax)/(kGravity*kGravity))));
     double pitch_var = d_pitch_d_ax * accel_body_cov(0,0) * d_pitch_d_ax;
+
+    // Set appropriate covariance for quaternion components
+    roll_pitch_variance = std::max(roll_var, pitch_var);
+    }
 
     // Create rotation matrix from roll, pitch, and yaw
     Eigen::Matrix3d roll_rot = Eigen::AngleAxisd(roll, Eigen::Vector3d::UnitX()).toRotationMatrix();
@@ -470,8 +481,6 @@ typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
     state(StateIndex::Quaternion::Y) = q.y();
     state(StateIndex::Quaternion::Z) = q.z();
 
-    // Set appropriate covariance for quaternion components
-    double roll_pitch_variance = std::max(roll_var, pitch_var);
 
     // Create a mask matrix for yaw-related components (W and Z)
     Eigen::Matrix4d yaw_mask = Eigen::Matrix4d::Zero();

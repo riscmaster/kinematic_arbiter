@@ -125,5 +125,115 @@ Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(
   return states;
 }
 
+// /**
+//  * @brief Configuration for oscillating trajectory generation
+//  */
+// struct OscillatingConfig {
+//   Eigen::Vector3d max_linear_accel = Eigen::Vector3d(10.0, 0.0, 0.0); // Max linear acceleration (m/s^2)
+//   Eigen::Vector3d max_angular_accel = Eigen::Vector3d(0.0, 0.0, 0.0); // Max angular acceleration (rad/s^2)
+
+//   double linear_time_period = 0.5;  // Time period for linear acceleration phases (seconds)
+//   double angular_time_period = 0.1; // Time period for angular acceleration phases (seconds)
+// };
+
+// /**
+//  * @brief Generates an oscillating trajectory for testing
+//  *
+//  * Creates a trajectory that follows an acceleration pattern: 0, max, -max, 0, -max, max.
+//  * This is useful for testing state prediction, control models, and inertial compensation.
+//  *
+//  * @param time Current time in seconds
+//  * @param start_time Starting time of the trajectory
+//  * @param config Configuration parameters for the trajectory (optional)
+//  * @return State vector containing position, orientation, velocity, and acceleration
+//  */
+// Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> OscillatingTrajectory(
+//     double time,
+//     double start_time,
+//     const OscillatingConfig& config = OscillatingConfig()) {
+
+//   using SIdx = core::StateIndex;
+//   using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
+
+//   // Create state vector
+//   StateVector states = StateVector::Zero();
+
+//   double adjusted_time = time - start_time;
+
+//   // Linear Motion Calculation
+//   const double phase_duration_lin = config.linear_time_period / 5.0;
+//   double t_phase_lin = std::fmod(adjusted_time, 5 * phase_duration_lin);
+
+//   for (int i = 0; i < 3; ++i) {
+//     double pos = 0.0, vel = 0.0, acc = 0.0;
+
+//     if (t_phase_lin < phase_duration_lin) {
+//       acc = 0.0;
+//       pos = 0.0;
+//       vel = 0.0;
+//     } else if (t_phase_lin < 2 * phase_duration_lin) {
+//       acc = config.max_linear_accel[i];
+//       pos = 0.5 * acc * (t_phase_lin - phase_duration_lin) * (t_phase_lin - phase_duration_lin);
+//       vel = acc * (t_phase_lin - phase_duration_lin);
+//     } else if (t_phase_lin < 3 * phase_duration_lin) {
+//       acc = -config.max_linear_accel[i];
+//       pos = acc * phase_duration_lin * (t_phase_lin - 2 * phase_duration_lin) -
+//             0.5 * acc * (t_phase_lin - 2 * phase_duration_lin) * (t_phase_lin - 2 * phase_duration_lin);
+//       vel = acc * phase_duration_lin - acc * (t_phase_lin - 2 * phase_duration_lin);
+//     } else if (t_phase_lin < 4 * phase_duration_lin) {
+//       acc = -config.max_linear_accel[i];
+//       pos = -0.5 * acc * (t_phase_lin - 3 * phase_duration_lin) * (t_phase_lin - 3 * phase_duration_lin);
+//       vel = -acc * (t_phase_lin - 3 * phase_duration_lin);
+//     } else {
+//       acc = config.max_linear_accel[i];
+//       pos = -acc * phase_duration_lin * (t_phase_lin - 4 * phase_duration_lin) +
+//             0.5 * acc * (t_phase_lin - 4 * phase_duration_lin) * (t_phase_lin - 4 * phase_duration_lin);
+//       vel = -acc * phase_duration_lin + acc * (t_phase_lin - 4 * phase_duration_lin);
+//     }
+
+//     states[SIdx::Position::Begin() + i] = pos;
+//     states[SIdx::LinearVelocity::Begin() + i] = vel;
+//     states[SIdx::LinearAcceleration::Begin() + i] = acc;
+//   }
+
+//   // Angular Motion Calculation
+//   const double phase_duration_ang = config.angular_time_period / 5.0;
+//   double t_phase_ang = std::fmod(adjusted_time, 5 * phase_duration_ang);
+
+//   for (int i = 0; i < 3; ++i) {
+//     double ang_pos = 0.0, ang_vel = 0.0, ang_acc = 0.0;
+
+//     if (t_phase_ang < phase_duration_ang) {
+//       ang_acc = 0.0;
+//       ang_pos = 0.0;
+//       ang_vel = 0.0;
+//     } else if (t_phase_ang < 2 * phase_duration_ang) {
+//       ang_acc = config.max_angular_accel[i];
+//       ang_pos = 0.5 * ang_acc * (t_phase_ang - phase_duration_ang) * (t_phase_ang - phase_duration_ang);
+//       ang_vel = ang_acc * (t_phase_ang - phase_duration_ang);
+//     } else if (t_phase_ang < 3 * phase_duration_ang) {
+//       ang_acc = -config.max_angular_accel[i];
+//       ang_pos = ang_acc * phase_duration_ang * (t_phase_ang - 2 * phase_duration_ang) -
+//                  0.5 * ang_acc * (t_phase_ang - 2 * phase_duration_ang) * (t_phase_ang - 2 * phase_duration_ang);
+//       ang_vel = ang_acc * phase_duration_ang - ang_acc * (t_phase_ang - 2 * phase_duration_ang);
+//     } else if (t_phase_ang < 4 * phase_duration_ang) {
+//       ang_acc = -config.max_angular_accel[i];
+//       ang_pos = -0.5 * ang_acc * (t_phase_ang - 3 * phase_duration_ang) * (t_phase_ang - 3 * phase_duration_ang);
+//       ang_vel = -ang_acc * (t_phase_ang - 3 * phase_duration_ang);
+//     } else {
+//       ang_acc = config.max_angular_accel[i];
+//       ang_pos = -ang_acc * phase_duration_ang * (t_phase_ang - 4 * phase_duration_ang) +
+//                  0.5 * ang_acc * (t_phase_ang - 4 * phase_duration_ang) * (t_phase_ang - 4 * phase_duration_ang);
+//       ang_vel = -ang_acc * phase_duration_ang + ang_acc * (t_phase_ang - 4 * phase_duration_ang);
+//     }
+
+//     states[SIdx::AngularVelocity::Begin() + i] = ang_vel;
+//     states[SIdx::AngularAcceleration::Begin() + i] = ang_acc;
+//   }
+
+//   return states;
+// }
+
+
 } // namespace utils
 } // namespace kinematic_arbiter

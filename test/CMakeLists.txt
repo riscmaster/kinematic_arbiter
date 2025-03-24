@@ -132,14 +132,6 @@ set_tests_properties(
   PROPERTIES LABELS "sensors"
 )
 
-# Integration tests
-if(drake_FOUND)
-  add_test_executable(test_drake_integration
-    "${CMAKE_SOURCE_DIR}/test/integration/test_drake_integration.cpp"
-    drake::drake)
-  set_tests_properties(test_drake_integration PROPERTIES LABELS "integration")
-endif()
-
 # ROS2 tests
 add_ros2_test_executable(mkf_wrapper_test
   "${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_test.cpp"

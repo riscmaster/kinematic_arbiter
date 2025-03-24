@@ -141,6 +141,9 @@ pip install pre-commit
 
 # Install Foxglove Bridge (for visualization)
 sudo apt install ros-humble-foxglove-bridge
+
+# For C++ implementation, ensure you have Eigen
+sudo apt install libeigen3-dev
 ```
 
 ## Installation
@@ -165,7 +168,7 @@ source install/setup.bash
 
 ### Python-Only Installation
 
-If you're only interested in the Python demonstrations and don't need the C++ implementation (which requires Drake), you can build with the Python-only option:
+If you're only interested in the Python demonstrations and don't need the C++ implementation:
 
 ```bash
 # Navigate to your ROS 2 workspace
@@ -179,7 +182,7 @@ source install/setup.bash
 ```
 
 This option is useful if:
-- You want to quickly try out the demos without installing Drake
+- You want to quickly try out the demos
 - You're primarily interested in the educational aspects of the package
 - You're developing or testing only the Python components
 
@@ -218,7 +221,11 @@ If you're having trouble connecting to Foxglove Studio:
 - If the filter is too slow to respond to changes, decrease the `process_measurement_ratio`
 - Try different mediation modes to see which works best for your data
 
-#### Theory
+## Technical Documentation
+
+The Kinematic Arbiter package includes detailed technical documentation covering the key components:
+
+### Mediated Kalman Filter
 
 The Mediated Kalman Filter addresses two key challenges in practical Kalman filter implementations:
 
@@ -227,7 +234,7 @@ The Mediated Kalman Filter addresses two key challenges in practical Kalman filt
    - Adjust the measurement covariance
    - Reject the measurement entirely
 
-2. **Simplified tuning**: The filter dynamically estimates both measurement and process noise, requiring only a single tuning parameter (ζ) that represents the ratio between process and measurement noise. This methodology dramatically reduces the degrees of freedom in tuning parameters from scaling quadratically with the number of states and sensor degrees of freedom (as in traditional Kalman filters) to a single scalar value. Even in the single degree of freedom case, this approach simplifies the tuning process by eliminating the need to manually estimate separate process and measurement noise matrices, instead adapting these values automatically based on observed data characteristics.
+2. **Simplified tuning**: The filter dynamically estimates both measurement and process noise, requiring only a single tuning parameter (ζ) that represents the ratio between process and measurement noise. This methodology dramatically reduces the degrees of freedom in tuning parameters from scaling quadratically with the number of states and sensor degrees of freedom (as in traditional Kalman filters) to a single scalar value.
 
 The recursive noise estimation follows these equations:
 
@@ -236,7 +243,44 @@ The recursive noise estimation follows these equations:
 
 Where n is the sample window size for noise estimation.
 
-For more details, see the [technical documentation](doc/mediated_kalman_filter.pdf).
+For more details, see the [mediated Kalman filter documentation](doc/mediated_kalman_filter.pdf).
+
+### Rigid Body State Model
+
+The package implements a quaternion-based rigid body state model for accurate 3D dynamics:
+
+- 19-dimensional state vector (position, orientation, velocity, acceleration)
+- Quaternion kinematics for robust rotation modeling
+- Exponential decay model for acceleration stability
+- Derived Jacobian matrices for linearized state updates
+
+This comprehensive approach ensures numerical stability and physical accuracy for state estimation.
+
+For more details, see the [motion model documentation](doc/motion_model.pdf).
+
+### IMU Measurement Model
+
+The IMU model accounts for:
+
+- Sensor offset and misalignment
+- Bias estimation using sliding window averaging
+- Stationary detection logic for improved reliability
+- Compensation for rotational effects, lever arm displacement, and gravity
+
+The model provides detailed Jacobian derivations and practical testing guidelines to ensure robust performance.
+
+For more details, see the [IMU model documentation](doc/iimu_model.pdf).
+
+### Figure-8 Trajectory Generator
+
+For testing purposes, the package includes a configurable Figure-8 trajectory generator:
+
+- Parameterized by maximum velocity, length, width, and angular scale
+- Dynamically adjusted orientation using quaternions
+- Accurate angular dynamics with Coriolis effects
+- Smooth yet challenging motion profile for evaluation purposes
+
+For more details, see the [trajectory generator documentation](doc/figure8_trajectory.pdf).
 
 ## Package Structure
 
@@ -277,90 +321,3 @@ This package is released under the MIT License. See the [LICENSE](LICENSE) file 
 - [Mediated Kalman Filter](doc/mediated_kalman_filter.pdf)
 
 These additions would make the README more practical and user-friendly, providing concrete guidance for users at different levels of expertise.
-
-## Drake Integration
-
-The C++ implementation of the mediated Kalman filter uses [Drake](https://drake.mit.edu/) for mathematical operations and geometric transformations. This section is only relevant if you're building the full package (not using the `BUILD_PYTHON_ONLY` option).
-
-### Installing Drake
-
-#### Using the Drake Binary Release (Recommended)
-
-For the most up-to-date installation instructions, please refer to the official Drake APT repository documentation:
-
-[Drake APT Installation Instructions](https://drake.mit.edu/apt.html#stable-releases)
-
-The official documentation provides detailed steps for installing Drake on Ubuntu systems, including prerequisites and environment setup. This ensures you'll always have the most current instructions even if repository details change.
-
-### Configuring Your Environment
-
-After installing Drake through APT, most content installs to `/opt/drake`. You may want to set up the following environment variables as recommended in the Drake documentation:
-
-```bash
-export PATH="/opt/drake/bin${PATH:+:${PATH}}"
-export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
-```
-
-For CMake to find Drake, no additional configuration should be necessary when using the APT package installation.
-
-### Verifying Drake Integration
-
-To verify that Drake is properly integrated, build and run the included test:
-
-```bash
-# Build the package
-cd ~/ros2_ws
-colcon build --packages-select kinematic_arbiter
-
-# Run the Drake integration test
-colcon test --packages-select kinematic_arbiter --ctest-args -R test_drake_integration
-```
-
-If the test passes, Drake is properly integrated with the package.
-
-### Using Drake Components
-
-The mediated Kalman filter implementation uses several Drake components:
-
-- `drake::math::RigidTransform` for representing poses
-- `drake::math::RotationMatrix` for rotation operations
-- Eigen types from Drake's endorsed version of Eigen
-
-When developing new functionality, refer to the [Drake Documentation](https://drake.mit.edu/doxygen_cxx/index.html) for detailed API information.
-
-### Troubleshooting
-
-#### Common Issues
-
-1. **CMake can't find Drake**
-
-   ```
-   CMake Error at CMakeLists.txt:XX (find_package):
-     By not providing "Drakeconfig.cmake" or "drake-config.cmake"...
-   ```
-
-   **Solution**: Ensure Drake is installed and add its installation path to `CMAKE_PREFIX_PATH`.
-
-2. **Linking errors with Drake**
-
-   ```
-   undefined reference to `drake::math::RotationMatrix<double>::...`
-   ```
-
-   **Solution**: Check that you're linking against Drake properly in CMakeLists.txt with `target_link_libraries(... drake::drake)`.
-
-3. **Version mismatch with Eigen**
-
-   **Solution**: Use Drake's version of Eigen to avoid compatibility issues.
-
-4. **Runtime errors about missing Drake libraries**
-
-   **Solution**: Make sure to set `LD_LIBRARY_PATH` to include Drake's library path when running executables outside the build environment.
-
-#### Drake Compatibility
-
-Drake undergoes regular development and may change APIs. If you encounter compatibility issues:
-
-1. Check the [Drake Release Notes](https://drake.mit.edu/release_notes/) for API changes
-2. Consider pinning to a specific version of Drake
-3. Look for workarounds in the [Drake GitHub Issues](https://github.com/RobotLocomotion/drake/issues)
