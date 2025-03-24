@@ -9,6 +9,8 @@
 
 \usepackage{amsmath, amssymb, graphicx}
 \usepackage{hyperref}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
 
 \title{Mediated Kalman Filter}
 \author{Spencer Maughan}
@@ -262,4 +264,5 @@ Please note that this method can also be used in an extended Kalman filter for n
 		\hat{Q}_k = \hat{Q}_{k-1} + {\zeta (\hat{x}_k^- - \hat{x}_k^+)(\hat{x}_k^- - \hat{x}_k^+)^T - \hat{Q}_{k-1} \over n}
 	\end{equation*}
 
+\printbibliography[title={References}]
 \end{document}

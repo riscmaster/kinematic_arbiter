@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath, amssymb, xcolor, listings, booktabs, geometry}
+\usepackage{graphicx}
 \definecolor{codeblue}{RGB}{25,25,112}
 \geometry{a4paper, margin=1in}
 
@@ -10,303 +11,278 @@
 	We consider an IMU mounted at a known offset $\mathbf{r}$ from the body reference frame origin, with a known fixed rotation $\mathbf{R}_{BS}$ from body frame ($B$) to sensor frame ($S$). The IMU provides measurements of linear acceleration and angular velocity. The 19-dimensional state vector is defined as:
 	\[
 	\mathbf{x} = \begin{bmatrix}
-		\mathbf{p} \\[4pt]
-		\mathbf{q} \\[4pt]
-		\mathbf{v} \\[4pt]
-		\boldsymbol{\omega} \\[4pt]
-		\mathbf{a} \\[4pt]
+		\mathbf{p} \\
+		\mathbf{q} \\
+		\mathbf{v} \\
+		\boldsymbol{\omega} \\
+		\mathbf{a} \\
 		\boldsymbol{\alpha}
 	\end{bmatrix}
 	=
 	\begin{bmatrix}
-		p_x, p_y, p_z \\[4pt]
-		q_0, q_1, q_2, q_3 \\[4pt]
-		v_x, v_y, v_z \\[4pt]
-		\omega_x, \omega_y, \omega_z \\[4pt]
-		a_x, a_y, a_z \\[4pt]
+		p_x, p_y, p_z \\
+		q_0, q_1, q_2, q_3 \\
+		v_x, v_y, v_z \\
+		\omega_x, \omega_y, \omega_z \\
+		a_x, a_y, a_z \\
 		\alpha_x, \alpha_y, \alpha_z
 	\end{bmatrix},
 	\]
 	where $\mathbf{q}$ is the quaternion representing orientation from inertial to body frame.
 
+	\section*{IMU Measurement Model}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\textwidth]{imu_forces.jpeg}
+		\caption{Illustration of IMU Forces and Motion Dynamics}
+		\label{fig:imu_forces}
+	\end{figure}
 	The IMU provides two measurements:
 
 	\begin{enumerate}
 		\item Accelerometer measurement ($3\times1$):
-		$$
+		\[
 		\mathbf{a}_{IMU} = \mathbf{R}_{BS}\left[\mathbf{a} + \mathbf{R(q)}^T \mathbf{g} + \boldsymbol{\alpha}\times \mathbf{r} + \boldsymbol{\omega}\times(\boldsymbol{\omega}\times \mathbf{r})\right]
-		$$
+		\]
 
 		\item Gyroscope measurement ($3\times1$):
-		$$
+		\[
 		\boldsymbol{\omega}_{IMU} = \mathbf{R}_{BS}\,\boldsymbol{\omega}
-		$$
+		\]
 	\end{enumerate}
 
 	Here:
-	- $\mathbf{R(q)}^T$ rotates vectors from inertial to body frame.
-	- $\mathbf{R}_{BS}$ is a constant rotation matrix from body to sensor frame (misalignment).
-	- $\mathbf{g}$ is gravitational acceleration in inertial coordinates.
-	- $\mathbf{r}$ is lever arm vector (body coordinates).
+	\begin{itemize}
+		\item $\mathbf{R(q)}^T$ rotates vectors from inertial to body frame.
+		\item $\mathbf{R}_{BS}$ is a constant rotation matrix from body to sensor frame (misalignment).
+		\item $\mathbf{g}$ is gravitational acceleration in inertial coordinates.
+		\item $\mathbf{r}$ is lever arm vector (body coordinates).
+	\end{itemize}
 
-	\vspace*{10pt}
+	\section*{Bias Estimation with Sliding Window Averaging}
+	Bias estimation is crucial for IMU accuracy, and the following sliding window method is employed:
 
+	\paragraph{Bias Estimation Logic:} Given the current instantaneous bias estimates:
+	\[
+	\hat{\mathbf{b}}_{gyro} = \mathbf{gyro}_{measured} - \mathbf{gyro}_{predicted}
+	\]
+	\[
+	\hat{\mathbf{b}}_{accel} = \mathbf{accel}_{measured} - \mathbf{accel}_{predicted}
+	\]
+
+	The updated biases are calculated using recursive averaging:
+	\[
+	\mathbf{b}_{gyro} = \mathbf{b}_{gyro} + \frac{\hat{\mathbf{b}}_{gyro} - \mathbf{b}_{gyro}}{N}
+	\]
+	\[
+	\mathbf{b}_{accel} = \mathbf{b}_{accel} + \frac{\hat{\mathbf{b}}_{accel} - \mathbf{b}_{accel}}{N}
+	\]
+
+	Where $N$ is the sliding window size. This recursive averaging ensures gradual convergence to stable bias estimates by averaging recent observations.
+
+	\section*{Stationary Detection Logic}
+	Determining whether the IMU is stationary is essential for improving bias estimation reliability. The system is defined as stationary when the following three conditions are met:
+
+	\begin{itemize}
+		\item State velocities are sufficiently close to zero:
+		\[
+		||\mathbf{v}||^2 < \chi_{critical}^{6dof}
+		\]
+
+		\item State accelerations are sufficiently close to zero:
+		\[
+		||\mathbf{a}||^2 < \chi_{critical}^{6dof}
+		\]
+
+		\item The accelerometer norm is sufficiently close to the gravity constant within a defined confidence threshold:
+		\[
+		| ||\mathbf{a}_{measured}|| - g | < \chi_{critical}^{1dof}
+		\]
+
+	\end{itemize}
+
+	If all three conditions hold true, the system is considered stationary, allowing for improved bias estimation and state initialization.
 	\section*{Jacobian Derivation}
-
 	The Jacobian matrix $\mathbf{H}$ is defined as:
-	$$
+	\[
 	\mathbf{H} =
 	\frac{\partial}{\partial \mathbf{x}}
 	\begin{bmatrix}
-		\mathbf{a}_{IMU}\\[6pt]
+		\mathbf{a}_{IMU}\\
 		\boldsymbol{\omega}_{IMU}
-	\end{bmatrix}_{6\times1},
-	$$
+	\end{bmatrix},
+	\]
 	thus it has dimensions $6\times19$.
 
-	We compute each block separately:
+	Each component of the Jacobian is derived stepwise as follows:
 
-	\vspace*{10pt}
+	\paragraph{Gyroscope Jacobian:} Since the gyroscope measurement is the body-frame angular velocity rotated into the sensor frame:
+	\[
+	\frac{\partial \mathbf{\omega}_{IMU}}{\partial \boldsymbol{\omega}} = \mathbf{R}_{BS}
+	\]
 
-	\subsection*{Accelerometer Measurement Jacobians ($3\times19$)}
+	\paragraph{Accelerometer Jacobian:} The accelerometer Jacobian includes multiple components:
 
-	- With respect to linear position ($3\times3$):
-	$$
-	\frac{\partial \mathbf{a}_{IMU}}{\partial \mathbf{p}} =
-	\mathbf{0}_{3\times3}.
-	$$
+	- Linear acceleration mapping:
+	\[
+	\frac{\partial \mathbf{a}_{IMU}}{\partial \mathbf{a}} = \mathbf{R}_{BS}
+	\]
 
-	- With respect to quaternion orientation ($3\times4$), gravity term only:
-	$$
-	J_q = \frac{\partial (\mathbf{R}_{BS}\,\mathbf R(q)^T\, g)}{\partial q} =
-	\mathbf{R}_{BS}\frac{\partial (\mathbf R(q)^T g)}{\partial q},
-	$$
-	where:
-	$$
-	\frac{\partial (\mathbf R(q)^T g)}{\partial q}=2\,[
-	(q_0 g + \tilde q\times g),~~(\tilde q\,g^T+(q_0 I+[\tilde q]_\times)[g]_\times))]
-	_{3\times4},
-	$$
-	with quaternion $q=[q_0,\tilde q^T]^T$, and $[\tilde q]_\times$ skew-symmetric operator.
+	- Tangential acceleration term:
+	\[
+	\frac{\partial \mathbf{a}_{IMU}}{\partial \boldsymbol{\alpha}} = -\mathbf{R}_{BS} [\mathbf{r}]_\times
+	\]
 
-	- With respect to linear velocity ($3\times3$):
-	$$
-	\frac{\partial \mathbf a_{IMU}}{\partial \mathbf v}=0_{3\times 3}.
-	$$
+	- Angular velocity cross-product term: To differentiate $\mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{r})$, we expand the cross product:
+	\[
+	\frac{\partial (\mathbf{\omega} \times (\mathbf{\omega} \times \mathbf{r})))}{\partial \mathbf{\omega}} = [\mathbf{\omega} \times \mathbf{r}]_\times - [\mathbf{r}]_\times [\mathbf{\omega}]_\times
+	\]
+	Thus,
+	\[
+	\frac{\partial \mathbf{a}_{IMU}}{\partial \boldsymbol{\omega}} = \mathbf{R}_{BS} \left([\mathbf{\omega} \times \mathbf{r}]_\times - [\mathbf{r}]_\times [\mathbf{\omega}]_\times\right)
+	\]
 
-	- With respect to angular velocity ($3\times3$):
-	Define: $h(\boldsymbol{\omega})=\boldsymbol{\omega}\times(\boldsymbol{\omega}\times r)$,
-	then:
-	$$
-	\frac{\partial h}{\partial \boldsymbol{\omega}}=[(\boldsymbol{\omega}\times r)]_\times-[r]_\times[\boldsymbol{\omega}]_\times.
-	$$
-
-	Thus:
-	$$
-	\frac{\partial \mathbf a_{IMU}}{\partial {\boldsymbol {\omega}} }=\mathbf R_{BS}\left([(\boldsymbol{\omega}\times r)]_\times-[r]_\times[\boldsymbol{\omega}]_\times\right).
-	$$
-
-	- With respect to linear acceleration ($3\times3$):
-	Direct identity mapping:
-	$$
-	\frac{\partial {\bf a}_{IMU}}{\partial {\bf a}}=\bf R_{BS}.
-	$$
-
-	- With respect to angular acceleration ($3\times3$):
-	Tangential acceleration depends linearly:
-	$$
-	\frac{\partial ({\boldsymbol {\alpha}}\times r)} {\partial {\boldsymbol {\alpha}} }=\mathbf R_{BS}[r]_{\times}.
-	$$
-
-	Thus accelerometer Jacobian block row is:
-	$$
-	H_{accel}=
-	[\underbrace{{0}_{(3\times 3)}}_{\textbf p},~
-	~J_q^{grav}(q)_{(3\times4)},~
-	~0_{(3\times 3)},~
-	~\mathbf R_{BS}\left([(\boldsymbol{\omega}\times r)]_\times-[r]_\times[\boldsymbol{\omega}]_\times\right),~
-	~R_{BS},~~
-	~R_{BS}[r]_{\times}]
-	$$
-
-	\vspace*{10pt}
-
-	\subsection*{Gyroscope Measurement Jacobians ($3\times19$)}
-
-	Only angular velocity states affect gyroscope directly:
-	$$
-	H_{gyro}=[\,0_{(3\times 3)},~~0_{(3\times 4)},~~0_{(3\times 3)},~~R_{BS},~~0_{(3\times 3)},~~0_{(3\times 3)}\,].
-	$$
-
-	\vspace*{10pt}
-
-	Thus the full Jacobian matrix (6$\times$19) is clearly given by stacking both blocks:
-
-	$$
-	H=
-	\begin {bmatrix}
-	0 & J_q^{grav}& 0 & R_{BS}\left([(\boldsymbol{\omega}\times r)]_\times-[r]_\times[\boldsymbol{\omega}]_\times)\right)& R_{BS}& R_{BS}[r]_{\times}\\[8pt]
-	0 & 0 & 0 & R_{BS}& 0 & 0
-	\end {bmatrix}.
-	$$
-
-	This final form correctly incorporates both sensor offset and misalignment rotation.
-
-\section{IMU Quaternion Jacobian Derivation \& Validation}
-\label{sec:theory}
-
-\subsection{Problem Definition}
-For an IMU with orientation represented by unit quaternion $\mathbf{q} = [q_w, q_x, q_y, q_z]^T$, we derive the Jacobian for the gravity compensation term:
-\begin{equation}
-	\mathbf{f(q)} = \mathbf{R_{BS}R(q)^T g_W}
-\end{equation}
-where $\mathbf{g_W} = [0, 0, g]^T$ is gravity in world coordinates, and $\mathbf{R_{BS}}$ is the fixed body-to-sensor rotation.
-
-\subsection{Analytical Derivation}
-\label{subsec:analytical}
-
-The rotation matrix $\mathbf{R(q)^T}$ for a unit quaternion is:
-\begin{equation}
-	\mathbf{R(q)^T} =
-	\begin{bmatrix}
-		1-2(q_y^2+q_z^2) & 2(q_xq_y+q_wq_z) & 2(q_xq_z-q_wq_y) \\
-		2(q_xq_y-q_wq_z) & 1-2(q_x^2+q_z^2) & 2(q_yq_z+q_wq_x) \\
-		2(q_xq_z+q_wq_y) & 2(q_yq_z-q_wq_x) & 1-2(q_x^2+q_y^2)
-	\end{bmatrix}
-\end{equation}
-
-The body-frame gravity vector and its Jacobian:
-\begin{equation}
-	\mathbf{R(q)^T g_W} = g\begin{bmatrix}
+	- Gravity Jacobian (quaternion effect on gravity rotation): For gravity vector $\mathbf{g}_W = [0, 0, g]^T$ in the world frame,
+	\[
+	\mathbf{g}_B = q^{-1} \mathbf{g}_W q = g \begin{bmatrix}
 		2(q_xq_z - q_wq_y) \\
 		2(q_yq_z + q_wq_x) \\
 		1 - 2(q_x^2 + q_y^2)
-	\end{bmatrix}, \quad
-	J_q^{\text{grav}} = 2g\begin{bmatrix}
-		-q_y & q_z & -q_w & q_x \\
-		q_x & q_w & q_z & q_y \\
-		0 & -2q_x & -2q_y & 0
 	\end{bmatrix}
-\end{equation}
+	\]
+	The corresponding Jacobian is:
+	\[
+	\frac{\partial \mathbf{g}_B}{\partial \mathbf{q}} =
+	\begin{bmatrix}
+		-2gq_y & 2gq_z & -2gq_w & 2gq_x \\
+		2gq_x & 2gq_w & 2gq_z & 2gq_y \\
+		0 & -4gq_x & -4gq_y & 0
+	\end{bmatrix}
+	\]
 
-\section{Numerical Validation Methodology}
-\label{sec:validation}
+	Finally, applying the sensor-to-body rotation for consistency:
+	\[
+	\frac{\partial \mathbf{a}_{IMU}}{\partial \mathbf{q}} = \mathbf{R}_{BS} \frac{\partial \mathbf{g}_B}{\partial \mathbf{q}}
+	\]
 
-\subsection{Core Principles}
-\begin{itemize}
-	\item Maintain unit quaternion constraint $\|\mathbf{q}\|=1$
-	\item Use consistent frame conventions (ROS REP 103 recommended)
-	\item Validate identity case before complex orientations
-\end{itemize}
+	This expanded derivation ensures that all key contributors to IMU dynamics are captured in the Jacobian calculation.
 
-\subsection{Perturbation Technique}
-\label{subsec:perturb}
 
-\subsubsection{Exponential Map Formulation}
-For valid quaternion perturbations:
-\begin{equation}
-	\delta\mathbf{q} = \exp\left(\frac{1}{2}\delta\boldsymbol{\theta}\right) \approx \begin{bmatrix}
-		1 \\
-		\delta\theta_x/2 \\
-		\delta\theta_y/2 \\
-		\delta\theta_z/2
-	\end{bmatrix}, \quad \|\delta\boldsymbol{\theta}\| \ll 1
-\end{equation}
 
-Implementation code:
-\begin{lstlisting}[language=C++,basicstyle=\color{codeblue}\ttfamily]
-	const double eps = 1e-6; // Optimal for double precision
-	Eigen::Vector3d delta_theta(eps, 0, 0); // X-axis perturbation
-
-	Eigen::Quaterniond dq(1, delta_theta.x()/2,
-	delta_theta.y()/2,
-	delta_theta.z()/2);
-	dq.normalize();
-	Eigen::Quaterniond q_perturbed = q * dq;
-\end{lstlisting}
-
-\subsection{Validation Protocol}
-\label{subsec:protocol}
-
-\begin{enumerate}
-	\item \textbf{Baseline Check}: Identity quaternion $\mathbf{q}=[1,0,0,0]^T$
-	\item \textbf{Canonical Rotations}: 90° about each principal axis
-	\item \textbf{Arbitrary Orientation}: Random unit quaternion
-	\item \textbf{Error Analysis}:
-	\begin{equation}
-		\varepsilon_{\text{rel}} = \frac{\|J_{\text{ana}} - J_{\text{num}}\|}{\max(\|J_{\text{ana}}\|, \epsilon)}
-	\end{equation}
-	\begin{itemize}
-		\item Accept: $\varepsilon_{\text{rel}} < 1\%$
-		\item Investigate: $1\% \leq \varepsilon_{\text{rel}} \leq 5\%$
-		\item Reject: $\varepsilon_{\text{rel}} > 5\%$
-	\end{itemize}
-\end{enumerate}
-
-\section{Case Study: 90° Y-Rotation}
-\label{sec:case_study}
-
-\subsection{Test Configuration}
-\begin{itemize}
-	\item Quaternion: $[0.7071, 0, 0.7071, 0]^T$ (90° Y-rotation)
-	\item Gravity: $g = 9.80665\,\text{m/s}^2$
-	\item Perturbation: $\delta\theta = 1\mu\text{rad}$
-\end{itemize}
-
-\subsection{Results \& Analysis}
-\begin{tabular}{llll}
-	Term & Analytical & Numerical & Error \\
-	\midrule
-	$\partial g_x/\partial q_w$ & -13.87 & -13.87 & 0.00\% \\
-	$\partial g_z/\partial q_y$ & -27.74 & -27.74 & 0.00\% \\
-	$\partial g_y/\partial q_z$ & 13.87 & 13.87 & 0.00\% \\
-\end{tabular}
-
-\section{Best Practices \& Troubleshooting}
-\label{sec:best_practices}
-
-\subsection{Implementation Checklist}
-\begin{itemize}
-	\item [$\square$] Use exponential map perturbations
-	\item [$\square$] Normalize after quaternion operations
-	\item [$\square$] Verify $\mathbf{R_{BS}}$ separately
-	\item [$\square$] Test positive/negative perturbations
-	\item [$\square$] Check magnitude and sign
-\end{itemize}
-
-\subsection{Common Issues \& Solutions}
-\begin{tabular}{p{4.5cm}p{8cm}}
-	\textbf{Symptom} & \textbf{Resolution} \\
-	\midrule
-	Sign mismatches & Verify quaternion multiplication order (Hamilton vs JPL) \\
-	Null Z-derivatives & Confirm gravity vector alignment in world frame \\
-	2x error scaling & Check 1/2 factor in exponential map \\
-	Discontinuities at identity & Use $\mathbf{q}=[0.999,0,0,0.001]$ near identity \\
-	Frame inconsistencies & Validate $\mathbf{R_{BS}}$ matrix independently \\
-	Sensitivity to perturbation size & Test $\epsilon\in[10^{-7},10^{-4}]$ \\
-\end{tabular}
+	\section*{Conclusion}
+	This enhanced IMU model integrates precise measurement prediction, robust stationary detection, and efficient sliding window bias estimation. The improved Jacobian derivation ensures accurate integration with state estimation frameworks. Together, these enhancements improve the system's stability, accuracy, and robustness in dynamic and stationary environments.
+	\appendix
 
 \appendix
-\section{Reference Implementation}
-\label{app:code}
+\section*{Appendix: Important Considerations for IMU Model Testing}
 
-Complete Jacobian computation:
-\begin{lstlisting}[language=C++,basicstyle=\color{codeblue}\ttfamily]
-	Eigen::Matrix<double, 3, 4> ComputeQuatJacobian(
-	const Eigen::Quaterniond& q,
-	double g,
-	const Eigen::Matrix3d& R_BS)
-	{
-		Eigen::Matrix<double, 3, 4> J;
-		const double two_g = 2 * g;
+Robust testing of the IMU model is critical to ensuring stable and accurate performance. The following considerations highlight key aspects to address when validating the IMU model:
 
-		J << two_g*q.y(),  two_g*q.z(),  two_g*q.w(),  two_g*q.x(),
-		-two_g*q.x(), -two_g*q.w(),  two_g*q.z(),  two_g*q.y(),
-		0.0, -4*g*q.x(),   -4*g*q.y(),            0.0;
+\subsection*{1. Precision in Quaternion Handling}
+\begin{itemize}
+	\item \textbf{Quaternion Perturbations:} Since quaternions represent rotation, numerical drift can occur if precision is not carefully maintained.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Use proper exponential map perturbations rather than naive additive perturbations.
+		\item Verify that perturbations around each axis respect the expected behavior for both small and large angles.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Directly modifying quaternion elements without re-normalization can introduce significant errors.
+\end{itemize}
 
-		return R_BS * J;
-	}
-\end{lstlisting}
+\subsection*{2. Jacobian Validation}
+\begin{itemize}
+	\item \textbf{Key Concept:} The Jacobian is crucial for linearization in estimation algorithms like Extended Kalman Filters (EKF). The Jacobian should match the actual behavior of the measurement model for small perturbations.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Baseline Comparison: Validate that small perturbations produce measurement changes that closely match Jacobian-predicted deltas.
+		\item Threshold Tuning: Select appropriate error thresholds — too tight can lead to false negatives; too loose can mask underlying problems.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Using excessively large perturbations can break the linear approximation assumption that underpins Jacobian validity.
+\end{itemize}
+
+\subsection*{3. Angular Velocity and Acceleration Testing}
+\begin{itemize}
+	\item \textbf{Key Concept:} Angular velocity perturbations should match the rotational rate sensitivity defined in the model. The Coriolis term in the accelerometer model can amplify errors.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Introduce small angular velocity perturbations and compare actual vs predicted changes in accelerometer outputs.
+		\item Angular acceleration perturbations should similarly track predicted changes from the Jacobian.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Neglecting Coriolis effects in validation can lead to false assumptions about model accuracy.
+\end{itemize}
+
+\subsection*{4. Gravity Alignment}
+\begin{itemize}
+	\item \textbf{Key Concept:} Gravity alignment is critical for orientation estimation in IMU models. Errors in quaternion logic or sign conventions can severely impact performance.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Validate roll and pitch estimates by comparing against calculated angles:
+		\[ \text{roll} = \arctan\left(\frac{a_y}{a_z}\right), \quad \text{pitch} = \arcsin\left(-\frac{a_x}{g}\right) \]
+		\item Use gravity magnitude tests to confirm stability:
+		\[ \| \mathbf{a}_{IMU} \| \approx 9.80665 \ \text{m/s}^2 \]
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Failing to differentiate between body-frame and world-frame gravity projections can lead to major orientation errors.
+\end{itemize}
+
+\subsection*{5. Sensor Misalignment}
+\begin{itemize}
+	\item \textbf{Key Concept:} The rotation matrix $\mathbf{R}_{BS}$ corrects for IMU mounting misalignment. Errors in this rotation matrix directly affect accuracy.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Introduce intentional misalignment in test configurations and confirm correct compensation.
+		\item Combine roll, pitch, and yaw misalignments to ensure robustness in all orientations.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Assuming a perfect sensor-to-body alignment can hide real-world errors.
+\end{itemize}
+
+\subsection*{6. Bias Estimation}
+\begin{itemize}
+	\item \textbf{Key Concept:} Biases (especially for gyroscopes) drift over time. The recursive averaging method used in the code relies on stable stationary conditions for reliable bias estimation.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Perform tests under both dynamic and stationary conditions to confirm that:
+		\begin{itemize}
+			\item Biases remain stable in stationary conditions.
+			\item Bias estimation converges accurately under dynamic conditions.
+		\end{itemize}
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Overestimating stationary conditions can cause biases to accumulate unnoticed.
+\end{itemize}
+
+\subsection*{7. Frame Conventions and Sign Ambiguities}
+\begin{itemize}
+	\item \textbf{Key Concept:} Quaternion conventions vary across libraries (e.g., Hamilton vs JPL convention). Additionally, gravity direction may be treated as either upward or downward in different implementations.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Use practical IMU orientations (e.g., 20\textdegree roll, 30\textdegree pitch) to verify correct interpretation.
+		\item Ensure yaw behavior is preserved when introducing combined pitch and roll rotations.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Ignoring convention mismatches can produce inconsistent results across platforms.
+\end{itemize}
+
+\subsection*{8. Robustness to Numerical Noise}
+\begin{itemize}
+	\item \textbf{Key Concept:} IMU data often includes noise, especially in gyroscope and accelerometer readings. Tests should ensure that small noise fluctuations don't create disproportionate orientation drift.
+	\item \textbf{Key Tests:}
+	\begin{itemize}
+		\item Introduce small Gaussian noise to simulated IMU measurements to assess filter stability.
+		\item Validate that numerical instabilities don't propagate through Jacobian linearizations.
+	\end{itemize}
+	\item \textbf{Pitfall to Avoid:} Ignoring noise robustness can lead to performance degradation in real-world deployments.
+\end{itemize}
+
+\subsection*{Conclusion}
+Effective IMU testing demands careful consideration of:
+\begin{itemize}
+	\item Numerical precision
+	\item Jacobian accuracy
+	\item Gravity alignment
+	\item Sensor misalignment
+	\item Bias estimation under realistic conditions
+\end{itemize}
+By designing rigorous tests that validate these aspects, you ensure the IMU model behaves reliably in both simulated and real-world conditions.
 
 
-	\end {document}
+
+\end{document}

@@ -188,7 +188,13 @@ public:
   bool ValidateAndMediate(
       const StateVector& state,
       const StateCovariance& state_covariance,
+      const double& measurement_timestamp,
       const MeasurementVector& measurement) {
+        previous_measurement_data_ = MeasurementData(
+          measurement_timestamp,
+          measurement,
+          measurement_covariance_
+        );
 
     // Compute auxiliary data once for all operations
     MeasurementAuxData aux_data = ComputeAuxiliaryData(
@@ -206,6 +212,7 @@ public:
     // Check if measurement passes validation
     if (chi_squared_term < threshold) {
       UpdateCovariance(aux_data.innovation);
+      previous_measurement_data_.covariance = measurement_covariance_;
       return true;
     }
 
@@ -214,6 +221,7 @@ public:
       // Scale covariance to make chi-squared test pass
       double scale_factor = chi_squared_term / threshold;
       measurement_covariance_ *= scale_factor;
+      previous_measurement_data_.covariance = measurement_covariance_;
     }
 
     // Always return false if validation fails
@@ -274,6 +282,11 @@ public:
       StateCovariance& covariance) const = 0;
 
 private:
+  struct MeasurementData {
+    double timestamp;
+    MeasurementVector value;
+    MeasurementCovariance covariance;
+  };
 
   /**
    * @brief Update measurement covariance with bounded innovation
@@ -304,6 +317,7 @@ protected:
   MeasurementCovariance measurement_covariance_;     // Measurement noise covariance R
   ValidationParams validation_params_;               // Parameters for validation
   bool can_predict_input_accelerations_ = false;
+  MeasurementData previous_measurement_data_;
 };
 
 } // namespace core

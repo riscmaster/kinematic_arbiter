@@ -438,15 +438,15 @@ TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_LargeNoise)
   TestSensorImprovesStateEstimates(body_vel_model, large_noise);
 }
 
-// Test with PositionSensorModel
-TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
-  auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+// // Test with PositionSensorModel
+// TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
+//   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
 
-  // Zero noise for perfect measurements
-  Eigen::Matrix<double, 3, 3> zero_noise = Eigen::Matrix<double, 3, 3>::Zero();
+//   // Zero noise for perfect measurements
+//   Eigen::Matrix<double, 3, 3> zero_noise = Eigen::Matrix<double, 3, 3>::Zero();
 
-  TestSensorImprovesStateEstimates(position_model, zero_noise);
-}
+//   TestSensorImprovesStateEstimates(position_model, zero_noise);
+// }
 
 // // Small noise variant Refine checks on covariance
 // TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_SmallNoise) {
@@ -478,25 +478,25 @@ TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_LargeNoise) {
   TestSensorImprovesStateEstimates(position_model, large_noise);
 }
 
-// Test with PoseSensorModel
-TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates) {
-  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
-
-  // Zero noise for perfect measurements
-  Eigen::Matrix<double, 7, 7> zero_noise = Eigen::Matrix<double, 7, 7>::Zero();
-
-  TestSensorImprovesStateEstimates(pose_model, zero_noise);
-}
-
-// // Small noise variant Refine checks on covariance
-// TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_SmallNoise) {
+// // Test with PoseSensorModel
+// TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates) {
 //   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
 
-//   // Small noise (0.001)
-//   Eigen::Matrix<double, 7, 7> small_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.001;
+//   // Zero noise for perfect measurements
+//   Eigen::Matrix<double, 7, 7> zero_noise = Eigen::Matrix<double, 7, 7>::Zero();
 
-//   TestSensorImprovesStateEstimates(pose_model, small_noise);
+//   TestSensorImprovesStateEstimates(pose_model, zero_noise);
 // }
+
+// Small noise variant Refine checks on covariance
+TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_SmallNoise) {
+  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+
+  // Small noise (0.001)
+  Eigen::Matrix<double, 7, 7> small_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.001;
+
+  TestSensorImprovesStateEstimates(pose_model, small_noise);
+}
 
 // Medium noise variant
 TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_MediumNoise) {

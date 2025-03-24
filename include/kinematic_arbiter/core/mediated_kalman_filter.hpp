@@ -323,6 +323,7 @@ private:
       bool measurement_valid = sensor_model->ValidateAndMediate(
           predicted_state,        // Current state
           predicted_covariance,   // Current covariance
+          measurement_timestamp,  // Measurement timestamp
           measurement           // Measurement to validate
       );
 
