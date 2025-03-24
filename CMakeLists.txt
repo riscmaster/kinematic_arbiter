@@ -27,7 +27,6 @@ message(STATUS "Original CMakeLists.txt length: ${content_length}")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 # Find required dependencies for both Python and C++
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
@@ -90,7 +89,10 @@ if(NOT BUILD_PYTHON_ONLY)
   endif()
 
   # Include directories
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+  include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${EIGEN3_INCLUDE_DIRS}  # Add Eigen includes here for all targets
+  )
 
   # Print the current directory structure for debugging
   execute_process(
@@ -119,6 +121,15 @@ if(NOT BUILD_PYTHON_ONLY)
     endif()
   endforeach()
 
+  # Configure the core library
+  target_include_directories(kinematic_arbiter_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${EIGEN3_INCLUDE_DIRS}
+  )
+  target_link_libraries(kinematic_arbiter_core PUBLIC
+    Eigen3::Eigen
+  )
+
   # 2. Build the ROS2 wrapper library separately
   add_library(kinematic_arbiter_ros2 SHARED
     src/ros2/mkf_wrapper.cpp
@@ -134,6 +145,7 @@ if(NOT BUILD_PYTHON_ONLY)
     ${tf2_ros_INCLUDE_DIRS}
     ${tf2_eigen_INCLUDE_DIRS}
     ${tf2_geometry_msgs_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS}
   )
 
   target_link_libraries(kinematic_arbiter_ros2 PUBLIC
