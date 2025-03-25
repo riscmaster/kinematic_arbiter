@@ -1,0 +1,142 @@
+{
+  "configById": {
+    "Plot!3ip39i4": {
+      "paths": [
+        {
+          "value": "/test/sensors/position1.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#b7edba",
+          "label": "raw_x"
+        },
+        {
+          "value": "/test/sensors/position1/lower_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#d3dff6",
+          "label": "true_lower_bound"
+        },
+        {
+          "value": "/test/sensors/position1/truth.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#d3dff6",
+          "label": "true_x"
+        },
+        {
+          "value": "/test/sensors/position1/upper_bound.point.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#d3dff6",
+          "label": "true_upper_bound"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    },
+    "Plot!pkegc0": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1.point.y",
+          "enabled": true,
+          "color": "#b7edba",
+          "label": "raw_y"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/lower_bound.point.y",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_lower_bound"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/upper_bound.point.y",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_upper_bound"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/truth.point.y",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_y"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    },
+    "Plot!1w8wkt7": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1.point.z",
+          "enabled": true,
+          "color": "#b7edba",
+          "label": "raw_z"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/lower_bound.point.z",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_lower_bound"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/upper_bound.point.z",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_upper_bound"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/test/sensors/position1/truth.point.z",
+          "enabled": true,
+          "color": "#d3dff6",
+          "label": "true_z"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    }
+  },
+  "globalVariables": {
+    "globalVariable": 5,
+    "/filter_node.measurement_noise: 1": 19.4
+  },
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": "Plot!3ip39i4",
+    "second": {
+      "first": "Plot!pkegc0",
+      "second": "Plot!1w8wkt7",
+      "direction": "column"
+    },
+    "direction": "column",
+    "splitPercentage": 34.160679294578706
+  }
+}

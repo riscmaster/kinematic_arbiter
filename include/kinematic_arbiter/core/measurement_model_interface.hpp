@@ -1,10 +1,12 @@
-#pragma once
+#ifndef KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_
+#define KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_
 
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/mediation_types.hpp"
 #include "kinematic_arbiter/core/statistical_utils.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace core {
@@ -15,21 +17,20 @@ namespace core {
  * Provides methods for predicting measurements, computing Jacobians,
  * and validating filter assumptions using chi-squared testing.
  *
- * @tparam MeasurementVectorType Type defining the measurement vector dimensions
+ * @tparam Type Sensor type that defines the measurement vector dimensions
  */
-template<typename MeasurementVectorType>
+template<SensorType Type>
 class MeasurementModelInterface {
 public:
   // Type definitions
   static constexpr int StateSize = StateIndex::kFullStateSize;
+  static constexpr int MeasurementDim = MeasurementDimension<Type>::value;
+
   using StateVector = Eigen::Matrix<double, StateSize, 1>;                     // State vector x
   using StateCovariance = Eigen::Matrix<double, StateSize, StateSize>;
-  using MeasurementVector = MeasurementVectorType;                             // Measurement vector y_k
-  using MeasurementCovariance = Eigen::Matrix<double,
-    MeasurementVectorType::RowsAtCompileTime,
-    MeasurementVectorType::RowsAtCompileTime>;                               // Measurement covariance R
-  using MeasurementJacobian = Eigen::Matrix<double,
-    MeasurementVectorType::RowsAtCompileTime, StateSize>;                    // Measurement Jacobian C_k
+  using MeasurementVector = Eigen::Matrix<double, MeasurementDim, 1>;          // Measurement vector y_k
+  using MeasurementCovariance = Eigen::Matrix<double, MeasurementDim, MeasurementDim>; // Measurement covariance R
+  using MeasurementJacobian = Eigen::Matrix<double, MeasurementDim, StateSize>; // Measurement Jacobian C_k
   using InnovationCovariance = MeasurementCovariance;                          // Innovation covariance S
 
   // More general name for boolean state flags
@@ -281,11 +282,23 @@ public:
       StateVector& state,
       StateCovariance& covariance) const = 0;
 
+  /**
+   * @brief Get the type of this sensor model (non-virtual)
+   * @return The sensor type enumeration value
+   */
+  SensorType GetModelType() const {
+    return Type;
+  }
+
 private:
   struct MeasurementData {
-    double timestamp;
+    double timestamp = 0.0;
     MeasurementVector value;
     MeasurementCovariance covariance;
+
+    MeasurementData() = default;
+    MeasurementData(double t, const MeasurementVector& v, const MeasurementCovariance& c)
+      : timestamp(t), value(v), covariance(c) {}
   };
 
   /**
@@ -312,13 +325,15 @@ private:
   }
 
 protected:
-  Eigen::Isometry3d sensor_pose_in_body_frame_;      // Sensor-to-body transform
-  Eigen::Isometry3d body_to_sensor_transform_;       // Body-to-sensor transform
-  MeasurementCovariance measurement_covariance_;     // Measurement noise covariance R
-  ValidationParams validation_params_;               // Parameters for validation
+  Eigen::Isometry3d sensor_pose_in_body_frame_ = Eigen::Isometry3d::Identity();
+  Eigen::Isometry3d body_to_sensor_transform_ = Eigen::Isometry3d::Identity();
+  MeasurementCovariance measurement_covariance_;
+  ValidationParams validation_params_;
   bool can_predict_input_accelerations_ = false;
   MeasurementData previous_measurement_data_;
 };
 
 } // namespace core
 } // namespace kinematic_arbiter
+
+#endif // KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_

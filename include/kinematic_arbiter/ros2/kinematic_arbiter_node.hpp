@@ -14,6 +14,8 @@
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
 #include "sensor_msgs/msg/imu.hpp"
+#include <tf2_ros/transform_listener.h>
+#include <tf2_ros/buffer.h>
 
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
 
@@ -23,66 +25,61 @@ namespace ros2 {
 class KinematicArbiterNode : public rclcpp::Node {
 public:
   KinematicArbiterNode();
+  virtual ~KinematicArbiterNode() = default;
 
 private:
-  // Wrapper instance
-  std::unique_ptr<wrapper::FilterWrapper> filter_wrapper_;
-
-  // Main state publishers
-  rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pose_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::TwistWithCovarianceStamped>::SharedPtr velocity_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::AccelWithCovarianceStamped>::SharedPtr accel_pub_;
-
-  // Subscriber and associated publisher containers
+  // Sensor subscription structure
   struct SensorSubscription {
     std::string sensor_id;
     std::string topic;
     rclcpp::SubscriptionBase::SharedPtr subscription;
-
-    // Publisher for expected measurements (what the filter expects to measure)
     rclcpp::PublisherBase::SharedPtr expected_pub;
   };
-
-  std::vector<SensorSubscription> position_subs_;
-//   std::vector<SensorSubscription> pose_subs_;
-//   std::vector<SensorSubscription> velocity_subs_;
-//   std::vector<SensorSubscription> imu_subs_;
-
-  // Services
-  // To be implemented later when interfaces are available
-  // rclcpp::Service<RegisterSensorSrv>::SharedPtr register_sensor_srv_;
-
-  // Timer for publishing
-  rclcpp::TimerBase::SharedPtr publish_timer_;
 
   // Parameters
   double publish_rate_;
   double max_delay_window_;
-  std::string frame_id_;
+  std::string world_frame_id_;  // Frame for publishing state estimates
+  std::string body_frame_id_;   // Body/vehicle frame
+
+  // TF components
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+
+  // Filter wrapper
+  std::unique_ptr<wrapper::FilterWrapper> filter_wrapper_;
+
+  // Publishers
+  rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pose_pub_;
+  rclcpp::Publisher<geometry_msgs::msg::TwistWithCovarianceStamped>::SharedPtr velocity_pub_;
+  rclcpp::Publisher<geometry_msgs::msg::AccelWithCovarianceStamped>::SharedPtr accel_pub_;
+
+  // Timer
+  rclcpp::TimerBase::SharedPtr publish_timer_;
+
+  // Sensor subscriptions
+  std::vector<SensorSubscription> position_subs_;
+  // Future sensor types
+  // std::vector<SensorSubscription> pose_subs_;
+  // std::vector<SensorSubscription> velocity_subs_;
+  // std::vector<SensorSubscription> imu_subs_;
 
   // Callbacks
-  void positionCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg, const std::string& sensor_id);
-//   void poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg, const std::string& sensor_id);
-//   void velocityCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg, const std::string& sensor_id);
-//   void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg, const std::string& sensor_id);
-
-  // Service callback (to be implemented later)
-  // void registerSensorCallback(
-  //   const std::shared_ptr<RegisterSensorSrv::Request> request,
-  //   const std::shared_ptr<RegisterSensorSrv::Response> response);
-
+  void positionCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg,
+                        const std::string& sensor_id);
   void publishEstimates();
 
-  // Helper methods
-  void createSubscription(const std::string& sensor_type, const std::string& sensor_id, const std::string& topic);
-
-  // Helper method to create both subscription and expected measurement publisher
+  // Utility methods
   template<typename MsgType>
-  void createSensorPair(
-      const std::string& sensor_type,
-      const std::string& sensor_id,
-      const std::string& topic,
-      std::vector<SensorSubscription>& subscription_list);
+  void createSensorPair(const std::string& sensor_type,
+                        const std::string& sensor_id,
+                        const std::string& topic,
+                        std::vector<SensorSubscription>& subscription_list);
+
+  // Method to update sensor transform from TF
+  bool updateSensorTransform(const std::string& sensor_id,
+                             const std::string& frame_id,
+                             const rclcpp::Time& time);
 };
 
 } // namespace ros2

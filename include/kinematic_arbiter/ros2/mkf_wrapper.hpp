@@ -22,6 +22,7 @@
 #include "kinematic_arbiter/sensors/body_velocity_sensor_model.hpp"
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
@@ -85,6 +86,15 @@ public:
   void predictTo(const rclcpp::Time& time);
 
   /**
+   * @brief Set the transform from sensor to body frame for a sensor
+   *
+   * @param sensor_id The sensor identifier
+   * @param transform The transform from sensor to body frame
+   * @return true if successful, false otherwise
+   */
+  bool setSensorTransform(const std::string& sensor_id, const Eigen::Isometry3d& transform);
+
+  /**
    * @brief Convert ROS Time to seconds
    */
   double rosTimeToSeconds(const rclcpp::Time& time);
@@ -101,19 +111,17 @@ public:
   geometry_msgs::msg::Vector3 eigenToVectorMsg(const Eigen::Vector3d& vec);
 
 private:
-  // The core filter
-  std::shared_ptr<kinematic_arbiter::core::MediatedKalmanFilter<StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface>> filter_;
-
-  // Sensor registries
+  // Improved sensor info with the enum
   struct SensorInfo {
     size_t index;
-    std::string type;
+    kinematic_arbiter::core::SensorType type;
   };
 
   std::map<std::string, SensorInfo> sensors_;
 
-  // Store message headers for reuse in expected measurements
-  std::map<std::string, std_msgs::msg::Header> last_headers_;
+  // Filter instance
+  std::shared_ptr<kinematic_arbiter::core::MediatedKalmanFilter<
+      StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface>> filter_;
 };
 
 } // namespace wrapper

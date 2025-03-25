@@ -9,10 +9,10 @@ It configures parameters for the simulation and provides event handlers for grac
 
 import os
 from launch import LaunchDescription
-from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, LogInfo, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition
+from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -100,6 +100,25 @@ def generate_launch_description():
         description="Namespace for the nodes",
     )
 
+    # Frame IDs
+    world_frame_arg = DeclareLaunchArgument(
+        "world_frame_id",
+        default_value="map",
+        description="World frame ID",
+    )
+
+    body_frame_arg = DeclareLaunchArgument(
+        "body_frame_id",
+        default_value="base_link",
+        description="Body frame ID",
+    )
+
+    estimated_body_frame_arg = DeclareLaunchArgument(
+        "estimated_body_frame_id",
+        default_value="base_link_estimated",
+        description="Estimated body frame ID",
+    )
+
     # Debug output
     debug_output = LogInfo(
         msg=["Debug mode enabled"],
@@ -117,8 +136,12 @@ def generate_launch_description():
             {
                 "publish_rate": LaunchConfiguration("publish_rate"),
                 "parent_frequency": LaunchConfiguration("parent_frequency"),
-                "frame_id": "map",
-                "base_frame_id": "base_link",
+                "frame_id": LaunchConfiguration(
+                    "world_frame_id"
+                ),  # World frame
+                "base_frame_id": LaunchConfiguration(
+                    "body_frame_id"
+                ),  # Body frame
                 # Trajectory parameters
                 "trajectory.max_vel": LaunchConfiguration("max_velocity"),
                 "trajectory.length": LaunchConfiguration("length"),
@@ -127,28 +150,23 @@ def generate_launch_description():
                 "trajectory.angular_scale": LaunchConfiguration(
                     "angular_scale"
                 ),
-                # Sensors configuration
-                "sensors": ["position1", "position2"],
-                # Position sensor 1 parameters (center of robot)
-                "sensors.position1.position": [0.0, 0.0, 0.0],
-                "sensors.position1.quaternion": [
+                # Sensors configuration (just one position sensor)
+                "sensors": ["position_sensor"],
+                # Position sensor parameters
+                "sensors.position_sensor.position": [
+                    0.0,
+                    0.0,
+                    0.0,
+                ],  # Center of robot
+                "sensors.position_sensor.quaternion": [
                     1.0,
                     0.0,
                     0.0,
                     0.0,
                 ],  # w, x, y, z
-                "sensors.position1.noise_sigma": 0.05,
-                "sensors.position1.publish_rate": 20.0,
-                # Position sensor 2 parameters (front of robot, noisier)
-                "sensors.position2.position": [1.0, 0.0, 0.0],
-                "sensors.position2.quaternion": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                ],  # w, x, y, z
-                "sensors.position2.noise_sigma": 0.1,
-                "sensors.position2.publish_rate": 10.0,
+                "sensors.position_sensor.noise_sigma": 0.05,  # Noise level
+                "sensors.position_sensor.publish_rate": 20.0,  # Update rate
+                "sensors.position_sensor.topic": "sensors/position",  # Topic name
             }
         ],
     )
@@ -172,10 +190,17 @@ def generate_launch_description():
         parameters=[
             {
                 "publish_rate": LaunchConfiguration("filter_rate"),
-                "frame_id": "map",
-                "base_frame_id": "base_link_estimated",
-                # Configure sensors to use
-                "sensors": ["position1"],
+                "max_delay_window": 0.5,
+                "world_frame_id": LaunchConfiguration(
+                    "world_frame_id"
+                ),  # World frame
+                "body_frame_id": LaunchConfiguration(
+                    "estimated_body_frame_id"
+                ),  # Estimated body frame
+                # Configure position sensors to use
+                "position_sensors": ["position_sensor"],
+                # Position sensor configuration
+                "sensors.position_sensor.topic": "sensors/position",  # Match topic from simulator
             }
         ],
     )
@@ -204,7 +229,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            # Arguments
+            # Launch arguments
             debug_arg,
             use_foxglove_studio_arg,
             publish_rate_arg,
@@ -217,13 +242,15 @@ def generate_launch_description():
             angular_scale_arg,
             rviz_config_arg,
             namespace_arg,
-            # Logging
+            world_frame_arg,
+            body_frame_arg,
+            estimated_body_frame_arg,
+            # Debug output
             debug_output,
             # Nodes
             simulator_node,
             rviz_node,
             arbiter_node,
-            # Foxglove integration
             foxglove_bridge_node,
             foxglove_studio_process,
         ]

@@ -297,6 +297,40 @@ geometry_msgs::msg::Vector3 FilterWrapper::eigenToVectorMsg(const Eigen::Vector3
   return vector;
 }
 
+/**
+ * @brief Set the transform from sensor to body frame for a sensor
+ *
+ * @param sensor_id The sensor identifier
+ * @param transform The transform from sensor to body frame
+ * @return true if successful, false otherwise
+ */
+bool FilterWrapper::setSensorTransform(const std::string& sensor_id, const Eigen::Isometry3d& transform) {
+  auto it = sensors_.find(sensor_id);
+  if (it == sensors_.end()) {
+    return false;
+  }
+
+  const SensorInfo& info = it->second;
+
+  // Get the sensor as the base interface type
+  auto sensor = getSensorAsBaseModel(info.index);
+  if (!sensor) {
+    std::cerr << "Failed to get sensor '" << sensor_id
+              << "' of type " << info.type << std::endl;
+    return false;
+  }
+
+  // Set the transform using the base interface method
+  sensor->SetSensorPoseInBodyFrame(transform);
+  return true;
+}
+
+// Helper to get the sensor as the base measurement model interface
+std::shared_ptr<kinematic_arbiter::core::MeasurementModelInterface> FilterWrapper::getSensorAsBaseModel(size_t index) const {
+  // This assumes all sensor models derive from MeasurementModelInterface
+  return filter_->GetSensorByIndex<kinematic_arbiter::core::MeasurementModelInterface>(index);
+}
+
 } // namespace wrapper
 } // namespace ros2
 } // namespace kinematic_arbiter

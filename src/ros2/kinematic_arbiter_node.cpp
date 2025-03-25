@@ -1,4 +1,7 @@
 #include "kinematic_arbiter/ros2/kinematic_arbiter_node.hpp"
+#include <tf2_eigen/tf2_eigen.h>
+#include <tf2_ros/buffer.h>
+#include <tf2_ros/transform_listener.h>
 
 namespace kinematic_arbiter {
 namespace ros2 {
@@ -9,11 +12,17 @@ KinematicArbiterNode::KinematicArbiterNode()
   // Declare and get parameters
   this->declare_parameter("publish_rate", 20.0);
   this->declare_parameter("max_delay_window", 0.5);
-  this->declare_parameter("frame_id", "odom");
+  this->declare_parameter("world_frame_id", "map");
+  this->declare_parameter("body_frame_id", "base_link");
 
   publish_rate_ = this->get_parameter("publish_rate").as_double();
   max_delay_window_ = this->get_parameter("max_delay_window").as_double();
-  frame_id_ = this->get_parameter("frame_id").as_string();
+  world_frame_id_ = this->get_parameter("world_frame_id").as_string();
+  body_frame_id_ = this->get_parameter("body_frame_id").as_string();
+
+  // Set up TF2 transform listener and buffer
+  tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+  tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 
   // Initialize the filter wrapper
   filter_wrapper_ = std::make_unique<wrapper::FilterWrapper>();
@@ -66,6 +75,14 @@ void KinematicArbiterNode::positionCallback(
 
   RCLCPP_DEBUG(this->get_logger(), "Received position from sensor %s", sensor_id.c_str());
 
+  // Get sensor transform from TF tree
+  if (!updateSensorTransform(sensor_id, msg->header.frame_id, msg->header.stamp)) {
+    RCLCPP_WARN(this->get_logger(),
+                "Failed to get transform for sensor %s from frame %s to %s",
+                sensor_id.c_str(), msg->header.frame_id.c_str(), body_frame_id_.c_str());
+    // Continue processing even if transform failed - we'll use the last known transform
+  }
+
   // Process the measurement
   bool success = filter_wrapper_->processPosition(sensor_id, *msg);
 
@@ -90,6 +107,34 @@ void KinematicArbiterNode::positionCallback(
   }
 }
 
+bool KinematicArbiterNode::updateSensorTransform(
+    const std::string& sensor_id,
+    const std::string& frame_id,
+    const rclcpp::Time& time) {
+
+  try {
+    // Look up transform from sensor frame to body frame
+    geometry_msgs::msg::TransformStamped transform_stamped;
+    transform_stamped = tf_buffer_->lookupTransform(
+        body_frame_id_,                 // target frame (body)
+        frame_id,                       // source frame (sensor)
+        time,                          // time
+        rclcpp::Duration::from_seconds(0.1)  // timeout
+    );
+
+    // Convert to Eigen Isometry3d
+    Eigen::Isometry3d sensor_to_body_transform = tf2::transformToEigen(transform_stamped);
+
+    // Set the transform in the sensor model
+    filter_wrapper_->setSensorTransform(sensor_id, sensor_to_body_transform);
+
+    return true;
+  } catch (const tf2::TransformException& ex) {
+    RCLCPP_WARN(this->get_logger(), "Transform lookup failed: %s", ex.what());
+    return false;
+  }
+}
+
 void KinematicArbiterNode::publishEstimates() {
   // Get current time
   rclcpp::Time current_time = this->now();
@@ -103,9 +148,9 @@ void KinematicArbiterNode::publishEstimates() {
   auto accel_estimate = filter_wrapper_->getAccelerationEstimate(current_time);
 
   // Set the frame_id
-  pose_estimate.header.frame_id = frame_id_;
-  velocity_estimate.header.frame_id = frame_id_;
-  accel_estimate.header.frame_id = frame_id_;
+  pose_estimate.header.frame_id = world_frame_id_;
+  velocity_estimate.header.frame_id = body_frame_id_;
+  accel_estimate.header.frame_id = body_frame_id_;
 
   // Publish
   pose_pub_->publish(pose_estimate);
@@ -128,7 +173,7 @@ void KinematicArbiterNode::createSensorPair(
   if constexpr (std::is_same_v<MsgType, geometry_msgs::msg::PointStamped>) {
     sub.subscription = this->create_subscription<MsgType>(
         topic, 10,
-        [this, sensor_id](const std::shared_ptr<const MsgType> msg) {  // Fixed: updated callback signature
+        [this, sensor_id](const std::shared_ptr<const MsgType> msg) {
           this->positionCallback(std::const_pointer_cast<MsgType>(msg), sensor_id);
         });
 
