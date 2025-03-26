@@ -19,14 +19,6 @@ namespace kinematic_arbiter {
 namespace core {
 
 /**
- * @brief Exception class for filter-related errors
- */
-class FilterException : public std::runtime_error {
-public:
-  explicit FilterException(const std::string& message) : std::runtime_error(message) {}
-};
-
-/**
  * @brief MediatedKalmanFilter implements a Kalman filter with chi-squared validation
  *
  * Leverages StateModelInterface for prediction and ProcessNoise management
@@ -61,13 +53,11 @@ public:
    * @param sensor_model Shared pointer to measurement model interface
    * @return size_t Index of the newly added sensor
    */
-  template<SensorType Type>
-  size_t AddSensor(std::shared_ptr<MeasurementModelInterface<Type>> sensor_model) {
+  size_t AddSensor(std::shared_ptr<MeasurementModelInterface> sensor_model) {
     size_t sensor_index = sensors_types_.size();
 
     // Store sensor model and its type tag
     sensors_.push_back(sensor_model);
-    sensors_types_.push_back(Type);
 
     return sensor_index;
   }
@@ -79,15 +69,8 @@ public:
    * @return bool True if the operation was successful
    */
   bool GetSensorPoseInBodyFrameByIndex(size_t sensor_index, Eigen::Isometry3d& pose) const {
-    if (sensor_index >= sensors_.size()) {
-      return false;
-    }
-
-    // Use visitor pattern to call GetSensorPoseInBodyFrame() on the correct type
-    return VisitSensor(sensor_index, [&pose](auto&& sensor) {
-      pose = sensor->GetSensorPoseInBodyFrame();
-      return true;
-    });
+    if (sensor_index >= sensors_.size()) {return false;}
+    return sensors_[sensor_index]->GetSensorPoseInBodyFrame(pose);
   }
 
   /**
@@ -97,15 +80,8 @@ public:
    * @return bool True if the operation was successful
    */
   bool SetSensorPoseInBodyFrameByIndex(size_t sensor_index, const Eigen::Isometry3d& pose) {
-    if (sensor_index >= sensors_.size()) {
-      return false;
-    }
-
-    // Use visitor pattern to call SetSensorPoseInBodyFrame() on the correct type
-    return VisitSensor(sensor_index, [&pose](auto&& sensor) {
-      sensor->SetSensorPoseInBodyFrame(pose);
-      return true;
-    });
+    if (sensor_index >= sensors_.size()) {return false;}
+    return sensors_[sensor_index]->SetSensorPoseInBodyFrame(pose);
   }
 
   /**
@@ -117,15 +93,12 @@ public:
    * @param timestamp Timestamp of the measurement
    * @return true if measurement was processed successfully
    */
-  template<SensorType Type>
   bool ProcessMeasurementByIndex(size_t sensor_index,
-                                const typename MeasurementModelInterface<Type>::MeasurementVector& measurement,
+                                const MeasurementModelInterface::MeasurementVector& measurement,
                                 double timestamp) {
-    if (sensor_index >= sensors_.size() || sensors_types_[sensor_index] != Type) {
-      return false; // Invalid index or type mismatch
-    }
+    if (sensor_index >= sensors_.size()) {return false;}
 
-    auto sensor = std::static_pointer_cast<MeasurementModelInterface<Type>>(sensors_[sensor_index]);
+    auto sensor = sensors_[sensor_index];
 
     // ---- Phase 1: Process the measurement ----
 
@@ -172,7 +145,7 @@ public:
     StateMatrix Q = process_model_->GetProcessNoiseCovariance(dt);
     StateMatrix covariance_at_sensor_time = A * reference_covariance_ * A.transpose() + Q;
 
-    // ---- Phase 2: Apply the measurement (previously ApplyMeasurement) ----
+    // ---- Phase 2: Apply the measurement ----
 
     // Compute auxiliary data (innovation, Jacobian, innovation covariance)
     auto aux_data = sensor->ComputeAuxiliaryData(
@@ -306,27 +279,10 @@ public:
    * @param[out] covariance The measurement covariance matrix
    * @return bool True if the operation was successful
    */
-  template<SensorType Type>
   bool GetSensorCovarianceByIndex(size_t sensor_index,
-                                 typename MeasurementModelInterface<Type>::MeasurementCovariance& covariance) const {
-    if (sensor_index >= sensors_.size()) {
-      return false;
-    }
-
-    // Check if the sensor type matches
-    if (sensors_types_[sensor_index] != Type) {
-      return false;
-    }
-
-    // Use visitor pattern to get the covariance
-    return VisitSensor(sensor_index, [&covariance](auto&& sensor) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(*sensor)>,
-                                   MeasurementModelInterface<Type>>) {
-        covariance = sensor->GetMeasurementCovariance();
-        return true;
-      }
-      return false;
-    });
+                                 MeasurementModelInterface::MeasurementCovariance& covariance) const {
+    if (sensor_index >= sensors_.size()) {return false;}
+    return sensors_[sensor_index]->GetMeasurementCovariance(covariance);
   }
 
   /**
@@ -335,57 +291,18 @@ public:
    * @param[out] expected_measurement The predicted measurement
    * @return bool True if the operation was successful
    */
-  template<SensorType Type>
   bool GetExpectedMeasurementByIndex(size_t sensor_index,
-                                   typename MeasurementModelInterface<Type>::MeasurementVector& expected_measurement) const {
-    if (sensor_index >= sensors_.size()) {
-      return false;
-    }
-
-    // Check if the sensor type matches
-    if (sensors_types_[sensor_index] != Type) {
-      return false;
-    }
-
-    // Use visitor pattern to predict the measurement
-    return VisitSensor(sensor_index, [this, &expected_measurement](auto&& sensor) {
-      if constexpr (std::is_same_v<std::decay_t<decltype(*sensor)>,
-                                   MeasurementModelInterface<Type>>) {
-        expected_measurement = sensor->PredictMeasurement(this->reference_state_);
-        return true;
-      }
-      return false;
-    });
+                                   MeasurementModelInterface::MeasurementVector& expected_measurement) const {
+    if (sensor_index >= sensors_.size()) {return false;}
+    expected_measurement = sensors_[sensor_index]->PredictMeasurement(reference_state_);
+    return true;
   }
 
 private:
-  // Helper visitor pattern to apply functions to sensors with appropriate type
-  template<typename Func>
-  bool VisitSensor(size_t sensor_index, Func&& func) const {
-    if (sensor_index >= sensors_.size()) {
-      return false;
-    }
-
-    // A macro or constexpr-if approach would be better in C++17,
-    // but this switch pattern is clearer for the example
-    switch (sensors_types_[sensor_index]) {
-      case SensorType::Position:
-        return func(std::static_pointer_cast<MeasurementModelInterface<SensorType::Position>>(sensors_[sensor_index]));
-      case SensorType::Pose:
-        return func(std::static_pointer_cast<MeasurementModelInterface<SensorType::Pose>>(sensors_[sensor_index]));
-      case SensorType::BodyVelocity:
-        return func(std::static_pointer_cast<MeasurementModelInterface<SensorType::BodyVelocity>>(sensors_[sensor_index]));
-      case SensorType::Imu:
-        return func(std::static_pointer_cast<MeasurementModelInterface<SensorType::Imu>>(sensors_[sensor_index]));
-      default:
-        return false;
-    }
-  }
 
   // Private data members
   std::shared_ptr<ProcessModel> process_model_;
-  std::vector<std::shared_ptr<void>> sensors_;             // Type-erased storage for sensor models
-  std::vector<SensorType> sensors_types_;                  // Corresponding types for each sensor
+  std::vector<std::shared_ptr<MeasurementModelInterface>> sensors_;
   double reference_time_;
   double max_delay_window_;
   StateFlags initialized_states_;
