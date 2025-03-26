@@ -2,6 +2,7 @@
 
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
@@ -13,10 +14,10 @@ namespace sensors {
  * Measurement vector is [x, y, z, qw, qx, qy, qz]' where
  * [qw, qx, qy, qz] represents orientation as a quaternion.
  */
-class PoseSensorModel : public core::MeasurementModelInterface<Eigen::Matrix<double, 7, 1>> {
+class PoseSensorModel : public core::MeasurementModelInterface<core::SensorType::Pose> {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<Eigen::Matrix<double, 7, 1>>;
+  using Base = core::MeasurementModelInterface<core::SensorType::Pose>;
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;

@@ -1,5 +1,9 @@
 #include "kinematic_arbiter/ros2/kinematic_arbiter_node.hpp"
-#include <tf2_eigen/tf2_eigen.h>
+#include "geometry_msgs/msg/point_stamped.hpp"
+#include "geometry_msgs/msg/pose_stamped.hpp"
+#include "geometry_msgs/msg/twist_stamped.hpp"
+#include "sensor_msgs/msg/imu.hpp"
+#include <tf2_eigen/tf2_eigen.hpp>
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
 
@@ -41,30 +45,24 @@ KinematicArbiterNode::KinematicArbiterNode()
       std::chrono::milliseconds(static_cast<int>(1000.0 / publish_rate_)),
       std::bind(&KinematicArbiterNode::publishEstimates, this));
 
-  // Look for position sensor parameters
-  this->declare_parameter("position_sensors", std::vector<std::string>());
-  auto position_sensors = this->get_parameter("position_sensors").as_string_array();
+  // Initialize subscription vectors for each sensor type
+  position_subs_ = {};
+  // pose_subs_ = {};
+  // velocity_subs_ = {};
+  // imu_subs_ = {};
 
-  for (const auto& sensor_name : position_sensors) {
-    std::string topic_param = "sensors." + sensor_name + ".topic";
-    this->declare_parameter(topic_param, "");
-    std::string topic = this->get_parameter(topic_param).as_string();
+  // Look for all sensor types in parameters
+  initializeSensors<geometry_msgs::msg::PointStamped>("position_sensors", position_subs_,
+      &wrapper::FilterWrapper::registerPositionSensor);
 
-    if (!topic.empty()) {
-      // Register the sensor with the filter
-      std::string sensor_id = filter_wrapper_->registerPositionSensor(sensor_name);
+  // initializeSensors<geometry_msgs::msg::PoseStamped>("pose_sensors", pose_subs_,
+  //     &wrapper::FilterWrapper::registerPoseSensor);
 
-      // Create the subscription pair
-      createSensorPair<geometry_msgs::msg::PointStamped>(
-          "position", sensor_id, topic, position_subs_);
-    }
-  }
+  // initializeSensors<geometry_msgs::msg::TwistStamped>("velocity_sensors", velocity_subs_,
+  //     &wrapper::FilterWrapper::registerBodyVelocitySensor);
 
-  // Services
-  // register_sensor_srv_ = this->create_service<kinematic_arbiter_interfaces::srv::RegisterSensor>(
-  //     "register_sensor",
-  //     std::bind(&KinematicArbiterNode::registerSensorCallback, this,
-  //               std::placeholders::_1, std::placeholders::_2));
+  // initializeSensors<sensor_msgs::msg::Imu>("imu_sensors", imu_subs_,
+  //     &wrapper::FilterWrapper::registerImuSensor);
 
   RCLCPP_INFO(this->get_logger(), "Kinematic Arbiter node initialized");
 }
@@ -94,6 +92,8 @@ void KinematicArbiterNode::positionCallback(
 
   // Get the expected measurement for this sensor
   auto expected = filter_wrapper_->getExpectedPosition(sensor_id);
+  expected.header.frame_id = world_frame_id_;
+  expected.header.stamp = this->now();
 
   // Find the subscription to publish the expected measurement
   for (const auto& sub : position_subs_) {
@@ -106,6 +106,123 @@ void KinematicArbiterNode::positionCallback(
     }
   }
 }
+
+// void KinematicArbiterNode::poseCallback(
+//     const geometry_msgs::msg::PoseStamped::SharedPtr msg,
+//     const std::string& sensor_id) {
+
+//   RCLCPP_DEBUG(this->get_logger(), "Received pose from sensor %s", sensor_id.c_str());
+
+//   // Get sensor transform from TF tree
+//   if (!updateSensorTransform(sensor_id, msg->header.frame_id, msg->header.stamp)) {
+//     RCLCPP_WARN(this->get_logger(),
+//                 "Failed to get transform for sensor %s from frame %s to %s",
+//                 sensor_id.c_str(), msg->header.frame_id.c_str(), body_frame_id_.c_str());
+//   }
+
+//   // Process the measurement
+//   bool success = filter_wrapper_->processPose(sensor_id, *msg);
+
+//   if (!success) {
+//     RCLCPP_WARN(this->get_logger(), "Failed to process pose measurement from sensor %s",
+//                 sensor_id.c_str());
+//     return;
+//   }
+
+//   // Get the expected measurement for this sensor
+//   auto expected = filter_wrapper_->getExpectedPose(sensor_id);
+//   expected.header.frame_id = world_frame_id_;
+//   expected.header.stamp = this->now();
+
+//   // Find the subscription to publish the expected measurement
+//   for (const auto& sub : pose_subs_) {
+//     if (sub.sensor_id == sensor_id && sub.expected_pub) {
+//       // Publish expected measurement
+//       auto expected_pub = std::static_pointer_cast<rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>>(
+//           sub.expected_pub);
+//       expected_pub->publish(expected);
+//       break;
+//     }
+//   }
+// }
+
+// void KinematicArbiterNode::velocityCallback(
+//     const geometry_msgs::msg::TwistStamped::SharedPtr msg,
+//     const std::string& sensor_id) {
+
+//   RCLCPP_DEBUG(this->get_logger(), "Received velocity from sensor %s", sensor_id.c_str());
+
+//   // Get sensor transform from TF tree
+//   if (!updateSensorTransform(sensor_id, msg->header.frame_id, msg->header.stamp)) {
+//     RCLCPP_WARN(this->get_logger(),
+//                 "Failed to get transform for sensor %s from frame %s to %s",
+//                 sensor_id.c_str(), msg->header.frame_id.c_str(), body_frame_id_.c_str());
+//   }
+
+//   // Process the measurement
+//   bool success = filter_wrapper_->processBodyVelocity(sensor_id, *msg);
+
+//   if (!success) {
+//     RCLCPP_WARN(this->get_logger(), "Failed to process velocity measurement from sensor %s",
+//                 sensor_id.c_str());
+//     return;
+//   }
+
+//   // Get the expected measurement for this sensor
+//   auto expected = filter_wrapper_->getExpectedBodyVelocity(sensor_id);
+//   expected.header.frame_id = body_frame_id_; // Body velocities are in body frame
+//   expected.header.stamp = this->now();
+
+//   // Find the subscription to publish the expected measurement
+//   for (const auto& sub : velocity_subs_) {
+//     if (sub.sensor_id == sensor_id && sub.expected_pub) {
+//       // Publish expected measurement
+//       auto expected_pub = std::static_pointer_cast<rclcpp::Publisher<geometry_msgs::msg::TwistWithCovarianceStamped>>(
+//           sub.expected_pub);
+//       expected_pub->publish(expected);
+//       break;
+//     }
+//   }
+// }
+
+// void KinematicArbiterNode::imuCallback(
+//     const sensor_msgs::msg::Imu::SharedPtr msg,
+//     const std::string& sensor_id) {
+
+//   RCLCPP_DEBUG(this->get_logger(), "Received IMU data from sensor %s", sensor_id.c_str());
+
+//   // Get sensor transform from TF tree
+//   if (!updateSensorTransform(sensor_id, msg->header.frame_id, msg->header.stamp)) {
+//     RCLCPP_WARN(this->get_logger(),
+//                 "Failed to get transform for sensor %s from frame %s to %s",
+//                 sensor_id.c_str(), msg->header.frame_id.c_str(), body_frame_id_.c_str());
+//   }
+
+//   // Process the measurement
+//   bool success = filter_wrapper_->processImu(sensor_id, *msg);
+
+//   if (!success) {
+//     RCLCPP_WARN(this->get_logger(), "Failed to process IMU measurement from sensor %s",
+//                 sensor_id.c_str());
+//     return;
+//   }
+
+//   // Get the expected measurement for this sensor
+//   auto expected = filter_wrapper_->getExpectedImu(sensor_id);
+//   expected.header.frame_id = body_frame_id_; // IMU data is in sensor frame, transformed to body
+//   expected.header.stamp = this->now();
+
+//   // Find the subscription to publish the expected measurement
+//   for (const auto& sub : imu_subs_) {
+//     if (sub.sensor_id == sensor_id && sub.expected_pub) {
+//       // Publish expected measurement
+//       auto expected_pub = std::static_pointer_cast<rclcpp::Publisher<sensor_msgs::msg::Imu>>(
+//           sub.expected_pub);
+//       expected_pub->publish(expected);
+//       break;
+//     }
+//   }
+// }
 
 bool KinematicArbiterNode::updateSensorTransform(
     const std::string& sensor_id,
@@ -122,11 +239,11 @@ bool KinematicArbiterNode::updateSensorTransform(
         rclcpp::Duration::from_seconds(0.1)  // timeout
     );
 
-    // Convert to Eigen Isometry3d
-    Eigen::Isometry3d sensor_to_body_transform = tf2::transformToEigen(transform_stamped);
-
-    // Set the transform in the sensor model
-    filter_wrapper_->setSensorTransform(sensor_id, sensor_to_body_transform);
+    // Set the transform in the filter wrapper
+    if (!filter_wrapper_->setSensorTransform(sensor_id, transform_stamped)) {
+      RCLCPP_WARN(this->get_logger(), "Failed to set transform for sensor %s", sensor_id.c_str());
+      return false;
+    }
 
     return true;
   } catch (const tf2::TransformException& ex) {
@@ -159,6 +276,34 @@ void KinematicArbiterNode::publishEstimates() {
 }
 
 template<typename MsgType>
+void KinematicArbiterNode::initializeSensors(
+    const std::string& param_name,
+    std::vector<SensorSubscription>& subscription_list,
+    std::string (wrapper::FilterWrapper::*register_func)(const std::string&)) {
+
+  // Look for sensor parameters
+  this->declare_parameter(param_name, std::vector<std::string>());
+  auto sensors = this->get_parameter(param_name).as_string_array();
+
+  // Extract the sensor type from the parameter name (remove '_sensors' suffix)
+  std::string sensor_type = param_name.substr(0, param_name.find("_sensors"));
+
+  for (const auto& sensor_name : sensors) {
+    std::string topic_param = "sensors." + sensor_name + ".topic";
+    this->declare_parameter(topic_param, "");
+    std::string topic = this->get_parameter(topic_param).as_string();
+
+    if (!topic.empty()) {
+      // Register the sensor with the filter using the provided register function
+      std::string sensor_id = (filter_wrapper_.get()->*register_func)(sensor_name);
+
+      // Create the subscription pair
+      createSensorPair<MsgType>(sensor_type, sensor_id, topic, subscription_list);
+    }
+  }
+}
+
+template<typename MsgType>
 void KinematicArbiterNode::createSensorPair(
     const std::string& sensor_type,
     const std::string& sensor_id,
@@ -169,7 +314,7 @@ void KinematicArbiterNode::createSensorPair(
   sub.sensor_id = sensor_id;
   sub.topic = topic;
 
-  // Create subscription with updated callback signature (using shared_ptr<const MsgType>)
+  // Create subscription based on sensor type
   if constexpr (std::is_same_v<MsgType, geometry_msgs::msg::PointStamped>) {
     sub.subscription = this->create_subscription<MsgType>(
         topic, 10,
@@ -181,7 +326,39 @@ void KinematicArbiterNode::createSensorPair(
     sub.expected_pub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(
         topic + "/expected", 10);
   }
-  // Add more sensor types here when they are implemented in the wrapper
+  // else if constexpr (std::is_same_v<MsgType, geometry_msgs::msg::PoseStamped>) {
+  //   sub.subscription = this->create_subscription<MsgType>(
+  //       topic, 10,
+  //       [this, sensor_id](const std::shared_ptr<const MsgType> msg) {
+  //         this->poseCallback(std::const_pointer_cast<MsgType>(msg), sensor_id);
+  //       });
+
+  //   // Create publisher for expected measurements
+  //   sub.expected_pub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(
+  //       topic + "/expected", 10);
+  // }
+  // else if constexpr (std::is_same_v<MsgType, geometry_msgs::msg::TwistStamped>) {
+  //   sub.subscription = this->create_subscription<MsgType>(
+  //       topic, 10,
+  //       [this, sensor_id](const std::shared_ptr<const MsgType> msg) {
+  //         this->velocityCallback(std::const_pointer_cast<MsgType>(msg), sensor_id);
+  //       });
+
+  //   // Create publisher for expected measurements
+  //   sub.expected_pub = this->create_publisher<geometry_msgs::msg::TwistWithCovarianceStamped>(
+  //       topic + "/expected", 10);
+  // }
+  // else if constexpr (std::is_same_v<MsgType, sensor_msgs::msg::Imu>) {
+  //   sub.subscription = this->create_subscription<MsgType>(
+  //       topic, 10,
+  //       [this, sensor_id](const std::shared_ptr<const MsgType> msg) {
+  //         this->imuCallback(std::const_pointer_cast<MsgType>(msg), sensor_id);
+  //       });
+
+  //   // Create publisher for expected measurements
+  //   sub.expected_pub = this->create_publisher<sensor_msgs::msg::Imu>(
+  //       topic + "/expected", 10);
+  // }
 
   subscription_list.push_back(sub);
 

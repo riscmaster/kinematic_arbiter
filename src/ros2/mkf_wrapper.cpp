@@ -1,12 +1,13 @@
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
 #include "kinematic_arbiter/models/rigid_body_state_model.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 #include "tf2_eigen/tf2_eigen.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
 namespace wrapper {
-
+using namespace kinematic_arbiter::core;
 // Constructor
 FilterWrapper::FilterWrapper(const kinematic_arbiter::models::RigidBodyStateModel::Params& model_params) {
   // Create state model
@@ -18,29 +19,29 @@ FilterWrapper::FilterWrapper(const kinematic_arbiter::models::RigidBodyStateMode
 
 std::string FilterWrapper::registerPositionSensor(const std::string& name) {
   auto sensor = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
-  size_t idx = filter_->AddSensor(sensor);
-  sensors_[name] = {idx, "position"};
+  size_t idx = filter_->AddSensor<SensorType::Position>(sensor);
+  sensors_[name] = {idx, SensorType::Position};
   return name;
 }
 
 std::string FilterWrapper::registerPoseSensor(const std::string& name) {
   auto sensor = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
-  size_t idx = filter_->AddSensor(sensor);
-  sensors_[name] = {idx, "pose"};
+  size_t idx = filter_->AddSensor<SensorType::Pose>(sensor);
+  sensors_[name] = {idx, SensorType::Pose};
   return name;
 }
 
 std::string FilterWrapper::registerBodyVelocitySensor(const std::string& name) {
   auto sensor = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
-  size_t idx = filter_->AddSensor(sensor);
-  sensors_[name] = {idx, "body_velocity"};
+  size_t idx = filter_->AddSensor<SensorType::BodyVelocity>(sensor);
+  sensors_[name] = {idx, SensorType::BodyVelocity};
   return name;
 }
 
 std::string FilterWrapper::registerImuSensor(const std::string& name) {
   auto sensor = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
-  size_t idx = filter_->AddSensor(sensor);
-  sensors_[name] = {idx, "imu"};
+  size_t idx = filter_->AddSensor<SensorType::Imu>(sensor);
+  sensors_[name] = {idx, SensorType::Imu};
   return name;
 }
 
@@ -48,72 +49,167 @@ void FilterWrapper::setMaxDelayWindow(double seconds) {
   filter_->SetMaxDelayWindow(seconds);
 }
 
+/**
+ * @brief Process position measurement
+ */
 bool FilterWrapper::processPosition(const std::string& sensor_id, const geometry_msgs::msg::PointStamped& msg) {
   auto it = sensors_.find(sensor_id);
-  if (it == sensors_.end() || it->second.type != "position") {
+  if (it == sensors_.end() || it->second.type != SensorType::Position) {
+    std::cerr << "Invalid sensor ID or type mismatch: " << sensor_id << std::endl;
     return false;
   }
 
-  // Convert to measurement type
+  const SensorInfo& info = it->second;
   double timestamp = rosTimeToSeconds(msg.header.stamp);
-  Eigen::Vector3d position;
-  tf2::fromMsg(msg.point, position);
 
-  // Store the header for this sensor (for expected measurement generation)
-  last_headers_[sensor_id] = msg.header;
+  // Convert ROS message to Eigen vector
+  Eigen::Vector3d position = pointMsgToVector(msg.point);
 
-  // Process with filter
-  return filter_->ProcessMeasurementByIndex(it->second.index, timestamp, position);
+  // Process using the typed API
+  return filter_->ProcessMeasurementByIndex<SensorType::Position>(
+    info.index, position, timestamp);
 }
 
-geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getExpectedPosition(const std::string& sensor_id) {
+/**
+ * @brief Process pose measurement
+ */
+bool FilterWrapper::processPose(const std::string& sensor_id, const geometry_msgs::msg::PoseStamped& msg) {
   auto it = sensors_.find(sensor_id);
-  if (it == sensors_.end() || it->second.type != "position") {
-    geometry_msgs::msg::PoseWithCovarianceStamped empty;
-    return empty;
+  if (it == sensors_.end() || it->second.type != SensorType::Pose) {
+    std::cerr << "Invalid sensor ID or type mismatch: " << sensor_id << std::endl;
+    return false;
   }
 
-  // Get sensor model using proper template and index
-  auto sensor = filter_->GetSensorByIndex<kinematic_arbiter::sensors::PositionSensorModel>(it->second.index);
-  if (!sensor) {
-    geometry_msgs::msg::PoseWithCovarianceStamped empty;
-    return empty;
+  const SensorInfo& info = it->second;
+  double timestamp = rosTimeToSeconds(msg.header.stamp);
+
+  // Convert ROS Pose to Eigen (position and quaternion)
+  Eigen::Vector3d position = pointMsgToVector(msg.pose.position);
+  Eigen::Quaterniond orientation = quaternionMsgToEigen(msg.pose.orientation);
+
+  // Create measurement vector (7D: position + quaternion)
+  typename core::MeasurementModelInterface<SensorType::Pose>::MeasurementVector pose_vec;
+  pose_vec.segment<3>(0) = position;
+  pose_vec(3) = orientation.x();
+  pose_vec(4) = orientation.y();
+  pose_vec(5) = orientation.z();
+  pose_vec(6) = orientation.w();
+
+  // Process using the typed API
+  return filter_->ProcessMeasurementByIndex<SensorType::Pose>(
+    info.index, pose_vec, timestamp);
+}
+
+/**
+ * @brief Process body velocity measurement
+ */
+bool FilterWrapper::processBodyVelocity(const std::string& sensor_id, const geometry_msgs::msg::TwistStamped& msg) {
+  auto it = sensors_.find(sensor_id);
+  if (it == sensors_.end() || it->second.type != SensorType::BodyVelocity) {
+    std::cerr << "Invalid sensor ID or type mismatch: " << sensor_id << std::endl;
+    return false;
   }
 
-  // Get expected measurement and measurement covariance
-  Eigen::Vector3d expected_measurement = sensor->PredictMeasurement(filter_->GetStateEstimate());
-  Eigen::Matrix<double, 3, 3> measurement_covariance = sensor->GetMeasurementCovariance();
+  const SensorInfo& info = it->second;
+  double timestamp = rosTimeToSeconds(msg.header.stamp);
 
-  // Create ROS message
-  geometry_msgs::msg::PoseWithCovarianceStamped msg;
+  // Convert ROS Twist to Eigen vectors
+  Eigen::Vector3d linear = vectorMsgToEigen(msg.twist.linear);
+  Eigen::Vector3d angular = vectorMsgToEigen(msg.twist.angular);
 
-  // Use the original header if available, or current filter time if not
-  auto header_it = last_headers_.find(sensor_id);
-  if (header_it != last_headers_.end()) {
-    msg.header = header_it->second;
+  // Create measurement vector (6D: linear + angular)
+  typename core::MeasurementModelInterface<SensorType::BodyVelocity>::MeasurementVector vel_vec;
+  vel_vec.segment<3>(0) = linear;
+  vel_vec.segment<3>(3) = angular;
+
+  // Process using the typed API
+  return filter_->ProcessMeasurementByIndex<SensorType::BodyVelocity>(
+    info.index, vel_vec, timestamp);
+}
+
+/**
+ * @brief Process IMU measurement
+ */
+bool FilterWrapper::processImu(const std::string& sensor_id, const sensor_msgs::msg::Imu& msg) {
+  auto it = sensors_.find(sensor_id);
+  if (it == sensors_.end() || it->second.type != SensorType::Imu) {
+    std::cerr << "Invalid sensor ID or type mismatch: " << sensor_id << std::endl;
+    return false;
+  }
+
+  const SensorInfo& info = it->second;
+  double timestamp = rosTimeToSeconds(msg.header.stamp);
+
+  // Convert ROS IMU data to Eigen vectors
+  Eigen::Vector3d linear_accel = vectorMsgToEigen(msg.linear_acceleration);
+  Eigen::Vector3d angular_vel = vectorMsgToEigen(msg.angular_velocity);
+
+  // Create measurement vector (6D: linear_accel + angular_vel)
+  typename core::MeasurementModelInterface<SensorType::Imu>::MeasurementVector imu_vec;
+  imu_vec.segment<3>(0) = linear_accel;
+  imu_vec.segment<3>(3) = angular_vel;
+
+  // Process using the typed API
+  return filter_->ProcessMeasurementByIndex<SensorType::Imu>(
+    info.index, imu_vec, timestamp);
+}
+
+/**
+ * @brief Convert double time to ROS timestamp
+ */
+rclcpp::Time FilterWrapper::doubleTimeToRosTime(double time) const {
+  // Convert double seconds to ROS time
+  int32_t sec = static_cast<int32_t>(time);
+  uint32_t nanosec = static_cast<uint32_t>((time - sec) * 1e9);
+  return rclcpp::Time(sec, nanosec);
+}
+
+/**
+ * @brief Get expected position measurement for visualization
+ */
+geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getExpectedPosition(const std::string& sensor_id) {
+  geometry_msgs::msg::PoseWithCovarianceStamped result;
+
+  // Use filter's current time if available, otherwise use system time
+  if (filter_->IsInitialized()) {
+    result.header.stamp = doubleTimeToRosTime(filter_->GetCurrentTime());
   } else {
-    msg.header.stamp = rclcpp::Time(filter_->GetCurrentTime() * 1e9); // Convert to nanoseconds
-    msg.header.frame_id = "base_link"; // Should be configurable
+    result.header.stamp = rclcpp::Clock().now();
   }
 
-  // Set position (only valid fields for a position sensor)
-  msg.pose.pose.position = vectorToPointMsg(expected_measurement);
+  auto it = sensors_.find(sensor_id);
+  if (it == sensors_.end() || it->second.type != SensorType::Position) {
+    std::cerr << "Invalid sensor ID or type mismatch: " << sensor_id << std::endl;
+    return result;
+  }
 
-  // Identity quaternion as placeholder (not relevant for position sensor)
-  msg.pose.pose.orientation.w = 1.0;
-  msg.pose.pose.orientation.x = 0.0;
-  msg.pose.pose.orientation.y = 0.0;
-  msg.pose.pose.orientation.z = 0.0;
+  const SensorInfo& info = it->second;
 
-  // Set covariance (only position block is relevant)
-  // ROS uses 6x6 covariance in order [x, y, z, roll, pitch, yaw]
+  // Get expected measurement
+  typename core::MeasurementModelInterface<SensorType::Position>::MeasurementVector expected;
+  if (!filter_->GetExpectedMeasurementByIndex<SensorType::Position>(info.index, expected)) {
+    std::cerr << "Failed to get expected measurement for sensor: " << sensor_id << std::endl;
+    return result;
+  }
+
+  // Get measurement covariance
+  typename core::MeasurementModelInterface<SensorType::Position>::MeasurementCovariance cov;
+  filter_->GetSensorCovarianceByIndex<SensorType::Position>(info.index, cov);
+
+  // Fill position part of the message
+  result.pose.pose.position = vectorToPointMsg(expected);
+
+  // Fill orientation with identity quaternion (position sensors don't have orientation)
+  result.pose.pose.orientation.w = 1.0;
+
+  // Fill position covariance (3x3 block in the upper left corner)
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      msg.pose.covariance[i*6 + j] = measurement_covariance(i, j);
+      result.pose.covariance[i*6 + j] = cov(i, j);
     }
   }
 
-  return msg;
+  return result;
 }
 
 geometry_msgs::msg::PoseWithCovarianceStamped FilterWrapper::getPoseEstimate(const rclcpp::Time& time) {
@@ -301,10 +397,11 @@ geometry_msgs::msg::Vector3 FilterWrapper::eigenToVectorMsg(const Eigen::Vector3
  * @brief Set the transform from sensor to body frame for a sensor
  *
  * @param sensor_id The sensor identifier
- * @param transform The transform from sensor to body frame
+ * @param transform The transform from sensor to body frame (ROS2 format)
  * @return true if successful, false otherwise
  */
-bool FilterWrapper::setSensorTransform(const std::string& sensor_id, const Eigen::Isometry3d& transform) {
+bool FilterWrapper::setSensorTransform(const std::string& sensor_id,
+                                      const geometry_msgs::msg::TransformStamped& transform) {
   auto it = sensors_.find(sensor_id);
   if (it == sensors_.end()) {
     return false;
@@ -312,23 +409,55 @@ bool FilterWrapper::setSensorTransform(const std::string& sensor_id, const Eigen
 
   const SensorInfo& info = it->second;
 
-  // Get the sensor as the base interface type
-  auto sensor = getSensorAsBaseModel(info.index);
-  if (!sensor) {
-    std::cerr << "Failed to get sensor '" << sensor_id
-              << "' of type " << info.type << std::endl;
+  // Convert ROS2 transform to Eigen
+  Eigen::Isometry3d eigen_transform = tf2::transformToEigen(transform.transform);
+
+  // Use the filter's helper method to set the transform
+  if (!filter_->SetSensorPoseInBodyFrameByIndex(info.index, eigen_transform)) {
+    std::cerr << "Failed to set transform for sensor '" << sensor_id << "'" << std::endl;
     return false;
   }
 
-  // Set the transform using the base interface method
-  sensor->SetSensorPoseInBodyFrame(transform);
   return true;
 }
 
-// Helper to get the sensor as the base measurement model interface
-std::shared_ptr<kinematic_arbiter::core::MeasurementModelInterface> FilterWrapper::getSensorAsBaseModel(size_t index) const {
-  // This assumes all sensor models derive from MeasurementModelInterface
-  return filter_->GetSensorByIndex<kinematic_arbiter::core::MeasurementModelInterface>(index);
+/**
+ * @brief Get the transform from sensor to body frame for a sensor
+ *
+ * @param sensor_id The sensor identifier
+ * @param[out] transform The transform from sensor to body frame (ROS2 format)
+ * @return true if successful, false otherwise
+ */
+bool FilterWrapper::getSensorTransform(const std::string& sensor_id, const std::string& body_frame_id,
+                                      geometry_msgs::msg::TransformStamped& transform) const {
+  auto it = sensors_.find(sensor_id);
+  if (it == sensors_.end()) {
+    std::cerr << "Invalid sensor ID: " << sensor_id << std::endl;
+    return false;
+  }
+
+  const SensorInfo& info = it->second;
+
+  // Get Eigen transform from the filter
+  Eigen::Isometry3d eigen_transform;
+  if (!filter_->GetSensorPoseInBodyFrameByIndex(info.index, eigen_transform)) {
+    std::cerr << "Failed to get transform for sensor '" << sensor_id << "'" << std::endl;
+    return false;
+  }
+
+  // Convert Eigen transform to ROS2
+  transform = tf2::eigenToTransform(eigen_transform);
+
+  // Set header with filter's time if available
+  if (filter_->IsInitialized()) {
+    transform.header.stamp = doubleTimeToRosTime(filter_->GetCurrentTime());
+  } else {
+    transform.header.stamp = rclcpp::Clock().now();
+  }
+  transform.header.frame_id = body_frame_id;
+  transform.child_frame_id = sensor_id;
+
+  return true;
 }
 
 } // namespace wrapper

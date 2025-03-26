@@ -57,16 +57,26 @@ private:
   // Timer
   rclcpp::TimerBase::SharedPtr publish_timer_;
 
-  // Sensor subscriptions
+  // Subscription containers for different sensor types
   std::vector<SensorSubscription> position_subs_;
-  // Future sensor types
   // std::vector<SensorSubscription> pose_subs_;
   // std::vector<SensorSubscription> velocity_subs_;
   // std::vector<SensorSubscription> imu_subs_;
 
+  // Callback methods for different sensor types
+  void positionCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg, const std::string& sensor_id);
+  // void poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg, const std::string& sensor_id);
+  // void velocityCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg, const std::string& sensor_id);
+  // void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg, const std::string& sensor_id);
+
+  // Sensor initialization helper
+  template<typename MsgType>
+  void initializeSensors(
+      const std::string& param_name,
+      std::vector<SensorSubscription>& subscription_list,
+      std::string (wrapper::FilterWrapper::*register_func)(const std::string&));
+
   // Callbacks
-  void positionCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg,
-                        const std::string& sensor_id);
   void publishEstimates();
 
   // Utility methods

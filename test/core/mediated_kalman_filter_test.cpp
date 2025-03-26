@@ -15,9 +15,11 @@
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/trajectory_utils.hpp"
 #include "kinematic_arbiter/core/statistical_utils.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 // Use the correct state index type
 using SIdx = kinematic_arbiter::core::StateIndex;
+using SensorType = kinematic_arbiter::core::SensorType;
 
 namespace kinematic_arbiter {
 
@@ -47,14 +49,16 @@ protected:
   // Only keep the state model in the fixture
   std::shared_ptr<kinematic_arbiter::models::RigidBodyStateModel> state_model_;
 
+  // Generic PrintFilterDiagnostics that works with any sensor type
+  template<SensorType Type>
   void PrintFilterDiagnostics(
-      const std::shared_ptr<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>& sensor,
+      const std::shared_ptr<core::MeasurementModelInterface<Type>>& sensor,
       const StateVector& true_state,
       const StateVector& predicted_state,
       const StateMatrix& predicted_cov,
       const StateVector& updated_state,
-      const Eigen::Matrix<double, 6, 1>& measurement,
-      const core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>::MeasurementAuxData& aux_data,
+      const typename core::MeasurementModelInterface<Type>::MeasurementVector& measurement,
+      const typename core::MeasurementModelInterface<Type>::MeasurementAuxData& aux_data,
       const std::string& failure_reason = "ERROR WORSE") {
 
     // Calculate Kalman gain for diagnostics
@@ -163,7 +167,8 @@ protected:
               << "Measurement covariance norm: " << sensor->GetMeasurementCovariance().norm() << "\n";
   }
 
-  template<typename SensorModel>
+  // Updated template method that takes sensor type as a parameter
+  template<SensorType Type, typename SensorModel>
   void TestSensorImprovesStateEstimates(
       std::shared_ptr<SensorModel> sensor,
       const Eigen::MatrixXd& noise_covariance) {
@@ -176,7 +181,7 @@ protected:
 
       // Create filter
       auto filter = std::make_shared<FilterType>(state_model_);
-      size_t sensor_idx = filter->AddSensor(sensor);
+      size_t sensor_idx = filter->AddSensor<Type>(sensor);
 
       // Test parameters
       const double dt = 0.05;
@@ -256,8 +261,8 @@ protected:
               FAIL() << "NaN detected in auxiliary data at t=" << t;
           }
 
-          // Process measurement
-          bool assumptions_held = filter->ProcessMeasurementByIndex(sensor_idx, t, measurement);
+          // Process measurement with explicit template parameter
+          bool assumptions_held = filter->ProcessMeasurementByIndex<Type>(sensor_idx, measurement, t);
           if (!assumptions_held) {
               FAIL() << "Measurement assumptions not held at t=" << t;
           }
@@ -345,8 +350,8 @@ protected:
                         // Call PrintFilterDiagnostics to get more detailed information
                         // Only call PrintFilterDiagnostics if measurement is 6D
                         if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                            PrintFilterDiagnostics(
-                                std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                            PrintFilterDiagnostics<Type>(
+                                sensor,
                                 true_state,
                                 predicted_state,
                                 filter->GetStateCovariance(),
@@ -374,8 +379,8 @@ protected:
                         // Call PrintFilterDiagnostics to get more detailed information
                         // Only call PrintFilterDiagnostics if measurement is 6D
                         if constexpr (MeasurementType::RowsAtCompileTime == 6) {
-                            PrintFilterDiagnostics(
-                                std::static_pointer_cast<core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>>(sensor),
+                            PrintFilterDiagnostics<Type>(
+                                sensor,
                                 true_state,
                                 predicted_state,
                                 filter->GetStateCovariance(),
@@ -398,164 +403,125 @@ protected:
       SUCCEED() << "All initializable states improved";
   }
 };
-// Test with BodyVelocitySensorModel
+
+// Test with BodyVelocitySensorModel - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates) {
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
 
   // Zero noise for perfect measurements
   Eigen::Matrix<double, 6, 6> zero_noise = Eigen::Matrix<double, 6, 6>::Zero();
 
-  TestSensorImprovesStateEstimates(body_vel_model, zero_noise);
+  TestSensorImprovesStateEstimates<SensorType::BodyVelocity>(body_vel_model, zero_noise);
 }
 
-// Small noise variant
+// Small noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_SmallNoise) {
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
 
   // Small noise (0.001)
   Eigen::Matrix<double, 6, 6> small_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.001;
 
-  TestSensorImprovesStateEstimates(body_vel_model, small_noise);
+  TestSensorImprovesStateEstimates<SensorType::BodyVelocity>(body_vel_model, small_noise);
 }
 
-// Medium noise variant
+// Medium noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_MediumNoise) {
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
 
   // Medium noise (0.01)
   Eigen::Matrix<double, 6, 6> medium_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.01;
 
-  TestSensorImprovesStateEstimates(body_vel_model, medium_noise);
+  TestSensorImprovesStateEstimates<SensorType::BodyVelocity>(body_vel_model, medium_noise);
 }
 
-// Large noise variant
+// Large noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_LargeNoise) {
   auto body_vel_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
 
   // Large noise (0.1)
   Eigen::Matrix<double, 6, 6> large_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.1;
 
-  TestSensorImprovesStateEstimates(body_vel_model, large_noise);
+  TestSensorImprovesStateEstimates<SensorType::BodyVelocity>(body_vel_model, large_noise);
 }
 
-// // Test with PositionSensorModel
-// TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates) {
-//   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
-
-//   // Zero noise for perfect measurements
-//   Eigen::Matrix<double, 3, 3> zero_noise = Eigen::Matrix<double, 3, 3>::Zero();
-
-//   TestSensorImprovesStateEstimates(position_model, zero_noise);
-// }
-
-// // Small noise variant Refine checks on covariance
-// TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_SmallNoise) {
-//   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
-
-//   // Small noise (0.001)
-//   Eigen::Matrix<double, 3, 3> small_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.001;
-
-//   TestSensorImprovesStateEstimates(position_model, small_noise);
-// }
-
-// Medium noise variant
+// Test with PositionSensorModel - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_MediumNoise) {
   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
 
   // Medium noise (0.01)
   Eigen::Matrix<double, 3, 3> medium_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.01;
 
-  TestSensorImprovesStateEstimates(position_model, medium_noise);
+  TestSensorImprovesStateEstimates<SensorType::Position>(position_model, medium_noise);
 }
 
-// Large noise variant
+// Large noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_LargeNoise) {
   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
 
   // Large noise (0.1)
   Eigen::Matrix<double, 3, 3> large_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.1;
 
-  TestSensorImprovesStateEstimates(position_model, large_noise);
+  TestSensorImprovesStateEstimates<SensorType::Position>(position_model, large_noise);
 }
 
-// // Test with PoseSensorModel
-// TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates) {
-//   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
-
-//   // Zero noise for perfect measurements
-//   Eigen::Matrix<double, 7, 7> zero_noise = Eigen::Matrix<double, 7, 7>::Zero();
-
-//   TestSensorImprovesStateEstimates(pose_model, zero_noise);
-// }
-
-// // Small noise variant Refine checks on covariance
-// TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_SmallNoise) {
-//   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
-
-//   // Small noise (0.001)
-//   Eigen::Matrix<double, 7, 7> small_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.001;
-
-//   TestSensorImprovesStateEstimates(pose_model, small_noise);
-// }
-
-// Medium noise variant
+// Medium noise variant for Pose - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_MediumNoise) {
   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
 
   // Medium noise (0.01)
   Eigen::Matrix<double, 7, 7> medium_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.01;
 
-  TestSensorImprovesStateEstimates(pose_model, medium_noise);
+  TestSensorImprovesStateEstimates<SensorType::Pose>(pose_model, medium_noise);
 }
 
-// Large noise variant
+// Large noise variant for Pose - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_LargeNoise) {
   auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
 
   // Large noise (0.1)
   Eigen::Matrix<double, 7, 7> large_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.1;
 
-  TestSensorImprovesStateEstimates(pose_model, large_noise);
+  TestSensorImprovesStateEstimates<SensorType::Pose>(pose_model, large_noise);
 }
 
-// Test with ImuSensorModel
+// Test with ImuSensorModel - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
 
   // Zero noise for perfect measurements
   Eigen::Matrix<double, 6, 6> zero_noise = Eigen::Matrix<double, 6, 6>::Zero();
 
-  TestSensorImprovesStateEstimates(imu_model, zero_noise);
+  TestSensorImprovesStateEstimates<SensorType::Imu>(imu_model, zero_noise);
 }
 
-// Small noise variant
+// Small noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_SmallNoise) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
 
   // Small noise (0.001)
   Eigen::Matrix<double, 6, 6> small_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.001;
 
-  TestSensorImprovesStateEstimates(imu_model, small_noise);
+  TestSensorImprovesStateEstimates<SensorType::Imu>(imu_model, small_noise);
 }
 
-// Medium noise variant
+// Medium noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_MediumNoise) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
 
   // Medium noise (0.01)
   Eigen::Matrix<double, 6, 6> medium_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.01;
 
-  TestSensorImprovesStateEstimates(imu_model, medium_noise);
+  TestSensorImprovesStateEstimates<SensorType::Imu>(imu_model, medium_noise);
 }
 
-// Large noise variant
+// Large noise variant - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_LargeNoise) {
   auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
 
   // Large noise (0.1)
   Eigen::Matrix<double, 6, 6> large_noise = Eigen::Matrix<double, 6, 6>::Identity() * 0.1;
 
-  TestSensorImprovesStateEstimates(imu_model, large_noise);
+  TestSensorImprovesStateEstimates<SensorType::Imu>(imu_model, large_noise);
 }
 
 } // namespace kinematic_arbiter

@@ -10,9 +10,11 @@
 #include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
 #include "kinematic_arbiter/sensors/imu_bias_estimator.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 // Use the correct state index type
 using SIdx = kinematic_arbiter::core::StateIndex;
+using SensorType = kinematic_arbiter::core::SensorType;
 
 namespace kinematic_arbiter {
 
@@ -43,11 +45,11 @@ protected:
 
 // Test initialization with position sensor
 TEST_F(FilterInitializationTest, PositionSensorInitialization) {
-  // Create position sensor
+  // Create position sensor with explicit sensor type
   auto position_sensor = std::make_shared<sensors::PositionSensorModel>();
 
-  // Add sensor to filter
-  size_t sensor_idx = filter_->AddSensor(position_sensor);
+  // Add sensor to filter with explicit sensor type
+  size_t sensor_idx = filter_->AddSensor<SensorType::Position>(position_sensor);
 
   // Create desired state with known position
   StateVector desired_state = StateVector::Zero();
@@ -56,8 +58,9 @@ TEST_F(FilterInitializationTest, PositionSensorInitialization) {
   // Generate measurement from desired state
   Eigen::Vector3d position_measurement = position_sensor->PredictMeasurement(desired_state);
 
-  // Process the measurement
-  bool result = filter_->ProcessMeasurementByIndex(sensor_idx, 0.0, position_measurement);
+  // Process the measurement with explicit sensor type
+  bool result = filter_->ProcessMeasurementByIndex<SensorType::Position>(
+      sensor_idx, position_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process position measurement";
 
   // Check if filter is initialized
@@ -75,8 +78,8 @@ TEST_F(FilterInitializationTest, PoseSensorInitialization) {
   // Create pose sensor
   auto pose_sensor = std::make_shared<sensors::PoseSensorModel>();
 
-  // Add sensor to filter
-  size_t sensor_idx = filter_->AddSensor(pose_sensor);
+  // Add sensor to filter with explicit sensor type
+  size_t sensor_idx = filter_->AddSensor<SensorType::Pose>(pose_sensor);
 
   // Create desired state with known position and orientation
   StateVector desired_state = StateVector::Zero();
@@ -89,8 +92,9 @@ TEST_F(FilterInitializationTest, PoseSensorInitialization) {
   // Generate measurement from desired state
   Eigen::Matrix<double, 7, 1> pose_measurement = pose_sensor->PredictMeasurement(desired_state);
 
-  // Process the measurement
-  bool result = filter_->ProcessMeasurementByIndex(sensor_idx, 0.0, pose_measurement);
+  // Process the measurement with explicit sensor type
+  bool result = filter_->ProcessMeasurementByIndex<SensorType::Pose>(
+      sensor_idx, pose_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process pose measurement";
 
   // Check if filter is initialized
@@ -112,8 +116,8 @@ TEST_F(FilterInitializationTest, BodyVelocitySensorInitialization) {
   // Create body velocity sensor
   auto velocity_sensor = std::make_shared<sensors::BodyVelocitySensorModel>();
 
-  // Add sensor to filter
-  size_t sensor_idx = filter_->AddSensor(velocity_sensor);
+  // Add sensor to filter with explicit sensor type
+  size_t sensor_idx = filter_->AddSensor<SensorType::BodyVelocity>(velocity_sensor);
 
   // Create desired state with known velocities
   StateVector desired_state = StateVector::Zero();
@@ -123,8 +127,9 @@ TEST_F(FilterInitializationTest, BodyVelocitySensorInitialization) {
   // Generate measurement from desired state
   Eigen::Matrix<double, 6, 1> velocity_measurement = velocity_sensor->PredictMeasurement(desired_state);
 
-  // Process the measurement
-  bool result = filter_->ProcessMeasurementByIndex(sensor_idx, 0.0, velocity_measurement);
+  // Process the measurement with explicit sensor type
+  bool result = filter_->ProcessMeasurementByIndex<SensorType::BodyVelocity>(
+      sensor_idx, velocity_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process velocity measurement";
 
   // Check if filter is initialized
@@ -148,9 +153,9 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
   auto position_sensor = std::make_shared<sensors::PositionSensorModel>();
   auto velocity_sensor = std::make_shared<sensors::BodyVelocitySensorModel>();
 
-  // Add sensors to filter
-  size_t position_idx = filter_->AddSensor(position_sensor);
-  size_t velocity_idx = filter_->AddSensor(velocity_sensor);
+  // Add sensors to filter with explicit sensor types
+  size_t position_idx = filter_->AddSensor<SensorType::Position>(position_sensor);
+  size_t velocity_idx = filter_->AddSensor<SensorType::BodyVelocity>(velocity_sensor);
 
   // Create desired state
   StateVector desired_state = StateVector::Zero();
@@ -162,8 +167,9 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
   Eigen::Vector3d position_measurement = position_sensor->PredictMeasurement(desired_state);
   Eigen::Matrix<double, 6, 1> velocity_measurement = velocity_sensor->PredictMeasurement(desired_state);
 
-  // Process position measurement first
-  bool result1 = filter_->ProcessMeasurementByIndex(position_idx, 0.0, position_measurement);
+  // Process position measurement first with explicit sensor type
+  bool result1 = filter_->ProcessMeasurementByIndex<SensorType::Position>(
+      position_idx, position_measurement, 0.0);
   EXPECT_TRUE(result1) << "Failed to process position measurement";
 
   // Check if filter is initialized after position measurement
@@ -171,25 +177,30 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
 
   // Check position values
   StateVector state_after_position = filter_->GetStateEstimate();
-  EXPECT_NEAR(state_after_position[SIdx::Position::X], desired_state[SIdx::Position::X], 1e-6) << "Position X not correctly initialized";
-  EXPECT_NEAR(state_after_position[SIdx::Position::Y], desired_state[SIdx::Position::Y], 1e-6) << "Position Y not correctly initialized";
-  EXPECT_NEAR(state_after_position[SIdx::Position::Z], desired_state[SIdx::Position::Z], 1e-6) << "Position Z not correctly initialized";
+  EXPECT_NEAR(state_after_position[SIdx::Position::X], desired_state[SIdx::Position::X], 1e-6);
+  EXPECT_NEAR(state_after_position[SIdx::Position::Y], desired_state[SIdx::Position::Y], 1e-6);
+  EXPECT_NEAR(state_after_position[SIdx::Position::Z], desired_state[SIdx::Position::Z], 1e-6);
 
-  // Process velocity measurement next
-  bool result2 = filter_->ProcessMeasurementByIndex(velocity_idx, 0.0, velocity_measurement);
+  // Process velocity measurement next with explicit sensor type
+  bool result2 = filter_->ProcessMeasurementByIndex<SensorType::BodyVelocity>(
+      velocity_idx, velocity_measurement, 0.0);
   EXPECT_TRUE(result2) << "Failed to process velocity measurement";
 
   // Check all values after both measurements
   StateVector state_after_both = filter_->GetStateEstimate();
-  EXPECT_NEAR(state_after_both[SIdx::Position::X], desired_state[SIdx::Position::X], 1e-6) << "Position X not correctly maintained";
-  EXPECT_NEAR(state_after_both[SIdx::Position::Y], desired_state[SIdx::Position::Y], 1e-6) << "Position Y not correctly maintained";
-  EXPECT_NEAR(state_after_both[SIdx::Position::Z], desired_state[SIdx::Position::Z], 1e-6) << "Position Z not correctly maintained";
-  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::X], desired_state[SIdx::LinearVelocity::X], 1e-6) << "Linear Velocity X not correctly initialized";
-  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::Y], desired_state[SIdx::LinearVelocity::Y], 1e-6) << "Linear Velocity Y not correctly initialized";
-  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::Z], desired_state[SIdx::LinearVelocity::Z], 1e-6) << "Linear Velocity Z not correctly initialized";
-  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::X], desired_state[SIdx::AngularVelocity::X], 1e-6) << "Angular Velocity X not correctly initialized";
-  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::Y], desired_state[SIdx::AngularVelocity::Y], 1e-6) << "Angular Velocity Y not correctly initialized";
-  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::Z], desired_state[SIdx::AngularVelocity::Z], 1e-6) << "Angular Velocity Z not correctly initialized";
+
+  // Position should still be initialized
+  EXPECT_NEAR(state_after_both[SIdx::Position::X], desired_state[SIdx::Position::X], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::Position::Y], desired_state[SIdx::Position::Y], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::Position::Z], desired_state[SIdx::Position::Z], 1e-6);
+
+  // Velocity should now be initialized
+  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::X], desired_state[SIdx::LinearVelocity::X], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::Y], desired_state[SIdx::LinearVelocity::Y], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::LinearVelocity::Z], desired_state[SIdx::LinearVelocity::Z], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::X], desired_state[SIdx::AngularVelocity::X], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::Y], desired_state[SIdx::AngularVelocity::Y], 1e-6);
+  EXPECT_NEAR(state_after_both[SIdx::AngularVelocity::Z], desired_state[SIdx::AngularVelocity::Z], 1e-6);
 }
 
 } // namespace kinematic_arbiter

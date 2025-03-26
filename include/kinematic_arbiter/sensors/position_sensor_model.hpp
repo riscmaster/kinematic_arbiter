@@ -2,6 +2,7 @@
 
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
@@ -12,10 +13,10 @@ namespace sensors {
  * Models a sensor that measures position in 3D space.
  * Measurement vector is [x, y, z]' representing position in the global frame.
  */
-class PositionSensorModel : public core::MeasurementModelInterface<Eigen::Matrix<double, 3, 1>> {
+class PositionSensorModel : public core::MeasurementModelInterface<core::SensorType::Position> {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<Eigen::Matrix<double, 3, 1>>;
+  using Base = core::MeasurementModelInterface<core::SensorType::Position>;
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;

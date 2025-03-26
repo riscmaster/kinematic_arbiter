@@ -11,6 +11,10 @@
 namespace kinematic_arbiter {
 namespace core {
 
+  namespace {
+    constexpr int kMaxMeasurementDim = 7;  // Maximum measurement dimension (for Pose type)
+  }
+
 /**
  * @brief Interface for measurement models with assumption validation
  *
@@ -19,18 +23,16 @@ namespace core {
  *
  * @tparam Type Sensor type that defines the measurement vector dimensions
  */
-template<SensorType Type>
 class MeasurementModelInterface {
 public:
   // Type definitions
   static constexpr int StateSize = StateIndex::kFullStateSize;
-  static constexpr int MeasurementDim = MeasurementDimension<Type>::value;
 
   using StateVector = Eigen::Matrix<double, StateSize, 1>;                     // State vector x
   using StateCovariance = Eigen::Matrix<double, StateSize, StateSize>;
-  using MeasurementVector = Eigen::Matrix<double, MeasurementDim, 1>;          // Measurement vector y_k
-  using MeasurementCovariance = Eigen::Matrix<double, MeasurementDim, MeasurementDim>; // Measurement covariance R
-  using MeasurementJacobian = Eigen::Matrix<double, MeasurementDim, StateSize>; // Measurement Jacobian C_k
+  using MeasurementVector = Eigen::Matrix<double, Eigen::Dynamic, 1, Eigen::ColMajor, kMaxMeasurementDim, 1>;          // Measurement vector y_k
+  using MeasurementCovariance = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor, kMaxMeasurementDim, kMaxMeasurementDim>; // Measurement covariance R
+  using MeasurementJacobian = Eigen::Matrix<double, Eigen::Dynamic, StateSize, Eigen::ColMajor, kMaxMeasurementDim, StateSize>; // Measurement Jacobian C_k
   using InnovationCovariance = MeasurementCovariance;                          // Innovation covariance S
 
   // More general name for boolean state flags
@@ -80,12 +82,14 @@ public:
    * @param params Validation parameters
    */
   explicit MeasurementModelInterface(
+      SensorType type,
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ValidationParams& params = ValidationParams())
     : sensor_pose_in_body_frame_(sensor_pose_in_body_frame),
       body_to_sensor_transform_(sensor_pose_in_body_frame.inverse()),
       measurement_covariance_(MeasurementCovariance::Identity()),
-      validation_params_(params) {}
+      validation_params_(params),
+      type_(type) {}
 
   /**
    * @brief Virtual destructor
@@ -164,6 +168,7 @@ public:
       const StateVector& state,
       const StateCovariance& state_covariance,
       const MeasurementVector& measurement) const {
+    ValidateMeasurementSize(measurement);
 
     // Calculate innovation: ν = y_k - h(x_k)
     MeasurementVector innovation = measurement - PredictMeasurement(state);
@@ -191,6 +196,7 @@ public:
       const StateCovariance& state_covariance,
       const double& measurement_timestamp,
       const MeasurementVector& measurement) {
+        ValidateMeasurementSize(measurement);
         previous_measurement_data_ = MeasurementData(
           measurement_timestamp,
           measurement,
@@ -287,7 +293,7 @@ public:
    * @return The sensor type enumeration value
    */
   SensorType GetModelType() const {
-    return Type;
+    return type_;
   }
 
 private:
@@ -300,6 +306,25 @@ private:
     MeasurementData(double t, const MeasurementVector& v, const MeasurementCovariance& c)
       : timestamp(t), value(v), covariance(c) {}
   };
+
+  /**
+   * @brief Validate measurement size based on sensor type
+   * @param measurement Measurement vector to validate
+   */
+  void ValidateMeasurementSize(const MeasurementVector& measurement) const {
+    if (measurement.size() != MeasurementDimension<type_>::value) {
+      throw std::invalid_argument(
+          "Measurement size mismatch: expected " +
+          std::to_string(MeasurementDimension<type_>::value) +
+          " for " + SensorTypeToString(type_) +
+          ", got " + std::to_string(measurement.size()));
+    }
+
+    // Validate sensor type is known
+    if (type_ == SensorType::Unknown) {
+      throw std::invalid_argument("Cannot process measurement with Unknown sensor type");
+    }
+  }
 
   /**
    * @brief Update measurement covariance with bounded innovation
@@ -331,6 +356,7 @@ protected:
   ValidationParams validation_params_;
   bool can_predict_input_accelerations_ = false;
   MeasurementData previous_measurement_data_;
+  SensorType type_ = SensorType::Unknown;
 };
 
 } // namespace core

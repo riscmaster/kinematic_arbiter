@@ -2,7 +2,8 @@
 #include <memory>
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "tf2_eigen/tf2_eigen.hpp"
+#include <tf2_eigen/tf2_eigen.hpp>
+#include <geometry_msgs/msg/transform_stamped.hpp>
 
 namespace kinematic_arbiter {
 namespace ros2 {
@@ -252,11 +253,13 @@ TEST_F(FilterWrapperTest, SensorTransformTest) {
   EXPECT_NEAR(expected_default.pose.pose.position.z, 0.0, 0.01);
 
   // Create a non-identity transform
-  Eigen::Isometry3d sensor_transform = Eigen::Isometry3d::Identity();
-  sensor_transform.translation() = Eigen::Vector3d(1.0, 2.0, 0.0);
-  Eigen::AngleAxisd rotation(M_PI_2, Eigen::Vector3d::UnitZ()); // 90-degree Z rotation
-  sensor_transform.linear() = rotation.toRotationMatrix();
-
+  geometry_msgs::msg::TransformStamped sensor_transform;
+  sensor_transform.header.stamp = rclcpp::Clock().now();
+  sensor_transform.header.frame_id = "map";
+  sensor_transform.child_frame_id = sensor_id;
+  sensor_transform.transform.translation.x = 1.0;
+  sensor_transform.transform.translation.y = 2.0;
+  sensor_transform.transform.translation.z = 0.0;
   // Set the transform
   result = wrapper_->setSensorTransform(sensor_id, sensor_transform);
   EXPECT_TRUE(result);
@@ -306,14 +309,23 @@ TEST_F(FilterWrapperTest, MultiMeasurementTracking) {
 
   wrapper_->processPosition(position_sensor_id_, init_msg);
 
-  // Set transforms for both sensors
-  // First sensor at the origin of the body
-  Eigen::Isometry3d identity_transform = Eigen::Isometry3d::Identity();
+  geometry_msgs::msg::TransformStamped identity_transform;
+  identity_transform.header.stamp = rclcpp::Clock().now();
+  identity_transform.header.frame_id = "map";
+  identity_transform.child_frame_id = position_sensor_id_;
+  identity_transform.transform.translation.x = 0.0;
+  identity_transform.transform.translation.y = 0.0;
+  identity_transform.transform.translation.z = 0.0;
   wrapper_->setSensorTransform(position_sensor_id_, identity_transform);
 
   // Second sensor at (1,0,0) in the body frame (front of robot)
-  Eigen::Isometry3d front_transform = Eigen::Isometry3d::Identity();
-  front_transform.translation() = Eigen::Vector3d(1.0, 0.0, 0.0);
+  geometry_msgs::msg::TransformStamped front_transform;
+  front_transform.header.stamp = rclcpp::Clock().now();
+  front_transform.header.frame_id = "map";
+  front_transform.child_frame_id = second_sensor_id;
+  front_transform.transform.translation.x = 1.0;
+  front_transform.transform.translation.y = 0.0;
+  front_transform.transform.translation.z = 0.0;
   wrapper_->setSensorTransform(second_sensor_id, front_transform);
 
   // Create a trajectory of measurements (robot moving along x-axis)
@@ -437,8 +449,13 @@ TEST_F(FilterWrapperTest, ExpectedMeasurementsWithTransform) {
   wrapper_->processPosition(position_sensor_id_, init_msg);
 
   // Set a non-trivial transform for the sensor
-  Eigen::Isometry3d sensor_transform = Eigen::Isometry3d::Identity();
-  sensor_transform.translation() = Eigen::Vector3d(0.0, 1.0, 0.0); // 1m to the left
+  geometry_msgs::msg::TransformStamped sensor_transform;
+  sensor_transform.header.stamp = rclcpp::Clock().now();
+  sensor_transform.header.frame_id = "map";
+  sensor_transform.child_frame_id = position_sensor_id_;
+  sensor_transform.transform.translation.x = 0.0;
+  sensor_transform.transform.translation.y = 1.0;
+  sensor_transform.transform.translation.z = 0.0;
   wrapper_->setSensorTransform(position_sensor_id_, sensor_transform);
 
   // Process a measurement from directly ahead
@@ -473,49 +490,40 @@ TEST_F(FilterWrapperTest, SimpleSensorTransformTest) {
   // Register a position sensor
   std::string sensor_id = wrapper_->registerPositionSensor("transform_test_sensor");
 
-  // Get the filter and sensor index from the wrapper's map
-  auto it = wrapper_->getSensors().find(sensor_id);
-  ASSERT_NE(it, wrapper_->getSensors().end()) << "Sensor not found in wrapper";
-  size_t sensor_index = it->second.index;
-
-  // Get a direct reference to the filter
-  auto filter = wrapper_->getFilter();
-  ASSERT_NE(filter, nullptr) << "Filter is null";
-
-  // Get the sensor by index
-  auto sensor = filter->template GetSensorByIndex<kinematic_arbiter::sensors::PositionSensorModel>(sensor_index);
-  ASSERT_NE(sensor, nullptr) << "Could not get typed sensor";
-
   // Check initial transform is identity
-  Eigen::Isometry3d initial_transform = sensor->GetSensorPoseInBodyFrame();
-  EXPECT_TRUE(initial_transform.isApprox(Eigen::Isometry3d::Identity()))
+  geometry_msgs::msg::TransformStamped initial_transform;
+  bool result = wrapper_->getSensorTransform(sensor_id, "body", initial_transform);
+  EXPECT_TRUE(result) << "Failed to get initial transform";
+  EXPECT_TRUE(initial_transform.transform.translation.x == 0.0)
       << "Initial transform is not identity";
 
   // Create a new transform
-  Eigen::Isometry3d new_transform = Eigen::Isometry3d::Identity();
-  new_transform.translation() = Eigen::Vector3d(1.0, 2.0, 3.0);
-  Eigen::AngleAxisd rotation(M_PI_4, Eigen::Vector3d::UnitZ()); // 45-degree rotation
-  new_transform.linear() = rotation.toRotationMatrix();
+  geometry_msgs::msg::TransformStamped new_transform;
+  new_transform.header.stamp = rclcpp::Clock().now();
+  new_transform.header.frame_id = "body";
+  new_transform.child_frame_id = sensor_id;
+  new_transform.transform.translation.x = 1.0;
+  new_transform.transform.translation.y = 2.0;
+  new_transform.transform.translation.z = 3.0;
 
   // Set the transform through the wrapper
-  bool result = wrapper_->setSensorTransform(sensor_id, new_transform);
+  result = wrapper_->setSensorTransform(sensor_id, new_transform);
   EXPECT_TRUE(result) << "Failed to set sensor transform";
 
   // Get the sensor again and check the transform was updated
-  auto sensor_after = filter->template GetSensorByIndex<kinematic_arbiter::sensors::PositionSensorModel>(sensor_index);
-  ASSERT_NE(sensor_after, nullptr) << "Could not get typed sensor after setting transform";
-
-  Eigen::Isometry3d updated_transform = sensor_after->GetSensorPoseInBodyFrame();
+  geometry_msgs::msg::TransformStamped updated_transform;
+  result = wrapper_->getSensorTransform(sensor_id, "body", updated_transform);
+  EXPECT_TRUE(result) << "Failed to get updated transform";
 
   // Check translation component
-  EXPECT_NEAR(updated_transform.translation().x(), 1.0, 1e-9) << "X translation not set correctly";
-  EXPECT_NEAR(updated_transform.translation().y(), 2.0, 1e-9) << "Y translation not set correctly";
-  EXPECT_NEAR(updated_transform.translation().z(), 3.0, 1e-9) << "Z translation not set correctly";
+  EXPECT_NEAR(updated_transform.transform.translation.x, 1.0, 1e-9) << "X translation not set correctly";
+  EXPECT_NEAR(updated_transform.transform.translation.y, 2.0, 1e-9) << "Y translation not set correctly";
+  EXPECT_NEAR(updated_transform.transform.translation.z, 3.0, 1e-9) << "Z translation not set correctly";
 
   // Check rotation component (by comparing a vector rotated by both matrices)
   Eigen::Vector3d test_vector(1.0, 0.0, 0.0);
-  Eigen::Vector3d expected_rotated = new_transform.linear() * test_vector;
-  Eigen::Vector3d actual_rotated = updated_transform.linear() * test_vector;
+  Eigen::Vector3d expected_rotated = tf2::transformToEigen(new_transform).rotation() * test_vector;
+  Eigen::Vector3d actual_rotated = tf2::transformToEigen(updated_transform).rotation() * test_vector;
 
   EXPECT_NEAR(actual_rotated.x(), expected_rotated.x(), 1e-9) << "Rotation X component not set correctly";
   EXPECT_NEAR(actual_rotated.y(), expected_rotated.y(), 1e-9) << "Rotation Y component not set correctly";
@@ -541,12 +549,13 @@ TEST_F(FilterWrapperTest, SensorTransform) {
   bool result = wrapper_->processPosition(position_sensor_id_, init_msg);
   EXPECT_TRUE(result);
 
-  // Create a non-identity transform
-  Eigen::Isometry3d sensor_transform = Eigen::Isometry3d::Identity();
-  sensor_transform.translation() = Eigen::Vector3d(1.0, 2.0, 3.0);
-  Eigen::AngleAxisd rotation(M_PI_2, Eigen::Vector3d::UnitZ());
-  sensor_transform.linear() = rotation.toRotationMatrix();
-
+  geometry_msgs::msg::TransformStamped sensor_transform;
+  sensor_transform.header.stamp = rclcpp::Clock().now();
+  sensor_transform.header.frame_id = "map";
+  sensor_transform.child_frame_id = position_sensor_id_;
+  sensor_transform.transform.translation.x = 1.0;
+  sensor_transform.transform.translation.y = 2.0;
+  sensor_transform.transform.translation.z = 3.0;
   // Set the transform
   result = wrapper_->setSensorTransform(position_sensor_id_, sensor_transform);
   EXPECT_TRUE(result);

@@ -11,6 +11,7 @@
 #include "geometry_msgs/msg/twist_stamped.hpp"
 #include "geometry_msgs/msg/twist_with_covariance_stamped.hpp"
 #include "geometry_msgs/msg/accel_with_covariance_stamped.hpp"
+#include "geometry_msgs/msg/transform_stamped.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 #include "rclcpp/time.hpp"
 
@@ -61,17 +62,37 @@ public:
    * @brief Process different measurement types
    */
   bool processPosition(const std::string& sensor_id, const geometry_msgs::msg::PointStamped& msg);
-//   bool processPose(const std::string& sensor_id, const geometry_msgs::msg::PoseStamped& msg);
-//   bool processBodyVelocity(const std::string& sensor_id, const geometry_msgs::msg::TwistStamped& msg);
-//   bool processImu(const std::string& sensor_id, const sensor_msgs::msg::Imu& msg);
+  bool processPose(const std::string& sensor_id, const geometry_msgs::msg::PoseStamped& msg);
+  bool processBodyVelocity(const std::string& sensor_id, const geometry_msgs::msg::TwistStamped& msg);
+  bool processImu(const std::string& sensor_id, const sensor_msgs::msg::Imu& msg);
 
   /**
-   * @brief Get expected measuremen different measurement for each type
+   * @brief Get expected measurement for position sensor
+   * @param sensor_id The sensor identifier
+   * @return Expected position measurement as PoseWithCovarianceStamped
    */
   geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPosition(const std::string& sensor_id);
-//   geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPose(const std::string& sensor_id);
-//   geometry_msgs::msg::TwistWithCovarianceStamped getExpectedBodyVelocity(const std::string& sensor_id);
-//   sensor_msgs::msg::Imu getExpectedImu(const std::string& sensor_id);
+
+  // /**
+  //  * @brief Get expected measurement for pose sensor
+  //  * @param sensor_id The sensor identifier
+  //  * @return Expected pose measurement as PoseWithCovarianceStamped
+  //  */
+  // geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPose(const std::string& sensor_id);
+
+  // /**
+  //  * @brief Get expected measurement for body velocity sensor
+  //  * @param sensor_id The sensor identifier
+  //  * @return Expected velocity measurement as TwistWithCovarianceStamped
+  //  */
+  // geometry_msgs::msg::TwistWithCovarianceStamped getExpectedBodyVelocity(const std::string& sensor_id);
+
+  // /**
+  //  * @brief Get expected measurement for IMU sensor
+  //  * @param sensor_id The sensor identifier
+  //  * @return Expected IMU measurement
+  //  */
+  // sensor_msgs::msg::Imu getExpectedImu(const std::string& sensor_id);
 
   /**
    * @brief Get state estimates as ROS2 messages
@@ -89,10 +110,21 @@ public:
    * @brief Set the transform from sensor to body frame for a sensor
    *
    * @param sensor_id The sensor identifier
-   * @param transform The transform from sensor to body frame
+   * @param transform The transform from sensor to body frame (ROS2 format)
    * @return true if successful, false otherwise
    */
-  bool setSensorTransform(const std::string& sensor_id, const Eigen::Isometry3d& transform);
+  bool setSensorTransform(const std::string& sensor_id,
+                         const geometry_msgs::msg::TransformStamped& transform);
+
+  /**
+   * @brief Get the transform from sensor to body frame for a sensor
+   *
+   * @param sensor_id The sensor identifier
+   * @param[out] transform The transform from sensor to body frame (ROS2 format)
+   * @return true if successful, false otherwise
+   */
+  bool getSensorTransform(const std::string& sensor_id, const std::string& body_frame_id,
+                         geometry_msgs::msg::TransformStamped& transform) const;
 
   /**
    * @brief Convert ROS Time to seconds
@@ -111,6 +143,9 @@ public:
   geometry_msgs::msg::Vector3 eigenToVectorMsg(const Eigen::Vector3d& vec);
 
 private:
+  // Helper method to convert double time to ROS time
+  rclcpp::Time doubleTimeToRosTime(double time) const;
+
   // Improved sensor info with the enum
   struct SensorInfo {
     size_t index;

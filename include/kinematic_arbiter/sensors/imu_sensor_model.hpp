@@ -6,6 +6,7 @@
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/sensors/imu_bias_estimator.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
@@ -32,10 +33,10 @@ struct ImuSensorConfig {
  * Measurement vector is [gx, gy, gz, ax, ay, az]' where
  * [gx, gy, gz] represents angular velocity and [ax, ay, az] represents linear acceleration.
  */
-class ImuSensorModel : public core::MeasurementModelInterface<Eigen::Matrix<double, kImuMeasurementDof, 1>> {
+class ImuSensorModel : public core::MeasurementModelInterface<core::SensorType::Imu> {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<Eigen::Matrix<double, kImuMeasurementDof, 1>>;
+  using Base = core::MeasurementModelInterface<core::SensorType::Imu>;
   using StateVector = typename Base::StateVector;
   using StateCovariance = typename Base::StateCovariance;
   using MeasurementVector = typename Base::MeasurementVector;

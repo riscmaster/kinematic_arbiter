@@ -2,6 +2,7 @@
 
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
 #include "kinematic_arbiter/core/state_index.hpp"
+#include "kinematic_arbiter/core/sensor_types.hpp"
 
 namespace kinematic_arbiter {
 namespace sensors {
@@ -13,10 +14,10 @@ namespace sensors {
  * Measurement vector is [vx, vy, vz, wx, wy, wz]' where
  * [vx, vy, vz] represents linear velocity and [wx, wy, wz] represents angular velocity.
  */
-class BodyVelocitySensorModel : public core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>> {
+class BodyVelocitySensorModel : public core::MeasurementModelInterface<core::SensorType::BodyVelocity> {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<Eigen::Matrix<double, 6, 1>>;
+  using Base = core::MeasurementModelInterface<core::SensorType::BodyVelocity>;
   using StateVector = typename Base::StateVector;
   using MeasurementVector = typename Base::MeasurementVector;
   using MeasurementJacobian = typename Base::MeasurementJacobian;
