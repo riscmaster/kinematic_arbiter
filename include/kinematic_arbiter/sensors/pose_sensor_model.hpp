@@ -6,6 +6,9 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
+namespace {
+  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Pose>::value;
+}
 
 /**
  * @brief 7DOF pose measurement model (position + orientation)
@@ -14,13 +17,14 @@ namespace sensors {
  * Measurement vector is [x, y, z, qw, qx, qy, qz]' where
  * [qw, qx, qy, qz] represents orientation as a quaternion.
  */
-class PoseSensorModel : public core::MeasurementModelInterface<core::SensorType::Pose> {
+class PoseSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<core::SensorType::Pose>;
+  using Base = core::MeasurementModelInterface;
   using StateVector = typename Base::StateVector;
-  using MeasurementVector = typename Base::MeasurementVector;
-  using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
+  using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
+  using Covariance = Eigen::Matrix<double, kMeasurementDimension, kMeasurementDimension>;
   using StateFlags = typename Base::StateFlags;
 
   /**
@@ -48,7 +52,7 @@ public:
   explicit PoseSensorModel(
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ValidationParams& params = ValidationParams())
-    : Base(sensor_pose_in_body_frame, params) {}
+    : Base(core::SensorType::Pose, sensor_pose_in_body_frame, params, Covariance::Identity()) {}
 
   /**
    * @brief Predict measurement from state
@@ -57,7 +61,7 @@ public:
    * @return Expected measurement [x, y, z, qw, qx, qy, qz]'
    */
   MeasurementVector PredictMeasurement(const StateVector& state) const override {
-    MeasurementVector predicted_measurement = MeasurementVector::Zero();
+    Vector predicted_measurement = Vector::Zero();
 
     // Extract position from state
     Eigen::Vector3d position = state.segment<3>(core::StateIndex::Position::X);
@@ -100,7 +104,7 @@ public:
    * @return Jacobian of measurement with respect to state
    */
   MeasurementJacobian GetMeasurementJacobian(const StateVector& /* state */) const override {
-    MeasurementJacobian jacobian = MeasurementJacobian::Zero();
+    Jacobian jacobian = Jacobian::Zero();
 
     // Position part of the Jacobian - derivative with respect to position is identity
     jacobian.block<3, 3>(MeasurementIndex::X, core::StateIndex::Position::X) =

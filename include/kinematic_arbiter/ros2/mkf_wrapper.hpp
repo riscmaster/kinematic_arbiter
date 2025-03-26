@@ -62,10 +62,6 @@ public:
    * @brief Process different measurement types
    */
   bool processPosition(const std::string& sensor_id, const geometry_msgs::msg::PointStamped& msg);
-  bool processPose(const std::string& sensor_id, const geometry_msgs::msg::PoseStamped& msg);
-  bool processBodyVelocity(const std::string& sensor_id, const geometry_msgs::msg::TwistStamped& msg);
-  bool processImu(const std::string& sensor_id, const sensor_msgs::msg::Imu& msg);
-
   /**
    * @brief Get expected measurement for position sensor
    * @param sensor_id The sensor identifier
@@ -73,26 +69,6 @@ public:
    */
   geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPosition(const std::string& sensor_id);
 
-  // /**
-  //  * @brief Get expected measurement for pose sensor
-  //  * @param sensor_id The sensor identifier
-  //  * @return Expected pose measurement as PoseWithCovarianceStamped
-  //  */
-  // geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPose(const std::string& sensor_id);
-
-  // /**
-  //  * @brief Get expected measurement for body velocity sensor
-  //  * @param sensor_id The sensor identifier
-  //  * @return Expected velocity measurement as TwistWithCovarianceStamped
-  //  */
-  // geometry_msgs::msg::TwistWithCovarianceStamped getExpectedBodyVelocity(const std::string& sensor_id);
-
-  // /**
-  //  * @brief Get expected measurement for IMU sensor
-  //  * @param sensor_id The sensor identifier
-  //  * @return Expected IMU measurement
-  //  */
-  // sensor_msgs::msg::Imu getExpectedImu(const std::string& sensor_id);
 
   /**
    * @brief Get state estimates as ROS2 messages

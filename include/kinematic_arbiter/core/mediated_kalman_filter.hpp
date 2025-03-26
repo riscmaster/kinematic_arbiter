@@ -54,13 +54,13 @@ public:
    * @return size_t Index of the newly added sensor
    */
   size_t AddSensor(std::shared_ptr<MeasurementModelInterface> sensor_model) {
-    size_t sensor_index = sensors_types_.size();
+    size_t sensor_index = sensors_.size();
 
     // Store sensor model and its type tag
     sensors_.push_back(sensor_model);
 
     return sensor_index;
-  }
+  }sensors_types_
 
   /**
    * @brief Get sensor pose in body frame

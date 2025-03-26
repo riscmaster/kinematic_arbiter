@@ -6,6 +6,9 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
+namespace {
+  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Position>::value;
+}
 
 /**
  * @brief 3DOF position measurement model
@@ -13,13 +16,14 @@ namespace sensors {
  * Models a sensor that measures position in 3D space.
  * Measurement vector is [x, y, z]' representing position in the global frame.
  */
-class PositionSensorModel : public core::MeasurementModelInterface<core::SensorType::Position> {
+class PositionSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<core::SensorType::Position>;
+  using Base = core::MeasurementModelInterface;
   using StateVector = typename Base::StateVector;
-  using MeasurementVector = typename Base::MeasurementVector;
-  using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
+  using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
+  using Covariance = Eigen::Matrix<double, kMeasurementDimension, kMeasurementDimension>;
   using StateFlags = typename Base::StateFlags;
 
   /**
@@ -40,7 +44,7 @@ public:
   explicit PositionSensorModel(
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ValidationParams& params = ValidationParams())
-    : Base(sensor_pose_in_body_frame, params) {}
+    : Base(core::SensorType::Position, sensor_pose_in_body_frame, params, Covariance::Identity()) {}
 
   /**
    * @brief Predict measurement from state
@@ -76,7 +80,7 @@ public:
    * @return Jacobian of measurement with respect to state
    */
   MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const override {
-    MeasurementJacobian jacobian = MeasurementJacobian::Zero();
+    Jacobian jacobian = Jacobian::Zero();
 
     // Position part of the Jacobian - derivative with respect to position is identity
     jacobian.block<3, 3>(0, core::StateIndex::Position::X) = Eigen::Matrix3d::Identity();

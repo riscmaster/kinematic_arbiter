@@ -31,7 +31,7 @@ constexpr double kEpsilon = 1e-12;
 
 ImuSensorModel::MeasurementVector ImuSensorModel::PredictMeasurement(
     const StateVector& state) const {
-  MeasurementVector predicted_measurement;
+  Vector predicted_measurement;
 
   // Extract state components
   const Eigen::Quaterniond q(
@@ -100,7 +100,7 @@ bool ImuSensorModel::UpdateBiasEstimates(
 
 ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
     const StateVector& state) const {
-  MeasurementJacobian jacobian = MeasurementJacobian::Zero();
+  Jacobian jacobian = Jacobian::Zero();
 
   // Extract state components and sensor configuration
   const Eigen::Vector3d& r = sensor_pose_in_body_frame_.translation();

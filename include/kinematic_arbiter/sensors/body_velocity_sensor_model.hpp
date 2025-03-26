@@ -6,6 +6,9 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
+namespace {
+  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::BodyVelocity>::value;
+}
 
 /**
  * @brief Body velocity measurement model (linear + angular velocity)
@@ -14,13 +17,14 @@ namespace sensors {
  * Measurement vector is [vx, vy, vz, wx, wy, wz]' where
  * [vx, vy, vz] represents linear velocity and [wx, wy, wz] represents angular velocity.
  */
-class BodyVelocitySensorModel : public core::MeasurementModelInterface<core::SensorType::BodyVelocity> {
+class BodyVelocitySensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<core::SensorType::BodyVelocity>;
+  using Base = core::MeasurementModelInterface;
   using StateVector = typename Base::StateVector;
-  using MeasurementVector = typename Base::MeasurementVector;
-  using MeasurementJacobian = typename Base::MeasurementJacobian;
+  using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
+  using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
+  using Covariance = Eigen::Matrix<double, kMeasurementDimension, kMeasurementDimension>;
   using StateFlags = typename Base::StateFlags;
 
   /**
@@ -47,7 +51,7 @@ public:
   explicit BodyVelocitySensorModel(
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ValidationParams& params = ValidationParams())
-    : Base(sensor_pose_in_body_frame, params) {}
+    : Base(core::SensorType::BodyVelocity, sensor_pose_in_body_frame, params, Covariance::Identity()) {}
 
   /**
    * @brief Predict measurement from state
@@ -56,7 +60,7 @@ public:
    * @return Expected measurement [vx, vy, vz, wx, wy, wz]'
    */
   MeasurementVector PredictMeasurement(const StateVector& state) const override {
-    MeasurementVector predicted_measurement = MeasurementVector::Zero();
+    Vector predicted_measurement = Vector::Zero();
 
     // Extract linear velocity from state
     Eigen::Vector3d body_lin_vel = state.segment<3>(core::StateIndex::LinearVelocity::X);
@@ -99,7 +103,7 @@ public:
    * @return Jacobian of measurement with respect to state
    */
   MeasurementJacobian GetMeasurementJacobian(const StateVector&) const override {
-    MeasurementJacobian jacobian = MeasurementJacobian::Zero();
+    Jacobian jacobian = Jacobian::Zero();
 
     // Extract transform parameters
     Eigen::Vector3d sensor_offset = sensor_pose_in_body_frame_.translation();

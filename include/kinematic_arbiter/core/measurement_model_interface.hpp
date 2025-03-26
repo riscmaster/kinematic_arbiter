@@ -39,6 +39,30 @@ public:
   using StateFlags = Eigen::Array<bool, StateSize, 1>;
 
   /**
+   * @brief Parameters for assumption validation
+   */
+  struct ValidationParams {
+    // Sample window size for adaptive estimation of R
+    size_t noise_sample_window;
+
+    // Confidence level assumption validation (0-1)
+    double confidence_level;
+
+    // Process to measurement noise ratio
+    double process_to_measurement_noise_ratio;
+
+    // Mediation action to take if validation fails
+    MediationAction mediation_action;
+
+    // Constructor with default values
+    ValidationParams()
+      : noise_sample_window(40),
+        confidence_level(0.95),
+        process_to_measurement_noise_ratio(2.0),
+        mediation_action(MediationAction::AdjustCovariance) {}
+  };
+
+  /**
    * @brief Core measurement auxiliary data that can be reused across algorithms
    *
    * Contains expensive-to-compute elements that are needed for validation,
@@ -58,24 +82,6 @@ public:
       : innovation(inn), jacobian(jac), innovation_covariance(inn_cov) {}
   };
 
-
-  /**
-   * @brief Parameters for assumption validation
-   */
-  struct ValidationParams {
-    // Sample window size for adaptive estimation of R
-    size_t noise_sample_window = 40;
-
-    // Confidence level assumption validation (0-1)
-    double confidence_level = 0.95;
-
-    // Process to measurement noise ratio
-    double process_to_measurement_noise_ratio = 2.0;
-
-    // Mediation action to take if validation fails
-    MediationAction mediation_action = MediationAction::AdjustCovariance;
-  };
-
   /**
    * @brief Constructor
    * @param sensor_pose_in_body_frame Transform from body to sensor frame
@@ -84,10 +90,11 @@ public:
   explicit MeasurementModelInterface(
       SensorType type,
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
-      const ValidationParams& params = ValidationParams())
+      const ValidationParams& params = ValidationParams(),
+      const MeasurementCovariance& measurement_covariance = Eigen::Matrix<double, kMaxMeasurementDim, kMaxMeasurementDim>::Identity())
     : sensor_pose_in_body_frame_(sensor_pose_in_body_frame),
       body_to_sensor_transform_(sensor_pose_in_body_frame.inverse()),
-      measurement_covariance_(MeasurementCovariance::Identity()),
+      measurement_covariance_(measurement_covariance),
       validation_params_(params),
       type_(type) {}
 
@@ -239,25 +246,28 @@ public:
    * @brief Get sensor pose in body frame
    * @return Sensor-to-body transform
    */
-  const Eigen::Isometry3d& GetSensorPoseInBodyFrame() const {
-    return sensor_pose_in_body_frame_;
+  bool GetSensorPoseInBodyFrame(Eigen::Isometry3d& pose) const {
+    pose = sensor_pose_in_body_frame_;
+    return true;
   }
 
   /**
    * @brief Get body to sensor transform
    * @return Body-to-sensor transform
    */
-  const Eigen::Isometry3d& GetBodyToSensorTransform() const {
-    return body_to_sensor_transform_;
+  bool GetBodyToSensorTransform(Eigen::Isometry3d& pose) const {
+    pose = body_to_sensor_transform_;
+    return true;
   }
 
   /**
    * @brief Set sensor pose in body frame
    * @param pose New sensor-to-body transform
    */
-  void SetSensorPoseInBodyFrame(const Eigen::Isometry3d& pose) {
+  bool SetSensorPoseInBodyFrame(const Eigen::Isometry3d& pose) {
     sensor_pose_in_body_frame_ = pose;
     body_to_sensor_transform_ = pose.inverse();
+    return true;
   }
 
   /**
@@ -312,17 +322,17 @@ private:
    * @param measurement Measurement vector to validate
    */
   void ValidateMeasurementSize(const MeasurementVector& measurement) const {
-    if (measurement.size() != MeasurementDimension<type_>::value) {
-      throw std::invalid_argument(
-          "Measurement size mismatch: expected " +
-          std::to_string(MeasurementDimension<type_>::value) +
-          " for " + SensorTypeToString(type_) +
-          ", got " + std::to_string(measurement.size()));
-    }
-
-    // Validate sensor type is known
+        // Validate sensor type is known
     if (type_ == SensorType::Unknown) {
       throw std::invalid_argument("Cannot process measurement with Unknown sensor type");
+    }
+
+    if (measurement.size() != GetMeasurementDimension(type_)) {
+      throw std::invalid_argument(
+          "Measurement size mismatch: expected " +
+          std::to_string(GetMeasurementDimension(type_)) +
+          " for " + SensorTypeToString(type_) +
+          ", got " + std::to_string(measurement.size()));
     }
   }
 

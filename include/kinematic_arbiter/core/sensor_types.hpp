@@ -37,6 +37,26 @@ template<SensorType Type>
 using MeasurementVector = Eigen::Matrix<double, MeasurementDimension<Type>::value, 1>;
 
 /**
+ * @brief Runtime function to get measurement dimension from sensor type
+ *
+ * This function provides the same information as the MeasurementDimension template
+ * but can be used at runtime with non-constexpr types.
+ *
+ * @param type The sensor type to query
+ * @return int The measurement dimension for the given sensor type
+ */
+inline int GetMeasurementDimension(SensorType type) {
+  switch (type) {
+    case SensorType::Position:     return MeasurementDimension<SensorType::Position>::value;
+    case SensorType::Pose:         return MeasurementDimension<SensorType::Pose>::value;
+    case SensorType::BodyVelocity: return MeasurementDimension<SensorType::BodyVelocity>::value;
+    case SensorType::Imu:          return MeasurementDimension<SensorType::Imu>::value;
+    case SensorType::Unknown:      return MeasurementDimension<SensorType::Unknown>::value;
+  }
+  return -1; // Unknown type
+}
+
+/**
  * @brief Convert sensor type to string
  */
 inline std::string SensorTypeToString(SensorType type) {

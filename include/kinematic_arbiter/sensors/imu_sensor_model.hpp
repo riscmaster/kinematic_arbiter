@@ -14,10 +14,9 @@ namespace test {
 class ImuStationaryTest;
 }  // namespace test
 
-// IMU-specific measurement dimensions
-constexpr int kImuAngularVelocityDof = 3;  // 3 DOF for gyroscope
-constexpr int kImuLinearAccelerationDof = 3;  // 3 DOF for accelerometer
-constexpr int kImuMeasurementDof = kImuAngularVelocityDof + kImuLinearAccelerationDof;
+namespace {
+  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Imu>::value;
+}
 
 // Move Config struct outside the class
 struct ImuSensorConfig {
@@ -33,15 +32,15 @@ struct ImuSensorConfig {
  * Measurement vector is [gx, gy, gz, ax, ay, az]' where
  * [gx, gy, gz] represents angular velocity and [ax, ay, az] represents linear acceleration.
  */
-class ImuSensorModel : public core::MeasurementModelInterface<core::SensorType::Imu> {
+class ImuSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
-  using Base = core::MeasurementModelInterface<core::SensorType::Imu>;
+  using Base = core::MeasurementModelInterface;
   using StateVector = typename Base::StateVector;
   using StateCovariance = typename Base::StateCovariance;
-  using MeasurementVector = typename Base::MeasurementVector;
-  using MeasurementJacobian = typename Base::MeasurementJacobian;
-  using MeasurementCovariance = typename Base::MeasurementCovariance;
+  using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
+  using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
+  using Covariance = Eigen::Matrix<double, kMeasurementDimension, kMeasurementDimension>;
   using StateFlags = typename Base::StateFlags;
 
   /**
@@ -70,7 +69,7 @@ public:
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ImuSensorConfig& config = ImuSensorConfig(),
       const ValidationParams& params = ValidationParams())
-    : Base(sensor_pose_in_body_frame, params),
+    : Base(core::SensorType::Imu, sensor_pose_in_body_frame, params, Covariance::Identity()),
       bias_estimator_(config.bias_estimation_window_size),
       config_(config) {
         this->can_predict_input_accelerations_ = true;
