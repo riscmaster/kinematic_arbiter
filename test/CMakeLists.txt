@@ -137,4 +137,7 @@ add_ros2_test_executable(mkf_wrapper_test
   "${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_test.cpp"
   ${tf2_geometry_msgs_LIBRARIES})
 
+add_ros2_test_executable(mkf_wrapper_time_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_time_test.cpp")
+
 message(STATUS "Added all tests to test framework")

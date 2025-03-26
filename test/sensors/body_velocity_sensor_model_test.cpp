@@ -12,9 +12,9 @@ protected:
   using StateVector = BodyVelocitySensorModel::StateVector;
   using StateCovariance = BodyVelocitySensorModel::StateCovariance;
   using StateFlags = BodyVelocitySensorModel::StateFlags;
-  using MeasurementVector = BodyVelocitySensorModel::MeasurementVector;
-  using MeasurementJacobian = BodyVelocitySensorModel::MeasurementJacobian;
-  using MeasurementCovariance = BodyVelocitySensorModel::MeasurementCovariance;
+  using MeasurementVector = BodyVelocitySensorModel::Vector;
+  using MeasurementJacobian = BodyVelocitySensorModel::Jacobian;
+  using MeasurementCovariance = BodyVelocitySensorModel::Covariance;
 
   // Constants for clearer indexing
   static constexpr int MEAS_LIN_VEL = 0; // First three elements are linear velocity

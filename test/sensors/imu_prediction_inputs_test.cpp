@@ -83,7 +83,9 @@ TEST(ImuPredictionInputsTest, CheckPredictionModelInputs) {
     true_accel << true_state.segment<3>(core::StateIndex::LinearAcceleration::Begin()),
                   true_state.segment<3>(core::StateIndex::AngularAcceleration::Begin());
 
-    Eigen::Matrix3d R_SB = imu_model.GetSensorPoseInBodyFrame().rotation().matrix();
+    Eigen::Isometry3d sensor_pose;
+    EXPECT_TRUE(imu_model.GetSensorPoseInBodyFrame(sensor_pose));
+    Eigen::Matrix3d R_SB = sensor_pose.rotation().matrix();
 
     EXPECT_TRUE(imu_model.CanPredictInputAccelerations());
 

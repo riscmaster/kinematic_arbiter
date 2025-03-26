@@ -115,16 +115,15 @@ public:
       const StateVector& a_posteriori_state,
       double process_to_measurement_ratio,
       double dt) {
-    if (fabs(dt) < kEpsilon) { return; }
 
     // Compute state correction
     StateVector state_diff = a_priori_state - a_posteriori_state;
 
     // Create binary mask vector (1.0 where states changed, 0.0 otherwise)
-    StateVector mask = (state_diff.array().abs() > kEpsilon).cast<double>();
+    StateVector mask = (state_diff.array().abs() > kMinStateDiff).cast<double>();
 
     // Apply maximum bound to state differences
-    static const double kMaxStateDiff = 1e6;
+
     StateVector bounded_diff =
         state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
 
@@ -157,7 +156,8 @@ public:
 
 protected:
   // Threshold for numerical comparisons
-  static constexpr double kEpsilon = 1e-10;
+  static constexpr double kMinStateDiff = 1e-6;
+  static constexpr double kMaxStateDiff = 1e6;
 
   // State model parameters
   Params params_;

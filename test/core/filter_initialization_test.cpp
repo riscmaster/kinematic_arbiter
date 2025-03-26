@@ -49,7 +49,7 @@ TEST_F(FilterInitializationTest, PositionSensorInitialization) {
   auto position_sensor = std::make_shared<sensors::PositionSensorModel>();
 
   // Add sensor to filter with explicit sensor type
-  size_t sensor_idx = filter_->AddSensor<SensorType::Position>(position_sensor);
+  size_t sensor_idx = filter_->AddSensor(position_sensor);
 
   // Create desired state with known position
   StateVector desired_state = StateVector::Zero();
@@ -59,7 +59,7 @@ TEST_F(FilterInitializationTest, PositionSensorInitialization) {
   Eigen::Vector3d position_measurement = position_sensor->PredictMeasurement(desired_state);
 
   // Process the measurement with explicit sensor type
-  bool result = filter_->ProcessMeasurementByIndex<SensorType::Position>(
+  bool result = filter_->ProcessMeasurementByIndex(
       sensor_idx, position_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process position measurement";
 
@@ -79,7 +79,7 @@ TEST_F(FilterInitializationTest, PoseSensorInitialization) {
   auto pose_sensor = std::make_shared<sensors::PoseSensorModel>();
 
   // Add sensor to filter with explicit sensor type
-  size_t sensor_idx = filter_->AddSensor<SensorType::Pose>(pose_sensor);
+  size_t sensor_idx = filter_->AddSensor(pose_sensor);
 
   // Create desired state with known position and orientation
   StateVector desired_state = StateVector::Zero();
@@ -93,7 +93,7 @@ TEST_F(FilterInitializationTest, PoseSensorInitialization) {
   Eigen::Matrix<double, 7, 1> pose_measurement = pose_sensor->PredictMeasurement(desired_state);
 
   // Process the measurement with explicit sensor type
-  bool result = filter_->ProcessMeasurementByIndex<SensorType::Pose>(
+  bool result = filter_->ProcessMeasurementByIndex(
       sensor_idx, pose_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process pose measurement";
 
@@ -117,7 +117,7 @@ TEST_F(FilterInitializationTest, BodyVelocitySensorInitialization) {
   auto velocity_sensor = std::make_shared<sensors::BodyVelocitySensorModel>();
 
   // Add sensor to filter with explicit sensor type
-  size_t sensor_idx = filter_->AddSensor<SensorType::BodyVelocity>(velocity_sensor);
+  size_t sensor_idx = filter_->AddSensor(velocity_sensor);
 
   // Create desired state with known velocities
   StateVector desired_state = StateVector::Zero();
@@ -128,7 +128,7 @@ TEST_F(FilterInitializationTest, BodyVelocitySensorInitialization) {
   Eigen::Matrix<double, 6, 1> velocity_measurement = velocity_sensor->PredictMeasurement(desired_state);
 
   // Process the measurement with explicit sensor type
-  bool result = filter_->ProcessMeasurementByIndex<SensorType::BodyVelocity>(
+  bool result = filter_->ProcessMeasurementByIndex(
       sensor_idx, velocity_measurement, 0.0);
   EXPECT_TRUE(result) << "Failed to process velocity measurement";
 
@@ -154,8 +154,8 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
   auto velocity_sensor = std::make_shared<sensors::BodyVelocitySensorModel>();
 
   // Add sensors to filter with explicit sensor types
-  size_t position_idx = filter_->AddSensor<SensorType::Position>(position_sensor);
-  size_t velocity_idx = filter_->AddSensor<SensorType::BodyVelocity>(velocity_sensor);
+  size_t position_idx = filter_->AddSensor(position_sensor);
+  size_t velocity_idx = filter_->AddSensor(velocity_sensor);
 
   // Create desired state
   StateVector desired_state = StateVector::Zero();
@@ -168,7 +168,7 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
   Eigen::Matrix<double, 6, 1> velocity_measurement = velocity_sensor->PredictMeasurement(desired_state);
 
   // Process position measurement first with explicit sensor type
-  bool result1 = filter_->ProcessMeasurementByIndex<SensorType::Position>(
+  bool result1 = filter_->ProcessMeasurementByIndex(
       position_idx, position_measurement, 0.0);
   EXPECT_TRUE(result1) << "Failed to process position measurement";
 
@@ -182,7 +182,7 @@ TEST_F(FilterInitializationTest, SequentialInitialization) {
   EXPECT_NEAR(state_after_position[SIdx::Position::Z], desired_state[SIdx::Position::Z], 1e-6);
 
   // Process velocity measurement next with explicit sensor type
-  bool result2 = filter_->ProcessMeasurementByIndex<SensorType::BodyVelocity>(
+  bool result2 = filter_->ProcessMeasurementByIndex(
       velocity_idx, velocity_measurement, 0.0);
   EXPECT_TRUE(result2) << "Failed to process velocity measurement";
 

@@ -3,6 +3,8 @@
 
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
+#include <iostream>
+#include <stdexcept>
 #include "kinematic_arbiter/core/state_index.hpp"
 #include "kinematic_arbiter/core/mediation_types.hpp"
 #include "kinematic_arbiter/core/statistical_utils.hpp"
@@ -30,10 +32,9 @@ public:
 
   using StateVector = Eigen::Matrix<double, StateSize, 1>;                     // State vector x
   using StateCovariance = Eigen::Matrix<double, StateSize, StateSize>;
-  using MeasurementVector = Eigen::Matrix<double, Eigen::Dynamic, 1, Eigen::ColMajor, kMaxMeasurementDim, 1>;          // Measurement vector y_k
-  using MeasurementCovariance = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor, kMaxMeasurementDim, kMaxMeasurementDim>; // Measurement covariance R
-  using MeasurementJacobian = Eigen::Matrix<double, Eigen::Dynamic, StateSize, Eigen::ColMajor, kMaxMeasurementDim, StateSize>; // Measurement Jacobian C_k
-  using InnovationCovariance = MeasurementCovariance;                          // Innovation covariance S
+  using DynamicVector = Eigen::Matrix<double, Eigen::Dynamic, 1, Eigen::ColMajor, kMaxMeasurementDim, 1>;          // Measurement vector y_k
+  using DynamicCovariance = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor, kMaxMeasurementDim, kMaxMeasurementDim>; // Measurement covariance R
+  using DynamicJacobian = Eigen::Matrix<double, Eigen::Dynamic, StateSize, Eigen::ColMajor, kMaxMeasurementDim, StateSize>; // Measurement Jacobian C_k                        // Innovation covariance S
 
   // More general name for boolean state flags
   using StateFlags = Eigen::Array<bool, StateSize, 1>;
@@ -69,16 +70,16 @@ public:
    * updating, retrodiction, and other filter operations.
    */
   struct MeasurementAuxData {
-    MeasurementVector innovation;                // y_k - C_k x_k
-    MeasurementJacobian jacobian;                // C_k
-    InnovationCovariance innovation_covariance;  // S = C_k P_k C_k^T + R
+    DynamicVector innovation;                // y_k - C_k x_k
+    DynamicJacobian jacobian;                // C_k
+    DynamicCovariance innovation_covariance;  // S = C_k P_k C_k^T + R
 
     // Constructors
     MeasurementAuxData() = default;
     MeasurementAuxData(
-        const MeasurementVector& inn,
-        const MeasurementJacobian& jac,
-        const InnovationCovariance& inn_cov)
+        const DynamicVector& inn,
+        const DynamicJacobian& jac,
+        const DynamicCovariance& inn_cov)
       : innovation(inn), jacobian(jac), innovation_covariance(inn_cov) {}
   };
 
@@ -91,7 +92,7 @@ public:
       SensorType type,
       const Eigen::Isometry3d& sensor_pose_in_body_frame = Eigen::Isometry3d::Identity(),
       const ValidationParams& params = ValidationParams(),
-      const MeasurementCovariance& measurement_covariance = Eigen::Matrix<double, kMaxMeasurementDim, kMaxMeasurementDim>::Identity())
+      const DynamicCovariance& measurement_covariance = Eigen::Matrix<double, kMaxMeasurementDim, kMaxMeasurementDim>::Identity())
     : sensor_pose_in_body_frame_(sensor_pose_in_body_frame),
       body_to_sensor_transform_(sensor_pose_in_body_frame.inverse()),
       measurement_covariance_(measurement_covariance),
@@ -109,7 +110,7 @@ public:
    * @param state Current state estimate x_k
    * @return Expected measurement h(x)
    */
-  virtual MeasurementVector PredictMeasurement(const StateVector& state) const = 0;
+  virtual DynamicVector PredictMeasurement(const StateVector& state) const = 0;
 
   /**
    * @brief Compute the measurement Jacobian H = ∂h/∂x
@@ -117,7 +118,7 @@ public:
    * @param state Current state estimate x_k
    * @return Measurement Jacobian H (C_k in paper notation)
    */
-  virtual MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const = 0;
+  virtual DynamicJacobian GetMeasurementJacobian(const StateVector& state) const = 0;
 
   /**
    * @brief Get the inputs to the prediction model
@@ -128,7 +129,7 @@ public:
    * @param dt Time step in seconds
    * @return Linear and angular acceleration as inputs to the prediction model
    */
-  virtual Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& , const StateCovariance& , const MeasurementVector& , double) const {return Eigen::Matrix<double, 6, 1>::Zero();};
+  virtual Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& , const StateCovariance& , const DynamicVector& , double) const {return Eigen::Matrix<double, 6, 1>::Zero();};
 
   /**
    * @brief Get whether the prediction model can predict input accelerations
@@ -140,7 +141,7 @@ public:
    * @brief Get current measurement covariance
    * @return Measurement noise covariance R
    */
-  const MeasurementCovariance& GetMeasurementCovariance() const {
+  const DynamicCovariance& GetMeasurementCovariance() const {
     return measurement_covariance_;
   }
 
@@ -174,17 +175,17 @@ public:
   MeasurementAuxData ComputeAuxiliaryData(
       const StateVector& state,
       const StateCovariance& state_covariance,
-      const MeasurementVector& measurement) const {
+      const DynamicVector& measurement) const {
     ValidateMeasurementSize(measurement);
 
     // Calculate innovation: ν = y_k - h(x_k)
-    MeasurementVector innovation = measurement - PredictMeasurement(state);
+    DynamicVector innovation = measurement - PredictMeasurement(state);
 
     // Get measurement Jacobian: C_k
-    MeasurementJacobian jacobian = GetMeasurementJacobian(state);
+    DynamicJacobian jacobian = GetMeasurementJacobian(state);
 
     // Calculate innovation covariance: S = C_k P_k C_k^T + R
-    InnovationCovariance innovation_covariance =
+    DynamicCovariance innovation_covariance =
         jacobian * state_covariance * jacobian.transpose() + measurement_covariance_;
 
     return MeasurementAuxData(innovation, jacobian, innovation_covariance);
@@ -202,14 +203,13 @@ public:
       const StateVector& state,
       const StateCovariance& state_covariance,
       const double& measurement_timestamp,
-      const MeasurementVector& measurement) {
+      const DynamicVector& measurement) {
         ValidateMeasurementSize(measurement);
         previous_measurement_data_ = MeasurementData(
           measurement_timestamp,
           measurement,
           measurement_covariance_
         );
-
     // Compute auxiliary data once for all operations
     MeasurementAuxData aux_data = ComputeAuxiliaryData(
         state, state_covariance, measurement);
@@ -236,8 +236,15 @@ public:
       double scale_factor = chi_squared_term / threshold;
       measurement_covariance_ *= scale_factor;
       previous_measurement_data_.covariance = measurement_covariance_;
+      return true;
     }
-
+    // Log warning with metadata when validation fails
+    std::cerr << "WARNING: Measurement validation failed for sensor type "
+              << SensorTypeToString(type_) << std::endl
+              << "  Chi-squared value: " << chi_squared_term
+              << ", Threshold: " << threshold << std::endl
+              << "  Innovation norm: " << aux_data.innovation.norm()
+              << ", Measurement timestamp: " << measurement_timestamp << std::endl;
     // Always return false if validation fails
     return false;
   }
@@ -293,7 +300,7 @@ public:
    * @return Flags indicating which states were initialized
    */
   virtual StateFlags InitializeState(
-      const MeasurementVector& measurement,
+      const DynamicVector& measurement,
       const StateFlags& valid_states,
       StateVector& state,
       StateCovariance& covariance) const = 0;
@@ -306,22 +313,12 @@ public:
     return type_;
   }
 
-private:
-  struct MeasurementData {
-    double timestamp = 0.0;
-    MeasurementVector value;
-    MeasurementCovariance covariance;
-
-    MeasurementData() = default;
-    MeasurementData(double t, const MeasurementVector& v, const MeasurementCovariance& c)
-      : timestamp(t), value(v), covariance(c) {}
-  };
-
+  protected:
   /**
    * @brief Validate measurement size based on sensor type
    * @param measurement Measurement vector to validate
    */
-  void ValidateMeasurementSize(const MeasurementVector& measurement) const {
+  void ValidateMeasurementSize(const DynamicVector& measurement) const {
         // Validate sensor type is known
     if (type_ == SensorType::Unknown) {
       throw std::invalid_argument("Cannot process measurement with Unknown sensor type");
@@ -331,17 +328,27 @@ private:
       throw std::invalid_argument(
           "Measurement size mismatch: expected " +
           std::to_string(GetMeasurementDimension(type_)) +
-          " for " + SensorTypeToString(type_) +
           ", got " + std::to_string(measurement.size()));
     }
   }
+
+private:
+  struct MeasurementData {
+    double timestamp = 0.0;
+    DynamicVector value;
+    DynamicCovariance covariance;
+
+    MeasurementData() = default;
+    MeasurementData(double t, const DynamicVector& v, const DynamicCovariance& c)
+      : timestamp(t), value(v), covariance(c) {}
+  };
 
   /**
    * @brief Update measurement covariance with bounded innovation
    *
    * @param innovation Measurement innovation
    */
-  void UpdateCovariance(const MeasurementVector& innovation) {
+  void UpdateCovariance(const DynamicVector& innovation) {
     // Define bounds as named constants for clarity
     static const double kMinInnovation = 1e-6;
     static const double kMaxInnovation = 1e6;
@@ -351,7 +358,7 @@ private:
 
     // 2. Apply minimum magnitude while preserving sign
     // Formula: sign(x) * max(|x|, kMinInnovation)
-    MeasurementVector bounded_innovation =
+    DynamicVector bounded_innovation =
         clipped.sign() * clipped.abs().cwiseMax(kMinInnovation);
 
     // Update covariance with the adaptive formula
@@ -362,7 +369,7 @@ private:
 protected:
   Eigen::Isometry3d sensor_pose_in_body_frame_ = Eigen::Isometry3d::Identity();
   Eigen::Isometry3d body_to_sensor_transform_ = Eigen::Isometry3d::Identity();
-  MeasurementCovariance measurement_covariance_;
+  DynamicCovariance measurement_covariance_;
   ValidationParams validation_params_;
   bool can_predict_input_accelerations_ = false;
   MeasurementData previous_measurement_data_;

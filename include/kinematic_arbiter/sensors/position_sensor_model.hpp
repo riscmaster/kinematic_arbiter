@@ -6,20 +6,16 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
-namespace {
-  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Position>::value;
-}
 
 /**
- * @brief 3DOF position measurement model
- *
- * Models a sensor that measures position in 3D space.
- * Measurement vector is [x, y, z]' representing position in the global frame.
+ * @brief Position sensor model
  */
 class PositionSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
   using Base = core::MeasurementModelInterface;
+  // Move the constant inside the class
+  static constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Position>::value;
   using StateVector = typename Base::StateVector;
   using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
   using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
@@ -52,7 +48,7 @@ public:
    * @param state Current state estimate
    * @return Expected measurement [x, y, z]'
    */
-  MeasurementVector PredictMeasurement(const StateVector& state) const override {
+  DynamicVector PredictMeasurement(const StateVector& state) const override {
     // Extract position from state
     Eigen::Vector3d position = state.segment<3>(core::StateIndex::Position::X);
 
@@ -79,7 +75,7 @@ public:
    * @param state Current state estimate
    * @return Jacobian of measurement with respect to state
    */
-  MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const override {
+  DynamicJacobian GetMeasurementJacobian(const StateVector& state) const override {
     Jacobian jacobian = Jacobian::Zero();
 
     // Position part of the Jacobian - derivative with respect to position is identity
@@ -158,11 +154,11 @@ public:
    * @return Flags indicating which states were initialized
    */
   StateFlags InitializeState(
-      const MeasurementVector& measurement,
+      const DynamicVector& measurement,
       const StateFlags& valid_states,
       StateVector& state,
       StateCovariance& covariance) const override {
-
+    ValidateMeasurementSize(measurement);
     StateFlags initialized_states = StateFlags::Zero();
 
     // Extract position from measurement

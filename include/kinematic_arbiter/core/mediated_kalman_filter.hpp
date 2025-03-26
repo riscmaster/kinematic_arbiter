@@ -40,7 +40,7 @@ public:
    */
   explicit MediatedKalmanFilter(std::shared_ptr<ProcessModel> process_model)
     : process_model_(process_model),
-      reference_time_(0.0),
+      reference_time_(std::numeric_limits<double>::lowest()),
       max_delay_window_(1.0),
       initialized_states_(StateFlags::Zero()),
       reference_state_(StateVector::Zero()),
@@ -60,7 +60,7 @@ public:
     sensors_.push_back(sensor_model);
 
     return sensor_index;
-  }sensors_types_
+  }
 
   /**
    * @brief Get sensor pose in body frame
@@ -94,9 +94,15 @@ public:
    * @return true if measurement was processed successfully
    */
   bool ProcessMeasurementByIndex(size_t sensor_index,
-                                const MeasurementModelInterface::MeasurementVector& measurement,
+                                const MeasurementModelInterface::DynamicVector& measurement,
                                 double timestamp) {
-    if (sensor_index >= sensors_.size()) {return false;}
+    if (sensor_index >= sensors_.size()) {
+      std::cerr << "Warning: ProcessMeasurementByIndex called with invalid sensor index: " << sensor_index << std::endl;
+      return false;
+    }
+
+    if (reference_time_ == std::numeric_limits<double>::lowest()) {
+        reference_time_ = timestamp;}
 
     auto sensor = sensors_[sensor_index];
 
@@ -115,7 +121,11 @@ public:
     }
 
     // Reject too-old measurements
-    if (timestamp < reference_time_ - max_delay_window_) {
+    if ((timestamp < reference_time_ - max_delay_window_) ||
+        (timestamp > reference_time_ + max_delay_window_)) {
+      std::cerr << "Warning: Rejecting measurement at time " << timestamp
+                << " as outside delay window (reference time: " << reference_time_
+                << ", max delay: " << max_delay_window_ << ")" << std::endl;
       return false;
     }
 
@@ -158,6 +168,8 @@ public:
     // If invalid and set to reject, return early
     if (!measurement_valid &&
         sensor->GetValidationParams().mediation_action == MediationAction::Reject) {
+      std::cerr << "Warning: Measurement at time " << timestamp
+                << " failed validation and is being rejected" << std::endl;
       return false;
     }
 
@@ -280,21 +292,38 @@ public:
    * @return bool True if the operation was successful
    */
   bool GetSensorCovarianceByIndex(size_t sensor_index,
-                                 MeasurementModelInterface::MeasurementCovariance& covariance) const {
+                                 MeasurementModelInterface::DynamicCovariance& covariance) const {
     if (sensor_index >= sensors_.size()) {return false;}
-    return sensors_[sensor_index]->GetMeasurementCovariance(covariance);
+    covariance = sensors_[sensor_index]->GetMeasurementCovariance();
+    return true;
   }
 
   /**
    * @brief Get expected measurement from a sensor using current reference state
    * @param sensor_index Index of the sensor
    * @param[out] expected_measurement The predicted measurement
+   * @param[in] state_at_sensor_time The state at the sensor time
    * @return bool True if the operation was successful
    */
   bool GetExpectedMeasurementByIndex(size_t sensor_index,
-                                   MeasurementModelInterface::MeasurementVector& expected_measurement) const {
+                                   MeasurementModelInterface::DynamicVector& expected_measurement) const {
     if (sensor_index >= sensors_.size()) {return false;}
     expected_measurement = sensors_[sensor_index]->PredictMeasurement(reference_state_);
+    return true;
+  }
+
+  /**
+   * @brief Get expected measurement from a sensor using a specific state
+   * @param sensor_index Index of the sensor
+   * @param[out] expected_measurement The predicted measurement
+   * @param[in] state_at_sensor_time The state at the sensor time
+   * @return bool True if the operation was successful
+   */
+  bool GetExpectedMeasurementByIndex(size_t sensor_index,
+                                   MeasurementModelInterface::DynamicVector& expected_measurement,
+                                   const StateVector& state_at_sensor_time) const {
+    if (sensor_index >= sensors_.size()) {return false;}
+    expected_measurement = sensors_[sensor_index]->PredictMeasurement(state_at_sensor_time);
     return true;
   }
 

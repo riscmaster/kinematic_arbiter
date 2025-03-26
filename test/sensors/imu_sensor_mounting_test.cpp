@@ -15,6 +15,8 @@ namespace test {
 
 using core::StateIndex;
 using Eigen::Vector3d;
+using MeasurementCovariance = ImuSensorModel::Covariance;
+using MeasurementVector = ImuSensorModel::Vector;
 
 // Add this constant to avoid direct access to the private kGravity in the class
 constexpr double kTestGravity = 9.80665;
@@ -221,7 +223,8 @@ TEST_F(ImuSensorMountingTest, MountingOrientations) {
     test_sensor->SetTestCovariance(meas_cov);
 
     // Print the sensor pose for reference
-    Eigen::Isometry3d sensor_pose = test_sensor->GetSensorPoseInBodyFrame();
+    Eigen::Isometry3d sensor_pose;
+    EXPECT_TRUE(test_sensor->GetSensorPoseInBodyFrame(sensor_pose));
     SCOPED_TRACE("Sensor Position: " + ::testing::PrintToString(sensor_pose.translation().transpose()));
 
     Eigen::Quaterniond sensor_quat(sensor_pose.rotation());

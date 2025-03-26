@@ -13,7 +13,7 @@ using namespace Eigen;
 // namespace {
 
 // constexpr double kGravity = 9.80665;
-constexpr double kEpsilon = 1e-12;
+constexpr double kEpsilon = 1e-6;
 
 // Vector3d QuaternionLog(const Quaterniond& q) {
 //     const double w_clamped = std::clamp(q.w(), -1.0 + kEpsilon, 1.0 - kEpsilon);
@@ -29,7 +29,7 @@ constexpr double kEpsilon = 1e-12;
 
 // } // namespace
 
-ImuSensorModel::MeasurementVector ImuSensorModel::PredictMeasurement(
+ImuSensorModel::Base::DynamicVector ImuSensorModel::PredictMeasurement(
     const StateVector& state) const {
   Vector predicted_measurement;
 
@@ -78,14 +78,14 @@ ImuSensorModel::MeasurementVector ImuSensorModel::PredictMeasurement(
 bool ImuSensorModel::UpdateBiasEstimates(
     const StateVector& state,
     const Eigen::MatrixXd& state_covariance,
-    const MeasurementVector& measurement) {
+    const Vector& measurement) {
 
   if (!config_.calibration_enabled || !IsStationary(state, state_covariance, measurement)) {
     return false;
   }
 
   // Get predicted measurement
-  MeasurementVector predicted_measurement = PredictMeasurement(state);
+  Vector predicted_measurement = PredictMeasurement(state);
 
 
   // Update bias estimates
@@ -98,7 +98,7 @@ bool ImuSensorModel::UpdateBiasEstimates(
   return true;
 }
 
-ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
+ImuSensorModel::Base::DynamicJacobian ImuSensorModel::GetMeasurementJacobian(
     const StateVector& state) const {
   Jacobian jacobian = Jacobian::Zero();
 
@@ -194,7 +194,7 @@ ImuSensorModel::MeasurementJacobian ImuSensorModel::GetMeasurementJacobian(
 Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
     const StateVector& state_before_prediction,
     const StateCovariance& ,
-    const MeasurementVector& measurement_after_prediction,
+    const ImuSensorModel::Base::DynamicVector& measurement_after_prediction,
     double dt) const {
 
     // Handle edge case first
@@ -285,7 +285,7 @@ Eigen::Matrix<double, 6, 1> ImuSensorModel::GetPredictionModelInputs(
 bool ImuSensorModel::IsStationary(
     const StateVector& state,
     const StateCovariance& state_covariance,
-    const MeasurementVector& measurement) const {
+    const Vector& measurement) const {
 
   // Extract measurements directly using segment
   Eigen::Vector3d measured_accel = measurement.segment<3>(MeasurementIndex::AX);
@@ -369,10 +369,12 @@ typename ImuSensorModel::StateFlags ImuSensorModel::GetInitializableStates() con
  * @return Flags indicating which states were initialized
  */
 typename ImuSensorModel::StateFlags ImuSensorModel::InitializeState(
-    const MeasurementVector& measurement,
+    const ImuSensorModel::Base::DynamicVector& measurement,
     const StateFlags& ,
     StateVector& state,
     StateCovariance& covariance) const {
+
+  ValidateMeasurementSize(measurement);
 
   StateFlags initialized_states = StateFlags::Zero();
 

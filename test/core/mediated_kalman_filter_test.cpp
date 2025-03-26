@@ -52,13 +52,13 @@ protected:
   // Generic PrintFilterDiagnostics that works with any sensor type
   template<SensorType Type>
   void PrintFilterDiagnostics(
-      const std::shared_ptr<core::MeasurementModelInterface<Type>>& sensor,
+      const std::shared_ptr<core::MeasurementModelInterface>& sensor,
       const StateVector& true_state,
       const StateVector& predicted_state,
       const StateMatrix& predicted_cov,
       const StateVector& updated_state,
-      const typename core::MeasurementModelInterface<Type>::MeasurementVector& measurement,
-      const typename core::MeasurementModelInterface<Type>::MeasurementAuxData& aux_data,
+      const typename core::MeasurementModelInterface::DynamicVector& measurement,
+      const typename core::MeasurementModelInterface::MeasurementAuxData& aux_data,
       const std::string& failure_reason = "ERROR WORSE") {
 
     // Calculate Kalman gain for diagnostics
@@ -173,7 +173,7 @@ protected:
       std::shared_ptr<SensorModel> sensor,
       const Eigen::MatrixXd& noise_covariance) {
       using namespace core;
-      using MeasurementType = typename SensorModel::MeasurementVector;
+      using MeasurementType = typename SensorModel::Vector;
 
       // Flag to determine if we should add noise
       bool add_noise = !noise_covariance.isZero();
@@ -181,7 +181,7 @@ protected:
 
       // Create filter
       auto filter = std::make_shared<FilterType>(state_model_);
-      size_t sensor_idx = filter->AddSensor<Type>(sensor);
+      size_t sensor_idx = filter->AddSensor(sensor);
 
       // Test parameters
       const double dt = 0.05;
@@ -262,7 +262,7 @@ protected:
           }
 
           // Process measurement with explicit template parameter
-          bool assumptions_held = filter->ProcessMeasurementByIndex<Type>(sensor_idx, measurement, t);
+          bool assumptions_held = filter->ProcessMeasurementByIndex(sensor_idx, measurement, t);
           if (!assumptions_held) {
               FAIL() << "Measurement assumptions not held at t=" << t;
           }

@@ -242,7 +242,7 @@ TEST_F(PoseSensorModelTest, InitializeStateIdentityTransform) {
   PoseSensorModel model;
 
   // Create measurement with position [5, 6, 7] and orientation 90° around Z
-  PoseSensorModel::MeasurementVector measurement;
+  PoseSensorModel::Vector measurement;
   measurement << 5.0, 6.0, 7.0,                 // position
                  0.7071, 0.0, 0.0, 0.7071;      // quaternion (90° around Z)
 
@@ -282,7 +282,7 @@ TEST_F(PoseSensorModelTest, InitializeStateOffsetTransform) {
   PoseSensorModel model(offset_transform_);
 
   // Create measurement with position [5, 0, 0] and identity orientation
-  PoseSensorModel::MeasurementVector measurement;
+  PoseSensorModel::Vector measurement;
   measurement << 5.0, 0.0, 0.0,      // position
                  1.0, 0.0, 0.0, 0.0;  // identity quaternion
 
@@ -337,7 +337,7 @@ TEST_F(PoseSensorModelTest, InitializeCovarianceTransform) {
   PoseSensorModel model;
 
   // Create measurement with position [1, 2, 3] and identity orientation
-  PoseSensorModel::MeasurementVector measurement;
+  PoseSensorModel::Vector measurement;
   measurement << 1.0, 2.0, 3.0,      // position
                  1.0, 0.0, 0.0, 0.0;  // identity quaternion
 

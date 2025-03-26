@@ -13,8 +13,8 @@ protected:
   using StateVector = ImuSensorModel::StateVector;
   using StateCovariance = ImuSensorModel::StateCovariance;
   using StateFlags = ImuSensorModel::StateFlags;
-  using MeasurementVector = ImuSensorModel::MeasurementVector;
-  using MeasurementJacobian = ImuSensorModel::MeasurementJacobian;
+  using MeasurementVector = ImuSensorModel::Vector;
+  using MeasurementJacobian = ImuSensorModel::Jacobian;
 
   // Constants for indexing
   static constexpr int STATE_QUAT_W = core::StateIndex::Quaternion::W;

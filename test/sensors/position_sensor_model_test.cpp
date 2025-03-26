@@ -17,8 +17,8 @@ class PositionSensorModelTest : public ::testing::Test {
 protected:
   // Type definitions for clarity
   using StateVector = PositionSensorModel::StateVector;
-  using MeasurementVector = PositionSensorModel::MeasurementVector;
-  using MeasurementJacobian = PositionSensorModel::MeasurementJacobian;
+  using MeasurementVector = PositionSensorModel::Vector;
+  using MeasurementJacobian = PositionSensorModel::Jacobian;
 
   void SetUp() override {
     // Default initialization

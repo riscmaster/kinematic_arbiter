@@ -1,605 +1,366 @@
 #include <gtest/gtest.h>
-#include <memory>
+#include <rclcpp/rclcpp.hpp>
 #include "kinematic_arbiter/ros2/mkf_wrapper.hpp"
-#include "rclcpp/rclcpp.hpp"
-#include <tf2_eigen/tf2_eigen.hpp>
-#include <geometry_msgs/msg/transform_stamped.hpp>
+#include "kinematic_arbiter/core/trajectory_utils.hpp"
+#include "kinematic_arbiter/sensors/body_velocity_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/pose_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/position_sensor_model.hpp"
 
-namespace kinematic_arbiter {
-namespace ros2 {
-namespace wrapper {
-namespace test {
 
-using FilterWrapper = kinematic_arbiter::ros2::wrapper::FilterWrapper;
+using namespace kinematic_arbiter;
+using namespace kinematic_arbiter::ros2::wrapper;
 
 class FilterWrapperTest : public ::testing::Test {
+  using MeasurementModelInterface = kinematic_arbiter::core::MeasurementModelInterface;
+  using BodyVelocitySensorModel = kinematic_arbiter::sensors::BodyVelocitySensorModel;
+  using ImuSensorModel = kinematic_arbiter::sensors::ImuSensorModel;
+  using PoseSensorModel = kinematic_arbiter::sensors::PoseSensorModel;
+  using PositionSensorModel = kinematic_arbiter::sensors::PositionSensorModel;
 protected:
   void SetUp() override {
-    wrapper_ = std::make_unique<FilterWrapper>();
+    // Initialize ROS context if needed
+    if (!rclcpp::ok()) {
+      rclcpp::init(0, nullptr);
+    }
+
+    // Create wrapper with default parameters
+    wrapper_ = std::make_shared<FilterWrapper>();
+
+    // Register sensors
     position_sensor_id_ = wrapper_->registerPositionSensor("test_position");
+    pose_sensor_id_ = wrapper_->registerPoseSensor("test_pose");
+    velocity_sensor_id_ = wrapper_->registerBodyVelocitySensor("test_velocity");
+    imu_sensor_id_ = wrapper_->registerImuSensor("test_imu");
+
+    // Set a reasonable delay window
+    wrapper_->setMaxDelayWindow(kMaxDelayWindow);  // 1 second
   }
 
-  std::unique_ptr<FilterWrapper> wrapper_;
+  void TearDown() override {
+    // Cleanup
+    wrapper_.reset();
+  }
+
+  // Helper to create a timestamp
+  rclcpp::Time createTime(double seconds) {
+    int32_t sec = static_cast<int32_t>(seconds);
+    uint32_t nanosec = static_cast<uint32_t>((seconds - sec) * 1e9);
+    return rclcpp::Time(sec, nanosec);
+  }
+
+  // Create position message using expected measurement
+  geometry_msgs::msg::PointStamped createPositionMsg(double t) {
+    MeasurementModelInterface::DynamicVector measurement;
+    EXPECT_TRUE(wrapper_->getExpectedMeasurementByID(position_sensor_id_,
+      measurement, utils::Figure8Trajectory(t)));
+
+    geometry_msgs::msg::PointStamped msg;
+    msg.header.stamp = createTime(t);
+    msg.header.frame_id = "world";
+
+    // Position from expected measurement
+    msg.point.x = measurement[PositionSensorModel::MeasurementIndex::X]; // X
+    msg.point.y = measurement[PositionSensorModel::MeasurementIndex::Y]; // Y
+    msg.point.z = measurement[PositionSensorModel::MeasurementIndex::Z]; // Z
+
+    return msg;
+  }
+
+  // Create pose message using expected measurement
+  geometry_msgs::msg::PoseStamped createPoseMsg(double t) {
+    MeasurementModelInterface::DynamicVector measurement;
+    EXPECT_TRUE(wrapper_->getExpectedMeasurementByID(pose_sensor_id_,
+      measurement, utils::Figure8Trajectory(t)));
+
+    geometry_msgs::msg::PoseStamped msg;
+    msg.header.stamp = createTime(t);
+    msg.header.frame_id = "world";
+
+    // Position
+    msg.pose.position.x = measurement[PoseSensorModel::MeasurementIndex::X]; // X
+    msg.pose.position.y = measurement[PoseSensorModel::MeasurementIndex::Y]; // Y
+    msg.pose.position.z = measurement[PoseSensorModel::MeasurementIndex::Z]; // Z
+
+    // Orientation (quaternion)
+    msg.pose.orientation.w = measurement[PoseSensorModel::MeasurementIndex::QW]; // W
+    msg.pose.orientation.x = measurement[PoseSensorModel::MeasurementIndex::QX]; // X
+    msg.pose.orientation.y = measurement[PoseSensorModel::MeasurementIndex::QY]; // Y
+    msg.pose.orientation.z = measurement[PoseSensorModel::MeasurementIndex::QZ]; // Z
+
+    return msg;
+  }
+
+  // Create velocity message using expected measurement
+  geometry_msgs::msg::TwistStamped createVelocityMsg(double t) {
+    MeasurementModelInterface::DynamicVector measurement;
+    EXPECT_TRUE(wrapper_->getExpectedMeasurementByID(velocity_sensor_id_,
+      measurement, utils::Figure8Trajectory(t)));
+
+    geometry_msgs::msg::TwistStamped msg;
+    msg.header.stamp = createTime(t);
+    msg.header.frame_id = "body";
+
+    // Linear velocity
+    msg.twist.linear.x = measurement[BodyVelocitySensorModel::MeasurementIndex::VX]; // Vx
+    msg.twist.linear.y = measurement[BodyVelocitySensorModel::MeasurementIndex::VY]; // Vy
+    msg.twist.linear.z = measurement[BodyVelocitySensorModel::MeasurementIndex::VZ]; // Vz
+
+    // Angular velocity
+    msg.twist.angular.x = measurement[BodyVelocitySensorModel::MeasurementIndex::WX]; // Wx
+    msg.twist.angular.y = measurement[BodyVelocitySensorModel::MeasurementIndex::WY]; // Wy
+    msg.twist.angular.z = measurement[BodyVelocitySensorModel::MeasurementIndex::WZ]; // Wz
+
+    return msg;
+  }
+
+  sensor_msgs::msg::Imu createImuMsg(double t) {
+    MeasurementModelInterface::DynamicVector measurement;
+    EXPECT_TRUE( wrapper_->getExpectedMeasurementByID(imu_sensor_id_,
+    measurement, utils::Figure8Trajectory(t)));
+
+    sensor_msgs::msg::Imu msg;
+    msg.header.stamp = createTime(t);
+    msg.header.frame_id = "imu";
+
+    // Angular velocity
+    msg.angular_velocity.x = measurement[ImuSensorModel::MeasurementIndex::GX];
+    msg.angular_velocity.y = measurement[ImuSensorModel::MeasurementIndex::GY];
+    msg.angular_velocity.z = measurement[ImuSensorModel::MeasurementIndex::GZ];
+
+    // Linear acceleration
+    msg.linear_acceleration.x = measurement[ImuSensorModel::MeasurementIndex::AX];
+    msg.linear_acceleration.y = measurement[ImuSensorModel::MeasurementIndex::AY];
+    msg.linear_acceleration.z = measurement[ImuSensorModel::MeasurementIndex::AZ];
+
+    return msg;
+  }
+
+  // Utility to set sensor transforms
+  void setSensorTransforms() {
+    // Create identity transforms for testing
+    geometry_msgs::msg::TransformStamped transform;
+    transform.header.frame_id = "body";
+    transform.child_frame_id = "sensor";
+    transform.transform.translation.x = 0.0;
+    transform.transform.translation.y = 0.0;
+    transform.transform.translation.z = 0.0;
+    transform.transform.rotation.w = 1.0;
+    transform.transform.rotation.x = 0.0;
+    transform.transform.rotation.y = 0.0;
+    transform.transform.rotation.z = 0.0;
+
+    // Set for each sensor
+    ASSERT_TRUE(wrapper_->setSensorTransform(position_sensor_id_, transform));
+    ASSERT_TRUE(wrapper_->setSensorTransform(pose_sensor_id_, transform));
+    ASSERT_TRUE(wrapper_->setSensorTransform(velocity_sensor_id_, transform));
+    ASSERT_TRUE(wrapper_->setSensorTransform(imu_sensor_id_, transform));
+  }
+
+  std::shared_ptr<FilterWrapper> wrapper_;
   std::string position_sensor_id_;
+  std::string pose_sensor_id_;
+  std::string velocity_sensor_id_;
+  std::string imu_sensor_id_;
+  const double kMaxDelayWindow = 1.0;
 };
 
-// Test basic filter wrapper functionality with a single measurement
-TEST_F(FilterWrapperTest, ProcessSingleMeasurement) {
-  // Create a position measurement
-  geometry_msgs::msg::PointStamped position_msg;
-  position_msg.header.stamp = rclcpp::Time(1.0e9); // 1.0 seconds
-  position_msg.header.frame_id = "map";
-  position_msg.point.x = 1.0;
-  position_msg.point.y = 2.0;
-  position_msg.point.z = 3.0;
+// Test sensor registration and ID management
+TEST_F(FilterWrapperTest, SensorRegistration) {
+  // Check that sensor IDs are not empty
+  EXPECT_FALSE(position_sensor_id_.empty());
+  EXPECT_FALSE(pose_sensor_id_.empty());
+  EXPECT_FALSE(velocity_sensor_id_.empty());
+  EXPECT_FALSE(imu_sensor_id_.empty());
 
-  // Process the measurement
-  bool result = wrapper_->processPosition(position_sensor_id_, position_msg);
-  EXPECT_TRUE(result);
+  // Registering the same sensor type with the same name should return the same ID
+  std::string position_sensor_id2 = wrapper_->registerPositionSensor("test_position");
+  EXPECT_EQ(position_sensor_id_, position_sensor_id2);
 
-  // Get expected measurement
-  auto expected = wrapper_->getExpectedPosition(position_sensor_id_);
+  // Registering a different sensor type with the same name should return a different ID
+  std::string pose_sensor_id2 = wrapper_->registerPoseSensor("test_position");
+  EXPECT_NE(position_sensor_id_, pose_sensor_id2);
 
-  // Verify header was preserved - convert to seconds for comparison
-  EXPECT_DOUBLE_EQ(rclcpp::Time(expected.header.stamp).seconds(),
-                   rclcpp::Time(position_msg.header.stamp).seconds());
-  EXPECT_EQ(expected.header.frame_id, position_msg.header.frame_id);
+  // Re-registering the same sensor type and name should return the same ID again
+  std::string pose_sensor_id3 = wrapper_->registerPoseSensor("test_position");
+  EXPECT_EQ(pose_sensor_id2, pose_sensor_id3);
 
-  // Verify position is close to the measurement (should be for a new filter)
-  EXPECT_NEAR(expected.pose.pose.position.x, position_msg.point.x, 0.1);
-  EXPECT_NEAR(expected.pose.pose.position.y, position_msg.point.y, 0.1);
-  EXPECT_NEAR(expected.pose.pose.position.z, position_msg.point.z, 0.1);
+  // Now try with a completely new name
+  std::string position_sensor_id3 = wrapper_->registerPositionSensor("new_position_sensor");
+  EXPECT_NE(position_sensor_id_, position_sensor_id3);
 
-  // Verify covariance is populated
-  for (int i = 0; i < 3; i++) {
-    EXPECT_GT(expected.pose.covariance[i*7], 0.0);  // Check diagonal elements
-  }
-
-  // Get state estimate at the measurement time
-  auto state_estimate = wrapper_->getPoseEstimate(position_msg.header.stamp);
-
-  // Verify the state estimate reflects the measurement
-  EXPECT_NEAR(state_estimate.pose.pose.position.x, position_msg.point.x, 0.1);
-  EXPECT_NEAR(state_estimate.pose.pose.position.y, position_msg.point.y, 0.1);
-  EXPECT_NEAR(state_estimate.pose.pose.position.z, position_msg.point.z, 0.1);
-
-  // Test prediction to a future time
-  rclcpp::Time future_time(2.0e9);  // 2.0 seconds
-  wrapper_->predictTo(future_time);
-
-  // Get state estimate at future time
-  auto future_estimate = wrapper_->getPoseEstimate(future_time);
-
-  // Verify future estimate has the right timestamp - use seconds to compare
-  EXPECT_DOUBLE_EQ(rclcpp::Time(future_estimate.header.stamp).seconds(),
-                  future_time.seconds());
-
-  // Verify basic velocity and acceleration estimates
-  auto velocity = wrapper_->getVelocityEstimate(future_time);
-  auto acceleration = wrapper_->getAccelerationEstimate(future_time);
-
-  // Simply check that these methods return properly formed messages
-  EXPECT_DOUBLE_EQ(rclcpp::Time(velocity.header.stamp).seconds(), future_time.seconds());
-  EXPECT_DOUBLE_EQ(rclcpp::Time(acceleration.header.stamp).seconds(), future_time.seconds());
+  // Re-registering the new name should give the same ID
+  std::string position_sensor_id4 = wrapper_->registerPositionSensor("new_position_sensor");
+  EXPECT_EQ(position_sensor_id3, position_sensor_id4);
 }
 
-// Test error handling
-TEST_F(FilterWrapperTest, ErrorHandling) {
-  // Test with invalid sensor ID
-  geometry_msgs::msg::PointStamped position_msg;
-  position_msg.header.stamp = rclcpp::Time(1.0e9);
-  position_msg.point.x = 1.0;
-
-  // Process should fail with invalid sensor ID
-  bool result = wrapper_->processPosition("invalid_id", position_msg);
-  EXPECT_FALSE(result);
-
-  // Expected measurement should return empty message for invalid sensor
-  auto expected = wrapper_->getExpectedPosition("invalid_id");
-
-  // Check if the time is zero by checking both sec and nanosec fields
-  EXPECT_EQ(expected.header.stamp.sec, 0);
-  EXPECT_EQ(expected.header.stamp.nanosec, 0u);
-}
-
-// Test conversion utilities
-TEST_F(FilterWrapperTest, ConversionUtilities) {
-  // Test Vector3d <-> Point conversions
-  Eigen::Vector3d eigen_vector(1.0, 2.0, 3.0);
-  auto point_msg = wrapper_->vectorToPointMsg(eigen_vector);
-
-  EXPECT_DOUBLE_EQ(point_msg.x, 1.0);
-  EXPECT_DOUBLE_EQ(point_msg.y, 2.0);
-  EXPECT_DOUBLE_EQ(point_msg.z, 3.0);
-
-  Eigen::Vector3d converted_back = wrapper_->pointMsgToVector(point_msg);
-
-  EXPECT_DOUBLE_EQ(converted_back.x(), 1.0);
-  EXPECT_DOUBLE_EQ(converted_back.y(), 2.0);
-  EXPECT_DOUBLE_EQ(converted_back.z(), 3.0);
-
-  // Test Quaterniond <-> Quaternion conversions
-  Eigen::Quaterniond eigen_quat(0.7071, 0.0, 0.7071, 0.0); // 90 degree rotation around Y
-  eigen_quat.normalize();
-
-  auto quat_msg = wrapper_->quaternionToQuaternionMsg(eigen_quat);
-
-  EXPECT_NEAR(quat_msg.w, 0.7071, 1e-4);
-  EXPECT_NEAR(quat_msg.x, 0.0, 1e-4);
-  EXPECT_NEAR(quat_msg.y, 0.7071, 1e-4);
-  EXPECT_NEAR(quat_msg.z, 0.0, 1e-4);
-
-  Eigen::Quaterniond converted_quat = wrapper_->quaternionMsgToEigen(quat_msg);
-
-  EXPECT_NEAR(converted_quat.w(), 0.7071, 1e-4);
-  EXPECT_NEAR(converted_quat.x(), 0.0, 1e-4);
-  EXPECT_NEAR(converted_quat.y(), 0.7071, 1e-4);
-  EXPECT_NEAR(converted_quat.z(), 0.0, 1e-4);
-
-  // Test Vector3d <-> Vector3 conversions
-  Eigen::Vector3d velocity_vector(2.5, -1.0, 0.0);
-  auto vector_msg = wrapper_->eigenToVectorMsg(velocity_vector);
-
-  EXPECT_DOUBLE_EQ(vector_msg.x, 2.5);
-  EXPECT_DOUBLE_EQ(vector_msg.y, -1.0);
-  EXPECT_DOUBLE_EQ(vector_msg.z, 0.0);
-
-  Eigen::Vector3d converted_vector = wrapper_->vectorMsgToEigen(vector_msg);
-
-  EXPECT_DOUBLE_EQ(converted_vector.x(), 2.5);
-  EXPECT_DOUBLE_EQ(converted_vector.y(), -1.0);
-  EXPECT_DOUBLE_EQ(converted_vector.z(), 0.0);
-}
-
-// Test compatibility with tf2_eigen's direct conversions
-TEST_F(FilterWrapperTest, Tf2EigenCompatibility) {
-  // Create test data
-  Eigen::Vector3d position(3.5, 2.1, -1.2);
-  Eigen::Quaterniond rotation = Eigen::Quaterniond(Eigen::AngleAxisd(0.5, Eigen::Vector3d::UnitZ()));
-
-  // Convert using wrapper
-  auto point_wrapper = wrapper_->vectorToPointMsg(position);
-  auto quat_wrapper = wrapper_->quaternionToQuaternionMsg(rotation);
-
-  // Convert using tf2_eigen directly
-  geometry_msgs::msg::Point point_tf2 = tf2::toMsg(position);
-  geometry_msgs::msg::Quaternion quat_tf2 = tf2::toMsg(rotation);
-
-  // Compare results - they should be identical
-  EXPECT_DOUBLE_EQ(point_wrapper.x, point_tf2.x);
-  EXPECT_DOUBLE_EQ(point_wrapper.y, point_tf2.y);
-  EXPECT_DOUBLE_EQ(point_wrapper.z, point_tf2.z);
-
-  EXPECT_DOUBLE_EQ(quat_wrapper.w, quat_tf2.w);
-  EXPECT_DOUBLE_EQ(quat_wrapper.x, quat_tf2.x);
-  EXPECT_DOUBLE_EQ(quat_wrapper.y, quat_tf2.y);
-  EXPECT_DOUBLE_EQ(quat_wrapper.z, quat_tf2.z);
-
-  // Test round-trip conversions through both methods
-  Eigen::Vector3d position_wrapper_rt = wrapper_->pointMsgToVector(point_wrapper);
-  Eigen::Vector3d position_tf2_rt;
-  tf2::fromMsg(point_tf2, position_tf2_rt);
-
-  EXPECT_DOUBLE_EQ(position_wrapper_rt.x(), position_tf2_rt.x());
-  EXPECT_DOUBLE_EQ(position_wrapper_rt.y(), position_tf2_rt.y());
-  EXPECT_DOUBLE_EQ(position_wrapper_rt.z(), position_tf2_rt.z());
-}
-
-// Test isometry/transform conversions
-TEST_F(FilterWrapperTest, TransformConversions) {
-  // We don't have direct transform conversion in the wrapper
-  // but let's test a composite conversion to verify compatibility
-
-  // Create a test isometry
-  Eigen::Isometry3d isometry = Eigen::Isometry3d::Identity();
-  isometry.translation() = Eigen::Vector3d(1.0, 2.0, 3.0);
-  Eigen::Quaterniond quat(Eigen::AngleAxisd(M_PI/4, Eigen::Vector3d::UnitZ()));
-  isometry.linear() = quat.toRotationMatrix();
-
-  // Convert to transform using tf2_eigen
-  geometry_msgs::msg::TransformStamped transform_stamped = tf2::eigenToTransform(isometry);
-  geometry_msgs::msg::Transform transform_msg = transform_stamped.transform;
-
-  // Test the individual components with our wrapper
-  Eigen::Vector3d extracted_translation = wrapper_->vectorMsgToEigen(transform_msg.translation);
-  Eigen::Quaterniond extracted_rotation = wrapper_->quaternionMsgToEigen(transform_msg.rotation);
-
-  // Verify the translation component
-  EXPECT_NEAR(extracted_translation.x(), 1.0, 1e-6);
-  EXPECT_NEAR(extracted_translation.y(), 2.0, 1e-6);
-  EXPECT_NEAR(extracted_translation.z(), 3.0, 1e-6);
-
-  // Verify the rotation component
-  EXPECT_NEAR(extracted_rotation.w(), quat.w(), 1e-6);
-  EXPECT_NEAR(extracted_rotation.x(), quat.x(), 1e-6);
-  EXPECT_NEAR(extracted_rotation.y(), quat.y(), 1e-6);
-  EXPECT_NEAR(extracted_rotation.z(), quat.z(), 1e-6);
-
-  // Verify that we can recreate the isometry
-  Eigen::Isometry3d rebuilt_isometry = Eigen::Isometry3d::Identity();
-  rebuilt_isometry.translation() = extracted_translation;
-  rebuilt_isometry.linear() = extracted_rotation.toRotationMatrix();
-
-  // Compare the original and rebuilt transforms
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      EXPECT_NEAR(isometry.matrix()(i, j), rebuilt_isometry.matrix()(i, j), 1e-6);
-    }
-  }
-}
-
-// Test sensor transform setting through the public API
-TEST_F(FilterWrapperTest, SensorTransformTest) {
-  // Register a position sensor
-  std::string sensor_id = wrapper_->registerPositionSensor("transform_test_sensor");
-
-  // Initialize the filter with a measurement at the origin
-  geometry_msgs::msg::PointStamped init_msg;
-  init_msg.header.stamp = rclcpp::Time(1.0e9); // 1.0 seconds
-  init_msg.header.frame_id = "map";
-  init_msg.point.x = 0.0;
-  init_msg.point.y = 0.0;
-  init_msg.point.z = 0.0;
-
-  bool result = wrapper_->processPosition(sensor_id, init_msg);
-  EXPECT_TRUE(result);
-
-  // Get expected measurement with default (identity) transform
-  auto expected_default = wrapper_->getExpectedPosition(sensor_id);
-
-  // Verify initial expected position matches our measurement
-  EXPECT_NEAR(expected_default.pose.pose.position.x, 0.0, 0.01);
-  EXPECT_NEAR(expected_default.pose.pose.position.y, 0.0, 0.01);
-  EXPECT_NEAR(expected_default.pose.pose.position.z, 0.0, 0.01);
-
+// Test setting and getting transforms
+TEST_F(FilterWrapperTest, SensorTransforms) {
   // Create a non-identity transform
-  geometry_msgs::msg::TransformStamped sensor_transform;
-  sensor_transform.header.stamp = rclcpp::Clock().now();
-  sensor_transform.header.frame_id = "map";
-  sensor_transform.child_frame_id = sensor_id;
-  sensor_transform.transform.translation.x = 1.0;
-  sensor_transform.transform.translation.y = 2.0;
-  sensor_transform.transform.translation.z = 0.0;
-  // Set the transform
-  result = wrapper_->setSensorTransform(sensor_id, sensor_transform);
-  EXPECT_TRUE(result);
+  geometry_msgs::msg::TransformStamped input_transform;
+  input_transform.header.frame_id = "body";
+  input_transform.child_frame_id = "sensor";
+  input_transform.transform.translation.x = 1.0;
+  input_transform.transform.translation.y = 2.0;
+  input_transform.transform.translation.z = 3.0;
 
-  // Process a new measurement - the position in world frame
-  geometry_msgs::msg::PointStamped new_msg;
-  new_msg.header.stamp = rclcpp::Time(2.0e9); // 2.0 seconds
-  new_msg.header.frame_id = "map";
-  new_msg.point.x = 5.0;
-  new_msg.point.y = 0.0;
-  new_msg.point.z = 0.0;
+  // Use 90 degree rotation around Z
+  input_transform.transform.rotation.w = 0.7071;
+  input_transform.transform.rotation.x = 0.0;
+  input_transform.transform.rotation.y = 0.0;
+  input_transform.transform.rotation.z = 0.7071;
 
-  result = wrapper_->processPosition(sensor_id, new_msg);
-  EXPECT_TRUE(result);
+  // Set transform for position sensor
+  ASSERT_TRUE(wrapper_->setSensorTransform(position_sensor_id_, input_transform));
 
-  // Get expected measurement with the new transform
-  auto expected_transformed = wrapper_->getExpectedPosition(sensor_id);
+  // Get back the transform
+  geometry_msgs::msg::TransformStamped output_transform;
+  ASSERT_TRUE(wrapper_->getSensorTransform(position_sensor_id_, "body", output_transform));
 
-  // The expected measurement takes into account the sensor transform
-  // Original measurement (5,0,0) when viewed from a sensor at (1,2,0) with 90° Z rotation
-  // should be approximately (1,7,0) in the body frame
-  //
-  // Calculation:
-  // 1. Rotated vector: [0,5,0] (90° rotation of [5,0,0])
-  // 2. Translated: [0,5,0] + [1,2,0] = [1,7,0]
-  EXPECT_NEAR(expected_transformed.pose.pose.position.x, 1.0, 0.1);
-  EXPECT_NEAR(expected_transformed.pose.pose.position.y, 7.0, 0.1);
-  EXPECT_NEAR(expected_transformed.pose.pose.position.z, 0.0, 0.1);
-
-  // Try with invalid sensor ID
-  result = wrapper_->setSensorTransform("invalid_sensor", sensor_transform);
-  EXPECT_FALSE(result);
+  // Verify transform values
+  EXPECT_DOUBLE_EQ(output_transform.transform.translation.x, 1.0);
+  EXPECT_DOUBLE_EQ(output_transform.transform.translation.y, 2.0);
+  EXPECT_DOUBLE_EQ(output_transform.transform.translation.z, 3.0);
+  EXPECT_NEAR(output_transform.transform.rotation.w, 0.7071, 1e-4);
+  EXPECT_NEAR(output_transform.transform.rotation.x, 0.0, 1e-4);
+  EXPECT_NEAR(output_transform.transform.rotation.y, 0.0, 1e-4);
+  EXPECT_NEAR(output_transform.transform.rotation.z, 0.7071, 1e-4);
 }
 
-// Test with multiple measurements
-TEST_F(FilterWrapperTest, MultiMeasurementTracking) {
-  // Register a second position sensor at a different location
-  std::string second_sensor_id = wrapper_->registerPositionSensor("front_sensor");
+// Test filter initialization with position measurement
+TEST_F(FilterWrapperTest, InitializeWithPosition) {
+  // Create and process position measurement
+  double t = 0.0;
+  auto pos_msg = createPositionMsg(t);
 
-  // First initialize the filter with a measurement at the origin
-  geometry_msgs::msg::PointStamped init_msg;
-  init_msg.header.stamp = rclcpp::Time(0.0);
-  init_msg.header.frame_id = "map";
-  init_msg.point.x = 0.0;
-  init_msg.point.y = 0.0;
-  init_msg.point.z = 0.0;
+  ASSERT_TRUE(wrapper_->processPosition(position_sensor_id_, pos_msg));
 
-  wrapper_->processPosition(position_sensor_id_, init_msg);
+  // Get pose estimate and check position
+  auto pose_estimate = wrapper_->getPoseEstimate(pos_msg.header.stamp);
 
-  geometry_msgs::msg::TransformStamped identity_transform;
-  identity_transform.header.stamp = rclcpp::Clock().now();
-  identity_transform.header.frame_id = "map";
-  identity_transform.child_frame_id = position_sensor_id_;
-  identity_transform.transform.translation.x = 0.0;
-  identity_transform.transform.translation.y = 0.0;
-  identity_transform.transform.translation.z = 0.0;
-  wrapper_->setSensorTransform(position_sensor_id_, identity_transform);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.x, pos_msg.point.x, 1e-4);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.y, pos_msg.point.y, 1e-4);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.z, pos_msg.point.z, 1e-4);
+}
 
-  // Second sensor at (1,0,0) in the body frame (front of robot)
-  geometry_msgs::msg::TransformStamped front_transform;
-  front_transform.header.stamp = rclcpp::Clock().now();
-  front_transform.header.frame_id = "map";
-  front_transform.child_frame_id = second_sensor_id;
-  front_transform.transform.translation.x = 1.0;
-  front_transform.transform.translation.y = 0.0;
-  front_transform.transform.translation.z = 0.0;
-  wrapper_->setSensorTransform(second_sensor_id, front_transform);
+// Test dead reckoning
+TEST_F(FilterWrapperTest, DeadReckoning) {
+  // Initialize with first position measurement
+  double t = 0.0;
+  auto pos_msg = createPositionMsg(t);
+  ASSERT_TRUE(wrapper_->processPosition(position_sensor_id_, pos_msg));
 
-  // Create a trajectory of measurements (robot moving along x-axis)
-  for (double t = 0.1; t < 5.0; t += 0.5) {
-    // Position of the body
-    double body_x = t * 0.5; // Moving at 0.5 m/s
+  // Jump ahead in time and predict
+  double t_future = 0.5;  // 0.5 seconds later
+  wrapper_->predictTo(createTime(t_future));
 
-    // Measurement from center sensor
-    geometry_msgs::msg::PointStamped center_msg;
-    center_msg.header.stamp = rclcpp::Time(t * 1e9);
-    center_msg.header.frame_id = "map";
-    center_msg.point.x = body_x;
-    center_msg.point.y = 0.0;
-    center_msg.point.z = 0.0;
+  // Get the predicted state
+  auto pose_estimate = wrapper_->getPoseEstimate(createTime(t_future));
 
-    // Add some noise
-    center_msg.point.x += 0.01 * (std::rand() % 100 - 50) / 50.0;
-    center_msg.point.y += 0.01 * (std::rand() % 100 - 50) / 50.0;
+  // Verify prediction is reasonable (not exact due to prediction error)
+  auto true_state = utils::Figure8Trajectory(t_future);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.x,
+              true_state[core::StateIndex::Position::X], 0.5);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.y,
+              true_state[core::StateIndex::Position::Y], 0.5);
+  EXPECT_NEAR(pose_estimate.pose.pose.position.z,
+              true_state[core::StateIndex::Position::Z], 0.5);
+}
 
-    // Process with slight delay
-    wrapper_->processPosition(position_sensor_id_, center_msg);
+// Test expected measurement
+TEST_F(FilterWrapperTest, ExpectedMeasurement) {
+  // Initialize with first position measurement
+  double t = 0.0;
+  auto pos_msg = createPositionMsg(t);
+  ASSERT_TRUE(wrapper_->processPosition(position_sensor_id_, pos_msg));
 
-    // Measurement from front sensor (1m ahead of center)
-    if (t >= 1.0 && std::fmod(t, 1.0) < 0.1) { // Front sensor updates only every 1s
-      geometry_msgs::msg::PointStamped front_msg;
-      front_msg.header.stamp = rclcpp::Time(t * 1e9);
-      front_msg.header.frame_id = "map";
-      front_msg.point.x = body_x + 1.0; // 1m ahead of body center
-      front_msg.point.y = 0.0;
-      front_msg.point.z = 0.0;
+  // Get expected position measurement
+  auto expected_pos = wrapper_->getExpectedPosition(position_sensor_id_);
 
-      // Add more noise (less accurate sensor)
-      front_msg.point.x += 0.05 * (std::rand() % 100 - 50) / 50.0;
-      front_msg.point.y += 0.05 * (std::rand() % 100 - 50) / 50.0;
+  // Should be close to actual input measurement
+  EXPECT_NEAR(expected_pos.pose.pose.position.x, pos_msg.point.x, 1e-4);
+  EXPECT_NEAR(expected_pos.pose.pose.position.y, pos_msg.point.y, 1e-4);
+  EXPECT_NEAR(expected_pos.pose.pose.position.z, pos_msg.point.z, 1e-4);
+}
 
-      wrapper_->processPosition(second_sensor_id, front_msg);
-    }
+TEST_F(FilterWrapperTest, ProcessAndEstimateTrajectory) {
+  setSensorTransforms();
+  ASSERT_DOUBLE_EQ(wrapper_->GetCurrentTime(), std::numeric_limits<double>::lowest());
+
+  // Start at t=0, but with initial offset to test convergence
+  double t = 0.0;
+  double dt = 0.01;  // 100Hz
+  double time_step_jitter = 0.03;  // 1ms jitter
+
+  // Process first measurement with intentionally wrong position to test convergence
+  auto pos_msg = createPositionMsg(t);
+  // Add an initial error to test convergence
+  pos_msg.point.x += 1.0;  // 1m offset in X
+  pos_msg.point.y += 0.5;  // 0.5m offset in Y
+  ASSERT_TRUE(wrapper_->processPosition(position_sensor_id_, pos_msg));
+
+  // Random number generator for time jitter
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<> jitter_dist(-2*time_step_jitter, 0.0); // No future measurements
+
+  // Process measurements along the Figure-8 trajectory
+  for (int i = 1; i < 100; i++) {  // 10 seconds of data
+    t += dt;
+
+    // Add random jitter to each sensor's timestamp
+    double t_pos = t + jitter_dist(gen);
+    double t_pose = t + jitter_dist(gen);
+    double t_vel = t + jitter_dist(gen);
+    double t_imu = t + jitter_dist(gen);
+
+    // Create measurements from the true trajectory with perturbed timestamps
+    auto pos_msg = createPositionMsg(t_pos);
+    auto pose_msg = createPoseMsg(t_pose);
+    auto vel_msg = createVelocityMsg(t_vel);
+    auto imu_msg = createImuMsg(t_imu);
+    // Process all measurements
+    ASSERT_TRUE(wrapper_->processPose(pose_sensor_id_, pose_msg))
+        << "Failed to process pose measurement at time " << t_pose;
+    ASSERT_TRUE(wrapper_->processPosition(position_sensor_id_, pos_msg))
+        << "Failed to process position measurement at time " << t_pos;
+    ASSERT_TRUE(wrapper_->processBodyVelocity(velocity_sensor_id_, vel_msg))
+        << "Failed to process velocity measurement at time " << t_vel;
+    ASSERT_TRUE(wrapper_->processImu(imu_sensor_id_, imu_msg))
+        << "Failed to process IMU measurement at time " << t_imu;
+
+    ASSERT_DOUBLE_EQ(wrapper_->GetCurrentTime(), std::max({t_pos, t_pose, t_vel, t_imu}));
+
+    // Get expected state at this time
+    auto true_state = utils::Figure8Trajectory(t);
+
+    // Get state estimates
+    auto pose_estimate = wrapper_->getPoseEstimate(createTime(t));
+    auto velocity_estimate = wrapper_->getVelocityEstimate(createTime(t));
+
+    Eigen::Vector3d position(pose_estimate.pose.pose.position.x, pose_estimate.pose.pose.position.y, pose_estimate.pose.pose.position.z);
+    Eigen::Vector3d velocity(velocity_estimate.twist.twist.linear.x, velocity_estimate.twist.twist.linear.y, velocity_estimate.twist.twist.linear.z);
+    // Calculate position and velocity errors
+   double pos_error = (position - true_state.segment<3>(core::StateIndex::Position::Begin())).norm();
+   double vel_error = (velocity - true_state.segment<3>(core::StateIndex::LinearVelocity::Begin())).norm();
+
+    Eigen::Quaterniond quat_estimate(pose_estimate.pose.pose.orientation.w, pose_estimate.pose.pose.orientation.x, pose_estimate.pose.pose.orientation.y, pose_estimate.pose.pose.orientation.z);
+    Eigen::Quaterniond quat_true(true_state[core::StateIndex::Quaternion::W], true_state[core::StateIndex::Quaternion::X], true_state[core::StateIndex::Quaternion::Y], true_state[core::StateIndex::Quaternion::Z]);
+    double quat_error = quat_estimate.angularDistance(quat_true);
+
+    // Start with larger tolerance, decrease over time as filter converges
+    double tolerance_factor = std::max(0.1, 1.0 - i * 0.01);  // Decreases from 1.0 to 0.1
+
+    EXPECT_LT(pos_error, tolerance_factor * 0.1);
+    EXPECT_LT(vel_error, tolerance_factor * 0.1);
+    EXPECT_LT(quat_error, tolerance_factor * 0.1);
   }
-
-  // Get final state estimate
-  auto final_state = wrapper_->getPoseEstimate(rclcpp::Time(5.0 * 1e9));
-
-  // Verify the final state is valid (not NaN)
-  EXPECT_FALSE(std::isnan(final_state.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(final_state.pose.pose.position.y));
-
-  // Get velocity estimate
-  auto velocity = wrapper_->getVelocityEstimate(rclcpp::Time(5.0 * 1e9));
-
-  // Verify the velocity is valid
-  EXPECT_FALSE(std::isnan(velocity.twist.twist.linear.x));
-  EXPECT_FALSE(std::isnan(velocity.twist.twist.linear.y));
 }
-
-// Test out-of-sequence measurements and timeout behavior
-TEST_F(FilterWrapperTest, OutOfSequenceAndTimeout) {
-  // Initialize the filter first
-  geometry_msgs::msg::PointStamped init_msg;
-  init_msg.header.stamp = rclcpp::Time(0.5e9);
-  init_msg.header.frame_id = "map";
-  init_msg.point.x = 0.0;
-  init_msg.point.y = 0.0;
-  init_msg.point.z = 0.0;
-
-  wrapper_->processPosition(position_sensor_id_, init_msg);
-
-  // Set maximum delay window to 0.5 seconds
-  wrapper_->setMaxDelayWindow(0.5);
-
-  // Process a recent measurement first
-  geometry_msgs::msg::PointStamped recent_msg;
-  recent_msg.header.stamp = rclcpp::Time(2.0e9); // 2.0 seconds
-  recent_msg.header.frame_id = "map";
-  recent_msg.point.x = 2.0;
-  recent_msg.point.y = 0.0;
-  recent_msg.point.z = 0.0;
-
-  bool result = wrapper_->processPosition(position_sensor_id_, recent_msg);
-  EXPECT_TRUE(result);
-
-  // Now try to process an older measurement that's within the delay window
-  geometry_msgs::msg::PointStamped older_msg;
-  older_msg.header.stamp = rclcpp::Time(1.8e9); // 1.8 seconds (0.2s older)
-  older_msg.header.frame_id = "map";
-  older_msg.point.x = 1.8;
-  older_msg.point.y = 0.0;
-  older_msg.point.z = 0.0;
-
-  result = wrapper_->processPosition(position_sensor_id_, older_msg);
-  EXPECT_TRUE(result); // Should accept this measurement
-
-  // Now try a very old measurement outside the delay window
-  geometry_msgs::msg::PointStamped stale_msg;
-  stale_msg.header.stamp = rclcpp::Time(1.0e9); // 1.0 seconds (1.0s older)
-  stale_msg.header.frame_id = "map";
-  stale_msg.point.x = 1.0;
-  stale_msg.point.y = 0.0;
-  stale_msg.point.z = 0.0;
-
-  result = wrapper_->processPosition(position_sensor_id_, stale_msg);
-  EXPECT_FALSE(result); // Should reject this stale measurement
-
-  // Get state estimate at time 2.0s
-  auto state = wrapper_->getPoseEstimate(rclcpp::Time(2.0e9));
-
-  // Verify state is valid
-  EXPECT_FALSE(std::isnan(state.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(state.pose.pose.position.y));
-}
-
-// Test the impact of sensor transforms on expected measurements
-TEST_F(FilterWrapperTest, ExpectedMeasurementsWithTransform) {
-  // Initialize the filter first
-  geometry_msgs::msg::PointStamped init_msg;
-  init_msg.header.stamp = rclcpp::Time(0.5e9);
-  init_msg.header.frame_id = "map";
-  init_msg.point.x = 0.0;
-  init_msg.point.y = 0.0;
-  init_msg.point.z = 0.0;
-
-  wrapper_->processPosition(position_sensor_id_, init_msg);
-
-  // Set a non-trivial transform for the sensor
-  geometry_msgs::msg::TransformStamped sensor_transform;
-  sensor_transform.header.stamp = rclcpp::Clock().now();
-  sensor_transform.header.frame_id = "map";
-  sensor_transform.child_frame_id = position_sensor_id_;
-  sensor_transform.transform.translation.x = 0.0;
-  sensor_transform.transform.translation.y = 1.0;
-  sensor_transform.transform.translation.z = 0.0;
-  wrapper_->setSensorTransform(position_sensor_id_, sensor_transform);
-
-  // Process a measurement from directly ahead
-  geometry_msgs::msg::PointStamped position_msg;
-  position_msg.header.stamp = rclcpp::Time(1.0e9);
-  position_msg.header.frame_id = "map";
-  position_msg.point.x = 5.0; // 5m ahead
-  position_msg.point.y = 1.0; // 1m to the left (matching the sensor position)
-  position_msg.point.z = 0.0;
-
-  wrapper_->processPosition(position_sensor_id_, position_msg);
-
-  // Get the expected measurement
-  auto expected = wrapper_->getExpectedPosition(position_sensor_id_);
-
-  // Verify results are not NaN
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.y));
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.z));
-
-  // Verify the position estimate
-  auto pose = wrapper_->getPoseEstimate(position_msg.header.stamp);
-
-  // Verify results are not NaN
-  EXPECT_FALSE(std::isnan(pose.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(pose.pose.pose.position.y));
-  EXPECT_FALSE(std::isnan(pose.pose.pose.position.z));
-}
-
-// Test simplified sensor transform functionality
-TEST_F(FilterWrapperTest, SimpleSensorTransformTest) {
-  // Register a position sensor
-  std::string sensor_id = wrapper_->registerPositionSensor("transform_test_sensor");
-
-  // Check initial transform is identity
-  geometry_msgs::msg::TransformStamped initial_transform;
-  bool result = wrapper_->getSensorTransform(sensor_id, "body", initial_transform);
-  EXPECT_TRUE(result) << "Failed to get initial transform";
-  EXPECT_TRUE(initial_transform.transform.translation.x == 0.0)
-      << "Initial transform is not identity";
-
-  // Create a new transform
-  geometry_msgs::msg::TransformStamped new_transform;
-  new_transform.header.stamp = rclcpp::Clock().now();
-  new_transform.header.frame_id = "body";
-  new_transform.child_frame_id = sensor_id;
-  new_transform.transform.translation.x = 1.0;
-  new_transform.transform.translation.y = 2.0;
-  new_transform.transform.translation.z = 3.0;
-
-  // Set the transform through the wrapper
-  result = wrapper_->setSensorTransform(sensor_id, new_transform);
-  EXPECT_TRUE(result) << "Failed to set sensor transform";
-
-  // Get the sensor again and check the transform was updated
-  geometry_msgs::msg::TransformStamped updated_transform;
-  result = wrapper_->getSensorTransform(sensor_id, "body", updated_transform);
-  EXPECT_TRUE(result) << "Failed to get updated transform";
-
-  // Check translation component
-  EXPECT_NEAR(updated_transform.transform.translation.x, 1.0, 1e-9) << "X translation not set correctly";
-  EXPECT_NEAR(updated_transform.transform.translation.y, 2.0, 1e-9) << "Y translation not set correctly";
-  EXPECT_NEAR(updated_transform.transform.translation.z, 3.0, 1e-9) << "Z translation not set correctly";
-
-  // Check rotation component (by comparing a vector rotated by both matrices)
-  Eigen::Vector3d test_vector(1.0, 0.0, 0.0);
-  Eigen::Vector3d expected_rotated = tf2::transformToEigen(new_transform).rotation() * test_vector;
-  Eigen::Vector3d actual_rotated = tf2::transformToEigen(updated_transform).rotation() * test_vector;
-
-  EXPECT_NEAR(actual_rotated.x(), expected_rotated.x(), 1e-9) << "Rotation X component not set correctly";
-  EXPECT_NEAR(actual_rotated.y(), expected_rotated.y(), 1e-9) << "Rotation Y component not set correctly";
-  EXPECT_NEAR(actual_rotated.z(), expected_rotated.z(), 1e-9) << "Rotation Z component not set correctly";
-
-  // Try setting with invalid sensor ID
-  result = wrapper_->setSensorTransform("invalid_sensor", new_transform);
-  EXPECT_FALSE(result) << "Should return false for invalid sensor ID";
-}
-
-// This is the new version of the test from earlier commits
-TEST_F(FilterWrapperTest, SensorTransform) {
-  // First initialize the filter with a measurement at the origin
-  // to establish a valid state before applying transforms
-  geometry_msgs::msg::PointStamped init_msg;
-  init_msg.header.stamp = rclcpp::Time(0.5e9); // 0.5 seconds
-  init_msg.header.frame_id = "map";
-  init_msg.point.x = 0.0;
-  init_msg.point.y = 0.0;
-  init_msg.point.z = 0.0;
-
-  // Initialize filter state
-  bool result = wrapper_->processPosition(position_sensor_id_, init_msg);
-  EXPECT_TRUE(result);
-
-  geometry_msgs::msg::TransformStamped sensor_transform;
-  sensor_transform.header.stamp = rclcpp::Clock().now();
-  sensor_transform.header.frame_id = "map";
-  sensor_transform.child_frame_id = position_sensor_id_;
-  sensor_transform.transform.translation.x = 1.0;
-  sensor_transform.transform.translation.y = 2.0;
-  sensor_transform.transform.translation.z = 3.0;
-  // Set the transform
-  result = wrapper_->setSensorTransform(position_sensor_id_, sensor_transform);
-  EXPECT_TRUE(result);
-
-  // Try with invalid sensor ID
-  result = wrapper_->setSensorTransform("invalid_sensor", sensor_transform);
-  EXPECT_FALSE(result);
-
-  // Create a position measurement in the sensor frame
-  geometry_msgs::msg::PointStamped position_msg;
-  position_msg.header.stamp = rclcpp::Time(1.0e9); // 1.0 seconds
-  position_msg.header.frame_id = "sensor_frame";
-  position_msg.point.x = 2.0;
-  position_msg.point.y = 0.0;
-  position_msg.point.z = 0.0;
-
-  // Process the measurement
-  result = wrapper_->processPosition(position_sensor_id_, position_msg);
-  EXPECT_TRUE(result);
-
-  // Get expected measurement - should be transformed to the body frame
-  auto expected = wrapper_->getExpectedPosition(position_sensor_id_);
-
-  // Since we've initialized the state, we can now check the results
-  // Skip the precise numeric checks for now and just make sure the values are valid
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.y));
-  EXPECT_FALSE(std::isnan(expected.pose.pose.position.z));
-
-  // Get state estimate at the measurement time
-  auto state_estimate = wrapper_->getPoseEstimate(position_msg.header.stamp);
-
-  // Verify we have valid state estimates
-  EXPECT_FALSE(std::isnan(state_estimate.pose.pose.position.x));
-  EXPECT_FALSE(std::isnan(state_estimate.pose.pose.position.y));
-  EXPECT_FALSE(std::isnan(state_estimate.pose.pose.position.z));
-}
-
-} // namespace test
-} // namespace wrapper
-} // namespace ros2
-} // namespace kinematic_arbiter
 
 int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+  testing::InitGoogleTest(&argc, argv);
+  rclcpp::init(argc, argv);
+  int result = RUN_ALL_TESTS();
+  rclcpp::shutdown();
+  return result;
 }

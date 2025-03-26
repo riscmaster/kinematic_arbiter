@@ -6,10 +6,6 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
-namespace {
-  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Pose>::value;
-}
-
 /**
  * @brief 7DOF pose measurement model (position + orientation)
  *
@@ -20,13 +16,13 @@ namespace {
 class PoseSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
+  static constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Pose>::value;
   using Base = core::MeasurementModelInterface;
   using StateVector = typename Base::StateVector;
   using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
   using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
   using Covariance = Eigen::Matrix<double, kMeasurementDimension, kMeasurementDimension>;
   using StateFlags = typename Base::StateFlags;
-
   /**
    * @brief Indices for accessing pose measurement components
    */
@@ -60,7 +56,7 @@ public:
    * @param state Current state estimate
    * @return Expected measurement [x, y, z, qw, qx, qy, qz]'
    */
-  MeasurementVector PredictMeasurement(const StateVector& state) const override {
+  DynamicVector PredictMeasurement(const StateVector& state) const override {
     Vector predicted_measurement = Vector::Zero();
 
     // Extract position from state
@@ -103,7 +99,7 @@ public:
    * @param state Current state estimate (unused in this implementation as Jacobian is constant)
    * @return Jacobian of measurement with respect to state
    */
-  MeasurementJacobian GetMeasurementJacobian(const StateVector& /* state */) const override {
+  DynamicJacobian GetMeasurementJacobian(const StateVector& /* state */) const override {
     Jacobian jacobian = Jacobian::Zero();
 
     // Position part of the Jacobian - derivative with respect to position is identity
@@ -176,10 +172,11 @@ public:
    * @return Flags indicating which states were initialized
    */
   StateFlags InitializeState(
-      const MeasurementVector& measurement,
+      const DynamicVector& measurement,
       const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override {
+        ValidateMeasurementSize(measurement);
 
     StateFlags initialized_states = StateFlags::Zero();
 

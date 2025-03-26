@@ -45,29 +45,91 @@ public:
   explicit FilterWrapper(const kinematic_arbiter::models::RigidBodyStateModel::Params& model_params = kinematic_arbiter::models::RigidBodyStateModel::Params());
 
   /**
-   * @brief Register sensors of different types
+   * @brief Register a position sensor with a given name
+   * @param name The name of the sensor
    * @return The sensor ID for later reference
    */
-  std::string registerPositionSensor(const std::string& name);
-  std::string registerPoseSensor(const std::string& name);
-  std::string registerBodyVelocitySensor(const std::string& name);
-  std::string registerImuSensor(const std::string& name);
+  std::string registerPositionSensor(const std::string& name) {
+    return registerSensor(name, kinematic_arbiter::core::SensorType::Position);
+  }
 
   /**
-   * @brief Set maximum delay window for stale measurements
+   * @brief Register a pose sensor with a given name
+   * @param name The name of the sensor
+   * @return The sensor ID for later reference
+   */
+  std::string registerPoseSensor(const std::string& name) {
+    return registerSensor(name, kinematic_arbiter::core::SensorType::Pose);
+  }
+
+  /**
+   * @brief Register a body velocity sensor with a given name
+   * @param name The name of the sensor
+   * @return The sensor ID for later reference
+   */
+  std::string registerBodyVelocitySensor(const std::string& name) {
+    return registerSensor(name, kinematic_arbiter::core::SensorType::BodyVelocity);
+    }
+
+  /**
+   * @brief Register an IMU sensor with a given name
+   * @param name The name of the sensor
+   * @return The sensor ID for later reference
+   */
+  std::string registerImuSensor(const std::string& name) {
+    return registerSensor(name, kinematic_arbiter::core::SensorType::Imu);
+  }
+
+   /* @brief Set maximum delay window for stale measurements
    */
   void setMaxDelayWindow(double seconds);
 
   /**
-   * @brief Process different measurement types
+   * @brief Process Position measurement
    */
   bool processPosition(const std::string& sensor_id, const geometry_msgs::msg::PointStamped& msg);
+
+  /**
+   * @brief Process Pose measurement
+   */
+  bool processPose(const std::string& sensor_id, const geometry_msgs::msg::PoseStamped& msg);
+
+  /**
+   * @brief Process Body Velocity measurement
+   */
+  bool processBodyVelocity(const std::string& sensor_id, const geometry_msgs::msg::TwistStamped& msg);
+
+  /**
+   * @brief Process IMU measurement
+   */
+  bool processImu(const std::string& sensor_id, const sensor_msgs::msg::Imu& msg);
+
   /**
    * @brief Get expected measurement for position sensor
    * @param sensor_id The sensor identifier
    * @return Expected position measurement as PoseWithCovarianceStamped
    */
   geometry_msgs::msg::PoseWithCovarianceStamped getExpectedPosition(const std::string& sensor_id);
+
+  /**
+   * @brief Get expected measurement for a sensor using a specific trajectory
+   * @param sensor_id The sensor identifier
+   * @param[out] measurement The expected measurement vector
+   * @param[in] state_at_sensor_time The state at the sensor time
+   * @return True if successful, false otherwise
+   */
+  bool getExpectedMeasurementByID(const std::string& sensor_id,
+                                 kinematic_arbiter::core::MeasurementModelInterface::DynamicVector& measurement,
+                                 const StateVector& state_at_sensor_time) const;
+
+  /**
+   * @brief Get expected measurement for a sensor using current reference state
+   * @param sensor_id The sensor identifier
+   * @param[out] measurement The expected measurement vector
+   * @return True if successful, false otherwise
+   */
+  bool getExpectedMeasurementByID(const std::string& sensor_id,
+                                 kinematic_arbiter::core::MeasurementModelInterface::DynamicVector& measurement) const;
 
 
   /**
@@ -102,25 +164,29 @@ public:
   bool getSensorTransform(const std::string& sensor_id, const std::string& body_frame_id,
                          geometry_msgs::msg::TransformStamped& transform) const;
 
-  /**
+                         /**
    * @brief Convert ROS Time to seconds
    */
   double rosTimeToSeconds(const rclcpp::Time& time);
 
-  /**
-   * @brief Convert between ROS and Eigen types
-   */
-  Eigen::Vector3d pointMsgToVector(const geometry_msgs::msg::Point& point);
-  Eigen::Quaterniond quaternionMsgToEigen(const geometry_msgs::msg::Quaternion& quat);
-  Eigen::Vector3d vectorMsgToEigen(const geometry_msgs::msg::Vector3& vec);
-
-  geometry_msgs::msg::Point vectorToPointMsg(const Eigen::Vector3d& vec);
-  geometry_msgs::msg::Quaternion quaternionToQuaternionMsg(const Eigen::Quaterniond& quat);
-  geometry_msgs::msg::Vector3 eigenToVectorMsg(const Eigen::Vector3d& vec);
-
-private:
   // Helper method to convert double time to ROS time
   rclcpp::Time doubleTimeToRosTime(double time) const;
+
+  /**
+   * @brief Get the current time
+   */
+  double GetCurrentTime() const { return filter_->GetCurrentTime(); }
+
+
+private:
+
+  /**
+   * @brief Register sensors of different types
+   * @return The sensor ID for later reference
+   */
+  std::string registerSensor(const std::string& name, kinematic_arbiter::core::SensorType type);
+
+
 
   // Improved sensor info with the enum
   struct SensorInfo {

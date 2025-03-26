@@ -14,10 +14,6 @@ namespace test {
 class ImuStationaryTest;
 }  // namespace test
 
-namespace {
-  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Imu>::value;
-}
-
 // Move Config struct outside the class
 struct ImuSensorConfig {
   uint32_t bias_estimation_window_size = 1000;
@@ -36,6 +32,7 @@ class ImuSensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
   using Base = core::MeasurementModelInterface;
+  static constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::Imu>::value;
   using StateVector = typename Base::StateVector;
   using StateCovariance = typename Base::StateCovariance;
   using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
@@ -81,7 +78,7 @@ public:
    * @param state Current state estimate
    * @return Expected measurement [gx, gy, gz, ax, ay, az]'
    */
-  MeasurementVector PredictMeasurement(const StateVector& state) const override;
+  DynamicVector PredictMeasurement(const StateVector& state) const override;
 
   /**
    * @brief Update bias estimates
@@ -97,7 +94,7 @@ public:
   bool UpdateBiasEstimates(
       const StateVector& state,
       const Eigen::MatrixXd& state_covariance,
-      const MeasurementVector& raw_measurement);
+      const Vector& raw_measurement);
 
   /**
    * @brief Compute measurement Jacobian
@@ -105,7 +102,7 @@ public:
    * @param state Current state estimate
    * @return Jacobian of measurement with respect to state
    */
-  MeasurementJacobian GetMeasurementJacobian(const StateVector& state) const override;
+  DynamicJacobian GetMeasurementJacobian(const StateVector& state) const override;
 
   /**
    * @brief Get the inputs to the prediction model
@@ -115,7 +112,11 @@ public:
    * @param dt Time step in seconds
    * @return Linear and angular acceleration as inputs to the prediction model
    */
-  Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(const StateVector& state_before_prediction, const StateCovariance& state_covariance_before_prediction, const MeasurementVector& measurement_after_prediction, double dt) const override;
+  Eigen::Matrix<double, 6, 1> GetPredictionModelInputs(
+      const StateVector& state_before_prediction,
+      const StateCovariance& state_covariance_before_prediction,
+      const DynamicVector& measurement_after_prediction,
+      double dt) const override;
 
   /**
    * @brief Enable or disable bias calibration
@@ -167,7 +168,7 @@ public:
    * @return Flags indicating which states were initialized
    */
   StateFlags InitializeState(
-      const MeasurementVector& measurement,
+      const DynamicVector& measurement,
       const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override;
@@ -193,7 +194,7 @@ private:
   bool IsStationary(
       const StateVector& state,
       const StateCovariance& state_covariance,
-      const MeasurementVector& measurement) const;
+      const Vector& measurement) const;
 };
 
 } // namespace sensors

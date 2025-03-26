@@ -6,9 +6,6 @@
 
 namespace kinematic_arbiter {
 namespace sensors {
-namespace {
-  constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::BodyVelocity>::value;
-}
 
 /**
  * @brief Body velocity measurement model (linear + angular velocity)
@@ -21,6 +18,7 @@ class BodyVelocitySensorModel : public core::MeasurementModelInterface {
 public:
   // Type definitions for clarity
   using Base = core::MeasurementModelInterface;
+  static constexpr int kMeasurementDimension = core::MeasurementDimension<core::SensorType::BodyVelocity>::value;
   using StateVector = typename Base::StateVector;
   using Vector = Eigen::Matrix<double, kMeasurementDimension, 1>;
   using Jacobian = Eigen::Matrix<double, kMeasurementDimension, core::StateIndex::kFullStateSize>;
@@ -59,7 +57,7 @@ public:
    * @param state Current state estimate
    * @return Expected measurement [vx, vy, vz, wx, wy, wz]'
    */
-  MeasurementVector PredictMeasurement(const StateVector& state) const override {
+  DynamicVector PredictMeasurement(const StateVector& state) const override {
     Vector predicted_measurement = Vector::Zero();
 
     // Extract linear velocity from state
@@ -102,7 +100,7 @@ public:
    * @param state Current state estimate
    * @return Jacobian of measurement with respect to state
    */
-  MeasurementJacobian GetMeasurementJacobian(const StateVector&) const override {
+  DynamicJacobian GetMeasurementJacobian(const StateVector&) const override {
     Jacobian jacobian = Jacobian::Zero();
 
     // Extract transform parameters
@@ -186,10 +184,11 @@ public:
    * @return Flags indicating which states were initialized
    */
   StateFlags InitializeState(
-      const MeasurementVector& measurement,
+      const DynamicVector& measurement,
       const StateFlags&,
       StateVector& state,
       StateCovariance& covariance) const override {
+    ValidateMeasurementSize(measurement);
 
     StateFlags initialized_states = StateFlags::Zero();
 
