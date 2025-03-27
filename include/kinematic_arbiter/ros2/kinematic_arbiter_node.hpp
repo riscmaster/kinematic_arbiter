@@ -59,15 +59,15 @@ private:
 
   // Subscription containers for different sensor types
   std::vector<SensorSubscription> position_subs_;
-  // std::vector<SensorSubscription> pose_subs_;
-  // std::vector<SensorSubscription> velocity_subs_;
-  // std::vector<SensorSubscription> imu_subs_;
+  std::vector<SensorSubscription> pose_subs_;
+  std::vector<SensorSubscription> velocity_subs_;
+  std::vector<SensorSubscription> imu_subs_;
 
   // Callback methods for different sensor types
   void positionCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg, const std::string& sensor_id);
-  // void poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg, const std::string& sensor_id);
-  // void velocityCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg, const std::string& sensor_id);
-  // void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg, const std::string& sensor_id);
+  void poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg, const std::string& sensor_id);
+  void velocityCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg, const std::string& sensor_id);
+  void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg, const std::string& sensor_id);
 
   // Sensor initialization helper
   template<typename MsgType>
