@@ -9,6 +9,10 @@ namespace ros2 {
 namespace wrapper {
 using namespace kinematic_arbiter::core;
 using namespace kinematic_arbiter::sensors;
+// Global constant to offset times to avoid negative values
+// Large enough to ensure all test times are positive
+const double TIME_OFFSET = 1000000.0;  // 1 million seconds
+
 // Constructor
 FilterWrapper::FilterWrapper(const kinematic_arbiter::models::RigidBodyStateModel::Params& model_params) {
   // Create state model
@@ -338,7 +342,9 @@ void FilterWrapper::predictTo(const rclcpp::Time& time) {
 
 // Utility conversion methods
 double FilterWrapper::rosTimeToSeconds(const rclcpp::Time& time) {
-  return time.seconds();
+  // Convert to nanoseconds, then to seconds with double precision
+  double seconds_with_offset = time.nanoseconds() * 1e-9;
+  return seconds_with_offset - TIME_OFFSET;
 }
 
 /**
@@ -415,10 +421,14 @@ bool FilterWrapper::getSensorTransform(const std::string& sensor_id, const std::
  * @return ROS time
  */
 rclcpp::Time FilterWrapper::doubleTimeToRosTime(double time) const {
-  // Convert double seconds to ROS Time
-  int32_t sec = static_cast<int32_t>(time);
-  uint32_t nanosec = static_cast<uint32_t>((time - sec) * 1e9);
-  return rclcpp::Time(sec, nanosec);
+  // Add offset to ensure positive time
+  double time_with_offset = time + TIME_OFFSET;
+
+  // Convert to nanoseconds and use the nanoseconds constructor
+  int64_t nanoseconds = static_cast<int64_t>(time_with_offset * 1e9);
+
+  // Create time from nanoseconds
+  return rclcpp::Time(nanoseconds);
 }
 
 /**

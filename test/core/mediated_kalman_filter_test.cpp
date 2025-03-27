@@ -524,4 +524,106 @@ TEST_F(MediatedKalmanFilterTest, ImuSensorImprovesEstimates_LargeNoise) {
   TestSensorImprovesStateEstimates<SensorType::Imu>(imu_model, large_noise);
 }
 
+// Test that the filter can track a Figure-8 trajectory with multiple sensor types
+TEST_F(MediatedKalmanFilterTest, TrackFigure8Trajectory) {
+  // Initialize filter
+  auto state_model = std::make_shared<kinematic_arbiter::models::RigidBodyStateModel>();
+  auto filter = std::make_shared<FilterType>(state_model);
+  ASSERT_EQ(filter->GetCurrentTime(), std::numeric_limits<double>::lowest());
+  // Register sensor models with reasonable noise levels
+  auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+  auto velocity_model = std::make_shared<kinematic_arbiter::sensors::BodyVelocitySensorModel>();
+  auto imu_model = std::make_shared<kinematic_arbiter::sensors::ImuSensorModel>();
+
+  // Register sensors
+  int position_id = filter->AddSensor(position_model);
+  int pose_id = filter->AddSensor(pose_model);
+  int velocity_id = filter->AddSensor(velocity_model);
+  int imu_id = filter->AddSensor(imu_model);
+
+  // Initialize time
+  double t = 0.0;
+  double dt = 0.01;  // 100Hz update rate
+
+  // Use the Figure8Trajectory to get initial state
+  auto true_state = kinematic_arbiter::utils::Figure8Trajectory(t);
+
+  // Vectors to track errors for analysis
+  std::vector<double> position_errors;
+  std::vector<double> velocity_errors;
+  std::vector<double> orientation_errors;
+
+  // Run the filter for 5 seconds (500 iterations at 100Hz)
+  for (int i = 1; i <= 100; i++) {
+    t += dt;
+
+    // Get true state from trajectory
+    true_state = kinematic_arbiter::utils::Figure8Trajectory(t);
+
+    // Create measurements from true state (no added noise for simplicity)
+    // Position measurement
+    Eigen::Vector3d position_measurement = position_model->PredictMeasurement(true_state);
+    filter->ProcessMeasurementByIndex(position_id, position_measurement, t);
+    ASSERT_EQ(filter->GetCurrentTime(), t);
+
+    // Pose measurement
+    auto pose_measurement = pose_model->PredictMeasurement(true_state);
+    filter->ProcessMeasurementByIndex(pose_id, pose_measurement, t);
+
+    // Velocity measurement
+    auto velocity_measurement = velocity_model->PredictMeasurement(true_state);
+    filter->ProcessMeasurementByIndex(velocity_id, velocity_measurement, t);
+
+    // IMU measurement
+    auto imu_measurement = imu_model->PredictMeasurement(true_state);
+    filter->ProcessMeasurementByIndex(imu_id, imu_measurement, t);
+
+    // Get the current filter state
+    auto filter_state = filter->GetStateEstimate();
+
+    // Calculate errors
+    Eigen::Vector3d position_error = filter_state.segment<3>(core::StateIndex::Position::Begin()) -
+                                     true_state.segment<3>(core::StateIndex::Position::Begin());
+    Eigen::Vector3d velocity_error = filter_state.segment<3>(core::StateIndex::LinearVelocity::Begin()) -
+                                     true_state.segment<3>(core::StateIndex::LinearVelocity::Begin());
+
+    // Calculate quaternion error
+    Eigen::Quaterniond q_est(
+      filter_state[core::StateIndex::Quaternion::W],
+      filter_state[core::StateIndex::Quaternion::X],
+      filter_state[core::StateIndex::Quaternion::Y],
+      filter_state[core::StateIndex::Quaternion::Z]
+    );
+
+    Eigen::Quaterniond q_true(
+      true_state[core::StateIndex::Quaternion::W],
+      true_state[core::StateIndex::Quaternion::X],
+      true_state[core::StateIndex::Quaternion::Y],
+      true_state[core::StateIndex::Quaternion::Z]
+    );
+
+    double orientation_error = q_est.angularDistance(q_true);
+
+    // Store errors
+    position_errors.push_back(position_error.norm());
+    velocity_errors.push_back(velocity_error.norm());
+    orientation_errors.push_back(orientation_error);
+  }
+
+  // Check final errors (should be small after convergence)
+  double final_pos_error = position_errors.back();
+  double final_vel_error = velocity_errors.back();
+  double final_ori_error = orientation_errors.back();
+
+  RecordProperty("final_pos_error", final_pos_error);
+  RecordProperty("final_vel_error", final_vel_error);
+  RecordProperty("final_ori_error", final_ori_error);
+
+  // Use generous tolerances to ensure test stability
+  EXPECT_LT(final_pos_error, 0.003) << "Position did not converge";
+  EXPECT_LT(final_vel_error, 0.06) << "Velocity did not converge";
+  EXPECT_LT(final_ori_error, 0.4) << "Orientation did not converge";
+}
+
 } // namespace kinematic_arbiter
