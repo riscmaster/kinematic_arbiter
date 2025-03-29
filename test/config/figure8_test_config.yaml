@@ -1,0 +1,51 @@
+# Configuration for Figure-8 Simulator
+figure8_simulator:
+  ros__parameters:
+    # Trajectory parameters
+    trajectory:
+      max_vel: 1.0
+      length: 5.0
+      width: 3.0
+
+    # Timing parameters
+    main_update_rate: 100.0
+    position_rate: 50.0
+    pose_rate: 50.0
+    velocity_rate: 50.0
+    imu_rate: 100.0
+
+    # Frame parameters
+    world_frame_id: "map"
+    body_frame_id: "base_link"
+
+    # Sensor topics and frames
+    position_topic: "/sensors/position"
+    position_frame: "position_sensor"
+    pose_topic: "/sensors/pose"
+    pose_frame: "pose_sensor"
+    velocity_topic: "/sensors/velocity"
+    velocity_frame: "velocity_sensor"
+    imu_topic: "/sensors/imu"
+    imu_frame: "imu_sensor"
+
+    # Ground truth topics
+    truth_pose_topic: "/truth/pose"
+    truth_velocity_topic: "/truth/velocity"
+
+    # Noise parameters
+    noise_sigma: 0.01
+    time_jitter: 0.0
+
+# Configuration for Kinematic Arbiter
+kinematic_arbiter:
+  ros__parameters:
+    publish_rate: 100.0
+    max_delay_window: 0.5
+    world_frame_id: "map"
+    body_frame_id: "base_link"
+
+    # Sensor configurations
+    position_sensors: ["position_sensor:/sensors/position:position_sensor"]
+    pose_sensors: ["pose_sensor:/sensors/pose:pose_sensor"]
+    velocity_sensors: ["velocity_sensor:/sensors/velocity:velocity_sensor"]
+    imu_sensors: ["imu_sensor:/sensors/imu:imu_sensor"]

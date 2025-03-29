@@ -54,6 +54,10 @@ public:
    * @return size_t Index of the newly added sensor
    */
   size_t AddSensor(std::shared_ptr<MeasurementModelInterface> sensor_model) {
+    if (!sensor_model) {
+      throw std::invalid_argument("Cannot add null sensor model to filter");
+    }
+
     size_t sensor_index = sensors_.size();
 
     // Store sensor model and its type tag

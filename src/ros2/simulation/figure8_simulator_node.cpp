@@ -1,683 +1,350 @@
-#include "rclcpp/rclcpp.hpp"
-#include "geometry_msgs/msg/point_stamped.hpp"
-#include "geometry_msgs/msg/pose_stamped.hpp"
-#include "geometry_msgs/msg/twist_stamped.hpp"
-#include "geometry_msgs/msg/accel_stamped.hpp"
-#include "sensor_msgs/msg/imu.hpp"
-#include "tf2_ros/transform_broadcaster.h"
-#include "geometry_msgs/msg/transform_stamped.hpp"
-#include <tf2_eigen/tf2_eigen.hpp>  // Use angle brackets and .hpp extension
-#include "kinematic_arbiter/core/trajectory_utils.hpp"
-#include "kinematic_arbiter/sensors/position_sensor_model.hpp"
-#include "kinematic_arbiter/core/statistical_utils.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/msg/point_stamped.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/twist_stamped.hpp>
+#include <geometry_msgs/msg/accel_stamped.hpp>
+#include <sensor_msgs/msg/imu.hpp>
 #include <random>
-#include <memory>
-#include <string>
-#include <map>
-#include <Eigen/Geometry>
-#include <Eigen/Dense>
-#include <cmath>
+#include <chrono>
+#include <tf2_ros/static_transform_broadcaster.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
+
+#include "kinematic_arbiter/core/state_index.hpp"
+#include "kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp"
+#include "kinematic_arbiter/sensors/position_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/pose_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/body_velocity_sensor_model.hpp"
+#include "kinematic_arbiter/sensors/imu_sensor_model.hpp"
+#include <tf2_eigen/tf2_eigen.hpp>
+#include "kinematic_arbiter/ros2/simulation/sensor_publisher.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
 namespace simulation {
-
-/**
- * @brief Position sensor simulator that leverages PositionSensorModel
- */
-class PositionSensorSimulator {
-public:
-  using SIdx = core::StateIndex;
-  using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
-  using MeasurementVector = Eigen::Vector3d;
-  using MeasurementCovariance = Eigen::Matrix3d;
-
-  PositionSensorSimulator(
-      rclcpp::Node* node,
-      const std::string& sensor_name,
-      const Eigen::Isometry3d& transform,
-      double noise_sigma,
-      double publish_rate,
-      const kinematic_arbiter::utils::Figure8Config& trajectory_config)
-    : node_(node),
-      sensor_name_(sensor_name),
-      sensor_model_(std::make_shared<sensors::PositionSensorModel>(transform)),
-      noise_sigma_(noise_sigma),
-      publish_rate_(publish_rate),
-      trajectory_config_(trajectory_config) {
-
-    // Create publishers
-    truth_pub_ = node_->create_publisher<geometry_msgs::msg::PointStamped>(
-      "sensors/" + sensor_name_ + "/truth", 10);
-
-    measurement_pub_ = node_->create_publisher<geometry_msgs::msg::PointStamped>(
-      "sensors/" + sensor_name_, 10);
-
-    upper_bound_pub_ = node_->create_publisher<geometry_msgs::msg::PointStamped>(
-      "sensors/" + sensor_name_ + "/upper_bound", 10);
-
-    lower_bound_pub_ = node_->create_publisher<geometry_msgs::msg::PointStamped>(
-      "sensors/" + sensor_name_ + "/lower_bound", 10);
-
-    // Initialize random generator
-    std::random_device rd;
-    generator_ = std::mt19937(rd());
-
-    // Create covariance from sigma
-    updateCovariance();
-  }
-
-  void updateConfiguration(
-      const Eigen::Isometry3d& transform,
-      double noise_sigma,
-      double publish_rate) {
-    sensor_model_ = std::make_shared<sensors::PositionSensorModel>(transform);
-    noise_sigma_ = noise_sigma;
-    publish_rate_ = publish_rate;
-    updateCovariance();
-  }
-
-  void updateTrajectoryConfig(const kinematic_arbiter::utils::Figure8Config& config) {
-    trajectory_config_ = config;
-  }
-
-  void generateAndPublishMeasurements(double elapsed_seconds) {
-    auto current_time = node_->now();
-
-    // Generate trajectory state at current time
-    StateVector state = kinematic_arbiter::utils::Figure8Trajectory(
-        elapsed_seconds, trajectory_config_);
-
-    // Get perfect measurement from the sensor model
-    MeasurementVector true_measurement = sensor_model_->PredictMeasurement(state);
-
-    // Sample noisy measurement using the new utility function
-    Eigen::Vector3d noise = kinematic_arbiter::utils::generateMultivariateNoise(
-        measurement_covariance_, generator_);
-    MeasurementVector noisy_measurement = true_measurement + noise;
-
-    // Calculate 3-sigma bounds
-    MeasurementVector lower_bound = true_measurement - MeasurementVector::Constant(3.0 * noise_sigma_);
-    MeasurementVector upper_bound = true_measurement + MeasurementVector::Constant(3.0 * noise_sigma_);
-
-    // Publish all variants
-    publishPointStamped(truth_pub_, true_measurement, current_time);
-    publishPointStamped(measurement_pub_, noisy_measurement, current_time);
-    publishPointStamped(lower_bound_pub_, lower_bound, current_time);
-    publishPointStamped(upper_bound_pub_, upper_bound, current_time);
-  }
-
-  const std::string& getName() const {
-    return sensor_name_;
-  }
-
-  double getPublishRate() const {
-    return publish_rate_;
-  }
-
-private:
-  void updateCovariance() {
-    // Create diagonal covariance matrix from sigma
-    measurement_covariance_ = MeasurementCovariance::Identity() * (noise_sigma_ * noise_sigma_);
-  }
-
-  void publishPointStamped(
-      const rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr& publisher,
-      const MeasurementVector& point,
-      const rclcpp::Time& time) {
-    geometry_msgs::msg::PointStamped msg;
-    msg.header.stamp = time;
-    msg.header.frame_id = node_->get_parameter("frame_id").as_string();
-
-    // Use tf2_eigen to convert Eigen vector to ROS point
-    geometry_msgs::msg::Point ros_point = tf2::toMsg(point);
-    msg.point = ros_point;
-
-    publisher->publish(msg);
-  }
-
-  rclcpp::Node* node_;
-  std::string sensor_name_;
-  std::shared_ptr<sensors::PositionSensorModel> sensor_model_;
-  double noise_sigma_;
-  double publish_rate_;
-  MeasurementCovariance measurement_covariance_;
-  kinematic_arbiter::utils::Figure8Config trajectory_config_;
-
-  // Publishers
-  rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr truth_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr measurement_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr upper_bound_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr lower_bound_pub_;
-
-  // Random number generator
-  std::mt19937 generator_;
-};
-
-// Helper functions for conversions
-geometry_msgs::msg::Point toPoint(const Eigen::Vector3d& vec) {
-  geometry_msgs::msg::Point point;
-  point.x = vec.x();
-  point.y = vec.y();
-  point.z = vec.z();
-  return point;
-}
-
-geometry_msgs::msg::Quaternion toQuaternion(const Eigen::Quaterniond& quat) {
-  geometry_msgs::msg::Quaternion quaternion;
-  quaternion.x = quat.x();
-  quaternion.y = quat.y();
-  quaternion.z = quat.z();
-  quaternion.w = quat.w();
-  return quaternion;
-}
-
-geometry_msgs::msg::Vector3 toVector3(const Eigen::Vector3d& vec) {
-  geometry_msgs::msg::Vector3 vector;
-  vector.x = vec.x();
-  vector.y = vec.y();
-  vector.z = vec.z();
-  return vector;
-}
-
-/**
- * @brief Main node that generates a Figure-8 trajectory and simulates sensors
- */
-class Figure8SimulatorNode : public rclcpp::Node {
-public:
-  using SIdx = core::StateIndex;
-  using StateVector = Eigen::Matrix<double, SIdx::kFullStateSize, 1>;
-
-  Figure8SimulatorNode()
-    : Node("figure8_simulator") {
-
-    // Add the parent frequency parameter
-    this->declare_parameter("parent_frequency", 20.0);  // Default 20Hz
-    double requested_parent_freq = this->get_parameter("parent_frequency").as_double();
-    parent_frequency_ = std::min(requested_parent_freq, 100.0);  // Cap at 100Hz
-
-    // Other parameters
+Figure8SimulatorNode::Figure8SimulatorNode() : Node("figure8_simulator") {
+    // Trajectory parameters
     this->declare_parameter("trajectory.max_vel", 1.0);
     this->declare_parameter("trajectory.length", 5.0);
     this->declare_parameter("trajectory.width", 3.0);
-    this->declare_parameter("trajectory.width_slope", 0.1);
-    this->declare_parameter("trajectory.angular_scale", 0.1);
 
-    this->declare_parameter("frame_id", "world");
-    this->declare_parameter("base_frame_id", "base_link");
-    this->declare_parameter("publish_rate", 30.0);
-    this->declare_parameter("sensors", std::vector<std::string>());
+    // Timing parameters
+    this->declare_parameter("main_update_rate", 100.0);  // Default 100Hz
+    this->declare_parameter("position_rate", 30.0);
+    this->declare_parameter("pose_rate", 50.0);
+    this->declare_parameter("velocity_rate", 50.0);
+    this->declare_parameter("imu_rate", 100.0);
 
-    // Get parameters
-    auto max_vel = this->get_parameter("trajectory.max_vel").as_double();
-    auto length = this->get_parameter("trajectory.length").as_double();
-    auto width = this->get_parameter("trajectory.width").as_double();
-    auto width_slope = this->get_parameter("trajectory.width_slope").as_double();
-    auto angular_scale = this->get_parameter("trajectory.angular_scale").as_double();
+    // Frame parameters
+    this->declare_parameter("world_frame_id", "world");
+    this->declare_parameter("body_frame_id", "base_link");
 
-    publish_rate_ = this->get_parameter("publish_rate").as_double();
-    frame_id_ = this->get_parameter("frame_id").as_string();
-    base_frame_id_ = this->get_parameter("base_frame_id").as_string();
+    // Noise/jitter parameters
+    this->declare_parameter("noise_sigma", 0.01);
+    this->declare_parameter("time_jitter", 0.0);  // Default 0 for no jitter
 
-    // Configure trajectory
-    trajectory_config_.max_velocity = max_vel;
-    trajectory_config_.length = length;
-    trajectory_config_.width = width;
-    trajectory_config_.width_slope = width_slope;
-    trajectory_config_.angular_scale = angular_scale;
+    // Sensor transform parameters (offsets from the body frame)
+    this->declare_parameter("position_sensor.x_offset", 0.0);
+    this->declare_parameter("position_sensor.y_offset", 0.0);
+    this->declare_parameter("position_sensor.z_offset", 0.0);
 
-    RCLCPP_INFO(this->get_logger(), "Loaded trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
-               max_vel, length, width);
-    // Create publishers
-    true_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
-      "trajectory/pose", 10);
+    this->declare_parameter("pose_sensor.x_offset", 0.0);
+    this->declare_parameter("pose_sensor.y_offset", 0.0);
+    this->declare_parameter("pose_sensor.z_offset", 0.0);
 
-    true_velocity_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>(
-      "trajectory/velocity", 10);
+    this->declare_parameter("velocity_sensor.x_offset", 0.0);
+    this->declare_parameter("velocity_sensor.y_offset", 0.0);
+    this->declare_parameter("velocity_sensor.z_offset", 0.0);
 
-    true_accel_pub_ = this->create_publisher<geometry_msgs::msg::AccelStamped>(
-      "trajectory/acceleration", 10);
+    this->declare_parameter("imu_sensor.x_offset", 0.0);
+    this->declare_parameter("imu_sensor.y_offset", 0.0);
+    this->declare_parameter("imu_sensor.z_offset", 0.0);
 
-    // Setup transform broadcaster
+    // In the constructor, add these parameter declarations
+    this->declare_parameter("position_topic", "/sensors/position");
+    this->declare_parameter("pose_topic", "/sensors/pose");
+    this->declare_parameter("velocity_topic", "/sensors/velocity");
+    this->declare_parameter("imu_topic", "/sensors/imu");
+
+    this->declare_parameter("position_frame", "position_sensor");
+    this->declare_parameter("pose_frame", "pose_sensor");
+    this->declare_parameter("velocity_frame", "velocity_sensor");
+    this->declare_parameter("imu_frame", "imu_sensor");
+
+    this->declare_parameter("truth_pose_topic", "/truth/pose");
+    this->declare_parameter("truth_velocity_topic", "/truth/velocity");
+
+    // Get all parameters
+    trajectory_config_.max_velocity = this->get_parameter("trajectory.max_vel").as_double();
+    trajectory_config_.length = this->get_parameter("trajectory.length").as_double();
+    trajectory_config_.width = this->get_parameter("trajectory.width").as_double();
+
+    main_update_rate_ = this->get_parameter("main_update_rate").as_double();
+    position_rate_ = this->get_parameter("position_rate").as_double();
+    pose_rate_ = this->get_parameter("pose_rate").as_double();
+    velocity_rate_ = this->get_parameter("velocity_rate").as_double();
+    imu_rate_ = this->get_parameter("imu_rate").as_double();
+
+    world_frame_id_ = this->get_parameter("world_frame_id").as_string();
+    body_frame_id_ = this->get_parameter("body_frame_id").as_string();
+
+    // Get frame IDs - store in existing variables to match pattern
+    position_sensor_id_ = this->get_parameter("position_frame").as_string();
+    pose_sensor_id_ = this->get_parameter("pose_frame").as_string();
+    velocity_sensor_id_ = this->get_parameter("velocity_frame").as_string();
+    imu_sensor_id_ = this->get_parameter("imu_frame").as_string();
+
+    // Get topic names
+    std::string position_topic = this->get_parameter("position_topic").as_string();
+    std::string pose_topic = this->get_parameter("pose_topic").as_string();
+    std::string velocity_topic = this->get_parameter("velocity_topic").as_string();
+    std::string imu_topic = this->get_parameter("imu_topic").as_string();
+    std::string truth_pose_topic = this->get_parameter("truth_pose_topic").as_string();
+    std::string truth_velocity_topic = this->get_parameter("truth_velocity_topic").as_string();
+
+    noise_sigma_ = this->get_parameter("noise_sigma").as_double();
+    time_jitter_ = this->get_parameter("time_jitter").as_double();
+
+    // Initialize filter wrapper for sensor registration
+    position_sensor_model_ = std::make_unique<sensors::PositionSensorModel>();
+    pose_sensor_model_ = std::make_unique<sensors::PoseSensorModel>();
+    velocity_sensor_model_ = std::make_unique<sensors::BodyVelocitySensorModel>();
+    imu_sensor_model_ = std::make_unique<sensors::ImuSensorModel>();
+
+    // Set the transforms in the filter
+    publishSensorTransforms();
+
+    // Set up random generators
+    std::random_device rd;
+    generator_ = std::mt19937(rd());
+    noise_dist_ = std::normal_distribution<>(0.0, noise_sigma_);
+    jitter_dist_ = std::uniform_real_distribution<>(-time_jitter_, time_jitter_);
+
+    // Create sensor message publishers
+    position_publisher_ = std::make_unique<PositionPublisher>(
+        this, position_topic, noise_sigma_);
+
+    pose_publisher_ = std::make_unique<PosePublisher>(
+        this, pose_topic, noise_sigma_);
+
+    velocity_publisher_ = std::make_unique<VelocityPublisher>(
+        this, velocity_topic, noise_sigma_);
+
+    imu_publisher_ = std::make_unique<ImuPublisher>(
+        this, imu_topic, noise_sigma_);
+
+    // Create ground truth publishers
+    truth_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
+        truth_pose_topic, 10);
+    truth_velocity_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>(
+        truth_velocity_topic, 10);
+
+    // Create TF broadcaster
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
 
-    // Set starting time
-    elapsed_seconds_ = 0.0;
-    start_time_ = this->now(); // Still store this for logging, but don't use for calculations
+    // Track which iterations to publish each sensor type
+    position_divider_ = std::max(1, static_cast<int>(main_update_rate_ / position_rate_));
+    pose_divider_ = std::max(1, static_cast<int>(main_update_rate_ / pose_rate_));
+    velocity_divider_ = std::max(1, static_cast<int>(main_update_rate_ / velocity_rate_));
+    imu_divider_ = std::max(1, static_cast<int>(main_update_rate_ / imu_rate_));
 
-    // Initialize sensors
-    setupSensors();
+    // Create main timer that drives the simulation
+    update_timer_ = this->create_wall_timer(
+        std::chrono::milliseconds(static_cast<int>(1000.0 / main_update_rate_)),
+        std::bind(&Figure8SimulatorNode::update, this));
 
-    // Create parameter callback
-    params_callback_handle_ = this->add_on_set_parameters_callback(
-      std::bind(&Figure8SimulatorNode::parametersCallback, this, std::placeholders::_1));
+    start_time_ = this->now();
 
-    // Create parent timer using the parent frequency
-    double period_ms = 1000.0 / parent_frequency_;
-    trajectory_timer_ = this->create_wall_timer(
-      std::chrono::duration<double, std::milli>(period_ms),
-      std::bind(&Figure8SimulatorNode::timerCallback, this));
+    RCLCPP_INFO(this->get_logger(), "Figure8 simulator initialized:");
+    RCLCPP_INFO(this->get_logger(), "  Trajectory: length=%.1f, width=%.1f, max_vel=%.1f",
+               trajectory_config_.length, trajectory_config_.width, trajectory_config_.max_velocity);
+    RCLCPP_INFO(this->get_logger(), "  Update rates: main=%.1fHz, position=%.1fHz, pose=%.1fHz, velocity=%.1fHz, imu=%.1fHz",
+               main_update_rate_, position_rate_, pose_rate_, velocity_rate_, imu_rate_);
+    RCLCPP_INFO(this->get_logger(), "  Noise: sigma=%.3f, time_jitter=%.3fs", noise_sigma_, time_jitter_);
 
-    RCLCPP_INFO(this->get_logger(), "Figure8 simulator running at %.1f Hz parent frequency",
-                parent_frequency_);
   }
+  void Figure8SimulatorNode::update() {
+    iteration_++;
 
-private:
-  // Validate if a sensor frequency is compatible with parent frequency
-  double validateFrequency(double requested_freq) {
-    if (requested_freq > parent_frequency_) {
-      RCLCPP_WARN(this->get_logger(),
-          "Requested frequency %.1f Hz exceeds parent frequency %.1f Hz. Using parent frequency.",
-          requested_freq, parent_frequency_);
-      return parent_frequency_;
+    // Calculate current time and state
+    double elapsed_seconds = (this->now() - start_time_).seconds();
+    auto state = kinematic_arbiter::utils::Figure8Trajectory(elapsed_seconds, trajectory_config_);
+
+    // Always publish ground truth and TF
+    publishGroundTruth(state);
+
+    // Publish sensor data at their respective rates
+    if (iteration_ % position_divider_ == 0) {
+      publishPosition(state, elapsed_seconds);
     }
 
-    // Calculate ticks per publication
-    double ticks_per_pub = parent_frequency_ / requested_freq;
-    int rounded_ticks = std::round(ticks_per_pub);
-
-    // Calculate actual frequency
-    double actual_freq = parent_frequency_ / rounded_ticks;
-
-    // Warn if significant adjustment
-    if (std::abs(actual_freq - requested_freq) > 0.01) {
-      RCLCPP_WARN(this->get_logger(),
-          "Adjusted sensor frequency from %.1f Hz to %.1f Hz to match parent frequency",
-          requested_freq, actual_freq);
+    if (iteration_ % pose_divider_ == 0) {
+      publishPose(state, elapsed_seconds);
     }
 
-    return actual_freq;
-  }
-
-  // New combined timer callback that handles everything
-  void timerCallback() {
-    // Update elapsed time
-    elapsed_seconds_ += 1.0 / parent_frequency_;
-
-    // Publish trajectory at requested rate
-    publishTrajectory();
-
-    // Check which sensors should publish this tick
-    for (auto& [name, sensor] : position_sensors_) {
-      double sensor_rate = sensor->getPublishRate();
-      int ticks_per_pub = std::round(parent_frequency_ / sensor_rate);
-
-      // Check if this sensor should publish based on frame count
-      if (tick_counter_ % ticks_per_pub == 0) {
-        sensor->generateAndPublishMeasurements(elapsed_seconds_);
-      }
+    if (iteration_ % velocity_divider_ == 0) {
+      publishVelocity(state, elapsed_seconds);
     }
 
-    // Increment tick counter
-    tick_counter_++;
-  }
-
-  void setupSensors() {
-    auto sensors = this->get_parameter("sensors").as_string_array();
-
-    // Setup sensors based on parameters
-    for (const auto& name : sensors) {
-      // Declare parameters for this sensor if not already declared
-      declarePositionSensorParams(name);
-
-      // Get parameters
-      auto sensor_base = "sensors." + name;
-      auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
-      auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
-      double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-      double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
-
-      // Validate and adjust sensor rate to be compatible with parent frequency
-      double actual_rate = validateFrequency(requested_rate);
-
-      // Create transform
-      Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
-      transform.translation() = Eigen::Vector3d(
-          position_param[0], position_param[1], position_param[2]);
-
-      Eigen::Quaterniond q(
-          quaternion_param[0],  // w
-          quaternion_param[1],  // x
-          quaternion_param[2],  // y
-          quaternion_param[3]); // z
-      q.normalize();
-      transform.linear() = q.toRotationMatrix();
-
-      // Create the sensor
-      position_sensors_[name] = std::make_unique<PositionSensorSimulator>(
-          this, name, transform, noise_sigma, actual_rate, trajectory_config_);
-
-      RCLCPP_INFO(this->get_logger(),
-                 "Created position sensor: %s (%.1f Hz, sigma=%.3f)",
-                 name.c_str(), actual_rate, noise_sigma);
+    if (iteration_ % imu_divider_ == 0) {
+      publishImu(state, elapsed_seconds);
     }
   }
 
-  void declarePositionSensorParams(const std::string& name) {
-    auto prefix = "sensors." + name;
-
-    // Skip if already declared
-    if (this->has_parameter(prefix + ".position")) {
-      return;
-    }
-
-    // Position (x, y, z)
-    this->declare_parameter(prefix + ".position", std::vector<double>{0.0, 0.0, 0.0});
-
-    // Orientation (w, x, y, z)
-    this->declare_parameter(prefix + ".quaternion", std::vector<double>{1.0, 0.0, 0.0, 0.0});
-
-    // Noise and rate
-    this->declare_parameter(prefix + ".noise_sigma", 0.1);
-    this->declare_parameter(prefix + ".publish_rate", 10.0);
-  }
-
-  rcl_interfaces::msg::SetParametersResult parametersCallback(
-      const std::vector<rclcpp::Parameter>& parameters) {
-
-    rcl_interfaces::msg::SetParametersResult result;
-    result.successful = true;
-
-    bool update_trajectory = false;
-    bool update_sensors = false;
-    std::set<std::string> updated_sensors;
-
-    for (const auto& param : parameters) {
-      const auto& name = param.get_name();
-
-      // Check for trajectory parameter updates
-      if (name.find("trajectory.") == 0) {
-        update_trajectory = true;
-      }
-
-      // Check for sensor parameter updates
-      else if (name.find("sensors.") == 0) {
-        // Format: sensors.<name>.<param>
-        auto parts = splitString(name, '.');
-        if (parts.size() >= 2) {
-          updated_sensors.insert(parts[1]);
-          update_sensors = true;
-        }
-      }
-
-      // Check for sensor list update
-      else if (name == "sensors") {
-        update_sensors = true;
-      }
-
-      // Parent frequency update
-      else if (name == "parent_frequency") {
-        double requested_freq = param.as_double();
-        double new_freq = std::min(requested_freq, 100.0); // Cap at 100Hz
-
-        if (parent_frequency_ != new_freq) {
-          parent_frequency_ = new_freq;
-
-          // Recreate the timer with new frequency
-          double period_ms = 1000.0 / parent_frequency_;
-          trajectory_timer_ = this->create_wall_timer(
-            std::chrono::duration<double, std::milli>(period_ms),
-            std::bind(&Figure8SimulatorNode::timerCallback, this));
-
-          RCLCPP_INFO(this->get_logger(), "Updated parent frequency to %.1f Hz", parent_frequency_);
-
-          // Need to update all sensors to validate their frequencies
-          update_sensors = true;
-          auto sensors = this->get_parameter("sensors").as_string_array();
-          for (const auto& name : sensors) {
-            updated_sensors.insert(name);
-          }
-        }
-      }
-    }
-
-    // Update trajectory if needed
-    if (update_trajectory) {
-      auto max_vel = this->get_parameter("trajectory.max_vel").as_double();
-      auto length = this->get_parameter("trajectory.length").as_double();
-      auto width = this->get_parameter("trajectory.width").as_double();
-      auto width_slope = this->get_parameter("trajectory.width_slope").as_double();
-      auto angular_scale = this->get_parameter("trajectory.angular_scale").as_double();
-
-      trajectory_config_.max_velocity = max_vel;
-      trajectory_config_.length = length;
-      trajectory_config_.width = width;
-      trajectory_config_.width_slope = width_slope;
-      trajectory_config_.angular_scale = angular_scale;
-
-      RCLCPP_INFO(this->get_logger(), "Updated trajectory: max_vel=%.2f, length=%.2f, width=%.2f",
-                 max_vel, length, width);
-
-      // Update trajectory config in all sensors
-      for (auto& [name, sensor] : position_sensors_) {
-        sensor->updateTrajectoryConfig(trajectory_config_);
-      }
-    }
-
-    // Update sensors if needed
-    if (update_sensors) {
-      updateSensors(updated_sensors);
-    }
-
-    return result;
-  }
-
-  void updateSensors(const std::set<std::string>& specific_sensors = {}) {
-    // Get current sensor list
-    auto current_sensors = this->get_parameter("sensors").as_string_array();
-    std::set<std::string> current_set(current_sensors.begin(), current_sensors.end());
-
-    // Find sensors to remove (in position_sensors_ but not in current_sensors)
-    std::vector<std::string> to_remove;
-    for (const auto& [name, _] : position_sensors_) {
-      if (current_set.find(name) == current_set.end()) {
-        to_remove.push_back(name);
-      }
-    }
-
-    // Remove sensors
-    for (const auto& name : to_remove) {
-      position_sensors_.erase(name);
-      RCLCPP_INFO(this->get_logger(), "Removed sensor: %s", name.c_str());
-    }
-
-    // Find new sensors to add
-    std::vector<std::string> new_sensors;
-    for (const auto& name : current_sensors) {
-      if (position_sensors_.find(name) == position_sensors_.end()) {
-        new_sensors.push_back(name);
-      }
-    }
-
-    // Update existing sensors if specifically requested
-    if (!specific_sensors.empty()) {
-      for (const auto& name : specific_sensors) {
-        auto it = position_sensors_.find(name);
-        if (it != position_sensors_.end()) {
-          updateSensorFromParams(name, it->second.get());
-        }
-      }
-    }
-
-    // Add new sensors
-    for (const auto& name : new_sensors) {
-      if (current_set.find(name) != current_set.end()) {
-        // Declare parameters for this sensor
-        declarePositionSensorParams(name);
-
-        // Create the sensor
-        auto sensor_base = "sensors." + name;
-        auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
-        auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
-        double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-        double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
-
-        // Validate and adjust sensor rate
-        double actual_rate = validateFrequency(requested_rate);
-
-        Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
-        transform.translation() = Eigen::Vector3d(
-            position_param[0], position_param[1], position_param[2]);
-
-        Eigen::Quaterniond q(
-            quaternion_param[0],  // w
-            quaternion_param[1],  // x
-            quaternion_param[2],  // y
-            quaternion_param[3]); // z
-        q.normalize();
-        transform.linear() = q.toRotationMatrix();
-
-        // Create and store the sensor
-        position_sensors_[name] = std::make_unique<PositionSensorSimulator>(
-            this, name, transform, noise_sigma, actual_rate, trajectory_config_);
-
-        RCLCPP_INFO(this->get_logger(),
-                   "Created position sensor: %s (%.1f Hz, sigma=%.3f)",
-                   name.c_str(), actual_rate, noise_sigma);
-      }
-    }
-  }
-
-  void updateSensorFromParams(const std::string& name, PositionSensorSimulator* sensor) {
-    auto sensor_base = "sensors." + name;
-
-    // Get updated parameters
-    auto position_param = this->get_parameter(sensor_base + ".position").as_double_array();
-    auto quaternion_param = this->get_parameter(sensor_base + ".quaternion").as_double_array();
-    double noise_sigma = this->get_parameter(sensor_base + ".noise_sigma").as_double();
-    double requested_rate = this->get_parameter(sensor_base + ".publish_rate").as_double();
-
-    // Validate and adjust sensor rate
-    double actual_rate = validateFrequency(requested_rate);
-
-    // Create transform
-    Eigen::Isometry3d transform = Eigen::Isometry3d::Identity();
-    transform.translation() = Eigen::Vector3d(
-        position_param[0], position_param[1], position_param[2]);
-
-    Eigen::Quaterniond q(
-        quaternion_param[0],  // w
-        quaternion_param[1],  // x
-        quaternion_param[2],  // y
-        quaternion_param[3]); // z
-    q.normalize();
-    transform.linear() = q.toRotationMatrix();
-
-    // Update sensor configuration
-    sensor->updateConfiguration(transform, noise_sigma, actual_rate);
-
-    RCLCPP_INFO(this->get_logger(), "Updated sensor: %s (%.1f Hz, sigma=%.3f)",
-               name.c_str(), actual_rate, noise_sigma);
-  }
-
-  void publishTrajectory() {
-    // Get current time (for message headers)
+  void Figure8SimulatorNode::publishGroundTruth(const StateVector& state) {
     auto current_time = this->now();
-
-    // Generate trajectory state at current elapsed time
-    StateVector state = kinematic_arbiter::utils::Figure8Trajectory(
-        elapsed_seconds_, trajectory_config_);
 
     // Extract components for convenience
     Eigen::Vector3d position = state.segment<3>(SIdx::Position::Begin());
-    Eigen::Quaterniond orientation(
+    Eigen::Quaterniond quaternion(
         state[SIdx::Quaternion::W],
         state[SIdx::Quaternion::X],
         state[SIdx::Quaternion::Y],
         state[SIdx::Quaternion::Z]);
-    Eigen::Vector3d lin_velocity = state.segment<3>(SIdx::LinearVelocity::Begin());
-    Eigen::Vector3d ang_velocity = state.segment<3>(SIdx::AngularVelocity::Begin());
-    Eigen::Vector3d lin_accel = state.segment<3>(SIdx::LinearAcceleration::Begin());
-    Eigen::Vector3d ang_accel = state.segment<3>(SIdx::AngularAcceleration::Begin());
+    Eigen::Vector3d linear_velocity = state.segment<3>(SIdx::LinearVelocity::Begin());
+    Eigen::Vector3d angular_velocity = state.segment<3>(SIdx::AngularVelocity::Begin());
 
-    // Publish ground truth pose
-    auto pose_msg = std::make_unique<geometry_msgs::msg::PoseStamped>();
-    pose_msg->header.stamp = current_time;
-    pose_msg->header.frame_id = frame_id_;
-    pose_msg->pose.position = toPoint(position);
-    pose_msg->pose.orientation = toQuaternion(orientation);
-    true_pose_pub_->publish(std::move(pose_msg));
+    // Publish truth pose
+    auto pose_msg = geometry_msgs::msg::PoseStamped();
+    pose_msg.header.stamp = current_time;
+    pose_msg.header.frame_id = world_frame_id_;
+    pose_msg.pose.position.x = position.x();
+    pose_msg.pose.position.y = position.y();
+    pose_msg.pose.position.z = position.z();
+    pose_msg.pose.orientation.w = quaternion.w();
+    pose_msg.pose.orientation.x = quaternion.x();
+    pose_msg.pose.orientation.y = quaternion.y();
+    pose_msg.pose.orientation.z = quaternion.z();
+    truth_pose_pub_->publish(pose_msg);
 
-    // Publish ground truth velocity
-    auto vel_msg = std::make_unique<geometry_msgs::msg::TwistStamped>();
-    vel_msg->header.stamp = current_time;
-    vel_msg->header.frame_id = frame_id_;
-    vel_msg->twist.linear = toVector3(lin_velocity);
-    vel_msg->twist.angular = toVector3(ang_velocity);
-    true_velocity_pub_->publish(std::move(vel_msg));
-
-    // Publish ground truth acceleration
-    auto accel_msg = std::make_unique<geometry_msgs::msg::AccelStamped>();
-    accel_msg->header.stamp = current_time;
-    accel_msg->header.frame_id = frame_id_;
-    accel_msg->accel.linear = toVector3(lin_accel);
-    accel_msg->accel.angular = toVector3(ang_accel);
-    true_accel_pub_->publish(std::move(accel_msg));
+    // Publish truth velocity
+    auto vel_msg = geometry_msgs::msg::TwistStamped();
+    vel_msg.header.stamp = current_time;
+    vel_msg.header.frame_id = body_frame_id_;
+    vel_msg.twist.linear.x = linear_velocity.x();
+    vel_msg.twist.linear.y = linear_velocity.y();
+    vel_msg.twist.linear.z = linear_velocity.z();
+    vel_msg.twist.angular.x = angular_velocity.x();
+    vel_msg.twist.angular.y = angular_velocity.y();
+    vel_msg.twist.angular.z = angular_velocity.z();
+    truth_velocity_pub_->publish(vel_msg);
 
     // Publish transform
     geometry_msgs::msg::TransformStamped transform;
     transform.header.stamp = current_time;
-    transform.header.frame_id = frame_id_;
-    transform.child_frame_id = base_frame_id_;
+    transform.header.frame_id = world_frame_id_;
+    transform.child_frame_id = body_frame_id_;
     transform.transform.translation.x = position.x();
     transform.transform.translation.y = position.y();
     transform.transform.translation.z = position.z();
-    transform.transform.rotation = toQuaternion(orientation);
+    transform.transform.rotation = pose_msg.pose.orientation;
     tf_broadcaster_->sendTransform(transform);
   }
 
-  std::vector<std::string> splitString(const std::string& s, char delimiter) {
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter)) {
-      tokens.push_back(token);
-    }
-    return tokens;
+  void Figure8SimulatorNode::publishPosition(const StateVector& state, double elapsed_seconds) {
+    // Apply time jitter
+    double time_with_jitter = elapsed_seconds + jitter_dist_(generator_);
+    auto timestamp = start_time_ + rclcpp::Duration::from_seconds(time_with_jitter);
+
+    // Get expected measurement
+    MeasurementModelInterface::DynamicVector measurement = position_sensor_model_->PredictMeasurement(state);
+
+    // Publish all variants
+    position_publisher_->publish(measurement, timestamp, world_frame_id_, generator_);
   }
 
-  // Publishers
-  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr true_pose_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::TwistStamped>::SharedPtr true_velocity_pub_;
-  rclcpp::Publisher<geometry_msgs::msg::AccelStamped>::SharedPtr true_accel_pub_;
+  void Figure8SimulatorNode::publishPose(const StateVector& state, double elapsed_seconds) {
+    // Apply time jitter
+    double time_with_jitter = elapsed_seconds + jitter_dist_(generator_);
+    auto timestamp = start_time_ + rclcpp::Duration::from_seconds(time_with_jitter);
 
-  // TF broadcaster
-  std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+    // Get expected measurement
+    MeasurementModelInterface::DynamicVector measurement = pose_sensor_model_->PredictMeasurement(state);
 
-  // Timer
-  rclcpp::TimerBase::SharedPtr trajectory_timer_;
+    // Publish all variants
+    pose_publisher_->publish(measurement, timestamp, world_frame_id_, generator_);
+  }
 
-  // Parameter callback handle
-  rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr params_callback_handle_;
+  void Figure8SimulatorNode::publishVelocity(const StateVector& state, double elapsed_seconds) {
+    // Apply time jitter
+    double time_with_jitter = elapsed_seconds + jitter_dist_(generator_);
+    auto timestamp = start_time_ + rclcpp::Duration::from_seconds(time_with_jitter);
 
-  // Position sensors
-  std::map<std::string, std::unique_ptr<PositionSensorSimulator>> position_sensors_;
+    // Get expected measurement
+    MeasurementModelInterface::DynamicVector measurement = velocity_sensor_model_->PredictMeasurement(state);
 
-  // Trajectory configuration
-  kinematic_arbiter::utils::Figure8Config trajectory_config_;
+    // Publish all variants
+    velocity_publisher_->publish(measurement, timestamp, world_frame_id_, generator_);
+  }
 
-  // Other parameters
-  double publish_rate_;
-  std::string frame_id_;
-  std::string base_frame_id_;
+  void Figure8SimulatorNode::publishImu(const StateVector& state, double elapsed_seconds) {
+    // Apply time jitter
+    double time_with_jitter = elapsed_seconds + jitter_dist_(generator_);
+    auto timestamp = start_time_ + rclcpp::Duration::from_seconds(time_with_jitter);
 
-  // Parent frequency
-  double parent_frequency_ = 20.0;
-  int tick_counter_ = 0;
+    // Get expected measurement
+    MeasurementModelInterface::DynamicVector measurement = imu_sensor_model_->PredictMeasurement(state);
 
-  // Timing - keep start_time_ for logging but don't use for calculations
-  rclcpp::Time start_time_;
-  double elapsed_seconds_ = 0.0;
+    // Publish all variants
+    imu_publisher_->publish(measurement, timestamp, world_frame_id_, generator_);
+  }
 
-  // Random generator
-  std::mt19937 generator_;
-};
+  void Figure8SimulatorNode::publishSensorTransforms() {
+    tf_static_broadcaster_ = std::make_unique<tf2_ros::StaticTransformBroadcaster>(*this);
+    // Get sensor offsets from parameters
+    double pos_x = this->get_parameter("position_sensor.x_offset").as_double();
+    double pos_y = this->get_parameter("position_sensor.y_offset").as_double();
+    double pos_z = this->get_parameter("position_sensor.z_offset").as_double();
 
-}  // namespace simulation
-}  // namespace ros2
-}  // namespace kinematic_arbiter
+    double pose_x = this->get_parameter("pose_sensor.x_offset").as_double();
+    double pose_y = this->get_parameter("pose_sensor.y_offset").as_double();
+    double pose_z = this->get_parameter("pose_sensor.z_offset").as_double();
 
-int main(int argc, char * argv[]) {
+    double vel_x = this->get_parameter("velocity_sensor.x_offset").as_double();
+    double vel_y = this->get_parameter("velocity_sensor.y_offset").as_double();
+    double vel_z = this->get_parameter("velocity_sensor.z_offset").as_double();
+
+    double imu_x = this->get_parameter("imu_sensor.x_offset").as_double();
+    double imu_y = this->get_parameter("imu_sensor.y_offset").as_double();
+    double imu_z = this->get_parameter("imu_sensor.z_offset").as_double();
+
+    // Set up transforms (from body to sensor)
+    position_transform_.header.frame_id = body_frame_id_;
+    position_transform_.child_frame_id = position_sensor_id_;
+    position_transform_.transform.translation.x = pos_x;
+    position_transform_.transform.translation.y = pos_y;
+    position_transform_.transform.translation.z = pos_z;
+    pose_transform_.header.frame_id = body_frame_id_;
+    pose_transform_.child_frame_id = pose_sensor_id_;
+    pose_transform_.transform.translation.x = pose_x;
+    pose_transform_.transform.translation.y = pose_y;
+    pose_transform_.transform.translation.z = pose_z;
+    velocity_transform_.header.frame_id = body_frame_id_;
+    velocity_transform_.child_frame_id = velocity_sensor_id_;
+    velocity_transform_.transform.translation.x = vel_x;
+    velocity_transform_.transform.translation.y = vel_y;
+    velocity_transform_.transform.translation.z = vel_z;
+    imu_transform_.header.frame_id = body_frame_id_;
+    imu_transform_.child_frame_id = imu_sensor_id_;
+    imu_transform_.transform.translation.x = imu_x;
+    imu_transform_.transform.translation.y = imu_y;
+    imu_transform_.transform.translation.z = imu_z;
+
+    // Create and publish transforms for each sensor
+    tf_static_broadcaster_->sendTransform(position_transform_);
+    tf_static_broadcaster_->sendTransform(pose_transform_);
+    tf_static_broadcaster_->sendTransform(velocity_transform_);
+    tf_static_broadcaster_->sendTransform(imu_transform_);
+    position_sensor_model_->SetSensorPoseInBodyFrame(tf2::transformToEigen(position_transform_.transform));
+    pose_sensor_model_->SetSensorPoseInBodyFrame(tf2::transformToEigen(pose_transform_.transform));
+    velocity_sensor_model_->SetSensorPoseInBodyFrame(tf2::transformToEigen(velocity_transform_.transform));
+    imu_sensor_model_->SetSensorPoseInBodyFrame(tf2::transformToEigen(imu_transform_.transform));
+  }
+} // namespace simulation
+} // namespace ros2
+} // namespace kinematic_arbiter
+
+int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<kinematic_arbiter::ros2::simulation::Figure8SimulatorNode>();
   rclcpp::spin(node);

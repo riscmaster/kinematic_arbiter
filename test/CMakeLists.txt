@@ -133,11 +133,35 @@ set_tests_properties(
 )
 
 # ROS2 tests
-add_ros2_test_executable(mkf_wrapper_test
-  "${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_test.cpp"
+add_ros2_test_executable(filter_wrapper_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/filter_wrapper_test.cpp"
   ${tf2_geometry_msgs_LIBRARIES})
 
-add_ros2_test_executable(mkf_wrapper_time_test
-  "${CMAKE_SOURCE_DIR}/test/ros2/mkf_wrapper_time_test.cpp")
+add_ros2_test_executable(time_utils_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/time_utils_test.cpp")
+
+add_ros2_test_executable(sensor_handlers_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/sensor_handlers_test.cpp")
+
+# Add Figure-8 tracking test executable using the existing pattern
+add_ros2_test_executable(figure8_tracking_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/figure8_tracking_test.cpp"
+  ${tf2_geometry_msgs_LIBRARIES})
+
+# Find the launch testing package
+find_package(launch_testing_ament_cmake REQUIRED)
+
+# Register the launch file with a simple absolute path
+add_launch_test(
+  "${CMAKE_SOURCE_DIR}/test/launch/figure8_tracking_test.launch.py"
+  TARGET figure8_tracking_test_launch
+  TIMEOUT 60
+)
+
+# Install the test configuration files for proper discovery
+install(
+  DIRECTORY "${CMAKE_SOURCE_DIR}/test/config"
+  DESTINATION share/${PROJECT_NAME}/test
+)
 
 message(STATUS "Added all tests to test framework")

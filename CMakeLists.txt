@@ -132,7 +132,7 @@ if(NOT BUILD_PYTHON_ONLY)
 
   # 2. Build the ROS2 wrapper library separately
   add_library(kinematic_arbiter_ros2 SHARED
-    src/ros2/mkf_wrapper.cpp
+    src/ros2/filter_wrapper.cpp
   )
 
   # The wrapper depends on the core and ROS2 libraries

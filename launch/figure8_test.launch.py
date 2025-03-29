@@ -134,39 +134,37 @@ def generate_launch_description():
         output="screen",
         parameters=[
             {
-                "publish_rate": LaunchConfiguration("publish_rate"),
-                "parent_frequency": LaunchConfiguration("parent_frequency"),
-                "frame_id": LaunchConfiguration(
-                    "world_frame_id"
-                ),  # World frame
-                "base_frame_id": LaunchConfiguration(
-                    "body_frame_id"
-                ),  # Body frame
+                # Main parameters
+                "main_update_rate": 100.0,  # Core update rate
+                "world_frame_id": LaunchConfiguration("world_frame_id"),
+                "true_base_link": LaunchConfiguration("body_frame_id"),
+                "noise_sigma": 0.01,  # Base noise level
+                "time_jitter": 0.005,  # Small timing jitter
                 # Trajectory parameters
                 "trajectory.max_vel": LaunchConfiguration("max_velocity"),
                 "trajectory.length": LaunchConfiguration("length"),
                 "trajectory.width": LaunchConfiguration("width"),
-                "trajectory.width_slope": LaunchConfiguration("width_slope"),
-                "trajectory.angular_scale": LaunchConfiguration(
-                    "angular_scale"
-                ),
-                # Sensors configuration (just one position sensor)
-                "sensors": ["position_sensor"],
-                # Position sensor parameters
-                "sensors.position_sensor.position": [
-                    0.0,
-                    0.0,
-                    0.0,
-                ],  # Center of robot
-                "sensors.position_sensor.quaternion": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                ],  # w, x, y, z
-                "sensors.position_sensor.noise_sigma": 0.05,  # Noise level
-                "sensors.position_sensor.publish_rate": 20.0,  # Update rate
-                "sensors.position_sensor.topic": "sensors/position",  # Topic name
+                # Sensor rates
+                "position_rate": 30.0,  # Position sensor update rate (Hz)
+                "pose_rate": 50.0,  # Pose sensor update rate (Hz)
+                "velocity_rate": 50.0,  # Velocity sensor update rate (Hz)
+                "imu_rate": 100.0,  # IMU sensor update rate (Hz)
+                # Position sensor parameters (offsets from body frame)
+                "position_sensor.x_offset": 0.05,  # Slight offset for realism
+                "position_sensor.y_offset": 0.0,
+                "position_sensor.z_offset": 0.1,
+                # Pose sensor parameters
+                "pose_sensor.x_offset": -0.03,
+                "pose_sensor.y_offset": 0.02,
+                "pose_sensor.z_offset": 0.15,
+                # Velocity sensor parameters
+                "velocity_sensor.x_offset": 0.0,
+                "velocity_sensor.y_offset": 0.0,
+                "velocity_sensor.z_offset": 0.05,
+                # IMU sensor parameters
+                "imu_sensor.x_offset": 0.01,
+                "imu_sensor.y_offset": -0.01,
+                "imu_sensor.z_offset": 0.08,
             }
         ],
     )
@@ -191,16 +189,28 @@ def generate_launch_description():
             {
                 "publish_rate": LaunchConfiguration("filter_rate"),
                 "max_delay_window": 0.5,
-                "world_frame_id": LaunchConfiguration(
-                    "world_frame_id"
-                ),  # World frame
-                "body_frame_id": LaunchConfiguration(
-                    "estimated_body_frame_id"
-                ),  # Estimated body frame
-                # Configure position sensors to use
-                "position_sensors": ["position_sensor"],
-                # Position sensor configuration
-                "sensors.position_sensor.topic": "sensors/position",  # Match topic from simulator
+                "world_frame_id": LaunchConfiguration("world_frame_id"),
+                "body_frame_id": "base_link",
+                # TF configuration
+                "tf_lookup_timeout": 0.1,
+                "tf_fallback_to_identity": True,
+                "tf_warning_throttle_period": 5.0,
+                # Configure sensors to use for state estimation
+                "position_sensors": ["position"],
+                "pose_sensors": ["pose"],
+                "velocity_sensors": ["velocity"],
+                "imu_sensors": ["imu"],
+                # Sensor configuration with frame details
+                "sensors.position.topic": "test/sensors/position",
+                "sensors.position.frame_id": "position",
+                "sensors.position.reference_frame": "map",
+                "sensors.pose.topic": "test/sensors/pose",
+                "sensors.pose.frame_id": "pose",
+                "sensors.pose.reference_frame": "map",
+                "sensors.velocity.topic": "test/sensors/velocity",
+                "sensors.velocity.frame_id": "velocity",
+                "sensors.imu.topic": "test/sensors/imu",
+                "sensors.imu.frame_id": "imu",
             }
         ],
     )
