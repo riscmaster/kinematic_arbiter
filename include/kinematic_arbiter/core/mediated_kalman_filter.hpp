@@ -47,6 +47,20 @@ public:
       reference_covariance_(StateMatrix::Identity()) {}
 
   /**
+   * @brief Reset the filter to initial state
+   */
+  void reset() {
+    reference_time_ = std::numeric_limits<double>::lowest();
+    initialized_states_ = StateFlags::Zero();
+    reference_state_ = StateVector::Zero();
+    reference_covariance_ = StateMatrix::Identity();
+    for (auto& sensor : sensors_) {
+      sensor->reset();
+    }
+    process_model_->reset();
+  }
+
+  /**
    * @brief Add a sensor model
    *
    * @tparam Type Sensor type (from SensorType enum)
@@ -105,14 +119,19 @@ public:
       return false;
     }
 
-    if (reference_time_ == std::numeric_limits<double>::lowest()) {
-        reference_time_ = timestamp;}
-
     auto sensor = sensors_[sensor_index];
 
-    // ---- Phase 1: Process the measurement ----
+    // Set reference time if not initialized
+    if (reference_time_ == std::numeric_limits<double>::lowest()) {
+      reference_time_ = timestamp;
+    }
 
-    // Try to initialize any states this sensor can provide
+    // Quick validation of measurement and timestamp before any expensive operations
+    if (!sensor->ValidateMeasurementAndTime(measurement, timestamp, reference_time_, max_delay_window_)) {
+      return false;
+    }
+
+    // Try to initialize uninitiated states
     StateFlags initializable = sensor->GetInitializableStates();
     StateFlags not_initialized = initialized_states_.select(StateFlags::Zero(), StateFlags::Ones());
     StateFlags uninit_states = initializable.cwiseProduct(not_initialized);
@@ -124,74 +143,55 @@ public:
       initialized_states_ = initialized_states_.cwiseMax(new_states);
     }
 
-    // Reject too-old measurements
-    if ((timestamp < reference_time_ - max_delay_window_) ||
-        (timestamp > reference_time_ + max_delay_window_)) {
-      std::cerr << "Warning: Rejecting measurement at time " << timestamp
-                << " as outside delay window (reference time: " << reference_time_
-                << ", max delay: " << max_delay_window_ << ")" << std::endl;
-      return false;
-    }
-
     double dt = timestamp - reference_time_;
 
     // Predict state to measurement time
     StateMatrix A = process_model_->GetTransitionMatrix(reference_state_, dt);
     StateVector state_at_sensor_time;
 
-    if (sensor->CanPredictInputAccelerations()) {
-      // Get acceleration inputs from the sensor
-      Eigen::Matrix<double, 6, 1> inputs = sensor->GetPredictionModelInputs(
-          reference_state_, reference_covariance_, measurement, dt);
 
-      // Extract components with explicit template argument
-      Eigen::Vector3d linear_accel = inputs.template segment<3>(0);
-      Eigen::Vector3d angular_accel = inputs.template segment<3>(3);
+    state_at_sensor_time = process_model_->PredictState(reference_state_, dt);
 
-      // Predict with accelerations
-      state_at_sensor_time = process_model_->PredictStateWithInputAccelerations(
-          reference_state_, dt, linear_accel, angular_accel);
-    } else {
-      // Default prediction
-      state_at_sensor_time = process_model_->PredictState(reference_state_, dt);
+
+    // Validate predicted state
+    if (!state_at_sensor_time.allFinite()) {
+      std::cerr << "Predicted state contains NaN/Inf values at time " << timestamp << std::endl;
+      return false;
     }
 
     StateMatrix Q = process_model_->GetProcessNoiseCovariance(dt);
     StateMatrix covariance_at_sensor_time = A * reference_covariance_ * A.transpose() + Q;
+    covariance_at_sensor_time = 0.5 * (covariance_at_sensor_time + covariance_at_sensor_time.transpose());
 
-    // ---- Phase 2: Apply the measurement ----
+    // Compute auxiliary data
+    MeasurementModelInterface::MeasurementAuxData aux_data;
 
-    // Compute auxiliary data (innovation, Jacobian, innovation covariance)
-    auto aux_data = sensor->ComputeAuxiliaryData(
-        state_at_sensor_time, covariance_at_sensor_time, measurement);
-
-    // Validate measurement
+    // Validate and mediate the measurement
     bool measurement_valid = sensor->ValidateAndMediate(
-        state_at_sensor_time, covariance_at_sensor_time, timestamp, measurement);
+        state_at_sensor_time, covariance_at_sensor_time, timestamp, measurement, aux_data);
 
-    // If invalid and set to reject, return early
-    if (!measurement_valid &&
-        sensor->GetValidationParams().mediation_action == MediationAction::Reject) {
-      std::cerr << "Warning: Measurement at time " << timestamp
-                << " failed validation and is being rejected" << std::endl;
+    if (!measurement_valid) {
       return false;
     }
 
-    // Kalman update - compute PHt
-    auto PHt = covariance_at_sensor_time * aux_data.jacobian.transpose();
-    auto S = aux_data.innovation_covariance;
-
-    // Use LDLT decomposition for solving
-    Eigen::MatrixXd K_transpose = S.ldlt().solve(PHt.transpose());
-    auto kalman_gain = K_transpose.transpose();
+    Eigen::MatrixXd PHt = covariance_at_sensor_time * aux_data.jacobian.transpose();
+    Eigen::MatrixXd K_transpose = aux_data.innovation_covariance.ldlt().solve(PHt.transpose());
+    Eigen::MatrixXd kalman_gain = K_transpose.transpose();
 
     // Update state estimate
     StateVector updated_state = state_at_sensor_time + kalman_gain * aux_data.innovation;
 
-    // Joseph form covariance update for stability
-    auto I_KH = StateMatrix::Identity() - kalman_gain * aux_data.jacobian;
+    // Update covariance (Joseph form for numerical stability)
+    StateMatrix I_KH = StateMatrix::Identity() - kalman_gain * aux_data.jacobian;
     StateMatrix updated_covariance = I_KH * covariance_at_sensor_time * I_KH.transpose() +
         kalman_gain * sensor->GetMeasurementCovariance() * kalman_gain.transpose();
+
+    updated_covariance = 0.5 * (updated_covariance + updated_covariance.transpose());
+
+    if (!updated_covariance.allFinite()) {
+      std::cerr << "Updated covariance contains NaN/Inf values for at time " << timestamp << std::endl;
+      return false;
+    }
 
     // Update process noise
     process_model_->UpdateProcessNoise(
@@ -203,20 +203,25 @@ public:
 
     // Update reference state based on timestamp
     if (timestamp > reference_time_) {
-      // For newer measurements, update directly
       reference_state_ = updated_state;
       reference_covariance_ = updated_covariance;
       reference_time_ = timestamp;
     } else {
-      // For older measurements, propagate forward
       double forward_dt = reference_time_ - timestamp;
       reference_state_ = process_model_->PredictState(updated_state, forward_dt);
+
+      if (!reference_state_.allFinite()) {
+        std::cerr << "Forward propagation produced invalid state for at time " << timestamp << std::endl;
+        return false;
+      }
+
       StateMatrix A_forward = process_model_->GetTransitionMatrix(updated_state, forward_dt);
       StateMatrix Q_forward = process_model_->GetProcessNoiseCovariance(forward_dt);
       reference_covariance_ = A_forward * updated_covariance * A_forward.transpose() + Q_forward;
+      reference_covariance_ = 0.5 * (reference_covariance_ + reference_covariance_.transpose());
     }
 
-    return measurement_valid;
+    return true;
   }
 
 

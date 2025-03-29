@@ -62,6 +62,10 @@ protected:
     std::string node_name = "sensor_handlers_test_" + std::to_string(counter++);
     node_ = std::make_shared<rclcpp::Node>(node_name);
 
+    // Create and initialize TimeManager
+    time_manager_ = std::make_shared<TimeManager>();
+    time_manager_->setReferenceTime(node_->now());
+
     // Create a TF buffer and listener
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(node_->get_clock());
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
@@ -94,19 +98,19 @@ protected:
 
     // Create test wrapper handlers
     position_handler_ = std::make_shared<TestPositionSensorHandler>(
-        node_.get(), filter_, tf_buffer_,
+        node_.get(), filter_, tf_buffer_, time_manager_,
         "test_position", "position_topic", "position_frame", "map", "base_link");
 
     pose_handler_ = std::make_shared<TestPoseSensorHandler>(
-        node_.get(), filter_, tf_buffer_,
+        node_.get(), filter_, tf_buffer_, time_manager_,
         "test_pose", "pose_topic", "pose_frame", "map", "base_link");
 
     velocity_handler_ = std::make_shared<TestVelocitySensorHandler>(
-        node_.get(), filter_, tf_buffer_,
+        node_.get(), filter_, tf_buffer_, time_manager_,
         "test_velocity", "velocity_topic", "velocity_frame", "map", "base_link");
 
     imu_handler_ = std::make_shared<TestImuSensorHandler>(
-        node_.get(), filter_, tf_buffer_,
+        node_.get(), filter_, tf_buffer_, time_manager_,
         "test_imu", "imu_topic", "imu_frame", "map", "base_link");
 
     // Process any pending callbacks to ensure publishers/subscribers are established
@@ -128,6 +132,7 @@ protected:
     tf_buffer_.reset();
     tf_broadcaster_.reset();
     tf_listener_.reset();
+    time_manager_.reset();  // Clean up time manager
     node_.reset();
   }
 
@@ -154,11 +159,11 @@ protected:
     return vector;
   }
 
-  // Create a standard header for testing
+  // Create a standard header for testing - updated to use time_manager_
   std_msgs::msg::Header createTestHeader(double time_sec = 1.0) {
     std_msgs::msg::Header header;
     header.frame_id = "test_frame";
-    header.stamp = utils::doubleTimeToRosTime(time_sec);
+    header.stamp = time_manager_->filterTimeToRosTime(time_sec);
     return header;
   }
 
@@ -221,6 +226,7 @@ protected:
   std::shared_ptr<TestPoseSensorHandler> pose_handler_;
   std::shared_ptr<TestVelocitySensorHandler> velocity_handler_;
   std::shared_ptr<TestImuSensorHandler> imu_handler_;
+  std::shared_ptr<TimeManager> time_manager_;  // Added TimeManager
 };
 
 // Test for PositionSensorHandler

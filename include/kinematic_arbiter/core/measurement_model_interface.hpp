@@ -60,7 +60,7 @@ public:
       : noise_sample_window(40),
         confidence_level(0.95),
         process_to_measurement_noise_ratio(2.0),
-        mediation_action(MediationAction::AdjustCovariance) {}
+        mediation_action(MediationAction::ForceAccept) {}
   };
 
   /**
@@ -98,6 +98,11 @@ public:
       measurement_covariance_(measurement_covariance),
       validation_params_(params),
       type_(type) {}
+
+  /**
+   * @brief Reset the measurement model to initial state
+   */
+  virtual void reset() = 0;
 
   /**
    * @brief Virtual destructor
@@ -192,36 +197,94 @@ public:
   }
 
   /**
+   * @brief Validate auxiliary measurement data (innovation, jacobian, covariance)
+   *
+   * @param aux_data Auxiliary measurement data
+   * @return true if validation passes, false otherwise
+   */
+  bool ValidateAuxiliaryData(const MeasurementAuxData& aux_data) const {
+    // Check innovation and jacobian for NaN/Inf
+    if (!aux_data.innovation.allFinite() || !aux_data.jacobian.allFinite()) {
+      std::cerr << "Invalid innovation or jacobian from " << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    // Check innovation covariance for NaN/Inf
+    if (!aux_data.innovation_covariance.allFinite()) {
+      std::cerr << "Innovation covariance contains NaN/Inf from " << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    // Check if innovation covariance is well-conditioned
+    Eigen::JacobiSVD<DynamicCovariance> svd(aux_data.innovation_covariance);
+    double condition_number = svd.singularValues()(0) /
+                             std::max(svd.singularValues()(svd.singularValues().size() - 1), 1e-12);
+
+    const double kConditionThreshold = 1e12;
+    if (condition_number > kConditionThreshold) {
+      std::cerr << "Ill-conditioned innovation covariance (cond=" << condition_number
+                << ") from " << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    // Check if LDLT decomposition succeeds (positive definite check)
+    Eigen::LDLT<DynamicCovariance> ldlt(aux_data.innovation_covariance);
+    if (ldlt.info() != Eigen::Success) {
+      std::cerr << "Innovation covariance not positive definite from "
+                << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    // All checks passed
+    return true;
+  }
+
+  /**
    * @brief Perform the validation and mediation process
    *
    * @param state Current state estimate x_k
    * @param state_covariance Current state covariance P_k
+   * @param measurement_timestamp Measurement timestamp
    * @param measurement Actual measurement y_k
+   * @param aux_data Output parameter for auxiliary measurement data
    * @return Whether filter assumptions hold for this measurement
    */
   bool ValidateAndMediate(
       const StateVector& state,
       const StateCovariance& state_covariance,
       const double& measurement_timestamp,
-      const DynamicVector& measurement) {
-        ValidateMeasurementSize(measurement);
-        previous_measurement_data_ = MeasurementData(
-          measurement_timestamp,
-          measurement,
-          measurement_covariance_
-        );
-    // Compute auxiliary data once for all operations
-    MeasurementAuxData aux_data = ComputeAuxiliaryData(
-        state, state_covariance, measurement);
+      const DynamicVector& measurement,
+      MeasurementAuxData& aux_data) {
+
+    previous_measurement_data_ = MeasurementData(
+      measurement_timestamp,
+      measurement,
+      measurement_covariance_
+    );
+
+    // Compute auxiliary data
+    aux_data = ComputeAuxiliaryData(state, state_covariance, measurement);
+
+    // Validate auxiliary data
+    if (!ValidateAuxiliaryData(aux_data)) {
+      return false;
+    }
+
+    // Skip innovation test for forced accept
+    if (validation_params_.mediation_action == MediationAction::ForceAccept) {
+      UpdateCovariance(aux_data.innovation);
+      previous_measurement_data_.covariance = measurement_covariance_;
+      return true;
+    }
 
     // Mahalanobis distance: d = ν^T S^-1 ν
     double chi_squared_term = aux_data.innovation.transpose() *
-                         aux_data.innovation_covariance.llt().solve(
-                         aux_data.innovation);
+                        aux_data.innovation_covariance.ldlt().solve(
+                        aux_data.innovation);
 
     // Determine threshold for chi-squared test
     double threshold = utils::CalculateChiSquareCriticalValueNDof(
-          aux_data.innovation.rows()-1, validation_params_.confidence_level);
+          aux_data.innovation.rows(), validation_params_.confidence_level);
 
     // Check if measurement passes validation
     if (chi_squared_term < threshold) {
@@ -238,6 +301,7 @@ public:
       previous_measurement_data_.covariance = measurement_covariance_;
       return true;
     }
+
     // Log warning with metadata when validation fails
     std::cerr << "WARNING: Measurement validation failed for sensor type "
               << SensorTypeToString(type_) << std::endl
@@ -245,6 +309,7 @@ public:
               << ", Threshold: " << threshold << std::endl
               << "  Innovation norm: " << aux_data.innovation.norm()
               << ", Measurement timestamp: " << measurement_timestamp << std::endl;
+
     // Always return false if validation fails
     return false;
   }
@@ -311,6 +376,45 @@ public:
    */
   SensorType GetModelType() const {
     return type_;
+  }
+
+  /**
+   * @brief Validate measurement and timestamp before any expensive operations
+   *
+   * @param measurement Raw measurement vector
+   * @param timestamp Measurement timestamp
+   * @param reference_time Current filter reference time
+   * @param max_delay_window Maximum delay window for measurements
+   * @return bool Whether measurement passed basic validation
+   */
+  bool ValidateMeasurementAndTime(
+      const DynamicVector& measurement,
+      double timestamp,
+      double reference_time,
+      double max_delay_window) const {
+
+    // Check for NaN/Inf in measurement
+    if (!measurement.allFinite()) {
+      std::cerr << "Invalid measurement from " << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    // Check measurement size
+    ValidateMeasurementSize(measurement);
+
+    // Reference time not yet set (first measurement)
+    if (reference_time == std::numeric_limits<double>::lowest()) {
+      return true;
+    }
+
+    // Check timestamp against delay window
+    if (timestamp < reference_time - max_delay_window ||
+        timestamp > reference_time + max_delay_window) {
+      std::cerr << "Timestamp outside acceptable window for " << SensorTypeToString(type_) << " sensor" << std::endl;
+      return false;
+    }
+
+    return true;
   }
 
   protected:

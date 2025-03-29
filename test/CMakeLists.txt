@@ -137,13 +137,39 @@ add_ros2_test_executable(filter_wrapper_test
   "${CMAKE_SOURCE_DIR}/test/ros2/filter_wrapper_test.cpp"
   ${tf2_geometry_msgs_LIBRARIES})
 
-add_ros2_test_executable(time_utils_test
-  "${CMAKE_SOURCE_DIR}/test/ros2/time_utils_test.cpp")
+add_ros2_test_executable(time_manager_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/time_manager_test.cpp")
 
 add_ros2_test_executable(sensor_handlers_test
   "${CMAKE_SOURCE_DIR}/test/ros2/sensor_handlers_test.cpp")
 
-# Add Figure-8 tracking test executable using the existing pattern
+# Add parameter test executable (without Google Test)
+add_executable(parameter_test "${CMAKE_SOURCE_DIR}/test/ros2/parameter_test.cpp")
+target_link_libraries(parameter_test
+  ${rclcpp_LIBRARIES}
+)
+ament_target_dependencies(parameter_test
+  rclcpp
+)
+install(TARGETS parameter_test
+  DESTINATION lib/${PROJECT_NAME})
+
+# Install the test parameter file
+install(FILES
+  "${CMAKE_SOURCE_DIR}/test/config/test_params.yaml"
+  DESTINATION share/${PROJECT_NAME}/config
+)
+
+# Component test executables
+add_ros2_test_executable(figure8_simulator_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/figure8_simulator_test.cpp"
+  ${tf2_geometry_msgs_LIBRARIES})
+
+add_ros2_test_executable(kinematic_arbiter_test
+  "${CMAKE_SOURCE_DIR}/test/ros2/kinematic_arbiter_test.cpp"
+  ${tf2_geometry_msgs_LIBRARIES})
+
+# Integration test executable
 add_ros2_test_executable(figure8_tracking_test
   "${CMAKE_SOURCE_DIR}/test/ros2/figure8_tracking_test.cpp"
   ${tf2_geometry_msgs_LIBRARIES})
@@ -151,7 +177,27 @@ add_ros2_test_executable(figure8_tracking_test
 # Find the launch testing package
 find_package(launch_testing_ament_cmake REQUIRED)
 
-# Register the launch file with a simple absolute path
+# Register parameter test launch file
+add_launch_test(
+  "${CMAKE_SOURCE_DIR}/test/launch/test_params.launch.py"
+  TARGET parameter_test_launch
+  TIMEOUT 30
+)
+
+# Register the component tests launch files
+add_launch_test(
+  "${CMAKE_SOURCE_DIR}/test/launch/figure8_simulator_test.launch.py"
+  TARGET figure8_simulator_test_launch
+  TIMEOUT 30
+)
+
+add_launch_test(
+  "${CMAKE_SOURCE_DIR}/test/launch/kinematic_arbiter_test.launch.py"
+  TARGET kinematic_arbiter_test_launch
+  TIMEOUT 30
+)
+
+# Register the integration test launch file
 add_launch_test(
   "${CMAKE_SOURCE_DIR}/test/launch/figure8_tracking_test.launch.py"
   TARGET figure8_tracking_test_launch

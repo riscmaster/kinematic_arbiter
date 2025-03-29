@@ -69,8 +69,15 @@ public:
     : Base(core::SensorType::Imu, sensor_pose_in_body_frame, params, Covariance::Identity()),
       bias_estimator_(config.bias_estimation_window_size),
       config_(config) {
-        this->can_predict_input_accelerations_ = true;
+        this->can_predict_input_accelerations_ = false;
       }
+
+       /**
+     * @brief Reset the measurement model to initial state
+     */
+    void reset() override {
+      measurement_covariance_ = Covariance::Identity();
+    }
 
   /**
    * @brief Predict measurement from state

@@ -3,7 +3,7 @@
 #include <geometry_msgs/msg/point_stamped.hpp>
 #include "kinematic_arbiter/ros2/sensor_handler.hpp"
 #include "kinematic_arbiter/sensors/position_sensor_model.hpp"
-
+#include "kinematic_arbiter/ros2/ros2_utils.hpp"
 namespace kinematic_arbiter {
 namespace ros2 {
 
@@ -20,12 +20,13 @@ public:
       rclcpp::Node* node,
       std::shared_ptr<Filter> filter,
       std::shared_ptr<tf2_ros::Buffer> tf_buffer,
+      std::shared_ptr<utils::TimeManager> time_manager,
       const std::string& sensor_name,
       const std::string& topic,
       const std::string& sensor_frame_id,
       const std::string& reference_frame_id,
       const std::string& body_frame_id)
-    : Base(node, filter, tf_buffer, sensor_name, topic,
+    : Base(node, filter, tf_buffer, time_manager, sensor_name, topic,
           sensor_frame_id, reference_frame_id, body_frame_id,
           std::make_shared<ModelType>(),
           SensorType::Position) {}

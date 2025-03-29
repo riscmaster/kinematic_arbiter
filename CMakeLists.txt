@@ -141,6 +141,7 @@ if(NOT BUILD_PYTHON_ONLY)
     ${rclcpp_INCLUDE_DIRS}
     ${geometry_msgs_INCLUDE_DIRS}
     ${sensor_msgs_INCLUDE_DIRS}
+    ${std_srvs_INCLUDE_DIRS}
     ${tf2_INCLUDE_DIRS}
     ${tf2_ros_INCLUDE_DIRS}
     ${tf2_eigen_INCLUDE_DIRS}
@@ -153,6 +154,7 @@ if(NOT BUILD_PYTHON_ONLY)
     ${rclcpp_LIBRARIES}
     ${geometry_msgs_LIBRARIES}
     ${sensor_msgs_LIBRARIES}
+    ${std_srvs_LIBRARIES}
     ${tf2_LIBRARIES}
     ${tf2_ros_LIBRARIES}
     ${tf2_eigen_LIBRARIES}

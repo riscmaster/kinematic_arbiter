@@ -15,6 +15,7 @@
 #include "kinematic_arbiter/core/measurement_model_interface.hpp"
 #include "kinematic_arbiter/core/sensor_types.hpp"
 #include "kinematic_arbiter/ros2/ros2_utils.hpp"
+#include "kinematic_arbiter/core/mediation_types.hpp"
 
 namespace kinematic_arbiter {
 namespace ros2 {
@@ -53,6 +54,7 @@ public:
       rclcpp::Node* node,
       std::shared_ptr<Filter> filter,
       std::shared_ptr<tf2_ros::Buffer> tf_buffer,
+      std::shared_ptr<utils::TimeManager> time_manager,
       const std::string& sensor_name,
       const std::string& topic,
       const std::string& sensor_frame_id,
@@ -63,6 +65,7 @@ public:
     : node_(node),
       filter_(filter),
       tf_buffer_(tf_buffer),
+      time_manager_(time_manager),
       sensor_name_(sensor_name),
       topic_(topic),
       sensor_frame_id_(sensor_frame_id),
@@ -110,10 +113,10 @@ public:
         topic_ + "/expected", 10);
 
     upper_bound_pub_ = node_->create_publisher<MsgType>(
-        topic_ + "/upper_bound", 10);
+        topic_ + "/expected/upper_bound", 10);
 
     lower_bound_pub_ = node_->create_publisher<MsgType>(
-        topic_ + "/lower_bound", 10);
+        topic_ + "/expected/lower_bound", 10);
 
     RCLCPP_INFO(node_->get_logger(), "Created %s sensor handler '%s' (ID: %s) on topic '%s'",
                 kinematic_arbiter::core::SensorTypeToString(sensor_type_).c_str(),
@@ -125,6 +128,27 @@ public:
    */
   const std::string& getSensorId() const {
     return sensor_id_;
+  }
+
+  /**
+   * @brief Set validation parameters for the sensor model
+   *
+   * @param p2m_noise_ratio Process to measurement noise ratio
+   * @param mediation_action Mediation action
+   */
+  void setValidationParams(double p2m_noise_ratio, kinematic_arbiter::core::MediationAction mediation_action) {
+    if (sensor_model_) {
+      // ValidationParams is part of MeasurementModelInterface
+      kinematic_arbiter::core::MeasurementModelInterface::ValidationParams params;
+      params.process_to_measurement_noise_ratio = p2m_noise_ratio;
+      params.mediation_action = mediation_action;
+      sensor_model_->SetValidationParams(params);
+
+      RCLCPP_INFO(node_->get_logger(), "Set validation params for %s: p2m_ratio=%.2f, action=%s",
+                  sensor_name_.c_str(), p2m_noise_ratio,
+                  mediation_action == kinematic_arbiter::core::MediationAction::ForceAccept ? "force_accept" :
+                  (mediation_action == kinematic_arbiter::core::MediationAction::AdjustCovariance ? "adjust_covariance" : "reject"));
+    }
   }
 
 protected:
@@ -163,6 +187,7 @@ private:
   rclcpp::Node* node_;
   std::shared_ptr<Filter> filter_;
   std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<utils::TimeManager> time_manager_;
 
 
   // Sensor information
@@ -185,47 +210,22 @@ private:
   typename rclcpp::Publisher<MsgType>::SharedPtr upper_bound_pub_;
   typename rclcpp::Publisher<MsgType>::SharedPtr lower_bound_pub_;
 
-  /**
-   * @brief Callback for incoming sensor messages
-   */
-  void messageCallback(const typename MsgType::SharedPtr msg) {
-    if (!msg) {
-      RCLCPP_WARN(node_->get_logger(), "Received null message for sensor %s", sensor_id_.c_str());
-      return;
-    }
-
-    // Convert to vector
-    DynamicVector measurement;
-    if (!msgToVector(*msg, measurement)) {
-      RCLCPP_WARN(node_->get_logger(), "Failed to convert message to measurement vector for sensor %s",
-                  sensor_id_.c_str());
-      return;
-    }
-
-    // Get timestamp from message using our offset-adjusted conversion
-    double timestamp = utils::rosTimeToSeconds(rclcpp::Time(msg->header.stamp));
-
-    // Process the measurement
-    bool success = filter_->ProcessMeasurementByIndex(sensor_index_, measurement, timestamp);
-
-    if (!success) {
-      RCLCPP_WARN(node_->get_logger(), "Failed to process measurement for sensor %s",
-                 sensor_id_.c_str());
-    }
-
-    // Always publish expected measurements regardless of process success
-    publishExpectedMeasurement(msg->header);
-  }
+  // Add this member variable to the SensorHandler class's private section
+  bool has_valid_transform_ = false;
 
   /**
    * @brief Look up the static transform from sensor to body frame
+   * @return True if transform was successfully found or already exists
    */
-  void lookupStaticTransform() {
+  bool lookupStaticTransform() {
     if (sensor_frame_id_ == body_frame_id_) {
-      // No transform needed, use identity
+      // Special case: sensor is in the body frame, use identity
       sensor_to_body_transform_ = Eigen::Isometry3d::Identity();
       filter_->SetSensorPoseInBodyFrameByIndex(sensor_index_, sensor_to_body_transform_);
-      return;
+      has_valid_transform_ = true;
+      RCLCPP_INFO(node_->get_logger(), "Sensor %s is in body frame %s, using identity transform",
+                  sensor_id_.c_str(), body_frame_id_.c_str());
+      return true;
     }
 
     try {
@@ -251,18 +251,72 @@ private:
       // Store and set transform
       sensor_to_body_transform_ = transform;
       filter_->SetSensorPoseInBodyFrameByIndex(sensor_index_, sensor_to_body_transform_);
+      has_valid_transform_ = true;
 
-      RCLCPP_INFO(node_->get_logger(), "Set static transform from %s to %s for sensor %s",
-                  sensor_frame_id_.c_str(), body_frame_id_.c_str(), sensor_id_.c_str());
+      RCLCPP_INFO(node_->get_logger(), "Set transform from %s to %s for sensor %s: [%f, %f, %f]",
+                  sensor_frame_id_.c_str(), body_frame_id_.c_str(), sensor_id_.c_str(),
+                  transform.translation().x(),
+                  transform.translation().y(),
+                  transform.translation().z());
+      return true;
     } catch (const tf2::TransformException& ex) {
-      // Fall back to identity transform
-      sensor_to_body_transform_ = Eigen::Isometry3d::Identity();
-      filter_->SetSensorPoseInBodyFrameByIndex(sensor_index_, sensor_to_body_transform_);
-
-      RCLCPP_WARN(node_->get_logger(),
-                 "Failed to look up transform from %s to %s: %s. Using identity transform.",
-                 sensor_frame_id_.c_str(), body_frame_id_.c_str(), ex.what());
+      // Report the error without setting any transform
+      RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 5000,
+                 "Waiting for transform from %s to %s for sensor %s: %s",
+                 sensor_frame_id_.c_str(), body_frame_id_.c_str(),
+                 sensor_name_.c_str(), ex.what());
+      has_valid_transform_ = false;
+      return false;
     }
+  }
+
+  /**
+   * @brief Callback for incoming sensor messages
+   */
+  void messageCallback(const typename MsgType::SharedPtr msg) {
+    if(!time_manager_->isInitialized()) {
+      RCLCPP_WARN(node_->get_logger(), "Time manager not initialized for sensor %s", sensor_id_.c_str());
+      return;
+    }
+
+    if (!msg) {
+      RCLCPP_WARN(node_->get_logger(), "Received null message for sensor %s", sensor_id_.c_str());
+      return;
+    }
+
+    // Check for transform if we don't have a valid one yet
+    if (!has_valid_transform_) {
+      if (!lookupStaticTransform()) {
+        // Still don't have transform, skip processing this message
+        // Only log at most once per second to avoid spamming
+        RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
+                            "Skipping measurement for sensor '%s' - waiting for transform from %s to %s",
+                            sensor_name_.c_str(), sensor_frame_id_.c_str(), body_frame_id_.c_str());
+        return;
+      }
+    }
+
+    // Convert to vector
+    DynamicVector measurement;
+    if (!msgToVector(*msg, measurement)) {
+      RCLCPP_WARN(node_->get_logger(), "Failed to convert message to measurement vector for sensor %s",
+                  sensor_id_.c_str());
+      return;
+    }
+
+    // Get timestamp from message using our offset-adjusted conversion
+    double timestamp = time_manager_->rosTimeToFilterTime(rclcpp::Time(msg->header.stamp));
+
+    // Process the measurement
+    bool success = filter_->ProcessMeasurementByIndex(sensor_index_, measurement, timestamp);
+
+    if (!success) {
+      RCLCPP_WARN(node_->get_logger(), "Failed to process measurement for sensor %s",
+                 sensor_id_.c_str());
+    }
+
+    // Always publish expected measurements regardless of process success
+    publishExpectedMeasurement(msg->header);
   }
 
   /**
@@ -270,7 +324,7 @@ private:
    */
   void publishExpectedMeasurement(const std_msgs::msg::Header& header) {
     // Get the timestamp using our offset-adjusted conversion
-    double timestamp = utils::rosTimeToSeconds(rclcpp::Time(header.stamp));
+    double timestamp = time_manager_->rosTimeToFilterTime(rclcpp::Time(header.stamp));
 
     // Predict to the measurement time
     auto state = filter_->GetStateEstimate(timestamp);

@@ -18,15 +18,19 @@ def generate_launch_description():
     Returns:
         LaunchDescription: The complete launch description
     """
+    # Print the test configuration
     package_name = "kinematic_arbiter"
-
-    # Get the path to the test config file
     config_file = os.path.join(
         get_package_share_directory(package_name),
         "test",
         "config",
         "figure8_test_config.yaml",
     )
+
+    print(f"Using configuration file: {config_file}")
+    with open(config_file, "r") as f:
+        print("Configuration contents:")
+        print(f.read())
 
     # Launch the simulator node
     simulator_node = Node(

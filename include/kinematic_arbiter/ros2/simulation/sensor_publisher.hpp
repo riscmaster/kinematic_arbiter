@@ -55,17 +55,13 @@ public:
       noise_sigma_(noise_sigma) {
 
     // Create all publishers with consistent naming
-    raw_pub_ = node_->create_publisher<MsgType>(
-        "sensors/" + name_, 10);
+    raw_pub_ = node_->create_publisher<MsgType>(name_, 10);
 
-    truth_pub_ = node_->create_publisher<MsgType>(
-        "sensors/" + name_ + "/truth", 10);
+    truth_pub_ = node_->create_publisher<MsgType>(name_ + "/truth", 10);
 
-    upper_bound_pub_ = node_->create_publisher<MsgType>(
-        "sensors/" + name_ + "/upper_bound", 10);
+    upper_bound_pub_ = node_->create_publisher<MsgType>(name_ + "/upper_bound", 10);
 
-    lower_bound_pub_ = node_->create_publisher<MsgType>(
-        "sensors/" + name_ + "/lower_bound", 10);
+    lower_bound_pub_ = node_->create_publisher<MsgType>(name_ + "/lower_bound", 10);
 
     // Create noise distribution
     noise_dist_ = std::normal_distribution<>(0.0, noise_sigma_);

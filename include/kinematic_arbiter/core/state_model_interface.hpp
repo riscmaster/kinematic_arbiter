@@ -25,8 +25,15 @@ public:
     size_t process_noise_window;
 
     // Default constructor with initialization
-    Params() : process_noise_window(100) {}
+    Params() : process_noise_window(40) {}
   };
+
+  /**
+   * @brief Reset the state model to initial state
+   */
+  void reset() {
+    process_noise_ = StateMatrix::Identity();
+  }
 
   /**
    * @brief Constructor with parameters
@@ -118,24 +125,26 @@ public:
 
     // Compute state correction
     StateVector state_diff = a_priori_state - a_posteriori_state;
-
-    // Create binary mask vector (1.0 where states changed, 0.0 otherwise)
-    StateVector mask = (state_diff.array().abs() > kMinStateDiff).cast<double>();
-
-    // Apply maximum bound to state differences
-
+       // Apply maximum bound to state differences
     StateVector bounded_diff =
         state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
 
-    // Create masked outer product (only non-zero where both states changed)
-    StateMatrix mask_matrix = mask * mask.transpose();
-    StateMatrix masked_update = (mask.asDiagonal() * bounded_diff) *
-                               (mask.asDiagonal() * bounded_diff).transpose();
+    // Zero out terms that are below the minimum threshold
+    StateVector final_diff = bounded_diff.array() * (bounded_diff.array().abs() >= kMinStateDiff).cast<double>();
 
-    // Apply selective update using element-wise product with mask
-    process_noise_ += process_to_measurement_ratio * dt *
-                     (masked_update - process_noise_.cwiseProduct(mask_matrix)) /
-                     params_.process_noise_window;
+    StateMatrix update_contribution = final_diff * final_diff.transpose();
+
+
+    // Apply update only to masked elements
+    for (int i = 0; i < StateSize; ++i) {
+      for (int j = 0; j < StateSize; ++j) {
+        if (update_contribution(i, j) != 0.0) {  // Either element had significant change
+          process_noise_(i, j) += process_to_measurement_ratio * dt *
+                              (update_contribution(i, j) - process_noise_(i, j)) /
+                              params_.process_noise_window;
+        }
+      }
+    }
   }
 
   /**

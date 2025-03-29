@@ -19,18 +19,18 @@ figure8_simulator:
     body_frame_id: "base_link"
 
     # Sensor topics and frames
-    position_topic: "/sensors/position"
+    position_topic: "sensors/position"
     position_frame: "position_sensor"
-    pose_topic: "/sensors/pose"
+    pose_topic: "sensors/pose"
     pose_frame: "pose_sensor"
-    velocity_topic: "/sensors/velocity"
+    velocity_topic: "sensors/velocity"
     velocity_frame: "velocity_sensor"
-    imu_topic: "/sensors/imu"
+    imu_topic: "sensors/imu"
     imu_frame: "imu_sensor"
 
     # Ground truth topics
-    truth_pose_topic: "/truth/pose"
-    truth_velocity_topic: "/truth/velocity"
+    truth_pose_topic: "truth/pose"
+    truth_velocity_topic: "truth/velocity"
 
     # Noise parameters
     noise_sigma: 0.01
@@ -39,13 +39,18 @@ figure8_simulator:
 # Configuration for Kinematic Arbiter
 kinematic_arbiter:
   ros__parameters:
-    publish_rate: 100.0
-    max_delay_window: 0.5
+    publish_rate: 50.0
+    max_delay_window: 1.0
     world_frame_id: "map"
     body_frame_id: "base_link"
 
+    # Output state topics
+    pose_state_topic: "state/pose"
+    velocity_state_topic: "state/velocity"
+    acceleration_state_topic: "state/acceleration"
+
     # Sensor configurations
-    position_sensors: ["position_sensor:/sensors/position:position_sensor"]
-    pose_sensors: ["pose_sensor:/sensors/pose:pose_sensor"]
-    velocity_sensors: ["velocity_sensor:/sensors/velocity:velocity_sensor"]
-    imu_sensors: ["imu_sensor:/sensors/imu:imu_sensor"]
+    position_sensors: ["position_sensor:sensors/position:position_sensor"]
+    pose_sensors: ["pose_sensor:sensors/pose:pose_sensor"]
+    velocity_sensors: ["velocity_sensor:sensors/velocity:velocity_sensor"]
+    imu_sensors: ["imu_sensor:sensors/imu:imu_sensor"]

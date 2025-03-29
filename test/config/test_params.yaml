@@ -1,0 +1,31 @@
+parameter_test_node:
+  ros__parameters:
+    # Basic parameters
+    simple_param: "test_value"
+
+    # Position sensors with hierarchical structure
+    position_sensors:
+      position_sensor:  # Sensor name
+        topic: "position_sensor"
+        frame_id: "position_sensor"
+      test_sensor:  # Another sensor
+        topic: "test_position_topic"
+        frame_id: "test_position_frame"
+
+    # Pose sensors with hierarchical structure
+    pose_sensors:
+      pose_sensor:  # Sensor name
+        topic: "pose_sensor"
+        frame_id: "pose_sensor"
+
+    # Velocity sensors with hierarchical structure
+    velocity_sensors:
+      velocity_sensor:  # Sensor name
+        topic: "velocity_sensor"
+        frame_id: "velocity_sensor"
+
+    # IMU sensors with hierarchical structure
+    imu_sensors:
+      imu_sensor:  # Sensor name
+        topic: "imu_sensor"
+        frame_id: "imu_sensor"

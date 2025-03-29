@@ -3,39 +3,18 @@
     "Plot!3ip39i4": {
       "paths": [
         {
-          "value": "/sensors/sensors/position.point.x",
-          "enabled": true,
-          "timestampMethod": "receiveTime",
-          "color": "#b7edba",
-          "label": "raw_x"
-        },
-        {
-          "value": "/sensors/sensors/position/lower_bound.point.x",
-          "enabled": true,
-          "timestampMethod": "receiveTime",
-          "color": "#d3dff6",
-          "label": "true_lower_bound"
-        },
-        {
-          "value": "/sensors/sensors/position/truth.point.x",
+          "value": "/truth/pose.pose.position.x",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_x"
         },
         {
-          "value": "/sensors/sensors/position/upper_bound.point.x",
-          "enabled": true,
-          "timestampMethod": "receiveTime",
-          "color": "#d3dff6",
-          "label": "true_upper_bound"
-        },
-        {
           "timestampMethod": "receiveTime",
           "value": "/state/pose.pose.pose.position.x",
           "enabled": true,
           "color": "#ff8461",
-          "label": "Expected X"
+          "label": "estimate_x"
         }
       ],
       "showXAxisLabels": true,
@@ -50,28 +29,28 @@
     "Plot!3ajvnms": {
       "paths": [
         {
-          "value": "/sensors/sensors/position.point.y",
+          "value": "/position_sensor.point.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#b7edba",
           "label": "raw_y"
         },
         {
-          "value": "/sensors/sensors/position/lower_bound.point.y",
+          "value": "/position_sensor/lower_bound.point.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_lower_bound"
         },
         {
-          "value": "/sensors/sensors/position/truth.point.y",
+          "value": "/position_sensor/truth.point.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_y"
         },
         {
-          "value": "/sensors/sensors/position/upper_bound.point.y",
+          "value": "/position_sensor/upper_bound.point.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
@@ -79,10 +58,22 @@
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/test/state/pose.pose.pose.position.y",
+          "value": "/position_sensor/expected.point.y",
           "enabled": true,
           "color": "#ff8461",
           "label": "Expected Y"
+        },
+        {
+          "value": "/position_sensor/expected/lower_bound.point.y",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461"
+        },
+        {
+          "value": "/position_sensor/expected/upper_bound.point.y",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461"
         }
       ],
       "showXAxisLabels": true,
@@ -97,28 +88,28 @@
     "Plot!2y8h2f5": {
       "paths": [
         {
-          "value": "/sensors/sensors/position.point.z",
+          "value": "/position_sensor.point.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#b7edba",
           "label": "raw_z"
         },
         {
-          "value": "/sensors/sensors/position/lower_bound.point.z",
+          "value": "/position_sensor/lower_bound.point.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_lower_bound"
         },
         {
-          "value": "/sensors/sensors/position/truth.point.z",
+          "value": "/position_sensor/truth.point.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_z"
         },
         {
-          "value": "/sensors/sensors/position/upper_bound.point.z",
+          "value": "/position_sensor/upper_bound.point.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
@@ -126,10 +117,22 @@
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/test/state/pose.pose.pose.position.z",
+          "value": "/state/pose.pose.pose.position.z",
           "enabled": true,
           "color": "#ff8461",
           "label": "Expected Z"
+        },
+        {
+          "value": "/position_sensor/expected/upper_bound.point.z",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461"
+        },
+        {
+          "value": "/position_sensor/expected/lower_bound.point.z",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461"
         }
       ],
       "showXAxisLabels": true,

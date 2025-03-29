@@ -50,6 +50,14 @@ public:
       const ValidationParams& params = ValidationParams())
     : Base(core::SensorType::Pose, sensor_pose_in_body_frame, params, Covariance::Identity()) {}
 
+
+ /**
+     * @brief Reset the measurement model to initial state
+     */
+    void reset() override {
+      measurement_covariance_ = Covariance::Identity();
+    }
+
   /**
    * @brief Predict measurement from state
    *

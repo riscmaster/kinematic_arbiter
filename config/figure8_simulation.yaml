@@ -1,0 +1,121 @@
+# Figure 8 simulation configuration
+# -----------------------------------
+
+# Simulator configuration
+figure8_simulator:
+  ros__parameters:
+    # Main parameters
+    main_update_rate: 100.0  # Main simulator update rate (Hz)
+    world_frame_id: "map"    # World coordinate frame ID
+    body_frame_id: "base_link"  # Body coordinate frame ID
+
+    # Noise and timing parameters
+    noise_sigma: 0.01    # Standard deviation of noise (m)
+    time_jitter: 0.005   # Time jitter (s)
+
+    # Trajectory parameters
+    trajectory:
+      max_vel: 1.0     # Maximum velocity (m/s)
+      length: 5.0      # Length of figure-8 (m)
+      width: 3.0       # Width of figure-8 (m)
+      width_slope: 0.1  # Width slope parameter
+      angular_scale: 0.001  # Angular scale parameter
+
+    # Sensor update rates
+    position_rate: 10.0  # Position sensor rate (Hz)
+    pose_rate: 10.0      # Pose sensor rate (Hz)
+    velocity_rate: 10.0  # Velocity sensor rate (Hz)
+    imu_rate: 100.0      # IMU sensor rate (Hz)
+
+    # Topic names - remove leading slash to prevent double slashes
+    position_topic: "position_sensor"
+    pose_topic: "pose_sensor"
+    velocity_topic: "velocity_sensor"
+    imu_topic: "imu_sensor"
+    truth_pose_topic: "truth/pose"
+    truth_velocity_topic: "truth/velocity"
+
+    # Sensor frame IDs
+    position_frame: "position_sensor"
+    pose_frame: "pose_sensor"
+    velocity_frame: "velocity_sensor"
+    imu_frame: "imu_sensor"
+
+    # Sensor offsets from body frame (for realistic simulation)
+    position_sensor:
+      x_offset: 0.05   # X offset (m)
+      y_offset: 0.0    # Y offset (m)
+      z_offset: 0.1    # Z offset (m)
+
+    pose_sensor:
+      x_offset: -0.03  # X offset (m)
+      y_offset: 0.02   # Y offset (m)
+      z_offset: 0.15   # Z offset (m)
+
+    velocity_sensor:
+      x_offset: 0.0    # X offset (m)
+      y_offset: 0.0    # Y offset (m)
+      z_offset: 0.05   # Z offset (m)
+
+    imu_sensor:
+      x_offset: 0.01   # X offset (m)
+      y_offset: -0.01  # Y offset (m)
+      z_offset: 0.08   # Z offset (m)
+
+# Kinematic arbiter configuration with clearer sensor structure
+kinematic_arbiter:
+  ros__parameters:
+    # General parameters
+    publish_rate: 50.0  # Rate to publish state estimates (Hz)
+    max_delay_window: 0.5  # Maximum delay window for sensor data (s)
+
+    # Frame IDs
+    world_frame_id: "map"
+    body_frame_id: "base_link"
+
+    # Output state topics - remove leading slash
+    pose_state_topic: "state/pose"
+    velocity_state_topic: "state/velocity"
+    acceleration_state_topic: "state/acceleration"
+
+    # # Truth topics - for debugging sensor expectations and validation
+    # truth_pose_topic: "truth/pose"
+    # truth_velocity_topic: "truth/velocity"
+
+    # TF configuration
+    tf_lookup_timeout: 0.1
+    tf_fallback_to_identity: true
+    tf_warning_throttle_period: 5.0
+
+    # Position sensors with hierarchical structure
+    position_sensors:
+      position_sensor:  # Sensor name, can be any identifier
+        topic: "position_sensor"  # Topic to subscribe to
+        frame_id: "position_sensor"  # Frame ID of the sensor
+        p2m_noise_ratio: 0.001
+        mediation_action: "adjust_covariance"
+
+
+    # Pose sensors with hierarchical structure
+    pose_sensors:
+      pose_sensor:  # Sensor name
+        topic: "pose_sensor"
+        frame_id: "pose_sensor"
+        p2m_noise_ratio: 0.001
+        mediation_action: "force_accept"
+
+    # Velocity sensors with hierarchical structure
+    velocity_sensors:
+      velocity_sensor:  # Sensor name
+        topic: "velocity_sensor"
+        frame_id: "velocity_sensor"
+        p2m_noise_ratio: 0.001
+        mediation_action: "reject"
+
+    # IMU sensors with hierarchical structure
+    imu_sensors:
+      imu_sensor:  # Sensor name
+        topic: "imu_sensor"
+        frame_id: "imu_sensor"
+        p2m_noise_ratio: 0.001
+        mediation_action: "force_accept"

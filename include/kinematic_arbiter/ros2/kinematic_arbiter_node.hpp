@@ -11,6 +11,7 @@
 #include "geometry_msgs/msg/accel_with_covariance_stamped.hpp"
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/buffer.h>
+#include "std_srvs/srv/trigger.hpp"
 
 #include "kinematic_arbiter/ros2/filter_wrapper.hpp"
 
@@ -53,15 +54,29 @@ private:
   // Timer
   rclcpp::TimerBase::SharedPtr publish_timer_;
 
+  // True state subscribers for debugging
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr truth_pose_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::TwistStamped>::SharedPtr truth_velocity_sub_;
+
+  // Service for filter reset
+  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr reset_service_;
+
   // Callbacks
   void publishEstimates();
 
   // Sensor initialization
-  void configureSensors();
-  void configurePositionSensors();
-  void configurePoseSensors();
-  void configureVelocitySensors();
-  void configureImuSensors();
+  void configureSensorsFromLoadedParams();
+
+  std::vector<std::string> getSensorNames(const std::string& sensor_type);
+
+  // Callbacks for true state
+  void truthPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg);
+  void truthVelocityCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg);
+
+  // Reset service callback
+  void handleResetService(
+      const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+      std::shared_ptr<std_srvs::srv::Trigger::Response> response);
 };
 
 } // namespace ros2

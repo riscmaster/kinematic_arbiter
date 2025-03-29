@@ -122,6 +122,14 @@ Eigen::Matrix<double, core::StateIndex::kFullStateSize, 1> Figure8Trajectory(
   Eigen::Vector3d alpha_body = orientation.inverse() * alpha_world;
   states.segment<3>(SIdx::AngularAcceleration::Begin()) = alpha_body;
 
+  // 6. Extract and store roll rate (rotation about body X axis)
+  double roll_rate = omega_body.dot(Eigen::Vector3d::UnitX());
+  states[SIdx::AngularVelocity::X] = roll_rate;
+
+  // 7. Extract and store roll acceleration (about body X axis)
+  double roll_accel = alpha_body.dot(Eigen::Vector3d::UnitX());
+  states[SIdx::AngularAcceleration::X] = roll_accel;
+
   return states;
 }
 
