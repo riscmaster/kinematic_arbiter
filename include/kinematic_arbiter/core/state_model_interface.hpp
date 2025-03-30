@@ -18,14 +18,29 @@ public:
   using StateMatrix = Eigen::Matrix<double, StateSize, StateSize>;
   using Vector3d = Eigen::Vector3d;
   /**
-   * @brief Parameters for state model
+   * @brief Parameters for state model configuration
    */
   struct Params {
     // Sample window size for process noise estimation (n)
     size_t process_noise_window;
 
+    // Initial process noise values for different state components
+    double position_uncertainty_per_second;
+    double orientation_uncertainty_per_second;
+    double linear_velocity_uncertainty_per_second;
+    double angular_velocity_uncertainty_per_second;
+    double linear_acceleration_uncertainty_per_second;
+    double angular_acceleration_uncertainty_per_second;
+
     // Default constructor with initialization
-    Params() : process_noise_window(40) {}
+    Params()
+      : process_noise_window(40),
+        position_uncertainty_per_second(0.01),
+        orientation_uncertainty_per_second(0.01),
+        linear_velocity_uncertainty_per_second(0.1),
+        angular_velocity_uncertainty_per_second(0.1),
+        linear_acceleration_uncertainty_per_second(1.0),
+        angular_acceleration_uncertainty_per_second(1.0) {}
   };
 
   /**
@@ -42,7 +57,36 @@ public:
    */
   explicit StateModelInterface(const Params& params = Params())
     : params_(params),
-      process_noise_(StateMatrix::Identity()) {}
+      state_initialized_(false),
+      time_since_reset_(0.0) {
+
+    // Initialize process noise with diagonal elements based on parameters
+    process_noise_ = StateMatrix::Zero();
+
+    // Set position uncertainty (states 0-2)
+    process_noise_.block<3, 3>(0, 0) =
+        params_.position_uncertainty_per_second* params_.position_uncertainty_per_second* Eigen::Matrix3d::Identity() / 9.0;
+
+    // Set orientation uncertainty (states 3-6, quaternion)
+    process_noise_.block<4, 4>(3, 3) =
+        params_.orientation_uncertainty_per_second * params_.orientation_uncertainty_per_second * Eigen::Matrix4d::Identity() / (16.0 * 9.0);
+
+    // Set linear velocity uncertainty (states 7-9)
+    process_noise_.block<3, 3>(7, 7) =
+        params_.linear_velocity_uncertainty_per_second * params_.linear_velocity_uncertainty_per_second * Eigen::Matrix3d::Identity() / (9.0);
+
+    // Set angular velocity uncertainty (states 10-12)
+    process_noise_.block<3, 3>(10, 10) =
+        params_.angular_velocity_uncertainty_per_second * params_.angular_velocity_uncertainty_per_second * Eigen::Matrix3d::Identity() / (9.0);
+
+    // Set linear acceleration uncertainty (states 13-15)
+    process_noise_.block<3, 3>(13, 13) =
+        params_.linear_acceleration_uncertainty_per_second * params_.linear_acceleration_uncertainty_per_second * Eigen::Matrix3d::Identity() / (9.0);
+
+    // Set angular acceleration uncertainty (states 16-18)
+    process_noise_.block<3, 3>(16, 16) =
+        params_.angular_acceleration_uncertainty_per_second * params_.angular_acceleration_uncertainty_per_second * Eigen::Matrix3d::Identity() / (9.0);
+  }
 
   /**
    * @brief Virtual destructor
@@ -121,30 +165,31 @@ public:
       const StateVector& a_priori_state,
       const StateVector& a_posteriori_state,
       double process_to_measurement_ratio,
-      double dt) {
+      double) {
+return;
+// Deprecate this for now, it needs to be reformulated.
+    // // Compute state correction
+    // StateVector state_diff = a_priori_state - a_posteriori_state;
+    //    // Apply maximum bound to state differences
+    // StateVector bounded_diff =
+    //     state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
 
-    // Compute state correction
-    StateVector state_diff = a_priori_state - a_posteriori_state;
-       // Apply maximum bound to state differences
-    StateVector bounded_diff =
-        state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
+    // // Zero out terms that are below the minimum threshold
+    // StateVector final_diff = bounded_diff.array() * (bounded_diff.array().abs() >= kMinStateDiff).cast<double>();
 
-    // Zero out terms that are below the minimum threshold
-    StateVector final_diff = bounded_diff.array() * (bounded_diff.array().abs() >= kMinStateDiff).cast<double>();
-
-    StateMatrix update_contribution = final_diff * final_diff.transpose();
+    // StateMatrix update_contribution = final_diff * final_diff.transpose();
 
 
-    // Apply update only to masked elements
-    for (int i = 0; i < StateSize; ++i) {
-      for (int j = 0; j < StateSize; ++j) {
-        if (update_contribution(i, j) != 0.0) {  // Either element had significant change
-          process_noise_(i, j) += process_to_measurement_ratio * dt *
-                              (update_contribution(i, j) - process_noise_(i, j)) /
-                              params_.process_noise_window;
-        }
-      }
-    }
+    // // Apply update only to masked elements
+    // for (int i = 0; i < StateSize; ++i) {
+    //   for (int j = 0; j < StateSize; ++j) {
+    //     if (update_contribution(i, j) != 0.0) {  // Either element had significant change
+    //       process_noise_(i, j) += process_to_measurement_ratio *
+    //                           (update_contribution(i, j) - process_noise_(i, j)) /
+    //                           (params_.process_noise_window);
+    //     }
+    //   }
+    // }
   }
 
   /**
@@ -173,6 +218,10 @@ protected:
 
   // Process noise covariance
   StateMatrix process_noise_ = StateMatrix::Identity();
+
+  // State model initialization flags
+  bool state_initialized_ = false;
+  double time_since_reset_ = 0.0;
 };
 
 } // namespace core

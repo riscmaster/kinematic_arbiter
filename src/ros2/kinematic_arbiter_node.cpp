@@ -33,6 +33,13 @@ KinematicArbiterNode::KinematicArbiterNode()
   world_frame_id_ = this->get_parameter("world_frame_id").as_string();
   body_frame_id_ = this->get_parameter("body_frame_id").as_string();
 
+  // Get process noise window parameter (use get_parameter instead of declare_parameter)
+  int process_noise_window = 500; // Default value
+  if (this->has_parameter("process_noise_window")) {
+    process_noise_window = this->get_parameter("process_noise_window").as_int();
+  }
+  RCLCPP_INFO(this->get_logger(), "Process noise window: %d", process_noise_window);
+
   // Get the topic names
   std::string pose_topic = this->get_parameter("pose_state_topic").as_string();
   std::string velocity_topic = this->get_parameter("velocity_state_topic").as_string();
@@ -52,6 +59,29 @@ KinematicArbiterNode::KinematicArbiterNode()
 
   // Create state model parameters
   ::kinematic_arbiter::models::RigidBodyStateModel::Params model_params;
+  model_params.process_noise_window = process_noise_window;
+
+  // Get initial process noise values with defaults
+  model_params.position_uncertainty_per_second =
+      this->get_parameter_or("position_uncertainty_per_second", 0.01);
+  model_params.orientation_uncertainty_per_second =
+      this->get_parameter_or("orientation_uncertainty_per_second", 0.01);
+  model_params.linear_velocity_uncertainty_per_second =
+      this->get_parameter_or("linear_velocity_uncertainty_per_second", 0.1);
+  model_params.angular_velocity_uncertainty_per_second =
+      this->get_parameter_or("angular_velocity_uncertainty_per_second", 0.1);
+  model_params.linear_acceleration_uncertainty_per_second =
+      this->get_parameter_or("linear_acceleration_uncertainty_per_second", 1.0);
+  model_params.angular_acceleration_uncertainty_per_second =
+      this->get_parameter_or("angular_acceleration_uncertainty_per_second", 1.0);
+
+  RCLCPP_INFO(this->get_logger(), "Initial process noise settings:");
+  RCLCPP_INFO(this->get_logger(), "  Position: %.4f", model_params.position_uncertainty_per_second);
+  RCLCPP_INFO(this->get_logger(), "  Orientation: %.4f", model_params.orientation_uncertainty_per_second);
+  RCLCPP_INFO(this->get_logger(), "  Linear velocity: %.4f", model_params.linear_velocity_uncertainty_per_second);
+  RCLCPP_INFO(this->get_logger(), "  Angular velocity: %.4f", model_params.angular_velocity_uncertainty_per_second);
+  RCLCPP_INFO(this->get_logger(), "  Linear acceleration: %.4f", model_params.linear_acceleration_uncertainty_per_second);
+  RCLCPP_INFO(this->get_logger(), "  Angular acceleration: %.4f", model_params.angular_acceleration_uncertainty_per_second);
 
   // Create filter wrapper
   filter_wrapper_ = std::make_unique<FilterWrapper>(

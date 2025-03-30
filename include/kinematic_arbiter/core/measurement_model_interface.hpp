@@ -284,7 +284,7 @@ public:
 
     // Determine threshold for chi-squared test
     double threshold = utils::CalculateChiSquareCriticalValueNDof(
-          aux_data.innovation.rows(), validation_params_.confidence_level);
+          aux_data.innovation.rows()-1, validation_params_.confidence_level);
 
     // Check if measurement passes validation
     if (chi_squared_term < threshold) {

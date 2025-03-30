@@ -73,6 +73,14 @@ kinematic_arbiter:
     world_frame_id: "map"
     body_frame_id: "base_link"
 
+    # Filter parameters
+    position_uncertainty_per_second: 0.05  # Position uncertainty per second
+    orientation_uncertainty_per_second: 0.05  # Orientation uncertainty per second
+    linear_velocity_uncertainty_per_second: 0.75  # Linear velocity uncertainty per second
+    angular_velocity_uncertainty_per_second: 0.75  # Angular velocity uncertainty per second
+    linear_acceleration_uncertainty_per_second: 10.0 # Linear acceleration uncertainty per second
+    angular_acceleration_uncertainty_per_second: 10.0  # Angular acceleration uncertainty per second
+
     # Output state topics - remove leading slash
     pose_state_topic: "state/pose"
     velocity_state_topic: "state/velocity"
@@ -92,7 +100,7 @@ kinematic_arbiter:
       position_sensor:  # Sensor name, can be any identifier
         topic: "position_sensor"  # Topic to subscribe to
         frame_id: "position_sensor"  # Frame ID of the sensor
-        p2m_noise_ratio: 0.001
+        p2m_noise_ratio: 1.0
         mediation_action: "adjust_covariance"
 
 
@@ -101,21 +109,21 @@ kinematic_arbiter:
       pose_sensor:  # Sensor name
         topic: "pose_sensor"
         frame_id: "pose_sensor"
-        p2m_noise_ratio: 0.001
-        mediation_action: "force_accept"
+        p2m_noise_ratio: 2.0
+        mediation_action: "adjust_covariance"
 
     # Velocity sensors with hierarchical structure
     velocity_sensors:
       velocity_sensor:  # Sensor name
         topic: "velocity_sensor"
         frame_id: "velocity_sensor"
-        p2m_noise_ratio: 0.001
-        mediation_action: "reject"
+        p2m_noise_ratio: 2.0
+        mediation_action: "adjust_covariance"
 
     # IMU sensors with hierarchical structure
     imu_sensors:
       imu_sensor:  # Sensor name
         topic: "imu_sensor"
         frame_id: "imu_sensor"
-        p2m_noise_ratio: 0.001
-        mediation_action: "force_accept"
+        p2m_noise_ratio: 10.0
+        mediation_action: "adjust_covariance"
