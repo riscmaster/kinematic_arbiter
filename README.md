@@ -116,6 +116,50 @@ The demo includes Foxglove Bridge integration for advanced visualization:
 
 ![Foxglove Studio Visualization](https://github.com/riscmaster/kinematic_arbiter/blob/master/doc/SingleDofDemo.gif)
 
+## C++ Implementation Demo
+
+### Full 3D State Estimation with Figure-8 Trajectory
+
+The package provides a C++ implementation of the Mediated Kalman Filter with a 19-DOF state vector that:
+- Tracks position, orientation (quaternion), velocity, angular velocity, acceleration, and angular acceleration
+- Fuses data from four sensor types: position, pose, velocity, and IMU
+- Implements dynamic measurement noise estimation
+- Performs measurement validation and mediation
+
+This demonstration uses the kinematic_arbiter_node C++ implementation.
+
+Run the demo with:
+```bash
+# Source the workspace
+source ~/ros2_ws/install/setup.bash
+
+# Build the package (if not already built)
+colcon build --packages-select kinematic_arbiter
+
+# Launch the Figure-8 test
+ros2 launch kinematic_arbiter figure8_test.launch.py
+```
+
+#### Visualization Examples
+
+Here are examples of the visualization of individual sensor agreement while estimating the Figure-8 trajectory states:
+
+**Position Sensor Estimation**
+
+The following visualization shows the actual trajectory (ground truth), sensor measurements, and estimated position from the filter:
+
+![Position Estimates](https://github.com/riscmaster/kinematic_arbiter/blob/master/doc/position_estimates.gif)
+The configuration file for this visualization is [sensed_position_figure8_estimate.json](config/sensed_position_figure8_estimate.json)
+
+**Imu Sensor Gyro Estimation**
+
+This visualization shows the angular velocity ground truth, measurements from the IMU, and the filter's estimated values:
+
+![Gyro Estimates](https://github.com/riscmaster/kinematic_arbiter/blob/master/doc/gyro_estimates.gif)
+The configuration file for this visualization is [sensed_gyro_figure8_estimate.json](config/sensed_gyro_figure8_estimate.json)
+
+The Figure-8 test demonstrates how the C++ implementation handles a complex 3D motion pattern while fusing different sensor types with varying noise characteristics. It provides a realistic test case for evaluating the filter's performance in challenging conditions.
+
 ## Prerequisites
 
 ### System Requirements
