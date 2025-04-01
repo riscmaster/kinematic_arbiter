@@ -181,6 +181,17 @@ public:
     // Update state estimate
     StateVector updated_state = state_at_sensor_time + kalman_gain * aux_data.innovation;
 
+    // normalize quaternion
+    Eigen::Quaterniond quat(updated_state(StateIndex::Quaternion::W),
+                            updated_state(StateIndex::Quaternion::X),
+                            updated_state(StateIndex::Quaternion::Y),
+                            updated_state(StateIndex::Quaternion::Z));
+    quat.normalize();
+    updated_state(StateIndex::Quaternion::W) = quat.w();
+    updated_state(StateIndex::Quaternion::X) = quat.x();
+    updated_state(StateIndex::Quaternion::Y) = quat.y();
+    updated_state(StateIndex::Quaternion::Z) = quat.z();
+
     // Update covariance (Joseph form for numerical stability)
     StateMatrix I_KH = StateMatrix::Identity() - kalman_gain * aux_data.jacobian;
     StateMatrix updated_covariance = I_KH * covariance_at_sensor_time * I_KH.transpose() +

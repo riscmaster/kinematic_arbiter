@@ -23,8 +23,8 @@ figure8_simulator:
 
     # Sensor update rates
     position_rate: 10.0  # Position sensor rate (Hz)
-    pose_rate: 10.0      # Pose sensor rate (Hz)
-    velocity_rate: 10.0  # Velocity sensor rate (Hz)
+    pose_rate: 1.0      # Pose sensor rate (Hz)
+    velocity_rate: 50.0  # Velocity sensor rate (Hz)
     imu_rate: 100.0      # IMU sensor rate (Hz)
 
     # Topic names - remove leading slash to prevent double slashes
@@ -43,24 +43,24 @@ figure8_simulator:
 
     # Sensor offsets from body frame (for realistic simulation)
     position_sensor:
-      x_offset: 0.05   # X offset (m)
+      x_offset: 0.0   # X offset (m)
       y_offset: 0.0    # Y offset (m)
-      z_offset: 0.1    # Z offset (m)
+      z_offset: 0.0    # Z offset (m)
 
     pose_sensor:
-      x_offset: -0.03  # X offset (m)
-      y_offset: 0.02   # Y offset (m)
-      z_offset: 0.15   # Z offset (m)
+      x_offset: 0.0   # X offset (m)
+      y_offset: 0.0   # Y offset (m)
+      z_offset: 0.0   # Z offset (m)
 
     velocity_sensor:
       x_offset: 0.0    # X offset (m)
       y_offset: 0.0    # Y offset (m)
-      z_offset: 0.05   # Z offset (m)
+      z_offset: 0.0    # Z offset (m)
 
     imu_sensor:
-      x_offset: 0.01   # X offset (m)
-      y_offset: -0.01  # Y offset (m)
-      z_offset: 0.08   # Z offset (m)
+      x_offset: 0.0   # X offset (m)
+      y_offset: 0.0   # Y offset (m)
+      z_offset: 0.0   # Z offset (m)
 
 # Kinematic arbiter configuration with clearer sensor structure
 kinematic_arbiter:
@@ -74,7 +74,7 @@ kinematic_arbiter:
     body_frame_id: "base_link"
 
     # Filter parameters
-    process_noise_window: 40
+    process_noise_window: 100
     position_uncertainty_per_second: 0.05  # Position uncertainty per second
     orientation_uncertainty_per_second: 0.05  # Orientation uncertainty per second
     linear_velocity_uncertainty_per_second: 0.75  # Linear velocity uncertainty per second
@@ -101,7 +101,7 @@ kinematic_arbiter:
       position_sensor:  # Sensor name, can be any identifier
         topic: "position_sensor"  # Topic to subscribe to
         frame_id: "position_sensor"  # Frame ID of the sensor
-        p2m_noise_ratio: 100.0
+        p2m_noise_ratio: 2.0
         mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"
 
 
@@ -110,7 +110,7 @@ kinematic_arbiter:
       pose_sensor:  # Sensor name
         topic: "pose_sensor"
         frame_id: "pose_sensor"
-        p2m_noise_ratio: 100.0
+        p2m_noise_ratio: 2.0
         mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"
 
     # Velocity sensors with hierarchical structure
@@ -118,7 +118,7 @@ kinematic_arbiter:
       velocity_sensor:  # Sensor name
         topic: "velocity_sensor"
         frame_id: "velocity_sensor"
-        p2m_noise_ratio: 10.0
+        p2m_noise_ratio: 2.0
         mediation_action: "reject" # "force_accept", "adjust_covariance", "reject"
 
     # IMU sensors with hierarchical structure
@@ -126,5 +126,5 @@ kinematic_arbiter:
       imu_sensor:  # Sensor name
         topic: "imu_sensor"
         frame_id: "imu_sensor"
-        p2m_noise_ratio: 10.0
+        p2m_noise_ratio: 2.0
         mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"

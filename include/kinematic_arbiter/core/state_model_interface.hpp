@@ -166,9 +166,22 @@ public:
       const StateVector& a_posteriori_state,
       double process_to_measurement_ratio,
       double dt) {
+        if (fabs(dt) < 1e-6) {
+          return;
+        }
+
+    // handle quaternion
+    Eigen::Quaterniond quat_priori(a_priori_state.segment<4>(StateIndex::Quaternion::W));
+    Eigen::Quaterniond quat_posteriori(a_posteriori_state.segment<4>(StateIndex::Quaternion::W));
+    Eigen::Quaterniond quat_diff = (quat_priori.conjugate() * quat_posteriori).normalized();
+    StateVector raw_diff = a_priori_state - a_posteriori_state;
+    raw_diff.segment<4>(StateIndex::Quaternion::W) = quat_diff.coeffs();
+
+
     // Compute state correction
-    StateVector tmp_state_diff = sqrt(process_to_measurement_ratio) * (a_priori_state - a_posteriori_state).array().abs() / fabs(dt);
+    StateVector tmp_state_diff = sqrt(process_to_measurement_ratio) * (raw_diff.array().abs() / fabs(dt));
     StateVector bounded_diff = (tmp_state_diff.array() < kMinStateDiff).select(0.0, tmp_state_diff.array()).min(kMaxStateDiff);
+
 
     // Apply maximum bound to state differences
     state_diff_ += (bounded_diff - state_diff_) / params_.process_noise_window;
