@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::ros2::SensorHandler::publishExpectedMeasurement" name="kinematic_arbiter::ros2::SensorHandler::publishExpectedMeasurement">
+<area shape="rect" id="node1" title="Publish expected measurement and bounds." alt="" coords="5,45,232,101"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a82b574c4cbd3cfbf23ec2123a4e555db" title="Apply a sigma bound offset to a message." alt="" coords="280,5,433,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#af73f0d302ea4941d4ec056dd47cf0992" title="Convert measurement vector to message." alt="" coords="280,85,433,141"/>
+</map>

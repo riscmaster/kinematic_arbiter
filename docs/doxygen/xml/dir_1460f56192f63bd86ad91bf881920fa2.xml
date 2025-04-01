@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_1460f56192f63bd86ad91bf881920fa2" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2</compoundname>
+    <innerdir refid="dir_f97a4b523b65bb5e22bf973ea611b262">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation</innerdir>
+    <innerfile refid="filter__wrapper_8cpp">filter_wrapper.cpp</innerfile>
+    <innerfile refid="kinematic__arbiter__node_8cpp">kinematic_arbiter_node.cpp</innerfile>
+    <innerfile refid="main_8cpp">main.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/"/>
+  </compounddef>
+</doxygen>

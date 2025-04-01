@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::sensors::ImuSensorModel" name="kinematic_arbiter::sensors::ImuSensorModel">
+<area shape="rect" id="node1" title="IMU measurement model (gyroscope + accelerometer)" alt="" coords="34,95,223,136"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html" title="Interface for measurement models with assumption validation." alt="" coords="5,5,252,47"/>
+</map>

@@ -1,0 +1,1 @@
+prepend-non-duplicate;PYTHONPATH;lib/${PROJECT_NAME}

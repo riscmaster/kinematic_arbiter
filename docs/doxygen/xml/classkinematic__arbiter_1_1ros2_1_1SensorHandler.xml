@@ -1,0 +1,852 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>kinematic_arbiter::ros2::SensorHandler</compoundname>
+    <includes refid="sensor__handler_8hpp" local="no">sensor_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename MsgType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">kinematic_arbiter::core::MeasurementModelInterface</ref></type>
+        <definition>using kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::MeasurementModelInterface =  kinematic_arbiter::core::MeasurementModelInterface</definition>
+        <argsstring></argsstring>
+        <name>MeasurementModelInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="31" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">MeasurementModelInterface::DynamicVector</ref></type>
+        <definition>using kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::DynamicVector =  MeasurementModelInterface::DynamicVector</definition>
+        <argsstring></argsstring>
+        <name>DynamicVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="32" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" kindref="member">MeasurementModelInterface::DynamicCovariance</ref></type>
+        <definition>using kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::DynamicCovariance =  MeasurementModelInterface::DynamicCovariance</definition>
+        <argsstring></argsstring>
+        <name>DynamicCovariance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="33" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter" kindref="compound">kinematic_arbiter::core::MediatedKalmanFilter</ref>&lt; <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">kinematic_arbiter::core::StateIndex::kFullStateSize</ref>, <ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface" kindref="compound">kinematic_arbiter::core::StateModelInterface</ref> &gt;</type>
+        <definition>using kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::Filter =  kinematic_arbiter::core::MediatedKalmanFilter&lt;kinematic_arbiter::core::StateIndex::kFullStateSize, kinematic_arbiter::core::StateModelInterface&gt;</definition>
+        <argsstring></argsstring>
+        <name>Filter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="34" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a3c17f098d380353f141a11698eb74874" prot="public" static="no">
+        <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">kinematic_arbiter::core::SensorType</ref></type>
+        <definition>using kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorType =  kinematic_arbiter::core::SensorType</definition>
+        <argsstring></argsstring>
+        <name>SensorType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="35" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SIGMA_BOUND_FACTOR</definition>
+        <argsstring></argsstring>
+        <name>SIGMA_BOUND_FACTOR</name>
+        <initializer>= 3.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="38" column="27" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" prot="private" static="no" mutable="no">
+        <type>rclcpp::Node *</type>
+        <definition>rclcpp::Node* kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</definition>
+        <argsstring></argsstring>
+        <name>node_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="187" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="187" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" compoundref="sensor__handler_8hpp" startline="139" endline="152">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" kindref="member">Filter</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Filter&gt; kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::filter_</definition>
+        <argsstring></argsstring>
+        <name>filter_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="188" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="188" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+        <definition>std::shared_ptr&lt;tf2_ros::Buffer&gt; kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::tf_buffer_</definition>
+        <argsstring></argsstring>
+        <name>tf_buffer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="189" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="189" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kindref="compound">utils::TimeManager</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;utils::TimeManager&gt; kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::time_manager_</definition>
+        <argsstring></argsstring>
+        <name>time_manager_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="190" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</definition>
+        <argsstring></argsstring>
+        <name>sensor_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="194" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="194" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aa3d7ec017d40088221fd0aa9671a1ebb" compoundref="sensor__handler_8hpp" startline="129" endline="131">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::getSensorId</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_name_</definition>
+        <argsstring></argsstring>
+        <name>sensor_name_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="195" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="195" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" compoundref="sensor__handler_8hpp" startline="139" endline="152">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aacde580262a5c673c3c46778bd5d87ce" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::topic_</definition>
+        <argsstring></argsstring>
+        <name>topic_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="196" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="196" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>sensor_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="197" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="197" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4aa65cc833aa1dadcf7cab4f9ef08171" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::reference_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>reference_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="198" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::body_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>body_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="199" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="199" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" kindref="member">MeasurementModelInterface</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MeasurementModelInterface&gt; kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_model_</definition>
+        <argsstring></argsstring>
+        <name>sensor_model_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="200" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="200" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" compoundref="sensor__handler_8hpp" startline="139" endline="152">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a2de4944e89e7379bcf2f8b2bcd80fd6a" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref></type>
+        <definition>SensorType kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_type_</definition>
+        <argsstring></argsstring>
+        <name>sensor_type_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="201" column="14" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="201" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_index_</definition>
+        <argsstring></argsstring>
+        <name>sensor_index_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="202" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="202" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ade4884e545618ee0a04209c88062117e" prot="private" static="no" mutable="no">
+        <type>Eigen::Isometry3d</type>
+        <definition>Eigen::Isometry3d kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_to_body_transform_</definition>
+        <argsstring></argsstring>
+        <name>sensor_to_body_transform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="205" column="21" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="205" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a315e7261398e007ec210dad186521044" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::subscription_</definition>
+        <argsstring></argsstring>
+        <name>subscription_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="208" column="45" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="208" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::expected_pub_</definition>
+        <argsstring></argsstring>
+        <name>expected_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="209" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="209" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::upper_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>upper_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="210" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="210" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lower_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>lower_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="211" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="211" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::has_valid_transform_</definition>
+        <argsstring></argsstring>
+        <name>has_valid_transform_</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="214" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="214" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</definition>
+        <argsstring>(rclcpp::Node *node, std::shared_ptr&lt; Filter &gt; filter, std::shared_ptr&lt; tf2_ros::Buffer &gt; tf_buffer, std::shared_ptr&lt; utils::TimeManager &gt; time_manager, const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, const std::string &amp;reference_frame_id, const std::string &amp;body_frame_id, std::shared_ptr&lt; MeasurementModelInterface &gt; sensor_model, SensorType sensor_type)</argsstring>
+        <name>SensorHandler</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" kindref="member">Filter</ref> &gt;</type>
+          <declname>filter</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+          <declname>tf_buffer</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kindref="compound">utils::TimeManager</ref> &gt;</type>
+          <declname>time_manager</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>reference_frame_id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>body_frame_id</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" kindref="member">MeasurementModelInterface</ref> &gt;</type>
+          <declname>sensor_model</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref></type>
+          <declname>sensor_type</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">SensorHandler</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS2 node to create publishers and subscribers from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shared pointer to the core filter </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tf_buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TF buffer for transform lookups </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Human-readable sensor name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topic to subscribe to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID of the sensor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reference_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference frame for measurements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Body frame ID for transformations </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of sensor from core enum </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="53" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="53" bodyend="124"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" compoundref="sensor__handler_8hpp" startline="209">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::expected_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" compoundref="sensor__handler_8hpp" startline="188">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" compoundref="sensor__handler_8hpp" startline="211">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" compoundref="sensor__handler_8hpp" startline="187">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" compoundref="sensor__handler_8hpp" startline="194">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" compoundref="sensor__handler_8hpp" startline="202">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_index_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" compoundref="sensor__handler_8hpp" startline="200">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" compoundref="sensor__handler_8hpp" startline="195">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_name_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a2de4944e89e7379bcf2f8b2bcd80fd6a" compoundref="sensor__handler_8hpp" startline="201">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_type_</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a2d84e3b0f226e7c516325b0461643309" compoundref="sensor__types_8hpp" startline="62" endline="71">kinematic_arbiter::core::SensorTypeToString</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a315e7261398e007ec210dad186521044" compoundref="sensor__handler_8hpp" startline="208">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::subscription_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" compoundref="sensor__handler_8hpp" startline="189">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aacde580262a5c673c3c46778bd5d87ce" compoundref="sensor__handler_8hpp" startline="196">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::topic_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" compoundref="sensor__handler_8hpp" startline="210">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::upper_bound_pub_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aa3d7ec017d40088221fd0aa9671a1ebb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::getSensorId</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorId</name>
+        <briefdescription>
+<para>Get the sensor ID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="129" column="21" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="129" bodyend="131"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" compoundref="sensor__handler_8hpp" startline="194">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</definition>
+        <argsstring>(double p2m_noise_ratio, kinematic_arbiter::core::MediationAction mediation_action)</argsstring>
+        <name>setValidationParams</name>
+        <param>
+          <type>double</type>
+          <declname>p2m_noise_ratio</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888" kindref="member">kinematic_arbiter::core::MediationAction</ref></type>
+          <declname>mediation_action</declname>
+        </param>
+        <briefdescription>
+<para>Set validation parameters for the sensor model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p2m_noise_ratio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Process to measurement noise ratio </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mediation_action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mediation action </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="139" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="139" bodyend="152"/>
+        <references refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888a37b8a81e1288d220414efdb34301206c">kinematic_arbiter::core::AdjustCovariance</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888af35acb633021b32455020ebfb119d726">kinematic_arbiter::core::ForceAccept</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1af500a4ee6f57d167717f1c30908add37" compoundref="measurement__model__interface_8hpp" startline="56">kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::mediation_action</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" compoundref="sensor__handler_8hpp" startline="187">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1afd012760debc61c8a0784232a967fc87" compoundref="measurement__model__interface_8hpp" startline="53">kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::process_to_measurement_noise_ratio</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" compoundref="sensor__handler_8hpp" startline="200">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" compoundref="sensor__handler_8hpp" startline="195">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_name_</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a240e054f2e536ac7ee6dae29aa066f97" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::msgToVector</definition>
+        <argsstring>(const MsgType &amp;msg, DynamicVector &amp;vector)=0</argsstring>
+        <name>msgToVector</name>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981">msgToVector</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1aa6b8b76be0028ccc06755bbda15978f5">msgToVector</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094">msgToVector</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236">msgToVector</reimplementedby>
+        <param>
+          <type>const MsgType &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Convert message to measurement vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="158" column="16"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af73f0d302ea4941d4ec056dd47cf0992" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>MsgType</type>
+        <definition>virtual MsgType kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::vectorToMsg</definition>
+        <argsstring>(const DynamicVector &amp;vector, const std_msgs::msg::Header &amp;header)=0</argsstring>
+        <name>vectorToMsg</name>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6">vectorToMsg</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a0059d9c8cfabf75d16d83f4d34ec53ca">vectorToMsg</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a4fcc583c4cca630a978ff5aa0c953c73">vectorToMsg</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6">vectorToMsg</reimplementedby>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>const std_msgs::msg::Header &amp;</type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+<para>Convert measurement vector to message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The covariance is not needed as a parameter because we can get it directly from the filter </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="165" column="19"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a82b574c4cbd3cfbf23ec2123a4e555db" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>MsgType</type>
+        <definition>virtual MsgType kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::applyBound</definition>
+        <argsstring>(const MsgType &amp;base_msg, const DynamicCovariance &amp;covariance, bool positive)=0</argsstring>
+        <name>applyBound</name>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1aef1173b3a64f66078ef506675166483c">applyBound</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a0d4e2a1bf7b77065553454c5061c5e34">applyBound</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01">applyBound</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872">applyBound</reimplementedby>
+        <param>
+          <type>const MsgType &amp;</type>
+          <declname>base_msg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" kindref="member">DynamicCovariance</ref> &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>positive</declname>
+        </param>
+        <briefdescription>
+<para>Apply a sigma bound offset to a message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a new message with a sigma-bound offset in the positive or negative direction</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base message to modify </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The measurement covariance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>positive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True for upper bound, false for lower bound </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The bounded message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="179" column="19"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</definition>
+        <argsstring>()</argsstring>
+        <name>lookupStaticTransform</name>
+        <briefdescription>
+<para>Look up the static transform from sensor to body frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if transform was successfully found or already exists </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="220" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="220" bodyend="271"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" compoundref="sensor__handler_8hpp" startline="199">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" compoundref="sensor__handler_8hpp" startline="188">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" compoundref="sensor__handler_8hpp" startline="214">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::has_valid_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" compoundref="sensor__handler_8hpp" startline="187">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" compoundref="sensor__handler_8hpp" startline="197">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" compoundref="sensor__handler_8hpp" startline="194">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" compoundref="sensor__handler_8hpp" startline="202">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_index_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" compoundref="sensor__handler_8hpp" startline="195">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_name_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ade4884e545618ee0a04209c88062117e" compoundref="sensor__handler_8hpp" startline="205">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_to_body_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" compoundref="sensor__handler_8hpp" startline="189">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::tf_buffer_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</definition>
+        <argsstring>(const typename MsgType::SharedPtr msg)</argsstring>
+        <name>messageCallback</name>
+        <param>
+          <type>const typename MsgType::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Callback for incoming sensor messages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="276" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="276" bodyend="320"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" compoundref="sensor__handler_8hpp" startline="199">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" compoundref="sensor__handler_8hpp" startline="188">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" compoundref="sensor__handler_8hpp" startline="214">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::has_valid_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" compoundref="sensor__handler_8hpp" startline="220" endline="271">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lookupStaticTransform</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a240e054f2e536ac7ee6dae29aa066f97">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::msgToVector</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" compoundref="sensor__handler_8hpp" startline="187">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" compoundref="sensor__handler_8hpp" startline="325" endline="359">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" compoundref="sensor__handler_8hpp" startline="197">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" compoundref="sensor__handler_8hpp" startline="194">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" compoundref="sensor__handler_8hpp" startline="202">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_index_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" compoundref="sensor__handler_8hpp" startline="195">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_name_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" compoundref="sensor__handler_8hpp" startline="190">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::time_manager_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::publishExpectedMeasurement</definition>
+        <argsstring>(const std_msgs::msg::Header &amp;header)</argsstring>
+        <name>publishExpectedMeasurement</name>
+        <param>
+          <type>const std_msgs::msg::Header &amp;</type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+<para>Publish expected measurement and bounds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="325" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="325" bodyend="359"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a82b574c4cbd3cfbf23ec2123a4e555db">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::applyBound</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" compoundref="sensor__handler_8hpp" startline="209">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::expected_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" compoundref="sensor__handler_8hpp" startline="188">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" compoundref="sensor__handler_8hpp" startline="211">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" compoundref="sensor__handler_8hpp" startline="187">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" compoundref="sensor__handler_8hpp" startline="194">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" compoundref="sensor__handler_8hpp" startline="202">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::sensor_index_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" compoundref="sensor__handler_8hpp" startline="190">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::time_manager_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" compoundref="sensor__handler_8hpp" startline="210">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::upper_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af73f0d302ea4941d4ec056dd47cf0992">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::vectorToMsg</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" compoundref="sensor__handler_8hpp" startline="276" endline="320">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::messageCallback</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base template class for sensor handlers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Manages subscription, transforms, and expected measurement publishing for a sensor </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" line="29" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp" bodystart="29" bodyend="360"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a82b574c4cbd3cfbf23ec2123a4e555db" prot="protected" virt="pure-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>applyBound</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>body_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>DynamicCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>DynamicVector</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>expected_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>Filter</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>filter_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aa3d7ec017d40088221fd0aa9671a1ebb" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>getSensorId</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>has_valid_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>lookupStaticTransform</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>messageCallback</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a240e054f2e536ac7ee6dae29aa066f97" prot="protected" virt="pure-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>msgToVector</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>publishExpectedMeasurement</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4aa65cc833aa1dadcf7cab4f9ef08171" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>reference_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_index_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_name_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ade4884e545618ee0a04209c88062117e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_to_body_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a2de4944e89e7379bcf2f8b2bcd80fd6a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>sensor_type_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>SensorHandler</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a3c17f098d380353f141a11698eb74874" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>SensorType</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>setValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>SIGMA_BOUND_FACTOR</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a315e7261398e007ec210dad186521044" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>subscription_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>tf_buffer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>time_manager_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aacde580262a5c673c3c46778bd5d87ce" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>topic_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>upper_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af73f0d302ea4941d4ec056dd47cf0992" prot="protected" virt="pure-virtual"><scope>kinematic_arbiter::ros2::SensorHandler</scope><name>vectorToMsg</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

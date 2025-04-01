@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="message__converters_8py" kind="file" language="Python">
+    <compoundname>message_converters.py</compoundname>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters">src::single_dof_demo::ros2::message_converters</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters" refkind="compound"><highlight class="comment">#<sp/>Copyright<sp/>(c)<sp/>2024<sp/>Spencer<sp/>Maughan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">#</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">#<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">#<sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">#<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;Kinematic<sp/>Arbiter<sp/>package<sp/>component.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>PoseWithCovarianceStamped</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>rclpy.time<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Time</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>..ros2.domain_models<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>State</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ad227644b1ea054caef6977fc1dffaac3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ad227644b1ea054caef6977fc1dffaac3" kindref="member">pose_with_covariance_to_state</ref>(msg:<sp/>PoseWithCovarianceStamped)<sp/>-&gt;<sp/>State:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Convert<sp/>PoseWithCovarianceStamped<sp/>message<sp/>to<sp/>State.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" kindref="compound">State</ref>(</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value=msg.pose.pose.position.x,<sp/>variance=msg.pose.covariance[0]</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1a0c0669d860f3111ba7ffe38057e0b100" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1a0c0669d860f3111ba7ffe38057e0b100" kindref="member">state_to_pose_with_covariance_stamped</ref>(</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>state:<sp/>State,<sp/>stamp:<sp/>Time</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">)<sp/>-&gt;<sp/>PoseWithCovarianceStamped:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Convert<sp/>State<sp/>to<sp/>PoseWithCovarianceStamped<sp/>message.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>PoseWithCovarianceStamped()</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.header.stamp<sp/>=<sp/>stamp</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.pose.pose.position.x<sp/>=<sp/>state.value</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.pose.covariance<sp/>=<sp/>[0.0]<sp/>*<sp/>36</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.pose.covariance[0]<sp/>=<sp/>state.variance</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ae7247df8714da122d96ed5c1342f8914" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ae7247df8714da122d96ed5c1342f8914" kindref="member">ros_time_to_float</ref>(stamp:<sp/>Time)<sp/>-&gt;<sp/>float:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Convert<sp/>Time<sp/>to<sp/>float<sp/>representation.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>stamp.sec<sp/>+<sp/>stamp.nanosec<sp/>*<sp/>1e-9</highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py"/>
+  </compounddef>
+</doxygen>

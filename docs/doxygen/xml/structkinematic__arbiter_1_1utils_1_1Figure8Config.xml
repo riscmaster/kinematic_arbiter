@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1utils_1_1Figure8Config" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::utils::Figure8Config</compoundname>
+    <includes refid="trajectory__utils_8hpp" local="no">trajectory_utils.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1Figure8Config_1abf9001d43bca4ee9685c0fd271540547" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::Figure8Config::max_velocity</definition>
+        <argsstring></argsstring>
+        <name>max_velocity</name>
+        <initializer>= 1.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="14" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="14" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9fb55a22b391f3f3ec0345c0906dd68d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::Figure8Config::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <initializer>= 0.5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="15" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="15" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9e1036d75405d890325c421e07c7a7f8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::Figure8Config::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <initializer>= 0.25</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="16" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1Figure8Config_1afba8ef23593c54fb657b1e7d1ca99aea" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::Figure8Config::width_slope</definition>
+        <argsstring></argsstring>
+        <name>width_slope</name>
+        <initializer>= 0.1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="17" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a8a7ada3bb5df55aa3df6357ee1966444" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::Figure8Config::angular_scale</definition>
+        <argsstring></argsstring>
+        <name>angular_scale</name>
+        <initializer>= 0.01</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="18" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Configuration for Figure-8 trajectory generation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="13" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="13" bodyend="19"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a8a7ada3bb5df55aa3df6357ee1966444" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::Figure8Config</scope><name>angular_scale</name></member>
+      <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9fb55a22b391f3f3ec0345c0906dd68d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::Figure8Config</scope><name>length</name></member>
+      <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1abf9001d43bca4ee9685c0fd271540547" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::Figure8Config</scope><name>max_velocity</name></member>
+      <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9e1036d75405d890325c421e07c7a7f8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::Figure8Config</scope><name>width</name></member>
+      <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1afba8ef23593c54fb657b1e7d1ca99aea" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::Figure8Config</scope><name>width_slope</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

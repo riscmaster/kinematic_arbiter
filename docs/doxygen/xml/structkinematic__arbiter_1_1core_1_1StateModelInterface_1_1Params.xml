@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::StateModelInterface::Params</compoundname>
+    <includes refid="state__model__interface_8hpp" local="no">state_model_interface.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a650bddc23959713130e3a0c564de5af1" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t kinematic_arbiter::core::StateModelInterface::Params::process_noise_window</definition>
+        <argsstring></argsstring>
+        <name>process_noise_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="25" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ac321300d03a7b9d6b31e1351e6f268ea" compoundref="state__model__interface_8hpp" startline="164" endline="180">kinematic_arbiter::core::StateModelInterface::UpdateProcessNoise</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a36d6891ed987ad84626c353209e93d62" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::position_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>position_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="28" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1aeb7691c587b5780480a2bbccae6d7f59" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::orientation_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>orientation_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="29" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a20a9ab420ec092fe827450eba25d39f2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::linear_velocity_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>linear_velocity_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="30" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a86360392fa8acb4d1fbf772dc07a57d2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::angular_velocity_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>angular_velocity_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="31" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab888b7db255ed7924d57bfef6315bcc3" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::linear_acceleration_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>linear_acceleration_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="32" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a73690c6a07d29e4abca0afc538679dff" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::StateModelInterface::Params::angular_acceleration_uncertainty_per_second</definition>
+        <argsstring></argsstring>
+        <name>angular_acceleration_uncertainty_per_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="33" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" compoundref="state__model__interface_8hpp" startline="58" endline="89">kinematic_arbiter::core::StateModelInterface::StateModelInterface</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab4db61e5a806eb5d5e75146ff5f28a2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::core::StateModelInterface::Params::Params</definition>
+        <argsstring>()</argsstring>
+        <name>Params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="36" column="5" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="36" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parameters for state model configuration. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" line="23" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp" bodystart="23" bodyend="44"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a73690c6a07d29e4abca0afc538679dff" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>angular_acceleration_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a86360392fa8acb4d1fbf772dc07a57d2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>angular_velocity_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab888b7db255ed7924d57bfef6315bcc3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>linear_acceleration_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a20a9ab420ec092fe827450eba25d39f2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>linear_velocity_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1aeb7691c587b5780480a2bbccae6d7f59" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>orientation_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab4db61e5a806eb5d5e75146ff5f28a2f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>Params</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a36d6891ed987ad84626c353209e93d62" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>position_uncertainty_per_second</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a650bddc23959713130e3a0c564de5af1" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateModelInterface::Params</scope><name>process_noise_window</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

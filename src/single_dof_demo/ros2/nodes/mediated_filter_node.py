@@ -23,7 +23,7 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 from std_srvs.srv import Trigger
 
-from kinematic_arbiter.single_dof_demo.core.mediated_kalman_filter import (
+from single_dof_demo.core.mediated_kalman_filter import (
     MediatedKalmanFilter,
     Mediation,
 )
@@ -41,7 +41,7 @@ class MediatedFilterNode(Node):
 
         # Default parameter values
         self.default_params = {
-            "process_measurement_ratio": 2.0,
+            "process_measurement_ratio": 1.8,
             "sample_window": 20,
             "mediation_mode": Mediation.ADJUST_STATE,
             "model_frequency": 0.0,

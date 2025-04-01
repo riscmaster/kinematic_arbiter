@@ -23,7 +23,8 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 from std_srvs.srv import Trigger
 
-from kinematic_arbiter.single_dof_demo.core.kalman_filter import KalmanFilter
+# Now import using absolute imports - should work with ROS 2 environment
+from single_dof_demo.core.kalman_filter import KalmanFilter
 
 
 class KalmanFilterNode(Node):
@@ -38,8 +39,8 @@ class KalmanFilterNode(Node):
 
         # Default parameter values
         self.default_params = {
-            "process_noise": 0.01,
-            "measurement_noise": 0.1,
+            "process_noise": 1.0,
+            "measurement_noise": 5.0,
             "model_frequency": 0.0,
             "model_amplitude": 0.0,
         }

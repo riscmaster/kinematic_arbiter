@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1core" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::core</compoundname>
+    <innerclass refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" prot="public">kinematic_arbiter::core::MeasurementModelInterface</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter" prot="public">kinematic_arbiter::core::MediatedKalmanFilter</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" prot="public">kinematic_arbiter::core::MeasurementDimension</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4" prot="public">kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Position &gt;</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4" prot="public">kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Pose &gt;</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4" prot="public">kinematic_arbiter::core::MeasurementDimension&lt; SensorType::BodyVelocity &gt;</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4" prot="public">kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Imu &gt;</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4" prot="public">kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Unknown &gt;</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex" prot="public">kinematic_arbiter::core::StateIndex</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1core_1_1StateModelInterface" prot="public">kinematic_arbiter::core::StateModelInterface</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter_1_1core_1_1anonymous__namespace_02measurement__model__interface_8hpp_03">kinematic_arbiter::core::anonymous_namespace{measurement_model_interface.hpp}</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>MediationAction</name>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888af35acb633021b32455020ebfb119d726" prot="public">
+          <name>ForceAccept</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888ad98ac12774fca5c3cbaffe276840c55f" prot="public">
+          <name>Reject</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888a37b8a81e1288d220414efdb34301206c" prot="public">
+          <name>AdjustCovariance</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Possible corrective actions when filter assumptions are violated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>These actions define how to respond when a measurement fails validation. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/mediation_types.hpp" line="11" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/mediation_types.hpp" bodystart="11" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>SensorType</name>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a52f5e0bc3859bc5f5e25130b6c7e8881" prot="public">
+          <name>Position</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a8109c9c9d6a2ca3bec3e006fe51a5f3e" prot="public">
+          <name>Pose</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a279c45f6887896386ef1d781a74b4a75" prot="public">
+          <name>BodyVelocity</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914ae30c70d37a1c6991965a321393b30692" prot="public">
+          <name>Imu</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration of sensor types with built-in dimension information. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="13" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="13" bodyend="19"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacekinematic__arbiter_1_1core_1ad49d7320fc5e8d09e02dba3c16dc5a4a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>SensorType</type>
+            <declname>Type</declname>
+            <defname>Type</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Matrix&lt; double, <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kindref="compound">MeasurementDimension</ref>&lt; Type &gt;::value, 1 &gt;</type>
+        <definition>using kinematic_arbiter::core::MeasurementVector = typedef Eigen::Matrix&lt;double, MeasurementDimension&lt;Type&gt;::value, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>MeasurementVector</name>
+        <briefdescription>
+<para>Get measurement vector type for a sensor type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="37" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1core_1ad5832fdeec2175a36ebf3f68d77ad548" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int kinematic_arbiter::core::GetMeasurementDimension</definition>
+        <argsstring>(SensorType type)</argsstring>
+        <name>GetMeasurementDimension</name>
+        <param>
+          <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Runtime function to get measurement dimension from sensor type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function provides the same information as the <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kindref="compound">MeasurementDimension</ref> template but can be used at runtime with non-constexpr types.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sensor type to query </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int The measurement dimension for the given sensor type </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="48" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="48" bodyend="57"/>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a279c45f6887896386ef1d781a74b4a75">BodyVelocity</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914ae30c70d37a1c6991965a321393b30692">Imu</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a8109c9c9d6a2ca3bec3e006fe51a5f3e">Pose</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a52f5e0bc3859bc5f5e25130b6c7e8881">Position</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486" compoundref="measurement__model__interface_8hpp" startline="426" endline="438">kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementSize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1core_1a2d84e3b0f226e7c516325b0461643309" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::core::SensorTypeToString</definition>
+        <argsstring>(SensorType type)</argsstring>
+        <name>SensorTypeToString</name>
+        <param>
+          <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Convert sensor type to string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="62" column="20" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="62" bodyend="71"/>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a279c45f6887896386ef1d781a74b4a75">BodyVelocity</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914ae30c70d37a1c6991965a321393b30692">Imu</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a8109c9c9d6a2ca3bec3e006fe51a5f3e">Pose</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a52f5e0bc3859bc5f5e25130b6c7e8881">Position</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" compoundref="sensor__handler_8hpp" startline="53" endline="124">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::SensorHandler</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" compoundref="measurement__model__interface_8hpp" startline="252" endline="316">kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4d2c920c121d7b75cbe1d0edc8d0cd11" compoundref="measurement__model__interface_8hpp" startline="205" endline="240">kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0c2dc49a74ea86100c0fb28845323987" compoundref="measurement__model__interface_8hpp" startline="391" endline="419">kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementAndTime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; kinematic_arbiter::core::GetInitializableStateNames</definition>
+        <argsstring>(const Eigen::Array&lt; bool, 1, StateIndex::kFullStateSize &gt; &amp;initializable_states)</argsstring>
+        <name>GetInitializableStateNames</name>
+        <param>
+          <type>const Eigen::Array&lt; bool, 1, <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">StateIndex::kFullStateSize</ref> &gt; &amp;</type>
+          <declname>initializable_states</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="85" column="20" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="85" bodyend="121"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" compoundref="state__index_8hpp" startline="42">kinematic_arbiter::core::StateIndex::LinearVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" compoundref="state__index_8hpp" startline="22">kinematic_arbiter::core::StateIndex::Position::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" compoundref="state__index_8hpp" startline="43">kinematic_arbiter::core::StateIndex::LinearVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" compoundref="state__index_8hpp" startline="63">kinematic_arbiter::core::StateIndex::LinearAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" compoundref="state__index_8hpp" startline="73">kinematic_arbiter::core::StateIndex::AngularAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" compoundref="state__index_8hpp" startline="23">kinematic_arbiter::core::StateIndex::Position::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" compoundref="state__index_8hpp" startline="44">kinematic_arbiter::core::StateIndex::LinearVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" compoundref="state__index_8hpp" startline="64">kinematic_arbiter::core::StateIndex::LinearAcceleration::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" compoundref="state__index_8hpp" startline="74">kinematic_arbiter::core::StateIndex::AngularAcceleration::Z</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="14" column="1"/>
+  </compounddef>
+</doxygen>

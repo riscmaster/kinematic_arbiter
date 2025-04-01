@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_14389f9f12ab61553627e371bf84adfd" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors</compoundname>
+    <innerfile refid="body__velocity__sensor__model_8hpp">body_velocity_sensor_model.hpp</innerfile>
+    <innerfile refid="imu__bias__estimator_8hpp">imu_bias_estimator.hpp</innerfile>
+    <innerfile refid="imu__sensor__model_8hpp">imu_sensor_model.hpp</innerfile>
+    <innerfile refid="pose__sensor__model_8hpp">pose_sensor_model.hpp</innerfile>
+    <innerfile refid="position__sensor__model_8hpp">position_sensor_model.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/"/>
+  </compounddef>
+</doxygen>

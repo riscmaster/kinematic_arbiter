@@ -1,0 +1,7 @@
+<map id="kinematic_arbiter::sensors::BodyVelocitySensorModel::InitializeState" name="kinematic_arbiter::sensors::BodyVelocitySensorModel::InitializeState">
+<area shape="rect" id="node1" title="Initialize state from body velocity measurement." alt="" coords="5,85,215,141"/>
+<area shape="rect" id="node2" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html#a90f46140a68776dac322db5def8ef932" title=" " alt="" coords="272,5,500,61"/>
+<area shape="rect" id="node3" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html#a582fc5f2b58d312404f599b8d00afa71" title=" " alt="" coords="267,85,505,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="263,165,509,221"/>
+<area shape="rect" id="node5" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="557,173,799,214"/>
+</map>

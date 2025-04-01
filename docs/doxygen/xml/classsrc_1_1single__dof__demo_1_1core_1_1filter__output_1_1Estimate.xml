@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::filter_output::Estimate</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a14a5513f88ea898763e952ebac8dd904" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.Estimate::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="27" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1ad113826119efbda2b0e6ce54338ed575" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.Estimate::bound</definition>
+        <argsstring></argsstring>
+        <name>bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="28" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a3b71367205fe17875906620010aeea38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.filter_output.Estimate.__init__</definition>
+        <argsstring>(self, value=0.0, bound=0.0)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a14a5513f88ea898763e952ebac8dd904" kindref="member">value</ref></type>
+          <defname>value</defname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1ad113826119efbda2b0e6ce54338ed575" kindref="member">bound</ref></type>
+          <defname>bound</defname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize an estimate.
+
+Args:
+    value (float): The estimated value. Defaults to 0.0.
+    bound (float): The bound on the estimate. Defaults to 0.0.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="20" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="20" bodyend="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Represents an estimate with a value and a bound.</verbatim> </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="17" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="17" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a3b71367205fe17875906620010aeea38" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::Estimate</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1ad113826119efbda2b0e6ce54338ed575" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::Estimate</scope><name>bound</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a14a5513f88ea898763e952ebac8dd904" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::Estimate</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

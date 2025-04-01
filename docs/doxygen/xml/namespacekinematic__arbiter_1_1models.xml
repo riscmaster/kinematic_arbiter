@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1models" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::models</compoundname>
+    <innerclass refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel" prot="public">kinematic_arbiter::models::RigidBodyStateModel</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03">kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="11" column="1"/>
+  </compounddef>
+</doxygen>

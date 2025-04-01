@@ -1,0 +1,7 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ComputeAuxiliaryData" name="kinematic_arbiter::core::MeasurementModelInterface::ComputeAuxiliaryData">
+<area shape="rect" id="node1" title="Compute auxiliary measurement data for use in various algorithms." alt="" coords="5,85,252,141"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a6b5954981316837e748849685d76da04" title="Compute the measurement Jacobian H = ∂h/∂x." alt="" coords="300,5,547,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a93c282b256807ec898ed370425d51bbc" title="Predict expected measurement h(x) from state." alt="" coords="300,85,547,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="300,165,547,221"/>
+<area shape="rect" id="node5" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="595,173,836,214"/>
+</map>

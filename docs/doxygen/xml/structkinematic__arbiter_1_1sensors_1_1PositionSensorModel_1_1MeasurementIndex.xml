@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</compoundname>
+    <includes refid="position__sensor__model_8hpp" local="no">position_sensor_model.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a4b495807b74b2b8254a7ac8a5fd144b9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="29" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1aef1173b3a64f66078ef506675166483c" compoundref="position__sensor__handler_8hpp" startline="58" endline="76">kinematic_arbiter::ros2::PositionSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" compoundref="sensor__publisher_8hpp" startline="168" endline="182">kinematic_arbiter::ros2::simulation::PositionPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981" compoundref="position__sensor__handler_8hpp" startline="36" endline="42">kinematic_arbiter::ros2::PositionSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a4fcc583c4cca630a978ff5aa0c953c73" compoundref="position__sensor__handler_8hpp" startline="44" endline="56">kinematic_arbiter::ros2::PositionSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a700e743c89944155bb18caa693375a1e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="30" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1aef1173b3a64f66078ef506675166483c" compoundref="position__sensor__handler_8hpp" startline="58" endline="76">kinematic_arbiter::ros2::PositionSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" compoundref="sensor__publisher_8hpp" startline="168" endline="182">kinematic_arbiter::ros2::simulation::PositionPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981" compoundref="position__sensor__handler_8hpp" startline="36" endline="42">kinematic_arbiter::ros2::PositionSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a4fcc583c4cca630a978ff5aa0c953c73" compoundref="position__sensor__handler_8hpp" startline="44" endline="56">kinematic_arbiter::ros2::PositionSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a2a0b2b0e4e4a5c318473dd5fc38c168f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="31" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1aef1173b3a64f66078ef506675166483c" compoundref="position__sensor__handler_8hpp" startline="58" endline="76">kinematic_arbiter::ros2::PositionSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" compoundref="sensor__publisher_8hpp" startline="168" endline="182">kinematic_arbiter::ros2::simulation::PositionPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981" compoundref="position__sensor__handler_8hpp" startline="36" endline="42">kinematic_arbiter::ros2::PositionSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a4fcc583c4cca630a978ff5aa0c953c73" compoundref="position__sensor__handler_8hpp" startline="44" endline="56">kinematic_arbiter::ros2::PositionSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Indices for accessing position measurement components. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="28" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="28" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a4b495807b74b2b8254a7ac8a5fd144b9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</scope><name>X</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a700e743c89944155bb18caa693375a1e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</scope><name>Y</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a2a0b2b0e4e4a5c318473dd5fc38c168f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::StateModelInterface" name="kinematic_arbiter::core::StateModelInterface">
+<area shape="rect" id="node1" title="Interface for state transition models used in Kalman filtering." alt="" coords="5,124,196,165"/>
+<area shape="rect" id="node2" href="$structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html" title="Parameters for state model configuration." alt="" coords="5,5,196,61"/>
+</map>

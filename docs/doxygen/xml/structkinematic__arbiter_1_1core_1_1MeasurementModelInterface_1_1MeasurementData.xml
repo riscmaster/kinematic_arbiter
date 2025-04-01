@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData" kind="struct" language="C++" prot="private">
+    <compoundname>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1ada511516ae62e8f5a7ec0bc3cef9aebe" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::MeasurementModelInterface::MeasurementData::timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="442" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="442" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a464c87ff6cdf347ba5a5bc6d41428a91" prot="public" static="no" mutable="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref></type>
+        <definition>DynamicVector kinematic_arbiter::core::MeasurementModelInterface::MeasurementData::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="443" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="443" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a90dcddc215f2250331283497aa68e2da" prot="public" static="no" mutable="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" kindref="member">DynamicCovariance</ref></type>
+        <definition>DynamicCovariance kinematic_arbiter::core::MeasurementModelInterface::MeasurementData::covariance</definition>
+        <argsstring></argsstring>
+        <name>covariance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="444" column="23" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="444" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" compoundref="measurement__model__interface_8hpp" startline="252" endline="316">kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1aad7d3e8301c5a3158e3b44d4dae148fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData::MeasurementData</definition>
+        <argsstring>()=default</argsstring>
+        <name>MeasurementData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="446" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a30246ddcfe25a52a47175fa82cb532dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData::MeasurementData</definition>
+        <argsstring>(double t, const DynamicVector &amp;v, const DynamicCovariance &amp;c)</argsstring>
+        <name>MeasurementData</name>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" kindref="member">DynamicCovariance</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="447" column="5" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="447" bodyend="448"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="441" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="441" bodyend="449"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a90dcddc215f2250331283497aa68e2da" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</scope><name>covariance</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1aad7d3e8301c5a3158e3b44d4dae148fc" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</scope><name>MeasurementData</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a30246ddcfe25a52a47175fa82cb532dd" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</scope><name>MeasurementData</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1ada511516ae62e8f5a7ec0bc3cef9aebe" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</scope><name>timestamp</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a464c87ff6cdf347ba5a5bc6d41428a91" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

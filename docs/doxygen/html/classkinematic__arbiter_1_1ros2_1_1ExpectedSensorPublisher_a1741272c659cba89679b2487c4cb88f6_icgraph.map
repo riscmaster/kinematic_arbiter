@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::ros2::ExpectedSensorPublisher::createBound" name="kinematic_arbiter::ros2::ExpectedSensorPublisher::createBound">
+<area shape="rect" id="node1" title="Create a bound message from the expected value." alt="" coords="276,5,499,61"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html#ad4156283d46e5ff508e3ac81d81b4727" title="Publish expected value and bounds." alt="" coords="5,5,228,61"/>
+</map>

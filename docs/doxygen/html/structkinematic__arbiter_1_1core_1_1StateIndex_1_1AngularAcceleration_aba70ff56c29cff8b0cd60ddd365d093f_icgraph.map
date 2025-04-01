@@ -1,0 +1,7 @@
+<map id="kinematic_arbiter::core::StateIndex::AngularAcceleration::Begin" name="kinematic_arbiter::core::StateIndex::AngularAcceleration::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="313,125,580,181"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="26,5,245,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a3aab1963c7316f0e402277d9032fa87a" title="Initialize state from IMU measurement." alt="" coords="41,85,230,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a5c20315ad9946aee82af907393333f06" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="26,165,245,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1core_1_1StateModelInterface.html#a1d1d3982bee824943c5ab5ef0686de50" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="5,245,265,301"/>
+</map>

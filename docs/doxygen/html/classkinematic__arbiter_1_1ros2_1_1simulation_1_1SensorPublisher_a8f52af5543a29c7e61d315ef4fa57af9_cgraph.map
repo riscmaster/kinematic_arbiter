@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::ros2::simulation::SensorPublisher::publish" name="kinematic_arbiter::ros2::simulation::SensorPublisher::publish">
+<area shape="rect" id="node1" title="Publish all variants of the sensor message." alt="" coords="5,85,244,141"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html#ab7118cce5dfde001ef17b9372a8686b6" title="Convert an Eigen vector to a ROS message." alt="" coords="293,5,532,61"/>
+<area shape="rect" id="node3" href="$namespacekinematic__arbiter_1_1utils.html#a2d3bbcea2147884b93a81b50a5459280" title="Generate multivariate normal noise with given covariance." alt="" coords="315,85,510,141"/>
+<area shape="rect" id="node4" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="292,166,533,207"/>
+</map>

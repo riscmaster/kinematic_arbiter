@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::BodyVelocity &gt;</compoundname>
+    <includes refid="sensor__types_8hpp" local="no">sensor_types.hpp</includes>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4_1a4dbf68e9b5b40525093f4a70bb9c556a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::MeasurementDimension&lt; SensorType::BodyVelocity &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <initializer>= 6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="29" column="59" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" line="29" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/sensor_types.hpp" bodystart="29" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4_1a4dbf68e9b5b40525093f4a70bb9c556a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::BodyVelocity &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

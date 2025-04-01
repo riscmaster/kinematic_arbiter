@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</compoundname>
+    <includes refid="measurement__model__interface_8hpp" local="no">measurement_model_interface.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a5f2f83c58b677dea3b41b939851713df" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::noise_sample_window</definition>
+        <argsstring></argsstring>
+        <name>noise_sample_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="47" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40c3a85ae08d728f08a72294a41a4f87" compoundref="measurement__model__interface_8hpp" startline="456" endline="472">kinematic_arbiter::core::MeasurementModelInterface::UpdateCovariance</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a70c671bf56846e445e4b545755842a2e" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::confidence_level</definition>
+        <argsstring></argsstring>
+        <name>confidence_level</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="50" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" compoundref="measurement__model__interface_8hpp" startline="252" endline="316">kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1afd012760debc61c8a0784232a967fc87" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::process_to_measurement_noise_ratio</definition>
+        <argsstring></argsstring>
+        <name>process_to_measurement_noise_ratio</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="53" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" compoundref="sensor__handler_8hpp" startline="139" endline="152">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1af500a4ee6f57d167717f1c30908add37" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888" kindref="member">MediationAction</ref></type>
+        <definition>MediationAction kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::mediation_action</definition>
+        <argsstring></argsstring>
+        <name>mediation_action</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="56" column="21" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="56" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" compoundref="sensor__handler_8hpp" startline="139" endline="152">kinematic_arbiter::ros2::SensorHandler&lt; MsgType &gt;::setValidationParams</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" compoundref="measurement__model__interface_8hpp" startline="252" endline="316">kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1ac618d7982ab32e14087e81cc04718ed9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::ValidationParams</definition>
+        <argsstring>()</argsstring>
+        <name>ValidationParams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="59" column="5" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="59" bodyend="63"/>
+        <references refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888af35acb633021b32455020ebfb119d726">kinematic_arbiter::core::ForceAccept</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parameters for assumption validation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="45" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="45" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a70c671bf56846e445e4b545755842a2e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</scope><name>confidence_level</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1af500a4ee6f57d167717f1c30908add37" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</scope><name>mediation_action</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a5f2f83c58b677dea3b41b939851713df" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</scope><name>noise_sample_window</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1afd012760debc61c8a0784232a967fc87" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</scope><name>process_to_measurement_noise_ratio</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1ac618d7982ab32e14087e81cc04718ed9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</scope><name>ValidationParams</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

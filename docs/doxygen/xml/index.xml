@@ -1,0 +1,987 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration" kind="struct"><name>kinematic_arbiter::core::StateIndex::AngularAcceleration</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a1971c1065718b284c9e8fb6ed389dc53" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity" kind="struct"><name>kinematic_arbiter::core::StateIndex::AngularVelocity</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab9dca9f5dba97a18fedaddf76ba83f91" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" kind="class"><name>kinematic_arbiter::sensors::BodyVelocitySensorModel</name>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a6541c71d7dd18014071dbffcd3a9493b" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a8fb6b3e321df722d10c5dcdcc414ecaa" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a672cb820c546277630158c826bd8f494" kind="typedef"><name>Vector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a42579c84d07192523cf0a1f2356f158f" kind="typedef"><name>Jacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a046c7b7148f10646254c41453e1cd28d" kind="typedef"><name>Covariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1af612156f064eb729ac5bd9f43b853de7" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a5aaa69eda5c826e92f212472db3b9a6c" kind="variable"><name>kMeasurementDimension</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aef7b60cdaa3395a86a2206267eb89707" kind="function"><name>BodyVelocitySensorModel</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a7b55d054be27452f88018730da37ff81" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aebe109a082efb53ef2f6de4102b2712e" kind="function"><name>PredictMeasurement</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1abc14aaac4f15ab10c903db2757dae73b" kind="function"><name>GetMeasurementJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aaa8893982fcdae785412a197f037a691" kind="function"><name>GetInitializableStates</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a2dee7db6aa0b65ec2d1e8a7632f4c511" kind="function"><name>InitializeState</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" kind="struct"><name>kinematic_arbiter::utils::ChiSquareCriticalValue</name>
+    <member refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1a06d0b3d8ecfb22b64f8d96212239ecf1" kind="variable"><name>confidence</name></member>
+    <member refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1aa483e69ceaf5156ef3c2b9a82e6fc628" kind="variable"><name>critical_value</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui" kind="class"><name>src::single_dof_demo::display_gui::DisplayGui</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad5432c670eb9eb0882d73fdeddc52b79" kind="variable"><name>signal_time</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad1b9fa5d23f2a08502a3eecbbe393a34" kind="variable"><name>mkf_signal_estimate</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1acba05884a784f88e32274dc7377f6888" kind="variable"><name>mkf_signal_bound</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2f98318c8caec6d38fbca49d3c17be2b" kind="variable"><name>mkf_measurement_bound</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af9fba494e216ce4229d04dcb1c19f55b" kind="variable"><name>kf_signal_estimate</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1abd08da6ced248cd9e37ef815e8ca9def" kind="variable"><name>kf_signal_bound</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a5a94a39b9d1d6f67f8b4da140659e226" kind="variable"><name>kf_measurement_bound</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" kind="variable"><name>mediation</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a3bc796546a1d8f5a06f0893f45d29e31" kind="variable"><name>initial_mkf_tuning</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a59a69f488cb71239bb7eb4d310fc8146" kind="variable"><name>initial_process_noise</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a269e8d31d7e6fb396180016a89429b93" kind="variable"><name>initial_measurement_noise</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad77d1003d752d3c8916063e57d98da1e" kind="variable"><name>mkf_mediation</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af6a8fb404a58e3c3c5d7832c38cdd17d" kind="variable"><name>mkf_tuner</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7d9e67320e9292412733a542f545e0dd" kind="variable"><name>kf_process_tuner</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af8ed8368c3e1f603ee253e8de684ca2a" kind="variable"><name>kf_measurement_tuner</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a4c6e13be9d7d81dd71cd702df49c5b95" kind="variable"><name>button</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ab70e983d88b4f5759921333884479d23" kind="variable"><name>radio</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a235c037cba2d47a0045a72d13170c2b8" kind="variable"><name>mkf</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a153ecddefbcd38a6847ef16c79eaae56" kind="variable"><name>kf</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a9a09a10a68450e6a0fddab0e2bb5a64c" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ace1ee90d06cf53acefa248ec25869d8a" kind="function"><name>initialize_filters</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" kind="function"><name>update_data</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7c9c219671b8df5ebcc383ce55ef93f8" kind="function"><name>update_mkf_method</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" kind="function"><name>update_mkf_plot</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" kind="function"><name>update_kf_plot</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" kind="function"><name>reset</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a6cdf36272da4b68723f123791449e9fd" kind="function"><name>run</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate" kind="class"><name>src::single_dof_demo::core::filter_output::Estimate</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a14a5513f88ea898763e952ebac8dd904" kind="variable"><name>value</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1ad113826119efbda2b0e6ce54338ed575" kind="variable"><name>bound</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate_1a3b71367205fe17875906620010aeea38" kind="function"><name>__init__</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher" kind="class"><name>kinematic_arbiter::ros2::ExpectedPosePublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kind="typedef"><name>MsgType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1aeb1a8f9205377171161c79d93921b897" kind="function"><name>ExpectedPosePublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452" kind="function"><name>createBound</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kind="class"><name>kinematic_arbiter::ros2::ExpectedSensorPublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kind="variable"><name>node_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kind="variable"><name>topic_prefix_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" kind="variable"><name>expected_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" kind="variable"><name>upper_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" kind="variable"><name>lower_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" kind="function"><name>ExpectedSensorPublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" kind="function"><name>publish</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" kind="function"><name>createBound</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1utils_1_1Figure8Config" kind="struct"><name>kinematic_arbiter::utils::Figure8Config</name>
+    <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1abf9001d43bca4ee9685c0fd271540547" kind="variable"><name>max_velocity</name></member>
+    <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9fb55a22b391f3f3ec0345c0906dd68d" kind="variable"><name>length</name></member>
+    <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9e1036d75405d890325c421e07c7a7f8" kind="variable"><name>width</name></member>
+    <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1afba8ef23593c54fb657b1e7d1ca99aea" kind="variable"><name>width_slope</name></member>
+    <member refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a8a7ada3bb5df55aa3df6357ee1966444" kind="variable"><name>angular_scale</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode" kind="class"><name>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a21891a6d8884e429a2f66f425484fa9d" kind="typedef"><name>SIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a92c8f8f6dc44d8e9a331f9b97db71cb5" kind="typedef"><name>MeasurementModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" kind="variable"><name>position_sensor_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" kind="variable"><name>pose_sensor_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" kind="variable"><name>velocity_sensor_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" kind="variable"><name>imu_sensor_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac9385e2af956324ca87fae84c0294766" kind="variable"><name>trajectory_config_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a042eb6949d766812c55e46222511be32" kind="variable"><name>position_publisher_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aeab061fcf018a8a12054e82392a64ee8" kind="variable"><name>pose_publisher_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a972c080190f5ead476012bb4f0e935e6" kind="variable"><name>velocity_publisher_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a9951b0c1dfe599c7d3c4d2508a160e83" kind="variable"><name>imu_publisher_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aee2e8c077ee31c723518aa324317e849" kind="variable"><name>truth_pose_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af52359584cf8ffb0bfa9315c645dbbd0" kind="variable"><name>truth_velocity_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6e2b9a317be5e213b2331d072c69d306" kind="variable"><name>tf_broadcaster_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a1aa648a9520d10349cd796a8ba2037ad" kind="variable"><name>tf_static_broadcaster_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8b5935703db1efc985ddf263654e42ed" kind="variable"><name>update_timer_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" kind="variable"><name>world_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" kind="variable"><name>body_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a09c8c82cd3fb5bcb65d313c7f1886b82" kind="variable"><name>position_sensor_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a423380d9d381b5823691812d17a18b29" kind="variable"><name>pose_sensor_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5d8ce586e2fa887ccbba914a483c789a" kind="variable"><name>velocity_sensor_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8cdd81ce43cf4bee14352d6f5f79b1db" kind="variable"><name>imu_sensor_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e9aec9175ed5d1b8fc74db60a14756" kind="variable"><name>position_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a78436b193a4a16006ecb00e78a14718e" kind="variable"><name>pose_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a879fccd4ccc2fe827b025a55b2635bd2" kind="variable"><name>velocity_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a027cdb628e9b3f4971a12106dc213c98" kind="variable"><name>imu_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acb5ad98a76b83aacd276588916f37425" kind="variable"><name>main_update_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acd7e6085563f01b0b72a051c26a74a65" kind="variable"><name>position_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5bfabe03042292bccaeb783577dfc2cf" kind="variable"><name>pose_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad06b1af6a49eaeddcb0c0f2f15e44c20" kind="variable"><name>velocity_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a186a5b9d5e3f35576c1d665efd5ac839" kind="variable"><name>imu_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a774a7f6264a13176a8f9ec671c9b1b87" kind="variable"><name>position_divider_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8a585cb875783676bbd4667b5d531d15" kind="variable"><name>pose_divider_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6955fce6c6b6a2219cebcd12d0a81b30" kind="variable"><name>velocity_divider_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2ed955a0a2d5ac16642a22b72d4bbdac" kind="variable"><name>imu_divider_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6c3893b97b19b2214cfce3414325d05e" kind="variable"><name>iteration_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad275762ebcce75faf65b666dce7de1bc" kind="variable"><name>noise_sigma_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab7cf6db9eae478a3cf16da5c7908cfb9" kind="variable"><name>time_jitter_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" kind="variable"><name>generator_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad6e2ba04ebeab943bae2b7119191e905" kind="variable"><name>noise_dist_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" kind="variable"><name>jitter_dist_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" kind="variable"><name>start_time_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1abc816c8a07773d5c7d4ccc55bef8ee7a" kind="variable"><name>position_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e74b932add3c852b58a4660a6b671d" kind="variable"><name>pose_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aa871b01a4b443c740b55d9ff42f4685f" kind="variable"><name>velocity_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a69840c0c3bcd87c08af3c45afed956d7" kind="variable"><name>imu_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" kind="function"><name>Figure8SimulatorNode</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" kind="function"><name>update</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" kind="function"><name>publishGroundTruth</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" kind="function"><name>publishPosition</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" kind="function"><name>publishPose</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" kind="function"><name>publishVelocity</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" kind="function"><name>publishImu</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" kind="function"><name>publishSensorTransforms</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput" kind="class"><name>src::single_dof_demo::core::filter_output::FilterOutput</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1ad0f3e113c973630e02675f29a77de4c3" kind="variable"><name>predicted</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1abcc66f237708a6990ef44fc4cf969920" kind="variable"><name>mediated</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a17f15cc65b92a5e296c4420deed48b08" kind="variable"><name>final</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a75d62b7dfc2f36006228219975bf4c0d" kind="variable"><name>mediation_detected</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a7ce892ee0590359ff1f1f377f6793e4a" kind="variable"><name>mediation_point</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1acbf8205c3305a780501e47613bfb15bf" kind="function"><name>__init__</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters" kind="class"><name>src::single_dof_demo::ros2::domain_models::FilterParameters</name>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper" kind="class"><name>kinematic_arbiter::ros2::FilterWrapper</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a53ce144fef92fdb871a2ce4ccbac571a" kind="typedef"><name>StateIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae71c98e75f4ef72f931af222e9c6a479" kind="typedef"><name>StateModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a86e8ef1edb38b61afcf16b3e6a713559" kind="typedef"><name>MediatedKalmanFilter</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" kind="variable"><name>node_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" kind="variable"><name>tf_buffer_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" kind="variable"><name>body_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" kind="variable"><name>world_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" kind="variable"><name>filter_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" kind="variable"><name>time_manager_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1acc174f780b8a461ec002e45834650534" kind="variable"><name>position_handlers_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a25e4d235c539a174da84e32da57eb1a2" kind="variable"><name>pose_handlers_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a1c418716dca6478877b95f503949e08f" kind="variable"><name>velocity_handlers_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af7d8a1acbb75436a47eb3cb9773c8d1a" kind="variable"><name>imu_handlers_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" kind="function"><name>FilterWrapper</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" kind="function"><name>initializeTimeManager</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677" kind="function"><name>isInitialized</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a467693aa018f519942dc0d91e800d0e8" kind="function"><name>setMaxDelayWindow</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" kind="function"><name>addPositionSensor</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" kind="function"><name>addPoseSensor</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" kind="function"><name>addVelocitySensor</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" kind="function"><name>addImuSensor</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" kind="function"><name>getPoseEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" kind="function"><name>getVelocityEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" kind="function"><name>getAccelerationEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" kind="function"><name>setPoseEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928" kind="function"><name>setVelocityEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" kind="function"><name>stringToMediationAction</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a5cfc59bdc48407f9f247af2e60e02add" kind="function"><name>convertRosTimeToFilterTime</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" kind="function"><name>convertFilterTimeToRosTime</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator" kind="class"><name>kinematic_arbiter::sensors::ImuBiasEstimator</name>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a20aa5d14fb2c034066acfe3be9808d4b" kind="variable"><name>window_size_</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" kind="variable"><name>gyro_bias_</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" kind="variable"><name>accel_bias_</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1abf116563a2be62e8a0eeddc164f68fa2" kind="function"><name>ImuBiasEstimator</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" kind="function"><name>EstimateBiases</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a34db04201b4f8ef6a9c32e3fb37509a6" kind="function"><name>ResetCalibration</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a6165c220d3797eb17d8341da051feed9" kind="function"><name>GetGyroBias</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a4b5d87947dc369804142f789d3593e2b" kind="function"><name>GetAccelBias</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher" kind="class"><name>kinematic_arbiter::ros2::simulation::ImuPublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1ace092d66bbb21209b70b3de96cdb5589" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1a8a38bd8516c8cbf2e01505da3c428dc4" kind="typedef"><name>MIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1a35bc813db37c2e9388206b9dc23ee9b9" kind="function"><name>ImuPublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" kind="function"><name>eigenToRos</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kind="struct"><name>kinematic_arbiter::sensors::ImuSensorConfig</name>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a60805d4ea0d104b078d00a14bc78f2a5" kind="variable"><name>bias_estimation_window_size</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" kind="variable"><name>calibration_enabled</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a0321c5206f1fa07c984b40a00c693d6d" kind="variable"><name>stationary_confidence_threshold</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler" kind="class"><name>kinematic_arbiter::ros2::ImuSensorHandler</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a31d9631db0879b8be3c33a10f8d6c595" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a8db0399ce734991265e85230b2f97eb5" kind="typedef"><name>ModelType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1aab49f1aad74a0968234f7a244128e244" kind="typedef"><name>MeasurementIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af5529ec0c792937f154889c5fc3000d6" kind="function"><name>ImuSensorHandler</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" kind="function"><name>msgToVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" kind="function"><name>vectorToMsg</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" kind="function"><name>applyBound</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" kind="class"><name>kinematic_arbiter::sensors::ImuSensorModel</name>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ab8961b5d8eeaaee7b865eb2cb890e82d" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" kind="typedef"><name>StateCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kind="typedef"><name>Vector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1b718824924fcdf179c102454684c76b" kind="typedef"><name>Jacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" kind="typedef"><name>Covariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kind="variable"><name>kMeasurementDimension</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a037441e6ef4105b62bc5da4ddb9d9c00" kind="friend"><name>kinematic_arbiter::sensors::test::ImuStationaryTest</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" kind="variable"><name>bias_estimator_</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" kind="variable"><name>config_</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" kind="variable"><name>kGravity</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1abddc7407e6880cb4a3524a7b60bc626c" kind="variable"><name>kGravityVariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a9a3a064dd9c01092cf62c1122046ac2d" kind="function"><name>ImuSensorModel</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a30371ff6ab5bea1b1b356d83255b8c26" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" kind="function"><name>PredictMeasurement</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1ba34a3a2ffd727fbf186816b108cd95" kind="function"><name>UpdateBiasEstimates</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" kind="function"><name>GetMeasurementJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" kind="function"><name>GetPredictionModelInputs</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" kind="function"><name>EnableCalibration</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" kind="function"><name>SetConfig</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" kind="function"><name>GetGravity</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" kind="function"><name>GetInitializableStates</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" kind="function"><name>InitializeState</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" kind="function"><name>IsStationary</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter" kind="class"><name>src::single_dof_demo::core::kalman_filter::KalmanFilter</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0411e51cc021cd0393c6828c12e17e7a" kind="variable"><name>state_estimate</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0407e0dead9c2aa8dfdab0a62341bedb" kind="variable"><name>state_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a730106c75801fb54f981c37023b343a9" kind="variable"><name>measurement_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ab1e4534db580c14ff6f2e36b5ca8f0f3" kind="variable"><name>process_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a7c9fab97a61a520e4ea8239f99d41b19" kind="variable"><name>frequency</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1aeb2bf661dfd591b27e614843bdc30a75" kind="variable"><name>amplitude</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1af6b448824b370a34e5d71fabd4430a4b" kind="variable"><name>last_time</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a635d5cb1458539defec75c4808bb6003" kind="variable"><name>is_initialized</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a7aa206a236b2c0655e52abcfb21b3200" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ae81a3fefc1e4d4fde23bd96cd60603ef" kind="function"><name>set_process_noise</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a325ae1bc7f8f86aa4974e0dd4ee302ab" kind="function"><name>set_measurement_noise</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a1ff214637870cd370850cf1c41910fed" kind="function"><name>set_frequency</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a56507180f334c095d58f9eaf2b5f24d0" kind="function"><name>set_amplitude</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classkalman__filter__node_1_1KalmanFilterNode" kind="class"><name>kalman_filter_node::KalmanFilterNode</name>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a429faf2f9a1281ad08f7f7ac002f158c" kind="variable"><name>callback_group</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a995ed69374cfa477e40bab84c9a3e168" kind="variable"><name>default_params</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a019fed17a128fe3cc6d773588d6be69f" kind="variable"><name>measurement_sub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a91f70b1f3ef6307c4d737e6d01268989" kind="variable"><name>state_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6aaa46f70a3dc8e12609a7fffa4bea2c" kind="variable"><name>state_upper_bound_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a64b060a41a1e8dc112c57d791e5ebadb" kind="variable"><name>state_lower_bound_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a731d65a92d57f69fc52c71af8333079e" kind="variable"><name>measurement_upper_bound_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a9c47c30e1f97b24fd419e600312242c0" kind="variable"><name>measurement_lower_bound_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1afa783c9685b8221397956f17103fad35" kind="variable"><name>diagnostics_pub</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1adb78326902caec5c34f8cf956f008f8b" kind="variable"><name>reset_service</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6c997dbfbebdd05f6be9b4be97c0fc31" kind="variable"><name>reset_params_service</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" kind="variable"><name>initial_time</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" kind="variable"><name>filter</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a151e1dfe18a3b20180d553c39c481aff" kind="function"><name>__init__</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a29afe228c9e4fdaf49dff2b11694eeef" kind="function"><name>parameters_callback</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" kind="function"><name>measurement_callback</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" kind="function"><name>handle_reset</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" kind="function"><name>handle_reset_parameters</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a3c36f0466a71f86931e611f457be19ec" kind="function"><name>_create_float_descriptor</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6b3754af9d360cabbc917ac5b3855387" kind="function"><name>_init_filter</name></member>
+    <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" kind="function"><name>_publish_diagnostics</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode" kind="class"><name>kinematic_arbiter::ros2::KinematicArbiterNode</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a96ef95733f00e61f69c45e4611a6f39a" kind="variable"><name>publish_rate_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1d860aa7fe3e28520ca67ac6198c0516" kind="variable"><name>world_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a662e74da74772c89eb9d395f4cd5266c" kind="variable"><name>body_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a86531b38e3487a4d2d0c3ebbc0cb60a6" kind="variable"><name>tf_buffer_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afee59c24a0cb618afa756fcdff8ed593" kind="variable"><name>tf_listener_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" kind="variable"><name>filter_wrapper_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1abbe7e9f37fe57641d9d9276ef2aaaacd" kind="variable"><name>pose_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0ef4e2f29d4b1d31d750a72500a6be46" kind="variable"><name>velocity_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3eaaf1ac9110dd6060933424965d3d89" kind="variable"><name>accel_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a9762ce973e471ff87b88b10b0ff9c0da" kind="variable"><name>publish_timer_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a92e3ced23fcf59a648f8268f5095d567" kind="variable"><name>truth_pose_sub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1af65991b5c8b7d40008fed7dd7a850809" kind="variable"><name>truth_velocity_sub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1aff67e137a04bd9051d84a6244e2be296" kind="variable"><name>reset_service_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" kind="function"><name>KinematicArbiterNode</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a950168aed4e30295f38fe0ca03f2ca85" kind="function"><name>~KinematicArbiterNode</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" kind="function"><name>publishEstimates</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a85473ab7f0e6c297de92a046cba32b33" kind="function"><name>configureSensorsFromLoadedParams</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0a89df0487fe94b6ff105f8640be3aa8" kind="function"><name>getSensorNames</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1ab23bb37f4135e0b8b1d32eb831fa0d92" kind="function"><name>truthPoseCallback</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a5b4140c063627c2a6bc02346be4ad018" kind="function"><name>truthVelocityCallback</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afd1ba0177f9da2995b38f17181ef823b" kind="function"><name>handleResetService</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" kind="struct"><name>kinematic_arbiter::core::StateIndex::LinearAcceleration</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a9c3825f60d9d3c005a76a53aa8492222" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity" kind="struct"><name>kinematic_arbiter::core::StateIndex::LinearVelocity</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a131c982ef240ef0c00e6239420ca8d79" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData" kind="struct"><name>kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1acc8b0ee39be40ad70e672bf5691d43b8" kind="variable"><name>innovation</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a5ffc53fcce9974f003d3eead2cc3615f" kind="variable"><name>jacobian</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a6850572c55c29f12dbc26b2d6ca4568b" kind="variable"><name>innovation_covariance</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a61d5c2946efc50d95d98cbb9d14a49de" kind="function"><name>MeasurementAuxData</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a1b9e47817827bc23d104b7a530f56c1f" kind="function"><name>MeasurementAuxData</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData" kind="struct"><name>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1ada511516ae62e8f5a7ec0bc3cef9aebe" kind="variable"><name>timestamp</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a464c87ff6cdf347ba5a5bc6d41428a91" kind="variable"><name>value</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a90dcddc215f2250331283497aa68e2da" kind="variable"><name>covariance</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1aad7d3e8301c5a3158e3b44d4dae148fc" kind="function"><name>MeasurementData</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData_1a30246ddcfe25a52a47175fa82cb532dd" kind="function"><name>MeasurementData</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension</name>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::BodyVelocity &gt;</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4_1a4dbf68e9b5b40525093f4a70bb9c556a" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Imu &gt;</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4_1aa513160bd13a34decce938a8bd5adee8" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Pose &gt;</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4_1a3ed71515bcc266c81f85f27d74eeb881" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Position &gt;</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4_1a8ddb21a3a8733470fefd3b50089a62fc" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4" kind="struct"><name>kinematic_arbiter::core::MeasurementDimension&lt; SensorType::Unknown &gt;</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4_1a1d72e8e4b07c08640b301205f93d9cbb" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex" kind="struct"><name>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</name>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" kind="variable"><name>VX</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" kind="variable"><name>VY</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" kind="variable"><name>VZ</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" kind="variable"><name>WX</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" kind="variable"><name>WY</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" kind="variable"><name>WZ</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" kind="struct"><name>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</name>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" kind="variable"><name>GX</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" kind="variable"><name>GY</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" kind="variable"><name>GZ</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" kind="variable"><name>AX</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" kind="variable"><name>AY</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" kind="variable"><name>AZ</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex" kind="struct"><name>kinematic_arbiter::sensors::PoseSensorModel::MeasurementIndex</name>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1aca869efd6fe461d0e4ceb4f0240a6698" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1a7b208ac8358eaa6c9b164b44a56f59f6" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1a3f0f8b68dafc224d0aab20d0c9fd5e3c" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1aa82e69d83bc6648c75ae18d953e1726a" kind="variable"><name>QW</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1a5d0d9bba179005ca73133fd5ef220e31" kind="variable"><name>QX</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1a4f13afaa4918d546c2db3a3bfc26fa9f" kind="variable"><name>QY</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex_1a39070b9dd967395a0d87ae74e563159b" kind="variable"><name>QZ</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex" kind="struct"><name>kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</name>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a4b495807b74b2b8254a7ac8a5fd144b9" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a700e743c89944155bb18caa693375a1e" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a2a0b2b0e4e4a5c318473dd5fc38c168f" kind="variable"><name>Z</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kind="class"><name>kinematic_arbiter::core::MeasurementModelInterface</name>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kind="typedef"><name>StateCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kind="typedef"><name>DynamicVector</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" kind="typedef"><name>DynamicCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" kind="typedef"><name>DynamicJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af00dfc6985a743d5cbdeb8eb5ccd895f" kind="variable"><name>StateSize</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" kind="variable"><name>sensor_pose_in_body_frame_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad7f0a5265f1043721ccdcedfdaeaec4e" kind="variable"><name>body_to_sensor_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" kind="variable"><name>measurement_covariance_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af518043017105da5dc8e2884a3c08757" kind="variable"><name>validation_params_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea" kind="variable"><name>can_predict_input_accelerations_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a01f9294fc634377d82ff39899f0933da" kind="variable"><name>previous_measurement_data_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40058c54f10901f78ff41d6dc5bc2719" kind="variable"><name>type_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6892442da3585a1341223e86b19bab74" kind="function"><name>MeasurementModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa2b7cdf287cf76fd3f124d61b007b876" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15ccf29d4fcb77eeec7c061d1f1760a9" kind="function"><name>~MeasurementModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a93c282b256807ec898ed370425d51bbc" kind="function"><name>PredictMeasurement</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6b5954981316837e748849685d76da04" kind="function"><name>GetMeasurementJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6e876bbd501638d08c5edb780a267709" kind="function"><name>GetPredictionModelInputs</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4346126200c9f4de489aab3fab129971" kind="function"><name>CanPredictInputAccelerations</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a2fddcb888990500b3b3409b7b6cec686" kind="function"><name>GetMeasurementCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad540c0d79ba49a24099318bfc8bc7eda" kind="function"><name>SetValidationParams</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5cc96aafe1baa54185ab107e7badea1b" kind="function"><name>GetValidationParams</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a97984559c1bce1ca940c5031f0179c" kind="function"><name>ComputeAuxiliaryData</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4d2c920c121d7b75cbe1d0edc8d0cd11" kind="function"><name>ValidateAuxiliaryData</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" kind="function"><name>ValidateAndMediate</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3eb44bf67d92d14ffc6bfccd3577ea32" kind="function"><name>GetSensorPoseInBodyFrame</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a150e6a83b5b062c9d5be9515149c33" kind="function"><name>GetBodyToSensorTransform</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15cc22968d56d51842529beeb0467f08" kind="function"><name>SetSensorPoseInBodyFrame</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae8347005b6d6adc21b80a7c1aaf951ee" kind="function"><name>GetInitializableStates</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a98065dc0937c36d9b696dc86e7bffe4e" kind="function"><name>InitializeState</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3201756902a007c9ac9b209020119a0a" kind="function"><name>GetModelType</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0c2dc49a74ea86100c0fb28845323987" kind="function"><name>ValidateMeasurementAndTime</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486" kind="function"><name>ValidateMeasurementSize</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40c3a85ae08d728f08a72294a41a4f87" kind="function"><name>UpdateCovariance</name></member>
+  </compound>
+  <compound refid="classmediated__filter__node_1_1MediatedFilterNode" kind="class"><name>mediated_filter_node::MediatedFilterNode</name>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a7d267058bb3c376195773766a68c77e0" kind="variable"><name>callback_group</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a3ca29d770e6b20fb9c4f9bd1d7d3fc97" kind="variable"><name>default_params</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a300f0a18e958a17e28ffc654d62a8a99" kind="variable"><name>measurement_sub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a2efbd5439fc4abe3b63e2a6e93795cfd" kind="variable"><name>state_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a0bcc51eb64b0f3124b2047fb77e15898" kind="variable"><name>state_upper_bound_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a5d7260562d841621683925e7f6c934cb" kind="variable"><name>state_lower_bound_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a50cd28e6cc0f70e5f98460f2a6cdd5a0" kind="variable"><name>measurement_upper_bound_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1ae3f1cd68ac6da09bf461850c9fd7ea61" kind="variable"><name>measurement_lower_bound_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1ae2a23ce165463cafd54fbb580650040f" kind="variable"><name>diagnostics_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1aef50022b23e498586cfb48d63d97055b" kind="variable"><name>mediation_point_pub</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a0fc34c27b3c245464484939103f68258" kind="variable"><name>reset_service</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1abb61b8fc5d8e8ccc210948f03a32a9b2" kind="variable"><name>reset_params_service</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1ab44f5d8236d82c70bc088e064f423419" kind="variable"><name>initial_time</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a7e71c012c52ab415b45f96e63eaacc98" kind="variable"><name>filter</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1aa26d3eed21d09ed42a8edefa121862f3" kind="function"><name>__init__</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a497e5d95a624d6ed5c6dc1458fc38c08" kind="function"><name>parameters_callback</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" kind="function"><name>measurement_callback</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1acaf8ba128632faff37d8cd12873be096" kind="function"><name>handle_reset</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1aa2cf79a6d0354115572bb56f40623a44" kind="function"><name>handle_reset_parameters</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1acbc2353ac86db7821fd2ab9904f91afc" kind="function"><name>_create_float_descriptor</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1ab50ee8045ece1d99b665248d33b0864d" kind="function"><name>_init_filter</name></member>
+    <member refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c84350598e0b35a63c5f273ca3ed453" kind="function"><name>_publish_diagnostics</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter" kind="class"><name>kinematic_arbiter::core::MediatedKalmanFilter</name>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a010877c53e971ea72d350d6b6581a522" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a90a82e17ebf8d30c1e7600d975f0fb1e" kind="typedef"><name>StateMatrix</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1abf94185d2347f9477222d013aa858ffc" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ab9a366cb41342ef2cd39f23236bc7f71" kind="variable"><name>process_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a25595e83553b29a3ea629be7e94b7348" kind="variable"><name>sensors_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ad62715db165302f259ba9285bb1dd2ee" kind="variable"><name>reference_time_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a0fe4298d48744d928989efe06f5b213c" kind="variable"><name>max_delay_window_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a3ec1d01d6f85632726d6f3155de4bff2" kind="variable"><name>initialized_states_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a6a090d11eea0d3dacdeb57d573ebeb49" kind="variable"><name>reference_state_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ac3f995d79e6de6d6f83038797b499bba" kind="variable"><name>reference_covariance_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1afa53b6f23ee08c667756ad6c2acd4568" kind="function"><name>MediatedKalmanFilter</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ae03760b631e2c5595e28d72f4ae9e137" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ad693626dcfd5ddc5e76b35a146cc7296" kind="function"><name>AddSensor</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a1350b537bf0d4a0bfa7308c61b6a46ea" kind="function"><name>GetSensorPoseInBodyFrameByIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1aad372a7000e7629d2fd5116d36b75b4e" kind="function"><name>SetSensorPoseInBodyFrameByIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1aa24272033e8079022228e4f6e5765fd8" kind="function"><name>ProcessMeasurementByIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a2e8b9123e0aa4aa9befe740a3c705137" kind="function"><name>GetStateEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a9c19b50be8d81cb1189fb9b1915d5ab2" kind="function"><name>GetStateCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1af3e1b6b4a5940c1b728fbd23b57ed8a7" kind="function"><name>SetStateEstimate</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a7b4ef93886f9edac9c9b17405efb961b" kind="function"><name>GetCurrentTime</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ae071f5515d1cd57946a622f89d1ad3d9" kind="function"><name>SetMaxDelayWindow</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1abb51c9b7b9e5599bdeafd8af87db11fd" kind="function"><name>IsInitialized</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ae29de60fbbadf45ed3b9121624818ee9" kind="function"><name>PredictNewReference</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a98c6df3f49307d26042ae7b89de41f87" kind="function"><name>GetSensorCovarianceByIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1ac46df7e94cee7cdedbde395d63ab7dc7" kind="function"><name>GetExpectedMeasurementByIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter_1a28b4c6133b6013b376db8f267c8fef24" kind="function"><name>GetExpectedMeasurementByIndex</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter" kind="class"><name>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af8ff28cc662a9e2b7278e1b6bd02163e" kind="variable"><name>chi_squared_value</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af0eeeaa40b74a9b92d346b125933fceb" kind="variable"><name>scale</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a014458b9fab2bfddad96859a750e0e6a" kind="variable"><name>sample_window</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae38b4af068aee63f31507cefcce55ab0" kind="variable"><name>state_estimate</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a24147a964eaf701b87e0023e15d7e816" kind="variable"><name>state_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" kind="variable"><name>measurement_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" kind="variable"><name>process_variance</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aa6402530041dbd7f807f19885019caec" kind="variable"><name>previous_t</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" kind="variable"><name>mediation</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1acf14f3784e8d4001ec97274ce496ec4c" kind="variable"><name>mediation_behavior</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a792be0488c8120cf8b7e30e55ff68ee7" kind="variable"><name>frequency</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a814936f8b26abe9094d096c6343c81fd" kind="variable"><name>amplitude</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a2b89fe6aa7bd493587d9aac4de38aa56" kind="variable"><name>last_time</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aacda5a5b48d3500d20e8a27583f8bf5d" kind="variable"><name>is_initialized</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ad05f6219842a361b9c58b260a46bf530" kind="variable"><name>previous_state_estimate</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1abd345b29691f1f9de008924cc7fb2b9d" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" kind="function"><name>set_process_measurement_ratio</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ab0662cb0b16e3bbef80f9c99b721a7e8" kind="function"><name>set_sample_window</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac21b211b6194d6b37c9378835e8623e2" kind="function"><name>set_mediation_behavior</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a99a4346ae1b7f8459d7d35d28541a5da" kind="function"><name>set_frequency</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a35e0cae628c2eb934cf01725abbbc006" kind="function"><name>set_amplitude</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" kind="function"><name>reset</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation" kind="class"><name>src::single_dof_demo::core::mediated_kalman_filter::Mediation</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1af54ea6cc5b8261a99c6577b776197407" kind="variable"><name>ADJUST_STATE</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1abcdbef20084e90b7306a8a49ecb428ba" kind="variable"><name>ADJUST_MEASUREMENT</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a4a7a8a79f16d0e5e42ea738bab354a43" kind="variable"><name>REJECT_MEASUREMENT</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a717bbfc78739acfa9af77ec534ab93b5" kind="variable"><name>NO_ACTION</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode" kind="class"><name>src::single_dof_demo::ros2::domain_models::MediationMode</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a834324448ef0fcaeb0c52a24e129bd1c" kind="variable"><name>ADJUST_STATE</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a49874497f2222f90cf6d70d7899dfe0a" kind="variable"><name>ADJUST_MEASUREMENT</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a92a356be6480a22445e6fdefb0a02b5d" kind="variable"><name>REJECT_MEASUREMENT</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1afbc3bd0bde2ee9d34d0c4dddd70dc51b" kind="variable"><name>NO_ACTION</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params" kind="struct"><name>kinematic_arbiter::core::StateModelInterface::Params</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a650bddc23959713130e3a0c564de5af1" kind="variable"><name>process_noise_window</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a36d6891ed987ad84626c353209e93d62" kind="variable"><name>position_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1aeb7691c587b5780480a2bbccae6d7f59" kind="variable"><name>orientation_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a20a9ab420ec092fe827450eba25d39f2" kind="variable"><name>linear_velocity_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a86360392fa8acb4d1fbf772dc07a57d2" kind="variable"><name>angular_velocity_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab888b7db255ed7924d57bfef6315bcc3" kind="variable"><name>linear_acceleration_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a73690c6a07d29e4abca0afc538679dff" kind="variable"><name>angular_acceleration_uncertainty_per_second</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab4db61e5a806eb5d5e75146ff5f28a2f" kind="function"><name>Params</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher" kind="class"><name>kinematic_arbiter::ros2::simulation::PosePublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher_1a72ac7138acb634aa8e65ccd794d40e26" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher_1a1a193eb149363739b224d88377ea933e" kind="typedef"><name>MIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher_1a4f590d3ec93876067d8b0e7d50cc6a94" kind="function"><name>PosePublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher_1a8501faf681a603a9c906271eacee4ef8" kind="function"><name>eigenToRos</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler" kind="class"><name>kinematic_arbiter::ros2::PoseSensorHandler</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1aaa19c960cc7ec26b08247689edb97ee0" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a86ac00ab39c3161b7e6f8295b97cd568" kind="typedef"><name>ModelType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a7ceb366fb12857f8343cd434ee43ad06" kind="typedef"><name>MeasurementIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a407c23c9593de2da328cff796c8f8f20" kind="function"><name>PoseSensorHandler</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1aa6b8b76be0028ccc06755bbda15978f5" kind="function"><name>msgToVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a0059d9c8cfabf75d16d83f4d34ec53ca" kind="function"><name>vectorToMsg</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler_1a0d4e2a1bf7b77065553454c5061c5e34" kind="function"><name>applyBound</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel" kind="class"><name>kinematic_arbiter::sensors::PoseSensorModel</name>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a4d7b7ba64271115103a81143550d25be" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1ad6f9aa0bd45f557e9ccd4351fce1c53d" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a56ce1465b03b736e59f8de0817f264c3" kind="typedef"><name>Vector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1afcc87cd28867480bb8d6c1d73048901c" kind="typedef"><name>Jacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a82aeba6c10c94a86d49338c7542a0c01" kind="typedef"><name>Covariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a5ba49cf9b02ed8a739d43135f3bf12d5" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a326bba3dfb30bc4655207419c3416886" kind="variable"><name>kMeasurementDimension</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1acb3eb2aaaa1d76efd898721a5812fb6a" kind="function"><name>PoseSensorModel</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a974a7e4940abea13e458eea5533df86c" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" kind="function"><name>PredictMeasurement</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1ad2067f9a7583a777b16cbafb51c90d82" kind="function"><name>GetMeasurementJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" kind="function"><name>GetInitializableStates</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" kind="function"><name>InitializeState</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" kind="struct"><name>kinematic_arbiter::core::StateIndex::Position</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1ab6d4a1b99556dd9d584ef7ca889d9a8b" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher" kind="class"><name>kinematic_arbiter::ros2::simulation::PositionPublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a1ae73c3899082dc6c4d824fcfd742555" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a3b65838eca5ba90f45be0447266bb8cb" kind="typedef"><name>MIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a959632ac83c4d0c3b0eda2d5a699a70b" kind="function"><name>PositionPublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" kind="function"><name>eigenToRos</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler" kind="class"><name>kinematic_arbiter::ros2::PositionSensorHandler</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ada17016c3507064ba78cc300ad7a9da2" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a076a0f3c3f30e2bdaae2dc5eb3a60bb2" kind="typedef"><name>ModelType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a07643ee49de55db3e491b912d93b0e05" kind="typedef"><name>MeasurementIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1af04153e553619576c10df1dc0d2acc2a" kind="function"><name>PositionSensorHandler</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981" kind="function"><name>msgToVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1a4fcc583c4cca630a978ff5aa0c953c73" kind="function"><name>vectorToMsg</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1aef1173b3a64f66078ef506675166483c" kind="function"><name>applyBound</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel" kind="class"><name>kinematic_arbiter::sensors::PositionSensorModel</name>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a855fa5264ebe7df3fec094144635b078" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4af91121787431c6c012186cf48a40fb" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4255893f4e910e95d1f6c1552f9dffaa" kind="typedef"><name>Vector</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ade1c602a9af847cceb2e319b18c445cc" kind="typedef"><name>Jacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a9a5b3915a09d8c0c351da949b7eb7b7e" kind="typedef"><name>Covariance</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a231ab3d253635171563045da6116e001" kind="typedef"><name>StateFlags</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" kind="variable"><name>kMeasurementDimension</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a546ffd279698833bc3c4c801e74c3bb6" kind="function"><name>PositionSensorModel</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ad3c423f6217e4290553ed1b5dc098ecf" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" kind="function"><name>PredictMeasurement</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" kind="function"><name>GetMeasurementJacobian</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" kind="function"><name>GetInitializableStates</name></member>
+    <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" kind="function"><name>InitializeState</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" kind="struct"><name>kinematic_arbiter::core::StateIndex::Quaternion</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" kind="variable"><name>W</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" kind="variable"><name>X</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" kind="variable"><name>Y</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" kind="variable"><name>Z</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" kind="function"><name>Begin</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a670ba34adad41f7997719cf372fa4b1e" kind="function"><name>Size</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel" kind="class"><name>kinematic_arbiter::models::RigidBodyStateModel</name>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a94f655111a07c30be4b90ec40d595f97" kind="typedef"><name>Matrix3d</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a6e7f6163aa8eefec8d398341e9eeaaad" kind="typedef"><name>Vector3d</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa9a3c8f16a5313e3e6c1afc2ba67666b" kind="typedef"><name>Vector4d</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a63783d35b06bb216927e8422c8143097" kind="typedef"><name>Matrix4d</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa315b72df6366b9b7fd631a38e1ec526" kind="typedef"><name>SIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1ae5b004980ce188891ea33a30e875e2c7" kind="function"><name>RigidBodyStateModel</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" kind="function"><name>PredictState</name></member>
+    <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" kind="function"><name>GetTransitionMatrix</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kind="class"><name>kinematic_arbiter::ros2::SensorHandler</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" kind="typedef"><name>MeasurementModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kind="typedef"><name>DynamicVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" kind="typedef"><name>DynamicCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" kind="typedef"><name>Filter</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a3c17f098d380353f141a11698eb74874" kind="typedef"><name>SensorType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kind="variable"><name>SIGMA_BOUND_FACTOR</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" kind="variable"><name>node_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" kind="variable"><name>filter_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" kind="variable"><name>tf_buffer_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" kind="variable"><name>time_manager_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" kind="variable"><name>sensor_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" kind="variable"><name>sensor_name_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aacde580262a5c673c3c46778bd5d87ce" kind="variable"><name>topic_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" kind="variable"><name>sensor_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4aa65cc833aa1dadcf7cab4f9ef08171" kind="variable"><name>reference_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" kind="variable"><name>body_frame_id_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" kind="variable"><name>sensor_model_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a2de4944e89e7379bcf2f8b2bcd80fd6a" kind="variable"><name>sensor_type_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" kind="variable"><name>sensor_index_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ade4884e545618ee0a04209c88062117e" kind="variable"><name>sensor_to_body_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a315e7261398e007ec210dad186521044" kind="variable"><name>subscription_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" kind="variable"><name>expected_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" kind="variable"><name>upper_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" kind="variable"><name>lower_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" kind="variable"><name>has_valid_transform_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" kind="function"><name>SensorHandler</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aa3d7ec017d40088221fd0aa9671a1ebb" kind="function"><name>getSensorId</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" kind="function"><name>setValidationParams</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a240e054f2e536ac7ee6dae29aa066f97" kind="function"><name>msgToVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af73f0d302ea4941d4ec056dd47cf0992" kind="function"><name>vectorToMsg</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a82b574c4cbd3cfbf23ec2123a4e555db" kind="function"><name>applyBound</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" kind="function"><name>lookupStaticTransform</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" kind="function"><name>messageCallback</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" kind="function"><name>publishExpectedMeasurement</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" kind="class"><name>kinematic_arbiter::ros2::simulation::SensorPublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a22687a2da35486cbe7390d2a3185434e" kind="typedef"><name>MeasurementModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" kind="variable"><name>node_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" kind="variable"><name>sensor_type_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" kind="variable"><name>name_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" kind="variable"><name>noise_sigma_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" kind="variable"><name>raw_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" kind="variable"><name>truth_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" kind="variable"><name>upper_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" kind="variable"><name>lower_bound_pub_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1aa2dfcea2e499e82293e24b1ae7dad6ad" kind="variable"><name>noise_dist_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" kind="function"><name>SensorPublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" kind="function"><name>publish</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab7118cce5dfde001ef17b9372a8686b6" kind="function"><name>eigenToRos</name></member>
+  </compound>
+  <compound refid="classsignal__generator__node_1_1SignalGeneratorNode" kind="class"><name>signal_generator_node::SignalGeneratorNode</name>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a6243ccd055b304354138e56a68eb07d1" kind="variable"><name>callback_group</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a8d8a84ddc475e7ec4a9b1964c698d5ac" kind="variable"><name>default_params</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a6c496be2494e9ea823fedab62a6ed1a0" kind="variable"><name>noisy_publisher</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7941593fce8f9b157d0150636d60a473" kind="variable"><name>clean_publisher</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" kind="variable"><name>initial_time</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac1e8a003d2e35972d3831ab1ba69a211" kind="variable"><name>timer</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac84d62feeb7cc6031d5a0afa15e3f239" kind="variable"><name>reset_service</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a49b12fc704d5bb019e45a4c6352dad36" kind="variable"><name>reset_params_service</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1aa7698fdeb30e6a60ac9f70a353eeba3a" kind="variable"><name>noise_level</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7fbe717e377915cac73f9f4e3d5bcabf" kind="variable"><name>signal_params</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a58e2911ee7bb1dfa7908742f9d994ffa" kind="variable"><name>signal_generator</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac3572c977dd48000d77718c2f85a9737" kind="function"><name>__init__</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a018b95bb3c1612e1ee52a95f65841889" kind="function"><name>parameters_callback</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" kind="function"><name>timer_callback</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" kind="function"><name>handle_reset</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" kind="function"><name>handle_reset_parameters</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a9ebeb9c5dc9df507952180d43f5dc020" kind="function"><name>_create_float_descriptor</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ad2d8c4cecc6753305cd2f8c8efa2613f" kind="function"><name>_init_signal_generator</name></member>
+    <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" kind="function"><name>_create_timer</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams" kind="class"><name>src::single_dof_demo::core::signal_generator::SignalParams</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a9fe368fe3c323e040357be756e16ac87" kind="variable"><name>seed</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a87fbee11051c2e90fde92abb0d85f6c4" kind="variable"><name>max_frequency</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a3a6d9afc8b6cb6db5100b842148f6230" kind="variable"><name>max_amplitude</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a6af0b4537190a3b3dbdd4f1f401067ca" kind="variable"><name>number_of_signals</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a0cb9521ba04138f8f6dd04c32c9ad89d" kind="function"><name>__init__</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator" kind="class"><name>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" kind="variable"><name>params</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae728dd5eba3b193abdc2fd9c7d8445a8" kind="variable"><name>frequencies</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a2208d07582aeaeb4cf55b4c213d03b70" kind="variable"><name>amplitudes</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a4368dc2e2fb6c807b393dfcf79d3c2bd" kind="variable"><name>phases</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae9af5145ff9cc833e299170b3b21dc72" kind="variable"><name>seed</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a622fe466e78acd56393d9e3093371cf4" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" kind="function"><name>reset</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" kind="function"><name>get_value</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a02ac7453862af27ec97eca832eb6793f" kind="function"><name>generate_signal</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a77b82d0d4ce9ce34bdad6f7d0bab1526" kind="function"><name>generate_complete_signal</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" kind="class"><name>src::single_dof_demo::ros2::domain_models::State</name>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1StateIndex" kind="struct"><name>kinematic_arbiter::core::StateIndex</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kind="variable"><name>kFullStateSize</name></member>
+  </compound>
+  <compound refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair" kind="class"><name>src::single_dof_demo::core::filter_output::StateMeasurementPair</name>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair_1a6011505adb38ec75b59179f79157d6fb" kind="variable"><name>state</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair_1a57c7afee06e8c284fa4d1c1eca091155" kind="variable"><name>measurement</name></member>
+    <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair_1abc5578bfff0c31648dc1a92226a74327" kind="function"><name>__init__</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1core_1_1StateModelInterface" kind="class"><name>kinematic_arbiter::core::StateModelInterface</name>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa727c87965ff75514c4e097c6456905b" kind="typedef"><name>StateVector</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1eff680285d455bb828d1f94ea67c30d" kind="typedef"><name>StateMatrix</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1af47babdcc2441df1e20ce0e1dcf083d3" kind="typedef"><name>Vector3d</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a5858c293ee72008054d3f13a67c908a0" kind="variable"><name>StateSize</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ab45147eda8b8cf3a95f11700fa8f9832" kind="variable"><name>kMinStateDiff</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a318a341229a8bb90c1ea7712cb8d4869" kind="variable"><name>kMaxStateDiff</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1adc766438943c3d801ed8dfd5a31493f3" kind="variable"><name>state_diff_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1af6897e6a8b84cef9112c75329db6a947" kind="variable"><name>params_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a2fa3188a159cf16c6847228c26be8af3" kind="variable"><name>process_noise_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1af2fb47f316594dbb195b009f117a4f31" kind="variable"><name>state_initialized_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a77a6fb354f49c8d321d87175f35476ae" kind="variable"><name>time_since_reset_</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a457d6cf0093c1b61de4d0462dfbd6c44" kind="function"><name>reset</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" kind="function"><name>StateModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a6cf0e88c125182ab7faaa90b25abead0" kind="function"><name>~StateModelInterface</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aff55747339d075abc3c2a48d447a24eb" kind="function"><name>PredictState</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ad928ea890a63fd0c6b069c8b519178b0" kind="function"><name>GetTransitionMatrix</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1d1d3982bee824943c5ab5ef0686de50" kind="function"><name>PredictStateWithInputAccelerations</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a2897de0f322264af5edf9e4b02f811ac" kind="function"><name>GetProcessNoiseCovariance</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ac321300d03a7b9d6b31e1351e6f268ea" kind="function"><name>UpdateProcessNoise</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a4efb543e3192c48d7a466356cfd77583" kind="function"><name>GetProcessNoise</name></member>
+    <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a82facf89d0ec9ebf62547512a8ae9af4" kind="function"><name>GetParams</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kind="class"><name>kinematic_arbiter::ros2::utils::TimeManager</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kind="variable"><name>initialized_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kind="variable"><name>reference_time_</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1adf21efc1aa32aa4486dc12430d367d88" kind="function"><name>TimeManager</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" kind="function"><name>setReferenceTime</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" kind="function"><name>rosTimeToFilterTime</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" kind="function"><name>filterTimeToRosTime</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" kind="function"><name>isInitialized</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" kind="function"><name>getReferenceTime</name></member>
+  </compound>
+  <compound refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kind="struct"><name>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</name>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a5f2f83c58b677dea3b41b939851713df" kind="variable"><name>noise_sample_window</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a70c671bf56846e445e4b545755842a2e" kind="variable"><name>confidence_level</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1afd012760debc61c8a0784232a967fc87" kind="variable"><name>process_to_measurement_noise_ratio</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1af500a4ee6f57d167717f1c30908add37" kind="variable"><name>mediation_action</name></member>
+    <member refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1ac618d7982ab32e14087e81cc04718ed9" kind="function"><name>ValidationParams</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher" kind="class"><name>kinematic_arbiter::ros2::simulation::VelocityPublisher</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a26dff53021d5bbbb875c9f8c681c289e" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a181b0961d39b65b0d3fe135d6d705a8f" kind="typedef"><name>MIdx</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a3b6fee1f6296761f512253d3702249a0" kind="function"><name>VelocityPublisher</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" kind="function"><name>eigenToRos</name></member>
+  </compound>
+  <compound refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler" kind="class"><name>kinematic_arbiter::ros2::VelocitySensorHandler</name>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a013a78fbfb70a84f766e4b2f4789b0e7" kind="typedef"><name>Base</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a3daa67d9a9b70b1b27346272b968412b" kind="typedef"><name>ModelType</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a75824013841edc33e9d68432cd18179f" kind="typedef"><name>MeasurementIndex</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a7f85016dc682647f197748d8d73948ad" kind="function"><name>VelocitySensorHandler</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" kind="function"><name>msgToVector</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" kind="function"><name>vectorToMsg</name></member>
+    <member refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" kind="function"><name>applyBound</name></member>
+  </compound>
+  <compound refid="namespaceEigen" kind="namespace"><name>Eigen</name>
+  </compound>
+  <compound refid="namespacekalman__filter__node" kind="namespace"><name>kalman_filter_node</name>
+    <member refid="namespacekalman__filter__node_1ac54d1e5b67c380f72a4b5aac3c324aa4" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacekinematic__arbiter" kind="namespace"><name>kinematic_arbiter</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1core" kind="namespace"><name>kinematic_arbiter::core</name>
+    <member refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888" kind="enum"><name>MediationAction</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888af35acb633021b32455020ebfb119d726" kind="enumvalue"><name>ForceAccept</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888ad98ac12774fca5c3cbaffe276840c55f" kind="enumvalue"><name>Reject</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888a37b8a81e1288d220414efdb34301206c" kind="enumvalue"><name>AdjustCovariance</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kind="enum"><name>SensorType</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a52f5e0bc3859bc5f5e25130b6c7e8881" kind="enumvalue"><name>Position</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a8109c9c9d6a2ca3bec3e006fe51a5f3e" kind="enumvalue"><name>Pose</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a279c45f6887896386ef1d781a74b4a75" kind="enumvalue"><name>BodyVelocity</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914ae30c70d37a1c6991965a321393b30692" kind="enumvalue"><name>Imu</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a88183b946cc5f0e8c96b2e66e1c74a7e" kind="enumvalue"><name>Unknown</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1ad49d7320fc5e8d09e02dba3c16dc5a4a" kind="typedef"><name>MeasurementVector</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1ad5832fdeec2175a36ebf3f68d77ad548" kind="function"><name>GetMeasurementDimension</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a2d84e3b0f226e7c516325b0461643309" kind="function"><name>SensorTypeToString</name></member>
+    <member refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" kind="function"><name>GetInitializableStateNames</name></member>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1core_1_1anonymous__namespace_02measurement__model__interface_8hpp_03" kind="namespace"><name>kinematic_arbiter::core::anonymous_namespace{measurement_model_interface.hpp}</name>
+    <member refid="namespacekinematic__arbiter_1_1core_1_1anonymous__namespace_02measurement__model__interface_8hpp_03_1a25a9430e807272c9a29acccfa4d1ffb4" kind="variable"><name>kMaxMeasurementDim</name></member>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1models" kind="namespace"><name>kinematic_arbiter::models</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03" kind="namespace"><name>kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}</name>
+    <member refid="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03_1aa82dde35738c9d742fc6db2f0a57c44a" kind="variable"><name>kLambda</name></member>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1ros2" kind="namespace"><name>kinematic_arbiter::ros2</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1ros2_1_1simulation" kind="namespace"><name>kinematic_arbiter::ros2::simulation</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1ros2_1_1utils" kind="namespace"><name>kinematic_arbiter::ros2::utils</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1sensors" kind="namespace"><name>kinematic_arbiter::sensors</name>
+    <member refid="namespacekinematic__arbiter_1_1sensors_1a687fad93ff58abc219b838b61df405cb" kind="variable"><name>kEpsilon</name></member>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1sensors_1_1test" kind="namespace"><name>kinematic_arbiter::sensors::test</name>
+  </compound>
+  <compound refid="namespacekinematic__arbiter_1_1utils" kind="namespace"><name>kinematic_arbiter::utils</name>
+    <member refid="namespacekinematic__arbiter_1_1utils_1aeb6ad278c4686e43540d4fa3440f4007" kind="variable"><name>kMaxChiSquareDof</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1aa5bd5a24489eb4a19f438bfd3791449d" kind="variable"><name>kFuzzyMoreThanZero</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1aa1f27ecd94eccf17163e5da94dc17f0b" kind="variable"><name>kNumChiSquareCriticalValues</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1a988c0e186de8b566376642df93d93ef9" kind="variable"><name>kChiSquareCriticalValues</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" kind="function"><name>InterpolatedCriticalValue</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1ac2b1d5ac126ea3e455ef95d5516086ed" kind="function"><name>CalculateChiSquareCriticalValue1Dof</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" kind="function"><name>CalculateChiSquareCriticalValueNDof</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1a2d3bbcea2147884b93a81b50a5459280" kind="function"><name>generateMultivariateNoise</name></member>
+    <member refid="namespacekinematic__arbiter_1_1utils_1a2ca17a01e42301ffa188c887083eacb5" kind="function"><name>Figure8Trajectory</name></member>
+  </compound>
+  <compound refid="namespacemediated__filter__node" kind="namespace"><name>mediated_filter_node</name>
+    <member refid="namespacemediated__filter__node_1a61400153662d21450bae647b3a89f048" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacerclcpp" kind="namespace"><name>rclcpp</name>
+  </compound>
+  <compound refid="namespacesignal__generator__node" kind="namespace"><name>signal_generator_node</name>
+    <member refid="namespacesignal__generator__node_1a78123e986717d0b446422b90f40f10ab" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacesrc" kind="namespace"><name>src</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo" kind="namespace"><name>src::single_dof_demo</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core" kind="namespace"><name>src::single_dof_demo::core</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__output" kind="namespace"><name>src::single_dof_demo::core::filter_output</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities" kind="namespace"><name>src::single_dof_demo::core::filter_utilities</name>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1a67fb8830288964d1b3ec919c6bcdfdaf" kind="variable"><name>THREE_SIGMA_BOUND</name></member>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1ae5d3a21c9db683b311ceb4431a12963a" kind="function"><name>variance_to_bound</name></member>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1a9abc91bad110d245fe3aa2b3c56e49ea" kind="function"><name>bound_to_variance</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core_1_1kalman__filter" kind="namespace"><name>src::single_dof_demo::core::kalman_filter</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter" kind="namespace"><name>src::single_dof_demo::core::mediated_kalman_filter</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1core_1_1signal__generator" kind="namespace"><name>src::single_dof_demo::core::signal_generator</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1demo" kind="namespace"><name>src::single_dof_demo::demo</name>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1demo_1a67f744bc4f3cd8f1be3981751273fb81" kind="function"><name>_main</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1display__gui" kind="namespace"><name>src::single_dof_demo::display_gui</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1ros2" kind="namespace"><name>src::single_dof_demo::ros2</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1domain__models" kind="namespace"><name>src::single_dof_demo::ros2::domain_models</name>
+  </compound>
+  <compound refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters" kind="namespace"><name>src::single_dof_demo::ros2::message_converters</name>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ad227644b1ea054caef6977fc1dffaac3" kind="function"><name>pose_with_covariance_to_state</name></member>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1a0c0669d860f3111ba7ffe38057e0b100" kind="function"><name>state_to_pose_with_covariance_stamped</name></member>
+    <member refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ae7247df8714da122d96ed5c1342f8914" kind="function"><name>ros_time_to_float</name></member>
+  </compound>
+  <compound refid="measurement__model__interface_8hpp" kind="file"><name>measurement_model_interface.hpp</name>
+  </compound>
+  <compound refid="mediated__kalman__filter_8hpp" kind="file"><name>mediated_kalman_filter.hpp</name>
+  </compound>
+  <compound refid="mediation__types_8hpp" kind="file"><name>mediation_types.hpp</name>
+  </compound>
+  <compound refid="sensor__types_8hpp" kind="file"><name>sensor_types.hpp</name>
+  </compound>
+  <compound refid="state__index_8hpp" kind="file"><name>state_index.hpp</name>
+  </compound>
+  <compound refid="state__model__interface_8hpp" kind="file"><name>state_model_interface.hpp</name>
+  </compound>
+  <compound refid="statistical__utils_8hpp" kind="file"><name>statistical_utils.hpp</name>
+  </compound>
+  <compound refid="trajectory__utils_8hpp" kind="file"><name>trajectory_utils.hpp</name>
+  </compound>
+  <compound refid="rigid__body__state__model_8hpp" kind="file"><name>rigid_body_state_model.hpp</name>
+  </compound>
+  <compound refid="expected__sensor__publisher_8hpp" kind="file"><name>expected_sensor_publisher.hpp</name>
+  </compound>
+  <compound refid="filter__wrapper_8hpp" kind="file"><name>filter_wrapper.hpp</name>
+  </compound>
+  <compound refid="imu__sensor__handler_8hpp" kind="file"><name>imu_sensor_handler.hpp</name>
+  </compound>
+  <compound refid="kinematic__arbiter__node_8hpp" kind="file"><name>kinematic_arbiter_node.hpp</name>
+  </compound>
+  <compound refid="pose__sensor__handler_8hpp" kind="file"><name>pose_sensor_handler.hpp</name>
+  </compound>
+  <compound refid="position__sensor__handler_8hpp" kind="file"><name>position_sensor_handler.hpp</name>
+  </compound>
+  <compound refid="ros2__utils_8hpp" kind="file"><name>ros2_utils.hpp</name>
+  </compound>
+  <compound refid="sensor__handler_8hpp" kind="file"><name>sensor_handler.hpp</name>
+  </compound>
+  <compound refid="figure8__simulator__node_8hpp" kind="file"><name>figure8_simulator_node.hpp</name>
+  </compound>
+  <compound refid="sensor__publisher_8hpp" kind="file"><name>sensor_publisher.hpp</name>
+  </compound>
+  <compound refid="velocity__sensor__handler_8hpp" kind="file"><name>velocity_sensor_handler.hpp</name>
+  </compound>
+  <compound refid="body__velocity__sensor__model_8hpp" kind="file"><name>body_velocity_sensor_model.hpp</name>
+  </compound>
+  <compound refid="imu__bias__estimator_8hpp" kind="file"><name>imu_bias_estimator.hpp</name>
+  </compound>
+  <compound refid="imu__sensor__model_8hpp" kind="file"><name>imu_sensor_model.hpp</name>
+  </compound>
+  <compound refid="pose__sensor__model_8hpp" kind="file"><name>pose_sensor_model.hpp</name>
+  </compound>
+  <compound refid="position__sensor__model_8hpp" kind="file"><name>position_sensor_model.hpp</name>
+  </compound>
+  <compound refid="____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="single__dof__demo_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="single__dof__demo_2core_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="single__dof__demo_2ros2_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="statistical__utils_8cpp" kind="file"><name>statistical_utils.cpp</name>
+  </compound>
+  <compound refid="filter__wrapper_8cpp" kind="file"><name>filter_wrapper.cpp</name>
+  </compound>
+  <compound refid="kinematic__arbiter__node_8cpp" kind="file"><name>kinematic_arbiter_node.cpp</name>
+  </compound>
+  <compound refid="main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="figure8__simulator__node_8cpp" kind="file"><name>figure8_simulator_node.cpp</name>
+    <member refid="figure8__simulator__node_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="imu__bias__estimator_8cpp" kind="file"><name>imu_bias_estimator.cpp</name>
+  </compound>
+  <compound refid="imu__sensor__model_8cpp" kind="file"><name>imu_sensor_model.cpp</name>
+  </compound>
+  <compound refid="filter__output_8py" kind="file"><name>filter_output.py</name>
+  </compound>
+  <compound refid="filter__utilities_8py" kind="file"><name>filter_utilities.py</name>
+  </compound>
+  <compound refid="kalman__filter_8py" kind="file"><name>kalman_filter.py</name>
+  </compound>
+  <compound refid="mediated__kalman__filter_8py" kind="file"><name>mediated_kalman_filter.py</name>
+  </compound>
+  <compound refid="signal__generator_8py" kind="file"><name>signal_generator.py</name>
+  </compound>
+  <compound refid="demo_8py" kind="file"><name>demo.py</name>
+  </compound>
+  <compound refid="display__gui_8py" kind="file"><name>display_gui.py</name>
+  </compound>
+  <compound refid="domain__models_8py" kind="file"><name>domain_models.py</name>
+  </compound>
+  <compound refid="message__converters_8py" kind="file"><name>message_converters.py</name>
+  </compound>
+  <compound refid="kalman__filter__node_8py" kind="file"><name>kalman_filter_node.py</name>
+  </compound>
+  <compound refid="mediated__filter__node_8py" kind="file"><name>mediated_filter_node.py</name>
+  </compound>
+  <compound refid="signal__generator__node_8py" kind="file"><name>signal_generator_node.py</name>
+  </compound>
+  <compound refid="dir_14de83f734de492826b14eee0853d03c" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core</name>
+  </compound>
+  <compound refid="dir_74efce380c685308080167ec6a883d47" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core</name>
+  </compound>
+  <compound refid="dir_aebb8dcc11953d78e620bbef0b9e2183" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/core</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include</name>
+  </compound>
+  <compound refid="dir_a8c731d09161c3fe8f6d7f5f897be40a" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter</name>
+  </compound>
+  <compound refid="dir_c94ab60d5ec371b3a64e881278540505" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models</name>
+  </compound>
+  <compound refid="dir_b6721234e798a1b71c146169f6dcf645" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes</name>
+  </compound>
+  <compound refid="dir_a5cc1b63589a64b9071907131fed0687" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2</name>
+  </compound>
+  <compound refid="dir_2ab28a22740f281d84016c5721b6077f" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2</name>
+  </compound>
+  <compound refid="dir_1460f56192f63bd86ad91bf881920fa2" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2</name>
+  </compound>
+  <compound refid="dir_14389f9f12ab61553627e371bf84adfd" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors</name>
+  </compound>
+  <compound refid="dir_7349e89ef19c117195f8e371603e1b1f" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors</name>
+  </compound>
+  <compound refid="dir_4ef48471906caefe626de80dc13d11b3" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation</name>
+  </compound>
+  <compound refid="dir_f97a4b523b65bb5e22bf973ea611b262" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation</name>
+  </compound>
+  <compound refid="dir_db404cdce9f4e5b993dd5c1cf12beb58" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/home/spencer/ros2workspace/src/kinematic_arbiter/src</name>
+  </compound>
+</doxygenindex>

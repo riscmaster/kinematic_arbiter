@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::ros2::SensorHandler::lookupStaticTransform" name="kinematic_arbiter::ros2::SensorHandler::lookupStaticTransform">
+<area shape="rect" id="node1" title="Look up the static transform from sensor to body frame." alt="" coords="408,39,583,95"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a89a9cb9125c64a70da34fd546ab61ee5" title="Callback for incoming sensor messages." alt="" coords="207,5,360,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#aeb89991b470b121b0f3f81a658527b9d" title="Constructor for SensorHandler." alt="" coords="5,39,159,95"/>
+</map>

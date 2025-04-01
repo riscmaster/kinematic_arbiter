@@ -1,0 +1,8 @@
+<map id="kinematic_arbiter::sensors::ImuSensorModel" name="kinematic_arbiter::sensors::ImuSensorModel">
+<area shape="rect" id="node1" title="IMU measurement model (gyroscope + accelerometer)" alt="" coords="863,118,1052,159"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html" title="Interface for measurement models with assumption validation." alt="" coords="459,53,705,94"/>
+<area shape="rect" id="node3" href="$structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html" title="Parameters for assumption validation." alt="" coords="5,5,252,61"/>
+<area shape="rect" id="node4" href="$structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html" title=" " alt="" coords="5,85,252,141"/>
+<area shape="rect" id="node5" href="$structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html" title=" " alt="" coords="487,118,677,159"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html" title="IMU&#45;specific bias estimator using recursive averaging." alt="" coords="484,183,680,225"/>
+</map>

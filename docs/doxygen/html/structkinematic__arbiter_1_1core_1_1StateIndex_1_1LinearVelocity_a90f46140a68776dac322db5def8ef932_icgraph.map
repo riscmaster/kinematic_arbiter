@@ -1,0 +1,9 @@
+<map id="kinematic_arbiter::core::StateIndex::LinearVelocity::Begin" name="kinematic_arbiter::core::StateIndex::LinearVelocity::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="889,125,1117,181"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="609,5,827,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html#a2dee7db6aa0b65ec2d1e8a7632f4c511" title="Initialize state from body velocity measurement." alt="" coords="613,85,823,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a5c20315ad9946aee82af907393333f06" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="609,165,827,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#af5bdcfe5445ec15ef8a5735777f3c883" title="Publish ground truth and TF transforms." alt="" coords="595,245,841,301"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac2fc799b41b37ca470b37d7b816414a8" title="Main update function called by the timer." alt="" coords="300,245,547,301"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac3d5b099f5eed720ffccd06bb9586788" title="Constructor for Figure8SimulatorNode." alt="" coords="5,245,252,301"/>
+</map>

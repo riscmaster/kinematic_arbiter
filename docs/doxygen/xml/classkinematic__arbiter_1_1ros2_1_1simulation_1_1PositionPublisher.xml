@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::simulation::PositionPublisher</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" prot="public" virt="non-virtual">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; geometry_msgs::msg::PointStamped &gt;</basecompoundref>
+    <includes refid="sensor__publisher_8hpp" local="no">sensor_publisher.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a1ae73c3899082dc6c4d824fcfd742555" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" kindref="compound">SensorPublisher</ref>&lt; geometry_msgs::msg::PointStamped &gt;</type>
+        <definition>using kinematic_arbiter::ros2::simulation::PositionPublisher::Base =  SensorPublisher&lt;geometry_msgs::msg::PointStamped&gt;</definition>
+        <argsstring></argsstring>
+        <name>Base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="159" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a3b65838eca5ba90f45be0447266bb8cb" prot="public" static="no">
+        <type><ref refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex" kindref="compound">kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</ref></type>
+        <definition>using kinematic_arbiter::ros2::simulation::PositionPublisher::MIdx =  kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</definition>
+        <argsstring></argsstring>
+        <name>MIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="160" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a959632ac83c4d0c3b0eda2d5a699a70b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::simulation::PositionPublisher::PositionPublisher</definition>
+        <argsstring>(rclcpp::Node *node, const std::string &amp;name, double noise_sigma)</argsstring>
+        <name>PositionPublisher</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>noise_sigma</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="162" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="162" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>geometry_msgs::msg::PointStamped</type>
+        <definition>geometry_msgs::msg::PointStamped kinematic_arbiter::ros2::simulation::PositionPublisher::eigenToRos</definition>
+        <argsstring>(const Eigen::VectorXd &amp;measurement, const std::string &amp;frame_id, const rclcpp::Time &amp;timestamp) override</argsstring>
+        <name>eigenToRos</name>
+        <reimplements refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab7118cce5dfde001ef17b9372a8686b6">eigenToRos</reimplements>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frame_id</declname>
+        </param>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+<para>Convert an Eigen vector to a ROS message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Eigen vector to convert </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The frame ID for the message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS timestamp for the message </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The ROS message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="168" column="36" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="168" bodyend="182"/>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a4b495807b74b2b8254a7ac8a5fd144b9" compoundref="position__sensor__model_8hpp" startline="29">kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::X</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a700e743c89944155bb18caa693375a1e" compoundref="position__sensor__model_8hpp" startline="30">kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::Y</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex_1a2a0b2b0e4e4a5c318473dd5fc38c168f" compoundref="position__sensor__model_8hpp" startline="31">kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex::Z</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Position sensor publisher implementation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::simulation::PositionPublisher</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::simulation::SensorPublisher&lt; geometry_msgs::msg::PointStamped &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::simulation::PositionPublisher</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::simulation::SensorPublisher&lt; geometry_msgs::msg::PointStamped &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="157" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="157" bodyend="183"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a1ae73c3899082dc6c4d824fcfd742555" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>Base</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6" prot="public" virt="virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>eigenToRos</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a22687a2da35486cbe7390d2a3185434e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a3b65838eca5ba90f45be0447266bb8cb" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>MIdx</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>name_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1aa2dfcea2e499e82293e24b1ae7dad6ad" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>noise_dist_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>noise_sigma_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a959632ac83c4d0c3b0eda2d5a699a70b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>PositionPublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>publish</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>raw_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>sensor_type_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>SensorPublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>truth_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::PositionPublisher</scope><name>upper_bound_pub_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

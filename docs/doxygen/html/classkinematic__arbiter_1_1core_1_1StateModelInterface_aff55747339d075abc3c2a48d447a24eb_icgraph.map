@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::StateModelInterface::PredictState" name="kinematic_arbiter::core::StateModelInterface::PredictState">
+<area shape="rect" id="node1" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="313,5,504,61"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1StateModelInterface.html#a1d1d3982bee824943c5ab5ef0686de50" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="5,5,265,61"/>
+</map>

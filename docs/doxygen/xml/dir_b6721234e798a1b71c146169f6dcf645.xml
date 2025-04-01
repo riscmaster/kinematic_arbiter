@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_b6721234e798a1b71c146169f6dcf645" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes</compoundname>
+    <innerfile refid="kalman__filter__node_8py">kalman_filter_node.py</innerfile>
+    <innerfile refid="mediated__filter__node_8py">mediated_filter_node.py</innerfile>
+    <innerfile refid="signal__generator__node_8py">signal_generator_node.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/"/>
+  </compounddef>
+</doxygen>

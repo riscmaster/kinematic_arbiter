@@ -37,7 +37,7 @@ class KalmanFilter(object):
             amplitude (float): The amplitude of the model. Default is 0.0.
         """
         self.state_estimate = 0.0
-        self.state_variance = 100.0
+        self.state_variance = 10.0
         self.measurement_variance = measurement_noise
         self.process_variance = process_noise
         self.frequency = frequency

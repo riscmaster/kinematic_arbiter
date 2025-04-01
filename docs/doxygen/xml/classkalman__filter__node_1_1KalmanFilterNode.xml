@@ -1,0 +1,479 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkalman__filter__node_1_1KalmanFilterNode" kind="class" language="Python" prot="public">
+    <compoundname>kalman_filter_node::KalmanFilterNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Node</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a429faf2f9a1281ad08f7f7ac002f158c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::callback_group</definition>
+        <argsstring></argsstring>
+        <name>callback_group</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="37" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a995ed69374cfa477e40bab84c9a3e168" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::default_params</definition>
+        <argsstring></argsstring>
+        <name>default_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="40" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="40" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" compoundref="kalman__filter__node_8py" startline="269" endline="301">kalman_filter_node.KalmanFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1aa2cf79a6d0354115572bb56f40623a44" compoundref="mediated__filter__node_8py" startline="313" endline="350">mediated_filter_node.MediatedFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" compoundref="signal__generator__node_8py" startline="282" endline="315">signal_generator_node.SignalGeneratorNode.handle_reset_parameters</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a019fed17a128fe3cc6d773588d6be69f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::measurement_sub</definition>
+        <argsstring></argsstring>
+        <name>measurement_sub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="89" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a91f70b1f3ef6307c4d737e6d01268989" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::state_pub</definition>
+        <argsstring></argsstring>
+        <name>state_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="98" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="98" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a6aaa46f70a3dc8e12609a7fffa4bea2c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::state_upper_bound_pub</definition>
+        <argsstring></argsstring>
+        <name>state_upper_bound_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="101" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="101" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a64b060a41a1e8dc112c57d791e5ebadb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::state_lower_bound_pub</definition>
+        <argsstring></argsstring>
+        <name>state_lower_bound_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="104" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="104" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a731d65a92d57f69fc52c71af8333079e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::measurement_upper_bound_pub</definition>
+        <argsstring></argsstring>
+        <name>measurement_upper_bound_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="107" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="107" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a9c47c30e1f97b24fd419e600312242c0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::measurement_lower_bound_pub</definition>
+        <argsstring></argsstring>
+        <name>measurement_lower_bound_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="110" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="110" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1afa783c9685b8221397956f17103fad35" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::diagnostics_pub</definition>
+        <argsstring></argsstring>
+        <name>diagnostics_pub</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="113" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="113" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" compoundref="kalman__filter__node_8py" startline="302" endline="331">kalman_filter_node.KalmanFilterNode._publish_diagnostics</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c84350598e0b35a63c5f273ca3ed453" compoundref="mediated__filter__node_8py" startline="351" endline="396">mediated_filter_node.MediatedFilterNode._publish_diagnostics</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1adb78326902caec5c34f8cf956f008f8b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::reset_service</definition>
+        <argsstring></argsstring>
+        <name>reset_service</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="118" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a6c997dbfbebdd05f6be9b4be97c0fc31" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::reset_params_service</definition>
+        <argsstring></argsstring>
+        <name>reset_params_service</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="125" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::initial_time</definition>
+        <argsstring></argsstring>
+        <name>initial_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="133" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="133" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" compoundref="kalman__filter__node_8py" startline="261" endline="268">kalman_filter_node.KalmanFilterNode.handle_reset</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1acaf8ba128632faff37d8cd12873be096" compoundref="mediated__filter__node_8py" startline="305" endline="312">mediated_filter_node.MediatedFilterNode.handle_reset</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" compoundref="signal__generator__node_8py" startline="262" endline="281">signal_generator_node.SignalGeneratorNode.handle_reset</referencedby>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>kalman_filter_node.KalmanFilterNode::filter</definition>
+        <argsstring></argsstring>
+        <name>filter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="190" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="190" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" compoundref="kalman__filter__node_8py" startline="302" endline="331">kalman_filter_node.KalmanFilterNode._publish_diagnostics</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c84350598e0b35a63c5f273ca3ed453" compoundref="mediated__filter__node_8py" startline="351" endline="396">mediated_filter_node.MediatedFilterNode._publish_diagnostics</referencedby>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" compoundref="kalman__filter__node_8py" startline="269" endline="301">kalman_filter_node.KalmanFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1aa2cf79a6d0354115572bb56f40623a44" compoundref="mediated__filter__node_8py" startline="313" endline="350">mediated_filter_node.MediatedFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a29afe228c9e4fdaf49dff2b11694eeef" compoundref="kalman__filter__node_8py" startline="146" endline="187">kalman_filter_node.KalmanFilterNode.parameters_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a497e5d95a624d6ed5c6dc1458fc38c08" compoundref="mediated__filter__node_8py" startline="158" endline="205">mediated_filter_node.MediatedFilterNode.parameters_callback</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a151e1dfe18a3b20180d553c39c481aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the Kalman Filter node.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="32" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="32" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a29afe228c9e4fdaf49dff2b11694eeef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode.parameters_callback</definition>
+        <argsstring>(self, params)</argsstring>
+        <name>parameters_callback</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>params</type>
+          <defname>params</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Handle parameter changes.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="146" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="146" bodyend="187"/>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" compoundref="kalman__filter__node_8py" startline="190">kalman_filter_node.KalmanFilterNode.filter</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a7e71c012c52ab415b45f96e63eaacc98" compoundref="mediated__filter__node_8py" startline="208">mediated_filter_node.MediatedFilterNode.filter</references>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode.measurement_callback</definition>
+        <argsstring>(self, msg)</argsstring>
+        <name>measurement_callback</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>msg</type>
+          <defname>msg</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Process incoming measurement messages and update the filter.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="197" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="197" bodyend="260"/>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" compoundref="kalman__filter__node_8py" startline="302" endline="331">kalman_filter_node.KalmanFilterNode._publish_diagnostics</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c84350598e0b35a63c5f273ca3ed453" compoundref="mediated__filter__node_8py" startline="351" endline="396">mediated_filter_node.MediatedFilterNode._publish_diagnostics</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" compoundref="kalman__filter__node_8py" startline="190">kalman_filter_node.KalmanFilterNode.filter</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a7e71c012c52ab415b45f96e63eaacc98" compoundref="mediated__filter__node_8py" startline="208">mediated_filter_node.MediatedFilterNode.filter</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" compoundref="kalman__filter__node_8py" startline="133">kalman_filter_node.KalmanFilterNode.initial_time</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ab44f5d8236d82c70bc088e064f423419" compoundref="mediated__filter__node_8py" startline="145">mediated_filter_node.MediatedFilterNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" compoundref="signal__generator__node_8py" startline="106">signal_generator_node.SignalGeneratorNode.initial_time</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a9c47c30e1f97b24fd419e600312242c0" compoundref="kalman__filter__node_8py" startline="110">kalman_filter_node.KalmanFilterNode.measurement_lower_bound_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ae3f1cd68ac6da09bf461850c9fd7ea61" compoundref="mediated__filter__node_8py" startline="118">mediated_filter_node.MediatedFilterNode.measurement_lower_bound_pub</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a731d65a92d57f69fc52c71af8333079e" compoundref="kalman__filter__node_8py" startline="107">kalman_filter_node.KalmanFilterNode.measurement_upper_bound_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a50cd28e6cc0f70e5f98460f2a6cdd5a0" compoundref="mediated__filter__node_8py" startline="115">mediated_filter_node.MediatedFilterNode.measurement_upper_bound_pub</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a64b060a41a1e8dc112c57d791e5ebadb" compoundref="kalman__filter__node_8py" startline="104">kalman_filter_node.KalmanFilterNode.state_lower_bound_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a5d7260562d841621683925e7f6c934cb" compoundref="mediated__filter__node_8py" startline="112">mediated_filter_node.MediatedFilterNode.state_lower_bound_pub</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a91f70b1f3ef6307c4d737e6d01268989" compoundref="kalman__filter__node_8py" startline="98">kalman_filter_node.KalmanFilterNode.state_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a2efbd5439fc4abe3b63e2a6e93795cfd" compoundref="mediated__filter__node_8py" startline="106">mediated_filter_node.MediatedFilterNode.state_pub</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a6aaa46f70a3dc8e12609a7fffa4bea2c" compoundref="kalman__filter__node_8py" startline="101">kalman_filter_node.KalmanFilterNode.state_upper_bound_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a0bcc51eb64b0f3124b2047fb77e15898" compoundref="mediated__filter__node_8py" startline="109">mediated_filter_node.MediatedFilterNode.state_upper_bound_pub</references>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode.handle_reset</definition>
+        <argsstring>(self, request, response)</argsstring>
+        <name>handle_reset</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>request</type>
+          <defname>request</defname>
+        </param>
+        <param>
+          <type>response</type>
+          <defname>response</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Handle Kalman Filter reset requests.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="261" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="261" bodyend="268"/>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a6b3754af9d360cabbc917ac5b3855387" compoundref="kalman__filter__node_8py" startline="188" endline="196">kalman_filter_node.KalmanFilterNode._init_filter</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ab50ee8045ece1d99b665248d33b0864d" compoundref="mediated__filter__node_8py" startline="206" endline="217">mediated_filter_node.MediatedFilterNode._init_filter</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" compoundref="kalman__filter__node_8py" startline="133">kalman_filter_node.KalmanFilterNode.initial_time</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ab44f5d8236d82c70bc088e064f423419" compoundref="mediated__filter__node_8py" startline="145">mediated_filter_node.MediatedFilterNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" compoundref="signal__generator__node_8py" startline="106">signal_generator_node.SignalGeneratorNode.initial_time</references>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode.handle_reset_parameters</definition>
+        <argsstring>(self, request, response)</argsstring>
+        <name>handle_reset_parameters</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>request</type>
+          <defname>request</defname>
+        </param>
+        <param>
+          <type>response</type>
+          <defname>response</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Reset all parameters to their default values.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="269" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="269" bodyend="301"/>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a995ed69374cfa477e40bab84c9a3e168" compoundref="kalman__filter__node_8py" startline="40">kalman_filter_node.KalmanFilterNode.default_params</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a3ca29d770e6b20fb9c4f9bd1d7d3fc97" compoundref="mediated__filter__node_8py" startline="43">mediated_filter_node.MediatedFilterNode.default_params</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a8d8a84ddc475e7ec4a9b1964c698d5ac" compoundref="signal__generator__node_8py" startline="41">signal_generator_node.SignalGeneratorNode.default_params</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" compoundref="kalman__filter__node_8py" startline="190">kalman_filter_node.KalmanFilterNode.filter</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a7e71c012c52ab415b45f96e63eaacc98" compoundref="mediated__filter__node_8py" startline="208">mediated_filter_node.MediatedFilterNode.filter</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a3c36f0466a71f86931e611f457be19ec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode._create_float_descriptor</definition>
+        <argsstring>(self, min_val, max_val, description)</argsstring>
+        <name>_create_float_descriptor</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>min_val</type>
+          <defname>min_val</defname>
+        </param>
+        <param>
+          <type>max_val</type>
+          <defname>max_val</defname>
+        </param>
+        <param>
+          <type>description</type>
+          <defname>description</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Create a float parameter descriptor.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="137" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="137" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a6b3754af9d360cabbc917ac5b3855387" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode._init_filter</definition>
+        <argsstring>(self)</argsstring>
+        <name>_init_filter</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the Kalman filter.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="188" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="188" bodyend="196"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" compoundref="kalman__filter__node_8py" startline="261" endline="268">kalman_filter_node.KalmanFilterNode.handle_reset</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1acaf8ba128632faff37d8cd12873be096" compoundref="mediated__filter__node_8py" startline="305" endline="312">mediated_filter_node.MediatedFilterNode.handle_reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.KalmanFilterNode._publish_diagnostics</definition>
+        <argsstring>(self)</argsstring>
+        <name>_publish_diagnostics</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Publish diagnostics for the filter.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="302" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="302" bodyend="331"/>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1afa783c9685b8221397956f17103fad35" compoundref="kalman__filter__node_8py" startline="113">kalman_filter_node.KalmanFilterNode.diagnostics_pub</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ae2a23ce165463cafd54fbb580650040f" compoundref="mediated__filter__node_8py" startline="121">mediated_filter_node.MediatedFilterNode.diagnostics_pub</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" compoundref="kalman__filter__node_8py" startline="190">kalman_filter_node.KalmanFilterNode.filter</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a7e71c012c52ab415b45f96e63eaacc98" compoundref="mediated__filter__node_8py" startline="208">mediated_filter_node.MediatedFilterNode.filter</references>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Kalman Filter node for the single DOF demo with dynamic parameter adjustment.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Node</label>
+      </node>
+      <node id="1">
+        <label>kalman_filter_node.KalmanFilterNode</label>
+        <link refid="classkalman__filter__node_1_1KalmanFilterNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Node</label>
+      </node>
+      <node id="1">
+        <label>kalman_filter_node.KalmanFilterNode</label>
+        <link refid="classkalman__filter__node_1_1KalmanFilterNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="29" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="29" bodyend="332"/>
+    <listofallmembers>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a151e1dfe18a3b20180d553c39c481aff" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>__init__</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a3c36f0466a71f86931e611f457be19ec" prot="private" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>_create_float_descriptor</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6b3754af9d360cabbc917ac5b3855387" prot="private" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>_init_filter</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a81ec5b48a24765eca61884ccf2190ca7" prot="private" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>_publish_diagnostics</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a429faf2f9a1281ad08f7f7ac002f158c" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>callback_group</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a995ed69374cfa477e40bab84c9a3e168" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>default_params</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1afa783c9685b8221397956f17103fad35" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>diagnostics_pub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a3335df2108d28159937e3b873305f7d6" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>filter</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>handle_reset</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>handle_reset_parameters</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>initial_time</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>measurement_callback</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a9c47c30e1f97b24fd419e600312242c0" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>measurement_lower_bound_pub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a019fed17a128fe3cc6d773588d6be69f" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>measurement_sub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a731d65a92d57f69fc52c71af8333079e" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>measurement_upper_bound_pub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a29afe228c9e4fdaf49dff2b11694eeef" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>parameters_callback</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6c997dbfbebdd05f6be9b4be97c0fc31" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>reset_params_service</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1adb78326902caec5c34f8cf956f008f8b" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>reset_service</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a64b060a41a1e8dc112c57d791e5ebadb" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>state_lower_bound_pub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a91f70b1f3ef6307c4d737e6d01268989" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>state_pub</name></member>
+      <member refid="classkalman__filter__node_1_1KalmanFilterNode_1a6aaa46f70a3dc8e12609a7fffa4bea2c" prot="public" virt="non-virtual"><scope>kalman_filter_node::KalmanFilterNode</scope><name>state_upper_bound_pub</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

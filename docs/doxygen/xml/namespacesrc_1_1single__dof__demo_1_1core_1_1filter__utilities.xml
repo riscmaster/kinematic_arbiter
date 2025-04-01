@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::core::filter_utilities</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1a67fb8830288964d1b3ec919c6bcdfdaf" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float src::single_dof_demo::core::filter_utilities.THREE_SIGMA_BOUND</definition>
+        <argsstring></argsstring>
+        <name>THREE_SIGMA_BOUND</name>
+        <initializer>=  3.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" line="17" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1ae5d3a21c9db683b311ceb4431a12963a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition> float src.single_dof_demo.core.filter_utilities.variance_to_bound</definition>
+        <argsstring>(float variance)</argsstring>
+        <name>variance_to_bound</name>
+        <param>
+          <type>float</type>
+          <declname>variance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Convert variance to 3-sigma confidence bounds.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" line="20" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" bodystart="20" bodyend="24"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1a9abc91bad110d245fe3aa2b3c56e49ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition> float src.single_dof_demo.core.filter_utilities.bound_to_variance</definition>
+        <argsstring>(float bound)</argsstring>
+        <name>bound_to_variance</name>
+        <param>
+          <type>float</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Convert 3-sigma confidence bounds back to variance.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" line="25" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" bodystart="25" bodyend="28"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_utilities.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementAndTime" name="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementAndTime">
+<area shape="rect" id="node1" title="Validate measurement and timestamp before any expensive operations." alt="" coords="5,35,252,91"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1core.html#a2d84e3b0f226e7c516325b0461643309" title="Convert sensor type to string." alt="" coords="331,5,515,47"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="300,71,547,127"/>
+<area shape="rect" id="node4" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="595,79,836,120"/>
+</map>

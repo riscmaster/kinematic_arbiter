@@ -1,0 +1,549 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::display_gui::DisplayGui</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad5432c670eb9eb0882d73fdeddc52b79" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::signal_time</definition>
+        <argsstring></argsstring>
+        <name>signal_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="50" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad1b9fa5d23f2a08502a3eecbbe393a34" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf_signal_estimate</definition>
+        <argsstring></argsstring>
+        <name>mkf_signal_estimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="54" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1acba05884a784f88e32274dc7377f6888" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf_signal_bound</definition>
+        <argsstring></argsstring>
+        <name>mkf_signal_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="55" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2f98318c8caec6d38fbca49d3c17be2b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf_measurement_bound</definition>
+        <argsstring></argsstring>
+        <name>mkf_measurement_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="56" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="56" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af9fba494e216ce4229d04dcb1c19f55b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf_signal_estimate</definition>
+        <argsstring></argsstring>
+        <name>kf_signal_estimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="57" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1abd08da6ced248cd9e37ef815e8ca9def" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf_signal_bound</definition>
+        <argsstring></argsstring>
+        <name>kf_signal_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="58" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="58" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a5a94a39b9d1d6f67f8b4da140659e226" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf_measurement_bound</definition>
+        <argsstring></argsstring>
+        <name>kf_measurement_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="59" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mediation</definition>
+        <argsstring></argsstring>
+        <name>mediation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="60" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="60" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a3bc796546a1d8f5a06f0893f45d29e31" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::initial_mkf_tuning</definition>
+        <argsstring></argsstring>
+        <name>initial_mkf_tuning</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="63" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a59a69f488cb71239bb7eb4d310fc8146" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::initial_process_noise</definition>
+        <argsstring></argsstring>
+        <name>initial_process_noise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="64" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a269e8d31d7e6fb396180016a89429b93" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::initial_measurement_noise</definition>
+        <argsstring></argsstring>
+        <name>initial_measurement_noise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="65" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="65" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad77d1003d752d3c8916063e57d98da1e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf_mediation</definition>
+        <argsstring></argsstring>
+        <name>mkf_mediation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="66" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="66" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7c9c219671b8df5ebcc383ce55ef93f8" compoundref="display__gui_8py" startline="258" endline="269">src.single_dof_demo.display_gui.DisplayGui.update_mkf_method</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af6a8fb404a58e3c3c5d7832c38cdd17d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf_tuner</definition>
+        <argsstring></argsstring>
+        <name>mkf_tuner</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="158" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="158" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7d9e67320e9292412733a542f545e0dd" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf_process_tuner</definition>
+        <argsstring></argsstring>
+        <name>kf_process_tuner</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="169" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="169" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af8ed8368c3e1f603ee253e8de684ca2a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf_measurement_tuner</definition>
+        <argsstring></argsstring>
+        <name>kf_measurement_tuner</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="181" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="181" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a4c6e13be9d7d81dd71cd702df49c5b95" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::button</definition>
+        <argsstring></argsstring>
+        <name>button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="195" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ab70e983d88b4f5759921333884479d23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::radio</definition>
+        <argsstring></argsstring>
+        <name>radio</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="202" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a235c037cba2d47a0045a72d13170c2b8" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::mkf</definition>
+        <argsstring></argsstring>
+        <name>mkf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="210" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="210" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a153ecddefbcd38a6847ef16c79eaae56" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.display_gui.DisplayGui::kf</definition>
+        <argsstring></argsstring>
+        <name>kf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="220" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="220" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a9a09a10a68450e6a0fddab0e2bb5a64c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the display GUI with plots and interactive controls.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="21" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="21" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ace1ee90d06cf53acefa248ec25869d8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.initialize_filters</definition>
+        <argsstring>(self)</argsstring>
+        <name>initialize_filters</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize both filters with current parameters.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="207" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="207" bodyend="227"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.update_data</definition>
+        <argsstring>(self)</argsstring>
+        <name>update_data</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update all data using current filter settings.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="228" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="228" bodyend="257"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ace1ee90d06cf53acefa248ec25869d8a" compoundref="display__gui_8py" startline="207" endline="227">src.single_dof_demo.display_gui.DisplayGui.initialize_filters</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a153ecddefbcd38a6847ef16c79eaae56" compoundref="display__gui_8py" startline="220">src.single_dof_demo.display_gui.DisplayGui.kf</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a5a94a39b9d1d6f67f8b4da140659e226" compoundref="display__gui_8py" startline="59">src.single_dof_demo.display_gui.DisplayGui.kf_measurement_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1abd08da6ced248cd9e37ef815e8ca9def" compoundref="display__gui_8py" startline="58">src.single_dof_demo.display_gui.DisplayGui.kf_signal_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af9fba494e216ce4229d04dcb1c19f55b" compoundref="display__gui_8py" startline="57">src.single_dof_demo.display_gui.DisplayGui.kf_signal_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" compoundref="mediated__kalman__filter_8py" startline="61">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" compoundref="display__gui_8py" startline="60">src.single_dof_demo.display_gui.DisplayGui.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a235c037cba2d47a0045a72d13170c2b8" compoundref="display__gui_8py" startline="210">src.single_dof_demo.display_gui.DisplayGui.mkf</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2f98318c8caec6d38fbca49d3c17be2b" compoundref="display__gui_8py" startline="56">src.single_dof_demo.display_gui.DisplayGui.mkf_measurement_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1acba05884a784f88e32274dc7377f6888" compoundref="display__gui_8py" startline="55">src.single_dof_demo.display_gui.DisplayGui.mkf_signal_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad1b9fa5d23f2a08502a3eecbbe393a34" compoundref="display__gui_8py" startline="54">src.single_dof_demo.display_gui.DisplayGui.mkf_signal_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad5432c670eb9eb0882d73fdeddc52b79" compoundref="display__gui_8py" startline="50">src.single_dof_demo.display_gui.DisplayGui.signal_time</references>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7c9c219671b8df5ebcc383ce55ef93f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.update_mkf_method</definition>
+        <argsstring>(self, label)</argsstring>
+        <name>update_mkf_method</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>label</type>
+          <defname>label</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the mediation method based on radio button selection.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="258" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="258" bodyend="269"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad77d1003d752d3c8916063e57d98da1e" compoundref="display__gui_8py" startline="66">src.single_dof_demo.display_gui.DisplayGui.mkf_mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</definition>
+        <argsstring>(self, _)</argsstring>
+        <name>update_mkf_plot</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>_</type>
+          <defname>_</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the mediated Kalman filter plot based on slider values.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="270" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="270" bodyend="317"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a269e8d31d7e6fb396180016a89429b93" compoundref="display__gui_8py" startline="65">src.single_dof_demo.display_gui.DisplayGui.initial_measurement_noise</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a59a69f488cb71239bb7eb4d310fc8146" compoundref="display__gui_8py" startline="64">src.single_dof_demo.display_gui.DisplayGui.initial_process_noise</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" compoundref="mediated__kalman__filter_8py" startline="61">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" compoundref="display__gui_8py" startline="60">src.single_dof_demo.display_gui.DisplayGui.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a235c037cba2d47a0045a72d13170c2b8" compoundref="display__gui_8py" startline="210">src.single_dof_demo.display_gui.DisplayGui.mkf</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2f98318c8caec6d38fbca49d3c17be2b" compoundref="display__gui_8py" startline="56">src.single_dof_demo.display_gui.DisplayGui.mkf_measurement_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad77d1003d752d3c8916063e57d98da1e" compoundref="display__gui_8py" startline="66">src.single_dof_demo.display_gui.DisplayGui.mkf_mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1acba05884a784f88e32274dc7377f6888" compoundref="display__gui_8py" startline="55">src.single_dof_demo.display_gui.DisplayGui.mkf_signal_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad1b9fa5d23f2a08502a3eecbbe393a34" compoundref="display__gui_8py" startline="54">src.single_dof_demo.display_gui.DisplayGui.mkf_signal_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af6a8fb404a58e3c3c5d7832c38cdd17d" compoundref="display__gui_8py" startline="158">src.single_dof_demo.display_gui.DisplayGui.mkf_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad5432c670eb9eb0882d73fdeddc52b79" compoundref="display__gui_8py" startline="50">src.single_dof_demo.display_gui.DisplayGui.signal_time</references>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7c9c219671b8df5ebcc383ce55ef93f8" compoundref="display__gui_8py" startline="258" endline="269">src.single_dof_demo.display_gui.DisplayGui.update_mkf_method</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</definition>
+        <argsstring>(self, _)</argsstring>
+        <name>update_kf_plot</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>_</type>
+          <defname>_</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the standard Kalman filter plot based on slider values.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="318" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="318" bodyend="357"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a153ecddefbcd38a6847ef16c79eaae56" compoundref="display__gui_8py" startline="220">src.single_dof_demo.display_gui.DisplayGui.kf</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a5a94a39b9d1d6f67f8b4da140659e226" compoundref="display__gui_8py" startline="59">src.single_dof_demo.display_gui.DisplayGui.kf_measurement_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af8ed8368c3e1f603ee253e8de684ca2a" compoundref="display__gui_8py" startline="181">src.single_dof_demo.display_gui.DisplayGui.kf_measurement_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7d9e67320e9292412733a542f545e0dd" compoundref="display__gui_8py" startline="169">src.single_dof_demo.display_gui.DisplayGui.kf_process_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1abd08da6ced248cd9e37ef815e8ca9def" compoundref="display__gui_8py" startline="58">src.single_dof_demo.display_gui.DisplayGui.kf_signal_bound</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af9fba494e216ce4229d04dcb1c19f55b" compoundref="display__gui_8py" startline="57">src.single_dof_demo.display_gui.DisplayGui.kf_signal_estimate</references>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" compoundref="display__gui_8py" startline="358" endline="369">src.single_dof_demo.display_gui.DisplayGui.reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.reset</definition>
+        <argsstring>(self, _)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>_</type>
+          <defname>_</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Reset all sliders to their initial values.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="358" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="358" bodyend="369"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ace1ee90d06cf53acefa248ec25869d8a" compoundref="display__gui_8py" startline="207" endline="227">src.single_dof_demo.display_gui.DisplayGui.initialize_filters</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af8ed8368c3e1f603ee253e8de684ca2a" compoundref="display__gui_8py" startline="181">src.single_dof_demo.display_gui.DisplayGui.kf_measurement_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7d9e67320e9292412733a542f545e0dd" compoundref="display__gui_8py" startline="169">src.single_dof_demo.display_gui.DisplayGui.kf_process_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af6a8fb404a58e3c3c5d7832c38cdd17d" compoundref="display__gui_8py" startline="158">src.single_dof_demo.display_gui.DisplayGui.mkf_tuner</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" compoundref="display__gui_8py" startline="318" endline="357">src.single_dof_demo.display_gui.DisplayGui.update_kf_plot</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a6cdf36272da4b68723f123791449e9fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.display_gui.DisplayGui.run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Run the display GUI by showing the plot window.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="371" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="371" bodyend="374"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Interactive GUI for visualizing and comparing filter performance.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>src.single_dof_demo.display_gui.DisplayGui</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>object</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>src.single_dof_demo.display_gui.DisplayGui</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>object</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" line="18" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/display_gui.py" bodystart="18" bodyend="374"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a9a09a10a68450e6a0fddab0e2bb5a64c" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a4c6e13be9d7d81dd71cd702df49c5b95" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>button</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a269e8d31d7e6fb396180016a89429b93" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>initial_measurement_noise</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a3bc796546a1d8f5a06f0893f45d29e31" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>initial_mkf_tuning</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a59a69f488cb71239bb7eb4d310fc8146" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>initial_process_noise</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ace1ee90d06cf53acefa248ec25869d8a" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>initialize_filters</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a153ecddefbcd38a6847ef16c79eaae56" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a5a94a39b9d1d6f67f8b4da140659e226" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf_measurement_bound</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af8ed8368c3e1f603ee253e8de684ca2a" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf_measurement_tuner</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7d9e67320e9292412733a542f545e0dd" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf_process_tuner</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1abd08da6ced248cd9e37ef815e8ca9def" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf_signal_bound</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af9fba494e216ce4229d04dcb1c19f55b" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>kf_signal_estimate</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mediation</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a235c037cba2d47a0045a72d13170c2b8" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2f98318c8caec6d38fbca49d3c17be2b" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf_measurement_bound</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad77d1003d752d3c8916063e57d98da1e" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf_mediation</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1acba05884a784f88e32274dc7377f6888" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf_signal_bound</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad1b9fa5d23f2a08502a3eecbbe393a34" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf_signal_estimate</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1af6a8fb404a58e3c3c5d7832c38cdd17d" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>mkf_tuner</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ab70e983d88b4f5759921333884479d23" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>radio</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a2d65f30434b92e8e446b4d5e4eaa508f" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>reset</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a6cdf36272da4b68723f123791449e9fd" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>run</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1ad5432c670eb9eb0882d73fdeddc52b79" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>signal_time</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>update_data</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a206ddbd651b2bac7cd394a2deb13f8fa" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>update_kf_plot</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a7c9c219671b8df5ebcc383ce55ef93f8" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>update_mkf_method</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" prot="public" virt="non-virtual"><scope>src::single_dof_demo::display_gui::DisplayGui</scope><name>update_mkf_plot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

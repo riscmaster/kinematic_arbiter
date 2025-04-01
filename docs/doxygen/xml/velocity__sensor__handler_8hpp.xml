@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="velocity__sensor__handler_8hpp" kind="file" language="C++">
+    <compoundname>velocity_sensor_handler.hpp</compoundname>
+    <includes local="no">geometry_msgs/msg/twist_stamped.hpp</includes>
+    <includes refid="sensor__handler_8hpp" local="yes">kinematic_arbiter/ros2/sensor_handler.hpp</includes>
+    <includes refid="body__velocity__sensor__model_8hpp" local="yes">kinematic_arbiter/sensors/body_velocity_sensor_model.hpp</includes>
+    <includes refid="ros2__utils_8hpp" local="yes">kinematic_arbiter/ros2/ros2_utils.hpp</includes>
+    <includedby refid="filter__wrapper_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</includedby>
+    <incdepgraph>
+      <node id="21">
+        <label>kinematic_arbiter/core/state_index.hpp</label>
+        <link refid="state__index_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>kinematic_arbiter/ros2/ros2_utils.hpp</label>
+        <link refid="ros2__utils_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>limits</label>
+      </node>
+      <node id="6">
+        <label>geometry_msgs/msg/pose_stamped.hpp</label>
+      </node>
+      <node id="30">
+        <label>kinematic_arbiter/core/mediation_types.hpp</label>
+        <link refid="mediation__types_8hpp"/>
+      </node>
+      <node id="28">
+        <label>Eigen/Geometry</label>
+      </node>
+      <node id="7">
+        <label>geometry_msgs/msg/transform_stamped.hpp</label>
+      </node>
+      <node id="26">
+        <label>cmath</label>
+      </node>
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="20">
+        <label>boost/math/distributions/chi_squared.hpp</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="16">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>rclcpp/rclcpp.hpp</label>
+      </node>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp</label>
+        <link refid="velocity__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>geometry_msgs/msg/twist_stamped.hpp</label>
+      </node>
+      <node id="34">
+        <label>random</label>
+      </node>
+      <node id="12">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="27">
+        <label>kinematic_arbiter/core/measurement_model_interface.hpp</label>
+        <link refid="measurement__model__interface_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>kinematic_arbiter/ros2/sensor_handler.hpp</label>
+        <link refid="sensor__handler_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>kinematic_arbiter/sensors/body_velocity_sensor_model.hpp</label>
+        <link refid="body__velocity__sensor__model_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>tuple</label>
+      </node>
+      <node id="18">
+        <label>optional</label>
+      </node>
+      <node id="23">
+        <label>vector</label>
+      </node>
+      <node id="35">
+        <label>kinematic_arbiter/core/sensor_types.hpp</label>
+        <link refid="sensor__types_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>kinematic_arbiter/core/statistical_utils.hpp</label>
+        <link refid="statistical__utils_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>array</label>
+      </node>
+      <node id="5">
+        <label>geometry_msgs/msg/point_stamped.hpp</label>
+      </node>
+      <node id="25">
+        <label>kinematic_arbiter/core/state_model_interface.hpp</label>
+        <link refid="state__model__interface_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>kinematic_arbiter/core/mediated_kalman_filter.hpp</label>
+        <link refid="mediated__kalman__filter_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>iostream</label>
+      </node>
+      <node id="22">
+        <label>cstddef</label>
+      </node>
+      <node id="15">
+        <label>deque</label>
+      </node>
+      <node id="24">
+        <label>unordered_map</label>
+      </node>
+      <node id="19">
+        <label>type_traits</label>
+      </node>
+      <node id="9">
+        <label>tf2_ros/buffer.h</label>
+      </node>
+      <node id="10">
+        <label>memory</label>
+      </node>
+      <node id="8">
+        <label>sensor_msgs/msg/imu.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp</label>
+        <link refid="velocity__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</label>
+        <link refid="filter__wrapper_8cpp"/>
+      </node>
+      <node id="5">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+      <node id="4">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp</label>
+        <link refid="kinematic__arbiter__node_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</label>
+        <link refid="filter__wrapper_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp</label>
+        <link refid="kinematic__arbiter__node_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler" prot="public">kinematic_arbiter::ros2::VelocitySensorHandler</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter">kinematic_arbiter</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1ros2">kinematic_arbiter::ros2</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;geometry_msgs/msg/twist_stamped.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="sensor__handler_8hpp" kindref="compound">kinematic_arbiter/ros2/sensor_handler.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="body__velocity__sensor__model_8hpp" kindref="compound">kinematic_arbiter/sensors/body_velocity_sensor_model.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ros2__utils_8hpp" kindref="compound">kinematic_arbiter/ros2/ros2_utils.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacekinematic__arbiter" kindref="compound">kinematic_arbiter</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ros2<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler" kindref="compound">VelocitySensorHandler</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">SensorHandler</ref>&lt;geometry_msgs::msg::TwistStamped&gt;<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a013a78fbfb70a84f766e4b2f4789b0e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">Base</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">SensorHandler&lt;geometry_msgs::msg::TwistStamped&gt;</ref>;</highlight></codeline>
+<codeline lineno="17" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a3daa67d9a9b70b1b27346272b968412b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" kindref="compound">ModelType</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" kindref="compound">kinematic_arbiter::sensors::BodyVelocitySensorModel</ref>;</highlight></codeline>
+<codeline lineno="18" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a75824013841edc33e9d68432cd18179f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex" kindref="compound">MeasurementIndex</ref><sp/>=<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex" kindref="compound">ModelType::MeasurementIndex</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a7f85016dc682647f197748d8d73948ad" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a7f85016dc682647f197748d8d73948ad" kindref="member">VelocitySensorHandler</ref>(</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rclcpp::Node*<sp/>node,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Filter&gt;<sp/>filter,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;tf2_ros::Buffer&gt;<sp/>tf_buffer,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;utils::TimeManager&gt;<sp/>time_manager,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>sensor_name,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>topic,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>sensor_frame_id,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>reference_frame_id,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>body_frame_id)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">Base</ref>(node,<sp/>filter,<sp/>tf_buffer,<sp/>time_manager,<sp/>sensor_name,<sp/>topic,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sensor_frame_id,<sp/>reference_frame_id,<sp/>body_frame_id,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_shared&lt;<ref refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" kindref="compound">ModelType</ref>&gt;(),</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref>::BodyVelocity)<sp/>{}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" kindref="member">msgToVector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>geometry_msgs::msg::TwistStamped&amp;<sp/>msg,<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref>&amp;<sp/>vector)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>vector.resize(<ref refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a5aaa69eda5c826e92f212472db3b9a6c" kindref="member">ModelType::kMeasurementDimension</ref>);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Linear<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" kindref="member">MeasurementIndex::VX</ref>)<sp/>=<sp/>msg.twist.linear.x;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" kindref="member">MeasurementIndex::VY</ref>)<sp/>=<sp/>msg.twist.linear.y;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" kindref="member">MeasurementIndex::VZ</ref>)<sp/>=<sp/>msg.twist.linear.z;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Angular<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" kindref="member">MeasurementIndex::WX</ref>)<sp/>=<sp/>msg.twist.angular.x;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" kindref="member">MeasurementIndex::WY</ref>)<sp/>=<sp/>msg.twist.angular.y;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" kindref="member">MeasurementIndex::WZ</ref>)<sp/>=<sp/>msg.twist.angular.z;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" refkind="member"><highlight class="normal"><sp/><sp/>geometry_msgs::msg::TwistStamped<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" kindref="member">vectorToMsg</ref>(</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref>&amp;<sp/>vector,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std_msgs::msg::Header&amp;<sp/>header)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>geometry_msgs::msg::TwistStamped<sp/>msg;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.header<sp/>=<sp/>header;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Linear<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.linear.x<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" kindref="member">MeasurementIndex::VX</ref>);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.linear.y<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" kindref="member">MeasurementIndex::VY</ref>);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.linear.z<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" kindref="member">MeasurementIndex::VZ</ref>);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Angular<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.angular.x<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" kindref="member">MeasurementIndex::WX</ref>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.angular.y<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" kindref="member">MeasurementIndex::WY</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>msg.twist.angular.z<sp/>=<sp/>vector(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" kindref="member">MeasurementIndex::WZ</ref>);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" refkind="member"><highlight class="normal"><sp/><sp/>geometry_msgs::msg::TwistStamped<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" kindref="member">applyBound</ref>(</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>geometry_msgs::msg::TwistStamped&amp;<sp/>base_msg,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" kindref="member">DynamicCovariance</ref>&amp;<sp/>covariance,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>positive)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bounded_msg<sp/>=<sp/>base_msg;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sign<sp/>=<sp/>positive<sp/>?<sp/>1.0<sp/>:<sp/>-1.0;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Apply<sp/>bounds<sp/>to<sp/>linear<sp/>velocity<sp/>components<sp/>using<sp/>measurement<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>vx_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" kindref="member">MeasurementIndex::VX</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" kindref="member">MeasurementIndex::VX</ref>));</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>vy_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" kindref="member">MeasurementIndex::VY</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" kindref="member">MeasurementIndex::VY</ref>));</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>vz_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" kindref="member">MeasurementIndex::VZ</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" kindref="member">MeasurementIndex::VZ</ref>));</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.linear.x<sp/>+=<sp/>sign<sp/>*<sp/>vx_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.linear.y<sp/>+=<sp/>sign<sp/>*<sp/>vy_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.linear.z<sp/>+=<sp/>sign<sp/>*<sp/>vz_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Apply<sp/>bounds<sp/>to<sp/>angular<sp/>velocity<sp/>components<sp/>using<sp/>measurement<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>wx_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" kindref="member">MeasurementIndex::WX</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" kindref="member">MeasurementIndex::WX</ref>));</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>wy_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" kindref="member">MeasurementIndex::WY</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" kindref="member">MeasurementIndex::WY</ref>));</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>wz_std_dev<sp/>=<sp/>std::sqrt(covariance(<ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" kindref="member">MeasurementIndex::WZ</ref>,<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" kindref="member">MeasurementIndex::WZ</ref>));</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.angular.x<sp/>+=<sp/>sign<sp/>*<sp/>wx_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.angular.y<sp/>+=<sp/>sign<sp/>*<sp/>wy_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>bounded_msg.twist.angular.z<sp/>+=<sp/>sign<sp/>*<sp/>wz_std_dev<sp/>*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" kindref="member">SIGMA_BOUND_FACTOR</ref>;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bounded_msg;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ros2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>kinematic_arbiter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp"/>
+  </compounddef>
+</doxygen>

@@ -54,9 +54,9 @@ class MediatedKalmanFilter(object):
         self.scale = process_to_measurement_ratio  # ζ in the paper
         self.sample_window = sample_window  # n in the paper
         self.state_estimate = 0.0  # x̂_k in the paper
-        self.state_variance = 100.0  # P̂_k in the paper
-        self.measurement_variance = 100.0  # R_k in the paper
-        self.process_variance = 100.0  # Q_k in the paper
+        self.state_variance = 10.0  # P̂_k in the paper
+        self.measurement_variance = 10.0  # R_k in the paper
+        self.process_variance = 1.0  # Q_k in the paper
         self.previous_t = None
         self.mediation = False
         self.mediation_behavior = mediation

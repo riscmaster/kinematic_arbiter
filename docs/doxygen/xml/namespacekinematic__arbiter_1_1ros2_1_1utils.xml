@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1ros2_1_1utils" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::ros2::utils</compoundname>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" prot="public">kinematic_arbiter::ros2::utils::TimeManager</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="11" column="1"/>
+  </compounddef>
+</doxygen>

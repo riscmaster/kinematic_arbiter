@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1sensors_1_1test" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::sensors::test</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="13" column="1"/>
+  </compounddef>
+</doxygen>

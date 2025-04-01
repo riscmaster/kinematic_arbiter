@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::mediated_kalman_filter::Mediation</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1af54ea6cc5b8261a99c6577b776197407" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int src.single_dof_demo.core.mediated_kalman_filter.Mediation::ADJUST_STATE</definition>
+        <argsstring></argsstring>
+        <name>ADJUST_STATE</name>
+        <initializer>=  0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="26" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1abcdbef20084e90b7306a8a49ecb428ba" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int src.single_dof_demo.core.mediated_kalman_filter.Mediation::ADJUST_MEASUREMENT</definition>
+        <argsstring></argsstring>
+        <name>ADJUST_MEASUREMENT</name>
+        <initializer>=  1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="27" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a4a7a8a79f16d0e5e42ea738bab354a43" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int src.single_dof_demo.core.mediated_kalman_filter.Mediation::REJECT_MEASUREMENT</definition>
+        <argsstring></argsstring>
+        <name>REJECT_MEASUREMENT</name>
+        <initializer>=  2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="28" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a717bbfc78739acfa9af77ec534ab93b5" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int src.single_dof_demo.core.mediated_kalman_filter.Mediation::NO_ACTION</definition>
+        <argsstring></argsstring>
+        <name>NO_ACTION</name>
+        <initializer>=  3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="29" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Enumeration of mediation behaviors for the filter.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>src.single_dof_demo.core.mediated_kalman_filter.Mediation</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>object</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>src.single_dof_demo.core.mediated_kalman_filter.Mediation</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>object</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="23" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="23" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1abcdbef20084e90b7306a8a49ecb428ba" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::Mediation</scope><name>ADJUST_MEASUREMENT</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1af54ea6cc5b8261a99c6577b776197407" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::Mediation</scope><name>ADJUST_STATE</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a717bbfc78739acfa9af77ec534ab93b5" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::Mediation</scope><name>NO_ACTION</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a4a7a8a79f16d0e5e42ea738bab354a43" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::Mediation</scope><name>REJECT_MEASUREMENT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,589 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af8ff28cc662a9e2b7278e1b6bd02163e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::chi_squared_value</definition>
+        <argsstring></argsstring>
+        <name>chi_squared_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="53" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af0eeeaa40b74a9b92d346b125933fceb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::scale</definition>
+        <argsstring></argsstring>
+        <name>scale</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="54" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" compoundref="mediated__kalman__filter_8py" startline="69" endline="83">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_process_measurement_ratio</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a014458b9fab2bfddad96859a750e0e6a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::sample_window</definition>
+        <argsstring></argsstring>
+        <name>sample_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="55" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ab0662cb0b16e3bbef80f9c99b721a7e8" compoundref="mediated__kalman__filter_8py" startline="84" endline="91">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_sample_window</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae38b4af068aee63f31507cefcce55ab0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::state_estimate</definition>
+        <argsstring></argsstring>
+        <name>state_estimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="56" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="56" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a24147a964eaf701b87e0023e15d7e816" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::state_variance</definition>
+        <argsstring></argsstring>
+        <name>state_variance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="57" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::measurement_variance</definition>
+        <argsstring></argsstring>
+        <name>measurement_variance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="58" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="58" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a325ae1bc7f8f86aa4974e0dd4ee302ab" compoundref="kalman__filter_8py" startline="57" endline="65">src.single_dof_demo.core.kalman_filter.KalmanFilter.set_measurement_noise</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" compoundref="mediated__kalman__filter_8py" startline="69" endline="83">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_process_measurement_ratio</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::process_variance</definition>
+        <argsstring></argsstring>
+        <name>process_variance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="59" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" compoundref="mediated__kalman__filter_8py" startline="69" endline="83">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_process_measurement_ratio</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ae81a3fefc1e4d4fde23bd96cd60603ef" compoundref="kalman__filter_8py" startline="48" endline="56">src.single_dof_demo.core.kalman_filter.KalmanFilter.set_process_noise</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aa6402530041dbd7f807f19885019caec" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::previous_t</definition>
+        <argsstring></argsstring>
+        <name>previous_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="60" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="60" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::mediation</definition>
+        <argsstring></argsstring>
+        <name>mediation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="61" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="61" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a955c0dc7346219de8cf6b2dc194e61c1" compoundref="display__gui_8py" startline="228" endline="257">src.single_dof_demo.display_gui.DisplayGui.update_data</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a55d86d0ae70e8d48d824489d5c8be5ad" compoundref="display__gui_8py" startline="270" endline="317">src.single_dof_demo.display_gui.DisplayGui.update_mkf_plot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1acf14f3784e8d4001ec97274ce496ec4c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::mediation_behavior</definition>
+        <argsstring></argsstring>
+        <name>mediation_behavior</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="62" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac21b211b6194d6b37c9378835e8623e2" compoundref="mediated__kalman__filter_8py" startline="92" endline="99">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_mediation_behavior</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a792be0488c8120cf8b7e30e55ff68ee7" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::frequency</definition>
+        <argsstring></argsstring>
+        <name>frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="63" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a1ff214637870cd370850cf1c41910fed" compoundref="kalman__filter_8py" startline="66" endline="74">src.single_dof_demo.core.kalman_filter.KalmanFilter.set_frequency</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a99a4346ae1b7f8459d7d35d28541a5da" compoundref="mediated__kalman__filter_8py" startline="100" endline="107">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_frequency</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a814936f8b26abe9094d096c6343c81fd" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::amplitude</definition>
+        <argsstring></argsstring>
+        <name>amplitude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="64" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a56507180f334c095d58f9eaf2b5f24d0" compoundref="kalman__filter_8py" startline="75" endline="83">src.single_dof_demo.core.kalman_filter.KalmanFilter.set_amplitude</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a35e0cae628c2eb934cf01725abbbc006" compoundref="mediated__kalman__filter_8py" startline="108" endline="115">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_amplitude</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a2b89fe6aa7bd493587d9aac4de38aa56" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::last_time</definition>
+        <argsstring></argsstring>
+        <name>last_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="65" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="65" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aacda5a5b48d3500d20e8a27583f8bf5d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::is_initialized</definition>
+        <argsstring></argsstring>
+        <name>is_initialized</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="66" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="66" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a23b2fedd565c914a022131b5bfdb0e85" compoundref="kalman__filter_8py" startline="86" endline="152">src.single_dof_demo.core.kalman_filter.KalmanFilter.update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ad05f6219842a361b9c58b260a46bf530" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter::previous_state_estimate</definition>
+        <argsstring></argsstring>
+        <name>previous_state_estimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="67" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="67" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" compoundref="mediated__kalman__filter_8py" startline="116" endline="127">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" compoundref="mediated__kalman__filter_8py" startline="130" endline="274">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1abd345b29691f1f9de008924cc7fb2b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.__init__</definition>
+        <argsstring>(self, float process_to_measurement_ratio, int sample_window, mediation=Mediation.NO_ACTION, float frequency=0.0, float amplitude=0.0)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>process_to_measurement_ratio</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sample_window</declname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" kindref="member">mediation</ref></type>
+          <defname>mediation</defname>
+          <defval><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation_1a717bbfc78739acfa9af77ec534ab93b5" kindref="member">Mediation.NO_ACTION</ref></defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>amplitude</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the filter with configuration parameters.
+
+Args:
+    process_to_measurement_ratio: Ratio between process and measurement
+    noise (ζ in the paper)
+    sample_window: Number of samples for noise estimation (n in the paper)
+    mediation: Mediation behavior to use when measurement is rejected
+    frequency: Frequency of the model in Hz (default: 0.0)
+    amplitude: Amplitude of the model (default: 0.0)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="35" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="42" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_process_measurement_ratio</definition>
+        <argsstring>(self, float ratio)</argsstring>
+        <name>set_process_measurement_ratio</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the process to measurement ratio parameter.
+
+Args:
+    ratio: The new process to measurement ratio (ζ).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="69" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="69" bodyend="83"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a730106c75801fb54f981c37023b343a9" compoundref="kalman__filter_8py" startline="41">src.single_dof_demo.core.kalman_filter.KalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" compoundref="mediated__kalman__filter_8py" startline="58">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ab1e4534db580c14ff6f2e36b5ca8f0f3" compoundref="kalman__filter_8py" startline="42">src.single_dof_demo.core.kalman_filter.KalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" compoundref="mediated__kalman__filter_8py" startline="59">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af0eeeaa40b74a9b92d346b125933fceb" compoundref="mediated__kalman__filter_8py" startline="54">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.scale</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ab0662cb0b16e3bbef80f9c99b721a7e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_sample_window</definition>
+        <argsstring>(self, int window)</argsstring>
+        <name>set_sample_window</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>window</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the sample window parameter.
+
+Args:
+    window: The new sample window size (n).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="84" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="84" bodyend="91"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a014458b9fab2bfddad96859a750e0e6a" compoundref="mediated__kalman__filter_8py" startline="55">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.sample_window</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac21b211b6194d6b37c9378835e8623e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_mediation_behavior</definition>
+        <argsstring>(self, int behavior)</argsstring>
+        <name>set_mediation_behavior</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>behavior</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the mediation behavior.
+
+Args:
+    behavior: The new mediation behavior (from Mediation enum).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="92" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="92" bodyend="99"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1acf14f3784e8d4001ec97274ce496ec4c" compoundref="mediated__kalman__filter_8py" startline="62">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation_behavior</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a99a4346ae1b7f8459d7d35d28541a5da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_frequency</definition>
+        <argsstring>(self, float frequency)</argsstring>
+        <name>set_frequency</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the frequency model parameter.
+
+Args:
+    frequency: The new frequency in Hz.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="100" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="100" bodyend="107"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a7c9fab97a61a520e4ea8239f99d41b19" compoundref="kalman__filter_8py" startline="43">src.single_dof_demo.core.kalman_filter.KalmanFilter.frequency</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a792be0488c8120cf8b7e30e55ff68ee7" compoundref="mediated__kalman__filter_8py" startline="63">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.frequency</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a35e0cae628c2eb934cf01725abbbc006" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.set_amplitude</definition>
+        <argsstring>(self, float amplitude)</argsstring>
+        <name>set_amplitude</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>amplitude</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update the amplitude model parameter.
+
+Args:
+    amplitude: The new amplitude.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="108" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="108" bodyend="115"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1aeb2bf661dfd591b27e614843bdc30a75" compoundref="kalman__filter_8py" startline="44">src.single_dof_demo.core.kalman_filter.KalmanFilter.amplitude</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a814936f8b26abe9094d096c6343c81fd" compoundref="mediated__kalman__filter_8py" startline="64">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.amplitude</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.reset</definition>
+        <argsstring>(self)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Reset the filter state.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="116" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="116" bodyend="127"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a635d5cb1458539defec75c4808bb6003" compoundref="kalman__filter_8py" startline="46">src.single_dof_demo.core.kalman_filter.KalmanFilter.is_initialized</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aacda5a5b48d3500d20e8a27583f8bf5d" compoundref="mediated__kalman__filter_8py" startline="66">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.is_initialized</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1af6b448824b370a34e5d71fabd4430a4b" compoundref="kalman__filter_8py" startline="45">src.single_dof_demo.core.kalman_filter.KalmanFilter.last_time</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a2b89fe6aa7bd493587d9aac4de38aa56" compoundref="mediated__kalman__filter_8py" startline="65">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.last_time</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a730106c75801fb54f981c37023b343a9" compoundref="kalman__filter_8py" startline="41">src.single_dof_demo.core.kalman_filter.KalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" compoundref="mediated__kalman__filter_8py" startline="58">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" compoundref="mediated__kalman__filter_8py" startline="61">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" compoundref="display__gui_8py" startline="60">src.single_dof_demo.display_gui.DisplayGui.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ad05f6219842a361b9c58b260a46bf530" compoundref="mediated__kalman__filter_8py" startline="67">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.previous_state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aa6402530041dbd7f807f19885019caec" compoundref="mediated__kalman__filter_8py" startline="60">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.previous_t</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ab1e4534db580c14ff6f2e36b5ca8f0f3" compoundref="kalman__filter_8py" startline="42">src.single_dof_demo.core.kalman_filter.KalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" compoundref="mediated__kalman__filter_8py" startline="59">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0411e51cc021cd0393c6828c12e17e7a" compoundref="kalman__filter_8py" startline="39">src.single_dof_demo.core.kalman_filter.KalmanFilter.state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae38b4af068aee63f31507cefcce55ab0" compoundref="mediated__kalman__filter_8py" startline="56">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0407e0dead9c2aa8dfdab0a62341bedb" compoundref="kalman__filter_8py" startline="40">src.single_dof_demo.core.kalman_filter.KalmanFilter.state_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a24147a964eaf701b87e0023e15d7e816" compoundref="mediated__kalman__filter_8py" startline="57">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.state_variance</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput" kindref="compound">filter_output.FilterOutput</ref></type>
+        <definition> filter_output.FilterOutput src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.update</definition>
+        <argsstring>(self, float measurement, float t=None)</argsstring>
+        <name>update</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>t</declname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Update filter state with new measurement.
+
+Args:
+    measurement: New measurement value (y_k in the paper)
+    t: Timestamp of measurement (optional)
+
+Returns:
+    FilterOutput containing predicted, mediated and final states
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="128" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="130" bodyend="274"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1aeb2bf661dfd591b27e614843bdc30a75" compoundref="kalman__filter_8py" startline="44">src.single_dof_demo.core.kalman_filter.KalmanFilter.amplitude</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a814936f8b26abe9094d096c6343c81fd" compoundref="mediated__kalman__filter_8py" startline="64">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.amplitude</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af8ff28cc662a9e2b7278e1b6bd02163e" compoundref="mediated__kalman__filter_8py" startline="53">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.chi_squared_value</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a7c9fab97a61a520e4ea8239f99d41b19" compoundref="kalman__filter_8py" startline="43">src.single_dof_demo.core.kalman_filter.KalmanFilter.frequency</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a792be0488c8120cf8b7e30e55ff68ee7" compoundref="mediated__kalman__filter_8py" startline="63">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.frequency</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a635d5cb1458539defec75c4808bb6003" compoundref="kalman__filter_8py" startline="46">src.single_dof_demo.core.kalman_filter.KalmanFilter.is_initialized</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aacda5a5b48d3500d20e8a27583f8bf5d" compoundref="mediated__kalman__filter_8py" startline="66">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.is_initialized</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1af6b448824b370a34e5d71fabd4430a4b" compoundref="kalman__filter_8py" startline="45">src.single_dof_demo.core.kalman_filter.KalmanFilter.last_time</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a2b89fe6aa7bd493587d9aac4de38aa56" compoundref="mediated__kalman__filter_8py" startline="65">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.last_time</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a730106c75801fb54f981c37023b343a9" compoundref="kalman__filter_8py" startline="41">src.single_dof_demo.core.kalman_filter.KalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" compoundref="mediated__kalman__filter_8py" startline="58">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.measurement_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" compoundref="mediated__kalman__filter_8py" startline="61">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui_1a8a2f1323d759553c9fbc2d94518d33fe" compoundref="display__gui_8py" startline="60">src.single_dof_demo.display_gui.DisplayGui.mediation</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1acf14f3784e8d4001ec97274ce496ec4c" compoundref="mediated__kalman__filter_8py" startline="62">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.mediation_behavior</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ad05f6219842a361b9c58b260a46bf530" compoundref="mediated__kalman__filter_8py" startline="67">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.previous_state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aa6402530041dbd7f807f19885019caec" compoundref="mediated__kalman__filter_8py" startline="60">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.previous_t</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1ab1e4534db580c14ff6f2e36b5ca8f0f3" compoundref="kalman__filter_8py" startline="42">src.single_dof_demo.core.kalman_filter.KalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" compoundref="mediated__kalman__filter_8py" startline="59">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.process_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a014458b9fab2bfddad96859a750e0e6a" compoundref="mediated__kalman__filter_8py" startline="55">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.sample_window</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af0eeeaa40b74a9b92d346b125933fceb" compoundref="mediated__kalman__filter_8py" startline="54">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.scale</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0411e51cc021cd0393c6828c12e17e7a" compoundref="kalman__filter_8py" startline="39">src.single_dof_demo.core.kalman_filter.KalmanFilter.state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae38b4af068aee63f31507cefcce55ab0" compoundref="mediated__kalman__filter_8py" startline="56">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.state_estimate</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter_1a0407e0dead9c2aa8dfdab0a62341bedb" compoundref="kalman__filter_8py" startline="40">src.single_dof_demo.core.kalman_filter.KalmanFilter.state_variance</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a24147a964eaf701b87e0023e15d7e816" compoundref="mediated__kalman__filter_8py" startline="57">src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter.state_variance</references>
+        <references refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities_1ae5d3a21c9db683b311ceb4431a12963a" compoundref="filter__utilities_8py" startline="20" endline="24">src.single_dof_demo.core.filter_utilities.variance_to_bound</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Implementation of a Kalman filter with measurement mediation.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>object</label>
+      </node>
+      <node id="1">
+        <label>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>object</label>
+      </node>
+      <node id="1">
+        <label>src.single_dof_demo.core.mediated_kalman_filter.MediatedKalmanFilter</label>
+        <link refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="32" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" bodystart="32" bodyend="274"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1abd345b29691f1f9de008924cc7fb2b9d" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a814936f8b26abe9094d096c6343c81fd" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>amplitude</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af8ff28cc662a9e2b7278e1b6bd02163e" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>chi_squared_value</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a792be0488c8120cf8b7e30e55ff68ee7" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>frequency</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aacda5a5b48d3500d20e8a27583f8bf5d" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>is_initialized</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a2b89fe6aa7bd493587d9aac4de38aa56" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>last_time</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac14bc8d95265adf7dace0f7ee2b96185" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>measurement_variance</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a69788bf4d1479a08f042955bb3d8f07e" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>mediation</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1acf14f3784e8d4001ec97274ce496ec4c" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>mediation_behavior</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ad05f6219842a361b9c58b260a46bf530" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>previous_state_estimate</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1aa6402530041dbd7f807f19885019caec" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>previous_t</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a648be182533625d06920800c10661c7e" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>process_variance</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a4ef81b926e74623fcde689ac1d6bb5d2" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>reset</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a014458b9fab2bfddad96859a750e0e6a" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>sample_window</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1af0eeeaa40b74a9b92d346b125933fceb" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>scale</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a35e0cae628c2eb934cf01725abbbc006" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>set_amplitude</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a99a4346ae1b7f8459d7d35d28541a5da" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>set_frequency</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ac21b211b6194d6b37c9378835e8623e2" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>set_mediation_behavior</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae90bdedf1c9712e1a6a60194d7579a99" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>set_process_measurement_ratio</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ab0662cb0b16e3bbef80f9c99b721a7e8" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>set_sample_window</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1ae38b4af068aee63f31507cefcce55ab0" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>state_estimate</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a24147a964eaf701b87e0023e15d7e816" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>state_variance</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter_1a914f73e04573c21837a24a436726549a" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

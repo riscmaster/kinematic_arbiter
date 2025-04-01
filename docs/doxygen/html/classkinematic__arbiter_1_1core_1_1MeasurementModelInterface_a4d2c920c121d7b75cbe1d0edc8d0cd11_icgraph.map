@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData" name="kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData">
+<area shape="rect" id="node1" title="Validate auxiliary measurement data (innovation, jacobian, covariance)" alt="" coords="300,5,547,61"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#aa99e79b94b0117dc35ebe529a63d8e3d" title="Perform the validation and mediation process." alt="" coords="5,5,252,61"/>
+</map>

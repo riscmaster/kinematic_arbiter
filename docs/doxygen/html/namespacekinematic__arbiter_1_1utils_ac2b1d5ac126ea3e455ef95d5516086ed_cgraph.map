@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::utils::CalculateChiSquareCriticalValue1Dof" name="kinematic_arbiter::utils::CalculateChiSquareCriticalValue1Dof">
+<area shape="rect" id="node1" title="Calculate chi&#45;square critical value for 1 degree of freedom." alt="" coords="5,5,236,61"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1utils.html#af02a244e2c612066ac33228be4627067" title="Calculate chi&#45;square critical value for N degrees of freedom." alt="" coords="284,5,515,61"/>
+<area shape="rect" id="node3" href="$namespacekinematic__arbiter_1_1utils.html#a2115227fc0edd0bf7327ef2cd40c32c4" title="Interpolate between two critical values." alt="" coords="563,5,745,61"/>
+</map>

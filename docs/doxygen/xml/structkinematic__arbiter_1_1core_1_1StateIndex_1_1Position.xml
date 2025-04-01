@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::StateIndex::Position</compoundname>
+    <includes refid="state__index_8hpp" local="no">state_index.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Position::X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="21" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" compoundref="state__index_8hpp" startline="25" endline="25">Begin</referencedby>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" compoundref="position__sensor__model_8hpp" startline="139" endline="148">kinematic_arbiter::sensors::PositionSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1ad2067f9a7583a777b16cbafb51c90d82" compoundref="pose__sensor__model_8hpp" startline="110" endline="143">kinematic_arbiter::sensors::PoseSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" compoundref="position__sensor__model_8hpp" startline="84" endline="129">kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" compoundref="pose__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::PoseSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" compoundref="position__sensor__model_8hpp" startline="57" endline="76">kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Position::Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="22" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" compoundref="position__sensor__model_8hpp" startline="139" endline="148">kinematic_arbiter::sensors::PositionSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Position::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="23" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" compoundref="position__sensor__model_8hpp" startline="139" endline="148">kinematic_arbiter::sensors::PositionSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::Position::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="25" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="25" bodyend="25"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">X</references>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1ab6d4a1b99556dd9d584ef7ca889d9a8b" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::Position::Size</definition>
+        <argsstring>()</argsstring>
+        <name>Size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="26" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="20" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="20" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Position</scope><name>Begin</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1ab6d4a1b99556dd9d584ef7ca889d9a8b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Position</scope><name>Size</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Position</scope><name>X</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Position</scope><name>Y</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Position</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

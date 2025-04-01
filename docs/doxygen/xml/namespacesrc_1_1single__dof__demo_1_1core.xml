@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1core" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::core</compoundname>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__output">src::single_dof_demo::core::filter_output</innernamespace>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__utilities">src::single_dof_demo::core::filter_utilities</innernamespace>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1core_1_1kalman__filter">src::single_dof_demo::core::kalman_filter</innernamespace>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter">src::single_dof_demo::core::mediated_kalman_filter</innernamespace>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1core_1_1signal__generator">src::single_dof_demo::core::signal_generator</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::sensors::BodyVelocitySensorModel" name="kinematic_arbiter::sensors::BodyVelocitySensorModel">
+<area shape="rect" id="node1" title="Body velocity measurement model (linear + angular velocity)" alt="" coords="24,95,233,151"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html" title="Interface for measurement models with assumption validation." alt="" coords="5,5,252,47"/>
+</map>

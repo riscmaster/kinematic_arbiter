@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator::params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="60" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="60" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a77b82d0d4ce9ce34bdad6f7d0bab1526" compoundref="signal__generator_8py" startline="125" endline="155">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.generate_complete_signal</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae728dd5eba3b193abdc2fd9c7d8445a8" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator::frequencies</definition>
+        <argsstring></argsstring>
+        <name>frequencies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="61" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="61" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" compoundref="signal__generator_8py" startline="94" endline="109">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.get_value</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a2208d07582aeaeb4cf55b4c213d03b70" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator::amplitudes</definition>
+        <argsstring></argsstring>
+        <name>amplitudes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="62" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" compoundref="signal__generator_8py" startline="94" endline="109">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.get_value</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a4368dc2e2fb6c807b393dfcf79d3c2bd" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator::phases</definition>
+        <argsstring></argsstring>
+        <name>phases</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="63" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" compoundref="signal__generator_8py" startline="94" endline="109">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.get_value</referencedby>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae9af5145ff9cc833e299170b3b21dc72" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator::seed</definition>
+        <argsstring></argsstring>
+        <name>seed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="64" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a622fe466e78acd56393d9e3093371cf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.__init__</definition>
+        <argsstring>(self, params=SignalParams())</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" kindref="member">params</ref></type>
+          <defname>params</defname>
+          <defval><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams" kindref="compound">SignalParams</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the signal generator.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="58" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="58" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</definition>
+        <argsstring>(self)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Reset the signal components with a new random seed.
+
+Returns:
+    int: The new random seed used
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="67" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="67" bodyend="93"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a2208d07582aeaeb4cf55b4c213d03b70" compoundref="signal__generator_8py" startline="62">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.amplitudes</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae728dd5eba3b193abdc2fd9c7d8445a8" compoundref="signal__generator_8py" startline="61">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.frequencies</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" compoundref="signal__generator_8py" startline="60">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.params</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a4368dc2e2fb6c807b393dfcf79d3c2bd" compoundref="signal__generator_8py" startline="63">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.phases</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a9fe368fe3c323e040357be756e16ac87" compoundref="signal__generator_8py" startline="49">src.single_dof_demo.core.signal_generator.SignalParams.seed</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae9af5145ff9cc833e299170b3b21dc72" compoundref="signal__generator_8py" startline="64">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.seed</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.get_value</definition>
+        <argsstring>(self, t)</argsstring>
+        <name>get_value</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>t</type>
+          <defname>t</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Get the clean signal value at time t.
+
+Args:
+    t: Time in seconds
+
+Returns:
+    float: Signal value
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="94" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="94" bodyend="109"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a2208d07582aeaeb4cf55b4c213d03b70" compoundref="signal__generator_8py" startline="62">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.amplitudes</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae728dd5eba3b193abdc2fd9c7d8445a8" compoundref="signal__generator_8py" startline="61">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.frequencies</references>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a4368dc2e2fb6c807b393dfcf79d3c2bd" compoundref="signal__generator_8py" startline="63">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.phases</references>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a02ac7453862af27ec97eca832eb6793f" compoundref="signal__generator_8py" startline="110" endline="124">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.generate_signal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a02ac7453862af27ec97eca832eb6793f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.generate_signal</definition>
+        <argsstring>(self, t, noise_level=0.2)</argsstring>
+        <name>generate_signal</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>t</type>
+          <defname>t</defname>
+        </param>
+        <param>
+          <type>noise_level</type>
+          <defname>noise_level</defname>
+          <defval>0.2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generate both clean and noisy signals at time t.
+
+Args:
+    t: Time in seconds
+    noise_level: Standard deviation of Gaussian noise
+
+Returns:
+    tuple: (clean_signal, noisy_signal)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="110" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="110" bodyend="124"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" compoundref="signal__generator_8py" startline="94" endline="109">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.get_value</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a77b82d0d4ce9ce34bdad6f7d0bab1526" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.generate_complete_signal</definition>
+        <argsstring>(self, duration=1.0, sample_frequency=2000)</argsstring>
+        <name>generate_complete_signal</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>duration</type>
+          <defname>duration</defname>
+          <defval>1.0</defval>
+        </param>
+        <param>
+          <type>sample_frequency</type>
+          <defname>sample_frequency</defname>
+          <defval>2000</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generate both clean and noisy signals over a specified duration.
+
+Args:
+    duration: Total duration of the signal (seconds)
+    sample_frequency: Number of samples per second
+
+Returns:
+    tuple: (clean_signal, noisy_signal, signal_time)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="125" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="125" bodyend="155"/>
+        <references refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" compoundref="signal__generator_8py" startline="60">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.params</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Signal generator for single degree of freedom systems.</verbatim> </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="55" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="55" bodyend="155"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a622fe466e78acd56393d9e3093371cf4" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a2208d07582aeaeb4cf55b4c213d03b70" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>amplitudes</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae728dd5eba3b193abdc2fd9c7d8445a8" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>frequencies</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a77b82d0d4ce9ce34bdad6f7d0bab1526" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>generate_complete_signal</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a02ac7453862af27ec97eca832eb6793f" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>generate_signal</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aefb664672aabe4fc3c560c31e2911c03" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>get_value</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1aed02af7373219d0945dcf022966c9ba7" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>params</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a4368dc2e2fb6c807b393dfcf79d3c2bd" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>phases</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>reset</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1ae9af5145ff9cc833e299170b3b21dc72" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</scope><name>seed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

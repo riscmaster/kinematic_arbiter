@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::utils::TimeManager</compoundname>
+    <includes refid="ros2__utils_8hpp" local="no">ros2_utils.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::utils::TimeManager::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="93" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="93" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" compoundref="ros2__utils_8hpp" startline="64" endline="72">filterTimeToRosTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" compoundref="ros2__utils_8hpp" startline="79" endline="81">isInitialized</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" compoundref="ros2__utils_8hpp" startline="48" endline="56">rosTimeToFilterTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" compoundref="ros2__utils_8hpp" startline="35" endline="40">setReferenceTime</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" prot="private" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t kinematic_arbiter::ros2::utils::TimeManager::reference_time_</definition>
+        <argsstring></argsstring>
+        <name>reference_time_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="94" column="11" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="94" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" compoundref="ros2__utils_8hpp" startline="64" endline="72">filterTimeToRosTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" compoundref="ros2__utils_8hpp" startline="88" endline="90">getReferenceTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" compoundref="ros2__utils_8hpp" startline="48" endline="56">rosTimeToFilterTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" compoundref="ros2__utils_8hpp" startline="35" endline="40">setReferenceTime</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1adf21efc1aa32aa4486dc12430d367d88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::utils::TimeManager::TimeManager</definition>
+        <argsstring>()</argsstring>
+        <name>TimeManager</name>
+        <briefdescription>
+<para>Initialize with the current time as reference. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="28" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::utils::TimeManager::setReferenceTime</definition>
+        <argsstring>(const rclcpp::Time &amp;reference_time)</argsstring>
+        <name>setReferenceTime</name>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>reference_time</declname>
+        </param>
+        <briefdescription>
+<para>Initialize with a specific reference time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>reference_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ROS time to use as reference (t=0 for filter) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="35" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="35" bodyend="40"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" compoundref="ros2__utils_8hpp" startline="93">initialized_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" compoundref="ros2__utils_8hpp" startline="94">reference_time_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::utils::TimeManager::rosTimeToFilterTime</definition>
+        <argsstring>(const rclcpp::Time &amp;ros_time)</argsstring>
+        <name>rosTimeToFilterTime</name>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>ros_time</declname>
+        </param>
+        <briefdescription>
+<para>Convert ROS Time to filter internal time (seconds relative to reference) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ros_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS time </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Time in seconds relative to reference </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="48" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="48" bodyend="56"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" compoundref="ros2__utils_8hpp" startline="93">initialized_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" compoundref="ros2__utils_8hpp" startline="94">reference_time_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>rclcpp::Time</type>
+        <definition>rclcpp::Time kinematic_arbiter::ros2::utils::TimeManager::filterTimeToRosTime</definition>
+        <argsstring>(double filter_time)</argsstring>
+        <name>filterTimeToRosTime</name>
+        <param>
+          <type>double</type>
+          <declname>filter_time</declname>
+        </param>
+        <briefdescription>
+<para>Convert filter time to ROS time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filter_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time in seconds relative to reference </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ROS time </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="64" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="64" bodyend="72"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" compoundref="ros2__utils_8hpp" startline="93">initialized_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" compoundref="ros2__utils_8hpp" startline="94">reference_time_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::utils::TimeManager::isInitialized</definition>
+        <argsstring>() const</argsstring>
+        <name>isInitialized</name>
+        <briefdescription>
+<para>Check if the time manager has been initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if initialized </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="79" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="79" bodyend="81"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" compoundref="ros2__utils_8hpp" startline="93">initialized_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>rclcpp::Time</type>
+        <definition>rclcpp::Time kinematic_arbiter::ros2::utils::TimeManager::getReferenceTime</definition>
+        <argsstring>() const</argsstring>
+        <name>getReferenceTime</name>
+        <briefdescription>
+<para>Get the reference time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The reference time as a ROS time </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="88" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="88" bodyend="90"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" compoundref="ros2__utils_8hpp" startline="94">reference_time_</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class to handle time conversions between ROS and filter. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Uses the initialization time as the offset, so filter times are relative to when the filter was started, improving numerical stability </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" line="23" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp" bodystart="23" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>filterTimeToRosTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>getReferenceTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>initialized_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>isInitialized</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>reference_time_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>rosTimeToFilterTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>setReferenceTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1adf21efc1aa32aa4486dc12430d367d88" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::utils::TimeManager</scope><name>TimeManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

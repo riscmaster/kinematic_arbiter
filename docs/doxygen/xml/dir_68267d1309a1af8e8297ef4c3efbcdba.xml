@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/src</compoundname>
+    <innerdir refid="dir_aebb8dcc11953d78e620bbef0b9e2183">/home/spencer/ros2workspace/src/kinematic_arbiter/src/core</innerdir>
+    <innerdir refid="dir_1460f56192f63bd86ad91bf881920fa2">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2</innerdir>
+    <innerdir refid="dir_7349e89ef19c117195f8e371603e1b1f">/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors</innerdir>
+    <innerdir refid="dir_db404cdce9f4e5b993dd5c1cf12beb58">/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo</innerdir>
+    <innerfile refid="____init_____8py">__init__.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_a5cc1b63589a64b9071907131fed0687" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2</compoundname>
+    <innerdir refid="dir_4ef48471906caefe626de80dc13d11b3">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation</innerdir>
+    <innerfile refid="expected__sensor__publisher_8hpp">expected_sensor_publisher.hpp</innerfile>
+    <innerfile refid="filter__wrapper_8hpp">filter_wrapper.hpp</innerfile>
+    <innerfile refid="imu__sensor__handler_8hpp">imu_sensor_handler.hpp</innerfile>
+    <innerfile refid="kinematic__arbiter__node_8hpp">kinematic_arbiter_node.hpp</innerfile>
+    <innerfile refid="pose__sensor__handler_8hpp">pose_sensor_handler.hpp</innerfile>
+    <innerfile refid="position__sensor__handler_8hpp">position_sensor_handler.hpp</innerfile>
+    <innerfile refid="ros2__utils_8hpp">ros2_utils.hpp</innerfile>
+    <innerfile refid="sensor__handler_8hpp">sensor_handler.hpp</innerfile>
+    <innerfile refid="velocity__sensor__handler_8hpp">velocity_sensor_handler.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/"/>
+  </compounddef>
+</doxygen>

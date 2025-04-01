@@ -1,0 +1,410 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="state__index_8hpp" kind="file" language="C++">
+    <compoundname>state_index.hpp</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">Eigen/Dense</includes>
+    <includedby refid="measurement__model__interface_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp</includedby>
+    <includedby refid="mediated__kalman__filter_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/mediated_kalman_filter.hpp</includedby>
+    <includedby refid="state__model__interface_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp</includedby>
+    <includedby refid="trajectory__utils_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp</includedby>
+    <includedby refid="rigid__body__state__model_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp</includedby>
+    <includedby refid="filter__wrapper_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</includedby>
+    <includedby refid="figure8__simulator__node_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp</includedby>
+    <includedby refid="body__velocity__sensor__model_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp</includedby>
+    <includedby refid="imu__sensor__model_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp</includedby>
+    <includedby refid="pose__sensor__model_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/pose_sensor_model.hpp</includedby>
+    <includedby refid="position__sensor__model_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp</includedby>
+    <includedby refid="filter__wrapper_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</includedby>
+    <includedby refid="figure8__simulator__node_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp</includedby>
+    <includedby refid="imu__sensor__model_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp</label>
+        <link refid="state__index_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>cstddef</label>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp</label>
+        <link refid="state__index_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/position_sensor_handler.hpp</label>
+        <link refid="position__sensor__handler_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp</label>
+        <link refid="trajectory__utils_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp</label>
+        <link refid="sensor__publisher_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp</label>
+        <link refid="figure8__simulator__node_8cpp"/>
+      </node>
+      <node id="18">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp</label>
+        <link refid="imu__sensor__model_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp</label>
+        <link refid="velocity__sensor__handler_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</label>
+        <link refid="filter__wrapper_8cpp"/>
+      </node>
+      <node id="11">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/pose_sensor_handler.hpp</label>
+        <link refid="pose__sensor__handler_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp</label>
+        <link refid="imu__sensor__handler_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp</label>
+        <link refid="measurement__model__interface_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp</label>
+        <link refid="figure8__simulator__node_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp</label>
+        <link refid="sensor__handler_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp</label>
+        <link refid="body__velocity__sensor__model_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp</label>
+        <link refid="position__sensor__model_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp</label>
+        <link refid="imu__sensor__model_8cpp"/>
+      </node>
+      <node id="6">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp</label>
+        <link refid="kinematic__arbiter__node_8cpp"/>
+      </node>
+      <node id="22">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_model_interface.hpp</label>
+        <link refid="state__model__interface_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/mediated_kalman_filter.hpp</label>
+        <link refid="mediated__kalman__filter_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/pose_sensor_model.hpp</label>
+        <link refid="pose__sensor__model_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp</label>
+        <link refid="rigid__body__state__model_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</label>
+        <link refid="filter__wrapper_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp</label>
+        <link refid="kinematic__arbiter__node_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex" prot="public">kinematic_arbiter::core::StateIndex</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" prot="public">kinematic_arbiter::core::StateIndex::Position</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" prot="public">kinematic_arbiter::core::StateIndex::Quaternion</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity" prot="public">kinematic_arbiter::core::StateIndex::LinearVelocity</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity" prot="public">kinematic_arbiter::core::StateIndex::AngularVelocity</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" prot="public">kinematic_arbiter::core::StateIndex::LinearAcceleration</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration" prot="public">kinematic_arbiter::core::StateIndex::AngularAcceleration</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter">kinematic_arbiter</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1core">kinematic_arbiter::core</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstddef&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Dense&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacekinematic__arbiter" kindref="compound">kinematic_arbiter</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">core<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="structkinematic__arbiter_1_1core_1_1StateIndex" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex" kindref="compound">StateIndex</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Position<sp/>indices<sp/>(3D)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" kindref="compound">Position</ref><sp/>{</highlight></codeline>
+<codeline lineno="21" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" kindref="member">X</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="22" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" kindref="member">Y</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="23" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" kindref="member">Z</ref><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" kindref="member">X</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="26" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1ab6d4a1b99556dd9d584ef7ca889d9a8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1ab6d4a1b99556dd9d584ef7ca889d9a8b" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Orientation<sp/>indices<sp/>(quaternion)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" kindref="compound">Quaternion</ref><sp/>{</highlight></codeline>
+<codeline lineno="31" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" kindref="member">W</ref><sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="32" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" kindref="member">X</ref><sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="33" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" kindref="member">Y</ref><sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="34" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" kindref="member">Z</ref><sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" kindref="member">W</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="37" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a670ba34adad41f7997719cf372fa4b1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a670ba34adad41f7997719cf372fa4b1e" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4;<sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Linear<sp/>velocity<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity" kindref="compound">LinearVelocity</ref><sp/>{</highlight></codeline>
+<codeline lineno="42" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" kindref="member">X</ref><sp/>=<sp/>7;</highlight></codeline>
+<codeline lineno="43" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" kindref="member">Y</ref><sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="44" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" kindref="member">Z</ref><sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" kindref="member">X</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="47" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a131c982ef240ef0c00e6239420ca8d79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a131c982ef240ef0c00e6239420ca8d79" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Angular<sp/>velocity<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity" kindref="compound">AngularVelocity</ref><sp/>{</highlight></codeline>
+<codeline lineno="52" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" kindref="member">X</ref><sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="53" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" kindref="member">Y</ref><sp/>=<sp/>11;</highlight></codeline>
+<codeline lineno="54" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" kindref="member">Z</ref><sp/>=<sp/>12;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" kindref="member">X</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="57" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab9dca9f5dba97a18fedaddf76ba83f91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab9dca9f5dba97a18fedaddf76ba83f91" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Linear<sp/>acceleration<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" kindref="compound">LinearAcceleration</ref><sp/>{</highlight></codeline>
+<codeline lineno="62" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" kindref="member">X</ref><sp/>=<sp/>13;</highlight></codeline>
+<codeline lineno="63" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" kindref="member">Y</ref><sp/>=<sp/>14;</highlight></codeline>
+<codeline lineno="64" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" kindref="member">Z</ref><sp/>=<sp/>15;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" kindref="member">X</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="67" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a9c3825f60d9d3c005a76a53aa8492222" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a9c3825f60d9d3c005a76a53aa8492222" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Angular<sp/>acceleration<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration" kindref="compound">AngularAcceleration</ref><sp/>{</highlight></codeline>
+<codeline lineno="72" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" kindref="member">X</ref><sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="73" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" kindref="member">Y</ref><sp/>=<sp/>17;</highlight></codeline>
+<codeline lineno="74" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" kindref="member">Z</ref><sp/>=<sp/>18;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" kindref="member">Begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" kindref="member">X</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="77" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a1971c1065718b284c9e8fb6ed389dc53" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a1971c1065718b284c9e8fb6ed389dc53" kindref="member">Size</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Total<sp/>size<sp/>of<sp/>the<sp/>state<sp/>vector<sp/>for<sp/>a<sp/>full<sp/>rigid<sp/>body<sp/>state</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/>std::size_t<sp/><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">kFullStateSize</ref><sp/>=<sp/>19;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Function<sp/>to<sp/>get<sp/>the<sp/>names<sp/>of<sp/>initializable<sp/>states</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" kindref="member">GetInitializableStateNames</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::Array&lt;bool,<sp/>1,<sp/>StateIndex::kFullStateSize&gt;&amp;<sp/>initializable_states)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Map<sp/>of<sp/>state<sp/>indices<sp/>to<sp/>their<sp/>names</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::unordered_map&lt;int,<sp/>std::string&gt;<sp/>index_to_name<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" kindref="member">StateIndex::Position::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Position<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" kindref="member">StateIndex::Position::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Position<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" kindref="member">StateIndex::Position::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Position<sp/>Z&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" kindref="member">StateIndex::Quaternion::W</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Quaternion<sp/>W&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" kindref="member">StateIndex::Quaternion::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Quaternion<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" kindref="member">StateIndex::Quaternion::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Quaternion<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" kindref="member">StateIndex::Quaternion::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Quaternion<sp/>Z&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" kindref="member">StateIndex::LinearVelocity::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Velocity<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" kindref="member">StateIndex::LinearVelocity::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Velocity<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" kindref="member">StateIndex::LinearVelocity::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Velocity<sp/>Z&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" kindref="member">StateIndex::AngularVelocity::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Velocity<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" kindref="member">StateIndex::AngularVelocity::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Velocity<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" kindref="member">StateIndex::AngularVelocity::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Velocity<sp/>Z&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" kindref="member">StateIndex::LinearAcceleration::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Acceleration<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" kindref="member">StateIndex::LinearAcceleration::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Acceleration<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" kindref="member">StateIndex::LinearAcceleration::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Linear<sp/>Acceleration<sp/>Z&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" kindref="member">StateIndex::AngularAcceleration::X</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Acceleration<sp/>X&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" kindref="member">StateIndex::AngularAcceleration::Y</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Acceleration<sp/>Y&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" kindref="member">StateIndex::AngularAcceleration::Z</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Angular<sp/>Acceleration<sp/>Z&quot;</highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Vector<sp/>to<sp/>store<sp/>the<sp/>names<sp/>of<sp/>the<sp/>initializable<sp/>states</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>state_names;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Populate<sp/>the<sp/>vector<sp/>with<sp/>names<sp/>based<sp/>on<sp/>the<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index<sp/>:<sp/>initializable_states)<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>index_to_name.find(index);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(it<sp/>!=<sp/>index_to_name.end())<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_names.push_back(it-&gt;second);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>state_names;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>core</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>kinematic_arbiter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::utils::ChiSquareCriticalValue</compoundname>
+    <includes refid="statistical__utils_8hpp" local="no">statistical_utils.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1a06d0b3d8ecfb22b64f8d96212239ecf1" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::ChiSquareCriticalValue::confidence</definition>
+        <argsstring></argsstring>
+        <name>confidence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="24" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" compoundref="statistical__utils_8cpp" startline="8" endline="18">kinematic_arbiter::utils::InterpolatedCriticalValue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1aa483e69ceaf5156ef3c2b9a82e6fc628" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::ChiSquareCriticalValue::critical_value</definition>
+        <argsstring></argsstring>
+        <name>critical_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="25" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" compoundref="statistical__utils_8cpp" startline="8" endline="18">kinematic_arbiter::utils::InterpolatedCriticalValue</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Critical value for chi-square test at a specific confidence level. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="23" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="23" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1a06d0b3d8ecfb22b64f8d96212239ecf1" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::ChiSquareCriticalValue</scope><name>confidence</name></member>
+      <member refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1aa483e69ceaf5156ef3c2b9a82e6fc628" prot="public" virt="non-virtual"><scope>kinematic_arbiter::utils::ChiSquareCriticalValue</scope><name>critical_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

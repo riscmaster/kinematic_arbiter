@@ -93,21 +93,5 @@ def generate_launch_description():
                 name="foxglove_studio",
                 output="screen",
             ),
-            # TF2 Static Transform Publisher
-            Node(
-                package="tf2_ros",
-                executable="static_transform_publisher",
-                name="static_transform_publisher",
-                arguments=[
-                    "0",
-                    "0",
-                    "0",
-                    "0",
-                    "0",
-                    "0",
-                    "world",
-                    "filter_frame",
-                ],
-            ),
         ]
     )

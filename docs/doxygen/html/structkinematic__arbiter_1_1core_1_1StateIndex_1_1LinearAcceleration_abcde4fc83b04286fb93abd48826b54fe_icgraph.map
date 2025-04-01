@@ -1,0 +1,8 @@
+<map id="kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin" name="kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="313,165,571,221"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a5aa25072cbd538487d53217bdf59cff3" title="Get the inputs to the prediction model." alt="" coords="36,5,235,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="26,85,245,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a3aab1963c7316f0e402277d9032fa87a" title="Initialize state from IMU measurement." alt="" coords="41,165,230,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a5c20315ad9946aee82af907393333f06" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="26,245,245,301"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1core_1_1StateModelInterface.html#a1d1d3982bee824943c5ab5ef0686de50" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="5,325,265,381"/>
+</map>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_2ab28a22740f281d84016c5721b6077f" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2</compoundname>
+    <innerdir refid="dir_b6721234e798a1b71c146169f6dcf645">/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes</innerdir>
+    <innerfile refid="single__dof__demo_2ros2_2____init_____8py">__init__.py</innerfile>
+    <innerfile refid="domain__models_8py">domain_models.py</innerfile>
+    <innerfile refid="message__converters_8py">message_converters.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/"/>
+  </compounddef>
+</doxygen>

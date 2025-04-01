@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::StateModelInterface" name="kinematic_arbiter::core::StateModelInterface">
+<area shape="rect" id="node1" title="Interface for state transition models used in Kalman filtering." alt="" coords="19,5,210,47"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html" title="State model for 3D rigid body with quaternion orientation." alt="" coords="5,95,224,136"/>
+</map>

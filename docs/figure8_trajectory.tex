@@ -1,0 +1,161 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Figure-8 Trajectory Generation in Robotics}
+\author{Spencer Maughan}
+\date{March 2025}
+
+\begin{document}
+
+	\maketitle
+
+	\section{Introduction}
+	A smooth and well-defined trajectory is crucial for testing and evaluating state estimation models, measurement systems, and prediction algorithms in robotics. This document outlines the design and implementation of a \textbf{Figure-8 Trajectory Generator}, which provides a robust motion profile for dynamic testing scenarios.
+
+	\section{Trajectory Configuration}
+	The Figure-8 trajectory is configured using a set of well-defined parameters:
+
+	\begin{itemize}
+		\item \textbf{Maximum Velocity} ($v_{\text{max}}$): Controls the peak velocity along the trajectory.
+		\item \textbf{Length} ($a$): Specifies the amplitude of the X-axis motion.
+		\item \textbf{Width} ($b$): Specifies the amplitude of the Y-axis motion.
+		\item \textbf{Width Slope} ($c$): Determines the inclination in the Z-direction.
+		\item \textbf{Angular Scale} ($\alpha$): Scales the angular motion for orientation dynamics.
+	\end{itemize}
+
+	\section{Mathematical Formulation}
+	The position in the Figure-8 trajectory is parameterized by time as follows:
+
+\subsection*{Position}
+
+	\[
+	\mathbf{p}(t) =
+	\begin{bmatrix}
+		a \cos(w_2 t) \\
+		b \sin(w_1 t) \\
+		c \sin(w_1 t)
+	\end{bmatrix}
+	\]
+	Where:
+	\begin{itemize}
+		\item $a = \frac{\text{length}}{2}$ (X amplitude)
+		\item $b = \frac{\text{width}}{2}$ (Y amplitude)
+		\item $c = \text{width} \times \tan(\text{width slope})$ (Z amplitude)
+		\item $w_1 = \frac{2\pi}{T}$ (frequency for Y and Z motion)
+		\item $w_2 = w_1 \times 0.5$ (frequency for X motion)
+		\item $T = \frac{\pi \sqrt{a^2 + 4(b^2 + c^2)}}{v_{\text{max}}}$ (Trajectory period)
+	\end{itemize}
+\subsection*{Velocity}
+
+\begin{align*}
+	\mathbf{v}(t) = \frac{d\mathbf{p}}{dt} =
+	\begin{bmatrix}
+		- a w_2 \sin(w_2 t) \\
+		\phantom{-} b w_1 \cos(w_1 t) \\
+		\phantom{-} c w_1 \cos(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
+\subsection*{Acceleration}
+
+\begin{align*}
+	\mathbf{a}(t) = \frac{d\mathbf{v}}{dt} =
+	\begin{bmatrix}
+		- a w_2^2 \cos(w_2 t) \\
+		- b w_1^2 \sin(w_1 t) \\
+		- c w_1^2 \sin(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
+\subsection*{Jerk}
+
+\begin{align*}
+	\mathbf{j}(t) = \frac{d\mathbf{a}}{dt} =
+	\begin{bmatrix}
+		\phantom{-} a w_2^3 \sin(w_2 t) \\
+		- b w_1^3 \cos(w_1 t) \\
+		- c w_1^3 \cos(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
+
+	\section{Orientation and Angular Dynamics}
+
+	To ensure the body frame’s X-axis aligns with the velocity direction, the orientation is defined using a quaternion. The axis of rotation is computed as the cross product of the inertial velocity direction and the X-axis in the world frame:
+
+	\[
+	\mathbf{r} = \hat{x} \times \frac{\mathbf{v}}{||\mathbf{v}||}
+	\]
+
+	The angle of rotation is the angle between these two vectors:
+
+	\[
+	\theta = \cos^{-1}\left( \hat{x} \cdot \frac{\mathbf{v}}{||\mathbf{v}||} \right)
+	\]
+
+	The corresponding quaternion representation is constructed as:
+
+	\[
+	\mathbf{q} = \left[\cos\left(\frac{\theta}{2}\right),\, \mathbf{r} \sin\left(\frac{\theta}{2}\right)\right]
+	\]
+
+	This quaternion is normalized to ensure numerical stability:
+
+	\[
+	\mathbf{q} = \frac{\mathbf{q}}{||\mathbf{q}||}
+	\]
+
+	The velocity in the body frame is calculated by transforming the inertial velocity vector:
+
+	\[
+	\mathbf{v}_{\text{body}} = \mathbf{q}^{-1} \mathbf{v}_{\text{inertial}}
+	\]
+
+	The angular velocity in the world frame is calculated as:
+
+	\[
+	\boldsymbol{\omega}_{\text{world}} = \frac{\mathbf{v} \times \mathbf{a}}{||\mathbf{v}||^2}
+	\]
+
+	The angular velocity is then converted to the body frame:
+
+	\[
+	\boldsymbol{\omega}_{\text{body}} = \mathbf{q}^{-1} \boldsymbol{\omega}_{\text{world}}
+	\]
+
+	The instantaneous roll rate is the component of angular velocity about the body-frame X-axis:
+
+	\[
+	\dot{\phi} = \hat{x}_{\text{body}} \cdot \boldsymbol{\omega}_{\text{body}}
+	\]
+
+	The body-frame acceleration is adjusted to incorporate full Coriolis compensation:
+
+	\[
+	\mathbf{a}_{\text{body}} = \mathbf{q}^{-1} \mathbf{a} - 2 \boldsymbol{\omega}_{\text{body}} \times \mathbf{v}_{\text{body}}
+	\]
+
+	The angular acceleration is derived as:
+
+	\[
+	\boldsymbol{\alpha}_{\text{world}} = \frac{\mathbf{v} \times \mathbf{j} \cdot ||\mathbf{v}||^2 - 2\mathbf{v} \times \mathbf{a} \cdot \mathbf{v} \cdot \mathbf{a}}{||\mathbf{v}||^4}
+	\]
+
+	Finally, the angular acceleration is transformed to the body frame:
+
+	\[
+	\boldsymbol{\alpha}_{\text{body}} = \mathbf{q}^{-1} \boldsymbol{\alpha}_{\text{world}}
+	\]
+
+	The roll acceleration is similarly defined as the rate of change of angular velocity about the body-frame X-axis:
+
+	\[
+	\ddot{\phi} = \hat{x}_{\text{body}} \cdot \boldsymbol{\alpha}_{\text{body}}
+	\]
+
+	\section{Conclusion}
+	This Figure-8 trajectory generator offers a robust and versatile tool for testing state estimation, measurement models, and prediction systems. By combining smooth position dynamics with controlled angular motion, it effectively replicates challenging real-world motion patterns for robotics testing environments.
+
+\end{document}

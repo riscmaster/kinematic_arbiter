@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>kinematic_arbiter::ros2::simulation::SensorPublisher</compoundname>
+    <includes refid="sensor__publisher_8hpp" local="no">sensor_publisher.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename MsgType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a22687a2da35486cbe7390d2a3185434e" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">kinematic_arbiter::core::MeasurementModelInterface</ref></type>
+        <definition>using kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::MeasurementModelInterface =  kinematic_arbiter::core::MeasurementModelInterface</definition>
+        <argsstring></argsstring>
+        <name>MeasurementModelInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="37" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Node *</type>
+        <definition>rclcpp::Node* kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::node_</definition>
+        <argsstring></argsstring>
+        <name>node_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="139" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="139" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">kinematic_arbiter::core::SensorType</ref></type>
+        <definition>kinematic_arbiter::core::SensorType kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::sensor_type_</definition>
+        <argsstring></argsstring>
+        <name>sensor_type_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="140" column="39" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="140" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="141" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="141" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::noise_sigma_</definition>
+        <argsstring></argsstring>
+        <name>noise_sigma_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="142" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="142" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::raw_pub_</definition>
+        <argsstring></argsstring>
+        <name>raw_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="145" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="145" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::truth_pub_</definition>
+        <argsstring></argsstring>
+        <name>truth_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="146" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="146" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::upper_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>upper_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="147" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="147" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::lower_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>lower_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="148" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="148" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1aa2dfcea2e499e82293e24b1ae7dad6ad" prot="protected" static="no" mutable="no">
+        <type>std::normal_distribution</type>
+        <definition>std::normal_distribution kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::noise_dist_</definition>
+        <argsstring></argsstring>
+        <name>noise_dist_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="151" column="4" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="151" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" compoundref="sensor__publisher_8hpp" startline="47" endline="71">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::SensorPublisher</definition>
+        <argsstring>(rclcpp::Node *node, kinematic_arbiter::core::SensorType sensor_type, const std::string &amp;name, double noise_sigma)</argsstring>
+        <name>SensorPublisher</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">kinematic_arbiter::core::SensorType</ref></type>
+          <declname>sensor_type</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>noise_sigma</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" kindref="compound">SensorPublisher</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ROS2 node to create publishers from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of sensor (from <ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">core::SensorType</ref>) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name/prefix for the sensor topics </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>noise_sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Standard deviation of noise to apply </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="47" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="47" bodyend="71"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" compoundref="sensor__publisher_8hpp" startline="148">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" compoundref="sensor__publisher_8hpp" startline="141">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::name_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" compoundref="sensor__publisher_8hpp" startline="139">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1aa2dfcea2e499e82293e24b1ae7dad6ad" compoundref="sensor__publisher_8hpp" startline="151">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::noise_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" compoundref="sensor__publisher_8hpp" startline="142">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::noise_sigma_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" compoundref="sensor__publisher_8hpp" startline="145">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::raw_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" compoundref="sensor__publisher_8hpp" startline="140">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::sensor_type_</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1a2d84e3b0f226e7c516325b0461643309" compoundref="sensor__types_8hpp" startline="62" endline="71">kinematic_arbiter::core::SensorTypeToString</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" compoundref="sensor__publisher_8hpp" startline="146">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::truth_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" compoundref="sensor__publisher_8hpp" startline="147">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::upper_bound_pub_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</definition>
+        <argsstring>(const MeasurementModelInterface::DynamicVector &amp;measurement, const rclcpp::Time &amp;timestamp, const std::string &amp;frame_id, std::mt19937 &amp;generator)</argsstring>
+        <name>publish</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">MeasurementModelInterface::DynamicVector</ref> &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frame_id</declname>
+        </param>
+        <param>
+          <type>std::mt19937 &amp;</type>
+          <declname>generator</declname>
+        </param>
+        <briefdescription>
+<para>Publish all variants of the sensor message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The true measurement vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS timestamp for the message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The frame ID for the message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator for noise </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="81" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="81" bodyend="123"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab7118cce5dfde001ef17b9372a8686b6">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::eigenToRos</references>
+        <references refid="namespacekinematic__arbiter_1_1utils_1a2d3bbcea2147884b93a81b50a5459280" compoundref="statistical__utils_8hpp" startline="198" endline="231">kinematic_arbiter::utils::generateMultivariateNoise</references>
+        <references refid="namespacekinematic__arbiter_1_1core_1ad5832fdeec2175a36ebf3f68d77ad548" compoundref="sensor__types_8hpp" startline="48" endline="57">kinematic_arbiter::core::GetMeasurementDimension</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" compoundref="sensor__publisher_8hpp" startline="148">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" compoundref="sensor__publisher_8hpp" startline="141">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::name_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" compoundref="sensor__publisher_8hpp" startline="139">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" compoundref="sensor__publisher_8hpp" startline="142">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::noise_sigma_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" compoundref="sensor__publisher_8hpp" startline="145">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::raw_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" compoundref="sensor__publisher_8hpp" startline="140">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::sensor_type_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" compoundref="sensor__publisher_8hpp" startline="146">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::truth_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" compoundref="sensor__publisher_8hpp" startline="147">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::upper_bound_pub_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab7118cce5dfde001ef17b9372a8686b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>MsgType</type>
+        <definition>virtual MsgType kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::eigenToRos</definition>
+        <argsstring>(const Eigen::VectorXd &amp;measurement, const std::string &amp;frame_id, const rclcpp::Time &amp;timestamp)=0</argsstring>
+        <name>eigenToRos</name>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher_1a622d5a9d8972d2bb122ea9ffc75dd2b6">eigenToRos</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher_1a8501faf681a603a9c906271eacee4ef8">eigenToRos</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe">eigenToRos</reimplementedby>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6">eigenToRos</reimplementedby>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frame_id</declname>
+        </param>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+<para>Convert an Eigen vector to a ROS message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Eigen vector to convert </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The frame ID for the message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS timestamp for the message </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The ROS message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="133" column="19"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Templated sensor publisher that handles different sensor types. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Publishes four variants of each sensor:<itemizedlist>
+<listitem><para>Raw (noisy measurements)</para>
+</listitem><listitem><para>Truth (ground truth)</para>
+</listitem><listitem><para>Upper bound (truth + 3*sigma)</para>
+</listitem><listitem><para>Lower bound (truth - 3*sigma) </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" line="35" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp" bodystart="35" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab7118cce5dfde001ef17b9372a8686b6" prot="public" virt="pure-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>eigenToRos</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ac89c1b6b2e1b41eda1851d37209ceaa4" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a22687a2da35486cbe7390d2a3185434e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1adaaeae7c03fc8e9cbd89254bb9885049" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>name_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a4ad5e309bbba9fa26ea9ebad0d83291f" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1aa2dfcea2e499e82293e24b1ae7dad6ad" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>noise_dist_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ae6337e8c038af34a14801f7ea9a70b06" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>noise_sigma_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>publish</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1ab33550bd1d561f2dfc95342b575dbcc4" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>raw_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a88146820d1da0925417e98f8cb37d20e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>sensor_type_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1afa109a98e1dd6e2aae3bb9a288460194" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>SensorPublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a703880f8676edeefeb964cb21f0fecf8" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>truth_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1af1813d86918ff7414afb8b6b8d2d7a89" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::SensorPublisher</scope><name>upper_bound_pub_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

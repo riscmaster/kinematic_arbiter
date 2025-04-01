@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1core_1_1anonymous__namespace_02measurement__model__interface_8hpp_03" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::core::anonymous_namespace{measurement_model_interface.hpp}</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1core_1_1anonymous__namespace_02measurement__model__interface_8hpp_03_1a25a9430e807272c9a29acccfa4d1ffb4" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::anonymous_namespace{measurement_model_interface.hpp}::kMaxMeasurementDim</definition>
+        <argsstring></argsstring>
+        <name>kMaxMeasurementDim</name>
+        <initializer>= 7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="17" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/measurement_model_interface.hpp" line="16" column="3"/>
+  </compounddef>
+</doxygen>

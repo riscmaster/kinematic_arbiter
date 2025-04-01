@@ -1,0 +1,7 @@
+<map id="kinematic_arbiter::ros2::FilterWrapper::stringToMediationAction" name="kinematic_arbiter::ros2::FilterWrapper::stringToMediationAction">
+<area shape="rect" id="node1" title=" " alt="" coords="204,125,391,181"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#a0a10f61553ab53d9ec8dd020385de860" title="Add an IMU sensor." alt="" coords="7,5,154,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#a38a9caa5338372440d896850cd83001b" title="Add a pose sensor." alt="" coords="7,85,154,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#af4666c30f4ceacdae68c98278514cd54" title="Add a position sensor." alt="" coords="5,165,156,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#a8437a820e0eb2ff8b22738d3bfe49da0" title="Add a velocity sensor." alt="" coords="5,245,156,301"/>
+</map>

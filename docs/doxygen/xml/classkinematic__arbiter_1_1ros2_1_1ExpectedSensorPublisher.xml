@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>kinematic_arbiter::ros2::ExpectedSensorPublisher</compoundname>
+    <includes refid="expected__sensor__publisher_8hpp" local="no">expected_sensor_publisher.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename MsgType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Node *</type>
+        <definition>rclcpp::Node* kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::node_</definition>
+        <argsstring></argsstring>
+        <name>node_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="72" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="72" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" compoundref="expected__sensor__publisher_8hpp" startline="25" endline="43">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::topic_prefix_</definition>
+        <argsstring></argsstring>
+        <name>topic_prefix_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="73" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="73" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" compoundref="expected__sensor__publisher_8hpp" startline="25" endline="43">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::expected_pub_</definition>
+        <argsstring></argsstring>
+        <name>expected_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="76" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="76" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" compoundref="expected__sensor__publisher_8hpp" startline="25" endline="43">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" compoundref="expected__sensor__publisher_8hpp" startline="50" endline="60">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::upper_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>upper_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="77" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="77" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" compoundref="expected__sensor__publisher_8hpp" startline="25" endline="43">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" compoundref="expected__sensor__publisher_8hpp" startline="50" endline="60">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" prot="protected" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; MsgType &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::lower_bound_pub_</definition>
+        <argsstring></argsstring>
+        <name>lower_bound_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="78" column="42" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="78" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" compoundref="expected__sensor__publisher_8hpp" startline="25" endline="43">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" compoundref="expected__sensor__publisher_8hpp" startline="50" endline="60">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::ExpectedSensorPublisher</definition>
+        <argsstring>(rclcpp::Node *node, const std::string &amp;topic_prefix)</argsstring>
+        <name>ExpectedSensorPublisher</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic_prefix</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kindref="compound">ExpectedSensorPublisher</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ROS2 node to create publishers from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic_prefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prefix for the sensor topics </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="25" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="25" bodyend="43"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" compoundref="expected__sensor__publisher_8hpp" startline="76">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::expected_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" compoundref="expected__sensor__publisher_8hpp" startline="78">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" compoundref="expected__sensor__publisher_8hpp" startline="72">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" compoundref="expected__sensor__publisher_8hpp" startline="73">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::topic_prefix_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" compoundref="expected__sensor__publisher_8hpp" startline="77">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::upper_bound_pub_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::publish</definition>
+        <argsstring>(const MsgType &amp;expected_msg)</argsstring>
+        <name>publish</name>
+        <param>
+          <type>const MsgType &amp;</type>
+          <declname>expected_msg</declname>
+        </param>
+        <briefdescription>
+<para>Publish expected value and bounds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The expected value message </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="50" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="50" bodyend="60"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::createBound</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" compoundref="expected__sensor__publisher_8hpp" startline="76">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::expected_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" compoundref="expected__sensor__publisher_8hpp" startline="78">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::lower_bound_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" compoundref="expected__sensor__publisher_8hpp" startline="77">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::upper_bound_pub_</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>MsgType</type>
+        <definition>virtual MsgType kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::createBound</definition>
+        <argsstring>(const MsgType &amp;expected_msg, double sigma_factor)=0</argsstring>
+        <name>createBound</name>
+        <reimplementedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452">createBound</reimplementedby>
+        <param>
+          <type>const MsgType &amp;</type>
+          <declname>expected_msg</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>sigma_factor</declname>
+        </param>
+        <briefdescription>
+<para>Create a bound message from the expected value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The expected value message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The factor to multiply the standard deviation by (e.g., 3.0 for 3-sigma) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The bound message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="70" column="19"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" compoundref="expected__sensor__publisher_8hpp" startline="50" endline="60">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for expected sensor publishers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Publishes expected value and bounds for a sensor </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="17" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="17" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" prot="protected" virt="pure-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>createBound</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>expected_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>ExpectedSensorPublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>publish</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>topic_prefix_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedSensorPublisher</scope><name>upper_bound_pub_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

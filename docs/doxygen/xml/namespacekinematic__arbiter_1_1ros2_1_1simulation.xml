@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1ros2_1_1simulation" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::ros2::simulation</compoundname>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode" prot="public">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher" prot="public">kinematic_arbiter::ros2::simulation::SensorPublisher</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher" prot="public">kinematic_arbiter::ros2::simulation::PositionPublisher</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher" prot="public">kinematic_arbiter::ros2::simulation::PosePublisher</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher" prot="public">kinematic_arbiter::ros2::simulation::VelocityPublisher</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher" prot="public">kinematic_arbiter::ros2::simulation::ImuPublisher</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="25" column="1"/>
+  </compounddef>
+</doxygen>

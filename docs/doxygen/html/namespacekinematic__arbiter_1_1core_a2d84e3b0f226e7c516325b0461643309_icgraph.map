@@ -1,0 +1,8 @@
+<map id="kinematic_arbiter::core::SensorTypeToString" name="kinematic_arbiter::core::SensorTypeToString">
+<area shape="rect" id="node1" title="Convert sensor type to string." alt="" coords="595,158,779,199"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#aeb89991b470b121b0f3f81a658527b9d" title="Constructor for SensorHandler." alt="" coords="347,5,500,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html#afa109a98e1dd6e2aae3bb9a288460194" title="Constructor for SensorPublisher." alt="" coords="304,85,543,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#aa99e79b94b0117dc35ebe529a63d8e3d" title="Perform the validation and mediation process." alt="" coords="5,184,252,240"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a4d2c920c121d7b75cbe1d0edc8d0cd11" title="Validate auxiliary measurement data (innovation, jacobian, covariance)" alt="" coords="300,216,547,272"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a0c2dc49a74ea86100c0fb28845323987" title="Validate measurement and timestamp before any expensive operations." alt="" coords="300,296,547,352"/>
+</map>

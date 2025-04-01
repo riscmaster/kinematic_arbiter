@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ros2__utils_8hpp" kind="file" language="C++">
+    <compoundname>ros2_utils.hpp</compoundname>
+    <includes local="yes">rclcpp/rclcpp.hpp</includes>
+    <includedby refid="filter__wrapper_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</includedby>
+    <includedby refid="imu__sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp</includedby>
+    <includedby refid="pose__sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/pose_sensor_handler.hpp</includedby>
+    <includedby refid="position__sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/position_sensor_handler.hpp</includedby>
+    <includedby refid="sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp</includedby>
+    <includedby refid="velocity__sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp</includedby>
+    <includedby refid="filter__wrapper_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp</label>
+        <link refid="ros2__utils_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rclcpp/rclcpp.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp</label>
+        <link refid="ros2__utils_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/position_sensor_handler.hpp</label>
+        <link refid="position__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/velocity_sensor_handler.hpp</label>
+        <link refid="velocity__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</label>
+        <link refid="filter__wrapper_8cpp"/>
+      </node>
+      <node id="8">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/pose_sensor_handler.hpp</label>
+        <link refid="pose__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp</label>
+        <link refid="imu__sensor__handler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+      <node id="10">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/sensor_handler.hpp</label>
+        <link refid="sensor__handler_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp</label>
+        <link refid="kinematic__arbiter__node_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</label>
+        <link refid="filter__wrapper_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp</label>
+        <link refid="kinematic__arbiter__node_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" prot="public">kinematic_arbiter::ros2::utils::TimeManager</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter">kinematic_arbiter</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1ros2">kinematic_arbiter::ros2</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1ros2_1_1utils">kinematic_arbiter::ros2::utils</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;rclcpp/rclcpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Note:<sp/>For<sp/>transform<sp/>conversions<sp/>between<sp/>Eigen<sp/>and<sp/>ROS,<sp/>consider<sp/>using:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#include<sp/>&lt;tf2_eigen/tf2_eigen.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See:<sp/>https://github.com/ros2/geometry2/tree/ros2/tf2_eigen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacekinematic__arbiter" kindref="compound">kinematic_arbiter</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ros2<sp/>{</highlight></codeline>
+<codeline lineno="11" refid="namespacekinematic__arbiter_1_1ros2_1_1utils" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">utils<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//------------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Time<sp/>conversion<sp/>utilities</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//------------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kindref="compound">TimeManager</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="28" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1adf21efc1aa32aa4486dc12430d367d88" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1adf21efc1aa32aa4486dc12430d367d88" kindref="member">TimeManager</ref>()<sp/>:<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>(false),<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref>(0)<sp/>{}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ad8404dcc7d4202ad33388a49d30295b6" kindref="member">setReferenceTime</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>rclcpp::Time&amp;<sp/>reference_time)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref><sp/>=<sp/>reference_time.nanoseconds();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab7bc47bee21f2232404b8a2da9c3f6af" kindref="member">rosTimeToFilterTime</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>rclcpp::Time&amp;<sp/>ros_time)<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;TimeManager<sp/>not<sp/>initialized<sp/>with<sp/>reference<sp/>time&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>time<sp/>difference<sp/>in<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>filter_time<sp/>=<sp/>(ros_time.nanoseconds()<sp/>-<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref>)<sp/>*<sp/>1e-9;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>filter_time;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" refkind="member"><highlight class="normal"><sp/><sp/>rclcpp::Time<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1aeb4ea035067a9af8fc8d66fa29491197" kindref="member">filterTimeToRosTime</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>filter_time)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;TimeManager<sp/>not<sp/>initialized<sp/>with<sp/>reference<sp/>time&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>absolute<sp/>time<sp/>in<sp/>nanoseconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>nanoseconds<sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref><sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">int64_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(filter_time<sp/>*<sp/>1e9);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rclcpp::Time(nanoseconds);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1ab0042802c5048171f658463f2c2543ff" kindref="member">isInitialized</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" refkind="member"><highlight class="normal"><sp/><sp/>rclcpp::Time<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a87536ce0488b1338411ca76b99ee79b3" kindref="member">getReferenceTime</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rclcpp::Time(<ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref>);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="93" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a2ae68b293ff3b8dec100c50825db9b63" kindref="member">initialized_</ref>;</highlight></codeline>
+<codeline lineno="94" refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" refkind="member"><highlight class="normal"><sp/><sp/>int64_t<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager_1a1c58fea7c126ade738b783dcf07b1af1" kindref="member">reference_time_</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>in<sp/>nanoseconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>utils</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ros2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>kinematic_arbiter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/ros2_utils.hpp"/>
+  </compounddef>
+</doxygen>

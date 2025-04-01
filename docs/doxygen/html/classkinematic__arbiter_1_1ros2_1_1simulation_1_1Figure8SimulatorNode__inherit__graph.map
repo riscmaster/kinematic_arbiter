@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode" name="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode">
+<area shape="rect" id="node1" title="Simplified simulator node that generates a Figure&#45;8 trajectory and publishes sensor data." alt="" coords="5,80,285,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="94,5,197,32"/>
+</map>

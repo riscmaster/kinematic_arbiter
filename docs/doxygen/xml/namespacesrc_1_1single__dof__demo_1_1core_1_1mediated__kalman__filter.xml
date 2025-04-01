@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::core::mediated_kalman_filter</compoundname>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation" prot="public">src::single_dof_demo::core::mediated_kalman_filter::Mediation</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter" prot="public">src::single_dof_demo::core::mediated_kalman_filter::MediatedKalmanFilter</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/mediated_kalman_filter.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

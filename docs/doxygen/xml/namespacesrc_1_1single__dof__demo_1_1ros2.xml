@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1ros2" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::ros2</compoundname>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1domain__models">src::single_dof_demo::ros2::domain_models</innernamespace>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters">src::single_dof_demo::ros2::message_converters</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

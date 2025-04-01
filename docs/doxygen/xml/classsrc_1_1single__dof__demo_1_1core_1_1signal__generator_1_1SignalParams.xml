@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::signal_generator::SignalParams</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a9fe368fe3c323e040357be756e16ac87" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SignalParams::seed</definition>
+        <argsstring></argsstring>
+        <name>seed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="49" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="49" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator_1a0d4d95721871eae48046cd92722b536e" compoundref="signal__generator_8py" startline="67" endline="93">src.single_dof_demo.core.signal_generator.SingleDofSignalGenerator.reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a87fbee11051c2e90fde92abb0d85f6c4" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SignalParams::max_frequency</definition>
+        <argsstring></argsstring>
+        <name>max_frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="50" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a3a6d9afc8b6cb6db5100b842148f6230" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SignalParams::max_amplitude</definition>
+        <argsstring></argsstring>
+        <name>max_amplitude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="51" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a6af0b4537190a3b3dbdd4f1f401067ca" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.signal_generator.SignalParams::number_of_signals</definition>
+        <argsstring></argsstring>
+        <name>number_of_signals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="52" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a0cb9521ba04138f8f6dd04c32c9ad89d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.signal_generator.SignalParams.__init__</definition>
+        <argsstring>(self, seed=543, max_frequency=20.0, max_amplitude=0.3, number_of_signals=10)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a9fe368fe3c323e040357be756e16ac87" kindref="member">seed</ref></type>
+          <defname>seed</defname>
+          <defval>543</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a87fbee11051c2e90fde92abb0d85f6c4" kindref="member">max_frequency</ref></type>
+          <defname>max_frequency</defname>
+          <defval>20.0</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a3a6d9afc8b6cb6db5100b842148f6230" kindref="member">max_amplitude</ref></type>
+          <defname>max_amplitude</defname>
+          <defval>0.3</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a6af0b4537190a3b3dbdd4f1f401067ca" kindref="member">number_of_signals</ref></type>
+          <defname>number_of_signals</defname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize signal parameters.
+
+Args:
+    seed: Random seed for reproducible signal generation
+    max_frequency: Maximum frequency for signal components (Hz)
+    max_amplitude: Maximum amplitude for signal components
+    number_of_signals: Number of sinusoidal components to combine
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="34" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="40" bodyend="54"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Parameters for configuring signal generation.
+
+This class defines parameters for generating test signals composed of
+multiple sinusoidal components with random frequencies and amplitudes.
+It does not define a sampling frequency - that should be determined by
+the application using this generator.
+
+Attributes:
+    seed: Random seed for reproducible signal generation
+    max_frequency: Maximum frequency for signal components (Hz)
+    max_amplitude: Maximum amplitude for signal components
+    number_of_signals: Number of sinusoidal components to combine
+</verbatim> </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="19" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" bodystart="19" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a0cb9521ba04138f8f6dd04c32c9ad89d" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SignalParams</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a3a6d9afc8b6cb6db5100b842148f6230" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SignalParams</scope><name>max_amplitude</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a87fbee11051c2e90fde92abb0d85f6c4" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SignalParams</scope><name>max_frequency</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a6af0b4537190a3b3dbdd4f1f401067ca" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SignalParams</scope><name>number_of_signals</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams_1a9fe368fe3c323e040357be756e16ac87" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::signal_generator::SignalParams</scope><name>seed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

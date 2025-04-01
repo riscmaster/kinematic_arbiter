@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03_1aa82dde35738c9d742fc6db2f0a57c44a" prot="public" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}::kLambda</definition>
+        <argsstring></argsstring>
+        <name>kLambda</name>
+        <initializer>= 46.05</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="13" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="13" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="12" column="1"/>
+  </compounddef>
+</doxygen>

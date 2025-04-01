@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::ros2::FilterWrapper::initializeTimeManager" name="kinematic_arbiter::ros2::FilterWrapper::initializeTimeManager">
+<area shape="rect" id="node1" title="Initialize the time manager with a specific reference time." alt="" coords="269,45,445,101"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#a992c213c8b4f271a2ae18a9130522e06" title=" " alt="" coords="5,5,221,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html#a5cfc59bdc48407f9f247af2e60e02add" title=" " alt="" coords="5,85,221,141"/>
+</map>

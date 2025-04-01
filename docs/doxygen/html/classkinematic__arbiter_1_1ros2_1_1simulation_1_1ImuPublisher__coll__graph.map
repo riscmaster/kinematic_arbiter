@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::ros2::simulation::ImuPublisher" name="kinematic_arbiter::ros2::simulation::ImuPublisher">
+<area shape="rect" id="node1" title="IMU sensor publisher implementation." alt="" coords="15,109,235,151"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html" title=" " alt="" coords="5,5,244,61"/>
+</map>

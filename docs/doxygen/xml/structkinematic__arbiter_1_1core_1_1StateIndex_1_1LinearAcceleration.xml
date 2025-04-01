@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::StateIndex::LinearAcceleration</compoundname>
+    <includes refid="state__index_8hpp" local="no">state_index.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::LinearAcceleration::X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <initializer>= 13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="62" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="62" bodyend="-1"/>
+        <referencedby refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" compoundref="state__index_8hpp" startline="66" endline="66">Begin</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">kinematic_arbiter::ros2::FilterWrapper::getAccelerationEstimate</referencedby>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" compoundref="imu__sensor__model_8cpp" startline="101" endline="192">kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" compoundref="imu__sensor__model_8cpp" startline="285" endline="321">kinematic_arbiter::sensors::ImuSensorModel::IsStationary</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" compoundref="imu__sensor__model_8cpp" startline="32" endline="76">kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::LinearAcceleration::Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <initializer>= 14</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="63" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">kinematic_arbiter::ros2::FilterWrapper::getAccelerationEstimate</referencedby>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::LinearAcceleration::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <initializer>= 15</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="64" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">kinematic_arbiter::ros2::FilterWrapper::getAccelerationEstimate</referencedby>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="66" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="66" bodyend="66"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">X</references>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" compoundref="imu__sensor__model_8cpp" startline="194" endline="283">kinematic_arbiter::sensors::ImuSensorModel::GetPredictionModelInputs</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1d1d3982bee824943c5ab5ef0686de50" compoundref="state__model__interface_8hpp" startline="125" endline="131">kinematic_arbiter::core::StateModelInterface::PredictStateWithInputAccelerations</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a9c3825f60d9d3c005a76a53aa8492222" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::LinearAcceleration::Size</definition>
+        <argsstring>()</argsstring>
+        <name>Size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="67" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="61" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="61" bodyend="68"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::LinearAcceleration</scope><name>Begin</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a9c3825f60d9d3c005a76a53aa8492222" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::LinearAcceleration</scope><name>Size</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::LinearAcceleration</scope><name>X</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::LinearAcceleration</scope><name>Y</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::LinearAcceleration</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::utils::CalculateChiSquareCriticalValueNDof" name="kinematic_arbiter::utils::CalculateChiSquareCriticalValueNDof">
+<area shape="rect" id="node1" title="Calculate chi&#45;square critical value for N degrees of freedom." alt="" coords="300,85,531,141"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1utils.html#ac2b1d5ac126ea3e455ef95d5516086ed" title="Calculate chi&#45;square critical value for 1 degree of freedom." alt="" coords="13,5,244,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#ac899c40e3d26a7e5aff1abc0e986fe35" title="Determine if the vehicle is stationary based on state and measurements." alt="" coords="34,85,223,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#aa99e79b94b0117dc35ebe529a63d8e3d" title="Perform the validation and mediation process." alt="" coords="5,165,252,221"/>
+</map>

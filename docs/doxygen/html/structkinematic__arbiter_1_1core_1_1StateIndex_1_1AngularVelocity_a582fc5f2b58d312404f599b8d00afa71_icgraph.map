@@ -1,0 +1,11 @@
+<map id="kinematic_arbiter::core::StateIndex::AngularVelocity::Begin" name="kinematic_arbiter::core::StateIndex::AngularVelocity::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="889,205,1128,261"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a5aa25072cbd538487d53217bdf59cff3" title="Get the inputs to the prediction model." alt="" coords="619,5,817,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="609,85,827,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html#a2dee7db6aa0b65ec2d1e8a7632f4c511" title="Initialize state from body velocity measurement." alt="" coords="613,165,823,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a3aab1963c7316f0e402277d9032fa87a" title="Initialize state from IMU measurement." alt="" coords="623,245,813,301"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a5c20315ad9946aee82af907393333f06" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="609,325,827,381"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#af5bdcfe5445ec15ef8a5735777f3c883" title="Publish ground truth and TF transforms." alt="" coords="595,405,841,461"/>
+<area shape="rect" id="node8" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac2fc799b41b37ca470b37d7b816414a8" title="Main update function called by the timer." alt="" coords="300,405,547,461"/>
+<area shape="rect" id="node9" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac3d5b099f5eed720ffccd06bb9586788" title="Constructor for Figure8SimulatorNode." alt="" coords="5,405,252,461"/>
+</map>

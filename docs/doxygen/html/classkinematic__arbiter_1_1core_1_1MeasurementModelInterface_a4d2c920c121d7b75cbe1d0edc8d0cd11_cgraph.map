@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData" name="kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData">
+<area shape="rect" id="node1" title="Validate auxiliary measurement data (innovation, jacobian, covariance)" alt="" coords="5,5,252,61"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1core.html#a2d84e3b0f226e7c516325b0461643309" title="Convert sensor type to string." alt="" coords="300,13,484,54"/>
+</map>

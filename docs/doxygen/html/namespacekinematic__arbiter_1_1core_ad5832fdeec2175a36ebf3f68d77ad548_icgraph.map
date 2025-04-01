@@ -1,0 +1,11 @@
+<map id="kinematic_arbiter::core::GetMeasurementDimension" name="kinematic_arbiter::core::GetMeasurementDimension">
+<area shape="rect" id="node1" title="Runtime function to get measurement dimension from sensor type." alt="" coords="889,133,1131,174"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html#a8f52af5543a29c7e61d315ef4fa57af9" title="Publish all variants of the sensor message." alt="" coords="599,85,837,141"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="595,165,841,221"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a0a97984559c1bce1ca940c5031f0179c" title="Compute auxiliary measurement data for use in various algorithms." alt="" coords="300,5,547,61"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html#a2dee7db6aa0b65ec2d1e8a7632f4c511" title="Initialize state from body velocity measurement." alt="" coords="319,85,528,141"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html#a2664b95c31554a212a0aa1d864ac14a9" title="Initialize state from pose measurement." alt="" coords="326,165,521,221"/>
+<area shape="rect" id="node8" href="$classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html#a1d6dcad7753b1e064cc499384d1e012c" title="Initialize state from position measurement." alt="" coords="315,245,531,301"/>
+<area shape="rect" id="node9" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a0c2dc49a74ea86100c0fb28845323987" title="Validate measurement and timestamp before any expensive operations." alt="" coords="300,325,547,381"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#aa99e79b94b0117dc35ebe529a63d8e3d" title="Perform the validation and mediation process." alt="" coords="5,5,252,61"/>
+</map>

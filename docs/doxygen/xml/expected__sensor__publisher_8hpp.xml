@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="expected__sensor__publisher_8hpp" kind="file" language="C++">
+    <compoundname>expected_sensor_publisher.hpp</compoundname>
+    <includes local="no">rclcpp/rclcpp.hpp</includes>
+    <includes local="no">geometry_msgs/msg/pose_with_covariance_stamped.hpp</includes>
+    <includes local="no">geometry_msgs/msg/twist_with_covariance_stamped.hpp</includes>
+    <includes local="no">geometry_msgs/msg/accel_with_covariance_stamped.hpp</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>geometry_msgs/msg/accel_with_covariance_stamped.hpp</label>
+      </node>
+      <node id="2">
+        <label>rclcpp/rclcpp.hpp</label>
+      </node>
+      <node id="4">
+        <label>geometry_msgs/msg/twist_with_covariance_stamped.hpp</label>
+      </node>
+      <node id="3">
+        <label>geometry_msgs/msg/pose_with_covariance_stamped.hpp</label>
+      </node>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp</label>
+        <link refid="expected__sensor__publisher_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" prot="public">kinematic_arbiter::ros2::ExpectedSensorPublisher</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher" prot="public">kinematic_arbiter::ros2::ExpectedPosePublisher</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter">kinematic_arbiter</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1ros2">kinematic_arbiter::ros2</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;rclcpp/rclcpp.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;geometry_msgs/msg/pose_with_covariance_stamped.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;geometry_msgs/msg/twist_with_covariance_stamped.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;geometry_msgs/msg/accel_with_covariance_stamped.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacekinematic__arbiter" kindref="compound">kinematic_arbiter</ref><sp/>{</highlight></codeline>
+<codeline lineno="9" refid="namespacekinematic__arbiter_1_1ros2" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ros2<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MsgType&gt;</highlight></codeline>
+<codeline lineno="17" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kindref="compound">ExpectedSensorPublisher</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" kindref="member">ExpectedSensorPublisher</ref>(</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rclcpp::Node*<sp/>node,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>topic_prefix)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>(node),</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref>(topic_prefix)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>publishers<sp/>with<sp/>consistent<sp/>naming</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" kindref="member">expected_pub_</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>-&gt;create_publisher&lt;MsgType&gt;(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref><sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/expected&quot;</highlight><highlight class="normal">,<sp/>10);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" kindref="member">upper_bound_pub_</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>-&gt;create_publisher&lt;MsgType&gt;(</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref><sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/upper_bound&quot;</highlight><highlight class="normal">,<sp/>10);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" kindref="member">lower_bound_pub_</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>-&gt;create_publisher&lt;MsgType&gt;(</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref><sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/lower_bound&quot;</highlight><highlight class="normal">,<sp/>10);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>RCLCPP_INFO(<ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>-&gt;get_logger(),<sp/></highlight><highlight class="stringliteral">&quot;Created<sp/>expected<sp/>sensor<sp/>publisher<sp/>for<sp/>&apos;%s&apos;&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref>.c_str());</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" kindref="member">publish</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>MsgType&amp;<sp/>expected_msg)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Publish<sp/>expected<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" kindref="member">expected_pub_</ref>-&gt;publish(expected_msg);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>and<sp/>publish<sp/>upper/lower<sp/>bounds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>MsgType<sp/>upper_bound<sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" kindref="member">createBound</ref>(expected_msg,<sp/>3.0);<sp/><sp/></highlight><highlight class="comment">//<sp/>3-sigma<sp/>upper<sp/>bound</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>MsgType<sp/>lower_bound<sp/>=<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" kindref="member">createBound</ref>(expected_msg,<sp/>-3.0);<sp/></highlight><highlight class="comment">//<sp/>3-sigma<sp/>lower<sp/>bound</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" kindref="member">upper_bound_pub_</ref>-&gt;publish(upper_bound);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" kindref="member">lower_bound_pub_</ref>-&gt;publish(lower_bound);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="70" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>MsgType<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6" kindref="member">createBound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>MsgType&amp;<sp/>expected_msg,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sigma_factor)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" refkind="member"><highlight class="normal"><sp/><sp/>rclcpp::Node*<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" kindref="member">node_</ref>;</highlight></codeline>
+<codeline lineno="73" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" kindref="member">topic_prefix_</ref>;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Publishers<sp/>for<sp/>expected<sp/>value<sp/>and<sp/>bounds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" kindref="member">expected_pub_</ref>;</highlight></codeline>
+<codeline lineno="77" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" kindref="member">upper_bound_pub_</ref>;</highlight></codeline>
+<codeline lineno="78" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>rclcpp::Publisher&lt;MsgType&gt;::SharedPtr<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" kindref="member">lower_bound_pub_</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher" kindref="compound">ExpectedPosePublisher</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kindref="compound">ExpectedSensorPublisher</ref>&lt;geometry_msgs::msg::PoseWithCovarianceStamped&gt;<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="86" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref><sp/>=<sp/>geometry_msgs::msg::PoseWithCovarianceStamped;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1aeb1a8f9205377171161c79d93921b897" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1aeb1a8f9205377171161c79d93921b897" kindref="member">ExpectedPosePublisher</ref>(rclcpp::Node*<sp/>node,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>topic_prefix)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" kindref="compound">ExpectedSensorPublisher</ref>&lt;<ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref>&gt;(node,<sp/>topic_prefix)<sp/>{}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="92" refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452" kindref="member">createBound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref>&amp;<sp/>expected_msg,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sigma_factor)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref><sp/>bound<sp/>=<sp/>expected_msg;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Position<sp/>bounds<sp/>based<sp/>on<sp/>position<sp/>covariance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>std_dev<sp/>=<sp/>std::sqrt(expected_msg.pose.covariance[i*6<sp/>+<sp/>i]);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>std_dev<sp/>*<sp/>sigma_factor;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>0)<sp/>bound.pose.pose.position.x<sp/>+=<sp/>offset;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>1)<sp/>bound.pose.pose.position.y<sp/>+=<sp/>offset;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>2)<sp/>bound.pose.pose.position.z<sp/>+=<sp/>offset;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>We<sp/>could<sp/>also<sp/>adjust<sp/>orientation<sp/>but<sp/>it&apos;s<sp/>more<sp/>complex</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Just<sp/>copy<sp/>the<sp/>original<sp/>orientation<sp/>for<sp/>now</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bound;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Similar<sp/>classes<sp/>for<sp/>ExpectedVelocityPublisher<sp/>and<sp/>ExpectedAccelerationPublisher</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ros2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>kinematic_arbiter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp"/>
+  </compounddef>
+</doxygen>

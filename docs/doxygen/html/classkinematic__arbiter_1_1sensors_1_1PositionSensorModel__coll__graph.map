@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::sensors::PositionSensorModel" name="kinematic_arbiter::sensors::PositionSensorModel">
+<area shape="rect" id="node1" title="Position sensor model." alt="" coords="755,53,971,94"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html" title="Interface for measurement models with assumption validation." alt="" coords="459,53,705,94"/>
+<area shape="rect" id="node3" href="$structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html" title="Parameters for assumption validation." alt="" coords="5,5,252,61"/>
+<area shape="rect" id="node4" href="$structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html" title=" " alt="" coords="5,85,252,141"/>
+</map>

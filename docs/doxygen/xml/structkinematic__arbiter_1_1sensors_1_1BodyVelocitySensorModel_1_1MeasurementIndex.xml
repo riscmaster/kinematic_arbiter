@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</compoundname>
+    <includes refid="body__velocity__sensor__model_8hpp" local="no">body_velocity_sensor_model.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VX</definition>
+        <argsstring></argsstring>
+        <name>VX</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="33" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1abc14aaac4f15ab10c903db2757dae73b" compoundref="body__velocity__sensor__model_8hpp" startline="110" endline="158">kinematic_arbiter::sensors::BodyVelocitySensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aebe109a082efb53ef2f6de4102b2712e" compoundref="body__velocity__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::BodyVelocitySensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VY</definition>
+        <argsstring></argsstring>
+        <name>VY</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="34" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VZ</definition>
+        <argsstring></argsstring>
+        <name>VZ</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="35" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WX</definition>
+        <argsstring></argsstring>
+        <name>WX</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="38" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1abc14aaac4f15ab10c903db2757dae73b" compoundref="body__velocity__sensor__model_8hpp" startline="110" endline="158">kinematic_arbiter::sensors::BodyVelocitySensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aebe109a082efb53ef2f6de4102b2712e" compoundref="body__velocity__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::BodyVelocitySensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WY</definition>
+        <argsstring></argsstring>
+        <name>WY</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="39" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WZ</definition>
+        <argsstring></argsstring>
+        <name>WZ</name>
+        <initializer>= 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="40" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="40" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a8c7d4ef2cffb6475cef2d9e506d92f01" compoundref="velocity__sensor__handler_8hpp" startline="73" endline="100">kinematic_arbiter::ros2::VelocitySensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher_1a1946e924a37b1898f917d2f23c1e5cbe" compoundref="sensor__publisher_8hpp" startline="252" endline="272">kinematic_arbiter::ros2::simulation::VelocityPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1ad1ebdac73a01c44649b30e3bc21d6094" compoundref="velocity__sensor__handler_8hpp" startline="37" endline="51">kinematic_arbiter::ros2::VelocitySensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler_1a265bb5668f0a5abd1bea2248cf3f13a6" compoundref="velocity__sensor__handler_8hpp" startline="53" endline="71">kinematic_arbiter::ros2::VelocitySensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Indices for accessing body velocity measurement components. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="31" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" bodystart="31" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>VX</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>VY</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>VZ</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>WX</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>WY</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex</scope><name>WZ</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

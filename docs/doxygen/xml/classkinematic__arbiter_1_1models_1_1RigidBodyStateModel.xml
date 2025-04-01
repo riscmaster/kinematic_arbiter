@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::models::RigidBodyStateModel</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface" prot="public" virt="non-virtual">kinematic_arbiter::core::StateModelInterface</basecompoundref>
+    <includes refid="rigid__body__state__model_8hpp" local="no">rigid_body_state_model.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a94f655111a07c30be4b90ec40d595f97" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, 3, 3 &gt;</type>
+        <definition>using kinematic_arbiter::models::RigidBodyStateModel::Matrix3d =  Eigen::Matrix&lt;double, 3, 3&gt;</definition>
+        <argsstring></argsstring>
+        <name>Matrix3d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="33" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a6e7f6163aa8eefec8d398341e9eeaaad" prot="public" static="no">
+        <type>Eigen::Vector3d</type>
+        <definition>using kinematic_arbiter::models::RigidBodyStateModel::Vector3d =  Eigen::Vector3d</definition>
+        <argsstring></argsstring>
+        <name>Vector3d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="34" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa9a3c8f16a5313e3e6c1afc2ba67666b" prot="public" static="no">
+        <type>Eigen::Vector4d</type>
+        <definition>using kinematic_arbiter::models::RigidBodyStateModel::Vector4d =  Eigen::Vector4d</definition>
+        <argsstring></argsstring>
+        <name>Vector4d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="35" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a63783d35b06bb216927e8422c8143097" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, 4, 4 &gt;</type>
+        <definition>using kinematic_arbiter::models::RigidBodyStateModel::Matrix4d =  Eigen::Matrix&lt;double, 4, 4&gt;</definition>
+        <argsstring></argsstring>
+        <name>Matrix4d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="36" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa315b72df6366b9b7fd631a38e1ec526" prot="public" static="no">
+        <type><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex" kindref="compound">core::StateIndex</ref></type>
+        <definition>using kinematic_arbiter::models::RigidBodyStateModel::SIdx =  core::StateIndex</definition>
+        <argsstring></argsstring>
+        <name>SIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="39" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1ae5b004980ce188891ea33a30e875e2c7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::models::RigidBodyStateModel::RigidBodyStateModel</definition>
+        <argsstring>(const Params &amp;params=Params())</argsstring>
+        <name>RigidBodyStateModel</name>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params" kindref="compound">Params</ref> &amp;</type>
+          <declname>params</declname>
+          <defval><ref refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params" kindref="compound">Params</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Construct a new <ref refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel" kindref="compound">RigidBodyStateModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State model parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="45" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="45" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa727c87965ff75514c4e097c6456905b" kindref="member">StateVector</ref></type>
+        <definition>StateVector kinematic_arbiter::models::RigidBodyStateModel::PredictState</definition>
+        <argsstring>(const StateVector &amp;current_state, double time_step) const override</argsstring>
+        <name>PredictState</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aff55747339d075abc3c2a48d447a24eb">PredictState</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa727c87965ff75514c4e097c6456905b" kindref="member">StateVector</ref> &amp;</type>
+          <declname>current_state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time_step</declname>
+        </param>
+        <briefdescription>
+<para>Predict state forward in time: x̂_k^- = f(x̂_{k-1}^+, u_k) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate x̂_{k-1}^+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time_step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Predicted next state x̂_k^- </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="55" column="17" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="55" bodyend="128"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" compoundref="state__index_8hpp" startline="25" endline="25">kinematic_arbiter::core::StateIndex::Position::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" compoundref="state__index_8hpp" startline="46" endline="46">kinematic_arbiter::core::StateIndex::LinearVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" compoundref="state__index_8hpp" startline="56" endline="56">kinematic_arbiter::core::StateIndex::AngularVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" compoundref="state__index_8hpp" startline="66" endline="66">kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" compoundref="state__index_8hpp" startline="76" endline="76">kinematic_arbiter::core::StateIndex::AngularAcceleration::Begin</references>
+        <references refid="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03_1aa82dde35738c9d742fc6db2f0a57c44a" compoundref="rigid__body__state__model_8hpp" startline="13">kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}::kLambda</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1eff680285d455bb828d1f94ea67c30d" kindref="member">StateMatrix</ref></type>
+        <definition>StateMatrix kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</definition>
+        <argsstring>(const StateVector &amp;current_state, double time_step) const override</argsstring>
+        <name>GetTransitionMatrix</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ad928ea890a63fd0c6b069c8b519178b0">GetTransitionMatrix</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa727c87965ff75514c4e097c6456905b" kindref="member">StateVector</ref> &amp;</type>
+          <declname>current_state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time_step</declname>
+        </param>
+        <briefdescription>
+<para>Get the state transition matrix: A_k. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The matrix A_k linearizes the state transition function: A_k = ∂f/∂x evaluated at x̂_{k-1}^+ and u_k</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate x̂_{k-1}^+ </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time_step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>State transition matrix A_k </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="140" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="140" bodyend="301"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" compoundref="state__index_8hpp" startline="25" endline="25">kinematic_arbiter::core::StateIndex::Position::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" compoundref="state__index_8hpp" startline="36" endline="36">kinematic_arbiter::core::StateIndex::Quaternion::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" compoundref="state__index_8hpp" startline="46" endline="46">kinematic_arbiter::core::StateIndex::LinearVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" compoundref="state__index_8hpp" startline="56" endline="56">kinematic_arbiter::core::StateIndex::AngularVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" compoundref="state__index_8hpp" startline="66" endline="66">kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" compoundref="state__index_8hpp" startline="76" endline="76">kinematic_arbiter::core::StateIndex::AngularAcceleration::Begin</references>
+        <references refid="namespacekinematic__arbiter_1_1models_1_1anonymous__namespace_02rigid__body__state__model_8hpp_03_1aa82dde35738c9d742fc6db2f0a57c44a" compoundref="rigid__body__state__model_8hpp" startline="13">kinematic_arbiter::models::anonymous_namespace{rigid_body_state_model.hpp}::kLambda</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" compoundref="state__index_8hpp" startline="73">kinematic_arbiter::core::StateIndex::AngularAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" compoundref="state__index_8hpp" startline="74">kinematic_arbiter::core::StateIndex::AngularAcceleration::Z</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>State model for 3D rigid body with quaternion orientation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Implements a state transition model for a rigid body in 3D space with:<itemizedlist>
+<listitem><para>3D position</para>
+</listitem><listitem><para>Quaternion orientation</para>
+</listitem><listitem><para>3D linear velocity</para>
+</listitem><listitem><para>3D angular velocity</para>
+</listitem><listitem><para>3D linear acceleration</para>
+</listitem><listitem><para>3D angular acceleration</para>
+</listitem></itemizedlist>
+</para>
+<para>The model uses quaternion kinematics for rotation representation to avoid gimbal lock. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::models::RigidBodyStateModel</label>
+        <link refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::core::StateModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1StateModelInterface"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>kinematic_arbiter::models::RigidBodyStateModel</label>
+        <link refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::core::StateModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1StateModelInterface"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>params_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>kinematic_arbiter::core::StateModelInterface::Params</label>
+        <link refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" line="30" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/rigid_body_state_model.hpp" bodystart="30" bodyend="302"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a82facf89d0ec9ebf62547512a8ae9af4" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>GetParams</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a4efb543e3192c48d7a466356cfd77583" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>GetProcessNoise</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a2897de0f322264af5edf9e4b02f811ac" prot="public" virt="virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>GetProcessNoiseCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" prot="public" virt="virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>GetTransitionMatrix</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a318a341229a8bb90c1ea7712cb8d4869" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>kMaxStateDiff</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ab45147eda8b8cf3a95f11700fa8f9832" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>kMinStateDiff</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a94f655111a07c30be4b90ec40d595f97" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>Matrix3d</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a63783d35b06bb216927e8422c8143097" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>Matrix4d</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1af6897e6a8b84cef9112c75329db6a947" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>params_</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" prot="public" virt="virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>PredictState</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1d1d3982bee824943c5ab5ef0686de50" prot="public" virt="virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>PredictStateWithInputAccelerations</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a2fa3188a159cf16c6847228c26be8af3" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>process_noise_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a457d6cf0093c1b61de4d0462dfbd6c44" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>reset</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1ae5b004980ce188891ea33a30e875e2c7" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>RigidBodyStateModel</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa315b72df6366b9b7fd631a38e1ec526" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>SIdx</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1adc766438943c3d801ed8dfd5a31493f3" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>state_diff_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1af2fb47f316594dbb195b009f117a4f31" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>state_initialized_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a1eff680285d455bb828d1f94ea67c30d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>StateMatrix</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa66fe5b173bd89acfa2e81151a9b0226" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>StateModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a5858c293ee72008054d3f13a67c908a0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>StateSize</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1aa727c87965ff75514c4e097c6456905b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>StateVector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a77a6fb354f49c8d321d87175f35476ae" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>time_since_reset_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1ac321300d03a7b9d6b31e1351e6f268ea" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>UpdateProcessNoise</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a6e7f6163aa8eefec8d398341e9eeaaad" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>Vector3d</name></member>
+      <member refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa9a3c8f16a5313e3e6c1afc2ba67666b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>Vector4d</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1StateModelInterface_1a6cf0e88c125182ab7faaa90b25abead0" prot="public" virt="virtual"><scope>kinematic_arbiter::models::RigidBodyStateModel</scope><name>~StateModelInterface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::sensors::PositionSensorModel::InitializeState" name="kinematic_arbiter::sensors::PositionSensorModel::InitializeState">
+<area shape="rect" id="node1" title="Initialize state from position measurement." alt="" coords="5,45,221,101"/>
+<area shape="rect" id="node2" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html#aefacc52dcba77933043b3802b5b749ae" title=" " alt="" coords="299,5,487,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="269,85,516,141"/>
+<area shape="rect" id="node4" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="564,93,805,134"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::sensors::PoseSensorModel" name="kinematic_arbiter::sensors::PoseSensorModel">
+<area shape="rect" id="node1" title="7DOF pose measurement model (position + orientation)" alt="" coords="31,95,226,136"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html" title="Interface for measurement models with assumption validation." alt="" coords="5,5,252,47"/>
+</map>

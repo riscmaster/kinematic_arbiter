@@ -1,0 +1,7 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface" name="kinematic_arbiter::core::MeasurementModelInterface">
+<area shape="rect" id="node1" title="Interface for measurement models with assumption validation." alt="" coords="5,119,252,161"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html" title="Body velocity measurement model (linear + angular velocity)" alt="" coords="303,5,513,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html" title="IMU measurement model (gyroscope + accelerometer)" alt="" coords="313,86,503,127"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html" title="7DOF pose measurement model (position + orientation)" alt="" coords="311,151,505,193"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html" title="Position sensor model." alt="" coords="300,217,516,258"/>
+</map>

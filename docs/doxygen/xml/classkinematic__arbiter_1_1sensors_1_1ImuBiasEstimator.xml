@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::ImuBiasEstimator</compoundname>
+    <includes refid="imu__bias__estimator_8hpp" local="no">imu_bias_estimator.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a20aa5d14fb2c034066acfe3be9808d4b" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kinematic_arbiter::sensors::ImuBiasEstimator::window_size_</definition>
+        <argsstring></argsstring>
+        <name>window_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="57" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" compoundref="imu__bias__estimator_8cpp" startline="6" endline="20">EstimateBiases</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" prot="private" static="no" mutable="no">
+        <type>Eigen::Vector3d</type>
+        <definition>Eigen::Vector3d kinematic_arbiter::sensors::ImuBiasEstimator::gyro_bias_</definition>
+        <argsstring></argsstring>
+        <name>gyro_bias_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="58" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" compoundref="imu__bias__estimator_8cpp" startline="6" endline="20">EstimateBiases</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a6165c220d3797eb17d8341da051feed9" compoundref="imu__bias__estimator_8hpp" startline="48" endline="48">GetGyroBias</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a34db04201b4f8ef6a9c32e3fb37509a6" compoundref="imu__bias__estimator_8hpp" startline="40" endline="43">ResetCalibration</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" prot="private" static="no" mutable="no">
+        <type>Eigen::Vector3d</type>
+        <definition>Eigen::Vector3d kinematic_arbiter::sensors::ImuBiasEstimator::accel_bias_</definition>
+        <argsstring></argsstring>
+        <name>accel_bias_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="59" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" compoundref="imu__bias__estimator_8cpp" startline="6" endline="20">EstimateBiases</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a4b5d87947dc369804142f789d3593e2b" compoundref="imu__bias__estimator_8hpp" startline="53" endline="53">GetAccelBias</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a34db04201b4f8ef6a9c32e3fb37509a6" compoundref="imu__bias__estimator_8hpp" startline="40" endline="43">ResetCalibration</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1abf116563a2be62e8a0eeddc164f68fa2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::sensors::ImuBiasEstimator::ImuBiasEstimator</definition>
+        <argsstring>(uint32_t window_size=100)</argsstring>
+        <name>ImuBiasEstimator</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>window_size</declname>
+          <defval>100</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="18" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="18" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::ImuBiasEstimator::EstimateBiases</definition>
+        <argsstring>(const Eigen::Vector3d &amp;measured_gyro, const Eigen::Vector3d &amp;measured_accel, const Eigen::Vector3d &amp;predicted_gyro, const Eigen::Vector3d &amp;predicted_accel)</argsstring>
+        <name>EstimateBiases</name>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>measured_gyro</declname>
+        </param>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>measured_accel</declname>
+        </param>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>predicted_gyro</declname>
+        </param>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>predicted_accel</declname>
+        </param>
+        <briefdescription>
+<para>Estimate biases if vehicle is stationary. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measured_gyro</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw gyroscope measurement </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>measured_accel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw accelerometer measurement </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>predicted_gyro</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected gyroscope measurement for current state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>predicted_accel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected accelerometer measurement for current state </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="31" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_bias_estimator.cpp" bodystart="6" bodyend="20"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" compoundref="imu__bias__estimator_8hpp" startline="59">accel_bias_</references>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" compoundref="imu__bias__estimator_8hpp" startline="58">gyro_bias_</references>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a20aa5d14fb2c034066acfe3be9808d4b" compoundref="imu__bias__estimator_8hpp" startline="57">window_size_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a34db04201b4f8ef6a9c32e3fb37509a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::ImuBiasEstimator::ResetCalibration</definition>
+        <argsstring>()</argsstring>
+        <name>ResetCalibration</name>
+        <briefdescription>
+<para>Reset all bias calibration parameters to default values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="40" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="40" bodyend="43"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" compoundref="imu__bias__estimator_8hpp" startline="59">accel_bias_</references>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" compoundref="imu__bias__estimator_8hpp" startline="58">gyro_bias_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a6165c220d3797eb17d8341da051feed9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Eigen::Vector3d &amp;</type>
+        <definition>const Eigen::Vector3d&amp; kinematic_arbiter::sensors::ImuBiasEstimator::GetGyroBias</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGyroBias</name>
+        <briefdescription>
+<para>Get current gyroscope bias estimate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="48" column="25" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="48" bodyend="48"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" compoundref="imu__bias__estimator_8hpp" startline="58">gyro_bias_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a4b5d87947dc369804142f789d3593e2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Eigen::Vector3d &amp;</type>
+        <definition>const Eigen::Vector3d&amp; kinematic_arbiter::sensors::ImuBiasEstimator::GetAccelBias</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAccelBias</name>
+        <briefdescription>
+<para>Get current accelerometer bias estimate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="53" column="25" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="53" bodyend="53"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" compoundref="imu__bias__estimator_8hpp" startline="59">accel_bias_</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>IMU-specific bias estimator using recursive averaging. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides bias estimation for both gyroscope and accelerometer measurements using recursive averaging. Should be used only when robot is stationary. </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" line="15" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_bias_estimator.hpp" bodystart="15" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac607059c6f2ec05aa6b03c99048c63c0" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>accel_bias_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a3be3ea1a86768eea3183fa0cabd423f2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>EstimateBiases</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a4b5d87947dc369804142f789d3593e2b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>GetAccelBias</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a6165c220d3797eb17d8341da051feed9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>GetGyroBias</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1ac16ea3009bdeb877657e2b4ecdf90dc1" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>gyro_bias_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1abf116563a2be62e8a0eeddc164f68fa2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>ImuBiasEstimator</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a34db04201b4f8ef6a9c32e3fb37509a6" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>ResetCalibration</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator_1a20aa5d14fb2c034066acfe3be9808d4b" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuBiasEstimator</scope><name>window_size_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

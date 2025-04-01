@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1sensors" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::sensors</compoundname>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" prot="public">kinematic_arbiter::sensors::BodyVelocitySensorModel</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator" prot="public">kinematic_arbiter::sensors::ImuBiasEstimator</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" prot="public">kinematic_arbiter::sensors::ImuSensorConfig</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" prot="public">kinematic_arbiter::sensors::ImuSensorModel</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel" prot="public">kinematic_arbiter::sensors::PoseSensorModel</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel" prot="public">kinematic_arbiter::sensors::PositionSensorModel</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter_1_1sensors_1_1test">kinematic_arbiter::sensors::test</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1sensors_1a687fad93ff58abc219b838b61df405cb" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double kinematic_arbiter::sensors::kEpsilon</definition>
+        <argsstring></argsstring>
+        <name>kEpsilon</name>
+        <initializer>= 1e-6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" line="16" column="18" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" compoundref="imu__sensor__model_8cpp" startline="194" endline="283">kinematic_arbiter::sensors::ImuSensorModel::GetPredictionModelInputs</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/body_velocity_sensor_model.hpp" line="8" column="1"/>
+  </compounddef>
+</doxygen>

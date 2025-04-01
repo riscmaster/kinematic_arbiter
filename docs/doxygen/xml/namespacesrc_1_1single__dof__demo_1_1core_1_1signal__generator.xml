@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1core_1_1signal__generator" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::core::signal_generator</compoundname>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams" prot="public">src::single_dof_demo::core::signal_generator::SignalParams</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator" prot="public">src::single_dof_demo::core::signal_generator::SingleDofSignalGenerator</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/signal_generator.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

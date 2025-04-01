@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesignal__generator__node" kind="namespace" language="Python">
+    <compoundname>signal_generator_node</compoundname>
+    <innerclass refid="classsignal__generator__node_1_1SignalGeneratorNode" prot="public">signal_generator_node::SignalGeneratorNode</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesignal__generator__node_1a78123e986717d0b446422b90f40f10ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.main</definition>
+        <argsstring>(args=None)</argsstring>
+        <name>main</name>
+        <param>
+          <type>args</type>
+          <defname>args</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Run the signal generator node.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="316" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="316" bodyend="324"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classkinematic__arbiter_1_1core_1_1StateModelInterface.html" title="Interface for state transition models used in Kalman filtering." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html" title="State model for 3D rigid body with quaternion orientation." alt="" coords="244,5,463,47"/>
+</map>

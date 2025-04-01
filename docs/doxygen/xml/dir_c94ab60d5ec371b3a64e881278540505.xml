@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_c94ab60d5ec371b3a64e881278540505" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models</compoundname>
+    <innerfile refid="rigid__body__state__model_8hpp">rigid_body_state_model.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/models/"/>
+  </compounddef>
+</doxygen>

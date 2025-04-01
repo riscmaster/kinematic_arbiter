@@ -1,0 +1,13 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate" name="kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate">
+<area shape="rect" id="node1" title="Perform the validation and mediation process." alt="" coords="5,216,252,272"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1utils.html#af02a244e2c612066ac33228be4627067" title="Calculate chi&#45;square critical value for N degrees of freedom." alt="" coords="308,60,539,116"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a0a97984559c1bce1ca940c5031f0179c" title="Compute auxiliary measurement data for use in various algorithms." alt="" coords="300,151,547,207"/>
+<area shape="rect" id="node9" href="$namespacekinematic__arbiter_1_1core.html#a2d84e3b0f226e7c516325b0461643309" title="Convert sensor type to string." alt="" coords="626,341,810,382"/>
+<area shape="rect" id="node10" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a40c3a85ae08d728f08a72294a41a4f87" title="Update measurement covariance with bounded innovation." alt="" coords="300,281,547,337"/>
+<area shape="rect" id="node11" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a4d2c920c121d7b75cbe1d0edc8d0cd11" title="Validate auxiliary measurement data (innovation, jacobian, covariance)" alt="" coords="300,361,547,417"/>
+<area shape="rect" id="node3" href="$namespacekinematic__arbiter_1_1utils.html#a2115227fc0edd0bf7327ef2cd40c32c4" title="Interpolate between two critical values." alt="" coords="627,5,809,61"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a6b5954981316837e748849685d76da04" title="Compute the measurement Jacobian H = ∂h/∂x." alt="" coords="595,85,841,141"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#a93c282b256807ec898ed370425d51bbc" title="Predict expected measurement h(x) from state." alt="" coords="595,165,841,221"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#ae38b26ee33e03c6729973af8a0575486" title="Validate measurement size based on sensor type." alt="" coords="595,245,841,301"/>
+<area shape="rect" id="node8" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="889,253,1131,294"/>
+</map>

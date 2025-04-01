@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1core_1_1filter__output" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::core::filter_output</compoundname>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate" prot="public">src::single_dof_demo::core::filter_output::Estimate</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair" prot="public">src::single_dof_demo::core::filter_output::StateMeasurementPair</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput" prot="public">src::single_dof_demo::core::filter_output::FilterOutput</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

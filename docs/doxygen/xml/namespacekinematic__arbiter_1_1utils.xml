@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekinematic__arbiter_1_1utils" kind="namespace" language="C++">
+    <compoundname>kinematic_arbiter::utils</compoundname>
+    <innerclass refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" prot="public">kinematic_arbiter::utils::ChiSquareCriticalValue</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1utils_1_1Figure8Config" prot="public">kinematic_arbiter::utils::Figure8Config</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1utils_1aeb6ad278c4686e43540d4fa3440f4007" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t kinematic_arbiter::utils::kMaxChiSquareDof</definition>
+        <argsstring></argsstring>
+        <name>kMaxChiSquareDof</name>
+        <initializer>= 7</initializer>
+        <briefdescription>
+<para>Maximum degrees of freedom for chi-square distribution. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="18" column="18" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" compoundref="statistical__utils_8cpp" startline="25" endline="50">CalculateChiSquareCriticalValueNDof</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1utils_1aa5bd5a24489eb4a19f438bfd3791449d" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double kinematic_arbiter::utils::kFuzzyMoreThanZero</definition>
+        <argsstring></argsstring>
+        <name>kFuzzyMoreThanZero</name>
+        <initializer>= 1e-10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="29" column="18" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" compoundref="statistical__utils_8cpp" startline="8" endline="18">InterpolatedCriticalValue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1utils_1aa1f27ecd94eccf17163e5da94dc17f0b" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t kinematic_arbiter::utils::kNumChiSquareCriticalValues</definition>
+        <argsstring></argsstring>
+        <name>kNumChiSquareCriticalValues</name>
+        <initializer>= 13U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="30" column="23" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacekinematic__arbiter_1_1utils_1a988c0e186de8b566376642df93d93ef9" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr std::array&lt; std::array&lt; <ref refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" kindref="compound">ChiSquareCriticalValue</ref>, <ref refid="namespacekinematic__arbiter_1_1utils_1aa1f27ecd94eccf17163e5da94dc17f0b" kindref="member">kNumChiSquareCriticalValues</ref> &gt;, <ref refid="namespacekinematic__arbiter_1_1utils_1aeb6ad278c4686e43540d4fa3440f4007" kindref="member">kMaxChiSquareDof</ref> &gt;</type>
+        <definition>constexpr std::array&lt; std::array&lt;ChiSquareCriticalValue, kNumChiSquareCriticalValues&gt;, kMaxChiSquareDof&gt; kinematic_arbiter::utils::kChiSquareCriticalValues</definition>
+        <argsstring></argsstring>
+        <name>kChiSquareCriticalValues</name>
+        <briefdescription>
+<para>Chi-square critical values table. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>These values are generated using the integration of the chi square distribution from 0 to the critical value resulting a given confidence level. Reference: <ulink url="https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm">https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="42" column="5" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="42" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" compoundref="statistical__utils_8cpp" startline="25" endline="50">CalculateChiSquareCriticalValueNDof</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::InterpolatedCriticalValue</definition>
+        <argsstring>(double confidence_level, ChiSquareCriticalValue lower, ChiSquareCriticalValue upper)</argsstring>
+        <name>InterpolatedCriticalValue</name>
+        <param>
+          <type>double</type>
+          <declname>confidence_level</declname>
+        </param>
+        <param>
+          <type><ref refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" kindref="compound">ChiSquareCriticalValue</ref></type>
+          <declname>lower</declname>
+        </param>
+        <param>
+          <type><ref refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue" kindref="compound">ChiSquareCriticalValue</ref></type>
+          <declname>upper</declname>
+        </param>
+        <briefdescription>
+<para>Interpolate between two critical values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>confidence_level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Target confidence level </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lower</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lower critical value data point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Upper critical value data point </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Interpolated critical value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" line="8" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" bodystart="8" bodyend="18" declfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" declline="165" declcolumn="8"/>
+        <references refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1a06d0b3d8ecfb22b64f8d96212239ecf1" compoundref="statistical__utils_8hpp" startline="24">kinematic_arbiter::utils::ChiSquareCriticalValue::confidence</references>
+        <references refid="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue_1aa483e69ceaf5156ef3c2b9a82e6fc628" compoundref="statistical__utils_8hpp" startline="25">kinematic_arbiter::utils::ChiSquareCriticalValue::critical_value</references>
+        <references refid="namespacekinematic__arbiter_1_1utils_1aa5bd5a24489eb4a19f438bfd3791449d" compoundref="statistical__utils_8hpp" startline="29">kFuzzyMoreThanZero</references>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" compoundref="statistical__utils_8cpp" startline="25" endline="50">CalculateChiSquareCriticalValueNDof</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1utils_1ac2b1d5ac126ea3e455ef95d5516086ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::CalculateChiSquareCriticalValue1Dof</definition>
+        <argsstring>(double confidence_level)</argsstring>
+        <name>CalculateChiSquareCriticalValue1Dof</name>
+        <param>
+          <type>double</type>
+          <declname>confidence_level</declname>
+        </param>
+        <briefdescription>
+<para>Calculate chi-square critical value for 1 degree of freedom. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>confidence_level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Confidence level (0-1) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Chi-square critical value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" line="20" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" bodystart="20" bodyend="23" declfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" declline="175" declcolumn="8"/>
+        <references refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" compoundref="statistical__utils_8cpp" startline="25" endline="50">CalculateChiSquareCriticalValueNDof</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::utils::CalculateChiSquareCriticalValueNDof</definition>
+        <argsstring>(size_t dof_index, double confidence_level)</argsstring>
+        <name>CalculateChiSquareCriticalValueNDof</name>
+        <param>
+          <type>size_t</type>
+          <declname>dof_index</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>confidence_level</declname>
+        </param>
+        <briefdescription>
+<para>Calculate chi-square critical value for N degrees of freedom. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dof_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of degrees of freedom (0-6) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>confidence_level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Confidence level (0-1) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Chi-square critical value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" line="25" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/core/statistical_utils.cpp" bodystart="25" bodyend="50" declfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" declline="184" declcolumn="8"/>
+        <references refid="namespacekinematic__arbiter_1_1utils_1a2115227fc0edd0bf7327ef2cd40c32c4" compoundref="statistical__utils_8cpp" startline="8" endline="18">InterpolatedCriticalValue</references>
+        <references refid="namespacekinematic__arbiter_1_1utils_1a988c0e186de8b566376642df93d93ef9" compoundref="statistical__utils_8hpp" startline="42">kChiSquareCriticalValues</references>
+        <references refid="namespacekinematic__arbiter_1_1utils_1aeb6ad278c4686e43540d4fa3440f4007" compoundref="statistical__utils_8hpp" startline="18">kMaxChiSquareDof</references>
+        <referencedby refid="namespacekinematic__arbiter_1_1utils_1ac2b1d5ac126ea3e455ef95d5516086ed" compoundref="statistical__utils_8cpp" startline="20" endline="23">CalculateChiSquareCriticalValue1Dof</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" compoundref="imu__sensor__model_8cpp" startline="285" endline="321">kinematic_arbiter::sensors::ImuSensorModel::IsStationary</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" compoundref="measurement__model__interface_8hpp" startline="252" endline="316">kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1utils_1a2d3bbcea2147884b93a81b50a5459280" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Generator</type>
+          </param>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd kinematic_arbiter::utils::generateMultivariateNoise</definition>
+        <argsstring>(const Eigen::MatrixBase&lt; Derived &gt; &amp;covariance, Generator &amp;generator)</argsstring>
+        <name>generateMultivariateNoise</name>
+        <param>
+          <type>const Eigen::MatrixBase&lt; Derived &gt; &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <param>
+          <type>Generator &amp;</type>
+          <declname>generator</declname>
+        </param>
+        <briefdescription>
+<para>Generate multivariate normal noise with given covariance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Derived</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Eigen matrix type for covariance </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Covariance matrix (must be positive definite) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Noise vector with specified covariance </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if covariance is not positive definite </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="198" column="17" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" bodystart="198" bodyend="231"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher_1a8f52af5543a29c7e61d315ef4fa57af9" compoundref="sensor__publisher_8hpp" startline="81" endline="123">kinematic_arbiter::ros2::simulation::SensorPublisher&lt; MsgType &gt;::publish</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacekinematic__arbiter_1_1utils_1a2ca17a01e42301ffa188c887083eacb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Eigen::Matrix&lt; double, <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">core::StateIndex::kFullStateSize</ref>, 1 &gt;</type>
+        <definition>Eigen::Matrix&lt;double, core::StateIndex::kFullStateSize, 1&gt; kinematic_arbiter::utils::Figure8Trajectory</definition>
+        <argsstring>(double time, const Figure8Config &amp;config=Figure8Config())</argsstring>
+        <name>Figure8Trajectory</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1utils_1_1Figure8Config" kindref="compound">Figure8Config</ref> &amp;</type>
+          <declname>config</declname>
+          <defval><ref refid="structkinematic__arbiter_1_1utils_1_1Figure8Config" kindref="compound">Figure8Config</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Generates a figure-8 trajectory for testing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a smooth figure-8 trajectory with position, velocity and acceleration. This is useful for testing state prediction and measurement models.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current time in seconds </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration parameters for the trajectory (optional) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>State vector containing position, orientation, velocity and acceleration </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" line="31" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/trajectory_utils.hpp" bodystart="31" bodyend="134"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::update</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/statistical_utils.hpp" line="13" column="1"/>
+  </compounddef>
+</doxygen>

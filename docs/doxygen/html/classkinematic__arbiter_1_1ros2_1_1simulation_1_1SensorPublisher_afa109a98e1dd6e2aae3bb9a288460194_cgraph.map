@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::ros2::simulation::SensorPublisher::SensorPublisher" name="kinematic_arbiter::ros2::simulation::SensorPublisher::SensorPublisher">
+<area shape="rect" id="node1" title="Constructor for SensorPublisher." alt="" coords="5,5,244,61"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1core.html#a2d84e3b0f226e7c516325b0461643309" title="Convert sensor type to string." alt="" coords="292,13,476,54"/>
+</map>

@@ -1,0 +1,816 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::ImuSensorModel</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" prot="public" virt="non-virtual">kinematic_arbiter::core::MeasurementModelInterface</basecompoundref>
+    <includes refid="imu__sensor__model_8hpp" local="no">imu_sensor_model.hpp</includes>
+    <innerclass refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" prot="public">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</innerclass>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ab8961b5d8eeaaee7b865eb2cb890e82d" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">core::MeasurementModelInterface</ref></type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::Base =  core::MeasurementModelInterface</definition>
+        <argsstring></argsstring>
+        <name>Base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="34" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" prot="public" static="no">
+        <type>typename <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">Base::StateVector</ref></type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::StateVector =  typename Base::StateVector</definition>
+        <argsstring></argsstring>
+        <name>StateVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="36" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" prot="public" static="no">
+        <type>typename <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">Base::StateCovariance</ref></type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::StateCovariance =  typename Base::StateCovariance</definition>
+        <argsstring></argsstring>
+        <name>StateCovariance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="37" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kindref="member">kMeasurementDimension</ref>, 1 &gt;</type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::Vector =  Eigen::Matrix&lt;double, kMeasurementDimension, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="38" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1b718824924fcdf179c102454684c76b" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kindref="member">kMeasurementDimension</ref>, <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">core::StateIndex::kFullStateSize</ref> &gt;</type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::Jacobian =  Eigen::Matrix&lt;double, kMeasurementDimension, core::StateIndex::kFullStateSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>Jacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="39" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kindref="member">kMeasurementDimension</ref>, <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kindref="member">kMeasurementDimension</ref> &gt;</type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::Covariance =  Eigen::Matrix&lt;double, kMeasurementDimension, kMeasurementDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>Covariance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="40" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" prot="public" static="no">
+        <type>typename <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">Base::StateFlags</ref></type>
+        <definition>using kinematic_arbiter::sensors::ImuSensorModel::StateFlags =  typename Base::StateFlags</definition>
+        <argsstring></argsstring>
+        <name>StateFlags</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="41" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::kMeasurementDimension</definition>
+        <argsstring></argsstring>
+        <name>kMeasurementDimension</name>
+        <initializer>= <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kindref="compound">core::MeasurementDimension</ref>&lt;<ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914ae30c70d37a1c6991965a321393b30692" kindref="member">core::SensorType::Imu</ref>&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="35" column="24" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a037441e6ef4105b62bc5da4ddb9d9c00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class kinematic_arbiter::sensors::test::ImuStationaryTest</definition>
+        <argsstring></argsstring>
+        <name>kinematic_arbiter::sensors::test::ImuStationaryTest</name>
+        <param>
+          <type>kinematic_arbiter::sensors::test::ImuStationaryTest</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="183" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" prot="private" static="no" mutable="no">
+        <type><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator" kindref="compound">ImuBiasEstimator</ref></type>
+        <definition>ImuBiasEstimator kinematic_arbiter::sensors::ImuSensorModel::bias_estimator_</definition>
+        <argsstring></argsstring>
+        <name>bias_estimator_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="186" column="20" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" prot="private" static="no" mutable="no">
+        <type><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref></type>
+        <definition>ImuSensorConfig kinematic_arbiter::sensors::ImuSensorModel::config_</definition>
+        <argsstring></argsstring>
+        <name>config_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="187" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="187" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" compoundref="imu__sensor__model_8hpp" startline="131" endline="133">EnableCalibration</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" compoundref="imu__sensor__model_8hpp" startline="140" endline="142">SetConfig</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double kinematic_arbiter::sensors::ImuSensorModel::kGravity</definition>
+        <argsstring></argsstring>
+        <name>kGravity</name>
+        <initializer>= 9.80665</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="190" column="27" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" compoundref="imu__sensor__model_8hpp" startline="149" endline="151">GetGravity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1abddc7407e6880cb4a3524a7b60bc626c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double kinematic_arbiter::sensors::ImuSensorModel::kGravityVariance</definition>
+        <argsstring></argsstring>
+        <name>kGravityVariance</name>
+        <initializer>= 0.012 * 0.012</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="191" column="27" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a9a3a064dd9c01092cf62c1122046ac2d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::sensors::ImuSensorModel::ImuSensorModel</definition>
+        <argsstring>(const Eigen::Isometry3d &amp;sensor_pose_in_body_frame=Eigen::Isometry3d::Identity(), const ImuSensorConfig &amp;config=ImuSensorConfig(), const ValidationParams &amp;params=ValidationParams())</argsstring>
+        <name>ImuSensorModel</name>
+        <param>
+          <type>const Eigen::Isometry3d &amp;</type>
+          <declname>sensor_pose_in_body_frame</declname>
+          <defval>Eigen::Isometry3d::Identity()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref> &amp;</type>
+          <declname>config</declname>
+          <defval><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref>()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref> &amp;</type>
+          <declname>params</declname>
+          <defval><ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_pose_in_body_frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Transform from body to sensor frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IMU sensor configuration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Validation parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="65" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="65" bodyend="73"/>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea" compoundref="measurement__model__interface_8hpp" startline="479">kinematic_arbiter::core::MeasurementModelInterface::can_predict_input_accelerations_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a30371ff6ab5bea1b1b356d83255b8c26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::ImuSensorModel::reset</definition>
+        <argsstring>() override</argsstring>
+        <name>reset</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa2b7cdf287cf76fd3f124d61b007b876">reset</reimplements>
+        <briefdescription>
+<para>Reset the measurement model to initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="78" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="78" bodyend="80"/>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" compoundref="measurement__model__interface_8hpp" startline="477">kinematic_arbiter::core::MeasurementModelInterface::measurement_covariance_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref></type>
+        <definition>ImuSensorModel::Base::DynamicVector kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</definition>
+        <argsstring>(const StateVector &amp;state) const override</argsstring>
+        <name>PredictMeasurement</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a93c282b256807ec898ed370425d51bbc">PredictMeasurement</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Predict measurement from state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Expected measurement [gx, gy, gz, ax, ay, az]&apos; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="88" column="17" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="32" bodyend="76"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1ba34a3a2ffd727fbf186816b108cd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::sensors::ImuSensorModel::UpdateBiasEstimates</definition>
+        <argsstring>(const StateVector &amp;state, const Eigen::MatrixXd &amp;state_covariance, const Vector &amp;raw_measurement)</argsstring>
+        <name>UpdateBiasEstimates</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>state_covariance</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kindref="member">Vector</ref> &amp;</type>
+          <declname>raw_measurement</declname>
+        </param>
+        <briefdescription>
+<para>Update bias estimates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Extended version that can update bias estimates if provided with raw measurements and the vehicle is determined to be stationary.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>state_covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State covariance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>raw_measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw IMU measurement </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>If bias estimates were updated (will be false if vehicle is not stationary) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="101" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="78" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" kindref="member">DynamicJacobian</ref></type>
+        <definition>ImuSensorModel::Base::DynamicJacobian kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</definition>
+        <argsstring>(const StateVector &amp;state) const override</argsstring>
+        <name>GetMeasurementJacobian</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6b5954981316837e748849685d76da04">GetMeasurementJacobian</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Compute measurement Jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Jacobian of measurement with respect to state </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="112" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="101" bodyend="192"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>Eigen::Matrix&lt; double, 6, 1 &gt;</type>
+        <definition>Eigen::Matrix&lt; double, 6, 1 &gt; kinematic_arbiter::sensors::ImuSensorModel::GetPredictionModelInputs</definition>
+        <argsstring>(const StateVector &amp;state_before_prediction, const StateCovariance &amp;state_covariance_before_prediction, const DynamicVector &amp;measurement_after_prediction, double dt) const override</argsstring>
+        <name>GetPredictionModelInputs</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6e876bbd501638d08c5edb780a267709">GetPredictionModelInputs</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state_before_prediction</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref> &amp;</type>
+          <declname>state_covariance_before_prediction</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>measurement_after_prediction</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Get the inputs to the prediction model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state_before_prediction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>measurement_after_prediction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Actual measurement y_k after prediction of dt </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Linear and angular acceleration as inputs to the prediction model </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="122" column="17" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="194" bodyend="283"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" compoundref="state__index_8hpp" startline="56" endline="56">kinematic_arbiter::core::StateIndex::AngularVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" compoundref="state__index_8hpp" startline="66" endline="66">kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin</references>
+        <references refid="namespacekinematic__arbiter_1_1sensors_1a687fad93ff58abc219b838b61df405cb" compoundref="imu__sensor__model_8cpp" startline="16">kinematic_arbiter::sensors::kEpsilon</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::ImuSensorModel::EnableCalibration</definition>
+        <argsstring>(bool enable)</argsstring>
+        <name>EnableCalibration</name>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable bias calibration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="131" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="131" bodyend="133"/>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" compoundref="imu__sensor__model_8hpp" startline="20">kinematic_arbiter::sensors::ImuSensorConfig::calibration_enabled</references>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" compoundref="imu__sensor__model_8hpp" startline="187">config_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::ImuSensorModel::SetConfig</definition>
+        <argsstring>(const ImuSensorConfig &amp;config)</argsstring>
+        <name>SetConfig</name>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Set the configuration for the IMU sensor model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration to set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="140" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="140" bodyend="142"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" compoundref="imu__sensor__model_8hpp" startline="187">config_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::sensors::ImuSensorModel::GetGravity</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGravity</name>
+        <briefdescription>
+<para>Get the gravity constant. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Gravity constant </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="149" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="149" bodyend="151"/>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" compoundref="imu__sensor__model_8hpp" startline="190">kGravity</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref></type>
+        <definition>ImuSensorModel::StateFlags kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetInitializableStates</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae8347005b6d6adc21b80a7c1aaf951ee">GetInitializableStates</reimplements>
+        <briefdescription>
+<para>Get states that this sensor can directly initialize. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>IMU provides measurements of angular velocity and linear acceleration. When stationary, it can also help initialize roll and pitch components of orientation from gravity direction.</para>
+<para><simplesect kind="return"><para>Flags indicating initializable states</para>
+</simplesect>
+IMU provides measurements of angular velocity and linear acceleration. When stationary, it can also help initialize roll and pitch components of orientation from gravity direction.</para>
+<para><simplesect kind="return"><para>Flags for initializable states </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="162" column="14" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="332" bodyend="356"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" compoundref="state__index_8hpp" startline="63">kinematic_arbiter::core::StateIndex::LinearAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" compoundref="state__index_8hpp" startline="73">kinematic_arbiter::core::StateIndex::AngularAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" compoundref="state__index_8hpp" startline="64">kinematic_arbiter::core::StateIndex::LinearAcceleration::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" compoundref="state__index_8hpp" startline="74">kinematic_arbiter::core::StateIndex::AngularAcceleration::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref></type>
+        <definition>ImuSensorModel::StateFlags kinematic_arbiter::sensors::ImuSensorModel::InitializeState</definition>
+        <argsstring>(const DynamicVector &amp;measurement, const StateFlags &amp;, StateVector &amp;state, StateCovariance &amp;covariance) const override</argsstring>
+        <name>InitializeState</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a98065dc0937c36d9b696dc86e7bffe4e">InitializeState</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref> &amp;</type>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref> &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <briefdescription>
+<para>Initialize state from IMU measurement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes angular velocity and linear acceleration directly. When stationary, initializes orientation (roll/pitch) from gravity and sets angular acceleration to zero.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IMU measurement [gx, gy, gz, ax, ay, az] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valid_states</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags indicating which states are valid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State vector to update </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State covariance to update </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Flags indicating which states were initialized </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="177" column="14" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="371" bodyend="529"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" compoundref="state__index_8hpp" startline="36" endline="36">kinematic_arbiter::core::StateIndex::Quaternion::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" compoundref="state__index_8hpp" startline="56" endline="56">kinematic_arbiter::core::StateIndex::AngularVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1abcde4fc83b04286fb93abd48826b54fe" compoundref="state__index_8hpp" startline="66" endline="66">kinematic_arbiter::core::StateIndex::LinearAcceleration::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aba70ff56c29cff8b0cd60ddd365d093f" compoundref="state__index_8hpp" startline="76" endline="76">kinematic_arbiter::core::StateIndex::AngularAcceleration::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::sensors::ImuSensorModel::IsStationary</definition>
+        <argsstring>(const StateVector &amp;state, const StateCovariance &amp;state_covariance, const Vector &amp;measurement) const</argsstring>
+        <name>IsStationary</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref> &amp;</type>
+          <declname>state_covariance</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kindref="member">Vector</ref> &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <briefdescription>
+<para>Determine if the vehicle is stationary based on state and measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>state_covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state covariance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IMU measurement vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Boolean indicating if vehicle is stationary </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="201" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp" bodystart="285" bodyend="321"/>
+        <references refid="namespacekinematic__arbiter_1_1utils_1af02a244e2c612066ac33228be4627067" compoundref="statistical__utils_8cpp" startline="25" endline="50">kinematic_arbiter::utils::CalculateChiSquareCriticalValueNDof</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" compoundref="state__index_8hpp" startline="42">kinematic_arbiter::core::StateIndex::LinearVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>IMU measurement model (gyroscope + accelerometer) </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Models an IMU sensor that measures angular velocity and linear acceleration. Measurement vector is [gx, gy, gz, ax, ay, az]&apos; where [gx, gy, gz] represents angular velocity and [ax, ay, az] represents linear acceleration. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::sensors::ImuSensorModel</label>
+        <link refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::core::MeasurementModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>kinematic_arbiter::sensors::ImuSensorConfig</label>
+        <link refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig"/>
+      </node>
+      <node id="1">
+        <label>kinematic_arbiter::sensors::ImuSensorModel</label>
+        <link refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>config_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>bias_estimator_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</label>
+        <link refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams"/>
+      </node>
+      <node id="4">
+        <label>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</label>
+        <link refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData"/>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::core::MeasurementModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>validation_params_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>previous_measurement_data_</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>kinematic_arbiter::sensors::ImuBiasEstimator</label>
+        <link refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="31" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="31" bodyend="205"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ab8961b5d8eeaaee7b865eb2cb890e82d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>Base</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>bias_estimator_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad7f0a5265f1043721ccdcedfdaeaec4e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>body_to_sensor_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>can_predict_input_accelerations_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4346126200c9f4de489aab3fab129971" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>CanPredictInputAccelerations</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a97984559c1bce1ca940c5031f0179c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ComputeAuxiliaryData</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>config_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>Covariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>DynamicCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>DynamicJacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>DynamicVector</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>EnableCalibration</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a150e6a83b5b062c9d5be9515149c33" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetBodyToSensorTransform</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetGravity</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetInitializableStates</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a2fddcb888990500b3b3409b7b6cec686" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetMeasurementCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetMeasurementJacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3201756902a007c9ac9b209020119a0a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetModelType</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetPredictionModelInputs</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3eb44bf67d92d14ffc6bfccd3577ea32" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetSensorPoseInBodyFrame</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5cc96aafe1baa54185ab107e7badea1b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>GetValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a9a3a064dd9c01092cf62c1122046ac2d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ImuSensorModel</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>InitializeState</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>IsStationary</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1b718824924fcdf179c102454684c76b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>Jacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>kGravity</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1abddc7407e6880cb4a3524a7b60bc626c" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>kGravityVariance</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a037441e6ef4105b62bc5da4ddb9d9c00" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>kinematic_arbiter::sensors::test::ImuStationaryTest</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>kMeasurementDimension</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>measurement_covariance_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6892442da3585a1341223e86b19bab74" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>PredictMeasurement</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a01f9294fc634377d82ff39899f0933da" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>previous_measurement_data_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a30371ff6ab5bea1b1b356d83255b8c26" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>reset</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>sensor_pose_in_body_frame_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>SetConfig</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15cc22968d56d51842529beeb0467f08" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>SetSensorPoseInBodyFrame</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad540c0d79ba49a24099318bfc8bc7eda" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>SetValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>StateCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>StateFlags</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af00dfc6985a743d5cbdeb8eb5ccd895f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>StateSize</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>StateVector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40058c54f10901f78ff41d6dc5bc2719" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>type_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1ba34a3a2ffd727fbf186816b108cd95" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>UpdateBiasEstimates</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40c3a85ae08d728f08a72294a41a4f87" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>UpdateCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ValidateAndMediate</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4d2c920c121d7b75cbe1d0edc8d0cd11" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ValidateAuxiliaryData</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0c2dc49a74ea86100c0fb28845323987" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ValidateMeasurementAndTime</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>ValidateMeasurementSize</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af518043017105da5dc8e2884a3c08757" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>validation_params_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>Vector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15ccf29d4fcb77eeec7c061d1f1760a9" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel</scope><name>~MeasurementModelInterface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

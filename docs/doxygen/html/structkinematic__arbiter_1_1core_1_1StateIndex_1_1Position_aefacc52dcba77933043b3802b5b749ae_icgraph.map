@@ -1,0 +1,10 @@
+<map id="kinematic_arbiter::core::StateIndex::Position::Begin" name="kinematic_arbiter::core::StateIndex::Position::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="889,165,1077,221"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="609,5,827,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html#a2664b95c31554a212a0aa1d864ac14a9" title="Initialize state from pose measurement." alt="" coords="621,85,815,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html#a1d6dcad7753b1e064cc499384d1e012c" title="Initialize state from position measurement." alt="" coords="610,165,826,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a5c20315ad9946aee82af907393333f06" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="609,245,827,301"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#af5bdcfe5445ec15ef8a5735777f3c883" title="Publish ground truth and TF transforms." alt="" coords="595,325,841,381"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac2fc799b41b37ca470b37d7b816414a8" title="Main update function called by the timer." alt="" coords="300,325,547,381"/>
+<area shape="rect" id="node8" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac3d5b099f5eed720ffccd06bb9586788" title="Constructor for Figure8SimulatorNode." alt="" coords="5,325,252,381"/>
+</map>

@@ -1,0 +1,1024 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::FilterWrapper</compoundname>
+    <includes refid="filter__wrapper_8hpp" local="no">filter_wrapper.hpp</includes>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a53ce144fef92fdb871a2ce4ccbac571a" prot="private" static="no">
+        <type>::<ref refid="structkinematic__arbiter_1_1core_1_1StateIndex" kindref="compound">kinematic_arbiter::core::StateIndex</ref></type>
+        <definition>using kinematic_arbiter::ros2::FilterWrapper::StateIndex =  ::kinematic_arbiter::core::StateIndex</definition>
+        <argsstring></argsstring>
+        <name>StateIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="30" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae71c98e75f4ef72f931af222e9c6a479" prot="private" static="no">
+        <type>::<ref refid="classkinematic__arbiter_1_1core_1_1StateModelInterface" kindref="compound">kinematic_arbiter::core::StateModelInterface</ref></type>
+        <definition>using kinematic_arbiter::ros2::FilterWrapper::StateModelInterface =  ::kinematic_arbiter::core::StateModelInterface</definition>
+        <argsstring></argsstring>
+        <name>StateModelInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="31" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a86e8ef1edb38b61afcf16b3e6a713559" prot="private" static="no">
+        <type>::<ref refid="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter" kindref="compound">kinematic_arbiter::core::MediatedKalmanFilter</ref>&lt; <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">StateIndex::kFullStateSize</ref>, <ref refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae71c98e75f4ef72f931af222e9c6a479" kindref="member">StateModelInterface</ref> &gt;</type>
+        <definition>using kinematic_arbiter::ros2::FilterWrapper::MediatedKalmanFilter =  ::kinematic_arbiter::core::MediatedKalmanFilter&lt;StateIndex::kFullStateSize, StateModelInterface&gt;</definition>
+        <argsstring></argsstring>
+        <name>MediatedKalmanFilter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="32" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" prot="private" static="no" mutable="no">
+        <type>rclcpp::Node *</type>
+        <definition>rclcpp::Node* kinematic_arbiter::ros2::FilterWrapper::node_</definition>
+        <argsstring></argsstring>
+        <name>node_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="182" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="182" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" compoundref="filter__wrapper_8hpp" startline="214" endline="220">convertFilterTimeToRosTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" compoundref="filter__wrapper_8cpp" startline="8" endline="31">FilterWrapper</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" compoundref="filter__wrapper_8hpp" startline="64" endline="69">initializeTimeManager</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" compoundref="filter__wrapper_8hpp" startline="54" endline="57">reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+        <definition>std::shared_ptr&lt;tf2_ros::Buffer&gt; kinematic_arbiter::ros2::FilterWrapper::tf_buffer_</definition>
+        <argsstring></argsstring>
+        <name>tf_buffer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="183" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="183" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::FilterWrapper::body_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>body_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="186" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="186" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" compoundref="filter__wrapper_8cpp" startline="8" endline="31">FilterWrapper</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">getAccelerationEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" compoundref="filter__wrapper_8cpp" startline="208" endline="244">getVelocityEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::FilterWrapper::world_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>world_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="187" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="187" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" compoundref="filter__wrapper_8cpp" startline="8" endline="31">FilterWrapper</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">getPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a86e8ef1edb38b61afcf16b3e6a713559" kindref="member">MediatedKalmanFilter</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MediatedKalmanFilter&gt; kinematic_arbiter::ros2::FilterWrapper::filter_</definition>
+        <argsstring></argsstring>
+        <name>filter_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="190" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" compoundref="filter__wrapper_8cpp" startline="8" endline="31">FilterWrapper</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">getAccelerationEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" compoundref="filter__wrapper_8cpp" startline="208" endline="244">getVelocityEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677" compoundref="filter__wrapper_8cpp" startline="306" endline="315">isInitialized</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" compoundref="filter__wrapper_8hpp" startline="54" endline="57">reset</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a467693aa018f519942dc0d91e800d0e8" compoundref="filter__wrapper_8cpp" startline="33" endline="35">setMaxDelayWindow</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">setPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928" compoundref="filter__wrapper_8cpp" startline="295" endline="304">setVelocityEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kindref="compound">utils::TimeManager</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;utils::TimeManager&gt; kinematic_arbiter::ros2::FilterWrapper::time_manager_</definition>
+        <argsstring></argsstring>
+        <name>time_manager_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="193" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="193" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" compoundref="filter__wrapper_8hpp" startline="214" endline="220">convertFilterTimeToRosTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a5cfc59bdc48407f9f247af2e60e02add" compoundref="filter__wrapper_8hpp" startline="205" endline="211">convertRosTimeToFilterTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" compoundref="filter__wrapper_8cpp" startline="8" endline="31">FilterWrapper</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" compoundref="filter__wrapper_8cpp" startline="246" endline="281">getAccelerationEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" compoundref="filter__wrapper_8cpp" startline="208" endline="244">getVelocityEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" compoundref="filter__wrapper_8hpp" startline="64" endline="69">initializeTimeManager</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677" compoundref="filter__wrapper_8cpp" startline="306" endline="315">isInitialized</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" compoundref="filter__wrapper_8hpp" startline="54" endline="57">reset</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">setPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928" compoundref="filter__wrapper_8cpp" startline="295" endline="304">setVelocityEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1acc174f780b8a461ec002e45834650534" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler" kindref="compound">PositionSensorHandler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;PositionSensorHandler&gt; &gt; kinematic_arbiter::ros2::FilterWrapper::position_handlers_</definition>
+        <argsstring></argsstring>
+        <name>position_handlers_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="196" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="196" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a25e4d235c539a174da84e32da57eb1a2" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler" kindref="compound">PoseSensorHandler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;PoseSensorHandler&gt; &gt; kinematic_arbiter::ros2::FilterWrapper::pose_handlers_</definition>
+        <argsstring></argsstring>
+        <name>pose_handlers_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="197" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="197" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a1c418716dca6478877b95f503949e08f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler" kindref="compound">VelocitySensorHandler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;VelocitySensorHandler&gt; &gt; kinematic_arbiter::ros2::FilterWrapper::velocity_handlers_</definition>
+        <argsstring></argsstring>
+        <name>velocity_handlers_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="198" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="198" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af7d8a1acbb75436a47eb3cb9773c8d1a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler" kindref="compound">ImuSensorHandler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;ImuSensorHandler&gt; &gt; kinematic_arbiter::ros2::FilterWrapper::imu_handlers_</definition>
+        <argsstring></argsstring>
+        <name>imu_handlers_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="199" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="199" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::FilterWrapper::FilterWrapper</definition>
+        <argsstring>(rclcpp::Node *node, std::shared_ptr&lt; tf2_ros::Buffer &gt; tf_buffer, const ::kinematic_arbiter::models::RigidBodyStateModel::Params &amp;model_params, const std::string &amp;body_frame_id=&quot;base_link&quot;, const std::string &amp;world_frame_id=&quot;map&quot;)</argsstring>
+        <name>FilterWrapper</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+          <declname>tf_buffer</declname>
+        </param>
+        <param>
+          <type>const ::<ref refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params" kindref="compound">kinematic_arbiter::models::RigidBodyStateModel::Params</ref> &amp;</type>
+          <declname>model_params</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>body_frame_id</declname>
+          <defval>&quot;base_link&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>world_frame_id</declname>
+          <defval>&quot;map&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ROS2 node for creating publishers and subscribers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tf_buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TF buffer for transform lookups </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>model_params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parameters for the rigid body model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID for the body (default: &quot;base_link&quot;) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>world_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID for the world (default: &quot;map&quot;) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="44" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="8" bodyend="31"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" compoundref="filter__wrapper_8hpp" startline="187">world_frame_id_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::FilterWrapper::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <briefdescription>
+<para>Reset the filter to initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="54" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="54" bodyend="57"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::FilterWrapper::initializeTimeManager</definition>
+        <argsstring>(const rclcpp::Time &amp;reference_time)</argsstring>
+        <name>initializeTimeManager</name>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>reference_time</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the time manager with a specific reference time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>reference_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ROS time to use as t=0 for the filter </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="64" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="64" bodyend="69"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" compoundref="filter__wrapper_8hpp" startline="214" endline="220">convertFilterTimeToRosTime</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a5cfc59bdc48407f9f247af2e60e02add" compoundref="filter__wrapper_8hpp" startline="205" endline="211">convertRosTimeToFilterTime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::FilterWrapper::isInitialized</definition>
+        <argsstring>() const</argsstring>
+        <name>isInitialized</name>
+        <briefdescription>
+<para>Get the number of initialized states in the filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>int Number of initialized states </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="76" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="306" bodyend="315"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a467693aa018f519942dc0d91e800d0e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::FilterWrapper::setMaxDelayWindow</definition>
+        <argsstring>(double seconds)</argsstring>
+        <name>setMaxDelayWindow</name>
+        <param>
+          <type>double</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>Set maximum delay window for handling out-of-sequence measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum time in seconds to keep trajectory history </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="83" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="33" bodyend="35"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::FilterWrapper::addPositionSensor</definition>
+        <argsstring>(const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, double p2m_noise_ratio=2.0, const std::string &amp;mediation_action=&quot;force_accept&quot;)</argsstring>
+        <name>addPositionSensor</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p2m_noise_ratio</declname>
+          <defval>2.0</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>mediation_action</declname>
+          <defval>&quot;force_accept&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Add a position sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Human-readable sensor name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topic to subscribe to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID of the sensor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2m_noise_ratio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Process to measurement noise ratio </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mediation_action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mediation action (force_accept, adjust_covariance, reject) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if sensor was successfully added </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="95" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="37" bodyend="68"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1acc174f780b8a461ec002e45834650534" compoundref="filter__wrapper_8hpp" startline="196">position_handlers_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" compoundref="filter__wrapper_8cpp" startline="318" endline="333">stringToMediationAction</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" compoundref="filter__wrapper_8hpp" startline="183">tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" compoundref="filter__wrapper_8hpp" startline="187">world_frame_id_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::FilterWrapper::addPoseSensor</definition>
+        <argsstring>(const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, double p2m_noise_ratio=2.0, const std::string &amp;mediation_action=&quot;force_accept&quot;)</argsstring>
+        <name>addPoseSensor</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p2m_noise_ratio</declname>
+          <defval>2.0</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>mediation_action</declname>
+          <defval>&quot;force_accept&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Add a pose sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Human-readable sensor name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topic to subscribe to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID of the sensor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2m_noise_ratio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Process to measurement noise ratio </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mediation_action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mediation action (force_accept, adjust_covariance, reject) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if sensor was successfully added </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="112" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="70" bodyend="101"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a25e4d235c539a174da84e32da57eb1a2" compoundref="filter__wrapper_8hpp" startline="197">pose_handlers_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" compoundref="filter__wrapper_8cpp" startline="318" endline="333">stringToMediationAction</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" compoundref="filter__wrapper_8hpp" startline="183">tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" compoundref="filter__wrapper_8hpp" startline="187">world_frame_id_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::FilterWrapper::addVelocitySensor</definition>
+        <argsstring>(const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, double p2m_noise_ratio=2.0, const std::string &amp;mediation_action=&quot;force_accept&quot;)</argsstring>
+        <name>addVelocitySensor</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p2m_noise_ratio</declname>
+          <defval>2.0</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>mediation_action</declname>
+          <defval>&quot;force_accept&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Add a velocity sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Human-readable sensor name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topic to subscribe to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID of the sensor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2m_noise_ratio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Process to measurement noise ratio </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mediation_action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mediation action (force_accept, adjust_covariance, reject) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if sensor was successfully added </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="129" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="103" bodyend="134"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" compoundref="filter__wrapper_8cpp" startline="318" endline="333">stringToMediationAction</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" compoundref="filter__wrapper_8hpp" startline="183">tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a1c418716dca6478877b95f503949e08f" compoundref="filter__wrapper_8hpp" startline="198">velocity_handlers_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::FilterWrapper::addImuSensor</definition>
+        <argsstring>(const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, double p2m_noise_ratio=2.0, const std::string &amp;mediation_action=&quot;force_accept&quot;)</argsstring>
+        <name>addImuSensor</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p2m_noise_ratio</declname>
+          <defval>2.0</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>mediation_action</declname>
+          <defval>&quot;force_accept&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Add an IMU sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Human-readable sensor name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topic to subscribe to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sensor_frame_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame ID of the sensor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2m_noise_ratio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Process to measurement noise ratio </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mediation_action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mediation action (force_accept, adjust_covariance, reject) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool True if sensor was successfully added </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="146" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="136" bodyend="167"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af7d8a1acbb75436a47eb3cb9773c8d1a" compoundref="filter__wrapper_8hpp" startline="199">imu_handlers_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" compoundref="filter__wrapper_8cpp" startline="318" endline="333">stringToMediationAction</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" compoundref="filter__wrapper_8hpp" startline="183">tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>geometry_msgs::msg::PoseWithCovarianceStamped</type>
+        <definition>geometry_msgs::msg::PoseWithCovarianceStamped kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</definition>
+        <argsstring>()</argsstring>
+        <name>getPoseEstimate</name>
+        <briefdescription>
+<para>Get the estimated pose with covariance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time to estimate at (uses current filter time if omitted) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pose with covariance stamped message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="159" column="49" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="169" bodyend="206"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" compoundref="filter__wrapper_8hpp" startline="187">world_frame_id_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" compoundref="state__index_8hpp" startline="22">kinematic_arbiter::core::StateIndex::Position::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" compoundref="state__index_8hpp" startline="23">kinematic_arbiter::core::StateIndex::Position::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>geometry_msgs::msg::TwistWithCovarianceStamped</type>
+        <definition>geometry_msgs::msg::TwistWithCovarianceStamped kinematic_arbiter::ros2::FilterWrapper::getVelocityEstimate</definition>
+        <argsstring>()</argsstring>
+        <name>getVelocityEstimate</name>
+        <briefdescription>
+<para>Get the estimated velocity with covariance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time to estimate at (uses current filter time if omitted) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Twist with covariance stamped message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="167" column="50" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="208" bodyend="244"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" compoundref="state__index_8hpp" startline="42">kinematic_arbiter::core::StateIndex::LinearVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" compoundref="state__index_8hpp" startline="43">kinematic_arbiter::core::StateIndex::LinearVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" compoundref="state__index_8hpp" startline="44">kinematic_arbiter::core::StateIndex::LinearVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>geometry_msgs::msg::AccelWithCovarianceStamped</type>
+        <definition>geometry_msgs::msg::AccelWithCovarianceStamped kinematic_arbiter::ros2::FilterWrapper::getAccelerationEstimate</definition>
+        <argsstring>()</argsstring>
+        <name>getAccelerationEstimate</name>
+        <briefdescription>
+<para>Get the estimated acceleration with covariance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time to estimate at (uses current filter time if omitted) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Accel with covariance stamped message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="175" column="50" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="246" bodyend="281"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" compoundref="filter__wrapper_8hpp" startline="186">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1aec74bb1d8af0022628c73105f68ab432" compoundref="state__index_8hpp" startline="62">kinematic_arbiter::core::StateIndex::LinearAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1ad54f3ad255cbacc2ad29b7c97a3f1f5a" compoundref="state__index_8hpp" startline="72">kinematic_arbiter::core::StateIndex::AngularAcceleration::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1a0a0cde579e6f27c1eae474023840aa46" compoundref="state__index_8hpp" startline="63">kinematic_arbiter::core::StateIndex::LinearAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1aaea479bb5c69487e92133f7a53b295e6" compoundref="state__index_8hpp" startline="73">kinematic_arbiter::core::StateIndex::AngularAcceleration::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration_1ac13e197ca37f472101cc14a2106fdb68" compoundref="state__index_8hpp" startline="64">kinematic_arbiter::core::StateIndex::LinearAcceleration::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration_1a6d5582b4588663cb994a2d751e68badf" compoundref="state__index_8hpp" startline="74">kinematic_arbiter::core::StateIndex::AngularAcceleration::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</definition>
+        <argsstring>(const geometry_msgs::msg::PoseStamped::SharedPtr msg)</argsstring>
+        <name>setPoseEstimate</name>
+        <param>
+          <type>const geometry_msgs::msg::PoseStamped::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="177" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="283" bodyend="293"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" compoundref="state__index_8hpp" startline="22">kinematic_arbiter::core::StateIndex::Position::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" compoundref="state__index_8hpp" startline="23">kinematic_arbiter::core::StateIndex::Position::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::FilterWrapper::setVelocityEstimate</definition>
+        <argsstring>(const geometry_msgs::msg::TwistStamped::SharedPtr msg)</argsstring>
+        <name>setVelocityEstimate</name>
+        <param>
+          <type>const geometry_msgs::msg::TwistStamped::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="178" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="295" bodyend="304"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" compoundref="filter__wrapper_8hpp" startline="190">filter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a0e89a91c515a8082579c3da82e694558" compoundref="state__index_8hpp" startline="42">kinematic_arbiter::core::StateIndex::LinearVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1ab5079ed794f17df901a6199dc51d9da8" compoundref="state__index_8hpp" startline="52">kinematic_arbiter::core::StateIndex::AngularVelocity::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a9ddd6b8d76482ae590615bd55fefb727" compoundref="state__index_8hpp" startline="43">kinematic_arbiter::core::StateIndex::LinearVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a6a36392e699a5d9c1fa1aa81a630796a" compoundref="state__index_8hpp" startline="53">kinematic_arbiter::core::StateIndex::AngularVelocity::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a6709e9d5181c66bd8202dd202a746d27" compoundref="state__index_8hpp" startline="44">kinematic_arbiter::core::StateIndex::LinearVelocity::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a21bf3e25ae81f3cfef8d9d0e6b12fcfb" compoundref="state__index_8hpp" startline="54">kinematic_arbiter::core::StateIndex::AngularVelocity::Z</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888" kindref="member">kinematic_arbiter::core::MediationAction</ref></type>
+        <definition>kinematic_arbiter::core::MediationAction kinematic_arbiter::ros2::FilterWrapper::stringToMediationAction</definition>
+        <argsstring>(const std::string &amp;action_str) const</argsstring>
+        <name>stringToMediationAction</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>action_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="202" column="44" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp" bodystart="318" bodyend="333"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" compoundref="filter__wrapper_8cpp" startline="136" endline="167">addImuSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" compoundref="filter__wrapper_8cpp" startline="70" endline="101">addPoseSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" compoundref="filter__wrapper_8cpp" startline="37" endline="68">addPositionSensor</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" compoundref="filter__wrapper_8cpp" startline="103" endline="134">addVelocitySensor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a5cfc59bdc48407f9f247af2e60e02add" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::FilterWrapper::convertRosTimeToFilterTime</definition>
+        <argsstring>(const rclcpp::Time &amp;ros_time)</argsstring>
+        <name>convertRosTimeToFilterTime</name>
+        <param>
+          <type>const rclcpp::Time &amp;</type>
+          <declname>ros_time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="205" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="205" bodyend="211"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" compoundref="filter__wrapper_8hpp" startline="64" endline="69">initializeTimeManager</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>rclcpp::Time</type>
+        <definition>rclcpp::Time kinematic_arbiter::ros2::FilterWrapper::convertFilterTimeToRosTime</definition>
+        <argsstring>(double filter_time)</argsstring>
+        <name>convertFilterTimeToRosTime</name>
+        <param>
+          <type>double</type>
+          <declname>filter_time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="214" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="214" bodyend="220"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" compoundref="filter__wrapper_8hpp" startline="64" endline="69">initializeTimeManager</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" compoundref="filter__wrapper_8hpp" startline="182">node_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" compoundref="filter__wrapper_8hpp" startline="193">time_manager_</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wrapper for the MediatedKalmanFilter that handles ROS2 integrations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" line="29" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp" bodystart="29" bodyend="221"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>addImuSensor</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>addPoseSensor</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>addPositionSensor</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>addVelocitySensor</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a36e87b67673dd1247dfd48d78cbb972b" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>body_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a992c213c8b4f271a2ae18a9130522e06" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>convertFilterTimeToRosTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a5cfc59bdc48407f9f247af2e60e02add" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>convertRosTimeToFilterTime</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ad064121a2af43eb29da7a31d97e35e93" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>filter_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>FilterWrapper</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>getAccelerationEstimate</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>getPoseEstimate</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>getVelocityEstimate</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af7d8a1acbb75436a47eb3cb9773c8d1a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>imu_handlers_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>initializeTimeManager</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>isInitialized</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a86e8ef1edb38b61afcf16b3e6a713559" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>MediatedKalmanFilter</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a6580be7642c9a5a68c1c709b07b24cf9" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a25e4d235c539a174da84e32da57eb1a2" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>pose_handlers_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1acc174f780b8a461ec002e45834650534" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>position_handlers_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>reset</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a467693aa018f519942dc0d91e800d0e8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>setMaxDelayWindow</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>setPoseEstimate</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>setVelocityEstimate</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a53ce144fef92fdb871a2ce4ccbac571a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>StateIndex</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae71c98e75f4ef72f931af222e9c6a479" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>StateModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a32f55e4e5454fbfe6cab6393edadb98c" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>stringToMediationAction</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abc2fd5839a7670d84d72fd0a9c410250" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>tf_buffer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa053b1dfbbc19014ad51b0ea7d1df123" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>time_manager_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a1c418716dca6478877b95f503949e08f" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>velocity_handlers_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8772d7ad73858294caf5cacafb979c66" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::FilterWrapper</scope><name>world_frame_id_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

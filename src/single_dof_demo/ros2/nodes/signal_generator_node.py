@@ -21,7 +21,7 @@ from rclpy.node import Node
 from std_srvs.srv import Trigger
 from rclpy.parameter import Parameter
 
-from kinematic_arbiter.single_dof_demo.core.signal_generator import (
+from single_dof_demo.core.signal_generator import (
     SignalParams,
     SingleDofSignalGenerator,
 )

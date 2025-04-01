@@ -1,0 +1,8 @@
+<map id="kinematic_arbiter::models::RigidBodyStateModel::PredictState" name="kinematic_arbiter::models::RigidBodyStateModel::PredictState">
+<area shape="rect" id="node1" title="Predict state forward in time: x̂_k^&#45; = f(x̂_{k&#45;1}^+, u_k)" alt="" coords="5,165,224,221"/>
+<area shape="rect" id="node2" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html#aefacc52dcba77933043b3802b5b749ae" title=" " alt="" coords="311,5,499,61"/>
+<area shape="rect" id="node3" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html#a90f46140a68776dac322db5def8ef932" title=" " alt="" coords="291,85,519,141"/>
+<area shape="rect" id="node4" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html#a582fc5f2b58d312404f599b8d00afa71" title=" " alt="" coords="286,165,525,221"/>
+<area shape="rect" id="node5" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html#abcde4fc83b04286fb93abd48826b54fe" title=" " alt="" coords="277,245,534,301"/>
+<area shape="rect" id="node6" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html#aba70ff56c29cff8b0cd60ddd365d093f" title=" " alt="" coords="272,325,539,381"/>
+</map>

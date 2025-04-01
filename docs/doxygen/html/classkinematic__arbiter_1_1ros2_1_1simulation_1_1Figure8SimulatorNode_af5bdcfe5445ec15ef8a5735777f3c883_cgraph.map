@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth" name="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth">
+<area shape="rect" id="node1" title="Publish ground truth and TF transforms." alt="" coords="5,85,252,141"/>
+<area shape="rect" id="node2" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html#aefacc52dcba77933043b3802b5b749ae" title=" " alt="" coords="325,5,513,61"/>
+<area shape="rect" id="node3" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html#a90f46140a68776dac322db5def8ef932" title=" " alt="" coords="305,85,533,141"/>
+<area shape="rect" id="node4" href="$structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html#a582fc5f2b58d312404f599b8d00afa71" title=" " alt="" coords="300,165,539,221"/>
+</map>

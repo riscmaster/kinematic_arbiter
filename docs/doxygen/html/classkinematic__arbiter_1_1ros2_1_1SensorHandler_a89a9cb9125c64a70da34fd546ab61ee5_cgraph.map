@@ -1,0 +1,8 @@
+<map id="kinematic_arbiter::ros2::SensorHandler::messageCallback" name="kinematic_arbiter::ros2::SensorHandler::messageCallback">
+<area shape="rect" id="node1" title="Callback for incoming sensor messages." alt="" coords="5,85,159,141"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a573195b53a7344f2d9d7d86e37e20062" title="Look up the static transform from sensor to body frame." alt="" coords="233,5,407,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a240e054f2e536ac7ee6dae29aa066f97" title="Convert message to measurement vector." alt="" coords="243,85,397,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a0d89952874a48c55aef825ff7f13ae1a" title="Publish expected measurement and bounds." alt="" coords="207,165,433,221"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a82b574c4cbd3cfbf23ec2123a4e555db" title="Apply a sigma bound offset to a message." alt="" coords="481,125,635,181"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#af73f0d302ea4941d4ec056dd47cf0992" title="Convert measurement vector to message." alt="" coords="481,205,635,261"/>
+</map>

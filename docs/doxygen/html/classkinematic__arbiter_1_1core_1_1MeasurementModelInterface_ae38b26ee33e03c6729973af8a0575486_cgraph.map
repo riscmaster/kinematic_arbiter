@@ -1,0 +1,4 @@
+<map id="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementSize" name="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementSize">
+<area shape="rect" id="node1" title="Validate measurement size based on sensor type." alt="" coords="5,5,252,61"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1core.html#ad5832fdeec2175a36ebf3f68d77ad548" title="Runtime function to get measurement dimension from sensor type." alt="" coords="300,13,541,54"/>
+</map>

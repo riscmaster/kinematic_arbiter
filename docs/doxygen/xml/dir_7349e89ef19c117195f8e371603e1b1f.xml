@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_7349e89ef19c117195f8e371603e1b1f" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors</compoundname>
+    <innerfile refid="imu__bias__estimator_8cpp">imu_bias_estimator.cpp</innerfile>
+    <innerfile refid="imu__sensor__model_8cpp">imu_sensor_model.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/"/>
+  </compounddef>
+</doxygen>

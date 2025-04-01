@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishImu" name="kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishImu">
+<area shape="rect" id="node1" title="Publish IMU sensor data." alt="" coords="595,5,841,61"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac2fc799b41b37ca470b37d7b816414a8" title="Main update function called by the timer." alt="" coords="300,5,547,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html#ac3d5b099f5eed720ffccd06bb9586788" title="Constructor for Figure8SimulatorNode." alt="" coords="5,5,252,61"/>
+</map>

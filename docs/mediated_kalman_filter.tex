@@ -1,0 +1,269 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\usepackage{amsmath, amssymb, graphicx}
+\usepackage{hyperref}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\title{Mediated Kalman Filter}
+\author{Spencer Maughan}
+\date{}
+
+\begin{document}
+	\maketitle
+
+	\begin{abstract}
+		Kalman filters are often misunderstood as deterministic estimators, when in fact they represent structured probabilistic beliefs. Their optimality depends on assumptions—linearity, Gaussian noise, and static covaraince—that are rarely validated in practice. This paper introduces two core extensions to address these limitations: first, a mediation layer to make assumptions explicit and testable at runtime; second, a simplified dynamic tuning framework that reduces tuning complexity and makes performance accessible to non-experts. The derivation builds on the joint density formulation from Barfoot, preserving the elegance of the original filter while addressing its fragility in real-world conditions.
+	\end{abstract}
+
+	\section{Introduction}
+	There are two parts to the method outlined in this document.
+	\begin{itemize}
+		\item {\bfseries Mediation:} Maintaining confidence in the assumptions underlying the optimal performance of the kalman filter
+		\item {\bfseries Simplified Tuning:} Estimating tuning parameters such that tuning is dramatically simplified and governed by reasonable noise estimates of the measurements used.
+	\end{itemize}
+Maintaining confidence in the assumptions underlying Kalman filter optimality has been a topic of discussion since its inception \cite{kalman1960new, maybeck1982stochastic}. Traditionally, this concern has been addressed through fault detection techniques—most notably via the chi-squared innovation test \cite{jazwinski2007stochastic}—or through scenario-specific handling approaches that are often complex and difficult to generalize \cite{barfoot2017state}. The method presented here takes a more proactive and practical stance: instead of merely detecting failure post hoc, it aims to prevent it. By embedding a chi-squared test within a structured mediation layer, this approach actively validates core assumptions—such as the consistency between predicted and observed measurements—thereby preserving the filter’s integrity during runtime.
+
+Adaptive tuning of Kalman filters remains an active area of research \cite{simon2006optimal, shumway2017time, sarkka2013bayesian}, and numerous self-tuning approaches have been proposed. However, these methods often struggle when designed to be fully autonomous, particularly in changing or uncertain environments. This work adopts a different philosophy: rather than eliminating tuning altogether, it simplifies and reframes it. By applying Bayesian inference and monitoring innovation statistics, a conservative estimate of measurement noise can be dynamically inferred. Moreover, introducing a single scalar to express the process-to-measurement noise ratio establishes a clear and intuitive relationship between noise terms. This substantially reduces the dimensionality of tuning, making the method accessible and robust—even for non-experts.
+
+	\section{Kalman Filter Derivation}
+	This derivation follows notation used by Barfoot \cite{barfoot2017state}. Beginning with the Gaussian prior, our state is represented as:
+	\begin{equation}
+		p(x_{k-1} | \check{x}_{0}, \nu_{1:k-1}, y_{0:k-1}) \sim \mathcal{N}(\hat{x}_{k-1}, \hat{P}_{k-1})
+	\end{equation}
+	where $x_{k-1}$ is the true state and $\hat{x}_{k-1}$ is the mean estimate and $\hat{P}_{k-1}$ is the covariance matrix.
+
+	\subsection{Prediction Step}
+	We can derive the standard form of the prediction step simply using the latest input $\nu_k$ and generate the expression for the prior at time step $k$:
+	\begin{equation}
+	p(x_k | \check{x}_{0}, \nu_{1:k}, y_{0:k-1}) \sim \mathcal{N}(\check{x}_{k}, \check{P}_{k})
+	\end{equation}
+	where:
+	\begin{align*}
+		\check{x}_k &= E[A_{k-1}x_{k-1} + \nu_k + w_k] \\
+		\check{x}_k &= A_{k-1} \underbrace{E[x_{k-1}]}_{\hat{x}_{k-1}} + \nu_k + \cancelto{0}{E[w_k]}
+	\end{align*}
+
+	\begin{equation}
+		\check{x}_k = A_{k-1} \hat{x}_{k-1} + \nu_k
+		\label{eq:process_model}
+	\end{equation}
+
+	and
+
+	\begin{align*}
+		\check{P}_k &= E[(x_{k} - E[x_k])(x_{k} - E[x_k])^T] \\
+		 &= E[(A_{k-1}x_{k-1} + \nu_k + w_k - A_{k-1}\hat{x}_{k-1} - \nu_k)(A_{k-1}x_{k-1} + \nu_k + w_k - A_{k-1}\hat{x}_{k-1} - \nu_k)^T] \\
+		 &= A_{k-1} \underbrace{E[(x_{k-1} - \hat{x}_{k-1})(x_{k-1} - \hat{x}_{k-1})^T]}_{\check{P}_{k-1}} A_{k-1}^T + \underbrace{E[w_kw_k^T]}_{Q_k} \\
+	\end{align*}
+
+	\begin{equation}
+		\check{P}_k = A_{k-1} \hat{P}_{k-1} A_{k-1}^T + Q_k
+		\label{eq:process_covariance}
+	\end{equation}
+
+	\subsection{Update Step Using Joint Density}
+	The joint density of the state and latest measurement can be expressed as:
+	\begin{align}
+			p(x_k, y_k | \check{x}_{0}, \nu_{1:k}, y_{0:k-1}) & \sim \mathcal{N} \left(
+		\begin{bmatrix}
+			\mu_x \\
+			\mu_y
+		\end{bmatrix},
+		\begin{bmatrix}
+			\Sigma_{xx} & \Sigma_{xy} \\
+			\Sigma_{yx} & \Sigma_{yy}
+		\end{bmatrix} \right)\\
+		& \sim \mathcal{N} \left(
+		\begin{bmatrix}
+			\check{x}_k \\
+			C_k \check{x}_k
+		\end{bmatrix},
+		\begin{bmatrix}
+			\check{P}_k & \check{P}_k C_k^T \\
+			C_k \check{P}_k & C_k \check{P}_k C_k^T + R_k
+		\end{bmatrix} \right)
+	\end{align}
+	Given this joint density, the conditional density can be directly written as follows:
+	\begin{equation}
+		p(x_k | \check{x}_{0}, \nu_{1:k}, y_{0:k}) \sim \mathcal{N} (\mu_x + \Sigma_{xy} \Sigma_{yy}^{-1} (y_k - \mu_y), \Sigma_{xx} -   \Sigma_{xy} \Sigma_{yy}^{-1} \Sigma_{yx})
+	\end{equation}
+	Leveraging this distribution we can provide the familiar structure of the Kalman filter update equations:
+	\begin{align}
+		K_k &=  \check{P}_k C_k^T (C_k \check{P}_k C_k^T + R_k)^{-1} \\
+		\hat{x}_k &= \check{x}_k + K_k (y_k - C_k \check{x}_k) \\
+		\hat{P}_k &= (I - K_k C_k) \check{P}_k
+	\end{align}
+
+	\section{Mediation}
+	Mediation provides a rigorous framework for encapsulating and actively maintaining the fundamental assumptions of the Kalman filter—assumptions that are typically taken for granted. By continuously validating these assumptions, mediation enables the detection of both recoverable and non-recoverable failures, ensuring appropriate failure mode handling. This proactive approach enhances the practicality and reliability of the Kalman filter, making it more robust for real-world applications.
+
+
+	A fundamental assumption of the Kalman filter is that both the actual measurement $y_k$ and the predicted measurement $C_k \check{x}_k$ share the same mean, which is a function of the true state $x_k$. Where both distributions are centered at $C_k x_k$, this can be expressed as:
+
+	\begin{align}
+		y_k &\sim \mathcal{N} (C_k x_k, R)\\
+		C_k \check{x}_k &\sim \mathcal{N} (C_k x_k, C_k \check{P}_k C_k^T)\\
+	\end{align}
+
+	Explicitly testing the assumption that two random variables share the same mean can be formulated as a chi-squared test:
+
+	\begin{equation}
+		(y_k - C_k \check{x}_k)^T (C_k \check{P}_k C_k^T + R)^{-1} (y_k - C_k \check{x}_k) < \chi_c
+		\label{eq:chisquare}
+	\end{equation}
+	where \( \chi_c \) is the critical value corresponding to a given confidence level of the chi-squared distribution, based on the degrees of freedom of the measurement. If this condition holds, the core assumptions of the filter remain valid, and no mediation is necessary. However, if the test fails, it indicates a fundamental breakdown of the filter’s underlying assumptions. At this point, the system is no longer operating within expected conditions, requiring appropriate corrective action to recover or transition to a safe failure mode.
+
+
+\subsection{Dynamic Tuning of Measurement Noise}
+
+As outlined in the introduction, the objective is not merely to detect violations of the Kalman filter’s assumptions, but to actively prevent them. A common failure mode arises from unmodeled disturbances in sensor data—such as vibration, temperature drift, environmental interference, or mechanical offsets—that cause deviations between predicted and actual measurements. These deviations increase the probability of failing the chi-squared innovation test, signaling a breakdown in the Gaussian, zero-mean noise assumption fundamental to Kalman filtering.
+
+To mitigate this, we introduce a dynamic estimation of measurement noise. Rather than relying on a static noise model, which often fails to generalize across changing conditions, the measurement noise covariance \( R \) is updated continuously based on empirical innovation statistics. This allows the filter to remain resilient in the presence of evolving disturbances by maintaining a probabilistic agreement between expected and observed measurements. In doing so, the filter adapts its belief about measurement uncertainty in real time, reinforcing the validity of its underlying assumptions and preventing silent degradation.
+
+	Leveraging measurement and expected measurement distributions we can derive the true Covariance matrix $R$:
+
+	\begin{equation}
+		R_n = {1 \over n - 1} \displaystyle\sum_{i=0} ^{n} (y_i - C_i x_i) (y_i - C_i x_i)^T
+	\end{equation}
+
+	In practical applications the true covariance is not available. A reliable alternative exists, given that the core assumptions of the filter are maintained. That is to use the current best estimates. In this is instance the expected value will result in a conservative estimate of covariance.
+
+	\begin{align*}
+		E[\hat{R}_k] &= E[{1 \over k - 1} \displaystyle\sum_{i=0} ^{k} (y_i - C_i \hat{x}_i) (y_i - C_i \hat{x}_i)^T]\\
+		&= \underbrace{E[{1 \over k - 1} \displaystyle\sum_{i=0} ^{k} y_iy_i^T]}_{R_k} + \cancelto{0}{E[{1 \over k - 1} \displaystyle\sum_{i=0} ^{k} -C_i \hat{x}_i y_i - y_i C_i \hat{x}_i^T C_i^T]} + C_i \underbrace{E[{1 \over k - 1} \displaystyle\sum_{i=0}^{k} x_ix_i^T]}_{\hat{P}_k} C_i^T\\
+	\end{align*}
+	\begin{equation}
+		E[\hat{R}_k] = R_k + C_k \hat{P}_k C_k^T
+		\label{eq:exp_meas_cov}
+	\end{equation}
+
+	While the underlying assumptions of the Kalman filter are maintained this relationship provides a possibility of simplifying tuning of the filter. Taking this one step further recognizing the iterative nature of this algorithm we can dynamically calculate measurement covariance or noise and have convergence to the expected value in equation \ref{eq:exp_meas_cov}
+
+	\subsubsection{Recursive Estimate of Covariance}
+
+	\begin{equation}
+		w_n = {1 \over n - 1} \displaystyle\sum_{i=0} ^{n} x_ix_i^T\\
+	\end{equation}
+
+	\begin{align*}
+		w_{n+1} &= {1 \over n} \displaystyle\sum_{i=0} ^{n+1} x_ix_i^T\\
+		&= {1 \over n} x_{n+1}x_{n+1}^T + {1 \over n} \displaystyle\sum_{i=0} ^{n} x_ix_i^T\\
+		&= {1 \over n} x_{n+1}x_{n+1}^T + {n-1 \over n} \underbrace{{1 \over n -1} \displaystyle\sum_{i=0} ^{n} x_ix_i^T}_{w_n}\\
+		&= {x_{n+1}x_{n+1}^T + (n - 1) w_n \over n}\\
+	\end{align*}
+
+	\begin{equation}
+		w_{n+1} = w_n + {x_{n+1}x_{n+1}^T -w_n \over n}
+		\label{eq:recursive_covariance}
+	\end{equation}
+
+	\subsubsection{Dynamic Estimation of Measurement Noise}
+
+	Applying equation \ref{eq:recursive_covariance} we can generate an expression for dynamic estimation of measurement noise which under our current assumptions will converge to the conservative estimated value demonstrated in equation \ref{eq:exp_meas_cov}.
+
+
+	\begin{equation}
+		\hat{R}_k = \hat{R}_{k-1} + {(y_k - C_k \hat{x}_k)(y_k - C_k \hat{x}_k)^T - \hat{R}_{k-1} \over n}
+	\end{equation}
+
+	Note that $(y_k - C_k \hat{x}_k)$ represents the innovation value and equation \ref{eq:exp_meas_cov} defines the innovation covariance.
+
+	\subsection{Dynamic Tuning of Process Noise}
+
+	Process noise is the Covariance of the error in the model at each time step:
+
+	\begin{align*}
+		\Delta \hat{x}_k &= \hat{x}_k - \hat{x}_{k-1}\\
+		\Delta x_k &= x_k - x_{k-1}\\
+		\Delta x_k^{err} &= \Delta \hat{x}_k - \Delta x_k
+	\end{align*}
+
+	\begin{equation}
+		Q_n = {1 \over n - 1} \displaystyle\sum_{i=0} ^{n} \Delta x_i^{err} {\Delta x_i^{err}}^T
+	\end{equation}
+
+	Similar to our discussion of measurement covariance, in practical applications the true state is not available. However, we are actively assessing whether the core assumptions of the filter are maintained. While these hold a reasonable substitute for the true state is the updated state that incorporates measurement data. This estimate again will result in a conservative estimate of covariance. Given that both process and measurement noise are conservative estimates a single scalar tuning parameter $\zeta$ will be introduced to permit tuning the relative weighting between measurement and process.
+
+	\begin{align*}
+		Q_n &= {1 \over n - 1} \displaystyle\sum_{i=0} ^{n}(\hat{x}_k^- - \hat{x}_{k-1}^- - (\hat{x}_k^+ - \hat{x}_{k-1}^-))(\hat{x}_k^- - \hat{x}_{k-1}^- - (\hat{x}_k^+ - \hat{x}_{k-1}^-))^T\\
+		&= {1 \over n - 1} \displaystyle\sum_{i=0} ^{n}(\hat{x}_k^- - \hat{x}_k^+)(\hat{x}_k^- - \hat{x}_k^+)^T\\
+	\end{align*}
+	Let $\hat{x}_k^-$ be the state predicted before the update step and let $\hat{x}_k^+$ be the state after the update step. Similarly applying equation \ref{eq:recursive_covariance} we have the following dynamic estimate of Q following the update step:
+
+	\begin{equation}
+	\hat{Q}_k = \hat{Q}_{k-1} + {\zeta (\hat{x}_k^- - \hat{x}_k^+)(\hat{x}_k^- - \hat{x}_k^+)^T - \hat{Q}_{k-1} \over n}
+	\end{equation}
+
+	\section{Complete Algorithm}
+
+	\subsection{Tuning Parameters}
+	Initializing parameters are needed. However, these do not need to be exposed at the interface level. Logical defaults typically suffice except for the initial state. The proper initialization of the state is not a topic of this paper.
+	\begin{itemize}
+		\item $Q_0 :=$ Initial Process noise
+		\item $R_0 :=$ Initial Measurement noise per sensor
+		\item $P_0 :=$ Initial State Covariance
+		\item $\hat{x}_0 :=$ Initial State
+	\end{itemize}
+
+	Active Tuning parameters (all scalars):
+		\begin{itemize}
+		\item $\zeta :=$ Process noise modifier. Lower increases confidence in the process model and higher decreases confidence in process model. A value of $1.0$ is neutral. The value should be $\geq 0$.
+		\item $n :=$ sample window over which adaptive tuning parameters will be estimated. The value should be an integer $\geq 0$.
+		\item $\chi_c :=$ Acceptable threshold for a given sensor before mediation.
+	\end{itemize}
+
+	\subsection{Prediction Step}
+	Using equations \ref{eq:process_model} and \ref{eq:process_covariance}:
+
+	\begin{align*}
+		\check{x}_k &= A_{k-1} \hat{x}_{k-1} + \nu_k\\
+		\check{P}_k &= A_{k-1} \hat{P}_{k-1} A_{k-1}^T + Q_k
+	\end{align*}
+
+	\subsection{Mediation}
+	Applying equation \ref{eq:chisquare}:
+
+	If:
+	\begin{equation*}
+		(y_k - C_k \check{x}_k)^T (C_k \check{P}_k C_k^T + R)^{-1} (y_k - C_k \check{x}_k) < \chi_c
+	\end{equation*}
+
+	Then:
+		\begin{center}
+			Take corrective action to recover or transition to a safe failure mode.
+		\end{center}
+
+	Else:
+		\begin{center}
+			Continue
+		\end{center}
+
+	\subsection{Update Step}
+	\begin{align*}
+		K_k &=  \check{P}_k C_k^T (C_k \check{P}_k C_k^T + R_k)^{-1} \\
+		\hat{x}_k &= \check{x}_k + K_k (y_k - C_k \check{x}_k) \\
+		\hat{P}_k &= (I - K_k C_k) \check{P}_k
+	\end{align*}
+
+	\subsection{Measurement Noise Update}
+
+	\begin{equation*}
+		\hat{R}_k = \hat{R}_{k-1} + {(y_k - C_k \hat{x}_k)(y_k - C_k \hat{x}_k)^T - \hat{R}_{k-1} \over n}
+	\end{equation*}
+
+	\subsection{Process Noise Update}
+
+	\begin{equation*}
+		\hat{Q}_k = \hat{Q}_{k-1} + {\zeta (\hat{x}_k^- - \hat{x}_k^+)(\hat{x}_k^- - \hat{x}_k^+)^T - \hat{Q}_{k-1} \over n}
+	\end{equation*}
+
+\printbibliography[title={References}]
+\end{document}

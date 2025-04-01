@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::ImuSensorConfig</compoundname>
+    <includes refid="imu__sensor__model_8hpp" local="no">imu_sensor_model.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a60805d4ea0d104b078d00a14bc78f2a5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kinematic_arbiter::sensors::ImuSensorConfig::bias_estimation_window_size</definition>
+        <argsstring></argsstring>
+        <name>bias_estimation_window_size</name>
+        <initializer>= 1000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="19" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::sensors::ImuSensorConfig::calibration_enabled</definition>
+        <argsstring></argsstring>
+        <name>calibration_enabled</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="20" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" compoundref="imu__sensor__model_8hpp" startline="131" endline="133">kinematic_arbiter::sensors::ImuSensorModel::EnableCalibration</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a0321c5206f1fa07c984b40a00c693d6d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::sensors::ImuSensorConfig::stationary_confidence_threshold</definition>
+        <argsstring></argsstring>
+        <name>stationary_confidence_threshold</name>
+        <initializer>= 0.01</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="21" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="18" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="18" bodyend="22"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a60805d4ea0d104b078d00a14bc78f2a5" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorConfig</scope><name>bias_estimation_window_size</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorConfig</scope><name>calibration_enabled</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a0321c5206f1fa07c984b40a00c693d6d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorConfig</scope><name>stationary_confidence_threshold</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

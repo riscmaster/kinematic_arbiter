@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::StateIndex::Quaternion</compoundname>
+    <includes refid="state__index_8hpp" local="no">state_index.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Quaternion::W</definition>
+        <argsstring></argsstring>
+        <name>W</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="31" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" compoundref="state__index_8hpp" startline="36" endline="36">Begin</referencedby>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1ad2067f9a7583a777b16cbafb51c90d82" compoundref="pose__sensor__model_8hpp" startline="110" endline="143">kinematic_arbiter::sensors::PoseSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" compoundref="imu__sensor__model_8cpp" startline="101" endline="192">kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" compoundref="position__sensor__model_8hpp" startline="84" endline="129">kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" compoundref="imu__sensor__model_8cpp" startline="32" endline="76">kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" compoundref="pose__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::PoseSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" compoundref="position__sensor__model_8hpp" startline="57" endline="76">kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Quaternion::X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="32" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" compoundref="imu__sensor__model_8cpp" startline="101" endline="192">kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" compoundref="position__sensor__model_8hpp" startline="84" endline="129">kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" compoundref="imu__sensor__model_8cpp" startline="32" endline="76">kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" compoundref="pose__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::PoseSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" compoundref="position__sensor__model_8hpp" startline="57" endline="76">kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Quaternion::Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <initializer>= 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="33" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" compoundref="imu__sensor__model_8cpp" startline="332" endline="356">kinematic_arbiter::sensors::ImuSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" compoundref="imu__sensor__model_8cpp" startline="101" endline="192">kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" compoundref="position__sensor__model_8hpp" startline="84" endline="129">kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" compoundref="imu__sensor__model_8cpp" startline="32" endline="76">kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" compoundref="pose__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::PoseSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" compoundref="position__sensor__model_8hpp" startline="57" endline="76">kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::core::StateIndex::Quaternion::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <initializer>= 6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="34" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="namespacekinematic__arbiter_1_1core_1a3679a6065d46d74cc6884d54cef976f9" compoundref="state__index_8hpp" startline="85" endline="121">kinematic_arbiter::core::GetInitializableStateNames</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1aacec4656b25778aa75adb69af6a50105" compoundref="pose__sensor__model_8hpp" startline="153" endline="168">kinematic_arbiter::sensors::PoseSensorModel::GetInitializableStates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" compoundref="imu__sensor__model_8cpp" startline="101" endline="192">kinematic_arbiter::sensors::ImuSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" compoundref="position__sensor__model_8hpp" startline="84" endline="129">kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f" compoundref="filter__wrapper_8cpp" startline="169" endline="206">kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" compoundref="position__sensor__model_8hpp" startline="162" endline="229">kinematic_arbiter::sensors::PositionSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" compoundref="imu__sensor__model_8cpp" startline="32" endline="76">kinematic_arbiter::sensors::ImuSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a9e10f3e5d8151af86c7e09490507b38b" compoundref="pose__sensor__model_8hpp" startline="67" endline="102">kinematic_arbiter::sensors::PoseSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" compoundref="position__sensor__model_8hpp" startline="57" endline="76">kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06" compoundref="rigid__body__state__model_8hpp" startline="55" endline="128">kinematic_arbiter::models::RigidBodyStateModel::PredictState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576" compoundref="filter__wrapper_8cpp" startline="283" endline="293">kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::Quaternion::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="36" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="36" bodyend="36"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">W</references>
+        <referencedby refid="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598" compoundref="rigid__body__state__model_8hpp" startline="140" endline="301">kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" compoundref="imu__sensor__model_8cpp" startline="371" endline="529">kinematic_arbiter::sensors::ImuSensorModel::InitializeState</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1a2664b95c31554a212a0aa1d864ac14a9" compoundref="pose__sensor__model_8hpp" startline="182" endline="248">kinematic_arbiter::sensors::PoseSensorModel::InitializeState</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a670ba34adad41f7997719cf372fa4b1e" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int kinematic_arbiter::core::StateIndex::Quaternion::Size</definition>
+        <argsstring>()</argsstring>
+        <name>Size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="37" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="30" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="30" bodyend="38"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af3e01b65049a657408ba89e583c1e5ca" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>Begin</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a670ba34adad41f7997719cf372fa4b1e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>Size</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>W</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>X</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>Y</name></member>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex::Quaternion</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

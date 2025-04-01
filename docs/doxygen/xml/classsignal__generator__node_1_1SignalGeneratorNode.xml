@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsignal__generator__node_1_1SignalGeneratorNode" kind="class" language="Python" prot="public">
+    <compoundname>signal_generator_node::SignalGeneratorNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Node</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a6243ccd055b304354138e56a68eb07d1" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::callback_group</definition>
+        <argsstring></argsstring>
+        <name>callback_group</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="38" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a8d8a84ddc475e7ec4a9b1964c698d5ac" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::default_params</definition>
+        <argsstring></argsstring>
+        <name>default_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="41" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="41" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1aa52c2ea60eb43207f991986f36e27fce" compoundref="kalman__filter__node_8py" startline="269" endline="301">kalman_filter_node.KalmanFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1aa2cf79a6d0354115572bb56f40623a44" compoundref="mediated__filter__node_8py" startline="313" endline="350">mediated_filter_node.MediatedFilterNode.handle_reset_parameters</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" compoundref="signal__generator__node_8py" startline="282" endline="315">signal_generator_node.SignalGeneratorNode.handle_reset_parameters</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a6c496be2494e9ea823fedab62a6ed1a0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::noisy_publisher</definition>
+        <argsstring></argsstring>
+        <name>noisy_publisher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="95" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="95" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a7941593fce8f9b157d0150636d60a473" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::clean_publisher</definition>
+        <argsstring></argsstring>
+        <name>clean_publisher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="98" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="98" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::initial_time</definition>
+        <argsstring></argsstring>
+        <name>initial_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="106" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="106" bodyend="-1"/>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1a777fcdec54c09b797a2e3b8dcea51329" compoundref="kalman__filter__node_8py" startline="261" endline="268">kalman_filter_node.KalmanFilterNode.handle_reset</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1acaf8ba128632faff37d8cd12873be096" compoundref="mediated__filter__node_8py" startline="305" endline="312">mediated_filter_node.MediatedFilterNode.handle_reset</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" compoundref="signal__generator__node_8py" startline="262" endline="281">signal_generator_node.SignalGeneratorNode.handle_reset</referencedby>
+        <referencedby refid="classkalman__filter__node_1_1KalmanFilterNode_1ab77c33db61bb979c1eeb62db66ad601d" compoundref="kalman__filter__node_8py" startline="197" endline="260">kalman_filter_node.KalmanFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classmediated__filter__node_1_1MediatedFilterNode_1a1c78fdafc1aba12897fd4799c79d0677" compoundref="mediated__filter__node_8py" startline="218" endline="304">mediated_filter_node.MediatedFilterNode.measurement_callback</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1ac1e8a003d2e35972d3831ab1ba69a211" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::timer</definition>
+        <argsstring></argsstring>
+        <name>timer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="109" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="109" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" compoundref="signal__generator__node_8py" startline="222" endline="235">signal_generator_node.SignalGeneratorNode._create_timer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1ac84d62feeb7cc6031d5a0afa15e3f239" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::reset_service</definition>
+        <argsstring></argsstring>
+        <name>reset_service</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="113" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a49b12fc704d5bb019e45a4c6352dad36" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::reset_params_service</definition>
+        <argsstring></argsstring>
+        <name>reset_params_service</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="120" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1aa7698fdeb30e6a60ac9f70a353eeba3a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::noise_level</definition>
+        <argsstring></argsstring>
+        <name>noise_level</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="169" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="169" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a7fbe717e377915cac73f9f4e3d5bcabf" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::signal_params</definition>
+        <argsstring></argsstring>
+        <name>signal_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="204" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="204" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a018b95bb3c1612e1ee52a95f65841889" compoundref="signal__generator__node_8py" startline="138" endline="201">signal_generator_node.SignalGeneratorNode.parameters_callback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__generator__node_1_1SignalGeneratorNode_1a58e2911ee7bb1dfa7908742f9d994ffa" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>signal_generator_node.SignalGeneratorNode::signal_generator</definition>
+        <argsstring></argsstring>
+        <name>signal_generator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="219" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="219" bodyend="-1"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" compoundref="signal__generator__node_8py" startline="262" endline="281">signal_generator_node.SignalGeneratorNode.handle_reset</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1ac3572c977dd48000d77718c2f85a9737" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the signal generator node.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="33" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="33" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1a018b95bb3c1612e1ee52a95f65841889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode.parameters_callback</definition>
+        <argsstring>(self, params)</argsstring>
+        <name>parameters_callback</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>params</type>
+          <defname>params</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Handle parameter changes.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="138" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="138" bodyend="201"/>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7fbe717e377915cac73f9f4e3d5bcabf" compoundref="signal__generator__node_8py" startline="204">signal_generator_node.SignalGeneratorNode.signal_params</references>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode.timer_callback</definition>
+        <argsstring>(self)</argsstring>
+        <name>timer_callback</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Publish clean and noisy measurements.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="236" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="236" bodyend="261"/>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7941593fce8f9b157d0150636d60a473" compoundref="signal__generator__node_8py" startline="98">signal_generator_node.SignalGeneratorNode.clean_publisher</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" compoundref="kalman__filter__node_8py" startline="133">kalman_filter_node.KalmanFilterNode.initial_time</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ab44f5d8236d82c70bc088e064f423419" compoundref="mediated__filter__node_8py" startline="145">mediated_filter_node.MediatedFilterNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" compoundref="signal__generator__node_8py" startline="106">signal_generator_node.SignalGeneratorNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1aa7698fdeb30e6a60ac9f70a353eeba3a" compoundref="signal__generator__node_8py" startline="169">signal_generator_node.SignalGeneratorNode.noise_level</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a6c496be2494e9ea823fedab62a6ed1a0" compoundref="signal__generator__node_8py" startline="95">signal_generator_node.SignalGeneratorNode.noisy_publisher</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a58e2911ee7bb1dfa7908742f9d994ffa" compoundref="signal__generator__node_8py" startline="219">signal_generator_node.SignalGeneratorNode.signal_generator</references>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" compoundref="signal__generator__node_8py" startline="222" endline="235">signal_generator_node.SignalGeneratorNode._create_timer</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode.handle_reset</definition>
+        <argsstring>(self, request, response)</argsstring>
+        <name>handle_reset</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>request</type>
+          <defname>request</defname>
+        </param>
+        <param>
+          <type>response</type>
+          <defname>response</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Handle signal generator reset requests.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="262" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="262" bodyend="281"/>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1ad2d8c4cecc6753305cd2f8c8efa2613f" compoundref="signal__generator__node_8py" startline="202" endline="221">signal_generator_node.SignalGeneratorNode._init_signal_generator</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a041385059b049c697483ac9519828e9d" compoundref="kalman__filter__node_8py" startline="133">kalman_filter_node.KalmanFilterNode.initial_time</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1ab44f5d8236d82c70bc088e064f423419" compoundref="mediated__filter__node_8py" startline="145">mediated_filter_node.MediatedFilterNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" compoundref="signal__generator__node_8py" startline="106">signal_generator_node.SignalGeneratorNode.initial_time</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a58e2911ee7bb1dfa7908742f9d994ffa" compoundref="signal__generator__node_8py" startline="219">signal_generator_node.SignalGeneratorNode.signal_generator</references>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode.handle_reset_parameters</definition>
+        <argsstring>(self, request, response)</argsstring>
+        <name>handle_reset_parameters</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>request</type>
+          <defname>request</defname>
+        </param>
+        <param>
+          <type>response</type>
+          <defname>response</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Reset all parameters to their default values.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="282" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="282" bodyend="315"/>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" compoundref="signal__generator__node_8py" startline="222" endline="235">signal_generator_node.SignalGeneratorNode._create_timer</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1ad2d8c4cecc6753305cd2f8c8efa2613f" compoundref="signal__generator__node_8py" startline="202" endline="221">signal_generator_node.SignalGeneratorNode._init_signal_generator</references>
+        <references refid="classkalman__filter__node_1_1KalmanFilterNode_1a995ed69374cfa477e40bab84c9a3e168" compoundref="kalman__filter__node_8py" startline="40">kalman_filter_node.KalmanFilterNode.default_params</references>
+        <references refid="classmediated__filter__node_1_1MediatedFilterNode_1a3ca29d770e6b20fb9c4f9bd1d7d3fc97" compoundref="mediated__filter__node_8py" startline="43">mediated_filter_node.MediatedFilterNode.default_params</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a8d8a84ddc475e7ec4a9b1964c698d5ac" compoundref="signal__generator__node_8py" startline="41">signal_generator_node.SignalGeneratorNode.default_params</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1a9ebeb9c5dc9df507952180d43f5dc020" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode._create_float_descriptor</definition>
+        <argsstring>(self, min_val, max_val, description)</argsstring>
+        <name>_create_float_descriptor</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>min_val</type>
+          <defname>min_val</defname>
+        </param>
+        <param>
+          <type>max_val</type>
+          <defname>max_val</defname>
+        </param>
+        <param>
+          <type>description</type>
+          <defname>description</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Create a float parameter descriptor.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="129" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="129" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1ad2d8c4cecc6753305cd2f8c8efa2613f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode._init_signal_generator</definition>
+        <argsstring>(self)</argsstring>
+        <name>_init_signal_generator</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize the signal generator with current parameters.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="202" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="202" bodyend="221"/>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" compoundref="signal__generator__node_8py" startline="262" endline="281">signal_generator_node.SignalGeneratorNode.handle_reset</referencedby>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" compoundref="signal__generator__node_8py" startline="282" endline="315">signal_generator_node.SignalGeneratorNode.handle_reset_parameters</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def signal_generator_node.SignalGeneratorNode._create_timer</definition>
+        <argsstring>(self)</argsstring>
+        <name>_create_timer</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Create or update the timer for signal publishing.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="222" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="222" bodyend="235"/>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac1e8a003d2e35972d3831ab1ba69a211" compoundref="signal__generator__node_8py" startline="109">signal_generator_node.SignalGeneratorNode.timer</references>
+        <references refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" compoundref="signal__generator__node_8py" startline="236" endline="261">signal_generator_node.SignalGeneratorNode.timer_callback</references>
+        <referencedby refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" compoundref="signal__generator__node_8py" startline="282" endline="315">signal_generator_node.SignalGeneratorNode.handle_reset_parameters</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Signal generator node for the simplified demo.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>signal_generator_node.SignalGeneratorNode</label>
+        <link refid="classsignal__generator__node_1_1SignalGeneratorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Node</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>signal_generator_node.SignalGeneratorNode</label>
+        <link refid="classsignal__generator__node_1_1SignalGeneratorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Node</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" line="30" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/signal_generator_node.py" bodystart="30" bodyend="316"/>
+    <listofallmembers>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac3572c977dd48000d77718c2f85a9737" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>__init__</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a9ebeb9c5dc9df507952180d43f5dc020" prot="private" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>_create_float_descriptor</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a0a2a97ee906bb34055b590c271aa7e50" prot="private" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>_create_timer</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ad2d8c4cecc6753305cd2f8c8efa2613f" prot="private" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>_init_signal_generator</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a6243ccd055b304354138e56a68eb07d1" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>callback_group</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7941593fce8f9b157d0150636d60a473" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>clean_publisher</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a8d8a84ddc475e7ec4a9b1964c698d5ac" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>default_params</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a1fbe9c8dc41e3469538893623b210b87" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>handle_reset</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac5447a1eb43b4bf55d6c58c65a287a13" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>handle_reset_parameters</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a56357c82a4b3abf3b9eb06b7ffa8fac7" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>initial_time</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1aa7698fdeb30e6a60ac9f70a353eeba3a" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>noise_level</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a6c496be2494e9ea823fedab62a6ed1a0" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>noisy_publisher</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a018b95bb3c1612e1ee52a95f65841889" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>parameters_callback</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a49b12fc704d5bb019e45a4c6352dad36" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>reset_params_service</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac84d62feeb7cc6031d5a0afa15e3f239" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>reset_service</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a58e2911ee7bb1dfa7908742f9d994ffa" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>signal_generator</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a7fbe717e377915cac73f9f4e3d5bcabf" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>signal_params</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1ac1e8a003d2e35972d3831ab1ba69a211" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>timer</name></member>
+      <member refid="classsignal__generator__node_1_1SignalGeneratorNode_1a09e332fa279aaa4cd65762e7adbfe6bb" prot="public" virt="non-virtual"><scope>signal_generator_node::SignalGeneratorNode</scope><name>timer_callback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

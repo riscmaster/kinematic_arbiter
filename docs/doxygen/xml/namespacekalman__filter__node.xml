@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacekalman__filter__node" kind="namespace" language="Python">
+    <compoundname>kalman_filter_node</compoundname>
+    <innerclass refid="classkalman__filter__node_1_1KalmanFilterNode" prot="public">kalman_filter_node::KalmanFilterNode</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacekalman__filter__node_1ac54d1e5b67c380f72a4b5aac3c324aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def kalman_filter_node.main</definition>
+        <argsstring>(args=None)</argsstring>
+        <name>main</name>
+        <param>
+          <type>args</type>
+          <defname>args</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Start the Kalman Filter node and begin processing.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="332" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" bodystart="332" bodyend="340"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/kalman_filter_node.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

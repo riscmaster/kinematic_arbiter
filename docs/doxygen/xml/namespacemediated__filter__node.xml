@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacemediated__filter__node" kind="namespace" language="Python">
+    <compoundname>mediated_filter_node</compoundname>
+    <innerclass refid="classmediated__filter__node_1_1MediatedFilterNode" prot="public">mediated_filter_node::MediatedFilterNode</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacemediated__filter__node_1a61400153662d21450bae647b3a89f048" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def mediated_filter_node.main</definition>
+        <argsstring>(args=None)</argsstring>
+        <name>main</name>
+        <param>
+          <type>args</type>
+          <defname>args</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Start the Mediated Kalman Filter node and begin processing.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/mediated_filter_node.py" line="397" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/mediated_filter_node.py" bodystart="397" bodyend="405"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/nodes/mediated_filter_node.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

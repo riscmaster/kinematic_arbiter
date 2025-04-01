@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</compoundname>
+    <includes refid="imu__sensor__model_8hpp" local="no">imu_sensor_model.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GX</definition>
+        <argsstring></argsstring>
+        <name>GX</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="48" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="48" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GY</definition>
+        <argsstring></argsstring>
+        <name>GY</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="49" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="49" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GZ</definition>
+        <argsstring></argsstring>
+        <name>GZ</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="50" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AX</definition>
+        <argsstring></argsstring>
+        <name>AX</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="53" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AY</definition>
+        <argsstring></argsstring>
+        <name>AY</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="54" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AZ</definition>
+        <argsstring></argsstring>
+        <name>AZ</name>
+        <initializer>= 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="55" column="26" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" compoundref="imu__sensor__handler_8hpp" startline="83" endline="110">kinematic_arbiter::ros2::ImuSensorHandler::applyBound</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher_1afe1b7450ad4054eabb33ebdc2d32c7e6" compoundref="sensor__publisher_8hpp" startline="289" endline="309">kinematic_arbiter::ros2::simulation::ImuPublisher::eigenToRos</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" compoundref="imu__sensor__handler_8hpp" startline="36" endline="50">kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" compoundref="imu__sensor__handler_8hpp" startline="52" endline="81">kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Indices for accessing IMU measurement components. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" line="46" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp" bodystart="46" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>AX</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>AY</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>AZ</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>GX</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>GY</name></member>
+      <member refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</scope><name>GZ</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

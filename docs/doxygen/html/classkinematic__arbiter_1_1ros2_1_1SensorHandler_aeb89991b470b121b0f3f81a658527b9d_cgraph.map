@@ -1,0 +1,10 @@
+<map id="kinematic_arbiter::ros2::SensorHandler::SensorHandler" name="kinematic_arbiter::ros2::SensorHandler::SensorHandler">
+<area shape="rect" id="node1" title="Constructor for SensorHandler." alt="" coords="5,81,159,137"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a573195b53a7344f2d9d7d86e37e20062" title="Look up the static transform from sensor to body frame." alt="" coords="465,5,639,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a89a9cb9125c64a70da34fd546ab61ee5" title="Callback for incoming sensor messages." alt="" coords="222,81,375,137"/>
+<area shape="rect" id="node8" href="$namespacekinematic__arbiter_1_1core.html#a2d84e3b0f226e7c516325b0461643309" title="Convert sensor type to string." alt="" coords="207,162,391,203"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a240e054f2e536ac7ee6dae29aa066f97" title="Convert message to measurement vector." alt="" coords="475,85,629,141"/>
+<area shape="rect" id="node5" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a0d89952874a48c55aef825ff7f13ae1a" title="Publish expected measurement and bounds." alt="" coords="439,165,665,221"/>
+<area shape="rect" id="node6" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#a82b574c4cbd3cfbf23ec2123a4e555db" title="Apply a sigma bound offset to a message." alt="" coords="713,125,867,181"/>
+<area shape="rect" id="node7" href="$classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#af73f0d302ea4941d4ec056dd47cf0992" title="Convert measurement vector to message." alt="" coords="713,205,867,261"/>
+</map>

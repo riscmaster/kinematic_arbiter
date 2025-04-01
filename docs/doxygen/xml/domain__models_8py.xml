@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="domain__models_8py" kind="file" language="Python">
+    <compoundname>domain_models.py</compoundname>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" prot="public">src::single_dof_demo::ros2::domain_models::State</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters" prot="public">src::single_dof_demo::ros2::domain_models::FilterParameters</innerclass>
+    <innerclass refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode" prot="public">src::single_dof_demo::ros2::domain_models::MediationMode</innerclass>
+    <innernamespace refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1domain__models">src::single_dof_demo::ros2::domain_models</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacesrc_1_1single__dof__demo_1_1ros2_1_1domain__models" refkind="compound"><highlight class="comment">#<sp/>Copyright<sp/>(c)<sp/>2024<sp/>Spencer<sp/>Maughan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">#</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">#<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">#<sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">#<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;Kinematic<sp/>Arbiter<sp/>package<sp/>component.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>dataclasses<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>dataclass</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>enum<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Enum,<sp/>auto</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">@dataclass</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" kindref="compound">State</ref>:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Represents<sp/>the<sp/>state<sp/>with<sp/>a<sp/>value<sp/>and<sp/>variance.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>value:<sp/>float</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>variance:<sp/>float</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">@dataclass</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters" kindref="compound">FilterParameters</ref>:</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Parameters<sp/>for<sp/>configuring<sp/>the<sp/>filter.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>process_measurement_ratio:<sp/>float</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>window_time:<sp/>float</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode" kindref="compound">MediationMode</ref>(Enum):</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;Enumeration<sp/>of<sp/>mediation<sp/>modes<sp/>for<sp/>the<sp/>filter.&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a834324448ef0fcaeb0c52a24e129bd1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>ADJUST_STATE<sp/>=<sp/>auto()</highlight></codeline>
+<codeline lineno="33" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a49874497f2222f90cf6d70d7899dfe0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>ADJUST_MEASUREMENT<sp/>=<sp/>auto()</highlight></codeline>
+<codeline lineno="34" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1a92a356be6480a22445e6fdefb0a02b5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>REJECT_MEASUREMENT<sp/>=<sp/>auto()</highlight></codeline>
+<codeline lineno="35" refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode_1afbc3bd0bde2ee9d34d0c4dddd70dc51b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NO_ACTION<sp/>=<sp/>auto()</highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/domain_models.py"/>
+  </compounddef>
+</doxygen>

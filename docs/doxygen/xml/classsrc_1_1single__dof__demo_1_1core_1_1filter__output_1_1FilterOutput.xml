@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput" kind="class" language="Python" prot="public">
+    <compoundname>src::single_dof_demo::core::filter_output::FilterOutput</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1ad0f3e113c973630e02675f29a77de4c3" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.FilterOutput::predicted</definition>
+        <argsstring></argsstring>
+        <name>predicted</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="45" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1abcc66f237708a6990ef44fc4cf969920" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.FilterOutput::mediated</definition>
+        <argsstring></argsstring>
+        <name>mediated</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="46" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a17f15cc65b92a5e296c4420deed48b08" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.FilterOutput::final</definition>
+        <argsstring></argsstring>
+        <name>final</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="47" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a75d62b7dfc2f36006228219975bf4c0d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.FilterOutput::mediation_detected</definition>
+        <argsstring></argsstring>
+        <name>mediation_detected</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="48" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a7ce892ee0590359ff1f1f377f6793e4a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.single_dof_demo.core.filter_output.FilterOutput::mediation_point</definition>
+        <argsstring></argsstring>
+        <name>mediation_point</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="49" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1acbf8205c3305a780501e47613bfb15bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def src.single_dof_demo.core.filter_output.FilterOutput.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Initialize filter output with default state-measurement pairs.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="43" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="43" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Contains filter output stages: predicted, mediated, and final estimates.</verbatim> </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" line="40" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/core/filter_output.py" bodystart="40" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1acbf8205c3305a780501e47613bfb15bf" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a17f15cc65b92a5e296c4420deed48b08" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>final</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1abcc66f237708a6990ef44fc4cf969920" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>mediated</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a75d62b7dfc2f36006228219975bf4c0d" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>mediation_detected</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1a7ce892ee0590359ff1f1f377f6793e4a" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>mediation_point</name></member>
+      <member refid="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput_1ad0f3e113c973630e02675f29a77de4c3" prot="public" virt="non-virtual"><scope>src::single_dof_demo::core::filter_output::FilterOutput</scope><name>predicted</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

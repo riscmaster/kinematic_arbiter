@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::KinematicArbiterNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">rclcpp::Node</basecompoundref>
+    <includes refid="kinematic__arbiter__node_8hpp" local="no">kinematic_arbiter_node.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a96ef95733f00e61f69c45e4611a6f39a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::KinematicArbiterNode::publish_rate_</definition>
+        <argsstring></argsstring>
+        <name>publish_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="38" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1d860aa7fe3e28520ca67ac6198c0516" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::KinematicArbiterNode::world_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>world_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="39" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a662e74da74772c89eb9d395f4cd5266c" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::KinematicArbiterNode::body_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>body_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="40" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="40" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a86531b38e3487a4d2d0c3ebbc0cb60a6" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+        <definition>std::shared_ptr&lt;tf2_ros::Buffer&gt; kinematic_arbiter::ros2::KinematicArbiterNode::tf_buffer_</definition>
+        <argsstring></argsstring>
+        <name>tf_buffer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="43" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afee59c24a0cb618afa756fcdff8ed593" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; tf2_ros::TransformListener &gt;</type>
+        <definition>std::shared_ptr&lt;tf2_ros::TransformListener&gt; kinematic_arbiter::ros2::KinematicArbiterNode::tf_listener_</definition>
+        <argsstring></argsstring>
+        <name>tf_listener_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="44" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1FilterWrapper" kindref="compound">FilterWrapper</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;FilterWrapper&gt; kinematic_arbiter::ros2::KinematicArbiterNode::filter_wrapper_</definition>
+        <argsstring></argsstring>
+        <name>filter_wrapper_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="47" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a85473ab7f0e6c297de92a046cba32b33" compoundref="kinematic__arbiter__node_8cpp" startline="143" endline="236">configureSensorsFromLoadedParams</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afd1ba0177f9da2995b38f17181ef823b" compoundref="kinematic__arbiter__node_8cpp" startline="286" endline="298">handleResetService</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" compoundref="kinematic__arbiter__node_8cpp" startline="238" endline="270">publishEstimates</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1ab23bb37f4135e0b8b1d32eb831fa0d92" compoundref="kinematic__arbiter__node_8cpp" startline="272" endline="277">truthPoseCallback</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a5b4140c063627c2a6bc02346be4ad018" compoundref="kinematic__arbiter__node_8cpp" startline="279" endline="284">truthVelocityCallback</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1abbe7e9f37fe57641d9d9276ef2aaaacd" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; geometry_msgs::msg::PoseWithCovarianceStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;geometry_msgs::msg::PoseWithCovarianceStamped&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::pose_pub_</definition>
+        <argsstring></argsstring>
+        <name>pose_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="50" column="33" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" compoundref="kinematic__arbiter__node_8cpp" startline="238" endline="270">publishEstimates</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0ef4e2f29d4b1d31d750a72500a6be46" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; geometry_msgs::msg::TwistWithCovarianceStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;geometry_msgs::msg::TwistWithCovarianceStamped&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::velocity_pub_</definition>
+        <argsstring></argsstring>
+        <name>velocity_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="51" column="33" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="51" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" compoundref="kinematic__arbiter__node_8cpp" startline="238" endline="270">publishEstimates</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3eaaf1ac9110dd6060933424965d3d89" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; geometry_msgs::msg::AccelWithCovarianceStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;geometry_msgs::msg::AccelWithCovarianceStamped&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::accel_pub_</definition>
+        <argsstring></argsstring>
+        <name>accel_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="52" column="33" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" compoundref="kinematic__arbiter__node_8cpp" startline="238" endline="270">publishEstimates</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a9762ce973e471ff87b88b10b0ff9c0da" prot="private" static="no" mutable="no">
+        <type>rclcpp::TimerBase::SharedPtr</type>
+        <definition>rclcpp::TimerBase::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::publish_timer_</definition>
+        <argsstring></argsstring>
+        <name>publish_timer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="55" column="32" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a92e3ced23fcf59a648f8268f5095d567" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; geometry_msgs::msg::PoseStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;geometry_msgs::msg::PoseStamped&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::truth_pose_sub_</definition>
+        <argsstring></argsstring>
+        <name>truth_pose_sub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="58" column="36" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1af65991b5c8b7d40008fed7dd7a850809" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; geometry_msgs::msg::TwistStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;geometry_msgs::msg::TwistStamped&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::truth_velocity_sub_</definition>
+        <argsstring></argsstring>
+        <name>truth_velocity_sub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="59" column="36" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1aff67e137a04bd9051d84a6244e2be296" prot="private" static="no" mutable="no">
+        <type>rclcpp::Service&lt; std_srvs::srv::Trigger &gt;::SharedPtr</type>
+        <definition>rclcpp::Service&lt;std_srvs::srv::Trigger&gt;::SharedPtr kinematic_arbiter::ros2::KinematicArbiterNode::reset_service_</definition>
+        <argsstring></argsstring>
+        <name>reset_service_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="62" column="31" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::KinematicArbiterNode::KinematicArbiterNode</definition>
+        <argsstring>()</argsstring>
+        <name>KinematicArbiterNode</name>
+        <briefdescription>
+<para>Constructor - initializes node, parameters and filter. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="29" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="8" bodyend="140"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3eaaf1ac9110dd6060933424965d3d89" compoundref="kinematic__arbiter__node_8hpp" startline="52">accel_pub_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a73690c6a07d29e4abca0afc538679dff" compoundref="state__model__interface_8hpp" startline="33">kinematic_arbiter::core::StateModelInterface::Params::angular_acceleration_uncertainty_per_second</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a86360392fa8acb4d1fbf772dc07a57d2" compoundref="state__model__interface_8hpp" startline="31">kinematic_arbiter::core::StateModelInterface::Params::angular_velocity_uncertainty_per_second</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a662e74da74772c89eb9d395f4cd5266c" compoundref="kinematic__arbiter__node_8hpp" startline="40">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a85473ab7f0e6c297de92a046cba32b33" compoundref="kinematic__arbiter__node_8cpp" startline="143" endline="236">configureSensorsFromLoadedParams</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afd1ba0177f9da2995b38f17181ef823b" compoundref="kinematic__arbiter__node_8cpp" startline="286" endline="298">handleResetService</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1ab888b7db255ed7924d57bfef6315bcc3" compoundref="state__model__interface_8hpp" startline="32">kinematic_arbiter::core::StateModelInterface::Params::linear_acceleration_uncertainty_per_second</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a20a9ab420ec092fe827450eba25d39f2" compoundref="state__model__interface_8hpp" startline="30">kinematic_arbiter::core::StateModelInterface::Params::linear_velocity_uncertainty_per_second</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1aeb7691c587b5780480a2bbccae6d7f59" compoundref="state__model__interface_8hpp" startline="29">kinematic_arbiter::core::StateModelInterface::Params::orientation_uncertainty_per_second</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1abbe7e9f37fe57641d9d9276ef2aaaacd" compoundref="kinematic__arbiter__node_8hpp" startline="50">pose_pub_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a36d6891ed987ad84626c353209e93d62" compoundref="state__model__interface_8hpp" startline="28">kinematic_arbiter::core::StateModelInterface::Params::position_uncertainty_per_second</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params_1a650bddc23959713130e3a0c564de5af1" compoundref="state__model__interface_8hpp" startline="25">kinematic_arbiter::core::StateModelInterface::Params::process_noise_window</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a96ef95733f00e61f69c45e4611a6f39a" compoundref="kinematic__arbiter__node_8hpp" startline="38">publish_rate_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a9762ce973e471ff87b88b10b0ff9c0da" compoundref="kinematic__arbiter__node_8hpp" startline="55">publish_timer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" compoundref="kinematic__arbiter__node_8cpp" startline="238" endline="270">publishEstimates</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1aff67e137a04bd9051d84a6244e2be296" compoundref="kinematic__arbiter__node_8hpp" startline="62">reset_service_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a86531b38e3487a4d2d0c3ebbc0cb60a6" compoundref="kinematic__arbiter__node_8hpp" startline="43">tf_buffer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afee59c24a0cb618afa756fcdff8ed593" compoundref="kinematic__arbiter__node_8hpp" startline="44">tf_listener_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a92e3ced23fcf59a648f8268f5095d567" compoundref="kinematic__arbiter__node_8hpp" startline="58">truth_pose_sub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1af65991b5c8b7d40008fed7dd7a850809" compoundref="kinematic__arbiter__node_8hpp" startline="59">truth_velocity_sub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1ab23bb37f4135e0b8b1d32eb831fa0d92" compoundref="kinematic__arbiter__node_8cpp" startline="272" endline="277">truthPoseCallback</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a5b4140c063627c2a6bc02346be4ad018" compoundref="kinematic__arbiter__node_8cpp" startline="279" endline="284">truthVelocityCallback</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0ef4e2f29d4b1d31d750a72500a6be46" compoundref="kinematic__arbiter__node_8hpp" startline="51">velocity_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1d860aa7fe3e28520ca67ac6198c0516" compoundref="kinematic__arbiter__node_8hpp" startline="39">world_frame_id_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a950168aed4e30295f38fe0ca03f2ca85" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual kinematic_arbiter::ros2::KinematicArbiterNode::~KinematicArbiterNode</definition>
+        <argsstring>()=default</argsstring>
+        <name>~KinematicArbiterNode</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="34" column="11"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::KinematicArbiterNode::publishEstimates</definition>
+        <argsstring>()</argsstring>
+        <name>publishEstimates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="65" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="238" bodyend="270"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3eaaf1ac9110dd6060933424965d3d89" compoundref="kinematic__arbiter__node_8hpp" startline="52">accel_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1abbe7e9f37fe57641d9d9276ef2aaaacd" compoundref="kinematic__arbiter__node_8hpp" startline="50">pose_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0ef4e2f29d4b1d31d750a72500a6be46" compoundref="kinematic__arbiter__node_8hpp" startline="51">velocity_pub_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a85473ab7f0e6c297de92a046cba32b33" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::KinematicArbiterNode::configureSensorsFromLoadedParams</definition>
+        <argsstring>()</argsstring>
+        <name>configureSensorsFromLoadedParams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="68" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="143" bodyend="236"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0a89df0487fe94b6ff105f8640be3aa8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; kinematic_arbiter::ros2::KinematicArbiterNode::getSensorNames</definition>
+        <argsstring>(const std::string &amp;sensor_type)</argsstring>
+        <name>getSensorNames</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="70" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1ab23bb37f4135e0b8b1d32eb831fa0d92" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::KinematicArbiterNode::truthPoseCallback</definition>
+        <argsstring>(const geometry_msgs::msg::PoseStamped::SharedPtr msg)</argsstring>
+        <name>truthPoseCallback</name>
+        <param>
+          <type>const geometry_msgs::msg::PoseStamped::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="73" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="272" bodyend="277"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a5b4140c063627c2a6bc02346be4ad018" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::KinematicArbiterNode::truthVelocityCallback</definition>
+        <argsstring>(const geometry_msgs::msg::TwistStamped::SharedPtr msg)</argsstring>
+        <name>truthVelocityCallback</name>
+        <param>
+          <type>const geometry_msgs::msg::TwistStamped::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="74" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="279" bodyend="284"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afd1ba0177f9da2995b38f17181ef823b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::KinematicArbiterNode::handleResetService</definition>
+        <argsstring>(const std::shared_ptr&lt; std_srvs::srv::Trigger::Request &gt; request, std::shared_ptr&lt; std_srvs::srv::Trigger::Response &gt; response)</argsstring>
+        <name>handleResetService</name>
+        <param>
+          <type>const std::shared_ptr&lt; std_srvs::srv::Trigger::Request &gt;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; std_srvs::srv::Trigger::Response &gt;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="77" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp" bodystart="286" bodyend="298"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" compoundref="kinematic__arbiter__node_8hpp" startline="47">filter_wrapper_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" compoundref="kinematic__arbiter__node_8cpp" startline="8" endline="140">KinematicArbiterNode</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>ROS2 node for managing kinematic state estimation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::KinematicArbiterNode</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::KinematicArbiterNode</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" line="24" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp" bodystart="24" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3eaaf1ac9110dd6060933424965d3d89" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>accel_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a662e74da74772c89eb9d395f4cd5266c" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>body_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a85473ab7f0e6c297de92a046cba32b33" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>configureSensorsFromLoadedParams</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a52faaa348228ea7c7812f574208431a3" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>filter_wrapper_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0a89df0487fe94b6ff105f8640be3aa8" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>getSensorNames</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afd1ba0177f9da2995b38f17181ef823b" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>handleResetService</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1771f3ca549f8e3731c83dc7a15584f5" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>KinematicArbiterNode</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1abbe7e9f37fe57641d9d9276ef2aaaacd" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>pose_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a96ef95733f00e61f69c45e4611a6f39a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>publish_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a9762ce973e471ff87b88b10b0ff9c0da" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>publish_timer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a3ab1d18d88852ef31e3cb08631bf35f1" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>publishEstimates</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1aff67e137a04bd9051d84a6244e2be296" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>reset_service_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a86531b38e3487a4d2d0c3ebbc0cb60a6" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>tf_buffer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1afee59c24a0cb618afa756fcdff8ed593" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>tf_listener_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a92e3ced23fcf59a648f8268f5095d567" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>truth_pose_sub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1af65991b5c8b7d40008fed7dd7a850809" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>truth_velocity_sub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1ab23bb37f4135e0b8b1d32eb831fa0d92" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>truthPoseCallback</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a5b4140c063627c2a6bc02346be4ad018" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>truthVelocityCallback</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a0ef4e2f29d4b1d31d750a72500a6be46" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>velocity_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a1d860aa7fe3e28520ca67ac6198c0516" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>world_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode_1a950168aed4e30295f38fe0ca03f2ca85" prot="public" virt="virtual"><scope>kinematic_arbiter::ros2::KinematicArbiterNode</scope><name>~KinematicArbiterNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

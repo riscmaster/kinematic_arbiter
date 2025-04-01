@@ -1,0 +1,6 @@
+<map id="kinematic_arbiter::core::StateIndex::Quaternion::Begin" name="kinematic_arbiter::core::StateIndex::Quaternion::Begin">
+<area shape="rect" id="node1" title=" " alt="" coords="272,85,480,141"/>
+<area shape="rect" id="node2" href="$classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#a998e9b62772caea5fc4a44858f201598" title="Get the state transition matrix: A_k." alt="" coords="5,5,224,61"/>
+<area shape="rect" id="node3" href="$classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#a3aab1963c7316f0e402277d9032fa87a" title="Initialize state from IMU measurement." alt="" coords="20,85,209,141"/>
+<area shape="rect" id="node4" href="$classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html#a2664b95c31554a212a0aa1d864ac14a9" title="Initialize state from pose measurement." alt="" coords="17,165,212,221"/>
+</map>

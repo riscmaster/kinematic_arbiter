@@ -1,0 +1,5 @@
+<map id="kinematic_arbiter::sensors::ImuSensorModel::IsStationary" name="kinematic_arbiter::sensors::ImuSensorModel::IsStationary">
+<area shape="rect" id="node1" title="Determine if the vehicle is stationary based on state and measurements." alt="" coords="5,5,195,61"/>
+<area shape="rect" id="node2" href="$namespacekinematic__arbiter_1_1utils.html#af02a244e2c612066ac33228be4627067" title="Calculate chi&#45;square critical value for N degrees of freedom." alt="" coords="243,5,473,61"/>
+<area shape="rect" id="node3" href="$namespacekinematic__arbiter_1_1utils.html#a2115227fc0edd0bf7327ef2cd40c32c4" title="Interpolate between two critical values." alt="" coords="521,5,704,61"/>
+</map>

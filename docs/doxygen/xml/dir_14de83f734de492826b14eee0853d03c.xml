@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_14de83f734de492826b14eee0853d03c" kind="dir">
+    <compoundname>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core</compoundname>
+    <innerfile refid="measurement__model__interface_8hpp">measurement_model_interface.hpp</innerfile>
+    <innerfile refid="mediated__kalman__filter_8hpp">mediated_kalman_filter.hpp</innerfile>
+    <innerfile refid="mediation__types_8hpp">mediation_types.hpp</innerfile>
+    <innerfile refid="sensor__types_8hpp">sensor_types.hpp</innerfile>
+    <innerfile refid="state__index_8hpp">state_index.hpp</innerfile>
+    <innerfile refid="state__model__interface_8hpp">state_model_interface.hpp</innerfile>
+    <innerfile refid="statistical__utils_8hpp">statistical_utils.hpp</innerfile>
+    <innerfile refid="trajectory__utils_8hpp">trajectory_utils.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/"/>
+  </compounddef>
+</doxygen>

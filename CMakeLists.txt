@@ -53,18 +53,15 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES action_msgs
 )
 
-# Python installation
+# Python installation - ensure modules are in Python's site-packages
 install(DIRECTORY src/single_dof_demo/
   DESTINATION lib/python${PYTHON_VERSION}/site-packages/single_dof_demo
   PATTERN "*.py"
 )
 
-# Make Python scripts executable before installing
-execute_process(
-  COMMAND chmod +x
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/signal_generator_node.py
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/kalman_filter_node.py
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/single_dof_demo/ros2/nodes/mediated_filter_node.py
+# Create a Python setup.py file for proper Python packaging
+ament_python_install_package(single_dof_demo
+  PACKAGE_DIR src/single_dof_demo
 )
 
 # Install Python executables

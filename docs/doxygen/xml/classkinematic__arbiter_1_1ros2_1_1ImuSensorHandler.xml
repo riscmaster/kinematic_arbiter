@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::ImuSensorHandler</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" prot="public" virt="non-virtual">kinematic_arbiter::ros2::SensorHandler&lt; sensor_msgs::msg::Imu &gt;</basecompoundref>
+    <includes refid="imu__sensor__handler_8hpp" local="no">imu_sensor_handler.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a31d9631db0879b8be3c33a10f8d6c595" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler" kindref="compound">SensorHandler</ref>&lt; sensor_msgs::msg::Imu &gt;</type>
+        <definition>using kinematic_arbiter::ros2::ImuSensorHandler::Base =  SensorHandler&lt;sensor_msgs::msg::Imu&gt;</definition>
+        <argsstring></argsstring>
+        <name>Base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="15" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a8db0399ce734991265e85230b2f97eb5" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" kindref="compound">kinematic_arbiter::sensors::ImuSensorModel</ref></type>
+        <definition>using kinematic_arbiter::ros2::ImuSensorHandler::ModelType =  kinematic_arbiter::sensors::ImuSensorModel</definition>
+        <argsstring></argsstring>
+        <name>ModelType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="16" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1aab49f1aad74a0968234f7a244128e244" prot="public" static="no">
+        <type><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" kindref="compound">ModelType::MeasurementIndex</ref></type>
+        <definition>using kinematic_arbiter::ros2::ImuSensorHandler::MeasurementIndex =  ModelType::MeasurementIndex</definition>
+        <argsstring></argsstring>
+        <name>MeasurementIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="17" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af5529ec0c792937f154889c5fc3000d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::ImuSensorHandler::ImuSensorHandler</definition>
+        <argsstring>(rclcpp::Node *node, std::shared_ptr&lt; Filter &gt; filter, std::shared_ptr&lt; tf2_ros::Buffer &gt; tf_buffer, std::shared_ptr&lt; utils::TimeManager &gt; time_manager, const std::string &amp;sensor_name, const std::string &amp;topic, const std::string &amp;sensor_frame_id, const std::string &amp;reference_frame_id, const std::string &amp;body_frame_id)</argsstring>
+        <name>ImuSensorHandler</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" kindref="member">Filter</ref> &gt;</type>
+          <declname>filter</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; tf2_ros::Buffer &gt;</type>
+          <declname>tf_buffer</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager" kindref="compound">utils::TimeManager</ref> &gt;</type>
+          <declname>time_manager</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sensor_frame_id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>reference_frame_id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>body_frame_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="19" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="19" bodyend="32"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool kinematic_arbiter::ros2::ImuSensorHandler::msgToVector</definition>
+        <argsstring>(const sensor_msgs::msg::Imu &amp;msg, DynamicVector &amp;vector) override</argsstring>
+        <name>msgToVector</name>
+        <reimplements refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a240e054f2e536ac7ee6dae29aa066f97">msgToVector</reimplements>
+        <param>
+          <type>const sensor_msgs::msg::Imu &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Convert message to measurement vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="36" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="36" bodyend="50"/>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" compoundref="imu__sensor__model_8hpp" startline="53">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" compoundref="imu__sensor__model_8hpp" startline="54">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" compoundref="imu__sensor__model_8hpp" startline="55">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AZ</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" compoundref="imu__sensor__model_8hpp" startline="48">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" compoundref="imu__sensor__model_8hpp" startline="49">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" compoundref="imu__sensor__model_8hpp" startline="50">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GZ</references>
+        <references refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" compoundref="imu__sensor__model_8hpp" startline="35">kinematic_arbiter::sensors::ImuSensorModel::kMeasurementDimension</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>sensor_msgs::msg::Imu</type>
+        <definition>sensor_msgs::msg::Imu kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg</definition>
+        <argsstring>(const DynamicVector &amp;vector, const std_msgs::msg::Header &amp;header) override</argsstring>
+        <name>vectorToMsg</name>
+        <reimplements refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af73f0d302ea4941d4ec056dd47cf0992">vectorToMsg</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>const std_msgs::msg::Header &amp;</type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+<para>Convert measurement vector to message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The covariance is not needed as a parameter because we can get it directly from the filter </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="52" column="25" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="52" bodyend="81"/>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" compoundref="imu__sensor__model_8hpp" startline="53">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" compoundref="imu__sensor__model_8hpp" startline="54">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" compoundref="imu__sensor__model_8hpp" startline="55">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AZ</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" compoundref="imu__sensor__model_8hpp" startline="48">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" compoundref="imu__sensor__model_8hpp" startline="49">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" compoundref="imu__sensor__model_8hpp" startline="50">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GZ</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>sensor_msgs::msg::Imu</type>
+        <definition>sensor_msgs::msg::Imu kinematic_arbiter::ros2::ImuSensorHandler::applyBound</definition>
+        <argsstring>(const sensor_msgs::msg::Imu &amp;base_msg, const DynamicCovariance &amp;covariance, bool positive) override</argsstring>
+        <name>applyBound</name>
+        <reimplements refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a82b574c4cbd3cfbf23ec2123a4e555db">applyBound</reimplements>
+        <param>
+          <type>const sensor_msgs::msg::Imu &amp;</type>
+          <declname>base_msg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" kindref="member">DynamicCovariance</ref> &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>positive</declname>
+        </param>
+        <briefdescription>
+<para>Apply a sigma bound offset to a message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a new message with a sigma-bound offset in the positive or negative direction</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base message to modify </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The measurement covariance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>positive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True for upper bound, false for lower bound </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The bounded message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="83" column="25" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="83" bodyend="110"/>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" compoundref="imu__sensor__model_8hpp" startline="53">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" compoundref="imu__sensor__model_8hpp" startline="54">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" compoundref="imu__sensor__model_8hpp" startline="55">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::AZ</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" compoundref="imu__sensor__model_8hpp" startline="48">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GX</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" compoundref="imu__sensor__model_8hpp" startline="49">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GY</references>
+        <references refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" compoundref="imu__sensor__model_8hpp" startline="50">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex::GZ</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" compoundref="sensor__handler_8hpp" startline="38">kinematic_arbiter::ros2::SensorHandler&lt; sensor_msgs::msg::Imu &gt;::SIGMA_BOUND_FACTOR</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>IMU sensor handler. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::ImuSensorHandler</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::SensorHandler&lt; sensor_msgs::msg::Imu &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::ImuSensorHandler</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::SensorHandler&lt; sensor_msgs::msg::Imu &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" line="13" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp" bodystart="13" bodyend="111"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872" prot="protected" virt="virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>applyBound</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a31d9631db0879b8be3c33a10f8d6c595" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>Base</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1afd6a42e473d68fb1f7fe5bffbf16ed6a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>body_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e0ff0526d02fcae926d3afba1b8aae8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>DynamicCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4845c39c1ed40883a357027612f3d792" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>DynamicVector</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ae960ef8e284337936f5acb28d1b6a70d" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>expected_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a11826ffbf43101b3c9957f59c56c69a3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>Filter</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a72cc31a6f49d0f94eefefd751ed3580e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>filter_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aa3d7ec017d40088221fd0aa9671a1ebb" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>getSensorId</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a6a2e391b01c906eb521549c6d9852e19" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>has_valid_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af5529ec0c792937f154889c5fc3000d6" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>ImuSensorHandler</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a573195b53a7344f2d9d7d86e37e20062" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>lookupStaticTransform</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af06d5739d95bcfa335c69b3d4d461d71" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1aab49f1aad74a0968234f7a244128e244" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>MeasurementIndex</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4a844e4c4d7a6c772f5e844d57b49372" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a89a9cb9125c64a70da34fd546ab61ee5" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>messageCallback</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a8db0399ce734991265e85230b2f97eb5" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>ModelType</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236" prot="protected" virt="virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>msgToVector</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ab052a1d834b3d5046ca2d69d14f1900d" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0d89952874a48c55aef825ff7f13ae1a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>publishExpectedMeasurement</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a4aa65cc833aa1dadcf7cab4f9ef08171" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>reference_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aed32088585389429d17b4ffb43539351" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a351832b4b98b22c2c7fb6af998aa154e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1af724278d1d8708d14bdca6ef048528c5" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_index_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a820176d283edb4a5cdc39872c934f880" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a64944749bf7fc45b8556b94bb0736ebf" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_name_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ade4884e545618ee0a04209c88062117e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_to_body_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a2de4944e89e7379bcf2f8b2bcd80fd6a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>sensor_type_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aeb89991b470b121b0f3f81a658527b9d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>SensorHandler</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a3c17f098d380353f141a11698eb74874" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>SensorType</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acd11564df43dc3fe40e5b29aee1ea189" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>setValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a0e2786774b62a21485357a00eb1b13d1" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>SIGMA_BOUND_FACTOR</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a315e7261398e007ec210dad186521044" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>subscription_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1acfdc9b270cbe34e3db25525caf0305ca" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>tf_buffer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1ad9ed747b382f38dfe1f7bb898505ee69" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>time_manager_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1aacde580262a5c673c3c46778bd5d87ce" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>topic_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1SensorHandler_1a1c92318e86de661517f118b529aaaf00" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>upper_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6" prot="protected" virt="virtual"><scope>kinematic_arbiter::ros2::ImuSensorHandler</scope><name>vectorToMsg</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

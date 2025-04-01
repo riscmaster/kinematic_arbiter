@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structkinematic__arbiter_1_1core_1_1StateIndex" kind="struct" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::core::StateIndex</compoundname>
+    <includes refid="state__index_8hpp" local="no">state_index.hpp</includes>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration" prot="public">kinematic_arbiter::core::StateIndex::AngularAcceleration</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity" prot="public">kinematic_arbiter::core::StateIndex::AngularVelocity</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration" prot="public">kinematic_arbiter::core::StateIndex::LinearAcceleration</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity" prot="public">kinematic_arbiter::core::StateIndex::LinearVelocity</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position" prot="public">kinematic_arbiter::core::StateIndex::Position</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion" prot="public">kinematic_arbiter::core::StateIndex::Quaternion</innerclass>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t kinematic_arbiter::core::StateIndex::kFullStateSize</definition>
+        <argsstring></argsstring>
+        <name>kFullStateSize</name>
+        <initializer>= 19</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="81" column="32" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base state indices for common state vector elements. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This provides a common framework for accessing state vector elements that can be used across different state model implementations. </para>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" line="18" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/core/state_index.hpp" bodystart="18" bodyend="82"/>
+    <listofallmembers>
+      <member refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::core::StateIndex</scope><name>kFullStateSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

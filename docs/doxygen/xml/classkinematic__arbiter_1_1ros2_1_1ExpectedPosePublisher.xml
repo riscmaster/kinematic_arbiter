@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::ExpectedPosePublisher</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher" prot="public" virt="non-virtual">kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; geometry_msgs::msg::PoseWithCovarianceStamped &gt;</basecompoundref>
+    <includes refid="expected__sensor__publisher_8hpp" local="no">expected_sensor_publisher.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" prot="public" static="no">
+        <type>geometry_msgs::msg::PoseWithCovarianceStamped</type>
+        <definition>using kinematic_arbiter::ros2::ExpectedPosePublisher::MsgType =  geometry_msgs::msg::PoseWithCovarianceStamped</definition>
+        <argsstring></argsstring>
+        <name>MsgType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="86" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1aeb1a8f9205377171161c79d93921b897" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::ExpectedPosePublisher::ExpectedPosePublisher</definition>
+        <argsstring>(rclcpp::Node *node, const std::string &amp;topic_prefix)</argsstring>
+        <name>ExpectedPosePublisher</name>
+        <param>
+          <type>rclcpp::Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>topic_prefix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="88" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="88" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref></type>
+        <definition>MsgType kinematic_arbiter::ros2::ExpectedPosePublisher::createBound</definition>
+        <argsstring>(const MsgType &amp;expected_msg, double sigma_factor) override</argsstring>
+        <name>createBound</name>
+        <reimplements refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a1741272c659cba89679b2487c4cb88f6">createBound</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" kindref="member">MsgType</ref> &amp;</type>
+          <declname>expected_msg</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>sigma_factor</declname>
+        </param>
+        <briefdescription>
+<para>Create a bound message from the expected value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The expected value message </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The factor to multiply the standard deviation by (e.g., 3.0 for 3-sigma) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The bound message </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="92" column="11" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="92" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Expected pose publisher. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::ExpectedPosePublisher</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; geometry_msgs::msg::PoseWithCovarianceStamped &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::ExpectedPosePublisher</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::ros2::ExpectedSensorPublisher&lt; geometry_msgs::msg::PoseWithCovarianceStamped &gt;</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" line="84" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/expected_sensor_publisher.hpp" bodystart="84" bodyend="110"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1af94b19abd99ab9539652473d0cf26452" prot="protected" virt="virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>createBound</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9971affd6c5be31fb8bdf620c4bc80a7" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>expected_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1aeb1a8f9205377171161c79d93921b897" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>ExpectedPosePublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a8ade6d5b4eb549a2d2506be34fbbd0b2" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>ExpectedSensorPublisher</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a60f28f22264cfa8738783549d99dc281" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>lower_bound_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher_1a8a58e9c996bb899dbea9078aaaf563b3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>MsgType</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1aab0d794122a662c8587e0253638e560e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>node_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1ad4156283d46e5ff508e3ac81d81b4727" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>publish</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a4f2b53519b5d13c841163416998741d1" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>topic_prefix_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher_1a9a48792c1c86626bfd493725ed26d980" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::ros2::ExpectedPosePublisher</scope><name>upper_bound_pub_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

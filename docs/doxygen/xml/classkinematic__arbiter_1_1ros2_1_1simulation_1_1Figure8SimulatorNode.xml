@@ -1,0 +1,1151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">rclcpp::Node</basecompoundref>
+    <includes refid="figure8__simulator__node_8hpp" local="no">figure8_simulator_node.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a21891a6d8884e429a2f66f425484fa9d" prot="public" static="no">
+        <type><ref refid="structkinematic__arbiter_1_1core_1_1StateIndex" kindref="compound">kinematic_arbiter::core::StateIndex</ref></type>
+        <definition>using kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::SIdx =  kinematic_arbiter::core::StateIndex</definition>
+        <argsstring></argsstring>
+        <name>SIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="32" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">SIdx::kFullStateSize</ref>, 1 &gt;</type>
+        <definition>using kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::StateVector =  Eigen::Matrix&lt;double, SIdx::kFullStateSize, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>StateVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="33" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a92c8f8f6dc44d8e9a331f9b97db71cb5" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">kinematic_arbiter::core::MeasurementModelInterface</ref></type>
+        <definition>using kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::MeasurementModelInterface =  kinematic_arbiter::core::MeasurementModelInterface</definition>
+        <argsstring></argsstring>
+        <name>MeasurementModelInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="34" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel" kindref="compound">sensors::PositionSensorModel</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;sensors::PositionSensorModel&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_sensor_model_</definition>
+        <argsstring></argsstring>
+        <name>position_sensor_model_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="93" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="93" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel" kindref="compound">sensors::PoseSensorModel</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;sensors::PoseSensorModel&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_sensor_model_</definition>
+        <argsstring></argsstring>
+        <name>pose_sensor_model_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="94" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="94" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel" kindref="compound">sensors::BodyVelocitySensorModel</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;sensors::BodyVelocitySensorModel&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_sensor_model_</definition>
+        <argsstring></argsstring>
+        <name>velocity_sensor_model_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="95" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" kindref="compound">sensors::ImuSensorModel</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;sensors::ImuSensorModel&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_sensor_model_</definition>
+        <argsstring></argsstring>
+        <name>imu_sensor_model_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="96" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="96" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac9385e2af956324ca87fae84c0294766" prot="private" static="no" mutable="no">
+        <type><ref refid="structkinematic__arbiter_1_1utils_1_1Figure8Config" kindref="compound">kinematic_arbiter::utils::Figure8Config</ref></type>
+        <definition>kinematic_arbiter::utils::Figure8Config kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::trajectory_config_</definition>
+        <argsstring></argsstring>
+        <name>trajectory_config_</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="99" column="43" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="99" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a042eb6949d766812c55e46222511be32" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher" kindref="compound">PositionPublisher</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;PositionPublisher&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_publisher_</definition>
+        <argsstring></argsstring>
+        <name>position_publisher_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="102" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="102" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aeab061fcf018a8a12054e82392a64ee8" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher" kindref="compound">PosePublisher</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;PosePublisher&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_publisher_</definition>
+        <argsstring></argsstring>
+        <name>pose_publisher_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="103" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="103" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a972c080190f5ead476012bb4f0e935e6" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher" kindref="compound">VelocityPublisher</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;VelocityPublisher&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_publisher_</definition>
+        <argsstring></argsstring>
+        <name>velocity_publisher_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="104" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="104" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a9951b0c1dfe599c7d3c4d2508a160e83" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher" kindref="compound">ImuPublisher</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ImuPublisher&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_publisher_</definition>
+        <argsstring></argsstring>
+        <name>imu_publisher_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="105" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="105" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aee2e8c077ee31c723518aa324317e849" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; geometry_msgs::msg::PoseStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;geometry_msgs::msg::PoseStamped&gt;::SharedPtr kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::truth_pose_pub_</definition>
+        <argsstring></argsstring>
+        <name>truth_pose_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="108" column="33" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="108" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af52359584cf8ffb0bfa9315c645dbbd0" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; geometry_msgs::msg::TwistStamped &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;geometry_msgs::msg::TwistStamped&gt;::SharedPtr kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::truth_velocity_pub_</definition>
+        <argsstring></argsstring>
+        <name>truth_velocity_pub_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="109" column="33" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="109" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6e2b9a317be5e213b2331d072c69d306" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; tf2_ros::TransformBroadcaster &gt;</type>
+        <definition>std::unique_ptr&lt;tf2_ros::TransformBroadcaster&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::tf_broadcaster_</definition>
+        <argsstring></argsstring>
+        <name>tf_broadcaster_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="112" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="112" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a1aa648a9520d10349cd796a8ba2037ad" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; tf2_ros::StaticTransformBroadcaster &gt;</type>
+        <definition>std::unique_ptr&lt;tf2_ros::StaticTransformBroadcaster&gt; kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::tf_static_broadcaster_</definition>
+        <argsstring></argsstring>
+        <name>tf_static_broadcaster_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="113" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="113" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8b5935703db1efc985ddf263654e42ed" prot="private" static="no" mutable="no">
+        <type>rclcpp::TimerBase::SharedPtr</type>
+        <definition>rclcpp::TimerBase::SharedPtr kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::update_timer_</definition>
+        <argsstring></argsstring>
+        <name>update_timer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="116" column="32" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="116" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::world_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>world_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="119" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="119" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::body_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>body_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="120" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="120" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a09c8c82cd3fb5bcb65d313c7f1886b82" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_sensor_id_</definition>
+        <argsstring></argsstring>
+        <name>position_sensor_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="121" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="121" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a423380d9d381b5823691812d17a18b29" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_sensor_id_</definition>
+        <argsstring></argsstring>
+        <name>pose_sensor_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="122" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="122" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5d8ce586e2fa887ccbba914a483c789a" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_sensor_id_</definition>
+        <argsstring></argsstring>
+        <name>velocity_sensor_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="123" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="123" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8cdd81ce43cf4bee14352d6f5f79b1db" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_sensor_id_</definition>
+        <argsstring></argsstring>
+        <name>imu_sensor_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="124" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="124" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e9aec9175ed5d1b8fc74db60a14756" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>position_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="127" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a78436b193a4a16006ecb00e78a14718e" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>pose_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="128" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a879fccd4ccc2fe827b025a55b2635bd2" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>velocity_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="129" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a027cdb628e9b3f4971a12106dc213c98" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_frame_id_</definition>
+        <argsstring></argsstring>
+        <name>imu_frame_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="130" column="15" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acb5ad98a76b83aacd276588916f37425" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::main_update_rate_</definition>
+        <argsstring></argsstring>
+        <name>main_update_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="133" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="133" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acd7e6085563f01b0b72a051c26a74a65" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_rate_</definition>
+        <argsstring></argsstring>
+        <name>position_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="134" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="134" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5bfabe03042292bccaeb783577dfc2cf" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_rate_</definition>
+        <argsstring></argsstring>
+        <name>pose_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="135" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="135" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad06b1af6a49eaeddcb0c0f2f15e44c20" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_rate_</definition>
+        <argsstring></argsstring>
+        <name>velocity_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="136" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="136" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a186a5b9d5e3f35576c1d665efd5ac839" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_rate_</definition>
+        <argsstring></argsstring>
+        <name>imu_rate_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="137" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="137" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a774a7f6264a13176a8f9ec671c9b1b87" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_divider_</definition>
+        <argsstring></argsstring>
+        <name>position_divider_</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="139" column="7" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="139" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8a585cb875783676bbd4667b5d531d15" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_divider_</definition>
+        <argsstring></argsstring>
+        <name>pose_divider_</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="140" column="7" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="140" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6955fce6c6b6a2219cebcd12d0a81b30" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_divider_</definition>
+        <argsstring></argsstring>
+        <name>velocity_divider_</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="141" column="7" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="141" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2ed955a0a2d5ac16642a22b72d4bbdac" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_divider_</definition>
+        <argsstring></argsstring>
+        <name>imu_divider_</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="142" column="7" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="142" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6c3893b97b19b2214cfce3414325d05e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::iteration_</definition>
+        <argsstring></argsstring>
+        <name>iteration_</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="143" column="7" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="143" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad275762ebcce75faf65b666dce7de1bc" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::noise_sigma_</definition>
+        <argsstring></argsstring>
+        <name>noise_sigma_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="146" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="146" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab7cf6db9eae478a3cf16da5c7908cfb9" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::time_jitter_</definition>
+        <argsstring></argsstring>
+        <name>time_jitter_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="147" column="10" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="147" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" prot="private" static="no" mutable="no">
+        <type>std::mt19937</type>
+        <definition>std::mt19937 kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::generator_</definition>
+        <argsstring></argsstring>
+        <name>generator_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="150" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="150" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad6e2ba04ebeab943bae2b7119191e905" prot="private" static="no" mutable="no">
+        <type>std::normal_distribution</type>
+        <definition>std::normal_distribution kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::noise_dist_</definition>
+        <argsstring></argsstring>
+        <name>noise_dist_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="151" column="4" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="151" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" prot="private" static="no" mutable="no">
+        <type>std::uniform_real_distribution</type>
+        <definition>std::uniform_real_distribution kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::jitter_dist_</definition>
+        <argsstring></argsstring>
+        <name>jitter_dist_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="152" column="4" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="152" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" prot="private" static="no" mutable="no">
+        <type>rclcpp::Time</type>
+        <definition>rclcpp::Time kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::start_time_</definition>
+        <argsstring></argsstring>
+        <name>start_time_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="155" column="16" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="155" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</referencedby>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1abc816c8a07773d5c7d4ccc55bef8ee7a" prot="private" static="no" mutable="no">
+        <type>geometry_msgs::msg::TransformStamped</type>
+        <definition>geometry_msgs::msg::TransformStamped kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::position_transform_</definition>
+        <argsstring></argsstring>
+        <name>position_transform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="158" column="40" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="158" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e74b932add3c852b58a4660a6b671d" prot="private" static="no" mutable="no">
+        <type>geometry_msgs::msg::TransformStamped</type>
+        <definition>geometry_msgs::msg::TransformStamped kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::pose_transform_</definition>
+        <argsstring></argsstring>
+        <name>pose_transform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="159" column="40" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="159" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aa871b01a4b443c740b55d9ff42f4685f" prot="private" static="no" mutable="no">
+        <type>geometry_msgs::msg::TransformStamped</type>
+        <definition>geometry_msgs::msg::TransformStamped kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::velocity_transform_</definition>
+        <argsstring></argsstring>
+        <name>velocity_transform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="160" column="40" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="160" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a69840c0c3bcd87c08af3c45afed956d7" prot="private" static="no" mutable="no">
+        <type>geometry_msgs::msg::TransformStamped</type>
+        <definition>geometry_msgs::msg::TransformStamped kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::imu_transform_</definition>
+        <argsstring></argsstring>
+        <name>imu_transform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="161" column="40" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="161" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::Figure8SimulatorNode</definition>
+        <argsstring>()</argsstring>
+        <name>Figure8SimulatorNode</name>
+        <briefdescription>
+<para>Constructor for <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode" kindref="compound">Figure8SimulatorNode</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the node with all necessary publishers, parameters, and timers. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="41" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="25" bodyend="165"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" compoundref="figure8__simulator__node_8hpp" startline="120">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" compoundref="figure8__simulator__node_8hpp" startline="150">generator_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2ed955a0a2d5ac16642a22b72d4bbdac" compoundref="figure8__simulator__node_8hpp" startline="142">imu_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a9951b0c1dfe599c7d3c4d2508a160e83" compoundref="figure8__simulator__node_8hpp" startline="105">imu_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a186a5b9d5e3f35576c1d665efd5ac839" compoundref="figure8__simulator__node_8hpp" startline="137">imu_rate_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8cdd81ce43cf4bee14352d6f5f79b1db" compoundref="figure8__simulator__node_8hpp" startline="124">imu_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" compoundref="figure8__simulator__node_8hpp" startline="96">imu_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" compoundref="figure8__simulator__node_8hpp" startline="152">jitter_dist_</references>
+        <references refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9fb55a22b391f3f3ec0345c0906dd68d" compoundref="trajectory__utils_8hpp" startline="15">kinematic_arbiter::utils::Figure8Config::length</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acb5ad98a76b83aacd276588916f37425" compoundref="figure8__simulator__node_8hpp" startline="133">main_update_rate_</references>
+        <references refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1abf9001d43bca4ee9685c0fd271540547" compoundref="trajectory__utils_8hpp" startline="14">kinematic_arbiter::utils::Figure8Config::max_velocity</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad6e2ba04ebeab943bae2b7119191e905" compoundref="figure8__simulator__node_8hpp" startline="151">noise_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad275762ebcce75faf65b666dce7de1bc" compoundref="figure8__simulator__node_8hpp" startline="146">noise_sigma_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8a585cb875783676bbd4667b5d531d15" compoundref="figure8__simulator__node_8hpp" startline="140">pose_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aeab061fcf018a8a12054e82392a64ee8" compoundref="figure8__simulator__node_8hpp" startline="103">pose_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5bfabe03042292bccaeb783577dfc2cf" compoundref="figure8__simulator__node_8hpp" startline="135">pose_rate_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a423380d9d381b5823691812d17a18b29" compoundref="figure8__simulator__node_8hpp" startline="122">pose_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" compoundref="figure8__simulator__node_8hpp" startline="94">pose_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a774a7f6264a13176a8f9ec671c9b1b87" compoundref="figure8__simulator__node_8hpp" startline="139">position_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a042eb6949d766812c55e46222511be32" compoundref="figure8__simulator__node_8hpp" startline="102">position_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acd7e6085563f01b0b72a051c26a74a65" compoundref="figure8__simulator__node_8hpp" startline="134">position_rate_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a09c8c82cd3fb5bcb65d313c7f1886b82" compoundref="figure8__simulator__node_8hpp" startline="121">position_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" compoundref="figure8__simulator__node_8hpp" startline="93">position_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" compoundref="figure8__simulator__node_8cpp" startline="292" endline="342">publishSensorTransforms</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6e2b9a317be5e213b2331d072c69d306" compoundref="figure8__simulator__node_8hpp" startline="112">tf_broadcaster_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab7cf6db9eae478a3cf16da5c7908cfb9" compoundref="figure8__simulator__node_8hpp" startline="147">time_jitter_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac9385e2af956324ca87fae84c0294766" compoundref="figure8__simulator__node_8hpp" startline="99">trajectory_config_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aee2e8c077ee31c723518aa324317e849" compoundref="figure8__simulator__node_8hpp" startline="108">truth_pose_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af52359584cf8ffb0bfa9315c645dbbd0" compoundref="figure8__simulator__node_8hpp" startline="109">truth_velocity_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8b5935703db1efc985ddf263654e42ed" compoundref="figure8__simulator__node_8hpp" startline="116">update_timer_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6955fce6c6b6a2219cebcd12d0a81b30" compoundref="figure8__simulator__node_8hpp" startline="141">velocity_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a972c080190f5ead476012bb4f0e935e6" compoundref="figure8__simulator__node_8hpp" startline="104">velocity_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad06b1af6a49eaeddcb0c0f2f15e44c20" compoundref="figure8__simulator__node_8hpp" startline="136">velocity_rate_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5d8ce586e2fa887ccbba914a483c789a" compoundref="figure8__simulator__node_8hpp" startline="123">velocity_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" compoundref="figure8__simulator__node_8hpp" startline="95">velocity_sensor_model_</references>
+        <references refid="structkinematic__arbiter_1_1utils_1_1Figure8Config_1a9e1036d75405d890325c421e07c7a7f8" compoundref="trajectory__utils_8hpp" startline="16">kinematic_arbiter::utils::Figure8Config::width</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::update</definition>
+        <argsstring>()</argsstring>
+        <name>update</name>
+        <briefdescription>
+<para>Main update function called by the timer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Generates trajectory state and publishes sensor data at appropriate rates </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="49" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="166" bodyend="192"/>
+        <references refid="namespacekinematic__arbiter_1_1utils_1a2ca17a01e42301ffa188c887083eacb5" compoundref="trajectory__utils_8hpp" startline="31" endline="134">kinematic_arbiter::utils::Figure8Trajectory</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2ed955a0a2d5ac16642a22b72d4bbdac" compoundref="figure8__simulator__node_8hpp" startline="142">imu_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6c3893b97b19b2214cfce3414325d05e" compoundref="figure8__simulator__node_8hpp" startline="143">iteration_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8a585cb875783676bbd4667b5d531d15" compoundref="figure8__simulator__node_8hpp" startline="140">pose_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a774a7f6264a13176a8f9ec671c9b1b87" compoundref="figure8__simulator__node_8hpp" startline="139">position_divider_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" compoundref="figure8__simulator__node_8cpp" startline="194" endline="242">publishGroundTruth</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" compoundref="figure8__simulator__node_8cpp" startline="280" endline="290">publishImu</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" compoundref="figure8__simulator__node_8cpp" startline="256" endline="266">publishPose</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" compoundref="figure8__simulator__node_8cpp" startline="244" endline="254">publishPosition</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" compoundref="figure8__simulator__node_8cpp" startline="268" endline="278">publishVelocity</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac9385e2af956324ca87fae84c0294766" compoundref="figure8__simulator__node_8hpp" startline="99">trajectory_config_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6955fce6c6b6a2219cebcd12d0a81b30" compoundref="figure8__simulator__node_8hpp" startline="141">velocity_divider_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishGroundTruth</definition>
+        <argsstring>(const StateVector &amp;state)</argsstring>
+        <name>publishGroundTruth</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Publish ground truth and TF transforms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current trajectory state </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="55" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="194" bodyend="242"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" compoundref="state__index_8hpp" startline="25" endline="25">kinematic_arbiter::core::StateIndex::Position::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity_1a90f46140a68776dac322db5def8ef932" compoundref="state__index_8hpp" startline="46" endline="46">kinematic_arbiter::core::StateIndex::LinearVelocity::Begin</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity_1a582fc5f2b58d312404f599b8d00afa71" compoundref="state__index_8hpp" startline="56" endline="56">kinematic_arbiter::core::StateIndex::AngularVelocity::Begin</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" compoundref="figure8__simulator__node_8hpp" startline="120">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6e2b9a317be5e213b2331d072c69d306" compoundref="figure8__simulator__node_8hpp" startline="112">tf_broadcaster_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aee2e8c077ee31c723518aa324317e849" compoundref="figure8__simulator__node_8hpp" startline="108">truth_pose_pub_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af52359584cf8ffb0bfa9315c645dbbd0" compoundref="figure8__simulator__node_8hpp" startline="109">truth_velocity_pub_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishPosition</definition>
+        <argsstring>(const StateVector &amp;state, double elapsed_seconds)</argsstring>
+        <name>publishPosition</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>elapsed_seconds</declname>
+        </param>
+        <briefdescription>
+<para>Publish position sensor data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current trajectory state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elapsed_seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current simulation time in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="62" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="244" bodyend="254"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" compoundref="figure8__simulator__node_8hpp" startline="150">generator_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" compoundref="figure8__simulator__node_8hpp" startline="152">jitter_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a042eb6949d766812c55e46222511be32" compoundref="figure8__simulator__node_8hpp" startline="102">position_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" compoundref="figure8__simulator__node_8hpp" startline="93">position_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishPose</definition>
+        <argsstring>(const StateVector &amp;state, double elapsed_seconds)</argsstring>
+        <name>publishPose</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>elapsed_seconds</declname>
+        </param>
+        <briefdescription>
+<para>Publish pose sensor data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current trajectory state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elapsed_seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current simulation time in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="69" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="256" bodyend="266"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" compoundref="figure8__simulator__node_8hpp" startline="150">generator_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" compoundref="figure8__simulator__node_8hpp" startline="152">jitter_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aeab061fcf018a8a12054e82392a64ee8" compoundref="figure8__simulator__node_8hpp" startline="103">pose_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" compoundref="figure8__simulator__node_8hpp" startline="94">pose_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishVelocity</definition>
+        <argsstring>(const StateVector &amp;state, double elapsed_seconds)</argsstring>
+        <name>publishVelocity</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>elapsed_seconds</declname>
+        </param>
+        <briefdescription>
+<para>Publish velocity sensor data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current trajectory state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elapsed_seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current simulation time in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="76" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="268" bodyend="278"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" compoundref="figure8__simulator__node_8hpp" startline="150">generator_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" compoundref="figure8__simulator__node_8hpp" startline="152">jitter_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a972c080190f5ead476012bb4f0e935e6" compoundref="figure8__simulator__node_8hpp" startline="104">velocity_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" compoundref="figure8__simulator__node_8hpp" startline="95">velocity_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishImu</definition>
+        <argsstring>(const StateVector &amp;state, double elapsed_seconds)</argsstring>
+        <name>publishImu</name>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>elapsed_seconds</declname>
+        </param>
+        <briefdescription>
+<para>Publish IMU sensor data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current trajectory state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elapsed_seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current simulation time in seconds </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="83" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="280" bodyend="290"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" compoundref="figure8__simulator__node_8hpp" startline="150">generator_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a9951b0c1dfe599c7d3c4d2508a160e83" compoundref="figure8__simulator__node_8hpp" startline="105">imu_publisher_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" compoundref="figure8__simulator__node_8hpp" startline="96">imu_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" compoundref="figure8__simulator__node_8hpp" startline="152">jitter_dist_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" compoundref="figure8__simulator__node_8hpp" startline="155">start_time_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" compoundref="figure8__simulator__node_8hpp" startline="119">world_frame_id_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" compoundref="figure8__simulator__node_8cpp" startline="166" endline="192">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::ros2::simulation::Figure8SimulatorNode::publishSensorTransforms</definition>
+        <argsstring>()</argsstring>
+        <name>publishSensorTransforms</name>
+        <briefdescription>
+<para>Set up sensor transforms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates transforms for all sensors based on parameters </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="90" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp" bodystart="292" bodyend="342"/>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" compoundref="figure8__simulator__node_8hpp" startline="120">body_frame_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8cdd81ce43cf4bee14352d6f5f79b1db" compoundref="figure8__simulator__node_8hpp" startline="124">imu_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" compoundref="figure8__simulator__node_8hpp" startline="96">imu_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a69840c0c3bcd87c08af3c45afed956d7" compoundref="figure8__simulator__node_8hpp" startline="161">imu_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a423380d9d381b5823691812d17a18b29" compoundref="figure8__simulator__node_8hpp" startline="122">pose_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" compoundref="figure8__simulator__node_8hpp" startline="94">pose_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e74b932add3c852b58a4660a6b671d" compoundref="figure8__simulator__node_8hpp" startline="159">pose_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a09c8c82cd3fb5bcb65d313c7f1886b82" compoundref="figure8__simulator__node_8hpp" startline="121">position_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" compoundref="figure8__simulator__node_8hpp" startline="93">position_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1abc816c8a07773d5c7d4ccc55bef8ee7a" compoundref="figure8__simulator__node_8hpp" startline="158">position_transform_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a1aa648a9520d10349cd796a8ba2037ad" compoundref="figure8__simulator__node_8hpp" startline="113">tf_static_broadcaster_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5d8ce586e2fa887ccbba914a483c789a" compoundref="figure8__simulator__node_8hpp" startline="123">velocity_sensor_id_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" compoundref="figure8__simulator__node_8hpp" startline="95">velocity_sensor_model_</references>
+        <references refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aa871b01a4b443c740b55d9ff42f4685f" compoundref="figure8__simulator__node_8hpp" startline="160">velocity_transform_</references>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" compoundref="figure8__simulator__node_8cpp" startline="25" endline="165">Figure8SimulatorNode</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simplified simulator node that generates a Figure-8 trajectory and publishes sensor data. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</label>
+        <link refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>trajectory_config_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rclcpp::Node</label>
+      </node>
+      <node id="3">
+        <label>kinematic_arbiter::utils::Figure8Config</label>
+        <link refid="structkinematic__arbiter_1_1utils_1_1Figure8Config"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" line="30" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp" bodystart="30" bodyend="162"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a91e61438d3d22ff68d5c51e34f375634" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>body_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac3d5b099f5eed720ffccd06bb9586788" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>Figure8SimulatorNode</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1afe428a478e755c3d29dc492c2634d937" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>generator_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2ed955a0a2d5ac16642a22b72d4bbdac" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_divider_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a027cdb628e9b3f4971a12106dc213c98" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a9951b0c1dfe599c7d3c4d2508a160e83" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_publisher_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a186a5b9d5e3f35576c1d665efd5ac839" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8cdd81ce43cf4bee14352d6f5f79b1db" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a13c580e87fd98964c46719931fd69b14" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a69840c0c3bcd87c08af3c45afed956d7" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>imu_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6c3893b97b19b2214cfce3414325d05e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>iteration_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad92583a0a1dbcb6b0cd5cb799cafd95c" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>jitter_dist_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acb5ad98a76b83aacd276588916f37425" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>main_update_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a92c8f8f6dc44d8e9a331f9b97db71cb5" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad6e2ba04ebeab943bae2b7119191e905" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>noise_dist_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad275762ebcce75faf65b666dce7de1bc" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>noise_sigma_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8a585cb875783676bbd4667b5d531d15" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_divider_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a78436b193a4a16006ecb00e78a14718e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aeab061fcf018a8a12054e82392a64ee8" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_publisher_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5bfabe03042292bccaeb783577dfc2cf" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a423380d9d381b5823691812d17a18b29" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab5537378d788d0820dc902c2ea6b2778" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e74b932add3c852b58a4660a6b671d" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>pose_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a774a7f6264a13176a8f9ec671c9b1b87" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_divider_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a12e9aec9175ed5d1b8fc74db60a14756" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a042eb6949d766812c55e46222511be32" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_publisher_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1acd7e6085563f01b0b72a051c26a74a65" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a09c8c82cd3fb5bcb65d313c7f1886b82" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b5aead5bcaab556b23f57dd4f3d636a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1abc816c8a07773d5c7d4ccc55bef8ee7a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>position_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af5bdcfe5445ec15ef8a5735777f3c883" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishGroundTruth</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a76b4d1c68d4a318567e09b1512f628f7" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishImu</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad57d4f6e797e30a611edece7c0423d17" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishPose</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a2b1c12f942781ff8e475ff28d366a59e" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishPosition</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af54a9a2fb2974c10390275fddbb788bb" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishSensorTransforms</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae4a19452a50b81d28f72dacd84667677" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>publishVelocity</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a21891a6d8884e429a2f66f425484fa9d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>SIdx</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a46515dad3433234d0561e50fbda711eb" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>start_time_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a50e000e2346d81477f83ea10a75637d8" prot="public" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>StateVector</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6e2b9a317be5e213b2331d072c69d306" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>tf_broadcaster_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a1aa648a9520d10349cd796a8ba2037ad" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>tf_static_broadcaster_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab7cf6db9eae478a3cf16da5c7908cfb9" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>time_jitter_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac9385e2af956324ca87fae84c0294766" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>trajectory_config_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aee2e8c077ee31c723518aa324317e849" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>truth_pose_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1af52359584cf8ffb0bfa9315c645dbbd0" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>truth_velocity_pub_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ac2fc799b41b37ca470b37d7b816414a8" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>update</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a8b5935703db1efc985ddf263654e42ed" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>update_timer_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a6955fce6c6b6a2219cebcd12d0a81b30" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_divider_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a879fccd4ccc2fe827b025a55b2635bd2" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_frame_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a972c080190f5ead476012bb4f0e935e6" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_publisher_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ad06b1af6a49eaeddcb0c0f2f15e44c20" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_rate_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1a5d8ce586e2fa887ccbba914a483c789a" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_sensor_id_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ab957f7f4c057a481343926e9444ff346" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_sensor_model_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1aa871b01a4b443c740b55d9ff42f4685f" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>velocity_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode_1ae74e172ce6d20a16a8dec1e8c0d048b4" prot="private" virt="non-virtual"><scope>kinematic_arbiter::ros2::simulation::Figure8SimulatorNode</scope><name>world_frame_id_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

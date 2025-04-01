@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel" kind="class" language="C++" prot="public">
+    <compoundname>kinematic_arbiter::sensors::PositionSensorModel</compoundname>
+    <basecompoundref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" prot="public" virt="non-virtual">kinematic_arbiter::core::MeasurementModelInterface</basecompoundref>
+    <includes refid="position__sensor__model_8hpp" local="no">position_sensor_model.hpp</includes>
+    <innerclass refid="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex" prot="public">kinematic_arbiter::sensors::PositionSensorModel::MeasurementIndex</innerclass>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a855fa5264ebe7df3fec094144635b078" prot="public" static="no">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">core::MeasurementModelInterface</ref></type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::Base =  core::MeasurementModelInterface</definition>
+        <argsstring></argsstring>
+        <name>Base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="16" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4af91121787431c6c012186cf48a40fb" prot="public" static="no">
+        <type>typename <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">Base::StateVector</ref></type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::StateVector =  typename Base::StateVector</definition>
+        <argsstring></argsstring>
+        <name>StateVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="19" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4255893f4e910e95d1f6c1552f9dffaa" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" kindref="member">kMeasurementDimension</ref>, 1 &gt;</type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::Vector =  Eigen::Matrix&lt;double, kMeasurementDimension, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="20" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ade1c602a9af847cceb2e319b18c445cc" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" kindref="member">kMeasurementDimension</ref>, <ref refid="structkinematic__arbiter_1_1core_1_1StateIndex_1a941e39d09cd093509b19004b45c16f6a" kindref="member">core::StateIndex::kFullStateSize</ref> &gt;</type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::Jacobian =  Eigen::Matrix&lt;double, kMeasurementDimension, core::StateIndex::kFullStateSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>Jacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="21" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a9a5b3915a09d8c0c351da949b7eb7b7e" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, <ref refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" kindref="member">kMeasurementDimension</ref>, <ref refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" kindref="member">kMeasurementDimension</ref> &gt;</type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::Covariance =  Eigen::Matrix&lt;double, kMeasurementDimension, kMeasurementDimension&gt;</definition>
+        <argsstring></argsstring>
+        <name>Covariance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="22" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a231ab3d253635171563045da6116e001" prot="public" static="no">
+        <type>typename <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">Base::StateFlags</ref></type>
+        <definition>using kinematic_arbiter::sensors::PositionSensorModel::StateFlags =  typename Base::StateFlags</definition>
+        <argsstring></argsstring>
+        <name>StateFlags</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="23" column="3" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int kinematic_arbiter::sensors::PositionSensorModel::kMeasurementDimension</definition>
+        <argsstring></argsstring>
+        <name>kMeasurementDimension</name>
+        <initializer>= <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kindref="compound">core::MeasurementDimension</ref>&lt;<ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914a52f5e0bc3859bc5f5e25130b6c7e8881" kindref="member">core::SensorType::Position</ref>&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="18" column="24" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler_1ac19c83562c9516c43c5933c77521f981" compoundref="position__sensor__handler_8hpp" startline="36" endline="42">kinematic_arbiter::ros2::PositionSensorHandler::msgToVector</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a546ffd279698833bc3c4c801e74c3bb6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>kinematic_arbiter::sensors::PositionSensorModel::PositionSensorModel</definition>
+        <argsstring>(const Eigen::Isometry3d &amp;sensor_pose_in_body_frame=Eigen::Isometry3d::Identity(), const ValidationParams &amp;params=ValidationParams())</argsstring>
+        <name>PositionSensorModel</name>
+        <param>
+          <type>const Eigen::Isometry3d &amp;</type>
+          <declname>sensor_pose_in_body_frame</declname>
+          <defval>Eigen::Isometry3d::Identity()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref> &amp;</type>
+          <declname>params</declname>
+          <defval><ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor_pose_in_body_frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Transform from body to sensor frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Validation parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="40" column="12" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ad3c423f6217e4290553ed1b5dc098ecf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void kinematic_arbiter::sensors::PositionSensorModel::reset</definition>
+        <argsstring>() override</argsstring>
+        <name>reset</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa2b7cdf287cf76fd3f124d61b007b876">reset</reimplements>
+        <briefdescription>
+<para>Reset the measurement model to initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="48" column="8" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="48" bodyend="50"/>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" compoundref="measurement__model__interface_8hpp" startline="477">kinematic_arbiter::core::MeasurementModelInterface::measurement_covariance_</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref></type>
+        <definition>DynamicVector kinematic_arbiter::sensors::PositionSensorModel::PredictMeasurement</definition>
+        <argsstring>(const StateVector &amp;state) const override</argsstring>
+        <name>PredictMeasurement</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a93c282b256807ec898ed370425d51bbc">PredictMeasurement</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Predict measurement from state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Expected measurement [x, y, z]&apos; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="57" column="17" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="57" bodyend="76"/>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" compoundref="measurement__model__interface_8hpp" startline="475">kinematic_arbiter::core::MeasurementModelInterface::sensor_pose_in_body_frame_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" kindref="member">DynamicJacobian</ref></type>
+        <definition>DynamicJacobian kinematic_arbiter::sensors::PositionSensorModel::GetMeasurementJacobian</definition>
+        <argsstring>(const StateVector &amp;state) const override</argsstring>
+        <name>GetMeasurementJacobian</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6b5954981316837e748849685d76da04">GetMeasurementJacobian</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Compute measurement Jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state estimate </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Jacobian of measurement with respect to state </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="84" column="19" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="84" bodyend="129"/>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" compoundref="measurement__model__interface_8hpp" startline="475">kinematic_arbiter::core::MeasurementModelInterface::sensor_pose_in_body_frame_</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref></type>
+        <definition>StateFlags kinematic_arbiter::sensors::PositionSensorModel::GetInitializableStates</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetInitializableStates</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae8347005b6d6adc21b80a7c1aaf951ee">GetInitializableStates</reimplements>
+        <briefdescription>
+<para>Get states that this sensor can directly initialize. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Position sensor provides position measurements in global frame, so it can initialize position state components.</para>
+<para><simplesect kind="return"><para>Flags for initializable states </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="139" column="14" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="139" bodyend="148"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" compoundref="state__index_8hpp" startline="22">kinematic_arbiter::core::StateIndex::Position::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" compoundref="state__index_8hpp" startline="23">kinematic_arbiter::core::StateIndex::Position::Z</references>
+      </memberdef>
+      <memberdef kind="function" id="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref></type>
+        <definition>StateFlags kinematic_arbiter::sensors::PositionSensorModel::InitializeState</definition>
+        <argsstring>(const DynamicVector &amp;measurement, const StateFlags &amp;valid_states, StateVector &amp;state, StateCovariance &amp;covariance) const override</argsstring>
+        <name>InitializeState</name>
+        <reimplements refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a98065dc0937c36d9b696dc86e7bffe4e">InitializeState</reimplements>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref> &amp;</type>
+          <declname>measurement</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref> &amp;</type>
+          <declname>valid_states</declname>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref> &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <briefdescription>
+<para>Initialize state from position measurement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes position states from sensor measurement, accounting for sensor-to-body frame offset if quaternion is valid.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>measurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position measurement [x, y, z] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valid_states</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags indicating which states are valid </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State vector to update </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>covariance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State covariance to update </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Flags indicating which states were initialized </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="162" column="14" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="162" bodyend="229"/>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aefacc52dcba77933043b3802b5b749ae" compoundref="state__index_8hpp" startline="25" endline="25">kinematic_arbiter::core::StateIndex::Position::Begin</references>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" compoundref="measurement__model__interface_8hpp" startline="477">kinematic_arbiter::core::MeasurementModelInterface::measurement_covariance_</references>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" compoundref="measurement__model__interface_8hpp" startline="475">kinematic_arbiter::core::MeasurementModelInterface::sensor_pose_in_body_frame_</references>
+        <references refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486" compoundref="measurement__model__interface_8hpp" startline="426" endline="438">kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementSize</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a974ce211cf31eba33fd4a89c0706432f" compoundref="state__index_8hpp" startline="31">kinematic_arbiter::core::StateIndex::Quaternion::W</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a5c2652fe956b4be3393dd47bf9fe9d33" compoundref="state__index_8hpp" startline="21">kinematic_arbiter::core::StateIndex::Position::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a16846a86810c4a3c7b1651bd10586cfe" compoundref="state__index_8hpp" startline="32">kinematic_arbiter::core::StateIndex::Quaternion::X</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1a26718365b8836d35c53729c66a57f409" compoundref="state__index_8hpp" startline="22">kinematic_arbiter::core::StateIndex::Position::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1af1d78b2f18147bf1abec5a47d984e63c" compoundref="state__index_8hpp" startline="33">kinematic_arbiter::core::StateIndex::Quaternion::Y</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position_1aa1fb254c975be6b79b3be8d2a98bec5f" compoundref="state__index_8hpp" startline="23">kinematic_arbiter::core::StateIndex::Position::Z</references>
+        <references refid="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion_1a8a8ad785fbd7f06509eae6b27b7d20c9" compoundref="state__index_8hpp" startline="34">kinematic_arbiter::core::StateIndex::Quaternion::Z</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Position sensor model. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>kinematic_arbiter::core::MeasurementModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface"/>
+      </node>
+      <node id="1">
+        <label>kinematic_arbiter::sensors::PositionSensorModel</label>
+        <link refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>kinematic_arbiter::core::MeasurementModelInterface::ValidationParams</label>
+        <link refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams"/>
+      </node>
+      <node id="4">
+        <label>kinematic_arbiter::core::MeasurementModelInterface::MeasurementData</label>
+        <link refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData"/>
+      </node>
+      <node id="2">
+        <label>kinematic_arbiter::core::MeasurementModelInterface</label>
+        <link refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>validation_params_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>previous_measurement_data_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kinematic_arbiter::sensors::PositionSensorModel</label>
+        <link refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" line="13" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/position_sensor_model.hpp" bodystart="13" bodyend="230"/>
+    <listofallmembers>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a855fa5264ebe7df3fec094144635b078" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>Base</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad7f0a5265f1043721ccdcedfdaeaec4e" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>body_to_sensor_transform_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>can_predict_input_accelerations_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4346126200c9f4de489aab3fab129971" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>CanPredictInputAccelerations</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a97984559c1bce1ca940c5031f0179c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>ComputeAuxiliaryData</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a9a5b3915a09d8c0c351da949b7eb7b7e" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>Covariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>DynamicCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>DynamicJacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>DynamicVector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a150e6a83b5b062c9d5be9515149c33" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetBodyToSensorTransform</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a86eabdd69c46555d8651e700a8393406" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetInitializableStates</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a2fddcb888990500b3b3409b7b6cec686" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetMeasurementCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a714f39ad471603ffe4937d0f4a132154" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetMeasurementJacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3201756902a007c9ac9b209020119a0a" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetModelType</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6e876bbd501638d08c5edb780a267709" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetPredictionModelInputs</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3eb44bf67d92d14ffc6bfccd3577ea32" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetSensorPoseInBodyFrame</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5cc96aafe1baa54185ab107e7badea1b" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>GetValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a1d6dcad7753b1e064cc499384d1e012c" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>InitializeState</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ade1c602a9af847cceb2e319b18c445cc" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>Jacobian</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a173d17b61a41ece1380c66ca2b54e3b3" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>kMeasurementDimension</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>measurement_covariance_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6892442da3585a1341223e86b19bab74" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>MeasurementModelInterface</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a546ffd279698833bc3c4c801e74c3bb6" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>PositionSensorModel</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ac7958db15f723b5b6dd6af83b9604137" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>PredictMeasurement</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a01f9294fc634377d82ff39899f0933da" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>previous_measurement_data_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1ad3c423f6217e4290553ed1b5dc098ecf" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>reset</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>sensor_pose_in_body_frame_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15cc22968d56d51842529beeb0467f08" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>SetSensorPoseInBodyFrame</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad540c0d79ba49a24099318bfc8bc7eda" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>SetValidationParams</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>StateCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a231ab3d253635171563045da6116e001" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>StateFlags</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af00dfc6985a743d5cbdeb8eb5ccd895f" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>StateSize</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4af91121787431c6c012186cf48a40fb" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>StateVector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40058c54f10901f78ff41d6dc5bc2719" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>type_</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40c3a85ae08d728f08a72294a41a4f87" prot="private" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>UpdateCovariance</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>ValidateAndMediate</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4d2c920c121d7b75cbe1d0edc8d0cd11" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>ValidateAuxiliaryData</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0c2dc49a74ea86100c0fb28845323987" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>ValidateMeasurementAndTime</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>ValidateMeasurementSize</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af518043017105da5dc8e2884a3c08757" prot="protected" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>validation_params_</name></member>
+      <member refid="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1a4255893f4e910e95d1f6c1552f9dffaa" prot="public" virt="non-virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>Vector</name></member>
+      <member refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15ccf29d4fcb77eeec7c061d1f1760a9" prot="public" virt="virtual"><scope>kinematic_arbiter::sensors::PositionSensorModel</scope><name>~MeasurementModelInterface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

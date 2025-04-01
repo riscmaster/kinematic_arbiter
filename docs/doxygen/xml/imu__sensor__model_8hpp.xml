@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="imu__sensor__model_8hpp" kind="file" language="C++">
+    <compoundname>imu_sensor_model.hpp</compoundname>
+    <includes local="no">Eigen/Core</includes>
+    <includes local="no">Eigen/Geometry</includes>
+    <includes refid="measurement__model__interface_8hpp" local="yes">kinematic_arbiter/core/measurement_model_interface.hpp</includes>
+    <includes refid="state__index_8hpp" local="yes">kinematic_arbiter/core/state_index.hpp</includes>
+    <includes refid="imu__bias__estimator_8hpp" local="yes">kinematic_arbiter/sensors/imu_bias_estimator.hpp</includes>
+    <includes refid="sensor__types_8hpp" local="yes">kinematic_arbiter/core/sensor_types.hpp</includes>
+    <includedby refid="imu__sensor__handler_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp</includedby>
+    <includedby refid="figure8__simulator__node_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp</includedby>
+    <includedby refid="sensor__publisher_8hpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp</includedby>
+    <includedby refid="figure8__simulator__node_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp</includedby>
+    <includedby refid="imu__sensor__model_8cpp" local="yes">/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp</includedby>
+    <incdepgraph>
+      <node id="8">
+        <label>kinematic_arbiter/core/state_index.hpp</label>
+        <link refid="state__index_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>limits</label>
+      </node>
+      <node id="13">
+        <label>kinematic_arbiter/core/mediation_types.hpp</label>
+        <link refid="mediation__types_8hpp"/>
+      </node>
+      <node id="3">
+        <label>Eigen/Geometry</label>
+      </node>
+      <node id="16">
+        <label>cmath</label>
+      </node>
+      <node id="7">
+        <label>stdexcept</label>
+      </node>
+      <node id="2">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp</label>
+        <link refid="imu__sensor__model_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>random</label>
+      </node>
+      <node id="5">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="4">
+        <label>kinematic_arbiter/core/measurement_model_interface.hpp</label>
+        <link refid="measurement__model__interface_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>kinematic_arbiter/sensors/imu_bias_estimator.hpp</label>
+        <link refid="imu__bias__estimator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="19">
+        <label>kinematic_arbiter/core/sensor_types.hpp</label>
+        <link refid="sensor__types_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>kinematic_arbiter/core/statistical_utils.hpp</label>
+        <link refid="statistical__utils_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>array</label>
+      </node>
+      <node id="6">
+        <label>iostream</label>
+      </node>
+      <node id="9">
+        <label>cstddef</label>
+      </node>
+      <node id="12">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="10">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/sensor_publisher.hpp</label>
+        <link refid="sensor__publisher_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/simulation/figure8_simulator_node.cpp</label>
+        <link refid="figure8__simulator__node_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp</label>
+        <link refid="imu__sensor__model_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/filter_wrapper.cpp</label>
+        <link refid="filter__wrapper_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/imu_sensor_handler.hpp</label>
+        <link refid="imu__sensor__handler_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+      <node id="8">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/simulation/figure8_simulator_node.hpp</label>
+        <link refid="figure8__simulator__node_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/sensors/imu_sensor_model.cpp</label>
+        <link refid="imu__sensor__model_8cpp"/>
+      </node>
+      <node id="5">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/src/ros2/kinematic_arbiter_node.cpp</label>
+        <link refid="kinematic__arbiter__node_8cpp"/>
+      </node>
+      <node id="3">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/filter_wrapper.hpp</label>
+        <link refid="filter__wrapper_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/ros2/kinematic_arbiter_node.hpp</label>
+        <link refid="kinematic__arbiter__node_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" prot="public">kinematic_arbiter::sensors::ImuSensorConfig</innerclass>
+    <innerclass refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" prot="public">kinematic_arbiter::sensors::ImuSensorModel</innerclass>
+    <innerclass refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" prot="public">kinematic_arbiter::sensors::ImuSensorModel::MeasurementIndex</innerclass>
+    <innernamespace refid="namespacekinematic__arbiter">kinematic_arbiter</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1sensors">kinematic_arbiter::sensors</innernamespace>
+    <innernamespace refid="namespacekinematic__arbiter_1_1sensors_1_1test">kinematic_arbiter::sensors::test</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Geometry&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="measurement__model__interface_8hpp" kindref="compound">kinematic_arbiter/core/measurement_model_interface.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="state__index_8hpp" kindref="compound">kinematic_arbiter/core/state_index.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="imu__bias__estimator_8hpp" kindref="compound">kinematic_arbiter/sensors/imu_bias_estimator.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="sensor__types_8hpp" kindref="compound">kinematic_arbiter/core/sensor_types.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacekinematic__arbiter" kindref="compound">kinematic_arbiter</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">sensors<sp/>{</highlight></codeline>
+<codeline lineno="13" refid="namespacekinematic__arbiter_1_1sensors_1_1test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">test<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ImuStationaryTest;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>test</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Move<sp/>Config<sp/>struct<sp/>outside<sp/>the<sp/>class</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref><sp/>{</highlight></codeline>
+<codeline lineno="19" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a60805d4ea0d104b078d00a14bc78f2a5" refkind="member"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a60805d4ea0d104b078d00a14bc78f2a5" kindref="member">bias_estimation_window_size</ref><sp/>=<sp/>1000;</highlight></codeline>
+<codeline lineno="20" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" kindref="member">calibration_enabled</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a0321c5206f1fa07c984b40a00c693d6d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1a0321c5206f1fa07c984b40a00c693d6d" kindref="member">stationary_confidence_threshold</ref><sp/>=<sp/>0.01;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel" kindref="compound">ImuSensorModel</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">core::MeasurementModelInterface</ref><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Type<sp/>definitions<sp/>for<sp/>clarity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ab8961b5d8eeaaee7b865eb2cb890e82d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">Base</ref><sp/>=<sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">core::MeasurementModelInterface</ref>;</highlight></codeline>
+<codeline lineno="35" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1afc55ef0c231e15c65c062177ee4ee037" kindref="member">kMeasurementDimension</ref><sp/>=<sp/><ref refid="structkinematic__arbiter_1_1core_1_1MeasurementDimension" kindref="compound">core::MeasurementDimension&lt;core::SensorType::Imu&gt;::value</ref>;</highlight></codeline>
+<codeline lineno="36" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">Base::StateVector</ref>;</highlight></codeline>
+<codeline lineno="37" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">Base::StateCovariance</ref>;</highlight></codeline>
+<codeline lineno="38" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kindref="member">Vector</ref><sp/>=<sp/>Eigen::Matrix&lt;double,<sp/>kMeasurementDimension,<sp/>1&gt;;</highlight></codeline>
+<codeline lineno="39" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1b718824924fcdf179c102454684c76b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1b718824924fcdf179c102454684c76b" kindref="member">Jacobian</ref><sp/>=<sp/>Eigen::Matrix&lt;double,<sp/>kMeasurementDimension,<sp/>core::StateIndex::kFullStateSize&gt;;</highlight></codeline>
+<codeline lineno="40" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" kindref="member">Covariance</ref><sp/>=<sp/>Eigen::Matrix&lt;double,<sp/>kMeasurementDimension,<sp/>kMeasurementDimension&gt;;</highlight></codeline>
+<codeline lineno="41" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">StateFlags</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8" kindref="member">Base::StateFlags</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex" kindref="compound">MeasurementIndex</ref><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Gyroscope<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a0440010fa0de999eca42bcc91244cf7c" kindref="member">GX</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="49" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ab7f7617850a39e18cf85de71bab4eb01" kindref="member">GY</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="50" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a9d24c9587293c91baefc5151345162ef" kindref="member">GZ</ref><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Accelerometer<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1a07b54cf22b75ad1871438e809a43f32a" kindref="member">AX</ref><sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="54" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1afcc105d20a87404e3d0e93dd78e1aafd" kindref="member">AY</ref><sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="55" refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex_1ac48884f3f090357502fff24916a57192" kindref="member">AZ</ref><sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a9a3a064dd9c01092cf62c1122046ac2d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a9a3a064dd9c01092cf62c1122046ac2d" kindref="member">ImuSensorModel</ref>(</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::Isometry3d&amp;<sp/>sensor_pose_in_body_frame<sp/>=<sp/>Eigen::Isometry3d::Identity(),</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref>&amp;<sp/>config<sp/>=<sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref>(),</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref>&amp;<sp/>params<sp/>=<sp/><ref refid="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams" kindref="compound">ValidationParams</ref>())</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface" kindref="compound">Base</ref>(core::<ref refid="namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914" kindref="member">SensorType</ref>::Imu,<sp/>sensor_pose_in_body_frame,<sp/>params,<sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ad7b7d167ae7c0c1c1667552529a5c43b" kindref="member">Covariance</ref>::Identity()),</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" kindref="member">bias_estimator_</ref>(config.bias_estimation_window_size),</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" kindref="member">config_</ref>(config)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea" kindref="member">can_predict_input_accelerations_</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a30371ff6ab5bea1b1b356d83255b8c26" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a30371ff6ab5bea1b1b356d83255b8c26" kindref="member">reset</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6" kindref="member">measurement_covariance_</ref><sp/>=<sp/>Covariance::Identity();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a8f33ace296557e492289729d1a378ac7" kindref="member">PredictMeasurement</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kindref="member">StateVector</ref>&amp;<sp/>state)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1ba34a3a2ffd727fbf186816b108cd95" kindref="member">UpdateBiasEstimates</ref>(</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kindref="member">StateVector</ref>&amp;<sp/>state,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::MatrixXd&amp;<sp/>state_covariance,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kindref="member">Vector</ref>&amp;<sp/>raw_measurement);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368" kindref="member">DynamicJacobian</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5d8356e86f3e3dbcb810985a4debff1d" kindref="member">GetMeasurementJacobian</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kindref="member">StateVector</ref>&amp;<sp/>state)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Eigen::Matrix&lt;double,<sp/>6,<sp/>1&gt;<sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a5aa25072cbd538487d53217bdf59cff3" kindref="member">GetPredictionModelInputs</ref>(</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kindref="member">StateVector</ref>&amp;<sp/>state_before_prediction,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" kindref="member">StateCovariance</ref>&amp;<sp/>state_covariance_before_prediction,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref>&amp;<sp/>measurement_after_prediction,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1aaca53ce9aeb4744aa0ea869e43593a0b" kindref="member">EnableCalibration</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" kindref="member">config_</ref>.<ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig_1ac49f10c7dbffdde00eca537cd6149dca" kindref="member">calibration_enabled</ref><sp/>=<sp/>enable;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a017d18816162e8b2d0f948122af4abc8" kindref="member">SetConfig</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref>&amp;<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" kindref="member">config_</ref><sp/>=<sp/>config;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1add4aa360d8ee3e260cd2d2d99c9af100" kindref="member">GetGravity</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" kindref="member">kGravity</ref>;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" kindref="member">StateFlags</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a1d864b9804c270159a6b7b07fd4b8dc9" kindref="member">GetInitializableStates</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" kindref="member">StateFlags</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a3aab1963c7316f0e402277d9032fa87a" kindref="member">InitializeState</ref>(</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b" kindref="member">DynamicVector</ref>&amp;<sp/>measurement,</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a53abd5b1cb4baf98e8d2ec13dbe4bd0e" kindref="member">StateFlags</ref>&amp;,</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a2ab126876b6d23dc7ddb5e8bcbe4eeb0" kindref="member">StateVector</ref>&amp;<sp/>state,</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acce4beb22e7d812ee22e2454636c70b5" kindref="member">StateCovariance</ref>&amp;<sp/>covariance)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a037441e6ef4105b62bc5da4ddb9d9c00" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a037441e6ef4105b62bc5da4ddb9d9c00" kindref="member">kinematic_arbiter::sensors::test::ImuStationaryTest</ref>;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="186" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator" kindref="compound">ImuBiasEstimator</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a50fba6396081de4ead2ed0d0c9cf3f77" kindref="member">bias_estimator_</ref>;</highlight></codeline>
+<codeline lineno="187" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig" kindref="compound">ImuSensorConfig</ref><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1acc48bdf6476d46e9b9e9d1544a003675" kindref="member">config_</ref>;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Gravity<sp/>constants<sp/>moved<sp/>here<sp/>from<sp/>global<sp/>scope</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a421102acf9fccbb7c00b4da989eb148b" kindref="member">kGravity</ref><sp/>=<sp/>9.80665;</highlight></codeline>
+<codeline lineno="191" refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1abddc7407e6880cb4a3524a7b60bc626c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1abddc7407e6880cb4a3524a7b60bc626c" kindref="member">kGravityVariance</ref><sp/>=<sp/>0.012<sp/>*<sp/>0.012;<sp/><sp/></highlight><highlight class="comment">//<sp/>Variance<sp/>in<sp/>gravity<sp/>estimate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1ac899c40e3d26a7e5aff1abc0e986fe35" kindref="member">IsStationary</ref>(</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0" kindref="member">StateVector</ref>&amp;<sp/>state,</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05" kindref="member">StateCovariance</ref>&amp;<sp/>state_covariance,</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1a6c6ee31c6adbed7273d71e556662dabb" kindref="member">Vector</ref>&amp;<sp/>measurement)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>sensors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>kinematic_arbiter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/include/kinematic_arbiter/sensors/imu_sensor_model.hpp"/>
+  </compounddef>
+</doxygen>

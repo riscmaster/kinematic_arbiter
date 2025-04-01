@@ -1,0 +1,203 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{kalman1960new}{article}{}
+      \name{author}{1}{}{%
+        {{hash=905a0fe021951b4ebc06e4e1bb70bd26}{%
+           family={Kalman},
+           familyi={K\bibinitperiod},
+           given={Rudolf\bibnamedelima E},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Society of Mechanical Engineers}%
+      }
+      \strng{namehash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \strng{fullhash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \strng{bibnamehash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \strng{authorbibnamehash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \strng{authornamehash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \strng{authorfullhash}{905a0fe021951b4ebc06e4e1bb70bd26}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Basic Engineering}
+      \field{number}{1}
+      \field{title}{A new approach to linear filtering and prediction problems}
+      \field{volume}{82}
+      \field{year}{1960}
+      \field{pages}{35\bibrangedash 45}
+      \range{pages}{11}
+    \endentry
+    \entry{maybeck1982stochastic}{book}{}
+      \name{author}{1}{}{%
+        {{hash=4d4500bb1f6739393af04389e92a1935}{%
+           family={Maybeck},
+           familyi={M\bibinitperiod},
+           given={Peter\bibnamedelima S},
+           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{4d4500bb1f6739393af04389e92a1935}
+      \strng{fullhash}{4d4500bb1f6739393af04389e92a1935}
+      \strng{bibnamehash}{4d4500bb1f6739393af04389e92a1935}
+      \strng{authorbibnamehash}{4d4500bb1f6739393af04389e92a1935}
+      \strng{authornamehash}{4d4500bb1f6739393af04389e92a1935}
+      \strng{authorfullhash}{4d4500bb1f6739393af04389e92a1935}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Stochastic models, estimation, and control}
+      \field{volume}{1}
+      \field{year}{1982}
+    \endentry
+    \entry{jazwinski2007stochastic}{book}{}
+      \name{author}{1}{}{%
+        {{hash=009dfec97fe632b94e131f796374ba4f}{%
+           family={Jazwinski},
+           familyi={J\bibinitperiod},
+           given={Andrew\bibnamedelima H},
+           giveni={A\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Courier Corporation}%
+      }
+      \strng{namehash}{009dfec97fe632b94e131f796374ba4f}
+      \strng{fullhash}{009dfec97fe632b94e131f796374ba4f}
+      \strng{bibnamehash}{009dfec97fe632b94e131f796374ba4f}
+      \strng{authorbibnamehash}{009dfec97fe632b94e131f796374ba4f}
+      \strng{authornamehash}{009dfec97fe632b94e131f796374ba4f}
+      \strng{authorfullhash}{009dfec97fe632b94e131f796374ba4f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Stochastic processes and filtering theory}
+      \field{year}{2007}
+    \endentry
+    \entry{barfoot2017state}{book}{}
+      \name{author}{1}{}{%
+        {{hash=b2c352c24cb7305c1e2d9b232a6fc453}{%
+           family={Barfoot},
+           familyi={B\bibinitperiod},
+           given={Timothy\bibnamedelima D},
+           giveni={T\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \strng{fullhash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \strng{bibnamehash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \strng{authorbibnamehash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \strng{authornamehash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \strng{authorfullhash}{b2c352c24cb7305c1e2d9b232a6fc453}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{State estimation for robotics}
+      \field{year}{2017}
+    \endentry
+    \entry{simon2006optimal}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d2075620d3db6f848d4904775355e936}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{d2075620d3db6f848d4904775355e936}
+      \strng{fullhash}{d2075620d3db6f848d4904775355e936}
+      \strng{bibnamehash}{d2075620d3db6f848d4904775355e936}
+      \strng{authorbibnamehash}{d2075620d3db6f848d4904775355e936}
+      \strng{authornamehash}{d2075620d3db6f848d4904775355e936}
+      \strng{authorfullhash}{d2075620d3db6f848d4904775355e936}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Optimal state estimation: Kalman, $H^\infty$, and nonlinear approaches}
+      \field{year}{2006}
+    \endentry
+    \entry{shumway2017time}{book}{}
+      \name{author}{2}{}{%
+        {{hash=b85ddf5669a01baf831e55be1d4cefea}{%
+           family={Shumway},
+           familyi={S\bibinitperiod},
+           given={Robert\bibnamedelima H},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=1e067c36fd71f6dfe18562e848c77d5b}{%
+           family={Stoffer},
+           familyi={S\bibinitperiod},
+           given={David\bibnamedelima S},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \strng{fullhash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \strng{bibnamehash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \strng{authorbibnamehash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \strng{authornamehash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \strng{authorfullhash}{4c0f9c2f06b267bf9cdc25917f538d96}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Time series analysis and its applications: with R examples}
+      \field{year}{2017}
+    \endentry
+    \entry{sarkka2013bayesian}{book}{}
+      \name{author}{1}{}{%
+        {{hash=89f4b98fe43f3c9f7ffdc081904d4781}{%
+           family={Särkkä},
+           familyi={S\bibinitperiod},
+           given={Simo},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \strng{fullhash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \strng{bibnamehash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \strng{authorbibnamehash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \strng{authornamehash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \strng{authorfullhash}{89f4b98fe43f3c9f7ffdc081904d4781}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Bayesian filtering and smoothing}
+      \field{year}{2013}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput

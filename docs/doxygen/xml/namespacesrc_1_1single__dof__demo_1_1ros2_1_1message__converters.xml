@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters" kind="namespace" language="Python">
+    <compoundname>src::single_dof_demo::ros2::message_converters</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ad227644b1ea054caef6977fc1dffaac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" kindref="compound">State</ref></type>
+        <definition> State src.single_dof_demo.ros2.message_converters.pose_with_covariance_to_state</definition>
+        <argsstring>(PoseWithCovarianceStamped msg)</argsstring>
+        <name>pose_with_covariance_to_state</name>
+        <param>
+          <type>PoseWithCovarianceStamped</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Convert PoseWithCovarianceStamped message to State.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" line="15" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" bodystart="15" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1a0c0669d860f3111ba7ffe38057e0b100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>PoseWithCovarianceStamped</type>
+        <definition> PoseWithCovarianceStamped src.single_dof_demo.ros2.message_converters.state_to_pose_with_covariance_stamped</definition>
+        <argsstring>(State state, Time stamp)</argsstring>
+        <name>state_to_pose_with_covariance_stamped</name>
+        <param>
+          <type><ref refid="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State" kindref="compound">State</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>Time</type>
+          <declname>stamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Convert State to PoseWithCovarianceStamped message.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" line="22" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" bodystart="24" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1single__dof__demo_1_1ros2_1_1message__converters_1ae7247df8714da122d96ed5c1342f8914" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition> float src.single_dof_demo.ros2.message_converters.ros_time_to_float</definition>
+        <argsstring>(Time stamp)</argsstring>
+        <name>ros_time_to_float</name>
+        <param>
+          <type>Time</type>
+          <declname>stamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Convert Time to float representation.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" line="34" column="1" bodyfile="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" bodystart="34" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/spencer/ros2workspace/src/kinematic_arbiter/src/single_dof_demo/ros2/message_converters.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>
