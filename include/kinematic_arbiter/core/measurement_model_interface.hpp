@@ -297,7 +297,8 @@ public:
     if (validation_params_.mediation_action == MediationAction::AdjustCovariance) {
       // Scale covariance to make chi-squared test pass
       double scale_factor = chi_squared_term / threshold;
-      measurement_covariance_ *= scale_factor;
+      aux_data.innovation_covariance *= scale_factor;
+      measurement_covariance_ = aux_data.innovation_covariance - aux_data.jacobian * state_covariance * aux_data.jacobian.transpose();
       previous_measurement_data_.covariance = measurement_covariance_;
       return true;
     }

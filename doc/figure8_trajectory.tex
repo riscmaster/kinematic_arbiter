@@ -28,6 +28,8 @@
 	\section{Mathematical Formulation}
 	The position in the Figure-8 trajectory is parameterized by time as follows:
 
+\subsection*{Position}
+
 	\[
 	\mathbf{p}(t) =
 	\begin{bmatrix}
@@ -36,7 +38,6 @@
 		c \sin(w_1 t)
 	\end{bmatrix}
 	\]
-
 	Where:
 	\begin{itemize}
 		\item $a = \frac{\text{length}}{2}$ (X amplitude)
@@ -46,6 +47,39 @@
 		\item $w_2 = w_1 \times 0.5$ (frequency for X motion)
 		\item $T = \frac{\pi \sqrt{a^2 + 4(b^2 + c^2)}}{v_{\text{max}}}$ (Trajectory period)
 	\end{itemize}
+\subsection*{Velocity}
+
+\begin{align*}
+	\mathbf{v}(t) = \frac{d\mathbf{p}}{dt} =
+	\begin{bmatrix}
+		- a w_2 \sin(w_2 t) \\
+		\phantom{-} b w_1 \cos(w_1 t) \\
+		\phantom{-} c w_1 \cos(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
+\subsection*{Acceleration}
+
+\begin{align*}
+	\mathbf{a}(t) = \frac{d\mathbf{v}}{dt} =
+	\begin{bmatrix}
+		- a w_2^2 \cos(w_2 t) \\
+		- b w_1^2 \sin(w_1 t) \\
+		- c w_1^2 \sin(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
+\subsection*{Jerk}
+
+\begin{align*}
+	\mathbf{j}(t) = \frac{d\mathbf{a}}{dt} =
+	\begin{bmatrix}
+		\phantom{-} a w_2^3 \sin(w_2 t) \\
+		- b w_1^3 \cos(w_1 t) \\
+		- c w_1^3 \cos(w_1 t)
+	\end{bmatrix}
+\end{align*}
+
 
 	\section{Orientation and Angular Dynamics}
 

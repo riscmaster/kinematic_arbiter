@@ -3,18 +3,53 @@
     "Plot!3ip39i4": {
       "paths": [
         {
-          "value": "/truth/pose.pose.position.x",
+          "value": "/imu_sensor.angular_velocity.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#b7edba",
+          "label": "gyro_x"
+        },
+        {
+          "value": "/imu_sensor/lower_bound.angular_velocity.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#d3dff6",
+          "label": "true_lower_bound"
+        },
+        {
+          "value": "/imu_sensor/truth.angular_velocity.x",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_x"
         },
         {
+          "value": "/imu_sensor/upper_bound.angular_velocity.x",
+          "enabled": true,
           "timestampMethod": "receiveTime",
-          "value": "/state/pose.pose.pose.position.x",
+          "color": "#d3dff6",
+          "label": "true_upper_bound"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/imu_sensor/expected.angular_velocity.x",
           "enabled": true,
           "color": "#ff8461",
-          "label": "estimate_x"
+          "label": "Expected X"
+        },
+        {
+          "value": "/imu_sensor/expected/lower_bound.angular_velocity.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461",
+          "label": "LowerBound"
+        },
+        {
+          "value": "/imu_sensor/expected/upper_bound.angular_velocity.x",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "color": "#ff8461",
+          "label": "UpperBound"
         }
       ],
       "showXAxisLabels": true,
@@ -29,28 +64,28 @@
     "Plot!3ajvnms": {
       "paths": [
         {
-          "value": "/position_sensor.point.y",
+          "value": "/imu_sensor.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#b7edba",
-          "label": "raw_y"
+          "label": "gyro_y"
         },
         {
-          "value": "/position_sensor/lower_bound.point.y",
+          "value": "/imu_sensor/lower_bound.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_lower_bound"
         },
         {
-          "value": "/position_sensor/truth.point.y",
+          "value": "/imu_sensor/truth.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_y"
         },
         {
-          "value": "/position_sensor/upper_bound.point.y",
+          "value": "/imu_sensor/upper_bound.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
@@ -58,22 +93,24 @@
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/position_sensor/expected.point.y",
+          "value": "/imu_sensor/expected.angular_velocity.y",
           "enabled": true,
           "color": "#ff8461",
           "label": "Expected Y"
         },
         {
-          "value": "/position_sensor/expected/lower_bound.point.y",
+          "value": "/imu_sensor/expected/lower_bound.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
-          "color": "#ff8461"
+          "color": "#ff8461",
+          "label": "LowerBound"
         },
         {
-          "value": "/position_sensor/expected/upper_bound.point.y",
+          "value": "/imu_sensor/expected/upper_bound.angular_velocity.y",
           "enabled": true,
           "timestampMethod": "receiveTime",
-          "color": "#ff8461"
+          "color": "#ff8461",
+          "label": "UpperBound"
         }
       ],
       "showXAxisLabels": true,
@@ -88,28 +125,28 @@
     "Plot!2y8h2f5": {
       "paths": [
         {
-          "value": "/position_sensor.point.z",
+          "value": "/imu_sensor.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#b7edba",
-          "label": "raw_z"
+          "label": "gyro_z"
         },
         {
-          "value": "/position_sensor/lower_bound.point.z",
+          "value": "/imu_sensor/lower_bound.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_lower_bound"
         },
         {
-          "value": "/position_sensor/truth.point.z",
+          "value": "/imu_sensor/truth.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
           "label": "true_z"
         },
         {
-          "value": "/position_sensor/upper_bound.point.z",
+          "value": "/imu_sensor/upper_bound.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
           "color": "#d3dff6",
@@ -117,22 +154,24 @@
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/state/pose.pose.pose.position.z",
+          "value": "/imu_sensor/expected.angular_velocity.z",
           "enabled": true,
           "color": "#ff8461",
           "label": "Expected Z"
         },
         {
-          "value": "/position_sensor/expected/upper_bound.point.z",
+          "value": "/imu_sensor/expected/lower_bound.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
-          "color": "#ff8461"
+          "color": "#ff8461",
+          "label": "Lower Bound"
         },
         {
-          "value": "/position_sensor/expected/lower_bound.point.z",
+          "value": "/imu_sensor/expected/upper_bound.angular_velocity.z",
           "enabled": true,
           "timestampMethod": "receiveTime",
-          "color": "#ff8461"
+          "color": "#ff8461",
+          "label": "Upper Bound"
         }
       ],
       "showXAxisLabels": true,

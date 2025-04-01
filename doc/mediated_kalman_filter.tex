@@ -121,6 +121,7 @@ Adaptive tuning of Kalman filters remains an active area of research \cite{simon
 	\end{equation}
 	where \( \chi_c \) is the critical value corresponding to a given confidence level of the chi-squared distribution, based on the degrees of freedom of the measurement. If this condition holds, the core assumptions of the filter remain valid, and no mediation is necessary. However, if the test fails, it indicates a fundamental breakdown of the filter’s underlying assumptions. At this point, the system is no longer operating within expected conditions, requiring appropriate corrective action to recover or transition to a safe failure mode.
 
+
 \subsection{Dynamic Tuning of Measurement Noise}
 
 As outlined in the introduction, the objective is not merely to detect violations of the Kalman filter’s assumptions, but to actively prevent them. A common failure mode arises from unmodeled disturbances in sensor data—such as vibration, temperature drift, environmental interference, or mechanical offsets—that cause deviations between predicted and actual measurements. These deviations increase the probability of failing the chi-squared innovation test, signaling a breakdown in the Gaussian, zero-mean noise assumption fundamental to Kalman filtering.
@@ -160,7 +161,7 @@ To mitigate this, we introduce a dynamic estimation of measurement noise. Rather
 	\end{align*}
 
 	\begin{equation}
-		w_{n+1} = = w_n + {x_{n+1}x_{n+1}^T -w_n \over n}
+		w_{n+1} = w_n + {x_{n+1}x_{n+1}^T -w_n \over n}
 		\label{eq:recursive_covariance}
 	\end{equation}
 

@@ -74,6 +74,7 @@ kinematic_arbiter:
     body_frame_id: "base_link"
 
     # Filter parameters
+    process_noise_window: 40
     position_uncertainty_per_second: 0.05  # Position uncertainty per second
     orientation_uncertainty_per_second: 0.05  # Orientation uncertainty per second
     linear_velocity_uncertainty_per_second: 0.75  # Linear velocity uncertainty per second
@@ -100,8 +101,8 @@ kinematic_arbiter:
       position_sensor:  # Sensor name, can be any identifier
         topic: "position_sensor"  # Topic to subscribe to
         frame_id: "position_sensor"  # Frame ID of the sensor
-        p2m_noise_ratio: 1.0
-        mediation_action: "adjust_covariance"
+        p2m_noise_ratio: 100.0
+        mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"
 
 
     # Pose sensors with hierarchical structure
@@ -109,16 +110,16 @@ kinematic_arbiter:
       pose_sensor:  # Sensor name
         topic: "pose_sensor"
         frame_id: "pose_sensor"
-        p2m_noise_ratio: 2.0
-        mediation_action: "adjust_covariance"
+        p2m_noise_ratio: 100.0
+        mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"
 
     # Velocity sensors with hierarchical structure
     velocity_sensors:
       velocity_sensor:  # Sensor name
         topic: "velocity_sensor"
         frame_id: "velocity_sensor"
-        p2m_noise_ratio: 2.0
-        mediation_action: "adjust_covariance"
+        p2m_noise_ratio: 10.0
+        mediation_action: "reject" # "force_accept", "adjust_covariance", "reject"
 
     # IMU sensors with hierarchical structure
     imu_sensors:
@@ -126,4 +127,4 @@ kinematic_arbiter:
         topic: "imu_sensor"
         frame_id: "imu_sensor"
         p2m_noise_ratio: 10.0
-        mediation_action: "adjust_covariance"
+        mediation_action: "force_accept" # "force_accept", "adjust_covariance", "reject"

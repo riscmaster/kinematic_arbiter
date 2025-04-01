@@ -165,31 +165,18 @@ public:
       const StateVector& a_priori_state,
       const StateVector& a_posteriori_state,
       double process_to_measurement_ratio,
-      double) {
-return;
-// Deprecate this for now, it needs to be reformulated.
-    // // Compute state correction
-    // StateVector state_diff = a_priori_state - a_posteriori_state;
-    //    // Apply maximum bound to state differences
-    // StateVector bounded_diff =
-    //     state_diff.array().max(-kMaxStateDiff).min(kMaxStateDiff);
+      double dt) {
+    // Compute state correction
+    StateVector tmp_state_diff = sqrt(process_to_measurement_ratio) * (a_priori_state - a_posteriori_state).array().abs() / fabs(dt);
+    StateVector bounded_diff = (tmp_state_diff.array() < kMinStateDiff).select(0.0, tmp_state_diff.array()).min(kMaxStateDiff);
 
-    // // Zero out terms that are below the minimum threshold
-    // StateVector final_diff = bounded_diff.array() * (bounded_diff.array().abs() >= kMinStateDiff).cast<double>();
+    // Apply maximum bound to state differences
+    state_diff_ += (bounded_diff - state_diff_) / params_.process_noise_window;
 
-    // StateMatrix update_contribution = final_diff * final_diff.transpose();
+    if( (state_diff_.array() > kMinStateDiff).all() ) {
 
-
-    // // Apply update only to masked elements
-    // for (int i = 0; i < StateSize; ++i) {
-    //   for (int j = 0; j < StateSize; ++j) {
-    //     if (update_contribution(i, j) != 0.0) {  // Either element had significant change
-    //       process_noise_(i, j) += process_to_measurement_ratio *
-    //                           (update_contribution(i, j) - process_noise_(i, j)) /
-    //                           (params_.process_noise_window);
-    //     }
-    //   }
-    // }
+    process_noise_ += (state_diff_ * state_diff_.transpose() - process_noise_) / (params_.process_noise_window);
+    }
   }
 
   /**
@@ -212,6 +199,8 @@ protected:
   // Threshold for numerical comparisons
   static constexpr double kMinStateDiff = 1e-6;
   static constexpr double kMaxStateDiff = 1e6;
+
+  StateVector state_diff_ = StateVector::Zero();
 
   // State model parameters
   Params params_;
