@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File position_sensor_model.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File position_sensor_model.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_sensors_position_sensor_model.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-position-sensor-model-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-sensors-position-sensor-model-hpp"></span><h1>Program Listing for File position_sensor_model.hpp<a class="headerlink" href="#program-listing-for-file-position-sensor-model-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_sensors_position_sensor_model.hpp.html#file-include-kinematic-arbiter-sensors-position-sensor-model-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/sensors/position_sensor_model.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/measurement_model_interface.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/sensor_types.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">sensors</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PositionSensorModel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">MeasurementModelInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Type definitions for clarity</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">MeasurementModelInterface</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// Move the constant inside the class</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">kMeasurementDimension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">MeasurementDimension</span><span class="o">&lt;</span><span class="n">core</span><span class="o">::</span><span class="n">SensorType</span><span class="o">::</span><span class="n">Position</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Base</span><span class="o">::</span><span class="n">StateVector</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">kMeasurementDimension</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">kMeasurementDimension</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Covariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">kMeasurementDimension</span><span class="p">,</span><span class="w"> </span><span class="n">kMeasurementDimension</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateFlags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Base</span><span class="o">::</span><span class="n">StateFlags</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">MeasurementIndex</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">PositionSensorModel</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">(),</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ValidationParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ValidationParams</span><span class="p">())</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">SensorType</span><span class="o">::</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">Covariance</span><span class="o">::</span><span class="n">Identity</span><span class="p">())</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">measurement_covariance_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Covariance</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">PredictMeasurement</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Extract position from state</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Extract orientation quaternion from state</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span>
+<span class="w">        </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">),</span>
+<span class="w">        </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">),</span>
+<span class="w">        </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">),</span>
+<span class="w">        </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Extract the sensor-to-body transform components</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">trans_b_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Compute predicted position in global frame</span>
+<span class="w">    </span><span class="c1">// p_sensor_global = p_body + R_body_to_global * p_sensor_in_body</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trans_b_s</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="n">GetMeasurementJacobian</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Jacobian</span><span class="w"> </span><span class="n">jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jacobian</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Position part of the Jacobian - derivative with respect to position is identity</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// If the sensor is mounted with an offset, we need to compute the Jacobian</span>
+<span class="w">    </span><span class="c1">// with respect to orientation</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">().</span><span class="n">isZero</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Normalize quaternion (critical for numerical stability)</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">qx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">qy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">qz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">qw</span><span class="o">*</span><span class="n">qw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qx</span><span class="o">*</span><span class="n">qx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qy</span><span class="o">*</span><span class="n">qy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qz</span><span class="o">*</span><span class="n">qz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">qw</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">norm</span><span class="p">;</span><span class="w"> </span><span class="n">qx</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">norm</span><span class="p">;</span><span class="w"> </span><span class="n">qy</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">norm</span><span class="p">;</span><span class="w"> </span><span class="n">qz</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">norm</span><span class="p">;</span>
+
+<span class="w">      </span><span class="c1">// Extract sensor position in body frame</span>
+<span class="w">      </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">();</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">();</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">pz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">();</span>
+
+<span class="w">      </span><span class="c1">// Derivative with respect to qw</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qw</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qz</span><span class="o">*</span><span class="n">py</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qy</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qz</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">py</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qx</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">qy</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qx</span><span class="o">*</span><span class="n">py</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Derivative with respect to qx</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qx</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qy</span><span class="o">*</span><span class="n">py</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qz</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qy</span><span class="o">*</span><span class="n">qx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qz</span><span class="o">*</span><span class="n">qx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">py</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Derivative with respect to qy</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qx</span><span class="o">*</span><span class="n">qy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qy</span><span class="o">*</span><span class="n">py</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qx</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qz</span><span class="o">*</span><span class="n">pz</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qz</span><span class="o">*</span><span class="n">qy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">px</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Derivative with respect to qz</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qx</span><span class="o">*</span><span class="n">qz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">py</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qy</span><span class="o">*</span><span class="n">qz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qw</span><span class="o">*</span><span class="n">px</span><span class="p">);</span>
+<span class="w">      </span><span class="n">jacobian</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qz</span><span class="o">*</span><span class="n">pz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qx</span><span class="o">*</span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qy</span><span class="o">*</span><span class="n">py</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">jacobian</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">GetInitializableStates</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Position sensor can initialize position</span>
+<span class="w">    </span><span class="n">flags</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">flags</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">flags</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">InitializeState</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">&amp;</span><span class="w"> </span><span class="n">valid_states</span><span class="p">,</span>
+<span class="w">      </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">      </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">covariance</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ValidateMeasurementSize</span><span class="p">(</span><span class="n">measurement</span><span class="p">);</span>
+<span class="w">    </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">initialized_states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Extract position from measurement</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">sensor_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Extract the sensor-to-body translation</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">trans_b_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Check if quaternion is valid for lever arm compensation</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">quaternion_valid</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">valid_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">        </span><span class="n">valid_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">        </span><span class="n">valid_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">        </span><span class="n">valid_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">body_position</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">quaternion_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">trans_b_s</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// With valid quaternion, we can properly account for the lever arm</span>
+<span class="w">      </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span>
+<span class="w">          </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">),</span>
+<span class="w">          </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">),</span>
+<span class="w">          </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">),</span>
+<span class="w">          </span><span class="n">state</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span>
+<span class="w">      </span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Compensate for lever arm: p_body = p_sensor - R_body_to_global * p_sensor_in_body</span>
+<span class="w">      </span><span class="n">body_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trans_b_s</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Without valid quaternion, we ignore the lever arm</span>
+<span class="w">      </span><span class="c1">// This will introduce error if the lever arm is significant</span>
+<span class="w">      </span><span class="n">body_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_position</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Update state with initialized position</span>
+<span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body_position</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Update covariance in state</span>
+<span class="w">    </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// If we ignored the lever arm, increase position uncertainty</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">quaternion_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">trans_b_s</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Add additional uncertainty based on lever arm length</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">lever_arm_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trans_b_s</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">additional_variance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lever_arm_length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lever_arm_length</span><span class="p">;</span>
+
+<span class="w">      </span><span class="c1">// Use Eigen diagonal matrix addition instead of loops</span>
+<span class="w">      </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">          </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span>
+<span class="w">          </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">+=</span>
+<span class="w">          </span><span class="n">additional_variance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Mark position states as initialized</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">initialized_states</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace sensors</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

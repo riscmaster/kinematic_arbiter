@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File measurement_model_interface.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File measurement_model_interface.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_core_measurement_model_interface.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-measurement-model-interface-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-core-measurement-model-interface-hpp"></span><h1>Program Listing for File measurement_model_interface.hpp<a class="headerlink" href="#program-listing-for-file-measurement-model-interface-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_core_measurement_model_interface.hpp.html#file-include-kinematic-arbiter-core-measurement-model-interface-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/core/measurement_model_interface.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_</span>
+<span class="cp">#define KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Geometry&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/mediation_types.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/statistical_utils.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/sensor_types.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">core</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w">  </span><span class="c1">// Maximum measurement dimension (for Pose type)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MeasurementModelInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Type definitions</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">StateSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span><span class="w">                     </span><span class="c1">// State vector x</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateCovariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">DynamicVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">ColMajor</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span><span class="w">          </span><span class="c1">// Measurement vector y_k</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">ColMajor</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Measurement covariance R</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">ColMajor</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Measurement Jacobian C_k                        // Innovation covariance S</span>
+
+<span class="w">  </span><span class="c1">// More general name for boolean state flags</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateFlags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">ValidationParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Sample window size for adaptive estimation of R</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">noise_sample_window</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Confidence level assumption validation (0-1)</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">confidence_level</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Process to measurement noise ratio</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">process_to_measurement_noise_ratio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Mediation action to take if validation fails</span>
+<span class="w">    </span><span class="n">MediationAction</span><span class="w"> </span><span class="n">mediation_action</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Constructor with default values</span>
+<span class="w">    </span><span class="n">ValidationParams</span><span class="p">()</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">noise_sample_window</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">        </span><span class="n">confidence_level</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span>
+<span class="w">        </span><span class="n">process_to_measurement_noise_ratio</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span>
+<span class="w">        </span><span class="n">mediation_action</span><span class="p">(</span><span class="n">MediationAction</span><span class="o">::</span><span class="n">ForceAccept</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">MeasurementAuxData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">innovation</span><span class="p">;</span><span class="w">                </span><span class="c1">// y_k - C_k x_k</span>
+<span class="w">    </span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="n">jacobian</span><span class="p">;</span><span class="w">                </span><span class="c1">// C_k</span>
+<span class="w">    </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="n">innovation_covariance</span><span class="p">;</span><span class="w">  </span><span class="c1">// S = C_k P_k C_k^T + R</span>
+
+<span class="w">    </span><span class="c1">// Constructors</span>
+<span class="w">    </span><span class="n">MeasurementAuxData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MeasurementAuxData</span><span class="p">(</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">inn</span><span class="p">,</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicJacobian</span><span class="o">&amp;</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">inn_cov</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">innovation</span><span class="p">(</span><span class="n">inn</span><span class="p">),</span><span class="w"> </span><span class="n">jacobian</span><span class="p">(</span><span class="n">jac</span><span class="p">),</span><span class="w"> </span><span class="n">innovation_covariance</span><span class="p">(</span><span class="n">inn_cov</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">MeasurementModelInterface</span><span class="p">(</span>
+<span class="w">      </span><span class="n">SensorType</span><span class="w"> </span><span class="n">type</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">(),</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ValidationParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ValidationParams</span><span class="p">(),</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement_covariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="p">,</span><span class="w"> </span><span class="n">kMaxMeasurementDim</span><span class="o">&gt;::</span><span class="n">Identity</span><span class="p">())</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">(</span><span class="n">sensor_pose_in_body_frame</span><span class="p">),</span>
+<span class="w">      </span><span class="n">body_to_sensor_transform_</span><span class="p">(</span><span class="n">sensor_pose_in_body_frame</span><span class="p">.</span><span class="n">inverse</span><span class="p">()),</span>
+<span class="w">      </span><span class="n">measurement_covariance_</span><span class="p">(</span><span class="n">measurement_covariance</span><span class="p">),</span>
+<span class="w">      </span><span class="n">validation_params_</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
+<span class="w">      </span><span class="n">type_</span><span class="p">(</span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">MeasurementModelInterface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">DynamicVector</span><span class="w"> </span><span class="nf">PredictMeasurement</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="nf">GetMeasurementJacobian</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetPredictionModelInputs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;::</span><span class="n">Zero</span><span class="p">();};</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">CanPredictInputAccelerations</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">can_predict_input_accelerations_</span><span class="p">;}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">GetMeasurementCovariance</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetValidationParams</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ValidationParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">validation_params_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">ValidationParams</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">GetValidationParams</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">validation_params_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">MeasurementAuxData</span><span class="w"> </span><span class="nf">ComputeAuxiliaryData</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ValidateMeasurementSize</span><span class="p">(</span><span class="n">measurement</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Calculate innovation: ν = y_k - h(x_k)</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">innovation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">PredictMeasurement</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Get measurement Jacobian: C_k</span>
+<span class="w">    </span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="n">jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetMeasurementJacobian</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Calculate innovation covariance: S = C_k P_k C_k^T + R</span>
+<span class="w">    </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="n">innovation_covariance</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">jacobian</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">state_covariance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jacobian</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MeasurementAuxData</span><span class="p">(</span><span class="n">innovation</span><span class="p">,</span><span class="w"> </span><span class="n">jacobian</span><span class="p">,</span><span class="w"> </span><span class="n">innovation_covariance</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">ValidateAuxiliaryData</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MeasurementAuxData</span><span class="o">&amp;</span><span class="w"> </span><span class="n">aux_data</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Check innovation and jacobian for NaN/Inf</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">.</span><span class="n">allFinite</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">aux_data</span><span class="p">.</span><span class="n">jacobian</span><span class="p">.</span><span class="n">allFinite</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Invalid innovation or jacobian from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check innovation covariance for NaN/Inf</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="p">.</span><span class="n">allFinite</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Innovation covariance contains NaN/Inf from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check if innovation covariance is well-conditioned</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">JacobiSVD</span><span class="o">&lt;</span><span class="n">DynamicCovariance</span><span class="o">&gt;</span><span class="w"> </span><span class="n">svd</span><span class="p">(</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">condition_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">svd</span><span class="p">.</span><span class="n">singularValues</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span>
+<span class="w">                             </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">svd</span><span class="p">.</span><span class="n">singularValues</span><span class="p">()(</span><span class="n">svd</span><span class="p">.</span><span class="n">singularValues</span><span class="p">().</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">1e-12</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kConditionThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e12</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condition_number</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">kConditionThreshold</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Ill-conditioned innovation covariance (cond=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">condition_number</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check if LDLT decomposition succeeds (positive definite check)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">LDLT</span><span class="o">&lt;</span><span class="n">DynamicCovariance</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ldlt</span><span class="p">(</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ldlt</span><span class="p">.</span><span class="n">info</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Innovation covariance not positive definite from &quot;</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// All checks passed</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">ValidateAndMediate</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement_timestamp</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">      </span><span class="n">MeasurementAuxData</span><span class="o">&amp;</span><span class="w"> </span><span class="n">aux_data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">previous_measurement_data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MeasurementData</span><span class="p">(</span>
+<span class="w">      </span><span class="n">measurement_timestamp</span><span class="p">,</span>
+<span class="w">      </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">      </span><span class="n">measurement_covariance_</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Compute auxiliary data</span>
+<span class="w">    </span><span class="n">aux_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ComputeAuxiliaryData</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Validate auxiliary data</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ValidateAuxiliaryData</span><span class="p">(</span><span class="n">aux_data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Skip innovation test for forced accept</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validation_params_</span><span class="p">.</span><span class="n">mediation_action</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MediationAction</span><span class="o">::</span><span class="n">ForceAccept</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">UpdateCovariance</span><span class="p">(</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">);</span>
+<span class="w">      </span><span class="n">previous_measurement_data_</span><span class="p">.</span><span class="n">covariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Mahalanobis distance: d = ν^T S^-1 ν</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">chi_squared_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">*</span>
+<span class="w">                        </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="p">.</span><span class="n">ldlt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Determine threshold for chi-squared test</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">CalculateChiSquareCriticalValueNDof</span><span class="p">(</span>
+<span class="w">          </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">.</span><span class="n">rows</span><span class="p">()</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">validation_params_</span><span class="p">.</span><span class="n">confidence_level</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Check if measurement passes validation</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chi_squared_term</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">threshold</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">UpdateCovariance</span><span class="p">(</span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">);</span>
+<span class="w">      </span><span class="n">previous_measurement_data_</span><span class="p">.</span><span class="n">covariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Measurement Apply Mediation Action</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validation_params_</span><span class="p">.</span><span class="n">mediation_action</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MediationAction</span><span class="o">::</span><span class="n">AdjustCovariance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Scale covariance to make chi-squared test pass</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chi_squared_term</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">threshold</span><span class="p">;</span>
+<span class="w">      </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">scale_factor</span><span class="p">;</span>
+<span class="w">      </span><span class="n">measurement_covariance_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation_covariance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">aux_data</span><span class="p">.</span><span class="n">jacobian</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">state_covariance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">aux_data</span><span class="p">.</span><span class="n">jacobian</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">      </span><span class="n">previous_measurement_data_</span><span class="p">.</span><span class="n">covariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Log warning with metadata when validation fails</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;WARNING: Measurement validation failed for sensor type &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  Chi-squared value: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">chi_squared_term</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, Threshold: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  Innovation norm: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">aux_data</span><span class="p">.</span><span class="n">innovation</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, Measurement timestamp: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">measurement_timestamp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Always return false if validation fails</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">GetSensorPoseInBodyFrame</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">pose</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">GetBodyToSensorTransform</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">pose</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body_to_sensor_transform_</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">SetSensorPoseInBodyFrame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">pose</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sensor_pose_in_body_frame_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pose</span><span class="p">;</span>
+<span class="w">    </span><span class="n">body_to_sensor_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pose</span><span class="p">.</span><span class="n">inverse</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateFlags</span><span class="w"> </span><span class="nf">GetInitializableStates</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateFlags</span><span class="w"> </span><span class="nf">InitializeState</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">&amp;</span><span class="w"> </span><span class="n">valid_states</span><span class="p">,</span>
+<span class="w">      </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">      </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">covariance</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">SensorType</span><span class="w"> </span><span class="nf">GetModelType</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">type_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">ValidateMeasurementAndTime</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">reference_time</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">max_delay_window</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Check for NaN/Inf in measurement</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">measurement</span><span class="p">.</span><span class="n">allFinite</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Invalid measurement from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check measurement size</span>
+<span class="w">    </span><span class="n">ValidateMeasurementSize</span><span class="p">(</span><span class="n">measurement</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Reference time not yet set (first measurement)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reference_time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">lowest</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check timestamp against delay window</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timestamp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">reference_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">max_delay_window</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">timestamp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">reference_time</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">max_delay_window</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Timestamp outside acceptable window for &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sensor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">protected</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">ValidateMeasurementSize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Validate sensor type is known</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SensorType</span><span class="o">::</span><span class="n">Unknown</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;Cannot process measurement with Unknown sensor type&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">measurement</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">GetMeasurementDimension</span><span class="p">(</span><span class="n">type_</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span>
+<span class="w">          </span><span class="s">&quot;Measurement size mismatch: expected &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">          </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">GetMeasurementDimension</span><span class="p">(</span><span class="n">type_</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">          </span><span class="s">&quot;, got &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">measurement</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">MeasurementData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="n">covariance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MeasurementData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MeasurementData</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">timestamp</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">value</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">covariance</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">UpdateCovariance</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">innovation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define bounds as named constants for clarity</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kMinInnovation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">;</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kMaxInnovation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 1. Clip large values (positive and negative)</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">clipped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">innovation</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">cwiseMax</span><span class="p">(</span><span class="o">-</span><span class="n">kMaxInnovation</span><span class="p">).</span><span class="n">cwiseMin</span><span class="p">(</span><span class="n">kMaxInnovation</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 2. Apply minimum magnitude while preserving sign</span>
+<span class="w">    </span><span class="c1">// Formula: sign(x) * max(|x|, kMinInnovation)</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">bounded_innovation</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">clipped</span><span class="p">.</span><span class="n">sign</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">clipped</span><span class="p">.</span><span class="n">abs</span><span class="p">().</span><span class="n">cwiseMax</span><span class="p">(</span><span class="n">kMinInnovation</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Update covariance with the adaptive formula</span>
+<span class="w">    </span><span class="n">measurement_covariance_</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">bounded_innovation</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bounded_innovation</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">-</span>
+<span class="w">                               </span><span class="n">measurement_covariance_</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">validation_params_</span><span class="p">.</span><span class="n">noise_sample_window</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="w"> </span><span class="n">body_to_sensor_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">  </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ValidationParams</span><span class="w"> </span><span class="n">validation_params_</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">can_predict_input_accelerations_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="n">MeasurementData</span><span class="w"> </span><span class="n">previous_measurement_data_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">SensorType</span><span class="w"> </span><span class="n">type_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SensorType</span><span class="o">::</span><span class="n">Unknown</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace core</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+
+<span class="cp">#endif </span><span class="c1">// KINEMATIC_ARBITER_CORE_MEASUREMENT_MODEL_INTERFACE_HPP_</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File sensor_handler.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File sensor_handler.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_ros2_sensor_handler.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-sensor-handler-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-ros2-sensor-handler-hpp"></span><h1>Program Listing for File sensor_handler.hpp<a class="headerlink" href="#program-listing-for-file-sensor-handler-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_ros2_sensor_handler.hpp.html#file-include-kinematic-arbiter-ros2-sensor-handler-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/ros2/sensor_handler.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/point_stamped.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/pose_stamped.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/twist_stamped.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/transform_stamped.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sensor_msgs/msg/imu.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tf2_ros/buffer.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/mediated_kalman_filter.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/measurement_model_interface.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/sensor_types.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/ros2/ros2_utils.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/mediation_types.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">ros2</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">MsgType</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SensorHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">MeasurementModelInterface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MeasurementModelInterface</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">DynamicVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MeasurementModelInterface</span><span class="o">::</span><span class="n">DynamicVector</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MeasurementModelInterface</span><span class="o">::</span><span class="n">DynamicCovariance</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MediatedKalmanFilter</span><span class="o">&lt;</span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="p">,</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">StateModelInterface</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">SensorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">SensorType</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Constant for bound calculation</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">SIGMA_BOUND_FACTOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">SensorHandler</span><span class="p">(</span>
+<span class="w">      </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="p">,</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Filter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">,</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">tf2_ros</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tf_buffer</span><span class="p">,</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">utils</span><span class="o">::</span><span class="n">TimeManager</span><span class="o">&gt;</span><span class="w"> </span><span class="n">time_manager</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sensor_name</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sensor_frame_id</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference_frame_id</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">body_frame_id</span><span class="p">,</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MeasurementModelInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sensor_model</span><span class="p">,</span>
+<span class="w">      </span><span class="n">SensorType</span><span class="w"> </span><span class="n">sensor_type</span><span class="p">)</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">node_</span><span class="p">(</span><span class="n">node</span><span class="p">),</span>
+<span class="w">      </span><span class="n">filter_</span><span class="p">(</span><span class="n">filter</span><span class="p">),</span>
+<span class="w">      </span><span class="n">tf_buffer_</span><span class="p">(</span><span class="n">tf_buffer</span><span class="p">),</span>
+<span class="w">      </span><span class="n">time_manager_</span><span class="p">(</span><span class="n">time_manager</span><span class="p">),</span>
+<span class="w">      </span><span class="n">sensor_name_</span><span class="p">(</span><span class="n">sensor_name</span><span class="p">),</span>
+<span class="w">      </span><span class="n">topic_</span><span class="p">(</span><span class="n">topic</span><span class="p">),</span>
+<span class="w">      </span><span class="n">sensor_frame_id_</span><span class="p">(</span><span class="n">sensor_frame_id</span><span class="p">),</span>
+<span class="w">      </span><span class="n">reference_frame_id_</span><span class="p">(</span><span class="n">reference_frame_id</span><span class="p">),</span>
+<span class="w">      </span><span class="n">body_frame_id_</span><span class="p">(</span><span class="n">body_frame_id</span><span class="p">),</span>
+<span class="w">      </span><span class="n">sensor_model_</span><span class="p">(</span><span class="n">sensor_model</span><span class="p">),</span>
+<span class="w">      </span><span class="n">sensor_type_</span><span class="p">(</span><span class="n">sensor_type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Validate critical pointers</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">node_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;SensorHandler constructor given null node pointer&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">filter_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;SensorHandler constructor given null filter pointer&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">tf_buffer_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;SensorHandler constructor given null TF buffer pointer&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">sensor_model_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;SensorHandler constructor given null sensor model&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create unique sensor ID from type and name</span>
+<span class="w">    </span><span class="n">sensor_id_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">sensor_type_</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="s">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sensor_name_</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Register the sensor with the filter (same for all sensor types)</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sensor_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">AddSensor</span><span class="p">(</span><span class="n">sensor_model_</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Store sensor index for faster lookups</span>
+<span class="w">    </span><span class="n">sensor_index_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_index</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Lookup static transform once at initialization</span>
+<span class="w">    </span><span class="n">lookupStaticTransform</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Create the subscriber</span>
+<span class="w">    </span><span class="n">subscription_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">create_subscription</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">topic_</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">MsgType</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">messageCallback</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Create expected measurement publishers</span>
+<span class="w">    </span><span class="n">expected_pub_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">topic_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/expected&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">upper_bound_pub_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">topic_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/expected/upper_bound&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">lower_bound_pub_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">topic_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/expected/lower_bound&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Created %s sensor handler &#39;%s&#39; (ID: %s) on topic &#39;%s&#39;&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">SensorTypeToString</span><span class="p">(</span><span class="n">sensor_type_</span><span class="p">).</span><span class="n">c_str</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">sensor_name_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">topic_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">getSensorId</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">setValidationParams</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">p2m_noise_ratio</span><span class="p">,</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MediationAction</span><span class="w"> </span><span class="n">mediation_action</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sensor_model_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// ValidationParams is part of MeasurementModelInterface</span>
+<span class="w">      </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MeasurementModelInterface</span><span class="o">::</span><span class="n">ValidationParams</span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+<span class="w">      </span><span class="n">params</span><span class="p">.</span><span class="n">process_to_measurement_noise_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2m_noise_ratio</span><span class="p">;</span>
+<span class="w">      </span><span class="n">params</span><span class="p">.</span><span class="n">mediation_action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mediation_action</span><span class="p">;</span>
+<span class="w">      </span><span class="n">sensor_model_</span><span class="o">-&gt;</span><span class="n">SetValidationParams</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+
+<span class="w">      </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Set validation params for %s: p2m_ratio=%.2f, action=%s&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">sensor_name_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">p2m_noise_ratio</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">mediation_action</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MediationAction</span><span class="o">::</span><span class="n">ForceAccept</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;force_accept&quot;</span><span class="w"> </span><span class="o">:</span>
+<span class="w">                  </span><span class="p">(</span><span class="n">mediation_action</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">kinematic_arbiter</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">MediationAction</span><span class="o">::</span><span class="n">AdjustCovariance</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;adjust_covariance&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;reject&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">msgToVector</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MsgType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">MsgType</span><span class="w"> </span><span class="nf">vectorToMsg</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vector</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Header</span><span class="o">&amp;</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">MsgType</span><span class="w"> </span><span class="nf">applyBound</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">MsgType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">base_msg</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">DynamicCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">covariance</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">positive</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Node and configuration</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Filter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">tf2_ros</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tf_buffer_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">utils</span><span class="o">::</span><span class="n">TimeManager</span><span class="o">&gt;</span><span class="w"> </span><span class="n">time_manager_</span><span class="p">;</span>
+
+
+<span class="w">  </span><span class="c1">// Sensor information</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">sensor_name_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">topic_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">sensor_frame_id_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">reference_frame_id_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MeasurementModelInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sensor_model_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">SensorType</span><span class="w"> </span><span class="n">sensor_type_</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sensor_index_</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Transform cache</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="w"> </span><span class="n">sensor_to_body_transform_</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Publishers and subscriber</span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">rclcpp</span><span class="o">::</span><span class="n">Subscription</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">subscription_</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">rclcpp</span><span class="o">::</span><span class="n">Publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">expected_pub_</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">rclcpp</span><span class="o">::</span><span class="n">Publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">upper_bound_pub_</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">rclcpp</span><span class="o">::</span><span class="n">Publisher</span><span class="o">&lt;</span><span class="n">MsgType</span><span class="o">&gt;::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">lower_bound_pub_</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Add this member variable to the SensorHandler class&#39;s private section</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">has_valid_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">lookupStaticTransform</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sensor_frame_id_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Special case: sensor is in the body frame, use identity</span>
+<span class="w">      </span><span class="n">sensor_to_body_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">      </span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">SetSensorPoseInBodyFrameByIndex</span><span class="p">(</span><span class="n">sensor_index_</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_to_body_transform_</span><span class="p">);</span>
+<span class="w">      </span><span class="n">has_valid_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">      </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Sensor %s is in body frame %s, using identity transform&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Try to look up the static transform</span>
+<span class="w">      </span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">TransformStamped</span><span class="w"> </span><span class="n">transform_stamped</span><span class="p">;</span>
+<span class="w">      </span><span class="n">transform_stamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tf_buffer_</span><span class="o">-&gt;</span><span class="n">lookupTransform</span><span class="p">(</span>
+<span class="w">          </span><span class="n">body_frame_id_</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_frame_id_</span><span class="p">,</span><span class="w"> </span><span class="n">tf2</span><span class="o">::</span><span class="n">TimePointZero</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Convert to Eigen transform</span>
+<span class="w">      </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="w"> </span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">      </span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="p">(</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">.</span><span class="n">y</span><span class="p">,</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+
+<span class="w">      </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">q</span><span class="p">(</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">.</span><span class="n">w</span><span class="p">,</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">.</span><span class="n">y</span><span class="p">,</span>
+<span class="w">          </span><span class="n">transform_stamped</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="w">      </span><span class="n">transform</span><span class="p">.</span><span class="n">linear</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+
+<span class="w">      </span><span class="c1">// Store and set transform</span>
+<span class="w">      </span><span class="n">sensor_to_body_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">;</span>
+<span class="w">      </span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">SetSensorPoseInBodyFrameByIndex</span><span class="p">(</span><span class="n">sensor_index_</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_to_body_transform_</span><span class="p">);</span>
+<span class="w">      </span><span class="n">has_valid_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">      </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Set transform from %s to %s for sensor %s: [%f, %f, %f]&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">sensor_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">().</span><span class="n">x</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">().</span><span class="n">y</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">transform</span><span class="p">.</span><span class="n">translation</span><span class="p">().</span><span class="n">z</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">tf2</span><span class="o">::</span><span class="n">TransformException</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Report the error without setting any transform</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN_THROTTLE</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="o">*</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_clock</span><span class="p">(),</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">&quot;Waiting for transform from %s to %s for sensor %s: %s&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">sensor_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+<span class="w">                 </span><span class="n">sensor_name_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+<span class="w">      </span><span class="n">has_valid_transform_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">messageCallback</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">MsgType</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">time_manager_</span><span class="o">-&gt;</span><span class="n">isInitialized</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Time manager not initialized for sensor %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Received null message for sensor %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Check for transform if we don&#39;t have a valid one yet</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">has_valid_transform_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">lookupStaticTransform</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Still don&#39;t have transform, skip processing this message</span>
+<span class="w">        </span><span class="c1">// Only log at most once per second to avoid spamming</span>
+<span class="w">        </span><span class="n">RCLCPP_WARN_THROTTLE</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="o">*</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_clock</span><span class="p">(),</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;Skipping measurement for sensor &#39;%s&#39; - waiting for transform from %s to %s&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">sensor_name_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">sensor_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">body_frame_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Convert to vector</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">measurement</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">msgToVector</span><span class="p">(</span><span class="o">*</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Failed to convert message to measurement vector for sensor %s&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get timestamp from message using our offset-adjusted conversion</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time_manager_</span><span class="o">-&gt;</span><span class="n">rosTimeToFilterTime</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="p">(</span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">.</span><span class="n">stamp</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Process the measurement</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">ProcessMeasurementByIndex</span><span class="p">(</span><span class="n">sensor_index_</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Failed to process measurement for sensor %s&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Always publish expected measurements regardless of process success</span>
+<span class="w">    </span><span class="n">publishExpectedMeasurement</span><span class="p">(</span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">publishExpectedMeasurement</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Header</span><span class="o">&amp;</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Get the timestamp using our offset-adjusted conversion</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time_manager_</span><span class="o">-&gt;</span><span class="n">rosTimeToFilterTime</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">stamp</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Predict to the measurement time</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">GetStateEstimate</span><span class="p">(</span><span class="n">timestamp</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Get expected measurement for this sensor at this state</span>
+<span class="w">    </span><span class="n">DynamicVector</span><span class="w"> </span><span class="n">expected_vector</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">GetExpectedMeasurementByIndex</span><span class="p">(</span><span class="n">sensor_index_</span><span class="p">,</span><span class="w"> </span><span class="n">expected_vector</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Failed to get expected measurement for sensor %s&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get the measurement covariance</span>
+<span class="w">    </span><span class="n">DynamicCovariance</span><span class="w"> </span><span class="n">covariance</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">filter_</span><span class="o">-&gt;</span><span class="n">GetSensorCovarianceByIndex</span><span class="p">(</span><span class="n">sensor_index_</span><span class="p">,</span><span class="w"> </span><span class="n">covariance</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Failed to get covariance for sensor %s&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">sensor_id_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Convert to message</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">expected_msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vectorToMsg</span><span class="p">(</span><span class="n">expected_vector</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Apply bounds</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">upper_bound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applyBound</span><span class="p">(</span><span class="n">expected_msg</span><span class="p">,</span><span class="w"> </span><span class="n">covariance</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">lower_bound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applyBound</span><span class="p">(</span><span class="n">expected_msg</span><span class="p">,</span><span class="w"> </span><span class="n">covariance</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Publish all three messages</span>
+<span class="w">    </span><span class="n">expected_pub_</span><span class="o">-&gt;</span><span class="n">publish</span><span class="p">(</span><span class="n">expected_msg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">upper_bound_pub_</span><span class="o">-&gt;</span><span class="n">publish</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lower_bound_pub_</span><span class="o">-&gt;</span><span class="n">publish</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace ros2</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

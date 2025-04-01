@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class BodyVelocitySensorModel &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ImuBiasEstimator" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html" />
+    <link rel="prev" title="Class VelocitySensorHandler" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#namespaces">Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="library_root.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html">Template Struct MeasurementDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4.html">Template Struct MeasurementDimension&lt; SensorType::BodyVelocity &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Imu &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Pose &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Position &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Unknown &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html">Struct MeasurementModelInterface::MeasurementAuxData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html">Struct MeasurementModelInterface::MeasurementData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html">Struct MeasurementModelInterface::ValidationParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html">Struct StateIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html">Struct StateIndex::AngularAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html">Struct StateIndex::AngularVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html">Struct StateIndex::LinearAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html">Struct StateIndex::LinearVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html">Struct StateIndex::Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion.html">Struct StateIndex::Quaternion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html">Struct StateModelInterface::Params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html">Struct BodyVelocitySensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html">Struct ImuSensorConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex.html">Struct ImuSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex.html">Struct PoseSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex.html">Struct PositionSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue.html">Struct ChiSquareCriticalValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1Figure8Config.html">Struct Figure8Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkalman__filter__node_1_1KalmanFilterNode.html">Class KalmanFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html">Class MeasurementModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html">Template Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html">Class StateModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html">Class RigidBodyStateModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html">Class ExpectedPosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html">Template Class ExpectedSensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html">Class FilterWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html">Class ImuSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html">Class KinematicArbiterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler.html">Class PoseSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler.html">Class PositionSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html">Template Class SensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html">Class Figure8SimulatorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher.html">Class ImuPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher.html">Class PosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher.html">Class PositionPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html">Template Class SensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher.html">Class VelocityPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html">Class TimeManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html">Class VelocitySensorHandler</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class BodyVelocitySensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html">Class ImuBiasEstimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html">Class ImuSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html">Class PoseSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html">Class PositionSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classmediated__filter__node_1_1MediatedFilterNode.html">Class MediatedFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsignal__generator__node_1_1SignalGeneratorNode.html">Class SignalGeneratorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate.html">Class Estimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput.html">Class FilterOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair.html">Class StateMeasurementPair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter.html">Class KalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter.html">Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation.html">Class Mediation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams.html">Class SignalParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator.html">Class SingleDofSignalGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui.html">Class DisplayGui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters.html">Class FilterParameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode.html">Class MediationMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State.html">Class State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API Reference</a></li>
+      <li class="breadcrumb-item active">Class BodyVelocitySensorModel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-bodyvelocitysensormodel">
+<span id="exhale-class-classkinematic-arbiter-1-1sensors-1-1bodyvelocitysensormodel"></span><h1>Class BodyVelocitySensorModel<a class="headerlink" href="#class-bodyvelocitysensormodel" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_kinematic_arbiter_sensors_body_velocity_sensor_model.hpp.html#file-include-kinematic-arbiter-sensors-body-velocity-sensor-model-hpp"><span class="std std-ref">File body_velocity_sensor_model.hpp</span></a></p></li>
+</ul>
+<section id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Link to this heading"></a></h2>
+<section id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html#exhale-struct-structkinematic-arbiter-1-1sensors-1-1bodyvelocitysensormodel-1-1measurementindex"><span class="std std-ref">Struct BodyVelocitySensorModel::MeasurementIndex</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::core::MeasurementModelInterface</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#exhale-class-classkinematic-arbiter-1-1core-1-1measurementmodelinterface"><span class="std std-ref">Class MeasurementModelInterface</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModelE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModelE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModelE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BodyVelocitySensorModel</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">kinematic_arbiter</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceE" title="kinematic_arbiter::core::MeasurementModelInterface"><span class="n"><span class="pre">MeasurementModelInterface</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModelE" title="Link to this definition"></a><br /></dt>
+<dd><p>Body velocity measurement model (linear + angular velocity) </p>
+<p>Models a sensor that measures linear and angular velocities in the body frame. Measurement vector is [vx, vy, vz, wx, wy, wz]’ where [vx, vy, vz] represents linear velocity and [wx, wy, wz] represents angular velocity. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a6541c71d7dd18014071dbffcd3a9493b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Base</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceE" title="kinematic_arbiter::core::MeasurementModelInterface"><span class="n"><span class="pre">MeasurementModelInterface</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a8fb6b3e321df722d10c5dcdcc414ecaa"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateVector</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::Base"><span class="n"><span class="pre">Base</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">StateVector</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel6VectorE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel6VectorE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel6VectorE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a672cb820c546277630158c826bd8f494"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::kMeasurementDimension"><span class="n"><span class="pre">kMeasurementDimension</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel6VectorE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel8JacobianE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel8JacobianE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel8JacobianE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a42579c84d07192523cf0a1f2356f158f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jacobian</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::kMeasurementDimension"><span class="n"><span class="pre">kMeasurementDimension</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html#_CPPv4N17kinematic_arbiter4core10StateIndexE" title="kinematic_arbiter::core::StateIndex"><span class="n"><span class="pre">StateIndex</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html#_CPPv4N17kinematic_arbiter4core10StateIndex14kFullStateSizeE" title="kinematic_arbiter::core::StateIndex::kFullStateSize"><span class="n"><span class="pre">kFullStateSize</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel8JacobianE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10CovarianceE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel10CovarianceE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel10CovarianceE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a046c7b7148f10646254c41453e1cd28d"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Covariance</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::kMeasurementDimension"><span class="n"><span class="pre">kMeasurementDimension</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::kMeasurementDimension"><span class="n"><span class="pre">kMeasurementDimension</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10CovarianceE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1af612156f064eb729ac5bd9f43b853de7"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateFlags</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel4BaseE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::Base"><span class="n"><span class="pre">Base</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">StateFlags</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel23BodyVelocitySensorModelERKN5Eigen10Isometry3dERK16ValidationParams">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel23BodyVelocitySensorModelERKN5Eigen10Isometry3dERK16ValidationParams"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel23BodyVelocitySensorModelERKN5Eigen10Isometry3dERK16ValidationParams"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::BodyVelocitySensorModel__Eigen::Isometry3dCR.ValidationParamsCR"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aef7b60cdaa3395a86a2206267eb89707"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BodyVelocitySensorModel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_pose_in_body_frame</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Identity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ValidationParams</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">params</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">ValidationParams</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel23BodyVelocitySensorModelERKN5Eigen10Isometry3dERK16ValidationParams" title="Link to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_pose_in_body_frame</strong> – Transform from body to sensor frame </p></li>
+<li><p><strong>params</strong> – Validation parameters </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel5resetEv">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel5resetEv"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel5resetEv"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::reset"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a7b55d054be27452f88018730da37ff81"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset the measurement model to initial state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel18PredictMeasurementERK11StateVector">
+<span id="_CPPv3NK17kinematic_arbiter7sensors23BodyVelocitySensorModel18PredictMeasurementERK11StateVector"></span><span id="_CPPv2NK17kinematic_arbiter7sensors23BodyVelocitySensorModel18PredictMeasurementERK11StateVector"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::PredictMeasurement__StateVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aebe109a082efb53ef2f6de4102b2712e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicVector</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PredictMeasurement</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel18PredictMeasurementERK11StateVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Predict measurement from state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> – Current state estimate </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Expected measurement [vx, vy, vz, wx, wy, wz]’ </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetMeasurementJacobianERK11StateVector">
+<span id="_CPPv3NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetMeasurementJacobianERK11StateVector"></span><span id="_CPPv2NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetMeasurementJacobianERK11StateVector"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::GetMeasurementJacobian__StateVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1abc14aaac4f15ab10c903db2757dae73b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicJacobian</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetMeasurementJacobian</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetMeasurementJacobianERK11StateVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Compute measurement Jacobian. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> – Current state estimate </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of measurement with respect to state </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetInitializableStatesEv">
+<span id="_CPPv3NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetInitializableStatesEv"></span><span id="_CPPv2NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetInitializableStatesEv"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::GetInitializableStatesC"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1aaa8893982fcdae785412a197f037a691"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetInitializableStates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel22GetInitializableStatesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get states that this sensor can directly initialize. </p>
+<p>Body velocity sensors can initialize linear and angular velocity states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Flags for initializable states </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance">
+<span id="_CPPv3NK17kinematic_arbiter7sensors23BodyVelocitySensorModel15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance"></span><span id="_CPPv2NK17kinematic_arbiter7sensors23BodyVelocitySensorModel15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::InitializeState__DynamicVectorCR.StateFlagsCR.StateVectorR.StateCovarianceRC"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a2dee7db6aa0b65ec2d1e8a7632f4c511"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InitializeState</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicVector</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel10StateFlagsE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="p"><span class="pre">&amp;</span></span>, <a class="reference internal" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel11StateVectorE" title="kinematic_arbiter::sensors::BodyVelocitySensorModel::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span>, <span class="n"><span class="pre">StateCovariance</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">covariance</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter7sensors23BodyVelocitySensorModel15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize state from body velocity measurement. </p>
+<p>Initializes linear and angular velocity states based on the measurement, properly accounting for lever arm effects between sensor and body frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurement</strong> – Velocity measurement [vx, vy, vz, wx, wy, wz] </p></li>
+<li><p><strong>valid_states</strong> – Flags indicating which states are valid for initialization </p></li>
+<li><p><strong>state</strong> – State vector to update </p></li>
+<li><p><strong>covariance</strong> – State covariance to update </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Flags indicating which states were initialized </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::kMeasurementDimension__i"></span><span class="target" id="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1a5aaa69eda5c826e92f212472db3b9a6c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kMeasurementDimension</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html#_CPPv4I_10SensorTypeEN17kinematic_arbiter4core20MeasurementDimensionE" title="kinematic_arbiter::core::MeasurementDimension"><span class="n"><span class="pre">MeasurementDimension</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorTypeE" title="kinematic_arbiter::core::SensorType"><span class="n"><span class="pre">SensorType</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorType12BodyVelocityE" title="kinematic_arbiter::core::SensorType::BodyVelocity"><span class="n"><span class="pre">BodyVelocity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel21kMeasurementDimensionE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndexE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndexE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndexE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementIndex</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndexE" title="Link to this definition"></a><br /></dt>
+<dd><p>Indices for accessing body velocity measurement components. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VXE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VXE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VXE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VX__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a42ac10438b3c41d1106118ae02500af6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VX</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VXE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VYE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VYE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VYE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VY__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1aec4aff33d6b26d73d6514e6104dc63c0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VYE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VZE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VZE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VZE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::VZ__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1af0062094fe16158a380df98da0c592da"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VZ</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2VZE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WXE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WXE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WXE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WX__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a74c170fd579c4fbcee4bd7aade86a91a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WX</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WXE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WYE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WYE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WYE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WY__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a7b2746f3c58e554e3e1e2f5d51a65792"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WYE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WZE">
+<span id="_CPPv3N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WZE"></span><span id="_CPPv2N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WZE"></span><span id="kinematic_arbiter::sensors::BodyVelocitySensorModel::MeasurementIndex::WZ__i"></span><span class="target" id="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex_1a0e54af58a52b66b40b61b37357109553"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WZ</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter7sensors23BodyVelocitySensorModel16MeasurementIndex2WZE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html" class="btn btn-neutral float-left" title="Class VelocitySensorHandler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html" class="btn btn-neutral float-right" title="Class ImuBiasEstimator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

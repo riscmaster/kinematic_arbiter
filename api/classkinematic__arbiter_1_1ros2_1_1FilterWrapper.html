@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class FilterWrapper &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ImuSensorHandler" href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html" />
+    <link rel="prev" title="Template Class ExpectedSensorPublisher" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#namespaces">Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="library_root.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html">Template Struct MeasurementDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4.html">Template Struct MeasurementDimension&lt; SensorType::BodyVelocity &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Imu &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Pose &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Position &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Unknown &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html">Struct MeasurementModelInterface::MeasurementAuxData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html">Struct MeasurementModelInterface::MeasurementData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html">Struct MeasurementModelInterface::ValidationParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html">Struct StateIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html">Struct StateIndex::AngularAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html">Struct StateIndex::AngularVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html">Struct StateIndex::LinearAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html">Struct StateIndex::LinearVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html">Struct StateIndex::Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion.html">Struct StateIndex::Quaternion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html">Struct StateModelInterface::Params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html">Struct BodyVelocitySensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html">Struct ImuSensorConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex.html">Struct ImuSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex.html">Struct PoseSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex.html">Struct PositionSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue.html">Struct ChiSquareCriticalValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1Figure8Config.html">Struct Figure8Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkalman__filter__node_1_1KalmanFilterNode.html">Class KalmanFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html">Class MeasurementModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html">Template Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html">Class StateModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html">Class RigidBodyStateModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html">Class ExpectedPosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html">Template Class ExpectedSensorPublisher</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class FilterWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html">Class ImuSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html">Class KinematicArbiterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler.html">Class PoseSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler.html">Class PositionSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html">Template Class SensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html">Class Figure8SimulatorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher.html">Class ImuPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher.html">Class PosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher.html">Class PositionPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html">Template Class SensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher.html">Class VelocityPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html">Class TimeManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html">Class VelocitySensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html">Class BodyVelocitySensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html">Class ImuBiasEstimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html">Class ImuSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html">Class PoseSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html">Class PositionSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classmediated__filter__node_1_1MediatedFilterNode.html">Class MediatedFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsignal__generator__node_1_1SignalGeneratorNode.html">Class SignalGeneratorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate.html">Class Estimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput.html">Class FilterOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair.html">Class StateMeasurementPair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter.html">Class KalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter.html">Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation.html">Class Mediation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams.html">Class SignalParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator.html">Class SingleDofSignalGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui.html">Class DisplayGui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters.html">Class FilterParameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode.html">Class MediationMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State.html">Class State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API Reference</a></li>
+      <li class="breadcrumb-item active">Class FilterWrapper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/classkinematic__arbiter_1_1ros2_1_1FilterWrapper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-filterwrapper">
+<span id="exhale-class-classkinematic-arbiter-1-1ros2-1-1filterwrapper"></span><h1>Class FilterWrapper<a class="headerlink" href="#class-filterwrapper" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_kinematic_arbiter_ros2_filter_wrapper.hpp.html#file-include-kinematic-arbiter-ros2-filter-wrapper-hpp"><span class="std std-ref">File filter_wrapper.hpp</span></a></p></li>
+</ul>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapperE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapperE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapperE"></span><span id="kinematic_arbiter::ros2::FilterWrapper"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FilterWrapper</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapperE" title="Link to this definition"></a><br /></dt>
+<dd><p>Wrapper for the MediatedKalmanFilter that handles ROS2 integrations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper13FilterWrapperEPN6rclcpp4NodeENSt10shared_ptrIN7tf2_ros6BufferEEERKN17kinematic_arbiter6models19RigidBodyStateModel6ParamsERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper13FilterWrapperEPN6rclcpp4NodeENSt10shared_ptrIN7tf2_ros6BufferEEERKN17kinematic_arbiter6models19RigidBodyStateModel6ParamsERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper13FilterWrapperEPN6rclcpp4NodeENSt10shared_ptrIN7tf2_ros6BufferEEERKN17kinematic_arbiter6models19RigidBodyStateModel6ParamsERKNSt6stringERKNSt6stringE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::FilterWrapper__rclcpp::NodeP.std::shared_ptr:tf2_ros::Buffer:.kinematic_arbiter::models::RigidBodyStateModel::ParamsCR.ssCR.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3d29753463cba5cba0aca34f66e5aaa0"></span><span class="sig-name descname"><span class="n"><span class="pre">FilterWrapper</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">node</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">tf2_ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Buffer</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tf_buffer</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">kinematic_arbiter</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModelE" title="kinematic_arbiter::models::RigidBodyStateModel"><span class="n"><span class="pre">RigidBodyStateModel</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Params</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">model_params</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">body_frame_id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;base_link&quot;</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">world_frame_id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;map&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper13FilterWrapperEPN6rclcpp4NodeENSt10shared_ptrIN7tf2_ros6BufferEEERKN17kinematic_arbiter6models19RigidBodyStateModel6ParamsERKNSt6stringERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – ROS2 node for creating publishers and subscribers </p></li>
+<li><p><strong>tf_buffer</strong> – TF buffer for transform lookups </p></li>
+<li><p><strong>model_params</strong> – Parameters for the rigid body model </p></li>
+<li><p><strong>body_frame_id</strong> – Frame ID for the body (default: “base_link”) </p></li>
+<li><p><strong>world_frame_id</strong> – Frame ID for the world (default: “map”) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper5resetEv">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper5resetEv"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper5resetEv"></span><span id="kinematic_arbiter::ros2::FilterWrapper::reset"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1abe2134dbf5d1bb08e15d651b1f7a8a99"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset the filter to initial state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper21initializeTimeManagerERKN6rclcpp4TimeE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper21initializeTimeManagerERKN6rclcpp4TimeE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper21initializeTimeManagerERKN6rclcpp4TimeE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::initializeTimeManager__rclcpp::TimeCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a93dcd34e0fbcce4a0a87ddb3846135f0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initializeTimeManager</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Time</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reference_time</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper21initializeTimeManagerERKN6rclcpp4TimeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize the time manager with a specific reference time. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reference_time</strong> – The ROS time to use as t=0 for the filter </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4ros213FilterWrapper13isInitializedEv">
+<span id="_CPPv3NK17kinematic_arbiter4ros213FilterWrapper13isInitializedEv"></span><span id="_CPPv2NK17kinematic_arbiter4ros213FilterWrapper13isInitializedEv"></span><span id="kinematic_arbiter::ros2::FilterWrapper::isInitializedC"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1adb6ecfd4f28816d0345fd590e3034677"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isInitialized</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4ros213FilterWrapper13isInitializedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of initialized states in the filter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int Number of initialized states </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper17setMaxDelayWindowEd">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper17setMaxDelayWindowEd"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper17setMaxDelayWindowEd"></span><span id="kinematic_arbiter::ros2::FilterWrapper::setMaxDelayWindow__double"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a467693aa018f519942dc0d91e800d0e8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setMaxDelayWindow</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seconds</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper17setMaxDelayWindowEd" title="Link to this definition"></a><br /></dt>
+<dd><p>Set maximum delay window for handling out-of-sequence measurements. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>seconds</strong> – Maximum time in seconds to keep trajectory history </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper17addPositionSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper17addPositionSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper17addPositionSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::addPositionSensor__ssCR.ssCR.ssCR.double.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1af4666c30f4ceacdae68c98278514cd54"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addPositionSensor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">topic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_frame_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p2m_noise_ratio</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2.0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mediation_action</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;force_accept&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper17addPositionSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add a position sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_name</strong> – Human-readable sensor name </p></li>
+<li><p><strong>topic</strong> – Topic to subscribe to </p></li>
+<li><p><strong>sensor_frame_id</strong> – Frame ID of the sensor </p></li>
+<li><p><strong>p2m_noise_ratio</strong> – Process to measurement noise ratio </p></li>
+<li><p><strong>mediation_action</strong> – Mediation action (force_accept, adjust_covariance, reject) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool True if sensor was successfully added </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper13addPoseSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper13addPoseSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper13addPoseSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::addPoseSensor__ssCR.ssCR.ssCR.double.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a38a9caa5338372440d896850cd83001b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addPoseSensor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">topic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_frame_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p2m_noise_ratio</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2.0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mediation_action</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;force_accept&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper13addPoseSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add a pose sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_name</strong> – Human-readable sensor name </p></li>
+<li><p><strong>topic</strong> – Topic to subscribe to </p></li>
+<li><p><strong>sensor_frame_id</strong> – Frame ID of the sensor </p></li>
+<li><p><strong>p2m_noise_ratio</strong> – Process to measurement noise ratio </p></li>
+<li><p><strong>mediation_action</strong> – Mediation action (force_accept, adjust_covariance, reject) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool True if sensor was successfully added </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper17addVelocitySensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper17addVelocitySensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper17addVelocitySensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::addVelocitySensor__ssCR.ssCR.ssCR.double.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a8437a820e0eb2ff8b22738d3bfe49da0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addVelocitySensor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">topic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_frame_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p2m_noise_ratio</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2.0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mediation_action</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;force_accept&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper17addVelocitySensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add a velocity sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_name</strong> – Human-readable sensor name </p></li>
+<li><p><strong>topic</strong> – Topic to subscribe to </p></li>
+<li><p><strong>sensor_frame_id</strong> – Frame ID of the sensor </p></li>
+<li><p><strong>p2m_noise_ratio</strong> – Process to measurement noise ratio </p></li>
+<li><p><strong>mediation_action</strong> – Mediation action (force_accept, adjust_covariance, reject) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool True if sensor was successfully added </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper12addImuSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper12addImuSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper12addImuSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::addImuSensor__ssCR.ssCR.ssCR.double.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a0a10f61553ab53d9ec8dd020385de860"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addImuSensor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">topic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_frame_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p2m_noise_ratio</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2.0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mediation_action</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;force_accept&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper12addImuSensorERKNSt6stringERKNSt6stringERKNSt6stringEdRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add an IMU sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_name</strong> – Human-readable sensor name </p></li>
+<li><p><strong>topic</strong> – Topic to subscribe to </p></li>
+<li><p><strong>sensor_frame_id</strong> – Frame ID of the sensor </p></li>
+<li><p><strong>p2m_noise_ratio</strong> – Process to measurement noise ratio </p></li>
+<li><p><strong>mediation_action</strong> – Mediation action (force_accept, adjust_covariance, reject) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool True if sensor was successfully added </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper15getPoseEstimateEv">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper15getPoseEstimateEv"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper15getPoseEstimateEv"></span><span id="kinematic_arbiter::ros2::FilterWrapper::getPoseEstimate"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ae608f7a70f469bf0226f1b913f14a92f"></span><span class="n"><span class="pre">geometry_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PoseWithCovarianceStamped</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPoseEstimate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper15getPoseEstimateEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the estimated pose with covariance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> – Time to estimate at (uses current filter time if omitted) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pose with covariance stamped message </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper19getVelocityEstimateEv">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper19getVelocityEstimateEv"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper19getVelocityEstimateEv"></span><span id="kinematic_arbiter::ros2::FilterWrapper::getVelocityEstimate"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1a3853837ba0d81c60e262d77b61ef0237"></span><span class="n"><span class="pre">geometry_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">TwistWithCovarianceStamped</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getVelocityEstimate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper19getVelocityEstimateEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the estimated velocity with covariance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> – Time to estimate at (uses current filter time if omitted) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Twist with covariance stamped message </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper23getAccelerationEstimateEv">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper23getAccelerationEstimateEv"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper23getAccelerationEstimateEv"></span><span id="kinematic_arbiter::ros2::FilterWrapper::getAccelerationEstimate"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac521809a874f68bc2a68c85b7a5deb2a"></span><span class="n"><span class="pre">geometry_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">AccelWithCovarianceStamped</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAccelerationEstimate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper23getAccelerationEstimateEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the estimated acceleration with covariance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> – Time to estimate at (uses current filter time if omitted) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Accel with covariance stamped message </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper15setPoseEstimateEKN13geometry_msgs3msg11PoseStamped9SharedPtrE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper15setPoseEstimateEKN13geometry_msgs3msg11PoseStamped9SharedPtrE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper15setPoseEstimateEKN13geometry_msgs3msg11PoseStamped9SharedPtrE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::setPoseEstimate__geometry_msgs::msg::PoseStamped::SharedPtrC"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1aa14b79ca726a20c2b25eb0b61e690576"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPoseEstimate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">geometry_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PoseStamped</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SharedPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">msg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper15setPoseEstimateEKN13geometry_msgs3msg11PoseStamped9SharedPtrE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros213FilterWrapper19setVelocityEstimateEKN13geometry_msgs3msg12TwistStamped9SharedPtrE">
+<span id="_CPPv3N17kinematic_arbiter4ros213FilterWrapper19setVelocityEstimateEKN13geometry_msgs3msg12TwistStamped9SharedPtrE"></span><span id="_CPPv2N17kinematic_arbiter4ros213FilterWrapper19setVelocityEstimateEKN13geometry_msgs3msg12TwistStamped9SharedPtrE"></span><span id="kinematic_arbiter::ros2::FilterWrapper::setVelocityEstimate__geometry_msgs::msg::TwistStamped::SharedPtrC"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1FilterWrapper_1ac6b55430bfbe62cf9736f647624d7928"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setVelocityEstimate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">geometry_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">TwistStamped</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SharedPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">msg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros213FilterWrapper19setVelocityEstimateEKN13geometry_msgs3msg12TwistStamped9SharedPtrE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html" class="btn btn-neutral float-left" title="Template Class ExpectedSensorPublisher" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html" class="btn btn-neutral float-right" title="Class ImuSensorHandler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

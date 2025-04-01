@@ -1,0 +1,669 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class MeasurementModelInterface &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class MediatedKalmanFilter" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html" />
+    <link rel="prev" title="Class KalmanFilterNode" href="classkalman__filter__node_1_1KalmanFilterNode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#namespaces">Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="library_root.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html">Template Struct MeasurementDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4.html">Template Struct MeasurementDimension&lt; SensorType::BodyVelocity &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Imu &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Pose &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Position &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Unknown &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html">Struct MeasurementModelInterface::MeasurementAuxData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html">Struct MeasurementModelInterface::MeasurementData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html">Struct MeasurementModelInterface::ValidationParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html">Struct StateIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html">Struct StateIndex::AngularAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html">Struct StateIndex::AngularVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html">Struct StateIndex::LinearAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html">Struct StateIndex::LinearVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html">Struct StateIndex::Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion.html">Struct StateIndex::Quaternion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html">Struct StateModelInterface::Params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html">Struct BodyVelocitySensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html">Struct ImuSensorConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex.html">Struct ImuSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex.html">Struct PoseSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex.html">Struct PositionSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue.html">Struct ChiSquareCriticalValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1Figure8Config.html">Struct Figure8Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkalman__filter__node_1_1KalmanFilterNode.html">Class KalmanFilterNode</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class MeasurementModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html">Template Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html">Class StateModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html">Class RigidBodyStateModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html">Class ExpectedPosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html">Template Class ExpectedSensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html">Class FilterWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html">Class ImuSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html">Class KinematicArbiterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler.html">Class PoseSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler.html">Class PositionSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html">Template Class SensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html">Class Figure8SimulatorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher.html">Class ImuPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher.html">Class PosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher.html">Class PositionPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html">Template Class SensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher.html">Class VelocityPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html">Class TimeManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html">Class VelocitySensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html">Class BodyVelocitySensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html">Class ImuBiasEstimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html">Class ImuSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html">Class PoseSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html">Class PositionSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classmediated__filter__node_1_1MediatedFilterNode.html">Class MediatedFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsignal__generator__node_1_1SignalGeneratorNode.html">Class SignalGeneratorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate.html">Class Estimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput.html">Class FilterOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair.html">Class StateMeasurementPair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter.html">Class KalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter.html">Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation.html">Class Mediation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams.html">Class SignalParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator.html">Class SingleDofSignalGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui.html">Class DisplayGui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters.html">Class FilterParameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode.html">Class MediationMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State.html">Class State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API Reference</a></li>
+      <li class="breadcrumb-item active">Class MeasurementModelInterface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-measurementmodelinterface">
+<span id="exhale-class-classkinematic-arbiter-1-1core-1-1measurementmodelinterface"></span><h1>Class MeasurementModelInterface<a class="headerlink" href="#class-measurementmodelinterface" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_kinematic_arbiter_core_measurement_model_interface.hpp.html#file-include-kinematic-arbiter-core-measurement-model-interface-hpp"><span class="std std-ref">File measurement_model_interface.hpp</span></a></p></li>
+</ul>
+<section id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Link to this heading"></a></h2>
+<section id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html#exhale-struct-structkinematic-arbiter-1-1core-1-1measurementmodelinterface-1-1measurementauxdata"><span class="std std-ref">Struct MeasurementModelInterface::MeasurementAuxData</span></a></p></li>
+<li><p><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html#exhale-struct-structkinematic-arbiter-1-1core-1-1measurementmodelinterface-1-1measurementdata"><span class="std std-ref">Struct MeasurementModelInterface::MeasurementData</span></a></p></li>
+<li><p><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html#exhale-struct-structkinematic-arbiter-1-1core-1-1measurementmodelinterface-1-1validationparams"><span class="std std-ref">Struct MeasurementModelInterface::ValidationParams</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"></a></h2>
+<section id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::sensors::BodyVelocitySensorModel</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html#exhale-class-classkinematic-arbiter-1-1sensors-1-1bodyvelocitysensormodel"><span class="std std-ref">Class BodyVelocitySensorModel</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::sensors::ImuSensorModel</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#exhale-class-classkinematic-arbiter-1-1sensors-1-1imusensormodel"><span class="std std-ref">Class ImuSensorModel</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::sensors::PoseSensorModel</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html#exhale-class-classkinematic-arbiter-1-1sensors-1-1posesensormodel"><span class="std std-ref">Class PoseSensorModel</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::sensors::PositionSensorModel</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html#exhale-class-classkinematic-arbiter-1-1sensors-1-1positionsensormodel"><span class="std std-ref">Class PositionSensorModel</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterfaceE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterfaceE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementModelInterface</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceE" title="Link to this definition"></a><br /></dt>
+<dd><p>Interface for measurement models with assumption validation. </p>
+<p>Provides methods for predicting measurements, computing Jacobians, and validating filter assumptions using chi-squared testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Type</strong> – Sensor type that defines the measurement vector dimensions </p>
+</dd>
+</dl>
+<p>Subclassed by <a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html#classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel"><span class="std std-ref">kinematic_arbiter::sensors::BodyVelocitySensorModel</span></a>, <a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#classkinematic__arbiter_1_1sensors_1_1ImuSensorModel"><span class="std std-ref">kinematic_arbiter::sensors::ImuSensorModel</span></a>, <a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html#classkinematic__arbiter_1_1sensors_1_1PoseSensorModel"><span class="std std-ref">kinematic_arbiter::sensors::PoseSensorModel</span></a>, <a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html#classkinematic__arbiter_1_1sensors_1_1PositionSensorModel"><span class="std std-ref">kinematic_arbiter::sensors::PositionSensorModel</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1abd357cd1e2aabe2107244532db30ece0"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateVector</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af578e459eedc3354acd2339952c9df05"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateCovariance</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a9dfbdba5f6b255c3ac4c8ca73eb58a5b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DynamicVector</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Dynamic</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ColMajor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5f3205482e9935a1dcdecb315ed2c72c"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DynamicCovariance</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Dynamic</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Dynamic</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ColMajor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a72e3859677c567145f7abfddc1783368"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DynamicJacobian</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Dynamic</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ColMajor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1acced1b6fad51798933f1526abed8bdf8"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateFlags</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="kinematic_arbiter::core::MeasurementModelInterface::StateSize"><span class="n"><span class="pre">StateSize</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface25MeasurementModelInterfaceE10SensorTypeRKN5Eigen10Isometry3dERK16ValidationParamsRK17DynamicCovariance">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface25MeasurementModelInterfaceE10SensorTypeRKN5Eigen10Isometry3dERK16ValidationParamsRK17DynamicCovariance"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface25MeasurementModelInterfaceE10SensorTypeRKN5Eigen10Isometry3dERK16ValidationParamsRK17DynamicCovariance"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementModelInterface__SensorType.Eigen::Isometry3dCR.ValidationParamsCR.DynamicCovarianceCR"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6892442da3585a1341223e86b19bab74"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementModelInterface</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorTypeE" title="kinematic_arbiter::core::SensorType"><span class="n"><span class="pre">SensorType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_pose_in_body_frame</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Identity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"><span class="n"><span class="pre">ValidationParams</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">params</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"><span class="n"><span class="pre">ValidationParams</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicCovariance"><span class="n"><span class="pre">DynamicCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement_covariance</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">kMaxMeasurementDim</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Identity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface25MeasurementModelInterfaceE10SensorTypeRKN5Eigen10Isometry3dERK16ValidationParamsRK17DynamicCovariance" title="Link to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_pose_in_body_frame</strong> – Transform from body to sensor frame </p></li>
+<li><p><strong>params</strong> – Validation parameters </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface5resetEv">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface5resetEv"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface5resetEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::reset"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa2b7cdf287cf76fd3f124d61b007b876"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset the measurement model to initial state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceD0Ev">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterfaceD0Ev"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterfaceD0Ev"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::~MeasurementModelInterface"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15ccf29d4fcb77eeec7c061d1f1760a9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~MeasurementModelInterface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterfaceD0Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Virtual destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface18PredictMeasurementERK11StateVector">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface18PredictMeasurementERK11StateVector"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface18PredictMeasurementERK11StateVector"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::PredictMeasurement__StateVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a93c282b256807ec898ed370425d51bbc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PredictMeasurement</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface18PredictMeasurementERK11StateVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Predict expected measurement h(x) from state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> – Current state estimate x_k </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Expected measurement h(x) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface22GetMeasurementJacobianERK11StateVector">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface22GetMeasurementJacobianERK11StateVector"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface22GetMeasurementJacobianERK11StateVector"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetMeasurementJacobian__StateVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6b5954981316837e748849685d76da04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicJacobian"><span class="n"><span class="pre">DynamicJacobian</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetMeasurementJacobian</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface22GetMeasurementJacobianERK11StateVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Compute the measurement Jacobian H = ∂h/∂x. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> – Current state estimate x_k </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Measurement Jacobian H (C_k in paper notation) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetPredictionModelInputsERK11StateVectorRK15StateCovarianceRK13DynamicVectord">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface24GetPredictionModelInputsERK11StateVectorRK15StateCovarianceRK13DynamicVectord"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface24GetPredictionModelInputsERK11StateVectorRK15StateCovarianceRK13DynamicVectord"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetPredictionModelInputs__StateVectorCR.StateCovarianceCR.DynamicVectorCR.doubleC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a6e876bbd501638d08c5edb780a267709"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetPredictionModelInputs</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="p"><span class="pre">&amp;</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::StateCovariance"><span class="n"><span class="pre">StateCovariance</span></span></a><span class="p"><span class="pre">&amp;</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="p"><span class="pre">&amp;</span></span>, <span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetPredictionModelInputsERK11StateVectorRK15StateCovarianceRK13DynamicVectord" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the inputs to the prediction model. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_before_prediction</strong> – Current state estimate x_k </p></li>
+<li><p><strong>state_covariance_before_prediction</strong> – Current state covariance P_k </p></li>
+<li><p><strong>measurement_after_prediction</strong> – Actual measurement y_k after prediction of dt </p></li>
+<li><p><strong>dt</strong> – Time step in seconds </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Linear and angular acceleration as inputs to the prediction model </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface28CanPredictInputAccelerationsEv">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface28CanPredictInputAccelerationsEv"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface28CanPredictInputAccelerationsEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::CanPredictInputAccelerationsC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4346126200c9f4de489aab3fab129971"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CanPredictInputAccelerations</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface28CanPredictInputAccelerationsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get whether the prediction model can predict input accelerations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the prediction model can predict input accelerations </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetMeasurementCovarianceEv">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface24GetMeasurementCovarianceEv"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface24GetMeasurementCovarianceEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetMeasurementCovarianceC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a2fddcb888990500b3b3409b7b6cec686"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicCovariance"><span class="n"><span class="pre">DynamicCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">GetMeasurementCovariance</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetMeasurementCovarianceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get current measurement covariance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Measurement noise covariance R </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface19SetValidationParamsERK16ValidationParams">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface19SetValidationParamsERK16ValidationParams"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface19SetValidationParamsERK16ValidationParams"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::SetValidationParams__ValidationParamsCR"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad540c0d79ba49a24099318bfc8bc7eda"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SetValidationParams</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"><span class="n"><span class="pre">ValidationParams</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">params</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface19SetValidationParamsERK16ValidationParams" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the validation parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> – New validation parameters </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface19GetValidationParamsEv">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface19GetValidationParamsEv"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface19GetValidationParamsEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetValidationParamsC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a5cc96aafe1baa54185ab107e7badea1b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"><span class="n"><span class="pre">ValidationParams</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">GetValidationParams</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface19GetValidationParamsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current validation parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current validation parameters </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface20ComputeAuxiliaryDataERK11StateVectorRK15StateCovarianceRK13DynamicVector">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface20ComputeAuxiliaryDataERK11StateVectorRK15StateCovarianceRK13DynamicVector"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface20ComputeAuxiliaryDataERK11StateVectorRK15StateCovarianceRK13DynamicVector"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ComputeAuxiliaryData__StateVectorCR.StateCovarianceCR.DynamicVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a97984559c1bce1ca940c5031f0179c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE" title="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData"><span class="n"><span class="pre">MeasurementAuxData</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ComputeAuxiliaryData</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::StateCovariance"><span class="n"><span class="pre">StateCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state_covariance</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface20ComputeAuxiliaryDataERK11StateVectorRK15StateCovarianceRK13DynamicVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Compute auxiliary measurement data for use in various algorithms. </p>
+<p>Calculates innovation, Jacobian, and innovation covariance once for reuse in validation, update, retrodiction, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Current state estimate x_k </p></li>
+<li><p><strong>state_covariance</strong> – Current state covariance P_k </p></li>
+<li><p><strong>measurement</strong> – Actual measurement y_k </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Auxiliary measurement data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface21ValidateAuxiliaryDataERK18MeasurementAuxData">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface21ValidateAuxiliaryDataERK18MeasurementAuxData"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface21ValidateAuxiliaryDataERK18MeasurementAuxData"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidateAuxiliaryData__MeasurementAuxDataCRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a4d2c920c121d7b75cbe1d0edc8d0cd11"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidateAuxiliaryData</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE" title="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData"><span class="n"><span class="pre">MeasurementAuxData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">aux_data</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface21ValidateAuxiliaryDataERK18MeasurementAuxData" title="Link to this definition"></a><br /></dt>
+<dd><p>Validate auxiliary measurement data (innovation, jacobian, covariance) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>aux_data</strong> – Auxiliary measurement data </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if validation passes, false otherwise </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18ValidateAndMediateERK11StateVectorRK15StateCovarianceRKdRK13DynamicVectorR18MeasurementAuxData">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18ValidateAndMediateERK11StateVectorRK15StateCovarianceRKdRK13DynamicVectorR18MeasurementAuxData"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18ValidateAndMediateERK11StateVectorRK15StateCovarianceRKdRK13DynamicVectorR18MeasurementAuxData"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidateAndMediate__StateVectorCR.StateCovarianceCR.doubleCR.DynamicVectorCR.MeasurementAuxDataR"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1aa99e79b94b0117dc35ebe529a63d8e3d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidateAndMediate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::StateCovariance"><span class="n"><span class="pre">StateCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state_covariance</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement_timestamp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span>, <a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE" title="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData"><span class="n"><span class="pre">MeasurementAuxData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">aux_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18ValidateAndMediateERK11StateVectorRK15StateCovarianceRKdRK13DynamicVectorR18MeasurementAuxData" title="Link to this definition"></a><br /></dt>
+<dd><p>Perform the validation and mediation process. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Current state estimate x_k </p></li>
+<li><p><strong>state_covariance</strong> – Current state covariance P_k </p></li>
+<li><p><strong>measurement_timestamp</strong> – Measurement timestamp </p></li>
+<li><p><strong>measurement</strong> – Actual measurement y_k </p></li>
+<li><p><strong>aux_data</strong> – Output parameter for auxiliary measurement data </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether filter assumptions hold for this measurement </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetSensorPoseInBodyFrameERN5Eigen10Isometry3dE">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface24GetSensorPoseInBodyFrameERN5Eigen10Isometry3dE"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface24GetSensorPoseInBodyFrameERN5Eigen10Isometry3dE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetSensorPoseInBodyFrame__Eigen::Isometry3dRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3eb44bf67d92d14ffc6bfccd3577ea32"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetSensorPoseInBodyFrame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pose</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetSensorPoseInBodyFrameERN5Eigen10Isometry3dE" title="Link to this definition"></a><br /></dt>
+<dd><p>Get sensor pose in body frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sensor-to-body transform </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetBodyToSensorTransformERN5Eigen10Isometry3dE">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface24GetBodyToSensorTransformERN5Eigen10Isometry3dE"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface24GetBodyToSensorTransformERN5Eigen10Isometry3dE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetBodyToSensorTransform__Eigen::Isometry3dRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0a150e6a83b5b062c9d5be9515149c33"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetBodyToSensorTransform</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pose</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface24GetBodyToSensorTransformERN5Eigen10Isometry3dE" title="Link to this definition"></a><br /></dt>
+<dd><p>Get body to sensor transform. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Body-to-sensor transform </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface24SetSensorPoseInBodyFrameERKN5Eigen10Isometry3dE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface24SetSensorPoseInBodyFrameERKN5Eigen10Isometry3dE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface24SetSensorPoseInBodyFrameERKN5Eigen10Isometry3dE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::SetSensorPoseInBodyFrame__Eigen::Isometry3dCR"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a15cc22968d56d51842529beeb0467f08"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SetSensorPoseInBodyFrame</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pose</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface24SetSensorPoseInBodyFrameERKN5Eigen10Isometry3dE" title="Link to this definition"></a><br /></dt>
+<dd><p>Set sensor pose in body frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pose</strong> – New sensor-to-body transform </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface22GetInitializableStatesEv">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface22GetInitializableStatesEv"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface22GetInitializableStatesEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetInitializableStatesC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae8347005b6d6adc21b80a7c1aaf951ee"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE" title="kinematic_arbiter::core::MeasurementModelInterface::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetInitializableStates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface22GetInitializableStatesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the states that this sensor can directly initialize. </p>
+<p>Returns an array of boolean flags where each element corresponds to a state component. A true value indicates that the sensor can directly initialize that state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Flags indicating initializable states </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::InitializeState__DynamicVectorCR.StateFlagsCR.StateVectorR.StateCovarianceRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a98065dc0937c36d9b696dc86e7bffe4e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE" title="kinematic_arbiter::core::MeasurementModelInterface::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InitializeState</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface10StateFlagsE" title="kinematic_arbiter::core::MeasurementModelInterface::StateFlags"><span class="n"><span class="pre">StateFlags</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">valid_states</span></span>, <a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface11StateVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::StateVector"><span class="n"><span class="pre">StateVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">state</span></span>, <a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15StateCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::StateCovariance"><span class="n"><span class="pre">StateCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">covariance</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface15InitializeStateERK13DynamicVectorRK10StateFlagsR11StateVectorR15StateCovariance" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize state components from a measurement. </p>
+<p>This method initializes state components that this sensor can directly observe. Updates both the state vector and covariance matrix for initialized components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurement</strong> – The measurement to use for initialization </p></li>
+<li><p><strong>valid_states</strong> – Flags indicating which states are valid for use in initialization </p></li>
+<li><p><strong>state</strong> – [in/out] The state vector to be initialized </p></li>
+<li><p><strong>covariance</strong> – [in/out] The state covariance to be initialized </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Flags indicating which states were initialized </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface12GetModelTypeEv">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface12GetModelTypeEv"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface12GetModelTypeEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::GetModelTypeC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3201756902a007c9ac9b209020119a0a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorTypeE" title="kinematic_arbiter::core::SensorType"><span class="n"><span class="pre">SensorType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetModelType</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface12GetModelTypeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the type of this sensor model (non-virtual) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The sensor type enumeration value </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface26ValidateMeasurementAndTimeERK13DynamicVectorddd">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface26ValidateMeasurementAndTimeERK13DynamicVectorddd"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface26ValidateMeasurementAndTimeERK13DynamicVectorddd"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementAndTime__DynamicVectorCR.double.double.doubleC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a0c2dc49a74ea86100c0fb28845323987"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidateMeasurementAndTime</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timestamp</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">reference_time</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_delay_window</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface26ValidateMeasurementAndTimeERK13DynamicVectorddd" title="Link to this definition"></a><br /></dt>
+<dd><p>Validate measurement and timestamp before any expensive operations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurement</strong> – Raw measurement vector </p></li>
+<li><p><strong>timestamp</strong> – Measurement timestamp </p></li>
+<li><p><strong>reference_time</strong> – Current filter reference time </p></li>
+<li><p><strong>max_delay_window</strong> – Maximum delay window for measurements </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool Whether measurement passed basic validation </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::StateSize__i"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af00dfc6985a743d5cbdeb8eb5ccd895f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StateSize</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html#_CPPv4N17kinematic_arbiter4core10StateIndexE" title="kinematic_arbiter::core::StateIndex"><span class="n"><span class="pre">StateIndex</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html#_CPPv4N17kinematic_arbiter4core10StateIndex14kFullStateSizeE" title="kinematic_arbiter::core::StateIndex::kFullStateSize"><span class="n"><span class="pre">kFullStateSize</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface9StateSizeE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface23ValidateMeasurementSizeERK13DynamicVector">
+<span id="_CPPv3NK17kinematic_arbiter4core25MeasurementModelInterface23ValidateMeasurementSizeERK13DynamicVector"></span><span id="_CPPv2NK17kinematic_arbiter4core25MeasurementModelInterface23ValidateMeasurementSizeERK13DynamicVector"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidateMeasurementSize__DynamicVectorCRC"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae38b26ee33e03c6729973af8a0575486"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidateMeasurementSize</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter4core25MeasurementModelInterface23ValidateMeasurementSizeERK13DynamicVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Validate measurement size based on sensor type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>measurement</strong> – Measurement vector to validate </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface26sensor_pose_in_body_frame_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface26sensor_pose_in_body_frame_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface26sensor_pose_in_body_frame_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::sensor_pose_in_body_frame___Eigen::Isometry3d"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a3808ac718326c6a72c2c97e999fccf45"></span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_pose_in_body_frame_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Identity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface26sensor_pose_in_body_frame_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface25body_to_sensor_transform_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface25body_to_sensor_transform_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface25body_to_sensor_transform_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::body_to_sensor_transform___Eigen::Isometry3d"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ad7f0a5265f1043721ccdcedfdaeaec4e"></span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">body_to_sensor_transform_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Isometry3d</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Identity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface25body_to_sensor_transform_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface23measurement_covariance_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface23measurement_covariance_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface23measurement_covariance_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::measurement_covariance___DynamicCovariance"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1ae0330a0509ec21489d947b102615c8e6"></span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicCovariance"><span class="n"><span class="pre">DynamicCovariance</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">measurement_covariance_</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface23measurement_covariance_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18validation_params_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18validation_params_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18validation_params_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::validation_params___ValidationParams"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1af518043017105da5dc8e2884a3c08757"></span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"><span class="n"><span class="pre">ValidationParams</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">validation_params_</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18validation_params_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface32can_predict_input_accelerations_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface32can_predict_input_accelerations_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface32can_predict_input_accelerations_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::can_predict_input_accelerations___b"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a8c451d9e286ddb89664360162dd457ea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">can_predict_input_accelerations_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface32can_predict_input_accelerations_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface26previous_measurement_data_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface26previous_measurement_data_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface26previous_measurement_data_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::previous_measurement_data___MeasurementData"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a01f9294fc634377d82ff39899f0933da"></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15MeasurementDataE" title="kinematic_arbiter::core::MeasurementModelInterface::MeasurementData"><span class="n"><span class="pre">MeasurementData</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">previous_measurement_data_</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface26previous_measurement_data_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface5type_E">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface5type_E"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface5type_E"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::type___SensorType"></span><span class="target" id="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1a40058c54f10901f78ff41d6dc5bc2719"></span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorTypeE" title="kinematic_arbiter::core::SensorType"><span class="n"><span class="pre">SensorType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorTypeE" title="kinematic_arbiter::core::SensorType"><span class="n"><span class="pre">SensorType</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1a87b6f05b1b83cdb34fb35bed653e4914.html#_CPPv4N17kinematic_arbiter4core10SensorType7UnknownE" title="kinematic_arbiter::core::SensorType::Unknown"><span class="n"><span class="pre">Unknown</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface5type_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementAuxData</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxDataE" title="Link to this definition"></a><br /></dt>
+<dd><p>Core measurement auxiliary data that can be reused across algorithms. </p>
+<p>Contains expensive-to-compute elements that are needed for validation, updating, retrodiction, and other filter operations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataEv">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataEv"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData::MeasurementAuxData"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a61d5c2946efc50d95d98cbb9d14a49de"></span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementAuxData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataERK13DynamicVectorRK15DynamicJacobianRK17DynamicCovariance">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataERK13DynamicVectorRK15DynamicJacobianRK17DynamicCovariance"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataERK13DynamicVectorRK15DynamicJacobianRK17DynamicCovariance"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData::MeasurementAuxData__DynamicVectorCR.DynamicJacobianCR.DynamicCovarianceCR"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a1b9e47817827bc23d104b7a530f56c1f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementAuxData</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicJacobian"><span class="n"><span class="pre">DynamicJacobian</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">jac</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicCovariance"><span class="n"><span class="pre">DynamicCovariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inn_cov</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData18MeasurementAuxDataERK13DynamicVectorRK15DynamicJacobianRK17DynamicCovariance" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData10innovationE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData10innovationE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData10innovationE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData::innovation__DynamicVector"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1acc8b0ee39be40ad70e672bf5691d43b8"></span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface13DynamicVectorE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicVector"><span class="n"><span class="pre">DynamicVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">innovation</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData10innovationE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData8jacobianE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData8jacobianE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData8jacobianE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData::jacobian__DynamicJacobian"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a5ffc53fcce9974f003d3eead2cc3615f"></span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface15DynamicJacobianE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicJacobian"><span class="n"><span class="pre">DynamicJacobian</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jacobian</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData8jacobianE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData21innovation_covarianceE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData21innovation_covarianceE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData21innovation_covarianceE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::MeasurementAuxData::innovation_covariance__DynamicCovariance"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData_1a6850572c55c29f12dbc26b2d6ca4568b"></span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface17DynamicCovarianceE" title="kinematic_arbiter::core::MeasurementModelInterface::DynamicCovariance"><span class="n"><span class="pre">DynamicCovariance</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">innovation_covariance</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface18MeasurementAuxData21innovation_covarianceE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidationParams</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParamsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Parameters for assumption validation. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16ValidationParamsEv">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16ValidationParamsEv"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16ValidationParamsEv"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::ValidationParams"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1ac618d7982ab32e14087e81cc04718ed9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValidationParams</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16ValidationParamsEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams19noise_sample_windowE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams19noise_sample_windowE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams19noise_sample_windowE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::noise_sample_window__s"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a5f2f83c58b677dea3b41b939851713df"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">noise_sample_window</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams19noise_sample_windowE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16confidence_levelE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16confidence_levelE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16confidence_levelE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::confidence_level__double"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1a70c671bf56846e445e4b545755842a2e"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">confidence_level</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16confidence_levelE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams34process_to_measurement_noise_ratioE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams34process_to_measurement_noise_ratioE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams34process_to_measurement_noise_ratioE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::process_to_measurement_noise_ratio__double"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1afd012760debc61c8a0784232a967fc87"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process_to_measurement_noise_ratio</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams34process_to_measurement_noise_ratioE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16mediation_actionE">
+<span id="_CPPv3N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16mediation_actionE"></span><span id="_CPPv2N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16mediation_actionE"></span><span id="kinematic_arbiter::core::MeasurementModelInterface::ValidationParams::mediation_action__MediationAction"></span><span class="target" id="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams_1af500a4ee6f57d167717f1c30908add37"></span><a class="reference internal" href="enum_namespacekinematic__arbiter_1_1core_1abb0564c690342e24481c2575d7c29888.html#_CPPv4N17kinematic_arbiter4core15MediationActionE" title="kinematic_arbiter::core::MediationAction"><span class="n"><span class="pre">MediationAction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mediation_action</span></span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4core25MeasurementModelInterface16ValidationParams16mediation_actionE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classkalman__filter__node_1_1KalmanFilterNode.html" class="btn btn-neutral float-left" title="Class KalmanFilterNode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html" class="btn btn-neutral float-right" title="Template Class MediatedKalmanFilter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

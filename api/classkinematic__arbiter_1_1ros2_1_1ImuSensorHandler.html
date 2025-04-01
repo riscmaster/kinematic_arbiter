@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class ImuSensorHandler &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class KinematicArbiterNode" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html" />
+    <link rel="prev" title="Class FilterWrapper" href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#namespaces">Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="library_root.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html">Template Struct MeasurementDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4.html">Template Struct MeasurementDimension&lt; SensorType::BodyVelocity &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Imu &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Pose &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Position &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Unknown &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html">Struct MeasurementModelInterface::MeasurementAuxData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html">Struct MeasurementModelInterface::MeasurementData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html">Struct MeasurementModelInterface::ValidationParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html">Struct StateIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html">Struct StateIndex::AngularAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html">Struct StateIndex::AngularVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html">Struct StateIndex::LinearAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html">Struct StateIndex::LinearVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html">Struct StateIndex::Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion.html">Struct StateIndex::Quaternion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html">Struct StateModelInterface::Params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html">Struct BodyVelocitySensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html">Struct ImuSensorConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex.html">Struct ImuSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex.html">Struct PoseSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex.html">Struct PositionSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue.html">Struct ChiSquareCriticalValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1Figure8Config.html">Struct Figure8Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkalman__filter__node_1_1KalmanFilterNode.html">Class KalmanFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html">Class MeasurementModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html">Template Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html">Class StateModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.html">Class RigidBodyStateModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html">Class ExpectedPosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html">Template Class ExpectedSensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html">Class FilterWrapper</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class ImuSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html">Class KinematicArbiterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler.html">Class PoseSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler.html">Class PositionSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html">Template Class SensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html">Class Figure8SimulatorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher.html">Class ImuPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher.html">Class PosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher.html">Class PositionPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html">Template Class SensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher.html">Class VelocityPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html">Class TimeManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html">Class VelocitySensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html">Class BodyVelocitySensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html">Class ImuBiasEstimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html">Class ImuSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html">Class PoseSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html">Class PositionSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classmediated__filter__node_1_1MediatedFilterNode.html">Class MediatedFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsignal__generator__node_1_1SignalGeneratorNode.html">Class SignalGeneratorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate.html">Class Estimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput.html">Class FilterOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair.html">Class StateMeasurementPair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter.html">Class KalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter.html">Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation.html">Class Mediation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams.html">Class SignalParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator.html">Class SingleDofSignalGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui.html">Class DisplayGui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters.html">Class FilterParameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode.html">Class MediationMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State.html">Class State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API Reference</a></li>
+      <li class="breadcrumb-item active">Class ImuSensorHandler</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-imusensorhandler">
+<span id="exhale-class-classkinematic-arbiter-1-1ros2-1-1imusensorhandler"></span><h1>Class ImuSensorHandler<a class="headerlink" href="#class-imusensorhandler" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_kinematic_arbiter_ros2_imu_sensor_handler.hpp.html#file-include-kinematic-arbiter-ros2-imu-sensor-handler-hpp"><span class="std std-ref">File imu_sensor_handler.hpp</span></a></p></li>
+</ul>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::ros2::SensorHandler&lt;</span> <span class="pre">sensor_msgs::msg::Imu</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#exhale-class-classkinematic-arbiter-1-1ros2-1-1sensorhandler"><span class="std std-ref">Template Class SensorHandler</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandlerE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandlerE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandlerE"></span><span id="kinematic_arbiter::ros2::ImuSensorHandler"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ImuSensorHandler</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">kinematic_arbiter</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ros2</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#_CPPv4I0EN17kinematic_arbiter4ros213SensorHandlerE" title="kinematic_arbiter::ros2::SensorHandler"><span class="n"><span class="pre">SensorHandler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandlerE" title="Link to this definition"></a><br /></dt>
+<dd><p>IMU sensor handler. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler4BaseE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler4BaseE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler4BaseE"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a31d9631db0879b8be3c33a10f8d6c595"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Base</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html#_CPPv4I0EN17kinematic_arbiter4ros213SensorHandlerE" title="kinematic_arbiter::ros2::SensorHandler"><span class="n"><span class="pre">SensorHandler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler4BaseE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler9ModelTypeE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler9ModelTypeE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler9ModelTypeE"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a8db0399ce734991265e85230b2f97eb5"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ModelType</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">kinematic_arbiter</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">sensors</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html#_CPPv4N17kinematic_arbiter7sensors14ImuSensorModelE" title="kinematic_arbiter::sensors::ImuSensorModel"><span class="n"><span class="pre">ImuSensorModel</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler9ModelTypeE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler16MeasurementIndexE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler16MeasurementIndexE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler16MeasurementIndexE"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1aab49f1aad74a0968234f7a244128e244"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasurementIndex</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler9ModelTypeE" title="kinematic_arbiter::ros2::ImuSensorHandler::ModelType"><span class="n"><span class="pre">ModelType</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MeasurementIndex</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler16MeasurementIndexE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler16ImuSensorHandlerEPN6rclcpp4NodeENSt10shared_ptrI6FilterEENSt10shared_ptrIN7tf2_ros6BufferEEENSt10shared_ptrIN5utils11TimeManagerEEERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler16ImuSensorHandlerEPN6rclcpp4NodeENSt10shared_ptrI6FilterEENSt10shared_ptrIN7tf2_ros6BufferEEENSt10shared_ptrIN5utils11TimeManagerEEERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler16ImuSensorHandlerEPN6rclcpp4NodeENSt10shared_ptrI6FilterEENSt10shared_ptrIN7tf2_ros6BufferEEENSt10shared_ptrIN5utils11TimeManagerEEERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="kinematic_arbiter::ros2::ImuSensorHandler::ImuSensorHandler__rclcpp::NodeP.std::shared_ptr:Filter:.std::shared_ptr:tf2_ros::Buffer:.std::shared_ptr:utils::TimeManager:.ssCR.ssCR.ssCR.ssCR.ssCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af5529ec0c792937f154889c5fc3000d6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ImuSensorHandler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">node</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Filter</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">tf2_ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Buffer</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tf_buffer</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">utils</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html#_CPPv4N17kinematic_arbiter4ros25utils11TimeManagerE" title="kinematic_arbiter::ros2::utils::TimeManager"><span class="n"><span class="pre">TimeManager</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_manager</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">topic</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sensor_frame_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reference_frame_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">body_frame_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler16ImuSensorHandlerEPN6rclcpp4NodeENSt10shared_ptrI6FilterEENSt10shared_ptrIN7tf2_ros6BufferEEENSt10shared_ptrIN5utils11TimeManagerEEERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler11msgToVectorERKN11sensor_msgs3msg3ImuER13DynamicVector">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler11msgToVectorERKN11sensor_msgs3msg3ImuER13DynamicVector"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler11msgToVectorERKN11sensor_msgs3msg3ImuER13DynamicVector"></span><span id="kinematic_arbiter::ros2::ImuSensorHandler::msgToVector__sensor_msgs::msg::ImuCR.DynamicVectorR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a9bd071ba091384fbccc30f7004af9236"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">msgToVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">msg</span></span>, <span class="n"><span class="pre">DynamicVector</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler11msgToVectorERKN11sensor_msgs3msg3ImuER13DynamicVector" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert message to measurement vector. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler11vectorToMsgERK13DynamicVectorRKN8std_msgs3msg6HeaderE">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler11vectorToMsgERK13DynamicVectorRKN8std_msgs3msg6HeaderE"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler11vectorToMsgERK13DynamicVectorRKN8std_msgs3msg6HeaderE"></span><span id="kinematic_arbiter::ros2::ImuSensorHandler::vectorToMsg__DynamicVectorCR.std_msgs::msg::HeaderCR"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1a7ac5a4409d77c2028e8569f019c978e6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vectorToMsg</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicVector</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Header</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">header</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler11vectorToMsgERK13DynamicVectorRKN8std_msgs3msg6HeaderE" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert measurement vector to message. </p>
+<p>The covariance is not needed as a parameter because we can get it directly from the filter </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler10applyBoundERKN11sensor_msgs3msg3ImuERK17DynamicCovarianceb">
+<span id="_CPPv3N17kinematic_arbiter4ros216ImuSensorHandler10applyBoundERKN11sensor_msgs3msg3ImuERK17DynamicCovarianceb"></span><span id="_CPPv2N17kinematic_arbiter4ros216ImuSensorHandler10applyBoundERKN11sensor_msgs3msg3ImuERK17DynamicCovarianceb"></span><span id="kinematic_arbiter::ros2::ImuSensorHandler::applyBound__sensor_msgs::msg::ImuCR.DynamicCovarianceCR.b"></span><span class="target" id="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler_1af2a62e40c0fd7885e0c2edc729166872"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">applyBound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Imu</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">base_msg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicCovariance</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">covariance</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">positive</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter4ros216ImuSensorHandler10applyBoundERKN11sensor_msgs3msg3ImuERK17DynamicCovarianceb" title="Link to this definition"></a><br /></dt>
+<dd><p>Apply a sigma bound offset to a message. </p>
+<p>Creates a new message with a sigma-bound offset in the positive or negative direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_msg</strong> – The base message to modify </p></li>
+<li><p><strong>covariance</strong> – The measurement covariance </p></li>
+<li><p><strong>positive</strong> – True for upper bound, false for lower bound </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The bounded message </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html" class="btn btn-neutral float-left" title="Class FilterWrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html" class="btn btn-neutral float-right" title="Class KinematicArbiterNode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File trajectory_utils.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File trajectory_utils.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_core_trajectory_utils.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-trajectory-utils-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-core-trajectory-utils-hpp"></span><h1>Program Listing for File trajectory_utils.hpp<a class="headerlink" href="#program-listing-for-file-trajectory-utils-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_core_trajectory_utils.hpp.html#file-include-kinematic-arbiter-core-trajectory-utils-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/core/trajectory_utils.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Figure8Config</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">max_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w">    </span><span class="c1">// Maximum velocity along the trajectory</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">          </span><span class="c1">// Length of the figure-8 in X dimension</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w">          </span><span class="c1">// Width of the figure-8 in Y dimension</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">width_slope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span><span class="w">     </span><span class="c1">// Z inclination in radians</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">angular_scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span><span class="p">;</span><span class="w">   </span><span class="c1">// Scale factor for angular motion</span>
+<span class="p">};</span>
+
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Figure8Trajectory</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Figure8Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Figure8Config</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">SIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Trajectory parameters</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">        </span><span class="c1">// x amplitude</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">         </span><span class="c1">// y amplitude</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tan</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">width_slope</span><span class="p">);</span><span class="w"> </span><span class="c1">// z amplitude</span>
+
+<span class="w">  </span><span class="c1">// Period and frequency calculations</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">max_velocity</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">T</span><span class="p">;</span><span class="w">    </span><span class="c1">// y,z frequency</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">        </span><span class="c1">// x frequency</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">;</span><span class="w">             </span><span class="c1">// current time</span>
+
+<span class="w">  </span><span class="c1">// Create state vector</span>
+<span class="w">  </span><span class="n">StateVector</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateVector</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Position vector in world frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="nf">position</span><span class="p">(</span>
+<span class="w">      </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Store position</span>
+<span class="w">  </span><span class="n">states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Linear Inertial (World Frame) Velocity</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="nf">i_v</span><span class="p">(</span>
+<span class="w">      </span><span class="o">-</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Linear Inertial (World Frame) Acceleration</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="nf">i_a</span><span class="p">(</span>
+<span class="w">      </span><span class="o">-</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Linear Inertial (World Frame) Jerk</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="nf">i_j</span><span class="p">(</span>
+<span class="w">      </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">w2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span>
+<span class="w">      </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Current Orientation (body X aligned with velocity)</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">orientation</span><span class="p">;</span>
+<span class="w">  </span><span class="n">orientation</span><span class="p">.</span><span class="n">setFromTwoVectors</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitX</span><span class="p">(),</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">normalized</span><span class="p">());</span>
+<span class="w">  </span><span class="n">orientation</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Store quaternion</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">w</span><span class="p">();</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">x</span><span class="p">();</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">y</span><span class="p">();</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">z</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Convert world velocity to body frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">b_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_v</span><span class="p">;</span>
+<span class="w">  </span><span class="n">states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b_v</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 1. Compute angular velocity in world frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega_world</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">omega_world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">i_a</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">omega_world</span><span class="p">.</span><span class="n">setZero</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// 2. Transform to body frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega_world</span><span class="p">;</span>
+<span class="w">  </span><span class="n">states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega_body</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 3. Compute body-frame acceleration PROPERLY</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">b_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">b_a</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega_body</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b_v</span><span class="p">);</span><span class="w"> </span><span class="c1">// Full Coriolis compensation</span>
+<span class="w">  </span><span class="n">states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b_a</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 4. Angular acceleration (derivative of omega_world)</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">alpha_world</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">alpha_world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i_v</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">i_j</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span><span class="w"> </span><span class="o">-</span>
+<span class="w">                    </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">i_a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">i_a</span><span class="p">))</span>
+<span class="w">                    </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i_v</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">alpha_world</span><span class="p">.</span><span class="n">setZero</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// 5. Transform to body frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">alpha_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha_world</span><span class="p">;</span>
+<span class="w">  </span><span class="n">states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha_body</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 6. Extract and store roll rate (rotation about body X axis)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">roll_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega_body</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitX</span><span class="p">());</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roll_rate</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 7. Extract and store roll acceleration (about body X axis)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">roll_accel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha_body</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitX</span><span class="p">());</span>
+<span class="w">  </span><span class="n">states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roll_accel</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">states</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// /**</span>
+<span class="c1">//  * @brief Configuration for oscillating trajectory generation</span>
+<span class="c1">//  */</span>
+<span class="c1">// struct OscillatingConfig {</span>
+<span class="c1">//   Eigen::Vector3d max_linear_accel = Eigen::Vector3d(10.0, 0.0, 0.0); // Max linear acceleration (m/s^2)</span>
+<span class="c1">//   Eigen::Vector3d max_angular_accel = Eigen::Vector3d(0.0, 0.0, 0.0); // Max angular acceleration (rad/s^2)</span>
+
+<span class="c1">//   double linear_time_period = 0.5;  // Time period for linear acceleration phases (seconds)</span>
+<span class="c1">//   double angular_time_period = 0.1; // Time period for angular acceleration phases (seconds)</span>
+<span class="c1">// };</span>
+
+<span class="c1">// /**</span>
+<span class="c1">//  * @brief Generates an oscillating trajectory for testing</span>
+<span class="c1">//  *</span>
+<span class="c1">//  * Creates a trajectory that follows an acceleration pattern: 0, max, -max, 0, -max, max.</span>
+<span class="c1">//  * This is useful for testing state prediction, control models, and inertial compensation.</span>
+<span class="c1">//  *</span>
+<span class="c1">//  * @param time Current time in seconds</span>
+<span class="c1">//  * @param start_time Starting time of the trajectory</span>
+<span class="c1">//  * @param config Configuration parameters for the trajectory (optional)</span>
+<span class="c1">//  * @return State vector containing position, orientation, velocity, and acceleration</span>
+<span class="c1">//  */</span>
+<span class="c1">// Eigen::Matrix&lt;double, core::StateIndex::kFullStateSize, 1&gt; OscillatingTrajectory(</span>
+<span class="c1">//     double time,</span>
+<span class="c1">//     double start_time,</span>
+<span class="c1">//     const OscillatingConfig&amp; config = OscillatingConfig()) {</span>
+
+<span class="c1">//   using SIdx = core::StateIndex;</span>
+<span class="c1">//   using StateVector = Eigen::Matrix&lt;double, SIdx::kFullStateSize, 1&gt;;</span>
+
+<span class="c1">//   // Create state vector</span>
+<span class="c1">//   StateVector states = StateVector::Zero();</span>
+
+<span class="c1">//   double adjusted_time = time - start_time;</span>
+
+<span class="c1">//   // Linear Motion Calculation</span>
+<span class="c1">//   const double phase_duration_lin = config.linear_time_period / 5.0;</span>
+<span class="c1">//   double t_phase_lin = std::fmod(adjusted_time, 5 * phase_duration_lin);</span>
+
+<span class="c1">//   for (int i = 0; i &lt; 3; ++i) {</span>
+<span class="c1">//     double pos = 0.0, vel = 0.0, acc = 0.0;</span>
+
+<span class="c1">//     if (t_phase_lin &lt; phase_duration_lin) {</span>
+<span class="c1">//       acc = 0.0;</span>
+<span class="c1">//       pos = 0.0;</span>
+<span class="c1">//       vel = 0.0;</span>
+<span class="c1">//     } else if (t_phase_lin &lt; 2 * phase_duration_lin) {</span>
+<span class="c1">//       acc = config.max_linear_accel[i];</span>
+<span class="c1">//       pos = 0.5 * acc * (t_phase_lin - phase_duration_lin) * (t_phase_lin - phase_duration_lin);</span>
+<span class="c1">//       vel = acc * (t_phase_lin - phase_duration_lin);</span>
+<span class="c1">//     } else if (t_phase_lin &lt; 3 * phase_duration_lin) {</span>
+<span class="c1">//       acc = -config.max_linear_accel[i];</span>
+<span class="c1">//       pos = acc * phase_duration_lin * (t_phase_lin - 2 * phase_duration_lin) -</span>
+<span class="c1">//             0.5 * acc * (t_phase_lin - 2 * phase_duration_lin) * (t_phase_lin - 2 * phase_duration_lin);</span>
+<span class="c1">//       vel = acc * phase_duration_lin - acc * (t_phase_lin - 2 * phase_duration_lin);</span>
+<span class="c1">//     } else if (t_phase_lin &lt; 4 * phase_duration_lin) {</span>
+<span class="c1">//       acc = -config.max_linear_accel[i];</span>
+<span class="c1">//       pos = -0.5 * acc * (t_phase_lin - 3 * phase_duration_lin) * (t_phase_lin - 3 * phase_duration_lin);</span>
+<span class="c1">//       vel = -acc * (t_phase_lin - 3 * phase_duration_lin);</span>
+<span class="c1">//     } else {</span>
+<span class="c1">//       acc = config.max_linear_accel[i];</span>
+<span class="c1">//       pos = -acc * phase_duration_lin * (t_phase_lin - 4 * phase_duration_lin) +</span>
+<span class="c1">//             0.5 * acc * (t_phase_lin - 4 * phase_duration_lin) * (t_phase_lin - 4 * phase_duration_lin);</span>
+<span class="c1">//       vel = -acc * phase_duration_lin + acc * (t_phase_lin - 4 * phase_duration_lin);</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     states[SIdx::Position::Begin() + i] = pos;</span>
+<span class="c1">//     states[SIdx::LinearVelocity::Begin() + i] = vel;</span>
+<span class="c1">//     states[SIdx::LinearAcceleration::Begin() + i] = acc;</span>
+<span class="c1">//   }</span>
+
+<span class="c1">//   // Angular Motion Calculation</span>
+<span class="c1">//   const double phase_duration_ang = config.angular_time_period / 5.0;</span>
+<span class="c1">//   double t_phase_ang = std::fmod(adjusted_time, 5 * phase_duration_ang);</span>
+
+<span class="c1">//   for (int i = 0; i &lt; 3; ++i) {</span>
+<span class="c1">//     double ang_pos = 0.0, ang_vel = 0.0, ang_acc = 0.0;</span>
+
+<span class="c1">//     if (t_phase_ang &lt; phase_duration_ang) {</span>
+<span class="c1">//       ang_acc = 0.0;</span>
+<span class="c1">//       ang_pos = 0.0;</span>
+<span class="c1">//       ang_vel = 0.0;</span>
+<span class="c1">//     } else if (t_phase_ang &lt; 2 * phase_duration_ang) {</span>
+<span class="c1">//       ang_acc = config.max_angular_accel[i];</span>
+<span class="c1">//       ang_pos = 0.5 * ang_acc * (t_phase_ang - phase_duration_ang) * (t_phase_ang - phase_duration_ang);</span>
+<span class="c1">//       ang_vel = ang_acc * (t_phase_ang - phase_duration_ang);</span>
+<span class="c1">//     } else if (t_phase_ang &lt; 3 * phase_duration_ang) {</span>
+<span class="c1">//       ang_acc = -config.max_angular_accel[i];</span>
+<span class="c1">//       ang_pos = ang_acc * phase_duration_ang * (t_phase_ang - 2 * phase_duration_ang) -</span>
+<span class="c1">//                  0.5 * ang_acc * (t_phase_ang - 2 * phase_duration_ang) * (t_phase_ang - 2 * phase_duration_ang);</span>
+<span class="c1">//       ang_vel = ang_acc * phase_duration_ang - ang_acc * (t_phase_ang - 2 * phase_duration_ang);</span>
+<span class="c1">//     } else if (t_phase_ang &lt; 4 * phase_duration_ang) {</span>
+<span class="c1">//       ang_acc = -config.max_angular_accel[i];</span>
+<span class="c1">//       ang_pos = -0.5 * ang_acc * (t_phase_ang - 3 * phase_duration_ang) * (t_phase_ang - 3 * phase_duration_ang);</span>
+<span class="c1">//       ang_vel = -ang_acc * (t_phase_ang - 3 * phase_duration_ang);</span>
+<span class="c1">//     } else {</span>
+<span class="c1">//       ang_acc = config.max_angular_accel[i];</span>
+<span class="c1">//       ang_pos = -ang_acc * phase_duration_ang * (t_phase_ang - 4 * phase_duration_ang) +</span>
+<span class="c1">//                  0.5 * ang_acc * (t_phase_ang - 4 * phase_duration_ang) * (t_phase_ang - 4 * phase_duration_ang);</span>
+<span class="c1">//       ang_vel = -ang_acc * phase_duration_ang + ang_acc * (t_phase_ang - 4 * phase_duration_ang);</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     states[SIdx::AngularVelocity::Begin() + i] = ang_vel;</span>
+<span class="c1">//     states[SIdx::AngularAcceleration::Begin() + i] = ang_acc;</span>
+<span class="c1">//   }</span>
+
+<span class="c1">//   return states;</span>
+<span class="c1">// }</span>
+
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace utils</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

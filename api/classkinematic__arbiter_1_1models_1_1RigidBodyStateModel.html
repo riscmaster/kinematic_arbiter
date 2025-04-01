@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class RigidBodyStateModel &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ExpectedPosePublisher" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html" />
+    <link rel="prev" title="Class StateModelInterface" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#namespaces">Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="library_root.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension.html">Template Struct MeasurementDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1BodyVelocity_01_4.html">Template Struct MeasurementDimension&lt; SensorType::BodyVelocity &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Imu_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Imu &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Pose_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Pose &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Position_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Position &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementDimension_3_01SensorType_1_1Unknown_01_4.html">Template Struct MeasurementDimension&lt; SensorType::Unknown &gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementAuxData.html">Struct MeasurementModelInterface::MeasurementAuxData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1MeasurementData.html">Struct MeasurementModelInterface::MeasurementData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1MeasurementModelInterface_1_1ValidationParams.html">Struct MeasurementModelInterface::ValidationParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html">Struct StateIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularAcceleration.html">Struct StateIndex::AngularAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1AngularVelocity.html">Struct StateIndex::AngularVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearAcceleration.html">Struct StateIndex::LinearAcceleration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1LinearVelocity.html">Struct StateIndex::LinearVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Position.html">Struct StateIndex::Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex_1_1Quaternion.html">Struct StateIndex::Quaternion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateModelInterface_1_1Params.html">Struct StateModelInterface::Params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel_1_1MeasurementIndex.html">Struct BodyVelocitySensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorConfig.html">Struct ImuSensorConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1ImuSensorModel_1_1MeasurementIndex.html">Struct ImuSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PoseSensorModel_1_1MeasurementIndex.html">Struct PoseSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1sensors_1_1PositionSensorModel_1_1MeasurementIndex.html">Struct PositionSensorModel::MeasurementIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1ChiSquareCriticalValue.html">Struct ChiSquareCriticalValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structkinematic__arbiter_1_1utils_1_1Figure8Config.html">Struct Figure8Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkalman__filter__node_1_1KalmanFilterNode.html">Class KalmanFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MeasurementModelInterface.html">Class MeasurementModelInterface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1MediatedKalmanFilter.html">Template Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html">Class StateModelInterface</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class RigidBodyStateModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html">Class ExpectedPosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ExpectedSensorPublisher.html">Template Class ExpectedSensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1FilterWrapper.html">Class FilterWrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1ImuSensorHandler.html">Class ImuSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1KinematicArbiterNode.html">Class KinematicArbiterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PoseSensorHandler.html">Class PoseSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1PositionSensorHandler.html">Class PositionSensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1SensorHandler.html">Template Class SensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1Figure8SimulatorNode.html">Class Figure8SimulatorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1ImuPublisher.html">Class ImuPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PosePublisher.html">Class PosePublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1PositionPublisher.html">Class PositionPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1SensorPublisher.html">Template Class SensorPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1simulation_1_1VelocityPublisher.html">Class VelocityPublisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1utils_1_1TimeManager.html">Class TimeManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1ros2_1_1VelocitySensorHandler.html">Class VelocitySensorHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1BodyVelocitySensorModel.html">Class BodyVelocitySensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuBiasEstimator.html">Class ImuBiasEstimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1ImuSensorModel.html">Class ImuSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PoseSensorModel.html">Class PoseSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classkinematic__arbiter_1_1sensors_1_1PositionSensorModel.html">Class PositionSensorModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classmediated__filter__node_1_1MediatedFilterNode.html">Class MediatedFilterNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsignal__generator__node_1_1SignalGeneratorNode.html">Class SignalGeneratorNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1Estimate.html">Class Estimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1FilterOutput.html">Class FilterOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1filter__output_1_1StateMeasurementPair.html">Class StateMeasurementPair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1kalman__filter_1_1KalmanFilter.html">Class KalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1MediatedKalmanFilter.html">Class MediatedKalmanFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1mediated__kalman__filter_1_1Mediation.html">Class Mediation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SignalParams.html">Class SignalParams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1core_1_1signal__generator_1_1SingleDofSignalGenerator.html">Class SingleDofSignalGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1display__gui_1_1DisplayGui.html">Class DisplayGui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1FilterParameters.html">Class FilterParameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1MediationMode.html">Class MediationMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classsrc_1_1single__dof__demo_1_1ros2_1_1domain__models_1_1State.html">Class State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_root.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API Reference</a></li>
+      <li class="breadcrumb-item active">Class RigidBodyStateModel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/classkinematic__arbiter_1_1models_1_1RigidBodyStateModel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-rigidbodystatemodel">
+<span id="exhale-class-classkinematic-arbiter-1-1models-1-1rigidbodystatemodel"></span><h1>Class RigidBodyStateModel<a class="headerlink" href="#class-rigidbodystatemodel" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_kinematic_arbiter_models_rigid_body_state_model.hpp.html#file-include-kinematic-arbiter-models-rigid-body-state-model-hpp"><span class="std std-ref">File rigid_body_state_model.hpp</span></a></p></li>
+</ul>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">kinematic_arbiter::core::StateModelInterface</span></code> (<a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html#exhale-class-classkinematic-arbiter-1-1core-1-1statemodelinterface"><span class="std std-ref">Class StateModelInterface</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModelE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModelE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModelE"></span><span id="kinematic_arbiter::models::RigidBodyStateModel"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RigidBodyStateModel</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">kinematic_arbiter</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html#_CPPv4N17kinematic_arbiter4core19StateModelInterfaceE" title="kinematic_arbiter::core::StateModelInterface"><span class="n"><span class="pre">StateModelInterface</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModelE" title="Link to this definition"></a><br /></dt>
+<dd><p>State model for 3D rigid body with quaternion orientation. </p>
+<p>Implements a state transition model for a rigid body in 3D space with:<ul class="simple">
+<li><p>3D position</p></li>
+<li><p>Quaternion orientation</p></li>
+<li><p>3D linear velocity</p></li>
+<li><p>3D angular velocity</p></li>
+<li><p>3D linear acceleration</p></li>
+<li><p>3D angular acceleration</p></li>
+</ul>
+</p>
+<p>The model uses quaternion kinematics for rotation representation to avoid gimbal lock. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Matrix3dE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel8Matrix3dE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel8Matrix3dE"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a94f655111a07c30be4b90ec40d595f97"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix3d</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Matrix3dE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Vector3dE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel8Vector3dE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel8Vector3dE"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a6e7f6163aa8eefec8d398341e9eeaaad"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector3d</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector3d</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Vector3dE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Vector4dE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel8Vector4dE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel8Vector4dE"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa9a3c8f16a5313e3e6c1afc2ba67666b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector4d</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector4d</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Vector4dE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Matrix4dE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel8Matrix4dE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel8Matrix4dE"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a63783d35b06bb216927e8422c8143097"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix4d</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel8Matrix4dE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel4SIdxE">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel4SIdxE"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel4SIdxE"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1aa315b72df6366b9b7fd631a38e1ec526"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SIdx</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">core</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structkinematic__arbiter_1_1core_1_1StateIndex.html#_CPPv4N17kinematic_arbiter4core10StateIndexE" title="kinematic_arbiter::core::StateIndex"><span class="n"><span class="pre">StateIndex</span></span></a><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel4SIdxE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel19RigidBodyStateModelERK6Params">
+<span id="_CPPv3N17kinematic_arbiter6models19RigidBodyStateModel19RigidBodyStateModelERK6Params"></span><span id="_CPPv2N17kinematic_arbiter6models19RigidBodyStateModel19RigidBodyStateModelERK6Params"></span><span id="kinematic_arbiter::models::RigidBodyStateModel::RigidBodyStateModel__ParamsCR"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1ae5b004980ce188891ea33a30e875e2c7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RigidBodyStateModel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Params</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">params</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Params</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17kinematic_arbiter6models19RigidBodyStateModel19RigidBodyStateModelERK6Params" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classkinematic__arbiter_1_1models_1_1RigidBodyStateModel"><span class="std std-ref">RigidBodyStateModel</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> – State model parameters </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter6models19RigidBodyStateModel12PredictStateERK11StateVectord">
+<span id="_CPPv3NK17kinematic_arbiter6models19RigidBodyStateModel12PredictStateERK11StateVectord"></span><span id="_CPPv2NK17kinematic_arbiter6models19RigidBodyStateModel12PredictStateERK11StateVectord"></span><span id="kinematic_arbiter::models::RigidBodyStateModel::PredictState__StateVectorCR.doubleC"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a5c20315ad9946aee82af907393333f06"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">StateVector</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PredictState</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">StateVector</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">current_state</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_step</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter6models19RigidBodyStateModel12PredictStateERK11StateVectord" title="Link to this definition"></a><br /></dt>
+<dd><p>Predict state forward in time: x̂_k^- = f(x̂_{k-1}^+, u_k) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current_state</strong> – Current state estimate x̂_{k-1}^+ </p></li>
+<li><p><strong>time_step</strong> – Time step in seconds </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predicted next state x̂_k^- </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17kinematic_arbiter6models19RigidBodyStateModel19GetTransitionMatrixERK11StateVectord">
+<span id="_CPPv3NK17kinematic_arbiter6models19RigidBodyStateModel19GetTransitionMatrixERK11StateVectord"></span><span id="_CPPv2NK17kinematic_arbiter6models19RigidBodyStateModel19GetTransitionMatrixERK11StateVectord"></span><span id="kinematic_arbiter::models::RigidBodyStateModel::GetTransitionMatrix__StateVectorCR.doubleC"></span><span class="target" id="classkinematic__arbiter_1_1models_1_1RigidBodyStateModel_1a998e9b62772caea5fc4a44858f201598"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">StateMatrix</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GetTransitionMatrix</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">StateVector</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">current_state</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_step</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK17kinematic_arbiter6models19RigidBodyStateModel19GetTransitionMatrixERK11StateVectord" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the state transition matrix: A_k. </p>
+<p>The matrix A_k linearizes the state transition function: A_k = ∂f/∂x evaluated at x̂_{k-1}^+ and u_k</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current_state</strong> – Current state estimate x̂_{k-1}^+ </p></li>
+<li><p><strong>time_step</strong> – Time step in seconds </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>State transition matrix A_k </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classkinematic__arbiter_1_1core_1_1StateModelInterface.html" class="btn btn-neutral float-left" title="Class StateModelInterface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classkinematic__arbiter_1_1ros2_1_1ExpectedPosePublisher.html" class="btn btn-neutral float-right" title="Class ExpectedPosePublisher" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File statistical_utils.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File statistical_utils.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_core_statistical_utils.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-statistical-utils-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-core-statistical-utils-hpp"></span><h1>Program Listing for File statistical_utils.hpp<a class="headerlink" href="#program-listing-for-file-statistical-utils-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_core_statistical_utils.hpp.html#file-include-kinematic-arbiter-core-statistical-utils-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/core/statistical_utils.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">kMaxChiSquareDof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ChiSquareCriticalValue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">confidence</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">critical_value</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Constants</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kFuzzyMoreThanZero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">kNumChiSquareCriticalValues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13U</span><span class="p">;</span>
+
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">ChiSquareCriticalValue</span><span class="p">,</span><span class="w"> </span><span class="n">kNumChiSquareCriticalValues</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">kMaxChiSquareDof</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">kChiSquareCriticalValues</span><span class="p">{{</span>
+<span class="w">        </span><span class="c1">// 1 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0002</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0039</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0158</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.102</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">0.455</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">1.33</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">2.71</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">3.84</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">5.02</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">6.63</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">10.83</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mf">15.0</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 2 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0201</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0506</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.103</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">0.211</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.575</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">1.39</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">2.77</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">4.61</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">5.99</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">7.38</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">9.21</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">13.8</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mf">18.5</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 3 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.115</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.216</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.35</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">0.584</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">1.21</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">2.37</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">4.11</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">6.25</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">7.82</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">9.35</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">11.3</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">16.3</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 4 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.297</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.484</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.711</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">1.06</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">1.92</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">3.36</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">5.39</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">7.78</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">9.49</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">11.1</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">13.3</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">18.5</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mf">23.5</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 5 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.554</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.831</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">1.15</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">1.61</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">2.68</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">4.35</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">6.63</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">9.24</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">11.1</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">12.8</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">15.1</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">20.5</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mf">25.8</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 6 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.872</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">1.24</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">1.64</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">3.46</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">5.35</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">7.84</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">10.7</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">12.6</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mf">14.5</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">16.8</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">22.4</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}},</span>
+<span class="w">        </span><span class="c1">// 7 DOF</span>
+<span class="w">        </span><span class="p">{{</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">1.24</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">1.69</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">2.17</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">2.83</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">4.26</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="mf">6.35</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">9.04</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">14.1</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.975</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="mf">18.5</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span><span class="mf">24.3</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mf">0.9999</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}}</span>
+<span class="w">    </span><span class="p">}};</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">InterpolatedCriticalValue</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">confidence_level</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">ChiSquareCriticalValue</span><span class="w"> </span><span class="n">lower</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">ChiSquareCriticalValue</span><span class="w"> </span><span class="n">upper</span><span class="p">);</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalculateChiSquareCriticalValue1Dof</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">confidence_level</span><span class="p">);</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalculateChiSquareCriticalValueNDof</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">dof_index</span><span class="p">,</span>
+<span class="w">                                           </span><span class="kt">double</span><span class="w"> </span><span class="n">confidence_level</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Generator</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Derived</span><span class="o">&gt;</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="n">generateMultivariateNoise</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixBase</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">covariance</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Generator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">generator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covariance</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Verify the covariance matrix is square</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">covariance</span><span class="p">.</span><span class="n">rows</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">covariance</span><span class="p">.</span><span class="n">cols</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;Covariance matrix must be square&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Compute the Cholesky decomposition</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">LLT</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">&gt;</span><span class="w"> </span><span class="n">llt</span><span class="p">(</span><span class="n">covariance</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Check if the covariance matrix is positive definite</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">llt</span><span class="p">.</span><span class="n">info</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;Covariance matrix must be positive definite&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Get the lower triangular matrix L from the decomposition</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llt</span><span class="p">.</span><span class="n">matrixL</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Create standard normal distribution</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">normal_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">normal_dist</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Generate standard normal samples</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="nf">z</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">z</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal_dist</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Transform to desired covariance: x = L*z</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace utils</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

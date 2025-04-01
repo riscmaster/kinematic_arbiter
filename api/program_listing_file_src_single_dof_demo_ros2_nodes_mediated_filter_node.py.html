@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File mediated_filter_node.py &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File mediated_filter_node.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_single_dof_demo_ros2_nodes_mediated_filter_node.py.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-mediated-filter-node-py">
+<span id="program-listing-file-src-single-dof-demo-ros2-nodes-mediated-filter-node-py"></span><h1>Program Listing for File mediated_filter_node.py<a class="headerlink" href="#program-listing-for-file-mediated-filter-node-py" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_src_single_dof_demo_ros2_nodes_mediated_filter_node.py.html#file-src-single-dof-demo-ros2-nodes-mediated-filter-node-py"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/single_dof_demo/ros2/nodes/mediated_filter_node.py</span></code>)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="c1"># Copyright (c) 2024 Spencer Maughan</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction.</span>
+
+<span class="sd">&quot;&quot;&quot;Mediated Kalman Filter node for the single DOF demo with dynamic parameter adjustment.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.parameter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">diagnostic_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiagnosticStatus</span><span class="p">,</span> <span class="n">KeyValue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geometry_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">PointStamped</span><span class="p">,</span> <span class="n">Point</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">std_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">Header</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rcl_interfaces.msg</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FloatingPointRange</span><span class="p">,</span>
+    <span class="n">ParameterDescriptor</span><span class="p">,</span>
+    <span class="n">SetParametersResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.callback_groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReentrantCallbackGroup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">std_srvs.srv</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trigger</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">kinematic_arbiter.single_dof_demo.core.mediated_kalman_filter</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MediatedKalmanFilter</span><span class="p">,</span>
+    <span class="n">Mediation</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MediatedFilterNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mediated Kalman Filter node for the single DOF demo with dynamic parameter adjustment.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the Mediated Kalman Filter node.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mediated_filter_node&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Use ReentrantCallbackGroup to allow concurrent callbacks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">callback_groupcallback_group</span> <span class="o">=</span> <span class="n">ReentrantCallbackGroup</span><span class="p">()</span>
+
+        <span class="c1"># Default parameter values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+            <span class="s2">&quot;sample_window&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">&quot;mediation_mode&quot;</span><span class="p">:</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_STATE</span><span class="p">,</span>
+            <span class="s2">&quot;model_frequency&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s2">&quot;model_amplitude&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameters</span><span class="p">(</span>
+            <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_create_float_descriptor_create_float_descriptor</span><span class="p">(</span>
+                        <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="s2">&quot;Process to measurement noise ratio (ζ)&quot;</span>
+                    <span class="p">),</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;sample_window&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;sample_window&quot;</span><span class="p">],</span>
+                    <span class="n">ParameterDescriptor</span><span class="p">(</span>
+                        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of samples for noise estimation (n)&quot;</span>
+                    <span class="p">),</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;mediation_mode&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;mediation_mode&quot;</span><span class="p">],</span>
+                    <span class="n">ParameterDescriptor</span><span class="p">(</span>
+                        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mediation behavior (0=ADJUST_STATE, 1=ADJUST_MEASUREMENT, 2=REJECT_MEASUREMENT, 3=NO_ACTION)&quot;</span>
+                    <span class="p">),</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;model_frequency&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;model_frequency&quot;</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_create_float_descriptor_create_float_descriptor</span><span class="p">(</span>
+                        <span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="s2">&quot;Frequency of the model in Hz&quot;</span>
+                    <span class="p">),</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="s2">&quot;model_amplitude&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;model_amplitude&quot;</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_create_float_descriptor_create_float_descriptor</span><span class="p">(</span>
+                        <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;Amplitude of the model&quot;</span>
+                    <span class="p">),</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add parameter callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_on_set_parameters_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters_callbackparameters_callback</span><span class="p">)</span>
+
+        <span class="c1"># Subscribers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_submeasurement_sub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span>
+            <span class="s2">&quot;raw_measurements&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">measurement_callbackmeasurement_callback</span><span class="p">,</span>
+            <span class="mi">10</span><span class="p">,</span>
+            <span class="n">callback_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">callback_groupcallback_group</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Publishers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_pubstate_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_state_estimate&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_upper_bound_pubstate_upper_bound_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_state_upper_bound&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_lower_bound_pubstate_lower_bound_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_state_lower_bound&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_upper_bound_pubmeasurement_upper_bound_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_measurement_upper_bound&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_lower_bound_pubmeasurement_lower_bound_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_measurement_lower_bound&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_pubdiagnostics_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">DiagnosticStatus</span><span class="p">,</span> <span class="s2">&quot;mediated_filter_status&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediation_point_pubmediation_point_pub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span>
+            <span class="n">PointStamped</span><span class="p">,</span> <span class="s2">&quot;mediated_mediation_point&quot;</span><span class="p">,</span> <span class="mi">10</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Services</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_servicereset_service</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_service</span><span class="p">(</span>
+            <span class="n">Trigger</span><span class="p">,</span>
+            <span class="s2">&quot;~/reset_filter&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_resethandle_reset</span><span class="p">,</span>
+            <span class="n">callback_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">callback_groupcallback_group</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_params_servicereset_params_service</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_service</span><span class="p">(</span>
+            <span class="n">Trigger</span><span class="p">,</span>
+            <span class="s2">&quot;~/reset_parameters&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_reset_parametershandle_reset_parameters</span><span class="p">,</span>
+            <span class="n">callback_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">callback_groupcallback_group</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Initialize filter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_filter_init_filter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_timeinitial_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Mediated Kalman Filter node initialized&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_float_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a float parameter descriptor.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ParameterDescriptor</span><span class="p">(</span>
+            <span class="n">floating_point_range</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">FloatingPointRange</span><span class="p">(</span><span class="n">from_value</span><span class="o">=</span><span class="n">min_val</span><span class="p">,</span> <span class="n">to_value</span><span class="o">=</span><span class="n">max_val</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameters_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle parameter updates.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">SetParametersResult</span><span class="p">(</span><span class="n">successful</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="s2">&quot;Process measurement ratio must be non-negative&quot;</span>
+                        <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_process_measurement_ratio</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Updated process measurement ratio to </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;sample_window&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Sample window must be positive&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_sample_window</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Updated sample window to </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;mediation_mode&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid mediation mode&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_mediation_behavior</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Updated mediation mode to </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;model_frequency&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_frequency</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Updated model frequency to </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;model_amplitude&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_amplitude</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Updated model amplitude to </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Error setting parameter </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">successful</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">reason</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the Mediated Kalman filter.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span> <span class="o">=</span> <span class="n">MediatedKalmanFilter</span><span class="p">(</span>
+            <span class="n">process_to_measurement_ratio</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span>
+                <span class="s2">&quot;process_measurement_ratio&quot;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">sample_window</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&quot;sample_window&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">mediation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&quot;mediation_mode&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">frequency</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&quot;model_frequency&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">amplitude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&quot;model_amplitude&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">measurement_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process incoming measurements.&quot;&quot;&quot;</span>
+        <span class="c1"># Extract measurement from message</span>
+        <span class="n">measurement</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">x</span>
+
+        <span class="c1"># Skip invalid measurements</span>
+        <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">measurement</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Received NaN measurement, skipping update&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate current time in seconds</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_timeinitial_time</span>
+        <span class="n">time_secs</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">nanoseconds</span> <span class="o">*</span> <span class="mf">1e-9</span>
+
+        <span class="c1"># Update filter with measurement</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">measurement</span><span class="p">,</span> <span class="n">time_secs</span><span class="p">)</span>
+
+        <span class="c1"># Publish state estimate</span>
+        <span class="n">state_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span> <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span>
+            <span class="p">),</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_pubstate_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">state_msg</span><span class="p">)</span>
+
+        <span class="c1"># Publish state upper bound</span>
+        <span class="n">state_upper_bound</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span>
+        <span class="n">state_upper_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span> <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span>
+            <span class="p">),</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">state_upper_bound</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_upper_bound_pubstate_upper_bound_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">state_upper_msg</span><span class="p">)</span>
+
+        <span class="c1"># Publish state lower bound</span>
+        <span class="n">state_lower_bound</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span>
+        <span class="n">state_lower_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span> <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span>
+            <span class="p">),</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">state_lower_bound</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_lower_bound_pubstate_lower_bound_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">state_lower_msg</span><span class="p">)</span>
+
+        <span class="c1"># Publish measurement upper bound</span>
+        <span class="n">meas_upper_bound</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span>
+        <span class="p">)</span>
+        <span class="n">meas_upper_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span> <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span>
+            <span class="p">),</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">meas_upper_bound</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_upper_bound_pubmeasurement_upper_bound_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">meas_upper_msg</span><span class="p">)</span>
+
+        <span class="c1"># Publish measurement lower bound</span>
+        <span class="n">meas_lower_bound</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span>
+        <span class="p">)</span>
+        <span class="n">meas_lower_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span> <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span>
+            <span class="p">),</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">meas_lower_bound</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_lower_bound_pubmeasurement_lower_bound_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">meas_lower_msg</span><span class="p">)</span>
+
+        <span class="c1"># Publish mediation point if mediation was detected</span>
+        <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">mediation_detected</span><span class="p">:</span>
+            <span class="n">mediation_point_msg</span> <span class="o">=</span> <span class="n">PointStamped</span><span class="p">(</span>
+                <span class="n">header</span><span class="o">=</span><span class="n">Header</span><span class="p">(</span>
+                    <span class="n">stamp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">(),</span>
+                    <span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;filter_frame&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">mediation_point</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mediation_point_pubmediation_point_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">mediation_point_msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Mediation detected at value: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">mediation_point</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Publish diagnostics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_publish_diagnostics_publish_diagnostics</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle Mediated Kalman Filter reset requests.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_filter_init_filter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_timeinitial_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Mediated Kalman Filter reset successful&quot;</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset all parameters to their default values.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Set parameters directly</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">param_type</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">DOUBLE</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;mediation_mode&quot;</span><span class="p">:</span>
+                    <span class="n">param_type</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">INTEGER</span>
+
+                <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param_type</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reset </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Update filter with default values</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_process_measurement_ratio</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_sample_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;sample_window&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_mediation_behavior</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;mediation_mode&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_frequency</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;model_frequency&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">set_amplitude</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_paramsdefault_params</span><span class="p">[</span><span class="s2">&quot;model_amplitude&quot;</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All parameters reset to default values&quot;</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Parameters reset successful&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error resetting parameters: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_publish_diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Publish diagnostics for the filter.&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">DiagnosticStatus</span><span class="p">()</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">DiagnosticStatus</span><span class="o">.</span><span class="n">OK</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Mediated Kalman Filter&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Filter running normally&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;state_variance&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">state_variance</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;measurement_variance&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">measurement_variance</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;process_variance&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">process_variance</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;process_measurement_ratio&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">scale</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;sample_window&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">sample_window</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;mediation_active&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">mediation</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;mediation_mode&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">mediation_behavior</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;model_frequency&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">frequency</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">KeyValue</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="s2">&quot;model_amplitude&quot;</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterfilter</span><span class="o">.</span><span class="n">amplitude</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_pubdiagnostics_pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the Mediated Kalman Filter node and begin processing.&quot;&quot;&quot;</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">MediatedFilterNode</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

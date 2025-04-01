@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File state_model_interface.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File state_model_interface.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_core_state_model_interface.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-state-model-interface-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-core-state-model-interface-hpp"></span><h1>Program Listing for File state_model_interface.hpp<a class="headerlink" href="#program-listing-for-file-state-model-interface-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_core_state_model_interface.hpp.html#file-include-kinematic-arbiter-core-state-model-interface-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/core/state_model_interface.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">core</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StateModelInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Type definitions</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">StateSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">kFullStateSize</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">StateMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="p">,</span><span class="w"> </span><span class="n">StateSize</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="p">;</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">Params</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Sample window size for process noise estimation (n)</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">process_noise_window</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Initial process noise values for different state components</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">position_uncertainty_per_second</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">orientation_uncertainty_per_second</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">linear_velocity_uncertainty_per_second</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">angular_velocity_uncertainty_per_second</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">linear_acceleration_uncertainty_per_second</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">angular_acceleration_uncertainty_per_second</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Default constructor with initialization</span>
+<span class="w">    </span><span class="n">Params</span><span class="p">()</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">process_noise_window</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="w">        </span><span class="n">position_uncertainty_per_second</span><span class="p">(</span><span class="mf">0.01</span><span class="p">),</span>
+<span class="w">        </span><span class="n">orientation_uncertainty_per_second</span><span class="p">(</span><span class="mf">0.01</span><span class="p">),</span>
+<span class="w">        </span><span class="n">linear_velocity_uncertainty_per_second</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="w">        </span><span class="n">angular_velocity_uncertainty_per_second</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="w">        </span><span class="n">linear_acceleration_uncertainty_per_second</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+<span class="w">        </span><span class="n">angular_acceleration_uncertainty_per_second</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">StateModelInterface</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Params</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Params</span><span class="p">())</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">params_</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state_initialized_</span><span class="p">(</span><span class="nb">false</span><span class="p">),</span>
+<span class="w">      </span><span class="n">time_since_reset_</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Initialize process noise with diagonal elements based on parameters</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Set position uncertainty (states 0-2)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">position_uncertainty_per_second</span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">position_uncertainty_per_second</span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">9.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set orientation uncertainty (states 3-6, quaternion)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">orientation_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">orientation_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">16.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">9.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set linear velocity uncertainty (states 7-9)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">linear_velocity_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">linear_velocity_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">9.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set angular velocity uncertainty (states 10-12)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">angular_velocity_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">angular_velocity_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">9.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set linear acceleration uncertainty (states 13-15)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">linear_acceleration_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">linear_acceleration_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">9.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set angular acceleration uncertainty (states 16-18)</span>
+<span class="w">    </span><span class="n">process_noise_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">params_</span><span class="p">.</span><span class="n">angular_acceleration_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">angular_acceleration_uncertainty_per_second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">9.0</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">StateModelInterface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="nf">PredictState</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateMatrix</span><span class="w"> </span><span class="nf">GetTransitionMatrix</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateVector</span><span class="w"> </span><span class="nf">PredictStateWithInputAccelerations</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">linear_acceleration</span><span class="o">=</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">Zero</span><span class="p">(),</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="o">=</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">Zero</span><span class="p">())</span><span class="w"> </span><span class="k">const</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StateVector</span><span class="w"> </span><span class="n">new_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linear_acceleration</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">PredictState</span><span class="p">(</span><span class="n">new_state</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">StateMatrix</span><span class="w"> </span><span class="nf">GetProcessNoiseCovariance</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">process_noise_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">UpdateProcessNoise</span><span class="p">(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a_priori_state</span><span class="p">,</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a_posteriori_state</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">process_to_measurement_ratio</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Compute state correction</span>
+<span class="w">    </span><span class="n">StateVector</span><span class="w"> </span><span class="n">tmp_state_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">process_to_measurement_ratio</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">a_priori_state</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a_posteriori_state</span><span class="p">).</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">StateVector</span><span class="w"> </span><span class="n">bounded_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tmp_state_diff</span><span class="p">.</span><span class="n">array</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kMinStateDiff</span><span class="p">).</span><span class="n">select</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">tmp_state_diff</span><span class="p">.</span><span class="n">array</span><span class="p">()).</span><span class="n">min</span><span class="p">(</span><span class="n">kMaxStateDiff</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Apply maximum bound to state differences</span>
+<span class="w">    </span><span class="n">state_diff_</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">bounded_diff</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">state_diff_</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">process_noise_window</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">state_diff_</span><span class="p">.</span><span class="n">array</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">kMinStateDiff</span><span class="p">).</span><span class="n">all</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">process_noise_</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">state_diff_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">state_diff_</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">process_noise_</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">params_</span><span class="p">.</span><span class="n">process_noise_window</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">GetProcessNoise</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">process_noise_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Params</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">GetParams</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">params_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Threshold for numerical comparisons</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kMinStateDiff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">;</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kMaxStateDiff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">StateVector</span><span class="w"> </span><span class="n">state_diff_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateVector</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// State model parameters</span>
+<span class="w">  </span><span class="n">Params</span><span class="w"> </span><span class="n">params_</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Process noise covariance</span>
+<span class="w">  </span><span class="n">StateMatrix</span><span class="w"> </span><span class="n">process_noise_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// State model initialization flags</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">state_initialized_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">time_since_reset_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace core</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

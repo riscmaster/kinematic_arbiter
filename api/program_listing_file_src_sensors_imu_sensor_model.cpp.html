@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File imu_sensor_model.cpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File imu_sensor_model.cpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_sensors_imu_sensor_model.cpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-imu-sensor-model-cpp">
+<span id="program-listing-file-src-sensors-imu-sensor-model-cpp"></span><h1>Program Listing for File imu_sensor_model.cpp<a class="headerlink" href="#program-listing-for-file-imu-sensor-model-cpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_src_sensors_imu_sensor_model.cpp.html#file-src-sensors-imu-sensor-model-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/sensors/imu_sensor_model.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/sensors/imu_sensor_model.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/statistical_utils.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Geometry&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">sensors</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Eigen</span><span class="p">;</span>
+
+<span class="c1">// namespace {</span>
+
+<span class="c1">// constexpr double kGravity = 9.80665;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kEpsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">;</span>
+
+<span class="c1">// Vector3d QuaternionLog(const Quaterniond&amp; q) {</span>
+<span class="c1">//     const double w_clamped = std::clamp(q.w(), -1.0 + kEpsilon, 1.0 - kEpsilon);</span>
+<span class="c1">//     const Vector3d v = q.vec();</span>
+<span class="c1">//     const double v_norm = v.norm();</span>
+
+<span class="c1">//     if(v_norm &lt; kEpsilon)</span>
+<span class="c1">//         return Vector3d::Zero();</span>
+
+<span class="c1">//     const double theta = 2.0 * std::acos(w_clamped);</span>
+<span class="c1">//     return theta * v.normalized();</span>
+<span class="c1">// }</span>
+
+<span class="c1">// } // namespace</span>
+
+<span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">Base</span><span class="o">::</span><span class="n">DynamicVector</span><span class="w"> </span><span class="nf">ImuSensorModel::PredictMeasurement</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Vector</span><span class="w"> </span><span class="n">predicted_measurement</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Extract state components</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">q</span><span class="p">(</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">a_linear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Extract sensor configuration</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">R_BS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">rotation</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Gravity vector in world frame</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">g_W</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">kGravity</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Base gyroscope measurement without bias</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">gyro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_BS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Base accelerometer measurement without bias</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">accel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_BS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="n">a_linear</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="n">q</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">g_W</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="n">alpha</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="n">omega</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">omega</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Apply biases only if calibration is enabled</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">config_</span><span class="p">.</span><span class="n">calibration_enabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">gyro</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">GetGyroBias</span><span class="p">();</span>
+<span class="w">    </span><span class="n">accel</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">GetAccelBias</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Set the measurement components</span>
+<span class="w">  </span><span class="n">predicted_measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">GX</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gyro</span><span class="p">;</span>
+<span class="w">  </span><span class="n">predicted_measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">predicted_measurement</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">ImuSensorModel::UpdateBiasEstimates</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">config_</span><span class="p">.</span><span class="n">calibration_enabled</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">IsStationary</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Get predicted measurement</span>
+<span class="w">  </span><span class="n">Vector</span><span class="w"> </span><span class="n">predicted_measurement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PredictMeasurement</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+
+<span class="w">  </span><span class="c1">// Update bias estimates</span>
+<span class="w">  </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">EstimateBiases</span><span class="p">(</span>
+<span class="w">      </span><span class="n">measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">GX</span><span class="p">),</span>
+<span class="w">      </span><span class="n">measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">),</span>
+<span class="w">      </span><span class="n">predicted_measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">GX</span><span class="p">),</span>
+<span class="w">      </span><span class="n">predicted_measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">));</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">Base</span><span class="o">::</span><span class="n">DynamicJacobian</span><span class="w"> </span><span class="nf">ImuSensorModel::GetMeasurementJacobian</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Jacobian</span><span class="w"> </span><span class="n">jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jacobian</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Extract state components and sensor configuration</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">R_BS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">rotation</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Extract and normalize quaternion orientation</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">q</span><span class="p">(</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="n">q</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Helper function to create a skew-symmetric matrix for cross products</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">skew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">(),</span>
+<span class="w">            </span><span class="o">-</span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="n">finished</span><span class="p">();</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// ==== LOWER BLOCK: GYROSCOPE JACOBIAN ====</span>
+<span class="w">  </span><span class="c1">// Gyro measurement is simply body angular velocity rotated to sensor frame</span>
+<span class="w">  </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">GX</span><span class="p">,</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_BS</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// ==== UPPER BLOCK: ACCELEROMETER JACOBIAN ====</span>
+
+<span class="w">  </span><span class="c1">// 1. Linear acceleration direct mapping</span>
+<span class="w">  </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">,</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_BS</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 2. Angular acceleration effect (tangential acceleration): -R_{BS}[r]_\times</span>
+<span class="w">  </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">,</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="o">-</span><span class="n">R_BS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">skew</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 3. Angular velocity effect on acceleration</span>
+<span class="w">  </span><span class="c1">// To fix the issues with the angular velocity Jacobian, we&#39;ll use the expanded cross product formula</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">omega_cross_r_jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Manually construct the Jacobian for d(ω×(ω×r))/dω</span>
+<span class="w">  </span><span class="c1">// This accounts for both terms in the derivative</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">e_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+<span class="w">    </span><span class="n">e_i</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// First term: e_i × (ω × r)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">term1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e_i</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">omega</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">r</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Second term: ω × (e_i × r)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">term2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">e_i</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">r</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Combined effect</span>
+<span class="w">    </span><span class="n">omega_cross_r_jacobian</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">term1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">term2</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">,</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">R_BS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega_cross_r_jacobian</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 4. Quaternion effect on gravity</span>
+<span class="w">  </span><span class="c1">// Derive Jacobian for rotation of gravity vector by quaternion</span>
+<span class="w">  </span><span class="c1">// For gravity vector g_W = [0, 0, g]^T in world frame</span>
+<span class="w">  </span><span class="c1">// The rotated gravity in body frame is: g_B = q.inverse() * g_W * q</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">w</span><span class="p">(),</span><span class="w"> </span><span class="n">qx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">x</span><span class="p">(),</span><span class="w"> </span><span class="n">qy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">y</span><span class="p">(),</span><span class="w"> </span><span class="n">qz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">z</span><span class="p">();</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kGravity</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Using the derivation from section 4.3 of the documentation:</span>
+<span class="w">  </span><span class="c1">// For g_W = [0, 0, g]^T, the rotation q.inverse() * g_W gives:</span>
+<span class="w">  </span><span class="c1">// g_B = g * [</span>
+<span class="w">  </span><span class="c1">//   2(q_x*q_z - q_w*q_y)</span>
+<span class="w">  </span><span class="c1">//   2(q_y*q_z + q_w*q_x)</span>
+<span class="w">  </span><span class="c1">//   1 - 2(q_x^2 + q_y^2)</span>
+<span class="w">  </span><span class="c1">// ]</span>
+<span class="w">  </span><span class="c1">//</span>
+<span class="w">  </span><span class="c1">// The Jacobian ∂g_B/∂q is therefore:</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="n">quaternion_gravity_jacobian</span><span class="p">;</span>
+<span class="w">  </span><span class="n">quaternion_gravity_jacobian</span><span class="w"> </span><span class="o">&lt;&lt;</span>
+<span class="w">      </span><span class="cm">/* ∂/∂q_w */</span><span class="w">      </span><span class="cm">/* ∂/∂q_x */</span><span class="w">      </span><span class="cm">/* ∂/∂q_y */</span><span class="w">      </span><span class="cm">/* ∂/∂q_z */</span>
+<span class="w">      </span><span class="mi">-2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qy</span><span class="p">,</span><span class="w">          </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qz</span><span class="p">,</span><span class="w">           </span><span class="mi">-2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qw</span><span class="p">,</span><span class="w">          </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qx</span><span class="p">,</span><span class="w">          </span><span class="c1">// ∂g_x/∂q</span>
+<span class="w">      </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qx</span><span class="p">,</span><span class="w">           </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qw</span><span class="p">,</span><span class="w">           </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qz</span><span class="p">,</span><span class="w">           </span><span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qy</span><span class="p">,</span><span class="w">          </span><span class="c1">// ∂g_y/∂q</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">                </span><span class="mi">-4</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qx</span><span class="p">,</span><span class="w">          </span><span class="mi">-4</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">qy</span><span class="p">,</span><span class="w">          </span><span class="mi">0</span><span class="p">;</span><span class="w">               </span><span class="c1">// ∂g_z/∂q</span>
+
+<span class="w">  </span><span class="c1">// Apply sensor-to-body rotation to transform the Jacobian to sensor frame</span>
+<span class="w">  </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">,</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">R_BS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">quaternion_gravity_jacobian</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">jacobian</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">GetPredictionModelInputs</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state_before_prediction</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">Base</span><span class="o">::</span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement_after_prediction</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Handle edge case first</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kEpsilon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">state_before_prediction</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Preprocess sensor measurements ==========================================</span>
+<span class="w">    </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">gyro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_after_prediction</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">GX</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Vector3d accel = measurement_after_prediction.segment&lt;3&gt;(MeasurementIndex::AX);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">config_</span><span class="p">.</span><span class="n">calibration_enabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">gyro</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">GetGyroBias</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// accel -= bias_estimator_.GetAccelBias();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">rotation</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// const Vector3d r = sensor_pose_in_body_frame_.translation();</span>
+
+<span class="w">    </span><span class="c1">// // Orientation Update====================================</span>
+<span class="w">    </span><span class="c1">// Quaterniond q_prev(</span>
+<span class="w">    </span><span class="c1">//     state_before_prediction(StateIndex::Quaternion::W),</span>
+<span class="w">    </span><span class="c1">//     state_before_prediction(StateIndex::Quaternion::X),</span>
+<span class="w">    </span><span class="c1">//     state_before_prediction(StateIndex::Quaternion::Y),</span>
+<span class="w">    </span><span class="c1">//     state_before_prediction(StateIndex::Quaternion::Z)</span>
+<span class="w">    </span><span class="c1">// );</span>
+<span class="w">    </span><span class="c1">// q_prev.normalize();  // Ensure valid quaternion</span>
+
+<span class="w">    </span><span class="c1">// 1. Compute gravity vector in body frame with stability checks</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gyro</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">current_lin_acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_before_prediction</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">current_ang_vel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_before_prediction</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// const Vector3d current_ang_acc = state_before_prediction.segment&lt;3&gt;(StateIndex::AngularAcceleration::Begin());</span>
+
+<span class="w">    </span><span class="c1">// Vector3d gravity_vec = R_SB * accel</span>
+<span class="w">    </span><span class="c1">//                      - current_lin_acc</span>
+<span class="w">    </span><span class="c1">//                      - current_ang_acc.cross(r)</span>
+<span class="w">    </span><span class="c1">//                      - current_ang_vel.cross(current_ang_vel.cross(r))</span>
+<span class="w">    </span><span class="c1">//                      - 2.0 * current_ang_vel.cross(omega.cross(r));  // Coriolis term</span>
+
+<span class="w">    </span><span class="c1">// // Fallback to predicted gravity if measured acceleration is unreliable</span>
+<span class="w">    </span><span class="c1">// const double g_magnitude = gravity_vec.norm();</span>
+<span class="w">    </span><span class="c1">// if(g_magnitude &lt; 0.5 * kGravity || g_magnitude &gt; 1.5 * kGravity) {</span>
+<span class="w">    </span><span class="c1">//     gravity_vec = q_prev.inverse() * Vector3d(0, 0, kGravity);</span>
+<span class="w">    </span><span class="c1">// }</span>
+<span class="w">    </span><span class="c1">// const Vector3d gravity = gravity_vec.normalized();</span>
+
+<span class="w">    </span><span class="c1">// // 2. Madgwick filter update</span>
+<span class="w">    </span><span class="c1">// const Vector4d F(</span>
+<span class="w">    </span><span class="c1">//     2.0 * (q_prev.x() * q_prev.z() - q_prev.w() * q_prev.y()) - gravity.x(),</span>
+<span class="w">    </span><span class="c1">//     2.0 * (q_prev.w() * q_prev.x() + q_prev.y() * q_prev.z()) - gravity.y(),</span>
+<span class="w">    </span><span class="c1">//     2.0 * (0.5 - q_prev.x() * q_prev.x() - q_prev.y() * q_prev.y()) - gravity.z(),</span>
+<span class="w">    </span><span class="c1">//     0.0</span>
+<span class="w">    </span><span class="c1">// );</span>
+
+<span class="w">    </span><span class="c1">// const double qw = q_prev.w(), qx = q_prev.x();</span>
+<span class="w">    </span><span class="c1">// const double qy = q_prev.y(), qz = q_prev.z();</span>
+<span class="w">    </span><span class="c1">// Matrix4d J;</span>
+<span class="w">    </span><span class="c1">// J &lt;&lt; -2 * qy,  2 * qz,  -2 * qw, 2 * qx,</span>
+<span class="w">    </span><span class="c1">//       2 * qx,  2 * qw,   2 * qz, 2 * qy,</span>
+<span class="w">    </span><span class="c1">//        0.0,   -4 * qx,  -4 * qy,  0.0,</span>
+<span class="w">    </span><span class="c1">//        0.0,     0.0,     0.0,    0.0;</span>
+
+<span class="w">    </span><span class="c1">// Vector4d gradient = (J.transpose() * F).normalized();</span>
+<span class="w">    </span><span class="c1">// const double beta = 50.0 * dt;  // Adaptive beta</span>
+<span class="w">    </span><span class="c1">// const double theta = beta * dt * gradient.norm();</span>
+
+<span class="w">    </span><span class="c1">// Quaterniond delta_q = Quaterniond::Identity();</span>
+<span class="w">    </span><span class="c1">// if(theta &gt; kEpsilon) {</span>
+<span class="w">    </span><span class="c1">//     delta_q = Quaterniond(AngleAxisd(theta, gradient.head&lt;3&gt;().normalized()));</span>
+<span class="w">    </span><span class="c1">// }</span>
+<span class="w">    </span><span class="c1">// Quaterniond q_new = (q_prev * delta_q).normalized();</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">omega</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">current_ang_vel</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// // Linear acceleration in world frame</span>
+<span class="w">    </span><span class="c1">// const Vector3d g_W(0.0, 0.0, kGravity);</span>
+<span class="w">    </span><span class="c1">// const Vector3d linear_acceleration = q_new * (accel - R_SB.transpose() * g_W)</span>
+<span class="w">    </span><span class="c1">//                                    - angular_acceleration.cross(r)</span>
+<span class="w">    </span><span class="c1">//                                    - omega.cross(omega.cross(r));</span>
+
+<span class="w">    </span><span class="c1">// Compose Output ==========================================================</span>
+<span class="w">    </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">inputs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">current_lin_acc</span><span class="p">,</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">IsStationary</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// Extract measurements directly using segment</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">measured_accel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Compute acceleration norm (should be close to gravity when stationary)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">accel_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measured_accel</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Pre-compute critical values for different degrees of freedom</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">critical_value6dof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">CalculateChiSquareCriticalValueNDof</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">config_</span><span class="p">.</span><span class="n">stationary_confidence_threshold</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">critical_value1dof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">CalculateChiSquareCriticalValueNDof</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">config_</span><span class="p">.</span><span class="n">stationary_confidence_threshold</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 1. Test state velocities (6-DOF)</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">state_vel_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_vel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">&gt;</span><span class="p">(</span><span class="n">state_vel_idx</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_vel_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">&gt;</span><span class="p">(</span><span class="n">state_vel_idx</span><span class="p">,</span><span class="w"> </span><span class="n">state_vel_idx</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_state_vel0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_vel</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state_vel_cov</span><span class="p">.</span><span class="n">llt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">state_vel</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">critical_value6dof</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 2. Test state accelerations (6-DOF)</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">state_acc_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">&gt;</span><span class="p">(</span><span class="n">state_acc_idx</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_acc_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">&gt;</span><span class="p">(</span><span class="n">state_acc_idx</span><span class="p">,</span><span class="w"> </span><span class="n">state_acc_idx</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_state_acc0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_acc</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">state_acc_cov</span><span class="p">.</span><span class="n">llt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">state_acc</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">critical_value6dof</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 3. Test IMU acceleration norm against gravity (1-DOF)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">gravity_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_norm</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">kGravity</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">accel_norm_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">measurement_covariance_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">,</span><span class="w"> </span><span class="n">MeasurementIndex</span><span class="o">::</span><span class="n">AX</span><span class="p">).</span><span class="n">trace</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">gravity_mahalanobis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">gravity_diff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gravity_diff</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">accel_norm_var</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kGravityVariance</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_imu_accel_gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gravity_mahalanobis</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">critical_value1dof</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Ignoring angular velocity from IMU for now due to confounding bias effects</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">is_state_vel0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">is_state_acc0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">is_imu_accel_gravity</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">typename</span><span class="w"> </span><span class="nc">ImuSensorModel</span><span class="o">::</span><span class="n">StateFlags</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">GetInitializableStates</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// IMU can initialize angular velocity</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// IMU can initialize linear acceleration</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// IMU can initialize roll and pitch (but not yaw) from gravity</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// When stationary, can also initialize angular acceleration (to zero)</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">flags</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">typename</span><span class="w"> </span><span class="nc">ImuSensorModel</span><span class="o">::</span><span class="n">StateFlags</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">InitializeState</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ImuSensorModel</span><span class="o">::</span><span class="n">Base</span><span class="o">::</span><span class="n">DynamicVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span>
+<span class="w">    </span><span class="n">StateCovariance</span><span class="o">&amp;</span><span class="w"> </span><span class="n">covariance</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">ValidateMeasurementSize</span><span class="p">(</span><span class="n">measurement</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">StateFlags</span><span class="w"> </span><span class="n">initialized_states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateFlags</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Extract gyro and accelerometer measurements</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">gyro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">accel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Transform to body frame</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_pose_in_body_frame_</span><span class="p">.</span><span class="n">rotation</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Apply bias correction if calibration is enabled</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">config_</span><span class="p">.</span><span class="n">calibration_enabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">gyro</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">GetGyroBias</span><span class="p">();</span>
+<span class="w">    </span><span class="n">accel</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">bias_estimator_</span><span class="p">.</span><span class="n">GetAccelBias</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Transform to body frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">omega_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gyro</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">accel_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accel</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Initialize angular velocity</span>
+<span class="w">  </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega_body</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Set angular velocity covariance</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">gyro_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">omega_body_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gyro_cov</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R_SB</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">  </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">      </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span>
+<span class="w">      </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega_body_cov</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Mark angular velocity as initialized</span>
+<span class="w">  </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Calculate accelerometer covariance in body frame</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">accel_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement_covariance_</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">accel_body_cov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R_SB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accel_cov</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R_SB</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Check if IMU is stationary for orientation initialization</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_stationary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IsStationary</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">covariance</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Always extract current yaw regardless of validity</span>
+<span class="w">  </span><span class="c1">// Extract current quaternion</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">current_q</span><span class="p">(</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">),</span>
+<span class="w">      </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="n">current_q</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Convert to rotation matrix and extract yaw</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">rot_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_q</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">current_yaw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atan2</span><span class="p">(</span><span class="n">rot_matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">rot_matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_stationary</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">accel_body</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kGravity</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">accel_body</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kGravity</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">ay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">accel_body</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">az</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">accel_body</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">roll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atan2</span><span class="p">(</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Calculate pitch from accelerometer when stationary</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">asin</span><span class="p">(</span><span class="o">-</span><span class="n">ax</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">accel_body</span><span class="p">.</span><span class="n">norm</span><span class="p">());</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">roll_pitch_variance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">M_PI</span><span class="o">/</span><span class="mf">6.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">M_PI</span><span class="o">/</span><span class="mf">6.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_stationary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Calculate roll from accelerometer when stationary</span>
+<span class="w">    </span><span class="n">ay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">az</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">roll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atan2</span><span class="p">(</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Propagate uncertainty for roll</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d_roll_d_ay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">az</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">ay</span><span class="o">*</span><span class="n">ay</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">az</span><span class="o">*</span><span class="n">az</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d_roll_d_az</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="o">-</span><span class="n">ay</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">ay</span><span class="o">*</span><span class="n">ay</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">az</span><span class="o">*</span><span class="n">az</span><span class="p">));</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="w"> </span><span class="n">d_roll_d_ayz</span><span class="p">;</span>
+<span class="w">    </span><span class="n">d_roll_d_ayz</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">d_roll_d_ay</span><span class="p">,</span><span class="w"> </span><span class="n">d_roll_d_az</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">roll_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d_roll_d_ayz</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">*</span>
+<span class="w">                     </span><span class="n">accel_body_cov</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">                     </span><span class="n">d_roll_d_ayz</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Calculate pitch from accelerometer when stationary</span>
+<span class="w">    </span><span class="n">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">asin</span><span class="p">(</span><span class="o">-</span><span class="n">ax</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">kGravity</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Propagate uncertainty for pitch</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d_pitch_d_ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">kGravity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">ax</span><span class="o">*</span><span class="n">ax</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">kGravity</span><span class="o">*</span><span class="n">kGravity</span><span class="p">))));</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pitch_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d_pitch_d_ax</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accel_body_cov</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_pitch_d_ax</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set appropriate covariance for quaternion components</span>
+<span class="w">    </span><span class="n">roll_pitch_variance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">roll_var</span><span class="p">,</span><span class="w"> </span><span class="n">pitch_var</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create rotation matrix from roll, pitch, and yaw</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">roll_rot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">AngleAxisd</span><span class="p">(</span><span class="n">roll</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitX</span><span class="p">()).</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">pitch_rot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">AngleAxisd</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitY</span><span class="p">()).</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">yaw_rot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">AngleAxisd</span><span class="p">(</span><span class="n">current_yaw</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitZ</span><span class="p">()).</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Combine rotations in XYZ order (roll-pitch-yaw)</span>
+<span class="w">    </span><span class="n">rot_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roll_rot</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pitch_rot</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yaw_rot</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Convert to quaternion</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">q</span><span class="p">(</span><span class="n">rot_matrix</span><span class="p">);</span>
+<span class="w">    </span><span class="n">q</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Update state with quaternion</span>
+<span class="w">    </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">w</span><span class="p">();</span>
+<span class="w">    </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">x</span><span class="p">();</span>
+<span class="w">    </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">y</span><span class="p">();</span>
+<span class="w">    </span><span class="n">state</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">z</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="c1">// Create a mask matrix for yaw-related components (W and Z)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="w"> </span><span class="n">yaw_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+<span class="w">    </span><span class="n">yaw_mask</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// W component</span>
+<span class="w">    </span><span class="n">yaw_mask</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Z component</span>
+
+<span class="w">    </span><span class="c1">// Create a mask for roll/pitch components (W, X, Y)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="w"> </span><span class="n">roll_pitch_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">yaw_mask</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Combine the covariances:</span>
+<span class="w">    </span><span class="c1">// - For roll/pitch components: use the newly calculated variance</span>
+<span class="w">    </span><span class="c1">// - For yaw components: preserve the original covariance magnitude</span>
+<span class="w">    </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="p">(</span><span class="n">roll_pitch_mask</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">roll_pitch_variance</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="p">(</span><span class="n">yaw_mask</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">()).</span><span class="n">norm</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Mark roll and pitch as initialized (quaternion components)</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// When stationary, linear acceleration should be zero in inertial frame</span>
+<span class="w">    </span><span class="c1">// and angular acceleration should be zero</span>
+<span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">()).</span><span class="n">setZero</span><span class="p">();</span>
+<span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">()).</span><span class="n">setZero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Set covariance for linear and angular acceleration</span>
+<span class="w">    </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_body_cov</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">covariance</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega_body_cov</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Mark linear and angular acceleration as initialized</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">      </span><span class="n">initialized_states</span><span class="p">[</span><span class="n">StateIndex</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">initialized_states</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace sensors</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

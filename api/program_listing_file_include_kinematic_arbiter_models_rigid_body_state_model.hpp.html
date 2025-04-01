@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File rigid_body_state_model.hpp &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File rigid_body_state_model.hpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_include_kinematic_arbiter_models_rigid_body_state_model.hpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-rigid-body-state-model-hpp">
+<span id="program-listing-file-include-kinematic-arbiter-models-rigid-body-state-model-hpp"></span><h1>Program Listing for File rigid_body_state_model.hpp<a class="headerlink" href="#program-listing-for-file-rigid-body-state-model-hpp" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_include_kinematic_arbiter_models_rigid_body_state_model.hpp.html#file-include-kinematic-arbiter-models-rigid-body-state-model-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/kinematic_arbiter/models/rigid_body_state_model.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_model_interface.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kinematic_arbiter/core/state_index.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Geometry&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">kinematic_arbiter</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">models</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kLambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">46.05</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RigidBodyStateModel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateModelInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Use convenient matrix/vector aliases for 3D/4D operations</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Matrix3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Vector4d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector4d</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">Matrix4d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Type alias for cleaner access to state indices</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">SIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateIndex</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">RigidBodyStateModel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Params</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Params</span><span class="p">())</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">StateModelInterface</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">StateVector</span><span class="w"> </span><span class="n">PredictState</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">current_state</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StateVector</span><span class="w"> </span><span class="n">new_states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_state</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">new_states</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Extract quaternion and normalize</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">orientation</span><span class="p">(</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">orientation</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Get rotation matrix</span>
+<span class="w">    </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">rotation_matrix_b_to_w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Extract velocity and acceleration components</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">linear_velocity</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">angular_velocity</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">linear_acceleration</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Linear XYZ Position Prediction Model</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">+=</span>
+<span class="w">      </span><span class="n">rotation_matrix_b_to_w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">((</span><span class="n">linear_velocity</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">linear_acceleration</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Angular Position (Quaternion) Prediction Model</span>
+<span class="w">    </span><span class="c1">// Use quaternion kinematics with angular acceleration: q(t+dt) = exp(0.5*ω*dt + 0.25*ω̇*dt²) * q(t)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">delta_q</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Calculate combined angular motion vector v = 0.5*ω*dt + 0.25*ω̇*dt²</span>
+<span class="w">    </span><span class="c1">// This is the same vector used in the quaternion update: q(t+dt) = exp(v) * q(t)</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time_step</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">angular_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">motion_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">motion_norm</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">motion_norm</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motion_norm</span><span class="p">;</span>
+<span class="w">      </span><span class="n">delta_q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">AngleAxisd</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">delta_q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">new_quaternion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delta_q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">orientation</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_quaternion</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">new_states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_quaternion</span><span class="p">.</span><span class="n">w</span><span class="p">();</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_quaternion</span><span class="p">.</span><span class="n">x</span><span class="p">();</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_quaternion</span><span class="p">.</span><span class="n">y</span><span class="p">();</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_quaternion</span><span class="p">.</span><span class="n">z</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Velocity prediction (integrate acceleration)</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">linear_acceleration</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Acceleration is modelled as exponential decay: a(t+dt) = a(t) * exp(-lambda * dt)</span>
+<span class="w">    </span><span class="c1">// With lambda = 46.05, acceleration decays to near zero within 0.1s</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">linear_acceleration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">kLambda</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="p">);</span>
+<span class="w">    </span><span class="n">new_states</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">kLambda</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">new_states</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">StateMatrix</span><span class="w"> </span><span class="n">GetTransitionMatrix</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StateVector</span><span class="o">&amp;</span><span class="w"> </span><span class="n">current_state</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">StateMatrix</span><span class="w"> </span><span class="n">jacobian</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StateMatrix</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Extract quaternion and normalize</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">W</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">X</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Y</span><span class="p">],</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">[</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Z</span><span class="p">]</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">orientation</span><span class="p">.</span><span class="n">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Get rotation matrix (world to body frame)</span>
+<span class="w">    </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">rotation_matrix_w_to_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Position block - identity for position elements</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Position wrt linear velocity</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">rotation_matrix_w_to_b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Position wrt linear acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">rotation_matrix_w_to_b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Remove coupling between linear and angular position in the jacobian by</span>
+<span class="w">    </span><span class="c1">// setting to zero. Derivation of partial of position with respect to the</span>
+<span class="w">    </span><span class="c1">// rotation in quaternion form can be found here:</span>
+<span class="w">    </span><span class="c1">// http://www.iri.upc.edu/people/jsola/JoanSola/objectes/notes/kinematics.pdf</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Position</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&gt;::</span><span class="n">Zero</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Quaternion self-propagation</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Extract angular velocity and acceleration components</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">angular_velocity</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">current_state</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Calculate combined angular motion vector v = 0.5*ω*dt + 0.25*ω̇*dt²</span>
+<span class="w">    </span><span class="c1">// This is the same vector used in the quaternion update: q(t+dt) = exp(v) * q(t)</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time_step</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">angular_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">angular_acceleration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">motion_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Jacobian terms for quaternion derivatives with respect to angular velocity</span>
+<span class="w">    </span><span class="c1">// ∂q/∂ω ≈ (t/2)*I - higher order correction terms</span>
+<span class="w">    </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">velocity_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Jacobian terms for quaternion derivatives with respect to angular acceleration</span>
+<span class="w">    </span><span class="c1">// ∂q/∂ω̇ ≈ (t²/4)*I - higher order correction terms</span>
+<span class="w">    </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">accel_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mf">4.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Apply correction terms when motion is non-zero</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">motion_norm</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Compute outer product correction based on combined motion</span>
+<span class="w">      </span><span class="c1">// This comes from the derivative of the exponential map</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">outer_product_correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">combined_angular_motion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">.</span><span class="n">transpose</span><span class="p">())</span><span class="w"> </span><span class="o">/</span>
+<span class="w">                                         </span><span class="p">(</span><span class="n">motion_norm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">motion_norm</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Scale for velocity: (t³*||v||)/16 * (v*v^T/||v||²)</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">velocity_correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">motion_norm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">16.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">outer_product_correction</span><span class="p">;</span>
+
+<span class="w">      </span><span class="c1">// Scale for acceleration: (t⁴*||v||)/32 * (v*v^T/||v||²)</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="w"> </span><span class="n">accel_correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">motion_norm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">32.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">outer_product_correction</span><span class="p">;</span>
+
+<span class="w">      </span><span class="n">velocity_term</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">velocity_correction</span><span class="p">;</span>
+<span class="w">      </span><span class="n">accel_term</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">accel_correction</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create quaternion derivatives for angular velocity components</span>
+<span class="w">    </span><span class="c1">// Format: [scalar_part, vector_part_x, vector_part_y, vector_part_z]</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="n">dq_dx</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w">  </span><span class="c1">// Scalar part derivative</span>
+<span class="w">        </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1">// Vector part derivatives</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="nf">dq_dy</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="nf">dq_dz</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">        </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">velocity_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set the Jacobian block for quaternion wrt angular velocity</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_dx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_dy</span><span class="p">;</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_dz</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Create quaternion derivatives for angular acceleration components</span>
+<span class="w">    </span><span class="c1">// Format: [scalar_part, vector_part_x, vector_part_y, vector_part_z]</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="n">dq_dax</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.125</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w">  </span><span class="c1">// Scalar part derivative</span>
+<span class="w">        </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1">// Vector part derivatives</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="nf">dq_day</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.125</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector4d</span><span class="w"> </span><span class="nf">dq_daz</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">-0.125</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">combined_angular_motion</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">        </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">accel_term</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set the Jacobian block for quaternion wrt angular acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_dax</span><span class="p">;</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_day</span><span class="p">;</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">Quaternion</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dq_daz</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Velocity blocks - identity for velocity elements</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Linear velocity wrt linear acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Angular velocity blocks - identity for angular velocity elements</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Angular velocity wrt angular acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Acceleration blocks are modelled as zero (no change)</span>
+
+<span class="w">    </span><span class="c1">// Velocity blocks - identity for velocity elements</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Linear velocity wrt linear acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Angular velocity blocks - identity for angular velocity elements</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Angular velocity wrt angular acceleration</span>
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularVelocity</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">time_step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">AngularAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">kLambda</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">jacobian</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">(),</span><span class="w"> </span><span class="n">SIdx</span><span class="o">::</span><span class="n">LinearAcceleration</span><span class="o">::</span><span class="n">Begin</span><span class="p">())</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">kLambda</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_step</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">jacobian</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace models</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace kinematic_arbiter</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

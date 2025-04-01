@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File kalman_filter.py &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File kalman_filter.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_single_dof_demo_core_kalman_filter.py.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-kalman-filter-py">
+<span id="program-listing-file-src-single-dof-demo-core-kalman-filter-py"></span><h1>Program Listing for File kalman_filter.py<a class="headerlink" href="#program-listing-for-file-kalman-filter-py" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_src_single_dof_demo_core_kalman_filter.py.html#file-src-single-dof-demo-core-kalman-filter-py"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/single_dof_demo/core/kalman_filter.py</span></code>)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (c) 2024 Spencer Maughan</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Base Kalman filter implementation with frequency model.</span>
+
+<span class="sd">Provides fundamental Kalman filter functionality for state estimation</span>
+<span class="sd">with a configurable frequency model.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.filter_utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_to_bound</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">KalmanFilter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Kalman filter implementation with frequency model.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">process_noise</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">measurement_noise</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the KalmanFilter.</span>
+
+<span class="sd">        Initialize with the given process/measurement noise and frequency.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            process_noise (float): The variance of the process noise.</span>
+<span class="sd">            measurement_noise (float): The variance of the measurement noise.</span>
+<span class="sd">            frequency (float): The frequency of the model in Hz. Default is 0.0.</span>
+<span class="sd">            amplitude (float): The amplitude of the model. Default is 0.0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="mf">100.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="n">measurement_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="n">process_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span> <span class="o">=</span> <span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">=</span> <span class="n">amplitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_process_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_noise</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the process noise parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            process_noise (float): The new process noise variance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="n">process_noise</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_measurement_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement_noise</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the measurement noise parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            measurement_noise (float): The new measurement noise variance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="n">measurement_noise</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the frequency model parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frequency (float): The new frequency in Hz.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span> <span class="o">=</span> <span class="n">frequency</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_amplitude</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the amplitude model parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amplitude (float): The new amplitude.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">=</span> <span class="n">amplitude</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">time_secs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">filter_output</span><span class="o">.</span><span class="n">FilterOutput</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the Kalman filter with a new measurement.</span>
+
+<span class="sd">        Return the filter output containing predicted, mediated, and final estimates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            measurement (float): The new measurement to incorporate.</span>
+<span class="sd">            time_secs (float, optional): Current time in seconds for time-based</span>
+<span class="sd">                models.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            filter_output.FilterOutput: The output of the filter containing</span>
+<span class="sd">            the predicted, mediated, and final state and measurement estimates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">filter_output</span><span class="o">.</span><span class="n">FilterOutput</span><span class="p">()</span>
+
+        <span class="c1"># Handle time for frequency model</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mf">0.0</span>
+            <span class="k">if</span> <span class="n">time_secs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">time_secs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span>
+        <span class="p">)</span>
+        <span class="n">frequency</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">time_secs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">predicted_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">+</span> <span class="n">dx</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">predicted_state</span>
+        <span class="n">predicted_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="n">predicted_variance</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">measurement</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+        <span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">mediated</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">predicted</span>
+
+        <span class="c1"># Initialization</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="n">measurement</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">measurement</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">time_secs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="n">time_secs</span>
+            <span class="k">return</span> <span class="n">output</span>
+
+        <span class="c1"># Innovation</span>
+        <span class="n">innovation</span> <span class="o">=</span> <span class="n">measurement</span> <span class="o">-</span> <span class="n">predicted_state</span>
+        <span class="n">innovation_variance</span> <span class="o">=</span> <span class="n">predicted_variance</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+
+        <span class="c1"># Update</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">mediated</span>
+        <span class="n">kalman_gain</span> <span class="o">=</span> <span class="n">predicted_variance</span> <span class="o">/</span> <span class="n">innovation_variance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="n">predicted_state</span> <span class="o">+</span> <span class="n">kalman_gain</span> <span class="o">*</span> <span class="n">innovation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">kalman_gain</span><span class="p">)</span> <span class="o">*</span> <span class="n">predicted_variance</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span><span class="p">)</span>
+
+        <span class="c1"># Update last time</span>
+        <span class="k">if</span> <span class="n">time_secs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="n">time_secs</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File display_gui.py &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File display_gui.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_single_dof_demo_display_gui.py.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-display-gui-py">
+<span id="program-listing-file-src-single-dof-demo-display-gui-py"></span><h1>Program Listing for File display_gui.py<a class="headerlink" href="#program-listing-for-file-display-gui-py" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_src_single_dof_demo_display_gui.py.html#file-src-single-dof-demo-display-gui-py"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/single_dof_demo/display_gui.py</span></code>)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (c) 2024 Spencer Maughan</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction.</span>
+
+<span class="sd">&quot;&quot;&quot;Interactive visualization tool for comparing Kalman filters.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.signal_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleDofSignalGenerator</span><span class="p">,</span> <span class="n">SignalParams</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.kalman_filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">KalmanFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.mediated_kalman_filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">MediatedKalmanFilter</span><span class="p">,</span> <span class="n">Mediation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">RadioButtons</span><span class="p">,</span> <span class="n">Slider</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DisplayGui</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interactive GUI for visualizing and comparing filter performance.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the display GUI with plots and interactive controls.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">custom_lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">),</span>
+            <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">),</span>
+            <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">),</span>
+            <span class="n">Line2D</span><span class="p">(</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Scatter&quot;</span><span class="p">,</span>
+                <span class="n">markerfacecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">custom_lines</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;Truth&quot;</span><span class="p">,</span> <span class="s2">&quot;Measurement&quot;</span><span class="p">,</span> <span class="s2">&quot;Estimate&quot;</span><span class="p">,</span> <span class="s2">&quot;Mediation&quot;</span><span class="p">],</span>
+            <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mediated Kalman Filter&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Standard Kalman Filter&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="n">signal_params</span> <span class="o">=</span> <span class="n">SignalParams</span><span class="p">()</span>
+        <span class="n">signal_generator</span> <span class="o">=</span> <span class="n">SingleDofSignalGenerator</span><span class="p">(</span><span class="n">signal_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">signal_generator</span><span class="o">.</span><span class="n">generate_complete_signal</span><span class="p">()</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">))</span>
+
+        <span class="c1"># Initialize tuning parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_mkf_tuninginitial_mkf_tuning</span> <span class="o">=</span> <span class="mf">1.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span> <span class="o">=</span> <span class="mf">0.025</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span> <span class="o">=</span> <span class="mf">0.05</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span> <span class="o">=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_STATE</span>
+
+        <span class="c1"># Create the filters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_filtersinitialize_filters</span><span class="p">()</span>
+
+        <span class="c1"># Generate initial data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_dataupdate_data</span><span class="p">()</span>
+
+        <span class="c1"># Plot setup for Mediated Kalman Filter</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_up</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span><span class="p">,</span>
+            <span class="s2">&quot;g--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_low</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span><span class="p">,</span>
+            <span class="s2">&quot;g--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mediation_plot</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span><span class="p">,</span> <span class="s2">&quot;ko&quot;</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_up</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span><span class="p">,</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_low</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span><span class="p">,</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_plot_true_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Plot setup for Standard Kalman Filter</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_up</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span><span class="p">,</span>
+            <span class="s2">&quot;g--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_low</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span><span class="p">,</span>
+            <span class="s2">&quot;g--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_up</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span><span class="p">,</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_low</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span><span class="p">,</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_plot_true_val</span><span class="p">,)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># MKF Tuner</span>
+        <span class="n">axcolor</span> <span class="o">=</span> <span class="s2">&quot;lightgoldenrodyellow&quot;</span>
+        <span class="n">ax_mkf_tuner</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">axcolor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_tunermkf_tuner</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+            <span class="n">ax_mkf_tuner</span><span class="p">,</span>
+            <span class="s2">&quot;MKF PM Ratio&quot;</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">valinit</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_mkf_tuninginitial_mkf_tuning</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)),</span>
+            <span class="n">valstep</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_tunermkf_tuner</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_mkf_plotupdate_mkf_plot</span><span class="p">)</span>
+
+        <span class="c1"># KF Tuner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_process_tunerkf_process_tuner</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span>
+                <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;lightgoldenrodyellow&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;KF Process&quot;</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">valinit</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">valstep</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_process_tunerkf_process_tuner</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_kf_plotupdate_kf_plot</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_tunerkf_measurement_tuner</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span>
+                <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;lightgoldenrodyellow&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;KF Measurement&quot;</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">valinit</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">valstep</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_tunerkf_measurement_tuner</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_kf_plotupdate_kf_plot</span><span class="p">)</span>
+
+        <span class="c1"># Reset button</span>
+        <span class="n">resetax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buttonbutton</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="n">resetax</span><span class="p">,</span> <span class="s2">&quot;Reset&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">axcolor</span><span class="p">,</span> <span class="n">hovercolor</span><span class="o">=</span><span class="s2">&quot;0.975&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buttonbutton</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resetreset</span><span class="p">)</span>
+
+        <span class="c1"># Radio buttons for mediation method</span>
+        <span class="n">rax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.185</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">axcolor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radioradio</span> <span class="o">=</span> <span class="n">RadioButtons</span><span class="p">(</span>
+            <span class="n">rax</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;State&quot;</span><span class="p">,</span> <span class="s2">&quot;Meas&quot;</span><span class="p">,</span> <span class="s2">&quot;Reject Meas&quot;</span><span class="p">,</span> <span class="s2">&quot;Nothing&quot;</span><span class="p">),</span> <span class="n">active</span><span class="o">=</span><span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radioradio</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_mkf_methodupdate_mkf_method</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize both filters with current parameters.&quot;&quot;&quot;</span>
+        <span class="c1"># Create MKF filter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span> <span class="o">=</span> <span class="n">MediatedKalmanFilter</span><span class="p">(</span>
+            <span class="n">process_to_measurement_ratio</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_mkf_tuninginitial_mkf_tuning</span><span class="p">,</span>
+            <span class="n">sample_window</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">mediation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">process_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">measurement_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">state_variance</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+        <span class="c1"># Create standard KF filter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span> <span class="o">=</span> <span class="n">KalmanFilter</span><span class="p">(</span>
+            <span class="n">process_noise</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span><span class="p">,</span>
+            <span class="n">measurement_noise</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">process_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">measurement_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">state_variance</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update all data using current filter settings.&quot;&quot;&quot;</span>
+        <span class="c1"># Reinitialize the filters instead of trying to reset them</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_filtersinitialize_filters</span><span class="p">()</span>
+
+        <span class="c1"># Process all data points</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">)):</span>
+            <span class="c1"># Process through MKF</span>
+            <span class="n">mkf_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">measurement</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mkf_output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">state_variance</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">measurement_variance</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Process through standard KF</span>
+            <span class="n">kf_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">measurement</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">kf_output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">state_variance</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">measurement_variance</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store mediation points</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">mediation</span>
+                <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_mkf_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the mediation method based on radio button selection.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;State&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span> <span class="o">=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_STATE</span>
+        <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Meas&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span> <span class="o">=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_MEASUREMENT</span>
+        <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Reject Meas&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span> <span class="o">=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">REJECT_MEASUREMENT</span>
+        <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Nothing&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span> <span class="o">=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">NO_ACTION</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_mkf_plotupdate_mkf_plot</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_mkf_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the mediated Kalman filter plot based on slider values.&quot;&quot;&quot;</span>
+        <span class="c1"># Convert slider value to actual ratio</span>
+        <span class="n">ratio_value</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_tunermkf_tuner</span><span class="o">.</span><span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_tunermkf_tuner</span><span class="o">.</span><span class="n">valtext</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">ratio_value</span><span class="p">)</span>
+
+        <span class="c1"># Re-initialize MKF with new parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span> <span class="o">=</span> <span class="n">MediatedKalmanFilter</span><span class="p">(</span>
+            <span class="n">process_to_measurement_ratio</span><span class="o">=</span><span class="n">ratio_value</span><span class="p">,</span>
+            <span class="n">sample_window</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">mediation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_mediationmkf_mediation</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">process_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_process_noiseinitial_process_noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">measurement_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_measurement_noiseinitial_measurement_noise</span>
+
+        <span class="c1"># Process all data through the filter</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal_timesignal_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">)):</span>
+            <span class="n">mkf_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">measurement</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mkf_output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">state_variance</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">measurement_variance</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkfmkf</span><span class="o">.</span><span class="n">mediation</span>
+                <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;NaN&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Update plot data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_up</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_noisy_plot_low</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_measurement_boundmkf_measurement_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediation_plot</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_up</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_est_plot_low</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_estimatemkf_signal_estimate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mkf_signal_boundmkf_signal_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_plot_true_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_kf_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the standard Kalman filter plot based on slider values.&quot;&quot;&quot;</span>
+        <span class="c1"># Convert slider values to actual noise values</span>
+        <span class="n">process_noise</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_process_tunerkf_process_tuner</span><span class="o">.</span><span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_process_tunerkf_process_tuner</span><span class="o">.</span><span class="n">valtext</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">process_noise</span><span class="p">)</span>
+        <span class="n">measurement_noise</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_tunerkf_measurement_tuner</span><span class="o">.</span><span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_tunerkf_measurement_tuner</span><span class="o">.</span><span class="n">valtext</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">measurement_noise</span><span class="p">)</span>
+
+        <span class="c1"># Re-initialize KF with new parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span> <span class="o">=</span> <span class="n">KalmanFilter</span><span class="p">(</span>
+            <span class="n">process_noise</span><span class="o">=</span><span class="n">process_noise</span><span class="p">,</span> <span class="n">measurement_noise</span><span class="o">=</span><span class="n">measurement_noise</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Process all data through the filter</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">):</span>
+            <span class="n">kf_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">measurement</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">kf_output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">state_variance</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kfkf</span><span class="o">.</span><span class="n">measurement_variance</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Update plot data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_up</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_noisy_plot_low</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noisy_signal</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_boundkf_measurement_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_up</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_est_plot_low</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_estimatekf_signal_estimate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">kf_signal_boundkf_signal_bound</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_plot_true_val</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset all sliders to their initial values.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkf_tunermkf_tuner</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_measurement_tunerkf_measurement_tuner</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kf_process_tunerkf_process_tuner</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="c1"># Reset filters to default states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_filtersinitialize_filters</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_dataupdate_data</span><span class="p">()</span>
+        <span class="c1"># Update plots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_mkf_plotupdate_mkf_plot</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_kf_plotupdate_kf_plot</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the display GUI by showing the plot window.&quot;&quot;&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File mediated_kalman_filter.py &mdash; arbiter 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+      <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arbiter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arbiter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Program Listing for File mediated_kalman_filter.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_single_dof_demo_core_mediated_kalman_filter.py.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-mediated-kalman-filter-py">
+<span id="program-listing-file-src-single-dof-demo-core-mediated-kalman-filter-py"></span><h1>Program Listing for File mediated_kalman_filter.py<a class="headerlink" href="#program-listing-for-file-mediated-kalman-filter-py" title="Link to this heading"></a></h1>
+<p>↰ <a class="reference internal" href="file_src_single_dof_demo_core_mediated_kalman_filter.py.html#file-src-single-dof-demo-core-mediated-kalman-filter-py"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/single_dof_demo/core/mediated_kalman_filter.py</span></code>)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (c) 2024 Spencer Maughan</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implementation of the Mediated Kalman Filter.</span>
+
+<span class="sd">Extends traditional Kalman filter with measurement validation and dynamic noise</span>
+<span class="sd">estimation. Key features:</span>
+<span class="sd">- Chi-square based measurement validation</span>
+<span class="sd">- Dynamic measurement noise estimation</span>
+<span class="sd">- Automated process noise estimation</span>
+<span class="sd">- Single parameter (ζ) tuning</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.filter_utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_to_bound</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Mediation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of mediation behaviors for the filter.&quot;&quot;&quot;</span>
+
+    <span class="n">ADJUST_STATE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ADJUST_MEASUREMENT</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">REJECT_MEASUREMENT</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">NO_ACTION</span> <span class="o">=</span> <span class="mi">3</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MediatedKalmanFilter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of a Kalman filter with measurement mediation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">process_to_measurement_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">sample_window</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mediation</span><span class="o">=</span><span class="n">Mediation</span><span class="o">.</span><span class="n">NO_ACTION</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the filter with configuration parameters.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            process_to_measurement_ratio: Ratio between process and measurement</span>
+<span class="sd">            noise (ζ in the paper)</span>
+<span class="sd">            sample_window: Number of samples for noise estimation (n in the paper)</span>
+<span class="sd">            mediation: Mediation behavior to use when measurement is rejected</span>
+<span class="sd">            frequency: Frequency of the model in Hz (default: 0.0)</span>
+<span class="sd">            amplitude: Amplitude of the model (default: 0.0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared_valuechi_squared_value</span> <span class="o">=</span> <span class="mf">6.64</span>  <span class="c1"># 99% confidence (χ_c in the paper)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scalescale</span> <span class="o">=</span> <span class="n">process_to_measurement_ratio</span>  <span class="c1"># ζ in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_windowsample_window</span> <span class="o">=</span> <span class="n">sample_window</span>  <span class="c1"># n in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># x̂_k in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># P̂_k in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># R_k in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># Q_k in the paper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">=</span> <span class="n">mediation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span> <span class="o">=</span> <span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">=</span> <span class="n">amplitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_state_estimateprevious_state_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># x̂_{k-1} in the paper</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_process_measurement_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the process to measurement ratio parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ratio: The new process to measurement ratio (ζ).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scalescale</span> <span class="o">=</span> <span class="n">ratio</span>
+        <span class="c1"># Adjust process_variance to maintain the proper ratio with measurement_variance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+        <span class="p">)</span>
+        <span class="c1"># Note: In high dimensional cases where measurements don&#39;t directly map to every state,</span>
+        <span class="c1"># a collective maximum bound on state covariance would be tracked and used</span>
+        <span class="c1"># across various measurements for the observable states.</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sample_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the sample window parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            window: The new sample window size (n).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_windowsample_window</span> <span class="o">=</span> <span class="n">window</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_mediation_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behavior</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the mediation behavior.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            behavior: The new mediation behavior (from Mediation enum).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">=</span> <span class="n">behavior</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the frequency model parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frequency: The new frequency in Hz.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span> <span class="o">=</span> <span class="n">frequency</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_amplitude</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the amplitude model parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amplitude: The new amplitude.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">=</span> <span class="n">amplitude</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the filter state.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="mf">100.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="mf">100.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="mf">10.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_state_estimateprevious_state_estimate</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">filter_output</span><span class="o">.</span><span class="n">FilterOutput</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update filter state with new measurement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            measurement: New measurement value (y_k in the paper)</span>
+<span class="sd">            t: Timestamp of measurement (optional)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            FilterOutput containing predicted, mediated and final states</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">filter_output</span><span class="o">.</span><span class="n">FilterOutput</span><span class="p">()</span>
+
+        <span class="c1"># Handle time for frequency model</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="o">+</span> <span class="mf">0.01</span>  <span class="c1"># Default time step if none provided</span>
+
+        <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span><span class="p">)</span>
+        <span class="n">frequency</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequencyfrequency</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitudeamplitude</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+
+        <span class="c1"># Store previous state estimate for process noise calculation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_state_estimateprevious_state_estimate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+
+        <span class="c1"># Prediction Step (x̌_k = A_{k-1} x̂_{k-1} + ν_k)</span>
+        <span class="n">predicted_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">+</span> <span class="n">dx</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">predicted_state</span>
+
+        <span class="c1"># Ensure variances are non-negative</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="mf">1e-8</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+        <span class="p">)</span>  <span class="c1"># Minimum to avoid division by zero</span>
+
+        <span class="c1"># Prediction Step (P̌_k = A_{k-1} P̂_{k-1} A_{k-1}^T + Q_k)</span>
+        <span class="n">predicted_variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="n">predicted_variance</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">measurement</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+        <span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">mediated</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">predicted</span>
+
+        <span class="c1"># Initialization</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_initializedis_initialized</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="n">measurement</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">measurement</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">output</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_tprevious_t</span> <span class="o">=</span> <span class="n">t</span>
+
+        <span class="c1"># Innovation (y_k - C_k x̌_k)</span>
+        <span class="n">innovation</span> <span class="o">=</span> <span class="n">measurement</span> <span class="o">-</span> <span class="n">predicted_state</span>
+        <span class="c1"># Innovation covariance (C_k P̌_k C_k^T + R_k)</span>
+        <span class="n">innovation_variance</span> <span class="o">=</span> <span class="n">predicted_variance</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+        <span class="n">innovation_2</span> <span class="o">=</span> <span class="n">innovation</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="c1"># Mediation test (chi-square test)</span>
+        <span class="c1"># (y_k - C_k x̌_k)^T (C_k P̌_k C_k^T + R_k)^{-1} (y_k - C_k x̌_k) &lt; χ_c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">innovation_2</span> <span class="o">/</span> <span class="n">innovation_variance</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared_valuechi_squared_value</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediationmediation</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">!=</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">NO_ACTION</span><span class="p">:</span>
+            <span class="c1"># Store the mediation point in the output for publishing</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">mediation_detected</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">mediation_point</span> <span class="o">=</span> <span class="n">measurement</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">==</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">REJECT_MEASUREMENT</span><span class="p">:</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">mediated</span>
+                <span class="c1"># Update last time</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="n">t</span>
+                <span class="k">return</span> <span class="n">output</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">==</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_STATE</span><span class="p">:</span>
+                <span class="c1"># Adjust state variance to satisfy chi-square test</span>
+                <span class="n">innovation_variance</span> <span class="o">=</span> <span class="n">innovation_2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared_valuechi_squared_value</span>
+                <span class="n">predicted_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+                    <span class="mf">0.0</span><span class="p">,</span> <span class="n">innovation_variance</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+                <span class="p">)</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">mediated</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+                    <span class="n">predicted_variance</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mediation_behaviormediation_behavior</span> <span class="o">==</span> <span class="n">Mediation</span><span class="o">.</span><span class="n">ADJUST_MEASUREMENT</span><span class="p">:</span>
+                <span class="c1"># Adjust measurement variance to satisfy chi-square test</span>
+                <span class="n">innovation_variance</span> <span class="o">=</span> <span class="n">innovation_2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">chi_squared_valuechi_squared_value</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+                    <span class="mf">1e-8</span><span class="p">,</span> <span class="n">innovation_variance</span> <span class="o">-</span> <span class="n">predicted_variance</span>
+                <span class="p">)</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">mediated</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Update Step</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">mediated</span>
+
+        <span class="c1"># Kalman gain (K_k = P̌_k C_k^T (C_k P̌_k C_k^T + R_k)^{-1})</span>
+        <span class="n">kalman_gain</span> <span class="o">=</span> <span class="n">predicted_variance</span> <span class="o">/</span> <span class="n">innovation_variance</span>
+
+        <span class="c1"># Store predicted state for process noise calculation (x̌_k)</span>
+        <span class="n">predicted_state_before_update</span> <span class="o">=</span> <span class="n">predicted_state</span>
+
+        <span class="c1"># Update state (x̂_k = x̌_k + K_k (y_k - C_k x̌_k))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span> <span class="o">=</span> <span class="n">predicted_state</span> <span class="o">+</span> <span class="n">kalman_gain</span> <span class="o">*</span> <span class="n">innovation</span>
+
+        <span class="c1"># Update state variance (P̂_k = (I - K_k C_k) P̌_k)</span>
+        <span class="n">new_state_variance</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">kalman_gain</span><span class="p">)</span> <span class="o">*</span> <span class="n">predicted_variance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">new_state_variance</span><span class="p">)</span>
+
+        <span class="c1"># Use sample window directly from the paper</span>
+        <span class="c1"># Ensure sample window is at least 1 to avoid division by zero</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_windowsample_window</span><span class="p">)</span>
+
+        <span class="c1"># Dynamic Measurement Noise Update</span>
+        <span class="c1"># R̂_k = R̂_{k-1} + ((y_k - C_k x̂_k)(y_k - C_k x̂_k)^T - R̂_{k-1}) / n</span>
+        <span class="n">new_measurement_variance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">innovation_2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_variancemeasurement_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">new_measurement_variance</span><span class="p">)</span>
+
+        <span class="c1"># Dynamic Process Noise Update</span>
+        <span class="c1"># Q̂_k = Q̂_{k-1} + (ζ (x̌_k - x̂_k)(x̌_k - x̂_k)^T - Q̂_{k-1}) / n</span>
+        <span class="n">state_update_diff</span> <span class="o">=</span> <span class="n">predicted_state_before_update</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+        <span class="n">new_process_variance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span>
+            <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scalescale</span> <span class="o">*</span> <span class="p">(</span><span class="n">state_update_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_varianceprocess_variance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">new_process_variance</span><span class="p">)</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_estimatestate_estimate</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">bound</span> <span class="o">=</span> <span class="n">variance_to_bound</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_variancestate_variance</span><span class="p">)</span>
+
+        <span class="c1"># Update last time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timelast_time</span> <span class="o">=</span> <span class="n">t</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Spencer Maughan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
