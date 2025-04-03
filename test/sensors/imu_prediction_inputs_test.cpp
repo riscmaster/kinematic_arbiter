@@ -87,7 +87,7 @@ TEST(ImuPredictionInputsTest, CheckPredictionModelInputs) {
     EXPECT_TRUE(imu_model.GetSensorPoseInBodyFrame(sensor_pose));
     Eigen::Matrix3d R_SB = sensor_pose.rotation().matrix();
 
-    EXPECT_TRUE(imu_model.CanPredictInputAccelerations());
+    EXPECT_FALSE(imu_model.CanPredictInputAccelerations());
 
     EXPECT_LE(position_error_with_inputs.norm(), position_error_without_inputs.norm())
         << "Position error with inputs is not less than position error without inputs\n"

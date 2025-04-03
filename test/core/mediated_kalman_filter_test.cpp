@@ -445,6 +445,16 @@ TEST_F(MediatedKalmanFilterTest, BodyVelocitySensorImprovesEstimates_LargeNoise)
 }
 
 // Test with PositionSensorModel - updated with explicit sensor type
+TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_SmallNoise) {
+  auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
+
+  // Small noise (0.001)
+  Eigen::Matrix<double, 3, 3> small_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.001;
+
+  TestSensorImprovesStateEstimates<SensorType::Position>(position_model, small_noise);
+}
+
+// Test with PositionSensorModel - updated with explicit sensor type
 TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_MediumNoise) {
   auto position_model = std::make_shared<kinematic_arbiter::sensors::PositionSensorModel>();
 
@@ -462,6 +472,16 @@ TEST_F(MediatedKalmanFilterTest, PositionSensorImprovesEstimates_LargeNoise) {
   Eigen::Matrix<double, 3, 3> large_noise = Eigen::Matrix<double, 3, 3>::Identity() * 0.1;
 
   TestSensorImprovesStateEstimates<SensorType::Position>(position_model, large_noise);
+}
+
+// Small noise variant for Pose - updated with explicit sensor type
+TEST_F(MediatedKalmanFilterTest, PoseSensorImprovesEstimates_SmallNoise) {
+  auto pose_model = std::make_shared<kinematic_arbiter::sensors::PoseSensorModel>();
+
+  // Small noise (0.001)
+  Eigen::Matrix<double, 7, 7> small_noise = Eigen::Matrix<double, 7, 7>::Identity() * 0.001;
+
+  TestSensorImprovesStateEstimates<SensorType::Pose>(pose_model, small_noise);
 }
 
 // Medium noise variant for Pose - updated with explicit sensor type
